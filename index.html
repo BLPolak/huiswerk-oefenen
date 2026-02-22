@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sam Oefent — 2 HAVO</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--donker: #1a202c;
+--licht: #f7fafc;
+}
+
+body {
+font-family: 'Nunito', sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+padding: 2rem 1rem 3rem;
+}
+
+header {
+text-align: center;
+margin-bottom: 2.5rem;
+}
+
+header h1 {
+font-size: 2.8rem;
+font-weight: 900;
+color: #fff;
+text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+letter-spacing: -0.5px;
+}
+
+header p {
+color: rgba(255,255,255,0.85);
+font-size: 1.1rem;
+margin-top: 0.5rem;
+font-weight: 600;
+}
+
+.grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+gap: 1.4rem;
+max-width: 1100px;
+margin: 0 auto;
+}
+
+.kaart {
+background: #fff;
+border-radius: 20px;
+padding: 1.8rem 1.5rem 1.5rem;
+text-decoration: none;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+gap: 0.7rem;
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+transition: transform 0.18s ease, box-shadow 0.18s ease;
+position: relative;
+overflow: hidden;
+cursor: pointer;
+}
+
+.kaart::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 6px;
+background: var(--kleur);
+}
+
+.kaart:hover {
+transform: translateY(-6px);
+box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
+
+.kaart-emoji {
+font-size: 2.8rem;
+line-height: 1;
+filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.kaart-naam {
+font-size: 1.25rem;
+font-weight: 800;
+color: var(--donker);
+}
+
+.kaart-omschrijving {
+font-size: 0.85rem;
+color: #718096;
+font-weight: 600;
+line-height: 1.4;
+}
+
+.badge {
+background: var(--kleur);
+color: #fff;
+font-size: 0.72rem;
+font-weight: 800;
+padding: 0.2rem 0.7rem;
+border-radius: 99px;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+margin-top: 0.3rem;
+}
+
+.badge.extern {
+background: linear-gradient(90deg, #11998e, #38ef7d);
+}
+
+footer {
+text-align: center;
+margin-top: 2.5rem;
+color: rgba(255,255,255,0.65);
+font-size: 0.85rem;
+font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Sam Oefent</h1>
+  <p>2 HAVO — kies een vak en ga aan de slag!</p>
+</header>
+
+<div class="grid">
+
+  <a class="kaart" href="/sam-oefenen/nederlands/" style="--kleur: #e53e3e;">
+    <div class="kaart-emoji">🇳🇱</div>
+    <div class="kaart-naam">Nederlands</div>
+    <div class="kaart-omschrijving">Spelling, grammatica &amp; schrijven</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/engels/" style="--kleur: #3182ce;">
+    <div class="kaart-emoji">🇬🇧</div>
+    <div class="kaart-naam">Engels</div>
+    <div class="kaart-omschrijving">Vocabulary, grammar &amp; reading</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/frans/" style="--kleur: #0077c8;">
+    <div class="kaart-emoji">🇫🇷</div>
+    <div class="kaart-naam">Frans</div>
+    <div class="kaart-omschrijving">Woordenschat, grammatica &amp; lezen</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/duits/" style="--kleur: #dd6b20;">
+    <div class="kaart-emoji">🇩🇪</div>
+    <div class="kaart-naam">Duits</div>
+    <div class="kaart-omschrijving">Wörter, Grammatik &amp; Lesen</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/geschiedenis/" style="--kleur: #744210;">
+    <div class="kaart-emoji">🏛️</div>
+    <div class="kaart-naam">Geschiedenis</div>
+    <div class="kaart-omschrijving">Tijdlijnen, bronnen &amp; begrippen</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/aardrijkskunde/" style="--kleur: #276749;">
+    <div class="kaart-emoji">🌍</div>
+    <div class="kaart-naam">Aardrijkskunde</div>
+    <div class="kaart-omschrijving">Landen, klimaat &amp; topografie</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="https://blpolak.github.io/meetkunde-oefenen" target="_blank" rel="noopener" style="--kleur: #1abc9c;">
+    <div class="kaart-emoji">📐</div>
+    <div class="kaart-naam">Wiskunde</div>
+    <div class="kaart-omschrijving">Meetkunde: oppervlakte, inhoud &amp; omtrek</div>
+    <span class="badge extern">Live! ↗</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/nask/" style="--kleur: #6b46c1;">
+    <div class="kaart-emoji">⚗️</div>
+    <div class="kaart-naam">NASK</div>
+    <div class="kaart-omschrijving">Scheikunde, krachten &amp; energie</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/biologie/" style="--kleur: #2d6a4f;">
+    <div class="kaart-emoji">🧬</div>
+    <div class="kaart-naam">Biologie</div>
+    <div class="kaart-omschrijving">Cellen, ecosystemen &amp; het lichaam</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+  <a class="kaart" href="/sam-oefenen/filosofie/" style="--kleur: #553c9a;">
+    <div class="kaart-emoji">🤔</div>
+    <div class="kaart-naam">Filosofie</div>
+    <div class="kaart-omschrijving">Denken, ethiek &amp; grote vragen</div>
+    <span class="badge">Binnenkort</span>
+  </a>
+
+</div>
+
+<footer>
+  <p>Gemaakt voor Sam · 2 HAVO · veel succes! 💪</p>
+</footer>
+
+</body>
+</html>

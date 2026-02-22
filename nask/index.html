@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NASK — Sam Oefent</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #faf5ff 0%, #e9d8fd 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.kaart {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  border-top: 8px solid #6b46c1;
+}
+.emoji { font-size: 4rem; margin-bottom: 0.5rem; line-height: 1; }
+h1 { font-size: 2rem; font-weight: 900; color: #1a202c; margin-bottom: 0.5rem; }
+.beschrijving { color: #4a5568; font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.5; }
+.binnenkort {
+  background: #6b46c1;
+  color: #fff;
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.binnenkort p { font-size: 1.05rem; font-weight: 700; }
+.binnenkort small { font-size: 0.85rem; opacity: 0.9; display: block; margin-top: 0.3rem; }
+.tips {
+  background: #f7fafc;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.tips h3 { font-size: 0.9rem; font-weight: 800; color: #2d3748; margin-bottom: 0.5rem; }
+.tips ul { list-style: none; }
+.tips li { font-size: 0.88rem; color: #4a5568; font-weight: 600; padding: 0.2rem 0; }
+.tips li::before { content: '→ '; color: #6b46c1; font-weight: 800; }
+.terug {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #edf2f7;
+  color: #2d3748;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.7rem 1.3rem;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+.terug:hover { background: #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="kaart">
+  <div class="emoji">⚗️</div>
+  <h1>NASK</h1>
+  <p class="beschrijving">Scheikunde, krachten, energie en meer — de wetten van de natuur!</p>
+  <div class="binnenkort">
+    <p>🚧 Oefeningen komen binnenkort!</p>
+    <small>Claude is nog hard aan het werk om leuke oefeningen te maken.</small>
+  </div>
+  <div class="tips">
+    <h3>💡 Wat gaat er komen?</h3>
+    <ul>
+      <li>Formules en rekenen (v=s/t, F=m·a)</li>
+      <li>Elementen en het periodiek systeem</li>
+      <li>Scheikundige symbolen en reacties</li>
+      <li>Elektriciteit: spanning, stroom, weerstand</li>
+    </ul>
+  </div>
+  <a class="terug" href="/sam-oefenen/">← Terug naar alle vakken</a>
+</div>
+</body>
+</html>
