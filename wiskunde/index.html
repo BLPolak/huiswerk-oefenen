@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In August</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--groen: #2ecc71;
+--rood: #e74c3c;
+--blauw: #3498db;
+--oranje: #f39c12;
+--paars: #9b59b6;
+--donker: #2c3e50;
+--licht: #ecf0f1;
+--wit: #ffffff;
+}
+
+    body {
+      background: radial-gradient(ellipse at 50% 0%, #1a1b2e 0%, #0e0f1c 45%, #090a0f 100%);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+    }
+
+header {
+text-align: center;
+padding: 1.5rem 1rem 1rem;
+}
+.terug {
+display: inline-flex; align-items: center; gap: 0.4rem;
+background: #edf2f7; color: #2d3748; text-decoration: none;
+font-weight: 800; font-size: 0.85rem; padding: 0.5rem 1rem;
+border-radius: 10px; margin-bottom: 0.8rem; transition: background 0.15s;
+}
+.terug:hover { background: #e2e8f0; }
+
+header h1 {
+font-size: 1.8rem;
+font-weight: 800;
+color: var(--donker);
+}
+
+header p {
+color: #666;
+font-size: 0.95rem;
+margin-top: 0.3rem;
+}
+
+/* Score balk */
+.scorebalk {
+display: flex;
+justify-content: center;
+gap: 1.5rem;
+margin: 0.8rem auto 1.2rem;
+flex-wrap: wrap;
+}
+
+.score-item {
+background: white;
+border-radius: 12px;
+padding: 0.5rem 1.2rem;
+font-weight: 700;
+font-size: 1rem;
+box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.score-item.goed { color: var(--groen); border-left: 4px solid var(--groen); }
+.score-item.fout { color: var(--rood); border-left: 4px solid var(--rood); }
+.score-item.totaal { color: var(--blauw); border-left: 4px solid var(--blauw); }
+
+/* Onderwerp knoppen */
+.onderwerp-knoppen {
+display: flex;
+flex-wrap: wrap;
+gap: 0.6rem;
+justify-content: center;
+margin-bottom: 1.5rem;
+}
+
+.onderwerp-knop {
+padding: 0.5rem 1rem;
+border-radius: 20px;
+border: 2px solid transparent;
+font-family: 'Nunito', sans-serif;
+font-size: 0.85rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s;
+background: white;
+box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.onderwerp-knop.actief {
+color: white;
+}
+
+.onderwerp-knop[data-onderwerp="cirkel"] { color: var(--blauw); border-color: var(--blauw); }
+.onderwerp-knop[data-onderwerp="cirkel"].actief { background: var(--blauw); }
+.onderwerp-knop[data-onderwerp="parallellogram"] { color: var(--oranje); border-color: var(--oranje); }
+.onderwerp-knop[data-onderwerp="parallellogram"].actief { background: var(--oranje); }
+.onderwerp-knop[data-onderwerp="trapezium"] { color: var(--paars); border-color: var(--paars); }
+.onderwerp-knop[data-onderwerp="trapezium"].actief { background: var(--paars); }
+.onderwerp-knop[data-onderwerp="driehoek"] { color: #e74c3c; border-color: #e74c3c; }
+.onderwerp-knop[data-onderwerp="driehoek"].actief { background: #e74c3c; }
+.onderwerp-knop[data-onderwerp="samengesteld"] { color: var(--groen); border-color: var(--groen); }
+.onderwerp-knop[data-onderwerp="samengesteld"].actief { background: var(--groen); }
+.onderwerp-knop[data-onderwerp="alles"] { color: var(--donker); border-color: var(--donker); }
+.onderwerp-knop[data-onderwerp="alles"].actief { background: var(--donker); }
+
+/* Opgave kaart */
+.kaart {
+background: white;
+border-radius: 20px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+max-width: 680px;
+margin: 0 auto 1.5rem;
+overflow: hidden;
+}
+
+.kaart-header {
+padding: 1rem 1.5rem 0.8rem;
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.badge {
+background: currentColor;
+color: white;
+border-radius: 20px;
+padding: 0.2rem 0.7rem;
+font-size: 0.75rem;
+}
+
+.badge span { color: white; }
+
+.kaart-header.driehoek { color: #e74c3c; }
+.onderwerp-knop[data-onderwerp="omlijsten"] { color: #c0392b; border-color: #c0392b; }
+.onderwerp-knop[data-onderwerp="omlijsten"].actief { background: #c0392b; }
+.kaart-header.omlijsten { color: #c0392b; }
+.onderwerp-knop[data-onderwerp="inhoud"] { color: #16a085; border-color: #16a085; }
+.onderwerp-knop[data-onderwerp="inhoud"].actief { background: #16a085; }
+.onderwerp-knop[data-onderwerp="eenheden"] { color: #8e44ad; border-color: #8e44ad; }
+.onderwerp-knop[data-onderwerp="eenheden"].actief { background: #8e44ad; }
+.kaart-header.inhoud { color: #16a085; }
+.kaart-header.eenheden { color: #8e44ad; }
+.kaart-header.cirkel { color: var(--blauw); }
+.kaart-header.parallellogram { color: var(--oranje); }
+.kaart-header.trapezium { color: var(--paars); }
+.kaart-header.samengesteld { color: var(--groen); }
+.onderwerp-knop[data-onderwerp="verhaaltjes"] { color: #1abc9c; border-color: #1abc9c; }
+.onderwerp-knop[data-onderwerp="verhaaltjes"].actief { background: #1abc9c; }
+.kaart-header.verhaaltjes { color: #1abc9c; }
+
+/* Canvas tekening */
+.figuur-container {
+padding: 0.5rem 1.5rem;
+display: flex;
+justify-content: center;
+}
+
+canvas {
+border-radius: 12px;
+background: #fafbfc;
+}
+
+/* Uitleg tip */
+.tip-box {
+margin: 0 1.5rem 0.8rem;
+background: #fff8e7;
+border-left: 4px solid var(--oranje);
+border-radius: 0 10px 10px 0;
+padding: 0.7rem 1rem;
+font-size: 0.88rem;
+line-height: 1.5;
+display: none;
+}
+
+.tip-box.zichtbaar { display: block; }
+
+/* Formule herinnering */
+.formule-box {
+margin: 0 1.5rem 1rem;
+background: #eaf4ff;
+border-left: 4px solid var(--blauw);
+border-radius: 0 10px 10px 0;
+padding: 0.6rem 1rem;
+font-size: 0.88rem;
+font-weight: 700;
+}
+
+/* Vraag */
+.vraag {
+padding: 0 1.5rem 0.8rem;
+font-size: 1.05rem;
+font-weight: 600;
+line-height: 1.5;
+}
+
+/* Stap-voor-stap sectie */
+.stappen {
+padding: 0 1.5rem;
+display: none;
+}
+
+.stappen.zichtbaar { display: block; }
+
+.stap {
+margin-bottom: 0.8rem;
+}
+
+.stap label {
+display: block;
+font-size: 0.85rem;
+font-weight: 700;
+color: #555;
+margin-bottom: 0.3rem;
+}
+
+.stap input {
+width: 100%;
+padding: 0.5rem 0.8rem;
+border: 2px solid #ddd;
+border-radius: 10px;
+font-family: 'Nunito', sans-serif;
+font-size: 1rem;
+font-weight: 600;
+transition: border-color 0.2s;
+outline: none;
+}
+
+.stap input:focus { border-color: var(--blauw); }
+.stap input.goed { border-color: var(--groen); background: #f0fff4; }
+.stap input.fout { border-color: var(--rood); background: #fff5f5; }
+
+/* Antwoord invoer */
+.antwoord-sectie {
+padding: 0.8rem 1.5rem;
+display: flex;
+gap: 0.8rem;
+align-items: center;
+flex-wrap: wrap;
+}
+
+.antwoord-sectie input {
+flex: 1;
+min-width: 140px;
+padding: 0.6rem 1rem;
+border: 2px solid #ddd;
+border-radius: 12px;
+font-family: 'Nunito', sans-serif;
+font-size: 1.1rem;
+font-weight: 700;
+outline: none;
+transition: border-color 0.2s;
+}
+
+.antwoord-sectie input:focus { border-color: var(--blauw); }
+.antwoord-sectie input.goed { border-color: var(--groen); background: #f0fff4; }
+.antwoord-sectie input.fout { border-color: var(--rood); background: #fff5f5; }
+
+.eenheid {
+font-weight: 700;
+color: #888;
+font-size: 0.95rem;
+white-space: nowrap;
+}
+
+/* Knoppen */
+.knoppen {
+padding: 0.8rem 1.5rem 1.5rem;
+display: flex;
+gap: 0.8rem;
+flex-wrap: wrap;
+}
+
+button {
+padding: 0.6rem 1.2rem;
+border: none;
+border-radius: 12px;
+font-family: 'Nunito', sans-serif;
+font-size: 0.95rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s;
+}
+
+.knop-controleer {
+background: var(--donker);
+color: white;
+}
+
+.knop-controleer:hover { opacity: 0.85; }
+
+.knop-hint {
+background: #fff3cd;
+color: #856404;
+}
+
+.knop-hint:hover { background: #ffe69c; }
+
+.knop-volgende {
+background: var(--groen);
+color: white;
+display: none;
+}
+
+.knop-volgende:hover { opacity: 0.85; }
+.knop-volgende.zichtbaar { display: block; }
+
+/* Feedback */
+.feedback {
+margin: 0 1.5rem 1rem;
+padding: 0.8rem 1rem;
+border-radius: 12px;
+font-weight: 700;
+font-size: 0.95rem;
+display: none;
+}
+
+.feedback.zichtbaar { display: block; }
+.feedback.goed { background: #d4edda; color: #155724; }
+.feedback.fout { background: #f8d7da; color: #721c24; }
+
+/* Uitleg na antwoord */
+.uitleg-na {
+margin: 0 1.5rem 1rem;
+background: #f8f9fa;
+border-radius: 12px;
+padding: 0.8rem 1rem;
+font-size: 0.88rem;
+line-height: 1.6;
+display: none;
+}
+
+.uitleg-na.zichtbaar { display: block; }
+
+/* Progress */
+.progress-bar-container {
+max-width: 680px;
+margin: 0 auto 1rem;
+background: #ddd;
+border-radius: 10px;
+height: 8px;
+overflow: hidden;
+}
+
+.progress-bar {
+height: 100%;
+background: linear-gradient(to right, var(--blauw), var(--groen));
+border-radius: 10px;
+transition: width 0.4s;
+}
+
+/* Formules overzicht */
+.formules-overzicht {
+max-width: 680px;
+margin: 0 auto 2rem;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1rem;
+}
+
+.formule-kaart {
+background: white;
+border-radius: 16px;
+padding: 1rem 1.2rem;
+box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.formule-kaart h3 {
+font-size: 0.85rem;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+margin-bottom: 0.4rem;
+}
+
+.formule-kaart .formule {
+font-size: 0.95rem;
+font-weight: 700;
+background: #f8f9fa;
+padding: 0.4rem 0.8rem;
+border-radius: 8px;
+margin-top: 0.3rem;
+}
+
+.formule-kaart.cirkel h3 { color: var(--blauw); }
+.formule-kaart.parallellogram h3 { color: var(--oranje); }
+.formule-kaart.trapezium h3 { color: var(--paars); }
+.formule-kaart.samengesteld h3 { color: var(--groen); }
+
+footer {
+text-align: center;
+padding: 1rem;
+color: #aaa;
+font-size: 0.8rem;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<a class="terug" href="/huiswerk-oefenen/">← Terug naar alle vakken</a>
+<h1>📐 Oefenen Meetkunde</h1>
+<p>Hoofdstuk 2, 7 & 8 — Getal & Ruimte 2 havo/vwo</p>
+</header>
+
+<div class="scorebalk">
+<div class="score-item goed">✓ Goed: <span id="score-goed">0</span></div>
+<div class="score-item fout">✗ Fout: <span id="score-fout">0</span></div>
+<div class="score-item totaal">📝 Totaal: <span id="score-totaal">0</span></div>
+</div>
+
+<div class="progress-bar-container">
+<div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+</div>
+
+<div class="onderwerp-knoppen">
+<button class="onderwerp-knop actief" data-onderwerp="alles">Alles door elkaar</button>
+<button class="onderwerp-knop" data-onderwerp="parallellogram">Parallellogram</button>
+<button class="onderwerp-knop" data-onderwerp="cirkel">Cirkel</button>
+<button class="onderwerp-knop" data-onderwerp="trapezium">Trapezium</button>
+<button class="onderwerp-knop" data-onderwerp="driehoek">Driehoek</button>
+<button class="onderwerp-knop" data-onderwerp="samengesteld">Samengesteld</button>
+<button class="onderwerp-knop" data-onderwerp="inhoud">Inhoud 3D</button>
+<button class="onderwerp-knop" data-onderwerp="omlijsten">Omlijsten</button>
+<button class="onderwerp-knop" data-onderwerp="eenheden">Eenheden</button>
+<button class="onderwerp-knop" data-onderwerp="verhaaltjes">📖 Verhaaltjes</button>
+</div>
+
+<div class="kaart" id="opgave-kaart">
+<div class="kaart-header" id="kaart-header">
+<span id="header-tekst"></span>
+</div>
+<div class="figuur-container">
+<canvas id="figuur" width="400" height="220"></canvas>
+</div>
+<div class="tip-box" id="tip-box"></div>
+<div class="formule-box" id="formule-box"></div>
+<div class="vraag" id="vraag"></div>
+<div class="antwoord-sectie">
+<input type="number" id="antwoord-input" placeholder="Jouw antwoord..." step="0.01" />
+<span class="eenheid" id="eenheid-label"></span>
+</div>
+<div class="feedback" id="feedback"></div>
+<div class="uitleg-na" id="uitleg-na"></div>
+<div class="knoppen">
+<button class="knop-controleer" id="knop-controleer" onclick="controleer()">Controleer</button>
+<button class="knop-hint" id="knop-hint" onclick="geefHint()">💡 Hint</button>
+<button class="knop-volgende" id="knop-volgende" onclick="volgende()">Volgende opgave →</button>
+</div>
+</div>
+
+<!-- Formules overzicht -->
+
+<div class="formules-overzicht">
+<div class="formule-kaart" style="border-top: 3px solid #e74c3c;">
+<h3 style="color:#e74c3c;">🔺 Driehoek</h3>
+<p style="font-size:0.82rem;color:#666;margin-top:0.2rem">De hoogte staat loodrecht op de basis</p>
+<div class="formule">opp = ½ × basis × hoogte</div>
+<div class="formule" style="margin-top:0.4rem">omtrek = zijde a + zijde b + zijde c</div>
+</div>
+<div class="formule-kaart parallellogram">
+<h3>📐 Parallellogram</h3>
+<p style="font-size:0.82rem;color:#666;margin-top:0.2rem">De hoogte staat loodrecht op de zijde — ook als die <em>buiten</em> het parallellogram valt!</p>
+<div class="formule">opp = zijde × bijbehorende hoogte</div>
+</div>
+<div class="formule-kaart cirkel">
+<h3>⭕ Cirkel</h3>
+<p style="font-size:0.82rem;color:#666;margin-top:0.2rem">straal = diameter ÷ 2</p>
+<div class="formule">opp = π × straal²</div>
+</div>
+<div class="formule-kaart trapezium">
+<h3>🔷 Trapezium</h3>
+<p style="font-size:0.82rem;color:#666;margin-top:0.2rem">Tel de twee evenwijdige zijden op, deel door 2, maal de hoogte</p>
+<div class="formule">opp = ½ × (a + b) × hoogte</div>
+</div>
+<div class="formule-kaart" style="border-top: 3px solid #16a085;">
+<h3 style="color:#16a085;">📦 Inhoud 3D-figuren</h3>
+<p style="font-size:0.82rem;color:#666;margin-top:0.2rem">Inhoud = oppervlakte grondvlak × hoogte</p>
+<div class="formule">balk/kubus: l × b × h</div>
+<div class="formule" style="margin-top:0.3rem">cilinder: π × straal² × hoogte</div>
+<div class="formule" style="margin-top:0.3rem">prisma: opp grondvlak × hoogte</div>
+<div class="formule" style="margin-top:0.3rem">piramide/kegel: ⅓ × opp grondvlak × hoogte</div>
+</div>
+<div class="formule-kaart" style="border-top: 3px solid #8e44ad;">
+<h3 style="color:#8e44ad;">📏 Eenheden omrekenen</h3>
+<p style="font-size:0.82rem;color:#666;margin-top:0.2rem">Lengte: ×10 groter / ÷10 kleiner</p>
+<div class="formule">Opp: ×100 per stap (km²→hm²→...→mm²)</div>
+<div class="formule" style="margin-top:0.3rem">Inhoud: ×1000 per stap (m³→dm³→cm³)</div>
+<div class="formule" style="margin-top:0.3rem">Gewicht: ton→kg→g→mg (×1000)</div>
+</div>
+</div>
+
+<footer>Gemaakt voor Sam 💪 — Getal & Ruimte 2 havo/vwo H2, H7 & H8</footer>
+
+<script>
+// ── Hulpfuncties ──────────────────────────────────────────────────
+function willekeurig(min, max) {
+return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function rond(getal, decimalen) {
+return Math.round(getal * Math.pow(10, decimalen)) / Math.pow(10, decimalen);
+}
+
+function nl(getal) {
+return getal.toString().replace('.', ',');
+}
+
+// ── Opgaven generatoren ───────────────────────────────────────────
+const generatoren = {
+
+parallellogram_binnen: () => {
+const z = willekeurig(15, 60);
+const h = willekeurig(8, 40);
+const opp = z * h;
+return {
+type: 'parallellogram', hoogtebuiten: false,
+zijde: z, hoogte: h,
+vraag: `Bereken de oppervlakte van het parallellogram met zijde ${z} mm en bijbehorende hoogte ${h} mm.`,
+antwoord: opp, marge: 0.5, eenheid: 'mm²',
+uitleg: `opp = zijde × hoogte = ${z} × ${h} = ${opp} mm².`,
+hint: 'De hoogte staat loodrecht op de zijde. opp = zijde × bijbehorende hoogte.',
+formule: 'opp = zijde × bijbehorende hoogte',
+};
+},
+
+parallellogram_buiten: () => {
+const z = willekeurig(20, 60);
+const h = willekeurig(10, 40);
+const opp = z * h;
+return {
+type: 'parallellogram', hoogtebuiten: true,
+zijde: z, hoogte: h,
+vraag: `Bereken de oppervlakte van het parallellogram. De zijde is ${z} mm en de bijbehorende hoogte (die buiten de figuur valt) is ${h} mm.`,
+antwoord: opp, marge: 0.5, eenheid: 'mm²',
+uitleg: `De hoogtelijn staat buiten het parallellogram — maar je gebruikt hem gewoon als hoogte! opp = ${z} × ${h} = ${opp} mm².`,
+hint: 'De hoogtelijn buiten de figuur is gewoon de bijbehorende hoogte. Gebruik hem gewoon! opp = zijde × hoogte.',
+formule: 'opp = zijde × bijbehorende hoogte',
+};
+},
+
+cirkel_straal: () => {
+const s = willekeurig(3, 25);
+const opp = rond(Math.PI * s * s, 1);
+return {
+type: 'cirkel', straal: s,
+vraag: `Bereken de oppervlakte van een cirkel met straal ${s} cm. Rond af op één decimaal.`,
+antwoord: opp, marge: 0.2, eenheid: 'cm²',
+uitleg: `opp = π × straal² = π × ${s}² = π × ${s*s} ≈ ${nl(opp)} cm².`,
+hint: 'opp = π × straal². Gebruik de π-toets op je rekenmachine.',
+formule: 'opp = π × straal²',
+};
+},
+
+cirkel_diameter: () => {
+const d = willekeurig(6, 50) * 2; // altijd even getal voor nette straal
+const s = d / 2;
+const opp = rond(Math.PI * s * s, 1);
+return {
+type: 'cirkel', straal: s,
+vraag: `Een cirkel heeft een diameter van ${d} mm. Bereken de oppervlakte. Rond af op één decimaal.`,
+antwoord: opp, marge: 0.5, eenheid: 'mm²',
+uitleg: `straal = ${d} ÷ 2 = ${s} mm. opp = π × ${s}² ≈ ${nl(opp)} mm².`,
+hint: `Eerst straal berekenen: ${d} ÷ 2 = ${s} mm. Dan opp = π × straal².`,
+formule: 'opp = π × straal²',
+};
+},
+
+trapezium: () => {
+const a = willekeurig(10, 40);
+const b = willekeurig(a + 5, 70);
+const h = willekeurig(10, 40);
+const opp = rond(0.5 * (a + b) * h, 1);
+return {
+type: 'trapezium', a, b, hoogte: h,
+vraag: `Bereken de oppervlakte van het trapezium met evenwijdige zijden ${a} mm en ${b} mm, en hoogte ${h} mm.`,
+antwoord: opp, marge: 0.6, eenheid: 'mm²',
+uitleg: `opp = ½ × (${a} + ${b}) × ${h} = ½ × ${a+b} × ${h} = ${nl(opp)} mm².`,
+hint: `Stap 1: ${a} + ${b} = ${a+b}. Stap 2: ${a+b} ÷ 2 = ${(a+b)/2}. Stap 3: × ${h}.`,
+formule: 'opp = ½ × (a + b) × hoogte',
+};
+},
+
+driehoek_opp: () => {
+const b = willekeurig(8, 40);
+const h = willekeurig(5, 30);
+const opp = rond(0.5 * b * h, 1);
+const eenheid = Math.random() < 0.5 ? 'cm' : 'mm';
+return {
+type: 'driehoek', subtype: 'oppervlakte',
+basis: b, hoogte: h,
+vraag: `Bereken de oppervlakte van een driehoek met basis ${b} ${eenheid} en hoogte ${h} ${eenheid}.`,
+antwoord: opp, marge: 0.2, eenheid: eenheid + '²',
+uitleg: `opp = ½ × basis × hoogte = ½ × ${b} × ${h} = ${nl(opp)} ${eenheid}².`,
+hint: 'Vergeet niet te delen door 2! opp = ½ × basis × hoogte.',
+formule: 'opp = ½ × basis × hoogte',
+};
+},
+
+driehoek_omtrek: () => {
+const a = willekeurig(5, 20);
+const b = willekeurig(5, 20);
+const c = willekeurig(Math.abs(a-b)+1, a+b-1); // geldige driehoek
+const omtrek = a + b + c;
+const eenheid = Math.random() < 0.5 ? 'cm' : 'mm';
+return {
+type: 'driehoek', subtype: 'omtrek',
+za: a, zb: b, zc: c,
+vraag: `Bereken de omtrek van een driehoek met zijden ${a} ${eenheid}, ${b} ${eenheid} en ${c} ${eenheid}.`,
+antwoord: omtrek, marge: 0, eenheid: eenheid,
+uitleg: `omtrek = ${a} + ${b} + ${c} = ${omtrek} ${eenheid}.`,
+hint: 'Omtrek = alle drie de zijden bij elkaar optellen.',
+formule: 'omtrek = zijde a + zijde b + zijde c',
+};
+},
+
+samengesteld_splitsen: () => {
+const breedte = willekeurig(3, 8);
+const rhoogte = willekeurig(2, 6);
+const dhoogte = willekeurig(1, 4);
+const oppR = breedte * rhoogte;
+const oppD = rond(0.5 * breedte * dhoogte, 1);
+const totaal = rond(oppR + oppD, 1);
+return {
+type: 'samengesteld', subtype: 'splitsen',
+breedte, rhoogte, dhoogte,
+vraag: `Een figuur bestaat uit een rechthoek (${breedte} × ${rhoogte} cm) met daarop een driehoek (basis ${breedte} cm, hoogte ${dhoogte} cm). Bereken de totale oppervlakte.`,
+antwoord: totaal, marge: 0.2, eenheid: 'cm²',
+uitleg: `Rechthoek: ${breedte} × ${rhoogte} = ${oppR} cm². Driehoek: ½ × ${breedte} × ${dhoogte} = ${nl(oppD)} cm². Totaal: ${oppR} + ${nl(oppD)} = ${nl(totaal)} cm².`,
+hint: 'Splits de figuur in een rechthoek en een driehoek. Bereken elk deel apart en tel op.',
+formule: 'opp = opp rechthoek + opp driehoek',
+};
+},
+
+samengesteld_aftrekken: () => {
+const gbreedte = willekeurig(4, 9);
+const ghoogte = willekeurig(3, 7);
+const dbasis = willekeurig(1, Math.floor(gbreedte/2));
+const dhoogte = willekeurig(1, ghoogte - 1);
+const oppGroot = gbreedte * ghoogte;
+const oppD = rond(0.5 * dbasis * dhoogte, 1);
+const totaal = rond(oppGroot - oppD, 1);
+return {
+type: 'samengesteld', subtype: 'stukjeerbij',
+gbreedte, ghoogte, dbasis, dhoogte,
+vraag: `Begin met een rechthoek van ${gbreedte} × ${ghoogte} cm. Snij er een driehoek uit met basis ${dbasis} cm en hoogte ${dhoogte} cm. Bereken de oppervlakte van de resterende figuur.`,
+antwoord: totaal, marge: 0.2, eenheid: 'cm²',
+uitleg: `Rechthoek: ${gbreedte} × ${ghoogte} = ${oppGroot} cm². Driehoek: ½ × ${dbasis} × ${dhoogte} = ${nl(oppD)} cm². Rest: ${oppGroot} − ${nl(oppD)} = ${nl(totaal)} cm².`,
+hint: 'Bereken eerst de grote rechthoek, bereken dan de driehoek, en trek die eraf.',
+formule: 'opp = opp groot − opp weggehaald stuk',
+};
+},
+
+// ── INHOUD 3D ──
+inhoud_balk: () => {
+const l = willekeurig(3, 20);
+const b = willekeurig(2, 15);
+const h = willekeurig(2, 12);
+const inh = l * b * h;
+return {
+type: 'inhoud', subtype: 'balk',
+l, b, h,
+vraag: `Bereken de inhoud van een balk met lengte ${l} cm, breedte ${b} cm en hoogte ${h} cm.`,
+antwoord: inh, marge: 0.5, eenheid: 'cm³',
+uitleg: `inhoud = lengte × breedte × hoogte = ${l} × ${b} × ${h} = ${inh} cm³.`,
+hint: 'inhoud balk = lengte × breedte × hoogte.',
+formule: 'inhoud balk = lengte × breedte × hoogte',
+};
+},
+
+inhoud_kubus: () => {
+const z = willekeurig(2, 12);
+const inh = z * z * z;
+return {
+type: 'inhoud', subtype: 'kubus',
+z,
+vraag: `Bereken de inhoud van een kubus met ribben van ${z} cm.`,
+antwoord: inh, marge: 0.5, eenheid: 'cm³',
+uitleg: `inhoud = zijde³ = ${z} × ${z} × ${z} = ${inh} cm³.`,
+hint: 'Een kubus heeft alle zijden even lang. inhoud = zijde × zijde × zijde.',
+formule: 'inhoud kubus = zijde × zijde × zijde',
+};
+},
+
+inhoud_cilinder: () => {
+const s = willekeurig(2, 10);
+const h = willekeurig(3, 20);
+const inh = rond(Math.PI * s * s * h, 1);
+return {
+type: 'inhoud', subtype: 'cilinder',
+s, h,
+vraag: `Bereken de inhoud van een cilinder met straal ${s} cm en hoogte ${h} cm. Rond af op één decimaal.`,
+antwoord: inh, marge: 0.5, eenheid: 'cm³',
+uitleg: `inhoud = π × straal² × hoogte = π × ${s}² × ${h} = π × ${s*s} × ${h} ≈ ${nl(inh)} cm³.`,
+hint: 'Stap 1: bereken opp grondvlak = π × straal². Stap 2: × hoogte.',
+formule: 'inhoud cilinder = π × straal² × hoogte',
+};
+},
+
+inhoud_prisma: () => {
+const b = willekeurig(4, 14);
+const hd = willekeurig(3, 10);
+const hp = willekeurig(5, 20);
+const oppGrond = rond(0.5 * b * hd, 1);
+const inh = rond(oppGrond * hp, 1);
+return {
+type: 'inhoud', subtype: 'prisma',
+b, hd, hp,
+vraag: `Een prisma heeft een driehoekig grondvlak met basis ${b} cm en hoogte ${hd} cm. De hoogte van het prisma is ${hp} cm. Bereken de inhoud.`,
+antwoord: inh, marge: 0.5, eenheid: 'cm³',
+uitleg: `Opp grondvlak = ½ × ${b} × ${hd} = ${nl(oppGrond)} cm². Inhoud = ${nl(oppGrond)} × ${hp} = ${nl(inh)} cm³.`,
+hint: 'Stap 1: bereken opp driehoekig grondvlak = ½ × basis × hoogte. Stap 2: × hoogte prisma.',
+formule: 'inhoud prisma = opp grondvlak × hoogte',
+};
+},
+
+inhoud_piramide: () => {
+const z = willekeurig(4, 14);
+const h = willekeurig(5, 18);
+const oppGrond = z * z;
+const inh = rond((1/3) * oppGrond * h, 1);
+return {
+type: 'inhoud', subtype: 'piramide',
+z, h,
+vraag: `Bereken de inhoud van een piramide met een vierkant grondvlak van ${z} × ${z} cm en hoogte ${h} cm. Rond af op één decimaal.`,
+antwoord: inh, marge: 0.5, eenheid: 'cm³',
+uitleg: `Opp grondvlak = ${z} × ${z} = ${oppGrond} cm². Inhoud = ⅓ × ${oppGrond} × ${h} = ${nl(inh)} cm³.`,
+hint: 'inhoud piramide = ⅓ × opp grondvlak × hoogte. Vergeet niet te delen door 3!',
+formule: 'inhoud piramide = ⅓ × opp grondvlak × hoogte',
+};
+},
+
+inhoud_kegel: () => {
+const s = willekeurig(2, 9);
+const h = willekeurig(5, 18);
+const oppGrond = rond(Math.PI * s * s, 2);
+const inh = rond((1/3) * Math.PI * s * s * h, 1);
+return {
+type: 'inhoud', subtype: 'kegel',
+s, h,
+vraag: `Bereken de inhoud van een kegel met straal ${s} cm en hoogte ${h} cm. Rond af op één decimaal.`,
+antwoord: inh, marge: 0.5, eenheid: 'cm³',
+uitleg: `Opp grondvlak = π × ${s}² ≈ ${nl(oppGrond)} cm². Inhoud = ⅓ × ${nl(oppGrond)} × ${h} ≈ ${nl(inh)} cm³.`,
+hint: 'inhoud kegel = ⅓ × π × straal² × hoogte. Vergeet niet te delen door 3!',
+formule: 'inhoud kegel = ⅓ × π × straal² × hoogte',
+};
+},
+
+// ── OMLIJSTEN ──
+omlijsten_cirkel_in_vierkant: () => {
+const s = willekeurig(2, 9);
+const zijde = s * 2;
+const oppVierkant = zijde * zijde;
+const oppCirkel = rond(Math.PI * s * s, 2);
+const verschil = rond(oppVierkant - oppCirkel, 2);
+return {
+type: 'omlijsten', subtype: 'cirkel_vierkant',
+s, zijde,
+vraag: `Een cirkel met straal ${s} cm past precies in een vierkant. Bereken de oppervlakte van de gele hoekjes. Rond af op twee decimalen.`,
+antwoord: verschil, marge: 0.1, eenheid: 'cm²',
+uitleg: `Vierkant: ${zijde} × ${zijde} = ${oppVierkant} cm². Cirkel: π × ${s}² ≈ ${nl(oppCirkel)} cm². Hoekjes: ${oppVierkant} − ${nl(oppCirkel)} = ${nl(verschil)} cm².`,
+hint: `Het vierkant heeft zijde = diameter = ${zijde} cm. Trek de oppervlakte van de cirkel af van het vierkant.`,
+formule: 'opp hoekjes = opp vierkant − opp cirkel',
+};
+},
+
+omlijsten_cirkel_in_rechthoek: () => {
+const s = willekeurig(2, 8);
+const extra = willekeurig(2, 6);
+const breedte = s * 2;
+const lengte = s * 2 + extra;
+const oppRechthoek = breedte * lengte;
+const oppCirkel = rond(Math.PI * s * s, 2);
+const verschil = rond(oppRechthoek - oppCirkel, 2);
+return {
+type: 'omlijsten', subtype: 'cirkel_rechthoek',
+s, breedte, lengte,
+vraag: `Een cirkel met straal ${s} cm zit in een rechthoek van ${lengte} × ${breedte} cm. Bereken de oppervlakte van het gele gebied (rechthoek minus cirkel). Rond af op twee decimalen.`,
+antwoord: verschil, marge: 0.1, eenheid: 'cm²',
+uitleg: `Rechthoek: ${lengte} × ${breedte} = ${oppRechthoek} cm². Cirkel: π × ${s}² ≈ ${nl(oppCirkel)} cm². Geel gebied: ${oppRechthoek} − ${nl(oppCirkel)} = ${nl(verschil)} cm².`,
+hint: `Bereken eerst de oppervlakte van de rechthoek (${lengte} × ${breedte}). Bereken dan de cirkel (π × ${s}²). Trek die van elkaar af.`,
+formule: 'opp geel = opp rechthoek − opp cirkel',
+};
+},
+
+omlijsten_vierkant_in_cirkel: () => {
+const s = willekeurig(3, 9);
+const oppVierkant = s * s;
+const straal = rond(Math.sqrt(2) * s / 2, 2);
+const oppCirkel = rond(Math.PI * straal * straal, 2);
+const verschil = rond(oppCirkel - oppVierkant, 2);
+return {
+type: 'omlijsten', subtype: 'vierkant_cirkel',
+s, straal,
+vraag: `Een vierkant van ${s} × ${s} cm past precies in een cirkel (de hoekpunten raken de cirkel). De straal van de cirkel is ${nl(straal)} cm. Bereken de oppervlakte van het gele gebied buiten het vierkant. Rond af op twee decimalen.`,
+antwoord: verschil, marge: 0.1, eenheid: 'cm²',
+uitleg: `Cirkel: π × ${nl(straal)}² ≈ ${nl(oppCirkel)} cm². Vierkant: ${s} × ${s} = ${oppVierkant} cm². Geel gebied: ${nl(oppCirkel)} − ${oppVierkant} = ${nl(verschil)} cm².`,
+hint: `Bereken de oppervlakte van de cirkel (π × ${nl(straal)}²). Trek de oppervlakte van het vierkant (${s} × ${s}) eraf.`,
+formule: 'opp geel = opp cirkel − opp vierkant',
+};
+},
+
+// ── EENHEDEN ──
+eenheden_lengte: () => {
+const conversies = [
+{ van: willekeurig(1,9) + ',' + willekeurig(1,9), vanE: 'km', naarE: 'm', factor: 1000 },
+{ van: willekeurig(10,900), vanE: 'cm', naarE: 'm', factor: 0.01 },
+{ van: willekeurig(10,9000), vanE: 'mm', naarE: 'cm', factor: 0.1 },
+{ van: willekeurig(1,9) + ',' + willekeurig(1,9), vanE: 'm', naarE: 'cm', factor: 100 },
+{ van: willekeurig(1,9) + ',' + willekeurig(1,9), vanE: 'dm', naarE: 'cm', factor: 10 },
+];
+const c = conversies[willekeurig(0, conversies.length - 1)];
+const vanGetal = parseFloat(c.van.toString().replace(',', '.'));
+const antwoord = rond(vanGetal * c.factor, 2);
+return {
+type: 'eenheden', subtype: 'lengte',
+vraag: `Bereken: ${c.van} ${c.vanE} = ... ${c.naarE}`,
+antwoord, marge: 0.01, eenheid: c.naarE,
+uitleg: `${c.van} ${c.vanE} = ${c.van} × ${c.factor} = ${nl(antwoord)} ${c.naarE}.`,
+hint: `Gebruik het schema: km → hm → dam → m → dm → cm → mm (elke stap ×10 of ÷10). Van ${c.vanE} naar ${c.naarE}.`,
+formule: 'Lengte: elke stap ×10 (groter→kleiner) of ÷10 (kleiner→groter)',
+};
+},
+
+eenheden_oppervlakte: () => {
+const opties = [
+{ van: willekeurig(1,9) * 100, vanE: 'cm²', naarE: 'dm²', factor: 0.01 },
+{ van: willekeurig(1,9), vanE: 'm²', naarE: 'cm²', factor: 10000 },
+{ van: willekeurig(1,9) * 1000, vanE: 'cm²', naarE: 'm²', factor: 0.0001 },
+{ van: willekeurig(1,9), vanE: 'dm²', naarE: 'cm²', factor: 100 },
+{ van: willekeurig(1,9) * 100, vanE: 'mm²', naarE: 'cm²', factor: 0.01 },
+{ van: willekeurig(1,9), vanE: 'ha', naarE: 'm²', factor: 10000 },
+];
+const c = opties[willekeurig(0, opties.length - 1)];
+const antwoord = rond(c.van * c.factor, 3);
+return {
+type: 'eenheden', subtype: 'oppervlakte',
+vraag: `Bereken: ${c.van} ${c.vanE} = ... ${c.naarE}`,
+antwoord, marge: 0.001, eenheid: c.naarE,
+uitleg: `Oppervlakte-eenheden: elke stap is ×100 of ÷100. ${c.van} ${c.vanE} = ${nl(antwoord)} ${c.naarE}.`,
+hint: 'Oppervlakte: km²→hm²→dam²→m²→dm²→cm²→mm², elke stap ×100 of ÷100.',
+formule: 'Oppervlakte: elke stap ×100 of ÷100',
+};
+},
+
+eenheden_gewicht: () => {
+const opties = [
+{ van: willekeurig(1,9) + ',' + willekeurig(1,9), vanE: 'kg', naarE: 'g', factor: 1000 },
+{ van: willekeurig(1,9) * 1000, vanE: 'g', naarE: 'kg', factor: 0.001 },
+{ van: willekeurig(1,9), vanE: 'ton', naarE: 'kg', factor: 1000 },
+{ van: willekeurig(100,9000), vanE: 'mg', naarE: 'g', factor: 0.001 },
+{ van: willekeurig(1,9) * 100, vanE: 'g', naarE: 'mg', factor: 1000 },
+];
+const c = opties[willekeurig(0, opties.length - 1)];
+const vanGetal = parseFloat(c.van.toString().replace(',', '.'));
+const antwoord = rond(vanGetal * c.factor, 3);
+return {
+type: 'eenheden', subtype: 'gewicht',
+vraag: `Bereken: ${c.van} ${c.vanE} = ... ${c.naarE}`,
+antwoord, marge: 0.001, eenheid: c.naarE,
+uitleg: `Gewicht: ton→kg→g→mg, elke stap ×1000 of ÷1000. ${c.van} ${c.vanE} = ${nl(antwoord)} ${c.naarE}.`,
+hint: 'Gewicht schema: ton ↔ kg ↔ g ↔ mg. Elke stap ×1000 (groter→kleiner) of ÷1000.',
+formule: 'Gewicht: ton→kg→g→mg (elke stap ×1000 of ÷1000)',
+};
+},
+
+eenheden_inhoud: () => {
+const opties = [
+{ van: willekeurig(1,9) * 1000, vanE: 'mL', naarE: 'L', factor: 0.001 },
+{ van: willekeurig(1,9), vanE: 'L', naarE: 'mL', factor: 1000 },
+{ van: willekeurig(1,9), vanE: 'dm³', naarE: 'L', factor: 1 },
+{ van: willekeurig(1,9) * 100, vanE: 'cL', naarE: 'L', factor: 0.01 },
+{ van: willekeurig(1,9), vanE: 'm³', naarE: 'L', factor: 1000 },
+{ van: willekeurig(1,9) * 10, vanE: 'dL', naarE: 'mL', factor: 100 },
+];
+const c = opties[willekeurig(0, opties.length - 1)];
+const vanGetal = parseFloat(c.van.toString().replace(',', '.'));
+const antwoord = rond(vanGetal * c.factor, 3);
+return {
+type: 'eenheden', subtype: 'inhoud',
+vraag: `Bereken: ${c.van} ${c.vanE} = ... ${c.naarE}`,
+antwoord, marge: 0.001, eenheid: c.naarE,
+uitleg: `Inhoud: m³→dm³(=L)→cm³(=mL), en L→dL→cL→mL. ${c.van} ${c.vanE} = ${nl(antwoord)} ${c.naarE}.`,
+hint: '1 dm³ = 1 L, 1 cm³ = 1 mL. Schema: m³↔dm³↔cm³ (×1000), L↔dL↔cL↔mL (×10).',
+formule: 'Inhoud: 1 L = 1 dm³, 1 mL = 1 cm³',
+};
+},
+
+// ── VERHAALTJESSOMMEN ──
+verhaaltjes_vloer: () => {
+const l = willekeurig(3, 12);
+const b = willekeurig(2, 8);
+const opp = l * b;
+return {
+type: 'verhaaltjes', subtype: 'vloer',
+l, b,
+vraag: `Sam legt tegels in een rechthoekige kamer van ${l} m lang en ${b} m breed. Hoeveel vierkante meter tegels heeft hij nodig?`,
+antwoord: opp, marge: 0.5, eenheid: 'm²',
+uitleg: `Oppervlakte kamer = lengte × breedte = ${l} × ${b} = ${opp} m².`,
+hint: 'Oppervlakte rechthoek = lengte × breedte.',
+formule: 'opp = lengte × breedte',
+};
+},
+
+verhaaltjes_zwembad: () => {
+const r = willekeurig(2, 8);
+const opp = rond(Math.PI * r * r, 1);
+return {
+type: 'verhaaltjes', subtype: 'zwembad',
+r,
+vraag: `Een rond zwembad heeft een straal van ${r} m. Wat is de oppervlakte van het wateroppervlak? Rond af op één decimaal.`,
+antwoord: opp, marge: 0.2, eenheid: 'm²',
+uitleg: `opp = π × straal² = π × ${r}² ≈ ${nl(opp)} m².`,
+hint: `opp cirkel = π × straal². De straal is ${r} m.`,
+formule: 'opp = π × straal²',
+};
+},
+
+verhaaltjes_dak: () => {
+const b = willekeurig(4, 14);
+const h = willekeurig(2, 7);
+const opp = rond(0.5 * b * h, 1);
+return {
+type: 'verhaaltjes', subtype: 'dak',
+b, h,
+vraag: `Een driehoekig dakpaneel heeft een breedte van ${b} m en een hoogte van ${h} m. Hoeveel m² dakpannen zijn er nodig?`,
+antwoord: opp, marge: 0.2, eenheid: 'm²',
+uitleg: `opp driehoek = ½ × basis × hoogte = ½ × ${b} × ${h} = ${nl(opp)} m².`,
+hint: 'opp driehoek = ½ × basis × hoogte. Vergeet de ½ niet!',
+formule: 'opp = ½ × basis × hoogte',
+};
+},
+
+verhaaltjes_akker: () => {
+const a = willekeurig(10, 30);
+const b = willekeurig(a + 5, 50);
+const h = willekeurig(8, 20);
+const opp = rond(0.5 * (a + b) * h, 1);
+return {
+type: 'verhaaltjes', subtype: 'akker',
+a, b, h,
+vraag: `Een trapeziumvormige akker heeft twee evenwijdige zijden van ${a} m en ${b} m. De afstand ertussen is ${h} m. Hoe groot is de akker in m²? Rond af op één decimaal.`,
+antwoord: opp, marge: 0.5, eenheid: 'm²',
+uitleg: `opp = ½ × (${a} + ${b}) × ${h} = ½ × ${a+b} × ${h} = ${nl(opp)} m².`,
+hint: `Tel de evenwijdige zijden op: ${a} + ${b} = ${a+b}. Deel door 2, dan × hoogte ${h}.`,
+formule: 'opp = ½ × (a + b) × hoogte',
+};
+},
+
+verhaaltjes_gras: () => {
+const l = willekeurig(6, 14);
+const b = willekeurig(4, 10);
+const r = willekeurig(1, Math.min(Math.floor(l / 2), Math.floor(b / 2), 4));
+const oppR = l * b;
+const oppC = rond(Math.PI * r * r, 2);
+const opp = rond(oppR - oppC, 2);
+return {
+type: 'verhaaltjes', subtype: 'gras',
+l, b, r,
+vraag: `In een rechthoekige tuin van ${l} × ${b} m staat een ronde vijver met straal ${r} m. Hoe groot is het grasoppervlak? Rond af op twee decimalen.`,
+antwoord: opp, marge: 0.1, eenheid: 'm²',
+uitleg: `Tuin: ${l} × ${b} = ${oppR} m². Vijver: π × ${r}² ≈ ${nl(oppC)} m². Gras: ${oppR} − ${nl(oppC)} = ${nl(opp)} m².`,
+hint: `Bereken eerst de tuin (${l} × ${b}), dan de vijver (π × ${r}²), en trek die eraf.`,
+formule: 'opp gras = opp tuin − opp vijver',
+};
+},
+
+verhaaltjes_muur: () => {
+const mw = willekeurig(4, 10);
+const mh = willekeurig(2, 4);
+const rw = willekeurig(1, Math.max(1, Math.floor(mw / 2) - 1));
+const rh = willekeurig(1, Math.max(1, Math.floor(mh * 0.7)));
+const oppMuur = mw * mh;
+const oppRaam = rw * rh;
+const opp = oppMuur - oppRaam;
+return {
+type: 'verhaaltjes', subtype: 'muur',
+mw, mh, rw, rh,
+vraag: `Een muur is ${mw} m breed en ${mh} m hoog. Erin zit een raam van ${rw} × ${rh} m. Hoeveel m² moet worden geverfd?`,
+antwoord: opp, marge: 0.5, eenheid: 'm²',
+uitleg: `Muur: ${mw} × ${mh} = ${oppMuur} m². Raam: ${rw} × ${rh} = ${oppRaam} m². Te verven: ${oppMuur} − ${oppRaam} = ${opp} m².`,
+hint: `Bereken de hele muur (${mw} × ${mh}), trek daarna het raam (${rw} × ${rh}) eraf.`,
+formule: 'opp verf = opp muur − opp raam',
+};
+},
+
+verhaaltjes_aquarium: () => {
+const l = willekeurig(4, 10);
+const b = willekeurig(2, 6);
+const h = willekeurig(3, 8);
+const inh = l * b * h;
+return {
+type: 'verhaaltjes', subtype: 'aquarium',
+l, b, h,
+vraag: `Een aquarium is ${l} dm lang, ${b} dm breed en ${h} dm hoog. Hoeveel liter water past erin? (1 dm³ = 1 liter)`,
+antwoord: inh, marge: 0.5, eenheid: 'liter',
+uitleg: `Inhoud = ${l} × ${b} × ${h} = ${inh} dm³ = ${inh} liter.`,
+hint: 'inhoud balk = lengte × breedte × hoogte. In dm³ is dat direct liters.',
+formule: 'inhoud = lengte × breedte × hoogte (dm³ = liter)',
+};
+},
+
+verhaaltjes_regenton: () => {
+const r = willekeurig(2, 5);
+const h = willekeurig(4, 10);
+const inh = rond(Math.PI * r * r * h, 1);
+return {
+type: 'verhaaltjes', subtype: 'regenton',
+r, h,
+vraag: `Een ronde regenton heeft een straal van ${r} dm en een hoogte van ${h} dm. Hoeveel liter water kan erin? (1 dm³ = 1 liter) Rond af op één decimaal.`,
+antwoord: inh, marge: 0.5, eenheid: 'liter',
+uitleg: `inhoud = π × ${r}² × ${h} ≈ ${nl(inh)} dm³ = ${nl(inh)} liter.`,
+hint: `inhoud cilinder = π × straal² × hoogte. 1 dm³ = 1 liter.`,
+formule: 'inhoud cilinder = π × straal² × hoogte',
+};
+},
+
+verhaaltjes_hek: () => {
+const a = willekeurig(5, 20);
+const b = willekeurig(5, 20);
+const c = willekeurig(Math.abs(a - b) + 1, a + b - 1);
+const omtrek = a + b + c;
+return {
+type: 'verhaaltjes', subtype: 'hek',
+a, b, c,
+vraag: `Een driehoekig weiland heeft zijden van ${a} m, ${b} m en ${c} m. Hoeveel meter hek heb je nodig om het weiland helemaal af te omheinen?`,
+antwoord: omtrek, marge: 0, eenheid: 'm',
+uitleg: `Omtrek = ${a} + ${b} + ${c} = ${omtrek} m.`,
+hint: 'Omtrek driehoek = alle drie de zijden bij elkaar optellen.',
+formule: 'omtrek = zijde a + zijde b + zijde c',
+};
+},
+
+verhaaltjes_parkeerplaats: () => {
+const z = willekeurig(4, 10);
+const h = willekeurig(3, 8);
+const opp = z * h;
+const autoOpp = willekeurig(5, 8);
+const autos = Math.floor(opp / autoOpp);
+return {
+type: 'verhaaltjes', subtype: 'parkeerplaats',
+z, h, autoOpp, autos,
+vraag: `Een parallellogramvormig parkeerterrein heeft een zijde van ${z} m en een bijbehorende hoogte van ${h} m. Elke auto heeft ${autoOpp} m² nodig. Hoeveel auto's passen er?`,
+antwoord: autos, marge: 0, eenheid: "auto's",
+uitleg: `Opp terrein = ${z} × ${h} = ${opp} m². Aantal auto's = ${opp} ÷ ${autoOpp} = ${autos}.`,
+hint: `Bereken eerst de oppervlakte (${z} × ${h}). Deel daarna door ${autoOpp} m² per auto.`,
+formule: "opp parallellogram = zijde × hoogte, dan ÷ opp per auto",
+};
+},
+};
+
+// Welke generatoren horen bij welk filter
+const filterGeneratoren = {
+parallellogram: ['parallellogram_binnen', 'parallellogram_buiten', 'parallellogram_buiten'],
+cirkel: ['cirkel_straal', 'cirkel_diameter'],
+trapezium: ['trapezium'],
+driehoek: ['driehoek_opp', 'driehoek_opp', 'driehoek_omtrek'],
+samengesteld: ['samengesteld_splitsen', 'samengesteld_aftrekken'],
+inhoud: ['inhoud_balk', 'inhoud_kubus', 'inhoud_cilinder', 'inhoud_prisma', 'inhoud_piramide', 'inhoud_kegel'],
+omlijsten: ['omlijsten_cirkel_in_vierkant', 'omlijsten_cirkel_in_rechthoek', 'omlijsten_vierkant_in_cirkel'],
+eenheden: ['eenheden_lengte', 'eenheden_oppervlakte', 'eenheden_gewicht', 'eenheden_inhoud'],
+verhaaltjes: ['verhaaltjes_vloer', 'verhaaltjes_zwembad', 'verhaaltjes_dak', 'verhaaltjes_akker',
+'verhaaltjes_gras', 'verhaaltjes_muur', 'verhaaltjes_aquarium', 'verhaaltjes_regenton',
+'verhaaltjes_hek', 'verhaaltjes_parkeerplaats'],
+alles: ['parallellogram_binnen', 'parallellogram_buiten',
+'cirkel_straal', 'cirkel_diameter',
+'trapezium',
+'driehoek_opp', 'driehoek_omtrek',
+'samengesteld_splitsen', 'samengesteld_aftrekken',
+'inhoud_balk', 'inhoud_kubus', 'inhoud_cilinder', 'inhoud_prisma', 'inhoud_piramide', 'inhoud_kegel',
+'omlijsten_cirkel_in_vierkant', 'omlijsten_cirkel_in_rechthoek', 'omlijsten_vierkant_in_cirkel',
+'eenheden_lengte', 'eenheden_oppervlakte', 'eenheden_gewicht', 'eenheden_inhoud',
+'verhaaltjes_vloer', 'verhaaltjes_zwembad', 'verhaaltjes_dak', 'verhaaltjes_akker',
+'verhaaltjes_gras', 'verhaaltjes_muur', 'verhaaltjes_aquarium', 'verhaaltjes_regenton',
+'verhaaltjes_hek', 'verhaaltjes_parkeerplaats'],
+};
+
+// ── State ─────────────────────────────────────────────────────────
+let huidigFilter = 'alles';
+let huidigeOpgave = null;
+let scoreGoed = 0, scoreFout = 0;
+let getoondHint = false;
+
+// ── Init ──────────────────────────────────────────────────────────
+document.querySelectorAll('.onderwerp-knop').forEach(knop => {
+knop.addEventListener('click', () => {
+document.querySelectorAll('.onderwerp-knop').forEach(k => k.classList.remove('actief'));
+knop.classList.add('actief');
+huidigFilter = knop.dataset.onderwerp;
+volgende();
+});
+});
+
+document.getElementById('antwoord-input').addEventListener('keydown', e => {
+if (e.key === 'Enter') controleer();
+});
+
+function genereerOpgave() {
+const lijst = filterGeneratoren[huidigFilter] || filterGeneratoren['alles'];
+const naam = lijst[Math.floor(Math.random() * lijst.length)];
+return generatoren[naam]();
+}
+
+function volgende() {
+huidigeOpgave = genereerOpgave();
+getoondHint = false;
+
+// Reset UI
+const input = document.getElementById('antwoord-input');
+input.value = '';
+input.className = '';
+input.disabled = false;
+
+document.getElementById('feedback').className = 'feedback';
+document.getElementById('feedback').textContent = '';
+document.getElementById('uitleg-na').className = 'uitleg-na';
+document.getElementById('tip-box').className = 'tip-box';
+document.getElementById('knop-volgende').className = 'knop-volgende';
+document.getElementById('knop-hint').style.display = '';
+document.getElementById('knop-controleer').style.display = '';
+
+// Header
+const types = { cirkel: '⭕ Cirkel', parallellogram: '📐 Parallellogram', trapezium: '🔷 Trapezium', samengesteld: '🧩 Samengesteld', driehoek: '🔺 Driehoek', inhoud: '📦 Inhoud 3D', omlijsten: '🔲 Omlijsten', eenheden: '📏 Eenheden', verhaaltjes: '📖 Verhaaltjessom' };
+const header = document.getElementById('kaart-header');
+header.className = 'kaart-header ' + huidigeOpgave.type;
+document.getElementById('header-tekst').textContent = types[huidigeOpgave.type];
+
+document.getElementById('formule-box').textContent = '📌 Formule: ' + huidigeOpgave.formule;
+document.getElementById('vraag').textContent = huidigeOpgave.vraag;
+document.getElementById('eenheid-label').textContent = huidigeOpgave.eenheid;
+
+tekenFiguur(huidigeOpgave);
+input.focus();
+}
+
+function controleer() {
+const input = document.getElementById('antwoord-input');
+const waarde = parseFloat(input.value.replace(',', '.'));
+if (isNaN(waarde)) {
+alert('Vul een getal in.');
+return;
+}
+
+const o = huidigeOpgave;
+const marge = o.marge || 0.05;
+const goed = Math.abs(waarde - o.antwoord) <= marge;
+
+const feedback = document.getElementById('feedback');
+const uitlegNa = document.getElementById('uitleg-na');
+
+if (goed) {
+scoreGoed++;
+input.classList.add('goed');
+feedback.textContent = '✅ Heel goed! ' + (getoondHint ? '' : 'Perfect!');
+feedback.className = 'feedback zichtbaar goed';
+} else {
+scoreFout++;
+input.classList.add('fout');
+feedback.textContent = '❌ Niet helemaal. Het juiste antwoord is ' + o.antwoord.toString().replace('.', ',') + ' ' + o.eenheid + '.';
+feedback.className = 'feedback zichtbaar fout';
+}
+
+uitlegNa.innerHTML = '<strong>Uitleg:</strong> ' + o.uitleg;
+uitlegNa.className = 'uitleg-na zichtbaar';
+
+document.getElementById('score-goed').textContent = scoreGoed;
+document.getElementById('score-fout').textContent = scoreFout;
+const totaal = scoreGoed + scoreFout;
+document.getElementById('score-totaal').textContent = totaal;
+
+const pct = totaal > 0 ? Math.round((scoreGoed / totaal) * 100) : 0;
+document.getElementById('progress-bar').style.width = pct + '%';
+
+input.disabled = true;
+document.getElementById('knop-hint').style.display = 'none';
+document.getElementById('knop-controleer').style.display = 'none';
+document.getElementById('knop-volgende').className = 'knop-volgende zichtbaar';
+}
+
+function geefHint() {
+getoondHint = true;
+const tip = document.getElementById('tip-box');
+tip.textContent = '💡 ' + huidigeOpgave.hint;
+tip.className = 'tip-box zichtbaar';
+}
+
+// ── Tekenroutines ─────────────────────────────────────────────────
+function tekenFiguur(o) {
+const canvas = document.getElementById('figuur');
+const ctx = canvas.getContext('2d');
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+if (o.type === 'parallellogram') tekenParallellogram(ctx, o);
+else if (o.type === 'cirkel') tekenCirkel(ctx, o);
+else if (o.type === 'trapezium') tekenTrapezium(ctx, o);
+else if (o.type === 'driehoek') tekenDriehoek(ctx, o);
+else if (o.type === 'inhoud') tekenInhoud(ctx, o);
+else if (o.type === 'omlijsten') tekenOmlijsten(ctx, o);
+else if (o.type === 'eenheden') tekenEenheden(ctx, o);
+else if (o.type === 'samengesteld') tekenSamengesteld(ctx, o);
+else if (o.type === 'verhaaltjes') tekenVerhaaltje(ctx, o);
+}
+
+function tekenVerhaaltje(ctx, o) {
+ctx.textAlign = 'center';
+const kleur = '#1abc9c';
+
+if (o.subtype === 'vloer') {
+// Tegels in rechthoekige kamer
+const ax = 80, ay = 40, w = 240, h = 140;
+ctx.fillStyle = '#e8f8f5';
+ctx.strokeStyle = kleur;
+ctx.lineWidth = 2.5;
+ctx.fillRect(ax, ay, w, h);
+ctx.strokeRect(ax, ay, w, h);
+// Tegelpatroon
+ctx.strokeStyle = '#a3e4d7';
+ctx.lineWidth = 1;
+for (let x = ax; x < ax + w; x += 40) { ctx.beginPath(); ctx.moveTo(x, ay); ctx.lineTo(x, ay + h); ctx.stroke(); }
+for (let y = ay; y < ay + h; y += 35) { ctx.beginPath(); ctx.moveTo(ax, y); ctx.lineTo(ax + w, y); ctx.stroke(); }
+ctx.fillStyle = '#333';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText(`${o.l} m`, ax + w / 2, ay + h + 20);
+ctx.save(); ctx.translate(ax - 18, ay + h / 2); ctx.rotate(-Math.PI / 2);
+ctx.fillText(`${o.b} m`, 0, 0); ctx.restore();
+ctx.fillStyle = kleur;
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel m² tegels?', ax + w / 2, ay - 10);
+
+} else if (o.subtype === 'zwembad') {
+// Rond zwembad van bovenaf
+const cx = 200, cy = 115, r = Math.min(80, o.r * 10);
+ctx.fillStyle = '#d6eaf8';
+ctx.strokeStyle = '#2980b9';
+ctx.lineWidth = 3;
+ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+// Golfjes
+ctx.strokeStyle = '#5dade2'; ctx.lineWidth = 1.5;
+for (let i = -1; i <= 1; i++) {
+ctx.beginPath(); ctx.moveTo(cx - 30, cy + i * 18);
+ctx.quadraticCurveTo(cx - 10, cy + i * 18 - 8, cx, cy + i * 18);
+ctx.quadraticCurveTo(cx + 10, cy + i * 18 + 8, cx + 30, cy + i * 18);
+ctx.stroke();
+}
+ctx.fillStyle = '#333'; ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('straal = ' + o.r + ' m', cx, cy + r + 20);
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Oppervlakte wateroppervlak?', cx, 20);
+
+} else if (o.subtype === 'dak') {
+// Driehoekig dak
+const ax = 80, ay = 170, bx = 320, by = 170, tx = 200, ty = 50;
+ctx.fillStyle = '#fadbd8';
+ctx.strokeStyle = '#c0392b';
+ctx.lineWidth = 2.5;
+ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.lineTo(tx, ty); ctx.closePath();
+ctx.fill(); ctx.stroke();
+// Dakpannen-lijnen
+ctx.strokeStyle = '#e74c3c'; ctx.lineWidth = 1;
+for (let y = ty + 20; y < ay; y += 18) {
+const frac = (y - ty) / (ay - ty);
+const lx = ax + (tx - ax) * (1 - frac), rx = bx + (tx - bx) * (1 - frac);
+ctx.beginPath(); ctx.moveTo(lx + (tx - lx) * frac, y); ctx.lineTo(rx + (tx - rx) * frac, y); ctx.stroke();
+}
+ctx.fillStyle = '#333'; ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('basis = ' + o.b + ' m', (ax + bx) / 2, ay + 22);
+ctx.fillStyle = '#c0392b';
+ctx.fillText('h = ' + o.h + ' m', tx + 35, (ty + ay) / 2);
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel m² dakpannen?', 200, 208);
+
+} else if (o.subtype === 'akker') {
+// Trapeziumvormige akker
+const lx = 60, rx = 340, by = 175, ty = 65;
+const tinset = 55;
+ctx.fillStyle = '#d5f5e3';
+ctx.strokeStyle = '#27ae60';
+ctx.lineWidth = 2.5;
+ctx.beginPath();
+ctx.moveTo(lx + tinset, ty); ctx.lineTo(rx - tinset + 20, ty);
+ctx.lineTo(rx, by); ctx.lineTo(lx, by); ctx.closePath();
+ctx.fill(); ctx.stroke();
+// Akkerlijnen
+ctx.strokeStyle = '#52be80'; ctx.lineWidth = 1;
+for (let y = ty + 18; y < by; y += 18) { ctx.beginPath(); ctx.moveTo(lx + 5, y); ctx.lineTo(rx - 5, y); ctx.stroke(); }
+ctx.fillStyle = '#333'; ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText('a = ' + o.a + ' m', 200, ty - 8);
+ctx.fillText('b = ' + o.b + ' m', 200, by + 20);
+ctx.fillStyle = '#e74c3c';
+ctx.fillText('h = ' + o.h + ' m', rx + 18, (ty + by) / 2 + 5);
+
+} else if (o.subtype === 'gras') {
+// Tuin met vijver
+const ax = 70, ay = 40, tw = 260, th = 150;
+ctx.fillStyle = '#abebc6';
+ctx.strokeStyle = '#27ae60'; ctx.lineWidth = 2.5;
+ctx.fillRect(ax, ay, tw, th); ctx.strokeRect(ax, ay, tw, th);
+const cx = ax + tw / 2, cy = ay + th / 2;
+const r = Math.min(50, o.r * 12);
+ctx.fillStyle = '#85c1e9';
+ctx.strokeStyle = '#2980b9'; ctx.lineWidth = 2;
+ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+ctx.fillStyle = '#1a5276'; ctx.font = 'bold 11px Nunito, sans-serif';
+ctx.fillText('vijver r=' + o.r + 'm', cx, cy + 5);
+ctx.fillStyle = '#333'; ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText(o.l + ' m', ax + tw / 2, ay + th + 18);
+ctx.save(); ctx.translate(ax - 18, ay + th / 2); ctx.rotate(-Math.PI / 2);
+ctx.fillText(o.b + ' m', 0, 0); ctx.restore();
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel m² gras (groen)?', cx, ay - 10);
+
+} else if (o.subtype === 'muur') {
+// Muur met raam
+const ax = 60, ay = 30, mw = 280, mh = 160;
+ctx.fillStyle = '#f0e6d3';
+ctx.strokeStyle = '#7f8c8d'; ctx.lineWidth = 2.5;
+ctx.fillRect(ax, ay, mw, mh); ctx.strokeRect(ax, ay, mw, mh);
+const rw = mw * 0.28, rh = mh * 0.4;
+const rx = ax + mw / 2 - rw / 2, ry = ay + mh / 2 - rh / 2;
+ctx.fillStyle = '#aed6f1';
+ctx.strokeStyle = '#2980b9'; ctx.lineWidth = 2;
+ctx.fillRect(rx, ry, rw, rh); ctx.strokeRect(rx, ry, rw, rh);
+ctx.strokeStyle = '#2980b9'; ctx.lineWidth = 1;
+ctx.beginPath(); ctx.moveTo(rx + rw / 2, ry); ctx.lineTo(rx + rw / 2, ry + rh); ctx.stroke();
+ctx.beginPath(); ctx.moveTo(rx, ry + rh / 2); ctx.lineTo(rx + rw, ry + rh / 2); ctx.stroke();
+ctx.fillStyle = '#333'; ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText(o.mw + ' m', ax + mw / 2, ay + mh + 18);
+ctx.fillStyle = '#2980b9'; ctx.font = '11px Nunito, sans-serif';
+ctx.fillText('raam ' + o.rw + '×' + o.rh + ' m', ax + mw / 2, ay + mh / 2 + 5);
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel m² verf nodig (muur min raam)?', 200, 210);
+
+} else if (o.subtype === 'aquarium') {
+// 3D balk aquarium met water
+const x = 90, y = 50, w = 180, h = 110, d = 45;
+ctx.fillStyle = '#d6eaf8';
+ctx.strokeStyle = '#2980b9'; ctx.lineWidth = 2;
+// Voorkant
+ctx.fillRect(x, y, w, h); ctx.strokeRect(x, y, w, h);
+// Bovenkant
+ctx.fillStyle = '#a9cce3';
+ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + d, y - d); ctx.lineTo(x + w + d, y - d); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill(); ctx.stroke();
+// Rechterkant
+ctx.fillStyle = '#85b9d5';
+ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d); ctx.lineTo(x + w + d, y + h - d); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill(); ctx.stroke();
+ctx.fillStyle = '#1a5276'; ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText(o.l + ' dm', x + w / 2, y + h + 18);
+ctx.fillText(o.b + ' dm', x + w + d / 2 + 8, y + h / 2 - d / 2);
+ctx.fillText(o.h + ' dm', x - 28, y + h / 2);
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel liter? (1 dm³ = 1 L)', 200, 208);
+
+} else if (o.subtype === 'regenton') {
+// Cilindervormige regenton
+const cx = 200, cy = 140, rx = 65, ry = 18, ch = 120;
+ctx.fillStyle = '#d5d8dc';
+ctx.strokeStyle = '#7f8c8d'; ctx.lineWidth = 2;
+ctx.beginPath(); ctx.moveTo(cx - rx, cy - ch); ctx.lineTo(cx - rx, cy);
+ctx.ellipse(cx, cy, rx, ry, 0, Math.PI, 0); ctx.lineTo(cx + rx, cy - ch);
+ctx.ellipse(cx, cy - ch, rx, ry, 0, 0, Math.PI); ctx.fill(); ctx.stroke();
+ctx.beginPath(); ctx.ellipse(cx, cy - ch, rx, ry, 0, 0, Math.PI * 2); ctx.stroke();
+// Water
+ctx.fillStyle = '#5dade2';
+ctx.beginPath(); ctx.moveTo(cx - rx + 4, cy - ch * 0.6);
+ctx.lineTo(cx - rx + 4, cy - 4);
+ctx.ellipse(cx, cy - 4, rx - 4, ry - 3, 0, Math.PI, 0);
+ctx.lineTo(cx + rx - 4, cy - ch * 0.6);
+ctx.ellipse(cx, cy - ch * 0.6, rx - 4, ry - 3, 0, 0, Math.PI); ctx.fill();
+ctx.fillStyle = '#333'; ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText('straal = ' + o.r + ' dm', cx + rx + 10, cy - ch / 2);
+ctx.fillText('h = ' + o.h + ' dm', cx + rx + 10, cy - ch / 2 + 20);
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel liter? (1 dm³ = 1 L)', cx, 210);
+
+} else if (o.subtype === 'hek') {
+// Driehoekig weiland met hek
+const ax = 80, ay = 175, bx = 320, by = 175, tx = 195, ty = 45;
+ctx.fillStyle = '#d5f5e3';
+ctx.strokeStyle = '#27ae60'; ctx.lineWidth = 3;
+ctx.setLineDash([10, 5]);
+ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.lineTo(tx, ty); ctx.closePath(); ctx.fill(); ctx.stroke();
+ctx.setLineDash([]);
+// Hekpalen
+ctx.fillStyle = '#784212';
+[[ax, ay], [bx, by], [tx, ty]].forEach(([px, py]) => {
+ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2); ctx.fill();
+});
+ctx.fillStyle = '#555'; ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText('a = ' + o.a + ' m', (ax + bx) / 2, ay + 20);
+ctx.fillText('b = ' + o.b + ' m', (ax + tx) / 2 - 30, (ay + ty) / 2);
+ctx.fillText('c = ' + o.c + ' m', (bx + tx) / 2 + 15, (by + ty) / 2);
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel meter hek nodig?', 200, 208);
+
+} else if (o.subtype === 'parkeerplaats') {
+// Parallellogram parkeerplaats
+const lx = 70, rx = 290, by2 = 175, ty2 = 65, schuif = 45;
+ctx.fillStyle = '#d5d8dc';
+ctx.strokeStyle = '#555'; ctx.lineWidth = 2.5;
+ctx.beginPath();
+ctx.moveTo(lx + schuif, ty2); ctx.lineTo(rx + schuif, ty2);
+ctx.lineTo(rx, by2); ctx.lineTo(lx, by2); ctx.closePath();
+ctx.fill(); ctx.stroke();
+// Parkeerplekken
+ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+const pw = (rx - lx) / 5;
+for (let i = 1; i < 5; i++) {
+ctx.beginPath();
+ctx.moveTo(lx + i * pw + schuif * (1 - i/5), ty2 + 5);
+ctx.lineTo(lx + i * pw + schuif * (1 - i/5) - schuif * 0.6, by2 - 5);
+ctx.stroke();
+}
+ctx.fillStyle = '#333'; ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText('zijde = ' + o.z + ' m', (lx + rx) / 2 + schuif/2, ty2 - 10);
+ctx.fillText('hoogte = ' + o.h + ' m', rx + schuif + 12, (ty2 + by2) / 2 + 5);
+ctx.fillStyle = kleur; ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Hoeveel auto\'s (' + o.autoOpp + ' m² per auto)?', 200, 208);
+}
+
+ctx.textAlign = 'left';
+}
+
+function tekenParallellogram(ctx, o) {
+const w = 400, h = 220;
+const offset = o.hoogtebuiten ? 60 : 0;
+const links = 80 + offset, rechts = 320 + offset;
+const boven = 50, onder = 170;
+const schuif = 40;
+
+ctx.fillStyle = '#fff8e7';
+ctx.strokeStyle = '#e67e22';
+ctx.lineWidth = 2.5;
+
+// Parallellogram
+ctx.beginPath();
+ctx.moveTo(links + schuif, boven);
+ctx.lineTo(rechts + schuif, boven);
+ctx.lineTo(rechts, onder);
+ctx.lineTo(links, onder);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+// Hoogte (stippellijn)
+if (o.hoogtebuiten) {
+// Hoogte buiten de figuur
+ctx.setLineDash([5, 4]);
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(rechts + schuif + 15, boven);
+ctx.lineTo(rechts + schuif + 15, onder);
+ctx.stroke();
+ctx.setLineDash([]);
+
+// Haakje
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 1.5;
+ctx.beginPath();
+ctx.moveTo(rechts + schuif + 15, onder);
+ctx.lineTo(rechts + schuif + 25, onder);
+ctx.stroke();
+
+// Label hoogte
+ctx.fillStyle = '#e74c3c';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('h = ' + o.hoogte, rechts + schuif + 20, (boven + onder) / 2 + 5);
+
+// Pijl markering hoogtestaat buiten
+ctx.fillStyle = '#c0392b';
+ctx.font = '11px Nunito, sans-serif';
+ctx.fillText('← hoogte staat buiten!', rechts + schuif - 90, boven - 12);
+} else {
+ctx.setLineDash([5, 4]);
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(rechts + schuif - 20, boven);
+ctx.lineTo(rechts + schuif - 20, onder);
+ctx.stroke();
+ctx.setLineDash([]);
+
+ctx.fillStyle = '#e74c3c';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('h = ' + o.hoogte, rechts + schuif - 15, (boven + onder) / 2 + 5);
+}
+
+// Zijde label
+ctx.fillStyle = '#333';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('z = ' + o.zijde, (links + rechts) / 2 - 20, onder + 22);
+
+// Haakje rechte hoek
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 1.5;
+const hx = o.hoogtebuiten ? rechts + schuif + 15 : rechts + schuif - 20;
+ctx.beginPath();
+ctx.moveTo(hx, onder - 10);
+ctx.lineTo(hx + 10, onder - 10);
+ctx.lineTo(hx + 10, onder);
+ctx.stroke();
+}
+
+function tekenCirkel(ctx, o) {
+const cx = 200, cy = 110, r = 80;
+
+ctx.fillStyle = '#eaf4ff';
+ctx.strokeStyle = '#3498db';
+ctx.lineWidth = 2.5;
+ctx.beginPath();
+ctx.arc(cx, cy, r, 0, Math.PI * 2);
+ctx.fill();
+ctx.stroke();
+
+// Straal lijn
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 2;
+ctx.setLineDash([]);
+ctx.beginPath();
+ctx.moveTo(cx, cy);
+ctx.lineTo(cx + r, cy);
+ctx.stroke();
+
+// Middelpunt
+ctx.fillStyle = '#e74c3c';
+ctx.beginPath();
+ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+ctx.fill();
+
+// Labels
+ctx.fillStyle = '#333';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('straal = ' + o.straal, cx + 10, cy - 8);
+ctx.fillStyle = '#888';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('(diameter = ' + (o.straal * 2) + ')', cx - 55, cy + r + 20);
+}
+
+function tekenTrapezium(ctx, o) {
+const links = 60, rechts = 340;
+const boven = 60, onder = 170;
+const inset = 50;
+
+ctx.fillStyle = '#f5eeff';
+ctx.strokeStyle = '#9b59b6';
+ctx.lineWidth = 2.5;
+
+ctx.beginPath();
+ctx.moveTo(links + inset, boven);
+ctx.lineTo(rechts - inset + 20, boven);
+ctx.lineTo(rechts, onder);
+ctx.lineTo(links, onder);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+// Hoogte
+ctx.setLineDash([5, 4]);
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(rechts - 30, boven);
+ctx.lineTo(rechts - 30, onder);
+ctx.stroke();
+ctx.setLineDash([]);
+
+// Haakje
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 1.5;
+ctx.beginPath();
+ctx.moveTo(rechts - 30, onder - 10);
+ctx.lineTo(rechts - 20, onder - 10);
+ctx.lineTo(rechts - 20, onder);
+ctx.stroke();
+
+// Labels
+ctx.fillStyle = '#333';
+ctx.font = 'bold 13px Nunito, sans-serif';
+const midden = (boven + onder) / 2;
+ctx.fillText('h = ' + o.hoogte, rechts - 20, midden + 5);
+ctx.fillText('a = ' + o.a, (links + inset + rechts - inset + 20) / 2 - 20, boven - 10);
+ctx.fillText('b = ' + o.b, (links + rechts) / 2 - 20, onder + 20);
+}
+
+function tekenDriehoek(ctx, o) {
+const ax = 80, ay = 170, bx = 320, by = 170;
+const cx = 180, cy = 60;
+
+ctx.fillStyle = '#fdecea';
+ctx.strokeStyle = '#e74c3c';
+ctx.lineWidth = 2.5;
+ctx.beginPath();
+ctx.moveTo(ax, ay);
+ctx.lineTo(bx, by);
+ctx.lineTo(cx, cy);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+if (o.subtype === 'oppervlakte') {
+// Hoogte stippellijn
+ctx.setLineDash([5, 4]);
+ctx.strokeStyle = '#c0392b';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(cx, cy);
+ctx.lineTo(cx, ay);
+ctx.stroke();
+ctx.setLineDash([]);
+
+// Haakje
+ctx.strokeStyle = '#c0392b';
+ctx.lineWidth = 1.5;
+ctx.beginPath();
+ctx.moveTo(cx, ay - 10);
+ctx.lineTo(cx + 10, ay - 10);
+ctx.lineTo(cx + 10, ay);
+ctx.stroke();
+
+// Labels
+ctx.fillStyle = '#c0392b';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('h = ' + o.hoogte, cx + 14, (cy + ay) / 2 + 5);
+ctx.fillStyle = '#333';
+ctx.fillText('basis = ' + o.basis, (ax + bx) / 2 - 25, ay + 22);
+
+} else {
+// Omtrek: zijde labels
+ctx.fillStyle = '#c0392b';
+ctx.font = 'bold 12px Nunito, sans-serif';
+// Basis
+ctx.fillText('a = ' + o.za, (ax + bx) / 2 - 15, ay + 22);
+// Links
+ctx.fillText('b = ' + o.zb, ax - 30, (ay + cy) / 2);
+// Rechts
+ctx.fillText('c = ' + o.zc, bx + 5, (by + cy) / 2);
+ctx.fillStyle = '#555';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('omtrek = a + b + c', 110, 205);
+}
+}
+
+function tekenOmlijsten(ctx, o) {
+ctx.clearRect(0, 0, 400, 220);
+
+if (o.subtype === 'cirkel_vierkant') {
+const cx = 200, cy = 110, s = o.s;
+const schaal = Math.min(80 / s, 8);
+const r = s * schaal;
+const half = r;
+
+// Vierkant (geel)
+ctx.fillStyle = '#f39c12';
+ctx.fillRect(cx - half, cy - half, half*2, half*2);
+ctx.strokeStyle = '#e67e22';
+ctx.lineWidth = 2;
+ctx.strokeRect(cx - half, cy - half, half*2, half*2);
+
+// Cirkel (wit eroverheen)
+ctx.fillStyle = '#eaf4ff';
+ctx.strokeStyle = '#3498db';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.arc(cx, cy, r, 0, Math.PI * 2);
+ctx.fill(); ctx.stroke();
+
+// Labels
+ctx.fillStyle = '#333';
+ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText(`straal = ${s} cm`, cx, cy + r + 20);
+ctx.fillText(`zijde vierkant = ${o.zijde} cm`, cx, cy - r - 8);
+ctx.fillStyle = '#e67e22';
+ctx.fillText('geel = vierkant − cirkel', cx, 210);
+ctx.textAlign = 'left';
+
+} else if (o.subtype === 'cirkel_rechthoek') {
+const cx = 200, cy = 110, s = o.s;
+const schaal = Math.min(60 / s, 7);
+const r = s * schaal;
+const rw = o.lengte * schaal;
+const rh = o.breedte * schaal;
+
+// Rechthoek (geel)
+ctx.fillStyle = '#f39c12';
+ctx.fillRect(cx - rw/2, cy - rh/2, rw, rh);
+ctx.strokeStyle = '#e67e22';
+ctx.lineWidth = 2;
+ctx.strokeRect(cx - rw/2, cy - rh/2, rw, rh);
+
+// Cirkel (wit)
+ctx.fillStyle = '#eaf4ff';
+ctx.strokeStyle = '#3498db';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.arc(cx, cy, r, 0, Math.PI * 2);
+ctx.fill(); ctx.stroke();
+
+ctx.fillStyle = '#333';
+ctx.font = 'bold 11px Nunito, sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText(`${o.lengte} × ${o.breedte} cm`, cx, cy - rh/2 - 8);
+ctx.fillText(`straal = ${s} cm`, cx, cy + r + 18);
+ctx.fillStyle = '#e67e22';
+ctx.fillText('geel = rechthoek − cirkel', cx, 210);
+ctx.textAlign = 'left';
+
+} else {
+// vierkant_in_cirkel
+const cx = 200, cy = 110, s = o.s;
+const schaal = Math.min(75 / o.straal, 9);
+const r = o.straal * schaal;
+const half = (s * schaal) / 2;
+
+// Cirkel (geel)
+ctx.fillStyle = '#f39c12';
+ctx.beginPath();
+ctx.arc(cx, cy, r, 0, Math.PI * 2);
+ctx.fill();
+ctx.strokeStyle = '#e67e22';
+ctx.lineWidth = 2;
+ctx.stroke();
+
+// Vierkant (wit)
+ctx.fillStyle = '#eaf4ff';
+ctx.strokeStyle = '#3498db';
+ctx.lineWidth = 2;
+ctx.fillRect(cx - half, cy - half, half*2, half*2);
+ctx.strokeRect(cx - half, cy - half, half*2, half*2);
+
+ctx.fillStyle = '#333';
+ctx.font = 'bold 11px Nunito, sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText(`straal = ${nl(o.straal)} cm`, cx, cy + r + 18);
+ctx.fillText(`vierkant ${s} × ${s} cm`, cx, cy - r - 8);
+ctx.fillStyle = '#e67e22';
+ctx.fillText('geel = cirkel − vierkant', cx, 210);
+ctx.textAlign = 'left';
+}
+}
+
+function tekenInhoud(ctx, o) {
+// Draw a 3D box shape for all inhoud types
+const x = 100, y = 50, w = 160, h = 100, d = 40;
+ctx.fillStyle = '#e8f8f5';
+ctx.strokeStyle = '#16a085';
+ctx.lineWidth = 2;
+
+if (o.subtype === 'cilinder' || o.subtype === 'kegel') {
+// Draw cylinder
+const cx = 200, cy = 130, rx = 70, ry = 20, ch = 110;
+ctx.fillStyle = '#e8f8f5';
+ctx.strokeStyle = '#16a085';
+// Body
+ctx.beginPath();
+ctx.moveTo(cx - rx, cy - ch);
+ctx.lineTo(cx - rx, cy);
+ctx.ellipse(cx, cy, rx, ry, 0, Math.PI, 0);
+ctx.lineTo(cx + rx, cy - ch);
+ctx.ellipse(cx, cy - ch, rx, ry, 0, 0, Math.PI);
+ctx.fill();
+ctx.stroke();
+// Top ellipse
+ctx.beginPath();
+ctx.ellipse(cx, cy - ch, rx, ry, 0, 0, Math.PI * 2);
+ctx.stroke();
+if (o.subtype === 'kegel') {
+// Draw cone instead
+ctx.clearRect(0, 0, 400, 220);
+ctx.fillStyle = '#e8f8f5';
+ctx.strokeStyle = '#16a085';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(200, 30);
+ctx.lineTo(130, 170);
+ctx.ellipse(200, 170, 70, 18, 0, Math.PI, 0);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+ctx.beginPath();
+ctx.ellipse(200, 170, 70, 18, 0, 0, Math.PI * 2);
+ctx.stroke();
+ctx.fillStyle = '#16a085';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('straal = ' + o.s + ' cm', 240, 175);
+ctx.fillText('hoogte = ' + o.h + ' cm', 215, 100);
+ctx.fillStyle = '#555';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('inhoud = ⅓ × π × straal² × hoogte', 80, 205);
+return;
+}
+ctx.fillStyle = '#16a085';
+ctx.font = 'bold 13px Nunito, sans-serif';
+ctx.fillText('straal = ' + o.s + ' cm', 240, 130);
+ctx.fillText('hoogte = ' + o.h + ' cm', 240, 80);
+ctx.fillStyle = '#555';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('inhoud = π × straal² × hoogte', 95, 205);
+return;
+}
+
+if (o.subtype === 'piramide') {
+ctx.fillStyle = '#e8f8f5';
+ctx.strokeStyle = '#16a085';
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(200, 30);
+ctx.lineTo(100, 170);
+ctx.lineTo(300, 170);
+ctx.closePath();
+ctx.fill(); ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(200, 30);
+ctx.lineTo(140, 140);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(100, 170);
+ctx.lineTo(140, 140);
+ctx.lineTo(300, 170);
+ctx.moveTo(140, 140);
+ctx.lineTo(200, 30);
+ctx.setLineDash([5,4]);
+ctx.stroke();
+ctx.setLineDash([]);
+ctx.fillStyle = '#16a085';
+ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText('z = ' + o.z + ' cm', 185, 185);
+ctx.fillText('h = ' + o.h + ' cm', 205, 100);
+ctx.fillStyle = '#555';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('inhoud = ⅓ × grondvlak × hoogte', 85, 210);
+return;
+}
+
+if (o.subtype === 'prisma') {
+// Triangular prism
+ctx.fillStyle = '#e8f8f5';
+ctx.strokeStyle = '#16a085';
+ctx.lineWidth = 2;
+// Front triangle
+ctx.beginPath();
+ctx.moveTo(120, 170); ctx.lineTo(220, 170); ctx.lineTo(170, 80); ctx.closePath();
+ctx.fill(); ctx.stroke();
+// Back triangle (offset)
+ctx.setLineDash([5,4]);
+ctx.beginPath();
+ctx.moveTo(160, 155); ctx.lineTo(260, 155); ctx.lineTo(210, 65); ctx.closePath();
+ctx.stroke();
+ctx.setLineDash([]);
+// Connecting lines
+ctx.beginPath();
+ctx.moveTo(120, 170); ctx.lineTo(160, 155);
+ctx.moveTo(220, 170); ctx.lineTo(260, 155);
+ctx.moveTo(170, 80); ctx.lineTo(210, 65);
+ctx.stroke();
+ctx.fillStyle = '#16a085';
+ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText('b = ' + o.b + ' cm', 120, 190);
+ctx.fillText('hd = ' + o.hd + ' cm', 55, 130);
+ctx.fillText('hp = ' + o.hp + ' cm', 230, 120);
+ctx.fillStyle = '#555';
+ctx.font = '11px Nunito, sans-serif';
+ctx.fillText('inhoud = opp grondvlak × hoogte', 80, 210);
+return;
+}
+
+// Balk / kubus
+ctx.beginPath();
+ctx.moveTo(x, y + h); ctx.lineTo(x, y); ctx.lineTo(x + w, y);
+ctx.lineTo(x + w, y + h); ctx.closePath();
+ctx.fill(); ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(x, y); ctx.lineTo(x + d, y - d);
+ctx.lineTo(x + w + d, y - d); ctx.lineTo(x + w, y);
+ctx.fill(); ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d);
+ctx.lineTo(x + w + d, y + h - d); ctx.lineTo(x + w, y + h);
+ctx.fill(); ctx.stroke();
+
+ctx.fillStyle = '#16a085';
+ctx.font = 'bold 12px Nunito, sans-serif';
+if (o.subtype === 'kubus') {
+ctx.fillText('z = ' + o.z + ' cm', x + w/2 - 20, y + h + 18);
+} else {
+ctx.fillText('l = ' + o.l, x + w/2 - 15, y + h + 18);
+ctx.fillText('b = ' + o.b, x + w + d/2 + 5, y + h/2 - d/2);
+ctx.fillText('h = ' + o.h, x - 30, y + h/2);
+}
+ctx.fillStyle = '#555';
+ctx.font = '11px Nunito, sans-serif';
+ctx.fillText('inhoud = lengte × breedte × hoogte', x - 10, y + h + 38);
+}
+
+function tekenEenheden(ctx, o) {
+const subtypes = { lengte: 'km→hm→dam→m→dm→cm→mm', oppervlakte: 'km²→hm²→dam²→m²→dm²→cm²→mm²', gewicht: 'ton→kg→g→mg', inhoud: 'm³→dm³(L)→cm³(mL)' };
+const kleuren = { lengte: '#3498db', oppervlakte: '#e67e22', gewicht: '#e74c3c', inhoud: '#27ae60' };
+const stappen = { lengte: '×10 per stap', oppervlakte: '×100 per stap', gewicht: '×1000 per stap', inhoud: '×1000 per stap (m³↔dm³)' };
+
+const keten = (subtypes[o.subtype] || '').split('→');
+const kleur = kleuren[o.subtype] || '#333';
+const stap = stappen[o.subtype] || '';
+
+ctx.fillStyle = kleur;
+ctx.font = 'bold 15px Nunito, sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText(o.subtype.charAt(0).toUpperCase() + o.subtype.slice(1) + ' omrekenen', 200, 35);
+
+const boxW = Math.min(60, Math.floor(360 / keten.length));
+const startX = 200 - (keten.length * (boxW + 8)) / 2 + boxW / 2;
+
+keten.forEach((eenheid, i) => {
+const bx = startX + i * (boxW + 8);
+ctx.fillStyle = kleur + '33';
+ctx.strokeStyle = kleur;
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.roundRect(bx - boxW/2, 55, boxW, 36, 6);
+ctx.fill(); ctx.stroke();
+ctx.fillStyle = '#222';
+ctx.font = 'bold 11px Nunito, sans-serif';
+ctx.fillText(eenheid, bx, 78);
+if (i < keten.length - 1) {
+ctx.fillStyle = '#888';
+ctx.font = '10px Nunito, sans-serif';
+ctx.fillText('→', bx + boxW/2 + 4, 76);
+}
+});
+
+ctx.fillStyle = '#555';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText(stap, 200, 120);
+ctx.fillStyle = kleur;
+ctx.font = 'bold 14px Nunito, sans-serif';
+ctx.fillText(o.vraag, 200, 160);
+ctx.textAlign = 'left';
+}
+
+function tekenSamengesteld(ctx, o) {
+if (o.subtype === 'splitsen') {
+// Rechthoek + driehoek boven
+const ax = 80, ay = 80, breedte = 180, rh = 80, dh = 60;
+
+ctx.fillStyle = '#e8f8f0';
+ctx.strokeStyle = '#27ae60';
+ctx.lineWidth = 2;
+ctx.fillRect(ax, ay, breedte, rh);
+ctx.strokeRect(ax, ay, breedte, rh);
+
+// Driehoek boven op rechthoek
+ctx.fillStyle = '#d5f5e3';
+ctx.beginPath();
+ctx.moveTo(ax, ay);
+ctx.lineTo(ax + breedte / 2, ay - dh);
+ctx.lineTo(ax + breedte, ay);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+// Labels
+ctx.fillStyle = '#27ae60';
+ctx.font = 'bold 12px Nunito, sans-serif';
+ctx.fillText('Rechthoek', ax + 50, ay + 45);
+ctx.fillText('Driehoek', ax + 60, ay - 20);
+ctx.fillStyle = '#555';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Splitsen in delen en optellen!', ax - 10, ay + rh + 25);
+
+} else {
+// Stukje erbij
+const ax = 70, ay = 70, breedte = 200, hoogte = 100;
+
+ctx.fillStyle = '#e8f8f0';
+ctx.strokeStyle = '#27ae60';
+ctx.lineWidth = 2;
+ctx.fillRect(ax, ay, breedte, hoogte);
+ctx.strokeRect(ax, ay, breedte, hoogte);
+
+// Extra stuk (driehoek) gestippeld
+ctx.setLineDash([5, 4]);
+ctx.fillStyle = 'rgba(231,76,60,0.1)';
+ctx.strokeStyle = '#e74c3c';
+ctx.beginPath();
+ctx.moveTo(ax + breedte, ay);
+ctx.lineTo(ax + breedte + 50, ay);
+ctx.lineTo(ax + breedte, ay + hoogte);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+ctx.setLineDash([]);
+
+ctx.fillStyle = '#555';
+ctx.font = '12px Nunito, sans-serif';
+ctx.fillText('Groot vlak', ax + 60, ay + 55);
+ctx.fillStyle = '#e74c3c';
+ctx.fillText('− dit deel', ax + breedte + 5, ay + 50);
+ctx.fillStyle = '#555';
+ctx.fillText('Stukje erbij → groot min extra', ax - 10, ay + hoogte + 28);
+}
+}
+
+// ── Start ─────────────────────────────────────────────────────────
+volgende();
+</script>
+
+</body>
+</html>
