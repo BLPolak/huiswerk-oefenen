@@ -3,88 +3,904 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NASK — Huiswerk Oefenen</title>
+<title>NASK – Krachten — Huiswerk Oefenen</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paars: #6b46c1;
+  --paars-licht: #9f7aea;
+  --paars-bg: #faf5ff;
+  --donker: #1a202c;
+  --groen: #38a169;
+  --rood: #e53e3e;
+  --oranje: #d97706;
+  --blauw: #3182ce;
+  --grijs: #718096;
+}
+
 body {
   font-family: 'Nunito', sans-serif;
   background: linear-gradient(135deg, #faf5ff 0%, #e9d8fd 100%);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
+  color: var(--donker);
+  padding: 1rem 1rem 3rem;
+}
+
+/* ── HEADER ── */
+header {
   text-align: center;
+  padding: 1.2rem 0 0.8rem;
+  max-width: 780px;
+  margin: 0 auto;
 }
-.kaart {
-  background: #fff;
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  max-width: 480px;
-  width: 100%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  border-top: 8px solid #6b46c1;
-}
-.emoji { font-size: 4rem; margin-bottom: 0.5rem; line-height: 1; }
-h1 { font-size: 2rem; font-weight: 900; color: #1a202c; margin-bottom: 0.5rem; }
-.beschrijving { color: #4a5568; font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.5; }
-.binnenkort {
-  background: #6b46c1;
-  color: #fff;
-  border-radius: 16px;
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.binnenkort p { font-size: 1.05rem; font-weight: 700; }
-.binnenkort small { font-size: 0.85rem; opacity: 0.9; display: block; margin-top: 0.3rem; }
-.tips {
-  background: #f7fafc;
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  text-align: left;
-  margin-bottom: 1.5rem;
-}
-.tips h3 { font-size: 0.9rem; font-weight: 800; color: #2d3748; margin-bottom: 0.5rem; }
-.tips ul { list-style: none; }
-.tips li { font-size: 0.88rem; color: #4a5568; font-weight: 600; padding: 0.2rem 0; }
-.tips li::before { content: '→ '; color: #6b46c1; font-weight: 800; }
+header h1 { font-size: 1.9rem; font-weight: 900; color: var(--donker); }
+header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; }
+
 .terug {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: #edf2f7;
-  color: #2d3748;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 0.95rem;
-  padding: 0.7rem 1.3rem;
-  border-radius: 10px;
-  transition: background 0.15s;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: #edf2f7; color: #2d3748; text-decoration: none;
+  font-weight: 800; font-size: 0.85rem; padding: 0.5rem 1rem;
+  border-radius: 10px; margin-bottom: 0.8rem; transition: background 0.15s;
 }
 .terug:hover { background: #e2e8f0; }
+
+/* ── TABS ── */
+.tabs {
+  display: flex; gap: 0.5rem; justify-content: center;
+  max-width: 780px; margin: 0 auto 1.5rem; flex-wrap: wrap;
+}
+.tab-knop {
+  padding: 0.65rem 1.8rem; border-radius: 20px;
+  border: 2px solid var(--paars);
+  font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+  cursor: pointer; background: white; color: var(--paars); transition: all 0.2s;
+}
+.tab-knop.actief { background: var(--paars); color: white; }
+.tab-knop:hover:not(.actief) { background: #f3e8ff; }
+
+/* ── SECTIONS ── */
+.sectie { display: none; max-width: 780px; margin: 0 auto; }
+.sectie.zichtbaar { display: block; }
+
+/* ── UITLEG CARDS ── */
+.uitleg-kaart {
+  background: white; border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 1.2rem; overflow: hidden;
+}
+.uitleg-kaart-header {
+  background: var(--paars); color: white;
+  padding: 1rem 1.5rem; font-size: 1.05rem; font-weight: 800;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.uitleg-kaart-body {
+  padding: 1.2rem 1.5rem; line-height: 1.75; font-size: 0.95rem;
+}
+.uitleg-kaart-body p { margin-bottom: 0.7rem; color: #2d3748; }
+.uitleg-kaart-body p:last-child { margin-bottom: 0; }
+.uitleg-kaart-body h3 {
+  font-size: 0.85rem; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--paars); margin: 1rem 0 0.4rem;
+}
+.uitleg-kaart-body h3:first-child { margin-top: 0; }
+
+.formule-blok {
+  background: #f3e8ff; border-left: 4px solid var(--paars);
+  border-radius: 0 10px 10px 0; padding: 0.65rem 1rem;
+  font-weight: 800; font-size: 0.95rem; margin: 0.6rem 0; color: var(--paars);
+}
+.voorbeeld-blok {
+  background: #f0fff4; border-left: 4px solid var(--groen);
+  border-radius: 0 10px 10px 0; padding: 0.65rem 1rem;
+  font-size: 0.88rem; margin: 0.6rem 0; color: #276749; line-height: 1.6;
+}
+.info-blok {
+  background: #fffbeb; border-left: 4px solid var(--oranje);
+  border-radius: 0 10px 10px 0; padding: 0.65rem 1rem;
+  font-size: 0.88rem; margin: 0.6rem 0; color: #744210; line-height: 1.6;
+}
+
+/* Directions grid */
+.richtingen-raster {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem; max-width: 300px; margin: 0.8rem 0;
+}
+.richting-cel {
+  background: #f3e8ff; border-radius: 8px; padding: 0.5rem 0.4rem;
+  text-align: center; font-size: 0.82rem; font-weight: 700; color: var(--paars);
+  line-height: 1.4;
+}
+.richting-cel.midden { background: var(--paars); color: white; font-size: 0.75rem; }
+
+/* Link items */
+.links-lijst { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.6rem; }
+.link-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: #f7fafc; border-radius: 10px; padding: 0.6rem 0.9rem;
+  text-decoration: none; color: var(--donker); font-size: 0.88rem; font-weight: 700;
+  border: 1px solid #e2e8f0; transition: background 0.15s;
+}
+.link-item:hover { background: #edf2f7; }
+.link-badge {
+  background: var(--paars); color: white; border-radius: 6px;
+  padding: 0.15rem 0.5rem; font-size: 0.75rem; font-weight: 800; white-space: nowrap;
+}
+.link-badge.video { background: #e53e3e; }
+.link-badge.yt { background: #e53e3e; }
+
+/* ── OEFENINGEN ── */
+.scorebalk {
+  display: flex; justify-content: center; gap: 1rem;
+  margin: 0 auto 1rem; flex-wrap: wrap;
+}
+.score-item {
+  background: white; border-radius: 12px; padding: 0.4rem 1rem;
+  font-weight: 700; font-size: 0.95rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.score-item.goed  { color: var(--groen); border-left: 4px solid var(--groen); }
+.score-item.fout  { color: var(--rood);  border-left: 4px solid var(--rood); }
+.score-item.totaal{ color: var(--blauw); border-left: 4px solid var(--blauw); }
+
+/* Filter buttons */
+.filter-knoppen {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  justify-content: center; margin-bottom: 1.2rem;
+}
+.filter-knop {
+  padding: 0.4rem 0.9rem; border-radius: 20px; border: 2px solid var(--paars);
+  font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
+  cursor: pointer; background: white; color: var(--paars); transition: all 0.2s;
+}
+.filter-knop.actief { background: var(--paars); color: white; }
+.filter-knop:hover:not(.actief) { background: #f3e8ff; }
+
+/* Exercise card */
+.kaart {
+  background: white; border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  overflow: hidden; margin-bottom: 1.5rem;
+}
+.kaart-header {
+  padding: 0.85rem 1.5rem; background: var(--paars); color: white;
+  font-size: 0.82rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.figuur-container {
+  padding: 0.5rem 1.5rem; display: flex; justify-content: center;
+}
+canvas { border-radius: 12px; background: #fafbfc; }
+
+.vraag {
+  padding: 0.6rem 1.5rem 0.5rem; font-size: 1.05rem; font-weight: 700; line-height: 1.5;
+}
+.formule-hint {
+  margin: 0 1.5rem 0.6rem; background: #f3e8ff;
+  border-left: 4px solid var(--paars); border-radius: 0 10px 10px 0;
+  padding: 0.5rem 0.9rem; font-size: 0.88rem; font-weight: 700; color: var(--paars);
+}
+
+/* Number input */
+.antwoord-sectie {
+  padding: 0.5rem 1.5rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;
+}
+.antwoord-sectie input {
+  flex: 1; min-width: 130px; padding: 0.6rem 1rem;
+  border: 2px solid #ddd; border-radius: 12px;
+  font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 700;
+  outline: none; transition: border-color 0.2s;
+}
+.antwoord-sectie input:focus { border-color: var(--paars); }
+.antwoord-sectie input.goed { border-color: var(--groen); background: #f0fff4; }
+.antwoord-sectie input.fout { border-color: var(--rood);  background: #fff5f5; }
+.eenheid { font-weight: 700; color: #888; font-size: 0.95rem; white-space: nowrap; }
+
+/* Multiple choice */
+.mc-opties {
+  padding: 0.5rem 1.5rem; display: grid;
+  grid-template-columns: repeat(2, 1fr); gap: 0.5rem;
+}
+.mc-knop {
+  padding: 0.65rem 0.8rem; border: 2px solid #ddd; border-radius: 12px;
+  font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; background: white; color: var(--donker); transition: all 0.2s; text-align: center;
+}
+.mc-knop:hover:not(:disabled) { border-color: var(--paars); background: #f3e8ff; }
+.mc-knop.goed  { border-color: var(--groen); background: #f0fff4; color: #22543d; }
+.mc-knop.fout  { border-color: var(--rood);  background: #fff5f5; color: #742a2a; }
+.mc-knop.correct-antwoord { border-color: var(--groen); background: #f0fff4; color: #22543d; }
+
+/* Tip / feedback */
+.tip-box {
+  margin: 0 1.5rem 0.6rem; background: #fffbeb;
+  border-left: 4px solid var(--oranje); border-radius: 0 10px 10px 0;
+  padding: 0.6rem 0.9rem; font-size: 0.88rem; display: none; line-height: 1.5;
+}
+.tip-box.zichtbaar { display: block; }
+
+.feedback {
+  margin: 0 1.5rem 0.7rem; padding: 0.75rem 1rem;
+  border-radius: 12px; font-weight: 700; font-size: 0.95rem; display: none;
+}
+.feedback.zichtbaar { display: block; }
+.feedback.goed { background: #c6f6d5; color: #22543d; }
+.feedback.fout { background: #fed7d7; color: #742a2a; }
+
+.uitleg-na {
+  margin: 0 1.5rem 0.8rem; background: #f7fafc; border-radius: 12px;
+  padding: 0.8rem 1rem; font-size: 0.88rem; line-height: 1.6; display: none;
+}
+.uitleg-na.zichtbaar { display: block; }
+
+/* Buttons */
+.knoppen { padding: 0.6rem 1.5rem 1.3rem; display: flex; gap: 0.7rem; flex-wrap: wrap; }
+button {
+  padding: 0.55rem 1.1rem; border: none; border-radius: 12px;
+  font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 800;
+  cursor: pointer; transition: all 0.2s;
+}
+.knop-controleer { background: var(--donker); color: white; }
+.knop-controleer:hover { opacity: 0.85; }
+.knop-hint { background: #fffbeb; color: #744210; }
+.knop-hint:hover { background: #fef3c7; }
+.knop-volgende { background: var(--groen); color: white; display: none; }
+.knop-volgende:hover { opacity: 0.85; }
+.knop-volgende.zichtbaar { display: block; }
+
+footer {
+  text-align: center; padding: 1.5rem 1rem 0.5rem; color: #a0aec0; font-size: 0.8rem;
+}
 </style>
 </head>
 <body>
-<div class="kaart">
-  <div class="emoji">⚗️</div>
-  <h1>NASK</h1>
-  <p class="beschrijving">Scheikunde, krachten, energie en meer — de wetten van de natuur!</p>
-  <div class="binnenkort">
-    <p>🚧 Oefeningen komen binnenkort!</p>
-    <small>Claude is nog hard aan het werk om leuke oefeningen te maken.</small>
-  </div>
-  <div class="tips">
-    <h3>💡 Wat gaat er komen?</h3>
-    <ul>
-      <li>Formules en rekenen (v=s/t, F=m·a)</li>
-      <li>Elementen en het periodiek systeem</li>
-      <li>Scheikundige symbolen en reacties</li>
-      <li>Elektriciteit: spanning, stroom, weerstand</li>
-    </ul>
-  </div>
+
+<header>
   <a class="terug" href="/huiswerk-oefenen/">← Terug naar alle vakken</a>
+  <h1>⚗️ NASK — Krachten</h1>
+  <p>Krachtenpijlen, krachtenschaal en richtingen — klas 2 havo/vwo</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-knop actief" onclick="wisselTab('uitleg')">📖 Uitleg</button>
+  <button class="tab-knop" onclick="wisselTab('oefeningen')">✏️ Oefeningen</button>
 </div>
+
+<!-- ═══════════════════════════════════════════════════
+     UITLEG SECTIE
+═══════════════════════════════════════════════════ -->
+<div class="sectie zichtbaar" id="sectie-uitleg">
+
+  <!-- Kaart 1: Wat is een kracht? -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">💪 Wat is een kracht?</div>
+    <div class="uitleg-kaart-body">
+      <p>Een <strong>kracht</strong> is een duw of een trek die één voorwerp op een ander uitoefent. Als je een bal wegschopt, oefen je een kracht uit. Als je aan een deur trekt, is dat ook een kracht.</p>
+      <p>Krachten worden gemeten in <strong>Newton (N)</strong>, vernoemd naar de wiskundige Isaac Newton. Hoe groter het getal, hoe sterker de kracht.</p>
+      <div class="formule-blok">Eenheid van kracht: Newton (N)</div>
+
+      <h3>Voorbeelden van krachten</h3>
+      <p>
+        🌍 <strong>Zwaartekracht</strong> — trekt alles naar beneden richting het middelpunt van de aarde<br>
+        🖐️ <strong>Spierkracht</strong> — als je iets optilt, duwt of trekt<br>
+        🧱 <strong>Normaalkracht</strong> — de kracht die een oppervlak terug uitoefent op een voorwerp dat erop rust<br>
+        💨 <strong>Luchtweerstand</strong> — de kracht van de lucht op een bewegend voorwerp<br>
+        🧲 <strong>Magnetische kracht</strong> — trekt ijzeren voorwerpen aan
+      </p>
+      <div class="info-blok">
+        💡 <strong>Wist je dat?</strong> Op aarde geldt: 1 kg massa heeft een zwaartekracht van 10 N. Een rugzak van 4 kg weegt dus 4 × 10 = <strong>40 N</strong>.
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="https://inask.nl/index.php/11-Onderwerpen/Krachten/48-krachten-tekenen" target="_blank">
+          <span class="link-badge">Website</span> inask.nl — Uitleg krachten tekenen (NaSk)
+        </a>
+        <a class="link-item" href="https://www.wetenschapsschool.nl/new_chapters/klas2_ch6.html" target="_blank">
+          <span class="link-badge">Website</span> wetenschapsschool.nl — Klas 2 krachten met instructiefilmpjes
+        </a>
+        <a class="link-item" href="https://www.youtube.com/results?search_query=krachten+uitleg+NaSk+klas+2+havo" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "krachten uitleg NaSk klas 2 havo"
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaart 2: Kracht als pijl -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">🏹 Kracht als pijl (vector)</div>
+    <div class="uitleg-kaart-body">
+      <p>Een kracht heeft niet alleen een <em>grootte</em> maar ook een <em>richting</em>. Daarom tekenen we krachten als <strong>pijlen</strong>. Zo'n pijl heet ook wel een <strong>vector</strong>.</p>
+
+      <p>Een krachtenpijl heeft drie eigenschappen:</p>
+      <p>
+        📍 <strong>Aangrijpingspunt</strong> — de plek waar de kracht werkt (de stip, de staart van de pijl)<br>
+        📏 <strong>Grootte</strong> — hoe groot de kracht is (de lengte van de pijl, bepaald door de krachtenschaal)<br>
+        🧭 <strong>Richting</strong> — in welke richting de kracht werkt (de pijlpunt wijst die kant op)
+      </p>
+
+      <div class="voorbeeld-blok">
+        🔍 <strong>Voorbeeld:</strong> Een boek ligt op tafel. De zwaartekracht werkt <em>omlaag</em> op het boek. Je tekent een pijl die vanaf het boek (het aangrijpingspunt) naar beneden wijst.
+      </div>
+      <div class="info-blok">
+        💡 <strong>Let op:</strong> De <em>punt</em> van de pijl geeft de richting aan. De <em>lengte</em> van de pijl geeft de grootte van de kracht aan (samen met de krachtenschaal).
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="https://meneerwietsma.nl/krachten/krachten-tekenen/" target="_blank">
+          <span class="link-badge">Website</span> meneerwietsma.nl — Krachten tekenen met uitleg en oefenvragen
+        </a>
+        <a class="link-item" href="https://debijlesstudent.nl/uitleg/havo/natuurkunde/krachten-en-beweging-de-krachten-zelf/" target="_blank">
+          <span class="link-badge">Website</span> debijlesstudent.nl — HAVO uitleg over krachten en vectoren
+        </a>
+        <a class="link-item" href="https://www.youtube.com/results?search_query=krachtenpijlen+tekenen+NaSk+uitleg+klas+2" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "krachtenpijlen tekenen NaSk uitleg klas 2"
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaart 3: De krachtenschaal -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">📏 De krachtenschaal</div>
+    <div class="uitleg-kaart-body">
+      <p>Krachten kunnen heel groot zijn (soms duizenden Newton!). We kunnen ze niet op ware grootte tekenen. Daarom gebruiken we een <strong>krachtenschaal</strong>: een afspraak over hoeveel Newton één centimeter pijl voorstelt.</p>
+
+      <div class="formule-blok">Schaal: 1 cm ≙ X newton &nbsp;&nbsp;(≙ betekent "stelt voor")</div>
+
+      <h3>Kracht berekenen uit een pijl → N</h3>
+      <p>Meet de lengte van de getekende pijl in centimeter, en vermenigvuldig met de schaal:</p>
+      <div class="formule-blok">Kracht (N) = pijllengte (cm) × schaal (N per cm)</div>
+      <div class="voorbeeld-blok">
+        🔍 <strong>Voorbeeld:</strong> Schaal is 1 cm = 20 N. De pijl is 4,5 cm lang.<br>
+        Kracht = 4,5 × 20 = <strong>90 N</strong>
+      </div>
+
+      <h3>Pijllengte berekenen voor een gegeven kracht → cm</h3>
+      <p>Wil je een pijl tekenen? Deel de kracht door de schaalwaarde:</p>
+      <div class="formule-blok">Pijllengte (cm) = kracht (N) ÷ schaal (N per cm)</div>
+      <div class="voorbeeld-blok">
+        🔍 <strong>Voorbeeld:</strong> Schaal is 1 cm = 25 N. De kracht is 150 N.<br>
+        Pijllengte = 150 ÷ 25 = <strong>6 cm</strong>
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="https://naskthuis.nl/krachten-tekenen/" target="_blank">
+          <span class="link-badge video">Video</span> naskthuis.nl — Video-uitleg krachten tekenen met krachtenschaal
+        </a>
+        <a class="link-item" href="https://hulpbijnask.wordpress.com/theorie/theorie-natuurkunde/krachten-tekenen/" target="_blank">
+          <span class="link-badge">Website</span> hulpbijnask.nl — Stap-voor-stap uitleg krachtenschaal
+        </a>
+        <a class="link-item" href="https://www.youtube.com/results?search_query=krachtenschaal+berekenen+NaSk+havo+uitleg" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "krachtenschaal berekenen NaSk havo uitleg"
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaart 4: Richtingen -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">🧭 Richtingen van krachten</div>
+    <div class="uitleg-kaart-body">
+      <p>Een kracht werkt altijd in een bepaalde richting. We gebruiken 8 hoofdrichtingen, net als een kompas. De pijl begint bij het <strong>aangrijpingspunt</strong> (de stip) en wijst in de richting van de kracht.</p>
+
+      <div class="richtingen-raster">
+        <div class="richting-cel">↖️<br>links­boven</div>
+        <div class="richting-cel">⬆️<br>omhoog</div>
+        <div class="richting-cel">↗️<br>rechts­boven</div>
+        <div class="richting-cel">⬅️<br>links</div>
+        <div class="richting-cel midden">●<br>aangrij­pings­punt</div>
+        <div class="richting-cel">➡️<br>rechts</div>
+        <div class="richting-cel">↙️<br>links­onder</div>
+        <div class="richting-cel">⬇️<br>omlaag</div>
+        <div class="richting-cel">↘️<br>rechts­onder</div>
+      </div>
+
+      <div class="voorbeeld-blok">
+        🔍 <strong>Voorbeelden:</strong><br>
+        • Zwaartekracht werkt altijd <strong>omlaag</strong> ⬇️<br>
+        • Als je een bal omhoog gooit, werkt de spierkracht <strong>omhoog</strong> ⬆️<br>
+        • Wind van links geeft een kracht naar <strong>rechts</strong> ➡️
+      </div>
+      <div class="info-blok">
+        💡 De diagonale richtingen (bijv. linksboven) staan op 45° ten opzichte van horizontaal of verticaal.
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="https://www.youtube.com/results?search_query=richting+kracht+pijl+NaSk+uitleg+havo" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "richting kracht pijl NaSk uitleg havo"
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /sectie-uitleg -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     OEFENINGEN SECTIE
+═══════════════════════════════════════════════════ -->
+<div class="sectie" id="sectie-oefeningen">
+
+  <div class="scorebalk">
+    <div class="score-item goed">✓ Goed: <span id="score-goed">0</span></div>
+    <div class="score-item fout">✗ Fout: <span id="score-fout">0</span></div>
+    <div class="score-item totaal">📝 Totaal: <span id="score-totaal">0</span></div>
+  </div>
+
+  <div class="filter-knoppen">
+    <button class="filter-knop actief" data-filter="alles"           onclick="setFilter('alles',this)">Alles door elkaar</button>
+    <button class="filter-knop" data-filter="kracht_berekenen"       onclick="setFilter('kracht_berekenen',this)">💪 Kracht berekenen (N)</button>
+    <button class="filter-knop" data-filter="pijllengte"             onclick="setFilter('pijllengte',this)">📏 Pijllengte berekenen (cm)</button>
+    <button class="filter-knop" data-filter="richting"               onclick="setFilter('richting',this)">🧭 Richting herkennen</button>
+  </div>
+
+  <div class="kaart" id="opgave-kaart">
+    <div class="kaart-header" id="kaart-header">⚗️ NASK — Krachten</div>
+    <div class="figuur-container">
+      <canvas id="figuur" width="400" height="230"></canvas>
+    </div>
+    <div class="vraag" id="vraag"></div>
+    <div class="formule-hint" id="formule-hint"></div>
+    <!-- Number input (kracht & pijllengte) -->
+    <div class="antwoord-sectie" id="antwoord-sectie">
+      <input type="number" id="antwoord-input" placeholder="Jouw antwoord..." step="0.5" />
+      <span class="eenheid" id="eenheid-label"></span>
+    </div>
+    <!-- Multiple choice (richting) -->
+    <div class="mc-opties" id="mc-opties"></div>
+    <div class="tip-box" id="tip-box"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="uitleg-na" id="uitleg-na"></div>
+    <div class="knoppen">
+      <button class="knop-controleer" id="knop-controleer" onclick="controleer()">Controleer</button>
+      <button class="knop-hint"       id="knop-hint"       onclick="geefHint()">💡 Hint</button>
+      <button class="knop-volgende"   id="knop-volgende"   onclick="volgende()">Volgende opgave →</button>
+    </div>
+  </div>
+
+</div><!-- /sectie-oefeningen -->
+
+<footer>Gemaakt voor Sam 💪 — NASK klas 2 havo/vwo — Krachten &amp; Krachtenschaal</footer>
+
+<script>
+// ── Hulpfuncties ──────────────────────────────────────────────────────────────
+function willekeurig(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function kies(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+function nl(n) {
+  // Format number with comma as decimal separator
+  return n.toString().replace('.', ',');
+}
+
+// ── Tab wisselen ──────────────────────────────────────────────────────────────
+function wisselTab(tab) {
+  document.querySelectorAll('.tab-knop').forEach((k, i) => {
+    k.classList.toggle('actief', (i === 0 && tab === 'uitleg') || (i === 1 && tab === 'oefeningen'));
+  });
+  document.getElementById('sectie-uitleg').classList.toggle('zichtbaar', tab === 'uitleg');
+  document.getElementById('sectie-oefeningen').classList.toggle('zichtbaar', tab === 'oefeningen');
+  if (tab === 'oefeningen' && !huidigeOpgave) volgende();
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let huidigFilter = 'alles';
+let huidigeOpgave = null;
+let scoreGoed = 0, scoreFout = 0;
+let getoondHint = false;
+
+// ── Filter ────────────────────────────────────────────────────────────────────
+function setFilter(filter, knop) {
+  huidigFilter = filter;
+  document.querySelectorAll('.filter-knop').forEach(k => k.classList.remove('actief'));
+  knop.classList.add('actief');
+  volgende();
+}
+
+// ── Richtingen ────────────────────────────────────────────────────────────────
+const richtingen = [
+  { naam: 'rechts',      hoek: 0,   pijl: '→' },
+  { naam: 'rechtsboven', hoek: 45,  pijl: '↗' },
+  { naam: 'omhoog',      hoek: 90,  pijl: '↑' },
+  { naam: 'linksboven',  hoek: 135, pijl: '↖' },
+  { naam: 'links',       hoek: 180, pijl: '←' },
+  { naam: 'linksonder',  hoek: 225, pijl: '↙' },
+  { naam: 'omlaag',      hoek: 270, pijl: '↓' },
+  { naam: 'rechtsonder', hoek: 315, pijl: '↘' },
+];
+
+// ── Canvas helpers ────────────────────────────────────────────────────────────
+const PX_PER_CM = 34; // 1 cm = 34 pixels on canvas
+
+function startPunt(hoekDeg, lengteP) {
+  // Compute a start point so the arrow stays within [pad…W-pad] × [pad…H-pad]
+  const W = 400, H = 230, pad = 25;
+  const dx =  Math.cos(hoekDeg * Math.PI / 180) * lengteP;
+  const dy = -Math.sin(hoekDeg * Math.PI / 180) * lengteP;
+
+  let cx = W / 2, cy = H / 2;
+  // Shift if endpoint would go out of bounds
+  if (cx + dx > W - pad) cx = W - pad - dx;
+  if (cx + dx < pad)     cx = pad - dx;
+  if (cy + dy < pad)     cy = pad - dy;
+  if (cy + dy > H - pad) cy = H - pad - dy;
+  // Clamp start itself
+  cx = Math.max(pad, Math.min(W - pad, cx));
+  cy = Math.max(pad, Math.min(H - pad, cy));
+  return { cx, cy };
+}
+
+function tekenRaster(ctx) {
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 0.8;
+  for (let x = 0; x < 400; x += PX_PER_CM) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 230); ctx.stroke();
+  }
+  for (let y = 0; y < 230; y += PX_PER_CM) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(400, y); ctx.stroke();
+  }
+}
+
+function tekenPijl(ctx, x0, y0, hoekDeg, lengteP, kleur) {
+  const x1 = x0 + Math.cos(hoekDeg * Math.PI / 180) * lengteP;
+  const y1 = y0 - Math.sin(hoekDeg * Math.PI / 180) * lengteP;
+
+  ctx.strokeStyle = kleur || '#6b46c1';
+  ctx.fillStyle   = kleur || '#6b46c1';
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+
+  ctx.beginPath();
+  ctx.moveTo(x0, y0);
+  ctx.lineTo(x1, y1);
+  ctx.stroke();
+
+  // Arrowhead
+  const angle = Math.atan2(y1 - y0, x1 - x0);
+  const size  = 13;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x1 - size * Math.cos(angle - 0.38), y1 - size * Math.sin(angle - 0.38));
+  ctx.lineTo(x1 - size * Math.cos(angle + 0.38), y1 - size * Math.sin(angle + 0.38));
+  ctx.closePath();
+  ctx.fill();
+}
+
+function tekenPunt(ctx, x, y) {
+  ctx.fillStyle = '#e53e3e';
+  ctx.beginPath(); ctx.arc(x, y, 5.5, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = 'white'; ctx.lineWidth = 1.5; ctx.stroke();
+}
+
+function tekenSchaalBalk(ctx, schaal) {
+  const bx = 310, by = 215;
+  ctx.strokeStyle = '#6b46c1'; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + PX_PER_CM, by); ctx.stroke();
+  [bx, bx + PX_PER_CM].forEach(px => {
+    ctx.beginPath(); ctx.moveTo(px, by - 5); ctx.lineTo(px, by + 5); ctx.stroke();
+  });
+  ctx.fillStyle = '#6b46c1'; ctx.font = 'bold 10.5px Nunito, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('1 cm = ' + schaal + ' N', bx + PX_PER_CM / 2, by + 14);
+  ctx.textAlign = 'left';
+}
+
+// ── Opgaven generatoren ───────────────────────────────────────────────────────
+const schalen  = [10, 20, 25, 40, 50];
+const lengtes  = [1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6];
+
+const generatoren = {
+
+  kracht_berekenen: () => {
+    const schaal   = kies(schalen);
+    const lengte   = kies(lengtes);
+    const kracht   = lengte * schaal;
+    const richting = kies(richtingen);
+    return {
+      type: 'kracht_berekenen',
+      schaal, lengte, kracht, richting,
+      vraag: `De krachtenschaal is 1 cm = ${schaal} N. De pijl is ${nl(lengte)} cm lang. Hoe groot is de kracht?`,
+      antwoord: kracht, marge: 0.5, eenheid: 'N',
+      uitleg: `Kracht = pijllengte × schaal = ${nl(lengte)} × ${schaal} = <strong>${nl(kracht)} N</strong>.`,
+      hint: `Vermenigvuldig de pijllengte met de schaalwaarde: ${nl(lengte)} cm × ${schaal} N/cm.`,
+      formule: 'Kracht (N) = pijllengte (cm) × schaal (N/cm)',
+      invoertype: 'getal',
+    };
+  },
+
+  pijllengte: () => {
+    const schaal   = kies(schalen);
+    // Pick length first, derive force → always gives nice division
+    const lengte   = kies(lengtes);
+    const kracht   = lengte * schaal;
+    const richting = kies(richtingen);
+    return {
+      type: 'pijllengte',
+      schaal, kracht, lengte, richting,
+      vraag: `De krachtenschaal is 1 cm = ${schaal} N. De kracht is ${nl(kracht)} N. Hoe lang moet de pijl zijn?`,
+      antwoord: lengte, marge: 0.1, eenheid: 'cm',
+      uitleg: `Pijllengte = kracht ÷ schaal = ${nl(kracht)} ÷ ${schaal} = <strong>${nl(lengte)} cm</strong>.`,
+      hint: `Deel de kracht door de schaalwaarde: ${nl(kracht)} N ÷ ${schaal} N/cm.`,
+      formule: 'Pijllengte (cm) = kracht (N) ÷ schaal (N/cm)',
+      invoertype: 'getal',
+    };
+  },
+
+  richting: () => {
+    const schaal   = kies(schalen);
+    const lengte   = kies([2, 2.5, 3, 3.5, 4]);
+    const kracht   = lengte * schaal;
+    const richting = kies(richtingen);
+
+    // 3 wrong options (unique)
+    const andere = richtingen.filter(r => r.naam !== richting.naam)
+                             .sort(() => Math.random() - 0.5)
+                             .slice(0, 3);
+    const opties = [richting, ...andere].sort(() => Math.random() - 0.5);
+
+    return {
+      type: 'richting',
+      schaal, lengte, kracht, richting, opties,
+      vraag: `In welke richting werkt de kracht? (schaal: 1 cm = ${schaal} N, kracht = ${kracht} N)`,
+      antwoord: richting.naam, marge: 0, eenheid: '',
+      uitleg: `De pijlpunt wijst naar <strong>${richting.naam}</strong> ${richting.pijl} — dat is dus de richting van de kracht.`,
+      hint: `Let op de punt van de pijl. Die kant wijst de kracht op. Het aangrijpingspunt (de rode stip) is de beginkant van de pijl.`,
+      formule: 'Richting = de kant waar de pijlpunt naar toe wijst',
+      invoertype: 'mc',
+    };
+  },
+};
+
+const filterGeneratoren = {
+  kracht_berekenen: ['kracht_berekenen'],
+  pijllengte:       ['pijllengte'],
+  richting:         ['richting'],
+  alles:            ['kracht_berekenen', 'kracht_berekenen', 'pijllengte', 'pijllengte', 'richting'],
+};
+
+// ── Volgende opgave ───────────────────────────────────────────────────────────
+function genereerOpgave() {
+  const lijst = filterGeneratoren[huidigFilter] || filterGeneratoren.alles;
+  return generatoren[kies(lijst)]();
+}
+
+function volgende() {
+  huidigeOpgave = genereerOpgave();
+  getoondHint = false;
+
+  // Reset all feedback UI
+  const inp = document.getElementById('antwoord-input');
+  inp.value = ''; inp.className = ''; inp.disabled = false;
+  document.getElementById('feedback').className  = 'feedback';
+  document.getElementById('uitleg-na').className = 'uitleg-na';
+  document.getElementById('tip-box').className   = 'tip-box';
+  document.getElementById('knop-volgende').className = 'knop-volgende';
+  document.getElementById('knop-hint').style.display       = '';
+  document.getElementById('knop-controleer').style.display = '';
+
+  // Header
+  const hdrs = {
+    kracht_berekenen: '💪 Kracht berekenen',
+    pijllengte:       '📏 Pijllengte berekenen',
+    richting:         '🧭 Richting herkennen',
+  };
+  document.getElementById('kaart-header').textContent  = hdrs[huidigeOpgave.type] || '⚗️ Krachten';
+  document.getElementById('vraag').textContent         = huidigeOpgave.vraag;
+  document.getElementById('formule-hint').textContent  = '📌 ' + huidigeOpgave.formule;
+
+  const isGetal = huidigeOpgave.invoertype === 'getal';
+  document.getElementById('antwoord-sectie').style.display = isGetal ? 'flex' : 'none';
+  document.getElementById('eenheid-label').textContent     = huidigeOpgave.eenheid;
+
+  // Multiple choice buttons
+  const mc = document.getElementById('mc-opties');
+  mc.innerHTML = '';
+  mc.style.display = isGetal ? 'none' : 'grid';
+
+  if (!isGetal) {
+    document.getElementById('knop-controleer').style.display = 'none';
+    document.getElementById('knop-hint').style.display       = '';
+    huidigeOpgave.opties.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className   = 'mc-knop';
+      btn.textContent = opt.pijl + ' ' + opt.naam;
+      btn.onclick = () => kiesRichting(opt.naam, btn);
+      mc.appendChild(btn);
+    });
+  }
+
+  tekenOpgave(huidigeOpgave);
+  if (isGetal) inp.focus();
+}
+
+// ── Multiple-choice richting ──────────────────────────────────────────────────
+function kiesRichting(gekozen, knop) {
+  const o   = huidigeOpgave;
+  const goed = gekozen === o.antwoord;
+
+  document.querySelectorAll('.mc-knop').forEach(b => {
+    b.disabled = true;
+    if (b.textContent.includes(o.antwoord)) b.classList.add('correct-antwoord');
+  });
+
+  if (goed) {
+    scoreGoed++;
+    knop.classList.add('goed');
+    toonFeedback(true, '✅ Goed zo! De kracht werkt naar ' + o.antwoord + '!', o.uitleg);
+  } else {
+    scoreFout++;
+    knop.classList.add('fout');
+    toonFeedback(false, '❌ Helaas. De kracht werkt naar ' + o.antwoord + '.', o.uitleg);
+  }
+  document.getElementById('knop-hint').style.display = 'none';
+  updateScore();
+  document.getElementById('knop-volgende').className = 'knop-volgende zichtbaar';
+}
+
+// ── Controleer numeriek ───────────────────────────────────────────────────────
+function controleer() {
+  const inp    = document.getElementById('antwoord-input');
+  const waarde = parseFloat(inp.value.replace(',', '.'));
+  if (isNaN(waarde)) { alert('Vul een getal in.'); return; }
+
+  const o    = huidigeOpgave;
+  const goed = Math.abs(waarde - o.antwoord) <= o.marge;
+
+  if (goed) {
+    scoreGoed++;
+    inp.classList.add('goed');
+    toonFeedback(true, '✅ Heel goed! ' + (getoondHint ? '' : 'Perfect!'), o.uitleg);
+  } else {
+    scoreFout++;
+    inp.classList.add('fout');
+    const juist = Number.isInteger(o.antwoord) ? o.antwoord : nl(o.antwoord);
+    toonFeedback(false, '❌ Niet helemaal. Het juiste antwoord is ' + juist + ' ' + o.eenheid + '.', o.uitleg);
+  }
+
+  inp.disabled = true;
+  updateScore();
+  document.getElementById('knop-hint').style.display       = 'none';
+  document.getElementById('knop-controleer').style.display = 'none';
+  document.getElementById('knop-volgende').className = 'knop-volgende zichtbaar';
+}
+
+function toonFeedback(goed, tekst, uitleg) {
+  const fb = document.getElementById('feedback');
+  fb.textContent = tekst;
+  fb.className   = 'feedback zichtbaar ' + (goed ? 'goed' : 'fout');
+  document.getElementById('uitleg-na').innerHTML  = '<strong>Uitleg:</strong> ' + uitleg;
+  document.getElementById('uitleg-na').className  = 'uitleg-na zichtbaar';
+}
+
+function updateScore() {
+  document.getElementById('score-goed').textContent   = scoreGoed;
+  document.getElementById('score-fout').textContent   = scoreFout;
+  document.getElementById('score-totaal').textContent = scoreGoed + scoreFout;
+}
+
+function geefHint() {
+  getoondHint = true;
+  const tip = document.getElementById('tip-box');
+  tip.textContent = '💡 ' + huidigeOpgave.hint;
+  tip.className   = 'tip-box zichtbaar';
+}
+
+// ── Canvas tekenen ────────────────────────────────────────────────────────────
+function tekenOpgave(o) {
+  const canvas = document.getElementById('figuur');
+  const ctx    = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  tekenRaster(ctx);
+
+  if (o.type === 'kracht_berekenen') tekenKrachtAflezen(ctx, o);
+  else if (o.type === 'pijllengte')  tekenPijllengte(ctx, o);
+  else if (o.type === 'richting')    tekenRichting(ctx, o);
+}
+
+// ─ Kracht aflezen: toon pijl met lengte-label, vraag N ───────────────────────
+function tekenKrachtAflezen(ctx, o) {
+  const lengteP = o.lengte * PX_PER_CM;
+  const { cx, cy } = startPunt(o.richting.hoek, lengteP);
+
+  // Draw the arrow
+  tekenPijl(ctx, cx, cy, o.richting.hoek, lengteP, '#6b46c1');
+  tekenPunt(ctx, cx, cy);
+
+  // Length label (offset perpendicular slightly)
+  const x1  = cx + Math.cos(o.richting.hoek * Math.PI / 180) * lengteP;
+  const y1  = cy - Math.sin(o.richting.hoek * Math.PI / 180) * lengteP;
+  const mx  = (cx + x1) / 2;
+  const my  = (cy + y1) / 2;
+  // Perpendicular offset direction
+  const perpX = -Math.sin(o.richting.hoek * Math.PI / 180) * 14;
+  const perpY = -Math.cos(o.richting.hoek * Math.PI / 180) * 14;
+
+  ctx.fillStyle = '#2d3748';
+  ctx.font = 'bold 12px Nunito, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(nl(o.lengte) + ' cm', mx + perpX, my + perpY);
+
+  // "? N" label near arrowhead
+  ctx.fillStyle = '#e53e3e';
+  ctx.font = 'bold 12px Nunito, sans-serif';
+  ctx.fillText('? N', x1 + perpX * 0.8, y1 + perpY * 0.8);
+  ctx.textAlign = 'left';
+
+  tekenSchaalBalk(ctx, o.schaal);
+}
+
+// ─ Pijllengte: toon richting + kracht, dashed line, vraag cm ─────────────────
+function tekenPijllengte(ctx, o) {
+  const lengteP = o.lengte * PX_PER_CM;
+  const { cx, cy } = startPunt(o.richting.hoek, lengteP);
+
+  const x1 = cx + Math.cos(o.richting.hoek * Math.PI / 180) * lengteP;
+  const y1 = cy - Math.sin(o.richting.hoek * Math.PI / 180) * lengteP;
+
+  // Draw dashed guide line showing the direction (student must calculate length)
+  ctx.strokeStyle = '#a0aec0'; ctx.lineWidth = 2;
+  ctx.setLineDash([7, 4]);
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x1, y1); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Arrowhead on dashed line (grey)
+  const angle = Math.atan2(y1 - cy, x1 - cx);
+  const size  = 11;
+  ctx.fillStyle = '#a0aec0';
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x1 - size * Math.cos(angle - 0.38), y1 - size * Math.sin(angle - 0.38));
+  ctx.lineTo(x1 - size * Math.cos(angle + 0.38), y1 - size * Math.sin(angle + 0.38));
+  ctx.closePath(); ctx.fill();
+
+  tekenPunt(ctx, cx, cy);
+
+  // Force label
+  ctx.fillStyle = '#6b46c1';
+  ctx.font = 'bold 14px Nunito, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('F = ' + nl(o.kracht) + ' N   ' + o.richting.pijl, 200, 20);
+  ctx.fillStyle = '#e53e3e';
+  ctx.font = 'bold 12px Nunito, sans-serif';
+  ctx.fillText('Pijllengte = ? cm', 200, 220);
+  ctx.textAlign = 'left';
+
+  tekenSchaalBalk(ctx, o.schaal);
+}
+
+// ─ Richting herkennen: toon pijl, vraag richting ─────────────────────────────
+function tekenRichting(ctx, o) {
+  const lengteP = o.lengte * PX_PER_CM;
+  const { cx, cy } = startPunt(o.richting.hoek, lengteP);
+
+  tekenPijl(ctx, cx, cy, o.richting.hoek, lengteP, '#6b46c1');
+  tekenPunt(ctx, cx, cy);
+
+  // Show force magnitude but NOT direction name
+  ctx.fillStyle = '#2d3748';
+  ctx.font = 'bold 12.5px Nunito, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('F = ' + nl(o.kracht) + ' N', 200, 18);
+  ctx.fillStyle = '#e53e3e';
+  ctx.font = 'bold 12px Nunito, sans-serif';
+  ctx.fillText('Welke richting?', 200, 220);
+  ctx.textAlign = 'left';
+
+  tekenSchaalBalk(ctx, o.schaal);
+}
+
+// ── Enter key support ─────────────────────────────────────────────────────────
+document.getElementById('antwoord-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') controleer();
+});
+
+// ── Start ─────────────────────────────────────────────────────────────────────
+volgende();
+</script>
 </body>
 </html>
