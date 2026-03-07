@@ -3,88 +3,752 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nederlands — Huiswerk Oefenen</title>
+<title>Nederlands — Leesvaardigheid — Huiswerk Oefenen</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --rood: #e53e3e;
+  --rood-licht: #fc8181;
+  --rood-bg: #fff5f5;
+  --donker: #1a202c;
+  --groen: #38a169;
+  --oranje: #d97706;
+  --blauw: #3182ce;
+  --grijs: #718096;
+}
+
 body {
   font-family: 'Nunito', sans-serif;
   background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  text-align: center;
+  color: var(--donker);
+  padding: 1rem 1rem 3rem;
 }
+
+header {
+  text-align: center;
+  padding: 1.2rem 0 0.8rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+header h1 { font-size: 1.9rem; font-weight: 900; color: var(--donker); }
+header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-weight: 600; }
+
+.terug {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: #fff; color: #2d3748; text-decoration: none;
+  font-weight: 800; font-size: 0.85rem; padding: 0.5rem 1rem;
+  border-radius: 10px; margin-bottom: 0.8rem; transition: background 0.15s;
+  border: 2px solid #e2e8f0;
+}
+.terug:hover { background: #f7fafc; }
+
+/* ── TABS ── */
+.tabs {
+  display: flex; gap: 0.5rem; justify-content: center;
+  max-width: 820px; margin: 0 auto 1.5rem; flex-wrap: wrap;
+}
+.tab-knop {
+  padding: 0.65rem 1.8rem; border-radius: 20px;
+  border: 2px solid var(--rood);
+  background: transparent; color: var(--rood);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 800;
+  cursor: pointer; transition: all 0.15s;
+}
+.tab-knop:hover { background: var(--rood-bg); }
+.tab-knop.actief { background: var(--rood); color: #fff; }
+
+/* ── CONTENT WRAPPER ── */
+.tab-inhoud { display: none; max-width: 820px; margin: 0 auto; }
+.tab-inhoud.zichtbaar { display: block; }
+
+/* ── KAART ── */
 .kaart {
   background: #fff;
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  max-width: 480px;
-  width: 100%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  border-top: 8px solid #e53e3e;
-}
-.emoji { font-size: 4rem; margin-bottom: 0.5rem; line-height: 1; }
-h1 { font-size: 2rem; font-weight: 900; color: #1a202c; margin-bottom: 0.5rem; }
-.beschrijving { color: #4a5568; font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.5; }
-.binnenkort {
-  background: #e53e3e;
-  color: #fff;
   border-radius: 16px;
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-left: 5px solid var(--rood);
 }
-.binnenkort p { font-size: 1.05rem; font-weight: 700; }
-.binnenkort small { font-size: 0.85rem; opacity: 0.9; display: block; margin-top: 0.3rem; }
-.tips {
-  background: #f7fafc;
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
+.kaart h2 {
+  font-size: 1.1rem; font-weight: 900; color: var(--donker);
+  margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
+}
+.kaart h3 {
+  font-size: 0.95rem; font-weight: 800; color: var(--rood);
+  margin: 1rem 0 0.4rem;
+}
+.kaart p, .kaart li {
+  font-size: 0.92rem; color: #4a5568; font-weight: 600; line-height: 1.6;
+}
+.kaart ul { padding-left: 1.2rem; }
+.kaart ul li { margin-bottom: 0.25rem; }
+
+.chip {
+  display: inline-block;
+  background: var(--rood-bg);
+  color: var(--rood);
+  font-size: 0.78rem; font-weight: 800;
+  padding: 0.15rem 0.6rem;
+  border-radius: 99px;
+  border: 1.5px solid var(--rood-licht);
+}
+.chip.blauw { background: #ebf8ff; color: var(--blauw); border-color: #90cdf4; }
+.chip.groen { background: #f0fff4; color: var(--groen); border-color: #9ae6b4; }
+.chip.oranje { background: #fffbeb; color: var(--oranje); border-color: #fcd34d; }
+
+/* ── LEESTEKST ── */
+.tekst-kader {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 2px solid #fed7d7;
+  line-height: 1.8;
+}
+.tekst-kader .bron {
+  font-size: 0.82rem; color: var(--grijs); font-weight: 600;
+  font-style: italic; margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem; border-bottom: 1px solid #eee;
+}
+.tekst-kader .titel {
+  font-size: 1.2rem; font-weight: 900; color: var(--donker);
+  margin-bottom: 0.3rem;
+}
+.tekst-kader p {
+  font-size: 0.93rem; color: #2d3748; margin-bottom: 1rem; font-weight: 600;
+}
+.alinea-nr {
+  display: inline-block;
+  background: var(--rood);
+  color: #fff;
+  font-size: 0.72rem; font-weight: 900;
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+.tekst-kader h3 {
+  font-size: 0.98rem; font-weight: 900; color: var(--donker);
+  margin: 1.2rem 0 0.5rem;
+}
+
+/* ── VRAGEN ── */
+.vraag-blok {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+  border-left: 4px solid #fed7d7;
+  transition: border-color 0.2s;
+}
+.vraag-blok.actief-vraag { border-left-color: var(--rood); }
+
+.vraag-kop {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+.vraag-nr {
+  background: var(--rood);
+  color: #fff;
+  font-size: 0.8rem; font-weight: 900;
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+  min-width: 2rem;
+  text-align: center;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+.punten {
+  font-size: 0.75rem; color: var(--grijs); font-weight: 700;
+  margin-left: auto; flex-shrink: 0; padding-top: 0.1rem;
+}
+.vraag-tekst {
+  font-size: 0.95rem; font-weight: 700; color: var(--donker); line-height: 1.5;
+}
+
+/* zin-kader */
+.zin-kader {
+  background: #f7fafc; border: 2px solid #e2e8f0;
+  border-radius: 10px; padding: 0.8rem 1rem;
+  font-size: 0.9rem; font-weight: 700; color: #2d3748;
+  font-style: italic; margin: 0.6rem 0 0.9rem;
+  line-height: 1.6;
+}
+
+/* Open antwoord */
+.open-antwoord textarea {
+  width: 100%; min-height: 80px;
+  border: 2px solid #e2e8f0; border-radius: 10px;
+  padding: 0.75rem; font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem; font-weight: 600; color: var(--donker);
+  resize: vertical; transition: border-color 0.15s;
+}
+.open-antwoord textarea:focus { outline: none; border-color: var(--rood); }
+
+.btn-model {
+  margin-top: 0.6rem;
+  background: var(--rood-bg); color: var(--rood);
+  border: 2px solid var(--rood-licht);
+  border-radius: 10px; padding: 0.5rem 1.1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem; font-weight: 800;
+  cursor: pointer; transition: all 0.15s;
+}
+.btn-model:hover { background: var(--rood); color: #fff; }
+
+.model-antwoord {
+  display: none;
+  background: #f0fff4; border: 2px solid #9ae6b4;
+  border-radius: 10px; padding: 0.9rem 1rem;
+  margin-top: 0.7rem;
+  font-size: 0.88rem; font-weight: 700; color: #22543d;
+  line-height: 1.6;
+}
+.model-antwoord.zichtbaar { display: block; }
+.model-antwoord strong { color: #276749; }
+
+/* MC */
+.mc-opties { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.3rem; }
+.mc-optie {
+  display: flex; align-items: center; gap: 0.7rem;
+  border: 2px solid #e2e8f0; border-radius: 10px;
+  padding: 0.7rem 1rem; cursor: pointer;
+  transition: all 0.15s; background: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.92rem; font-weight: 700; color: var(--donker);
   text-align: left;
-  margin-bottom: 1.5rem;
 }
-.tips h3 { font-size: 0.9rem; font-weight: 800; color: #2d3748; margin-bottom: 0.5rem; }
-.tips ul { list-style: none; }
-.tips li { font-size: 0.88rem; color: #4a5568; font-weight: 600; padding: 0.2rem 0; }
-.tips li::before { content: '→ '; color: #e53e3e; font-weight: 800; }
-.terug {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: #edf2f7;
-  color: #2d3748;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 0.95rem;
-  padding: 0.7rem 1.3rem;
-  border-radius: 10px;
-  transition: background 0.15s;
+.mc-optie:hover:not(:disabled) { border-color: var(--rood); background: var(--rood-bg); }
+.mc-optie .optie-letter {
+  background: #edf2f7; color: #4a5568;
+  font-size: 0.8rem; font-weight: 900;
+  padding: 0.2rem 0.55rem; border-radius: 6px;
+  flex-shrink: 0;
 }
-.terug:hover { background: #e2e8f0; }
+.mc-optie.goed { background: #f0fff4; border-color: var(--groen); color: #22543d; }
+.mc-optie.goed .optie-letter { background: var(--groen); color: #fff; }
+.mc-optie.fout { background: #fff5f5; border-color: var(--rood); color: #742a2a; }
+.mc-optie.fout .optie-letter { background: var(--rood); color: #fff; }
+.mc-optie.gemist { background: #f0fff4; border-color: var(--groen); color: #22543d; border-style: dashed; }
+
+/* Sectie label */
+.sectie-label {
+  font-size: 0.78rem; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--rood);
+  margin: 1.5rem 0 0.6rem;
+}
+
+/* Score banner */
+.score-banner {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  display: flex; align-items: center; gap: 1rem;
+  flex-wrap: wrap;
+}
+.score-banner .score-getal {
+  font-size: 2rem; font-weight: 900; color: var(--rood);
+  line-height: 1;
+}
+.score-banner .score-label {
+  font-size: 0.82rem; font-weight: 700; color: var(--grijs);
+}
+
+/* Tip box */
+.tip-box {
+  background: #fffbeb; border: 2px solid #fcd34d;
+  border-radius: 10px; padding: 0.7rem 1rem;
+  font-size: 0.85rem; font-weight: 700; color: #78350f;
+  margin-bottom: 1rem; line-height: 1.5;
+}
+
+/* verbindingswoorden tabel */
+.vw-tabel { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
+.vw-tabel th, .vw-tabel td {
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.84rem; font-weight: 600;
+  text-align: left;
+}
+.vw-tabel th {
+  background: var(--rood-bg); font-weight: 800; color: var(--rood);
+}
+.vw-tabel tr:nth-child(even) td { background: #fafafa; }
 </style>
 </head>
 <body>
-<div class="kaart">
-  <div class="emoji">🇳🇱</div>
-  <h1>Nederlands</h1>
-  <p class="beschrijving">Spelling, grammatica, begrijpend lezen en schrijven — alles voor je Nederlandse taal.</p>
-  <div class="binnenkort">
-    <p>🚧 Oefeningen komen binnenkort!</p>
-    <small>Claude is nog hard aan het werk om leuke oefeningen te maken.</small>
+
+<header>
+  <a class="terug" href="/huiswerk-oefenen/">← Alle vakken</a>
+  <h1>📖 Nederlands — Leesvaardigheid</h1>
+  <p>Oefentoets V2 · Les 2, 4, 17, 18 &amp; 32</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-knop actief" onclick="toonTab('theorie', this)">📚 Theorie</button>
+  <button class="tab-knop" onclick="toonTab('tekst', this)">📰 Leestekst</button>
+  <button class="tab-knop" onclick="toonTab('toets', this)">✏️ Oefentoets</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ THEORIE -->
+<div id="tab-theorie" class="tab-inhoud zichtbaar">
+
+  <div class="kaart">
+    <h2>📌 Les 32 — Onderwerp &amp; Hoofdgedachte</h2>
+    <p>Dit zijn twee verschillende dingen die je uit een tekst haalt.</p>
+    <h3>Onderwerp</h3>
+    <p>Het <strong>onderwerp</strong> is het <em>topic</em> van de tekst — <strong>waarover</strong> de tekst gaat. Het is meestal in één of twee woorden samen te vatten. Vraag jezelf: <em>"Waar gaat deze tekst over?"</em></p>
+    <h3>Hoofdgedachte</h3>
+    <p>De <strong>hoofdgedachte</strong> is de centrale <em>boodschap</em> — <strong>wat de auteur over het onderwerp wil zeggen</strong>. Het is de meest belangrijke uitspraak van de hele tekst. Vraag jezelf: <em>"Wat is de kernboodschap?"</em></p>
+    <div class="zin-kader" style="font-style:normal;">
+      <strong>Voorbeeld:</strong><br>
+      Tekst over klimaatverandering:<br>
+      → Onderwerp: <span class="chip">klimaatverandering</span><br>
+      → Hoofdgedachte: <span class="chip">De mens veroorzaakt klimaatverandering en moet nu actie ondernemen.</span>
+    </div>
+    <p><strong>Let op:</strong> de hoofdgedachte staat <em>niet</em> altijd letterlijk in de tekst. Soms moet je hem zelf formuleren op basis van de hele tekst.</p>
   </div>
-  <div class="tips">
-    <h3>💡 Wat gaat er komen?</h3>
+
+  <div class="kaart">
+    <h2>🔗 Les 18 — Verbindingswoorden</h2>
+    <p>Verbindingswoorden laten de <strong>relatie</strong> zien tussen zinnen of alinea's. Ze maken duidelijk hoe stukken tekst met elkaar samenhangen.</p>
+    <table class="vw-tabel">
+      <tr><th>Soort verbinding</th><th>Voorbeeldwoorden</th></tr>
+      <tr><td><strong>Opsomming / toevoeging</strong></td><td>ook, bovendien, daarnaast, verder, ten slotte, en</td></tr>
+      <tr><td><strong>Oorzaak → gevolg</strong></td><td>want, omdat, doordat, dus, daardoor, hierdoor, daarom</td></tr>
+      <tr><td><strong>Tegenstelling</strong></td><td>maar, echter, toch, terwijl, hoewel, al, aan de andere kant</td></tr>
+      <tr><td><strong>Tijd / volgorde</strong></td><td>toen, daarna, vervolgens, intussen, ondertussen, eerst, ten slotte</td></tr>
+      <tr><td><strong>Conclusie / samenvatting</strong></td><td>dus, kortom, al met al, zo, met andere woorden</td></tr>
+      <tr><td><strong>Voorbeeld / uitleg</strong></td><td>bijvoorbeeld, namelijk, dat wil zeggen, zo</td></tr>
+    </table>
+  </div>
+
+  <div class="kaart">
+    <h2>🏷️ Les 17 — Functiewoorden (Verwijswoorden)</h2>
+    <p>Functiewoorden zijn woorden die <strong>terugverwijzen</strong> naar iets wat eerder in de tekst staat. Ze zorgen voor samenhang en voorkomen herhaling.</p>
+    <h3>Veelvoorkomende functiewoorden</h3>
     <ul>
-      <li>Spelling- en interpunctieoefeningen</li>
-      <li>Begrijpend lezen met vragen</li>
-      <li>Werkwoordspelling (stam, verleden tijd)</li>
-      <li>Samenvatten en schrijfopdrachten</li>
+      <li><span class="chip">dat</span> <span class="chip">dit</span> <span class="chip">het</span> — verwijzen naar een zaak of situatie</li>
+      <li><span class="chip">hij</span> <span class="chip">zij</span> <span class="chip">ze</span> <span class="chip">hen</span> — verwijzen naar personen</li>
+      <li><span class="chip">hier</span> <span class="chip">daar</span> — verwijzen naar een plaats of eerder genoemde zaak</li>
+      <li><span class="chip">zo</span> <span class="chip">daarmee</span> <span class="chip">daardoor</span> <span class="chip">hiermee</span> — verwijzen naar een handeling of situatie</li>
+      <li><span class="chip blauw">dé</span> — benadrukt dat iets de enige/beste is</li>
+    </ul>
+    <h3>Hoe gebruik je ze?</h3>
+    <p>Zoek bij een functiewoord altijd <strong>waarnaar het verwijst</strong>. Vervang het woord mentaal door wat het bedoelt: klopt de zin nog?</p>
+    <div class="zin-kader">
+      "De kok kon niets meer zien." → voeg functiewoord toe →<br>
+      "<strong>Daardoor</strong> kon de kok niets meer zien." (verwijst naar: zijn bril besloeg)
+    </div>
+  </div>
+
+  <div class="kaart">
+    <h2>🎯 Les 2 — Tekstdoelen</h2>
+    <p>Een tekst heeft altijd een doel. Vraag jezelf: <em>waarom heeft de auteur deze tekst geschreven?</em></p>
+    <ul style="margin-top:0.5rem;">
+      <li><span class="chip">Informeren</span> — feiten en informatie doorgeven (nieuws, uitleg, verslag)</li>
+      <li><span class="chip oranje">Overtuigen</span> — de lezer ergens van overtuigen (opiniestuk, reclame, debat)</li>
+      <li><span class="chip groen">Amuseren</span> — de lezer vermaken (verhaal, gedicht, grappige column)</li>
+      <li><span class="chip blauw">Activeren</span> — de lezer aanzetten tot actie (oproep, petitie, actieplan)</li>
+    </ul>
+    <p style="margin-top:0.8rem;"><strong>Tip:</strong> journalistieke artikelen zijn bijna altijd <em>informerend</em>. Columns en ingezonden brieven zijn vaak <em>overtuigend</em>.</p>
+  </div>
+
+  <div class="kaart">
+    <h2>🔍 Les 4 — Woordraadstrategieën</h2>
+    <p>Als je een onbekend woord tegenkomt, gebruik dan deze strategieën:</p>
+    <ul>
+      <li><strong>Context:</strong> lees de zin(nen) eromheen — wat past logisch?</li>
+      <li><strong>Woorddelen:</strong> herken het voorvoegsel of achtervoegsel (<em>on-</em>, <em>-heid</em>, <em>-lijk</em>)</li>
+      <li><strong>Verwant woord:</strong> lijkt het op een woord dat je al kent?</li>
+      <li><strong>Taalverwantschap:</strong> lijkt het op een Engels/Duits/Frans woord?</li>
     </ul>
   </div>
-  <a class="terug" href="/huiswerk-oefenen/">← Terug naar alle vakken</a>
+
 </div>
+
+<!-- ═══════════════════════════════════════════════════════ LEESTEKST -->
+<div id="tab-tekst" class="tab-inhoud">
+
+  <div class="tip-box">
+    💡 Lees de tekst goed door. Bij de oefentoets heb je de tekst nodig voor vragen 4 t/m 12.
+  </div>
+
+  <div class="tekst-kader">
+    <div class="titel">TikTok verovert het internet</div>
+    <div class="bron">Naar: Anne Jochems, NRC, 18 maart 2019</div>
+
+    <p><span class="alinea-nr">1</span>
+    Korte filmpjes van vijftien seconden waarin jongeren liedjes playbacken, grappen uithalen, dansen op snelle muziek of een meme maken. Dat is de samenvatting van de app TikTok. Het is dé plaats waar deze video's gemaakt en gedeeld worden en het verovert de huidige internetcultuur. Met ruim 1 miljard downloads is TikTok een doorslaand succes.</p>
+
+    <p><span class="alinea-nr">2</span>
+    Volgens Creator Network, het influencer-platform waar de populairste TikTokkers uit Europa en Amerika bij zijn aangesloten voor begeleiding, management en het binnenhalen van betaalde opdrachten, hebben Nederland en België intussen 4,5 miljoen actieve gebruikers. Een half jaar geleden waren dat er nog 4 miljoen. "Deze groei is vooral te danken aan een nieuwe doelgroep die het platform gebruikt om korte vlogs te maken, onder wie ook wereldsterren als Martin Garrix en Justin Bieber", zegt Eugène Jans, talentmanager bij Creator Network.</p>
+
+    <h3>Gluren</h3>
+
+    <p><span class="alinea-nr">3</span>
+    Het populaire platform kreegonlangs nog een enorme boete, omdat ze de Amerikaanse privacyregels van jonge gebruikers niet zouden respecteren. De app zou persoonlijke informatie van Amerikaanse kinderen onder de 13 jaar illegaal verzamelen, zoals naam en emailadres. Volgens de Amerikaanse wet moeten ouders van kinderen onder de 13 jaar hier toestemming voor geven. TikTok heeft hiervoor een boete moeten betalen aan de Amerikaanse mededingingsautoriteit FTC.</p>
+
+    <p><span class="alinea-nr">4</span>
+    Profielen zouden automatisch als openbaar aangemaakt worden en gebruikers moeten zelf de functie van privé-modus inschakelen. Dit is niet bij alle gebruikers bekend. Ook waren de, vaak jonge, TikTokkers makkelijk te vinden en bleken naast likes in de vorm van hartjes ook seksueel getinte reacties van volwassen mannen te krijgen.</p>
+
+    <p><span class="alinea-nr">5</span>
+    TikTok heeft zichzelf nu verbeterd, verklaart Jans. "Gebruikers van 13 jaar of jonger worden nu minder gepusht." Dat wil zeggen dat de filmpjes van deze jonge gebruikers minder vaak worden getoond op de openbare pagina van de app in vergelijking tot filmpjes van gebruikers die 13 jaar of ouder zijn. Jans: "Hierdoor worden zij dus veel minder zichtbaar voor andere gebruikers."</p>
+
+    <h3>Positiviteit</h3>
+
+    <p><span class="alinea-nr">6</span>
+    Maar wat maakt deze 'coolkid' van alle apps nou zo succesvol? Volgens Diederik Broekhuizen, expert in sociale media en oprichter van het platform The Best Social Media, biedt TikTok een alternatief voor het grote monster dat Facebook heet. "De app is heel positief en maakt enthousiast. Dat is iets wat je op andere sociale platformen, zoals Twitter/X en Facebook, mist. Daar speelt een slechte reputatie rondom nepnieuws een rol, zijn controlerende ouders actief en komen geregeld relletjes door negatieve reacties voor." Het is juist die positieve uitstraling die jongeren trekt. Ook de naam TikTok helpt daarbij, denkt Broekhuizen: "Door de app de commerciële naam TikTok te geven, wijzend naar het beperkt aantal seconden van de video's, kreeg het platform in één klap een eigen identiteit. Het draaide niet langer om alleen het nadoen van muziek en het playbacken van liedjes, zoals bij oudere apps, maar om het maken van allerlei soorten creatieve video's."</p>
+
+    <h3>Talent voor video</h3>
+
+    <p><span class="alinea-nr">7</span>
+    Volgens Broekhuizen gaan we een tijd tegemoet waarin straks alles <em>video based</em> is. In de lijn van die trend zou TikTok geplaatst moeten worden. "Andere apps waren daar misschien net te vroeg mee. Maar met de snelle ontwikkeling van het 4G-netwerk, kijken én maken we nu overal ter wereld gemakkelijk video's."</p>
+
+    <p><span class="alinea-nr">8</span>
+    Zo luidde de conclusie van Broekhuizen over de filmpjes die de jonge gebruikers creëren: "Tegenwoordig gaan ze niet meer naar de musicalacademie of een school voor grafische vormgeving maar laten ze online, bijvoorbeeld via TikTok, zien wat ze in huis hebben. Het is bijzonder hoe goed en slim sommige jongeren filmpjes kunnen editen. Ik zou ze zo aannemen om creatieve video's voor mij te maken. En dat is alleen maar iets om aan te moedigen", aldus Broekhuizen.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ OEFENTOETS -->
+<div id="tab-toets" class="tab-inhoud">
+
+  <div class="score-banner">
+    <div>
+      <div class="score-getal" id="score-getal">0/4</div>
+      <div class="score-label">meerkeuze goed</div>
+    </div>
+    <div style="font-size:0.88rem;font-weight:700;color:var(--grijs);flex:1;">
+      Open vragen → klik <em>Toon modelantwoord</em> om je antwoord te controleren.<br>
+      Meerkeuze → klik een optie om direct te controleren.
+    </div>
+  </div>
+
+  <div class="tip-box">
+    📰 Voor vragen 4 t/m 12 heb je de leestekst nodig — klik op het tabblad <strong>Leestekst</strong> hierboven.
+  </div>
+
+  <!-- ─── SECTIE A: THEORIE ─── -->
+  <div class="sectie-label">Sectie A — Vragen over de theorie</div>
+
+  <!-- V1 -->
+  <div class="vraag-blok" id="vb1">
+    <div class="vraag-kop">
+      <span class="vraag-nr">1</span>
+      <span class="vraag-tekst">Leg uit wat het verschil is tussen het <strong>onderwerp</strong> en de <strong>hoofdgedachte</strong> van een tekst.</span>
+      <span class="punten">2p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Schrijf hier je antwoord..." oninput="activeerVraag('vb1')"></textarea>
+      <button class="btn-model" onclick="toonModel('model1')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model1">
+        <strong>Modelantwoord (2p):</strong><br>
+        Het <strong>onderwerp</strong> is het <em>topic</em> waarover de tekst gaat — je kunt dit in één of twee woorden zeggen (bijv. "TikTok").<br><br>
+        De <strong>hoofdgedachte</strong> is de centrale <em>boodschap</em> die de auteur over dat onderwerp wil overbrengen — wat hij/zij het belangrijkste vindt om te zeggen. Dit is een uitspraak/stelling, niet alleen een woord.
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 -->
+  <div class="vraag-blok" id="vb2">
+    <div class="vraag-kop">
+      <span class="vraag-nr">2</span>
+      <span class="vraag-tekst">Wat laten <strong>verbindingswoorden</strong> zien in een tekst?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Schrijf hier je antwoord..." oninput="activeerVraag('vb2')"></textarea>
+      <button class="btn-model" onclick="toonModel('model2')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model2">
+        <strong>Modelantwoord (1p):</strong><br>
+        Verbindingswoorden laten de <strong>relatie (het verband)</strong> zien tussen zinnen of alinea's. Ze maken duidelijk of er sprake is van een oorzaak-gevolg, tegenstelling, opsomming, tijdsvolgorde of conclusie.
+      </div>
+    </div>
+  </div>
+
+  <!-- V3 -->
+  <div class="vraag-blok" id="vb3">
+    <div class="vraag-kop">
+      <span class="vraag-nr">3</span>
+      <div style="flex:1;">
+        <div class="vraag-tekst">Lees de twee zinnen hieronder. Herschrijf de tweede zin en voeg een <strong>functiewoord</strong> toe.</div>
+        <div class="zin-kader">Toen de kok naar binnen ging, besloeg zijn bril. De kok kon niets meer zien.</div>
+      </div>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Herschrijf: De kok kon niets meer zien ..." oninput="activeerVraag('vb3')"></textarea>
+      <button class="btn-model" onclick="toonModel('model3')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model3">
+        <strong>Modelantwoord (1p):</strong><br>
+        "<strong>Daardoor</strong> kon de kok niets meer zien."<br><br>
+        Het functiewoord <em>daardoor</em> verwijst terug naar de vorige zin (het beslaan van de bril) en geeft meteen een oorzaak-gevolgverband aan. Andere goede antwoorden: <em>"Hierdoor kon de kok niets meer zien."</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECTIE B: TEKST ─── -->
+  <div class="sectie-label" style="margin-top:2rem;">Sectie B — Vragen over de tekst 'TikTok verovert het internet'</div>
+  <p style="font-size:0.85rem;color:var(--grijs);font-weight:700;margin-bottom:1rem;">Lees eerst de kop en alinea 1 voor vraag 4 en 5. Lees dan de hele tekst voor vraag 6 t/m 12.</p>
+
+  <!-- V4 -->
+  <div class="vraag-blok" id="vb4">
+    <div class="vraag-kop">
+      <span class="vraag-nr">4</span>
+      <span class="vraag-tekst">Wat denk je dat het <strong>onderwerp</strong> van deze tekst is? (Lees alleen de kop en alinea 1.)</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Het onderwerp is..." oninput="activeerVraag('vb4')"></textarea>
+      <button class="btn-model" onclick="toonModel('model4')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model4">
+        <strong>Modelantwoord (1p):</strong><br>
+        Het onderwerp is <strong>TikTok</strong> (de populaire video-app / het sociale platform).
+      </div>
+    </div>
+  </div>
+
+  <!-- V5 -->
+  <div class="vraag-blok" id="vb5">
+    <div class="vraag-kop">
+      <span class="vraag-nr">5</span>
+      <span class="vraag-tekst">Welk <strong>functiewoord</strong> staat er in alinea 1?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Het functiewoord is..." oninput="activeerVraag('vb5')"></textarea>
+      <button class="btn-model" onclick="toonModel('model5')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model5">
+        <strong>Modelantwoord (1p):</strong><br>
+        Het functiewoord is <strong>"Dat"</strong> — in de zin: <em>"Dat is de samenvatting van de app TikTok."</em><br>
+        Het woord <em>dat</em> verwijst terug naar de beschrijving in de eerste zin (de korte filmpjes van 15 seconden).
+      </div>
+    </div>
+  </div>
+
+  <!-- V6 -->
+  <div class="vraag-blok" id="vb6">
+    <div class="vraag-kop">
+      <span class="vraag-nr">6</span>
+      <span class="vraag-tekst">Welk <strong>verbindingswoord</strong> staat er in de eerste zin van alinea 2?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Het verbindingswoord is..." oninput="activeerVraag('vb6')"></textarea>
+      <button class="btn-model" onclick="toonModel('model6')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model6">
+        <strong>Modelantwoord (1p):</strong><br>
+        Het verbindingswoord is <strong>"intussen"</strong> — in de zin: <em>"...hebben Nederland en België <u>intussen</u> 4,5 miljoen actieve gebruikers."</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- V7 -->
+  <div class="vraag-blok" id="vb7">
+    <div class="vraag-kop">
+      <span class="vraag-nr">7</span>
+      <span class="vraag-tekst">Welke soort verbinding geeft dit woord (<em>intussen</em>) aan?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Dit woord geeft een ... verbinding aan." oninput="activeerVraag('vb7')"></textarea>
+      <button class="btn-model" onclick="toonModel('model7')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model7">
+        <strong>Modelantwoord (1p):</strong><br>
+        <em>Intussen</em> geeft een <strong>tijdsverbinding</strong> aan — het laat zien dat iets ondertussen / gelijktijdig / in de tussentijd is gebeurd.
+      </div>
+    </div>
+  </div>
+
+  <!-- V8 -->
+  <div class="vraag-blok" id="vb8">
+    <div class="vraag-kop">
+      <span class="vraag-nr">8</span>
+      <div style="flex:1;">
+        <div class="vraag-tekst">In alinea 3 staat: <em>'Volgens de Amerikaanse wet moeten ouders van kinderen onder de 13 jaar <strong>hier</strong> toestemming voor geven.'</em></div>
+        <div style="margin-top:0.4rem;" class="vraag-tekst">Waarnaar verwijst '<strong>hier</strong>'?</div>
+      </div>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="'Hier' verwijst naar..." oninput="activeerVraag('vb8')"></textarea>
+      <button class="btn-model" onclick="toonModel('model8')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model8">
+        <strong>Modelantwoord (1p):</strong><br>
+        <em>'Hier'</em> verwijst naar <strong>het verzamelen van persoonlijke informatie</strong> (zoals naam en e-mailadres) van kinderen onder de 13 jaar door TikTok.
+      </div>
+    </div>
+  </div>
+
+  <!-- V9 -->
+  <div class="vraag-blok" id="vb9">
+    <div class="vraag-kop">
+      <span class="vraag-nr">9</span>
+      <span class="vraag-tekst">Welke soort verbinding geeft het verbindingswoord <strong>'ook'</strong> in alinea 6 aan?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="'Ook' geeft een ... verbinding aan." oninput="activeerVraag('vb9')"></textarea>
+      <button class="btn-model" onclick="toonModel('model9')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model9">
+        <strong>Modelantwoord (1p):</strong><br>
+        <em>'Ook'</em> geeft een <strong>opsomming / toevoeging</strong> aan. De zin <em>"Ook de naam TikTok helpt daarbij"</em> voegt een extra reden toe aan de lijst van redenen waarom TikTok succesvol is.
+      </div>
+    </div>
+  </div>
+
+  <!-- V10 -->
+  <div class="vraag-blok" id="vb10">
+    <div class="vraag-kop">
+      <span class="vraag-nr">10</span>
+      <span class="vraag-tekst">Welk <strong>functiewoord</strong> staat er in alinea 8?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="open-antwoord">
+      <textarea placeholder="Het functiewoord is..." oninput="activeerVraag('vb10')"></textarea>
+      <button class="btn-model" onclick="toonModel('model10')">Toon modelantwoord</button>
+      <div class="model-antwoord" id="model10">
+        <strong>Modelantwoord (1p):</strong><br>
+        Het functiewoord is <strong>"Zo"</strong> — in de zin: <em>"<u>Zo</u> luidde de conclusie van Broekhuizen..."</em><br>
+        Het woord <em>zo</em> verwijst terug naar alles wat Broekhuizen in de vorige alinea heeft gezegd, en geeft aan dat wat volgt een samenvatting/conclusie is.
+      </div>
+    </div>
+  </div>
+
+  <!-- V11 MC -->
+  <div class="vraag-blok" id="vb11">
+    <div class="vraag-kop">
+      <span class="vraag-nr">11</span>
+      <span class="vraag-tekst">Wat is de <strong>hoofdgedachte</strong> van deze tekst?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="mc-opties" id="mc11">
+      <button class="mc-optie" onclick="checkMC('mc11', this, false, 11)">
+        <span class="optie-letter">A</span>Jongeren hebben TikTok populair gemaakt
+      </button>
+      <button class="mc-optie" onclick="checkMC('mc11', this, true, 11)">
+        <span class="optie-letter">B</span>TikTok verovert het internet
+      </button>
+      <button class="mc-optie" onclick="checkMC('mc11', this, false, 11)">
+        <span class="optie-letter">C</span>TikTok respecteert de privacyregels niet
+      </button>
+      <button class="mc-optie" onclick="checkMC('mc11', this, false, 11)">
+        <span class="optie-letter">D</span>TikTok is populairder dan Facebook en Twitter/X
+      </button>
+    </div>
+    <div class="model-antwoord" id="uitleg11">
+      <strong>Toelichting:</strong><br>
+      Het juiste antwoord is <strong>B</strong>. De hele tekst gaat over hoe TikTok steeds populairder wordt en het internet verovert — ondanks privacyproblemen (alinea 3–5) én dankzij positieve eigenschappen (alinea 6–8). Optie C beschrijft slechts één aspect (de privacyproblemen) en is dus te beperkt als hoofdgedachte.
+    </div>
+  </div>
+
+  <!-- V12 MC -->
+  <div class="vraag-blok" id="vb12">
+    <div class="vraag-kop">
+      <span class="vraag-nr">12</span>
+      <span class="vraag-tekst">Wat is het <strong>tekstdoel</strong> van deze tekst?</span>
+      <span class="punten">1p</span>
+    </div>
+    <div class="mc-opties" id="mc12">
+      <button class="mc-optie" onclick="checkMC('mc12', this, true, 12)">
+        <span class="optie-letter">A</span>Informeren
+      </button>
+      <button class="mc-optie" onclick="checkMC('mc12', this, false, 12)">
+        <span class="optie-letter">B</span>Overtuigen
+      </button>
+      <button class="mc-optie" onclick="checkMC('mc12', this, false, 12)">
+        <span class="optie-letter">C</span>Amuseren
+      </button>
+      <button class="mc-optie" onclick="checkMC('mc12', this, false, 12)">
+        <span class="optie-letter">D</span>Activeren
+      </button>
+    </div>
+    <div class="model-antwoord" id="uitleg12">
+      <strong>Toelichting:</strong><br>
+      Het juiste antwoord is <strong>A — Informeren</strong>. Dit is een journalistiek artikel uit de NRC dat de lezer informeert over de opkomst en het succes van TikTok. De auteur geeft feiten, cijfers en uitspraken van experts — er is geen oproep tot actie of duidelijke persoonlijke mening.
+    </div>
+  </div>
+
+</div><!-- /tab-toets -->
+
+<script>
+  // ── TAB WISSELEN
+  function toonTab(naam, knop) {
+    document.querySelectorAll('.tab-inhoud').forEach(t => t.classList.remove('zichtbaar'));
+    document.querySelectorAll('.tab-knop').forEach(k => k.classList.remove('actief'));
+    document.getElementById('tab-' + naam).classList.add('zichtbaar');
+    if (knop) knop.classList.add('actief');
+  }
+
+  // ── OPEN VRAGEN: activeer rand
+  function activeerVraag(id) {
+    document.getElementById(id).classList.add('actief-vraag');
+  }
+
+  // ── OPEN VRAGEN: toon modelantwoord
+  function toonModel(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('zichtbaar');
+    const knop = el.previousElementSibling;
+    if (el.classList.contains('zichtbaar')) {
+      knop.textContent = 'Verberg modelantwoord';
+    } else {
+      knop.textContent = 'Toon modelantwoord';
+    }
+  }
+
+  // ── MC: score bijhouden
+  const mcScore = { 11: null, 12: null };
+
+  function checkMC(containerId, knop, isGoed, vraagNr) {
+    const container = document.getElementById(containerId);
+    // al beantwoord?
+    if (container.dataset.beantwoord) return;
+    container.dataset.beantwoord = '1';
+
+    const opties = container.querySelectorAll('.mc-optie');
+    opties.forEach(o => {
+      o.disabled = true;
+      o.style.cursor = 'default';
+    });
+
+    if (isGoed) {
+      knop.classList.add('goed');
+      mcScore[vraagNr] = true;
+    } else {
+      knop.classList.add('fout');
+      mcScore[vraagNr] = false;
+      // toon juiste antwoord
+      opties.forEach(o => {
+        if (o.onclick.toString().includes('true')) {
+          o.classList.add('gemist');
+        }
+      });
+    }
+
+    // uitleg tonen
+    const uitleg = document.getElementById('uitleg' + vraagNr);
+    if (uitleg) uitleg.classList.add('zichtbaar');
+
+    // score bijwerken
+    updateScore();
+  }
+
+  function updateScore() {
+    const goed = Object.values(mcScore).filter(v => v === true).length;
+    const totaal = Object.keys(mcScore).length;
+    document.getElementById('score-getal').textContent = goed + '/' + totaal;
+  }
+</script>
+
 </body>
 </html>
