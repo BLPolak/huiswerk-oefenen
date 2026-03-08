@@ -282,6 +282,74 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
   background: var(--rood-bg); font-weight: 800; color: var(--rood);
 }
 .vw-tabel tr:nth-child(even) td { background: #fafafa; }
+
+/* ── FLIPCARDS ── */
+.fc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+.fc {
+  height: 160px;
+  perspective: 900px;
+  cursor: pointer;
+}
+.fc-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  border-radius: 14px;
+}
+.fc.open .fc-inner { transform: rotateY(180deg); }
+.fc-voor, .fc-achter {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+}
+.fc-voor {
+  background: var(--rood);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(229,62,62,0.3);
+}
+.fc-voor span {
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1.3;
+}
+.fc-voor small {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.75;
+}
+.fc-achter {
+  background: #fff;
+  border: 2.5px solid var(--rood);
+  transform: rotateY(180deg);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+.fc-achter .fc-def {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #4a5568;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+.fc-achter .fc-vb {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--rood);
+  line-height: 1.5;
+}
 </style>
 </head>
 <body>
@@ -349,6 +417,132 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
       <tr><td><strong>Conclusie</strong></td><td>dus, concluderend, dan ook</td></tr>
       <tr><td><strong>Samenvatting</strong></td><td>samengevat, kortom</td></tr>
     </table>
+
+    <h3 style="margin-top:1.4rem;">🃏 Oefenen met flipcards</h3>
+    <p style="font-size:0.82rem;color:var(--grijs);margin-bottom:0.2rem;">Klik op een kaart om de definitie en voorbeeldwoorden te zien.</p>
+    <div class="fc-grid">
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Opsomming</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat meerdere zaken worden opgesomd of toegevoegd.</div>
+            <div class="fc-vb">en · ook · bovendien · ten eerste · ten tweede · ten derde · verder</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Tijd</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft een tijdsrelatie of volgorde van gebeurtenissen aan.</div>
+            <div class="fc-vb">eerst · nadat · toen · terwijl · wanneer · dan · daarna · dadelijk · intussen</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Reden / Oorzaak / Gevolg</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan waarom iets gebeurt (reden/oorzaak) of wat het gevolg is.</div>
+            <div class="fc-vb">omdat · want · zodat · daardoor · daarom · aangezien</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Voorwaarde</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft een conditie aan waaronder iets geldt of plaatsvindt.</div>
+            <div class="fc-vb">als · wanneer · tenzij · mits · indien</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Inperking</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft een beperking of voorbehoud aan bij een bewering.</div>
+            <div class="fc-vb">hoewel · ondanks · natuurlijk … maar</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Tegenstelling</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat twee zaken tegenover elkaar staan of in strijd zijn.</div>
+            <div class="fc-vb">maar · daarentegen · desondanks · echter · integendeel · terwijl · enerzijds–anderzijds</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Vergelijking</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat twee zaken met elkaar worden vergeleken.</div>
+            <div class="fc-vb">evenzeer · evenals · eveneens · net als · alsof · hetzelfde is het geval</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Omschrijving</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat iets anders wordt geformuleerd of uitgelegd.</div>
+            <div class="fc-vb">in andere woorden · oftewel · anders gezegd</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Voorbeeld</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat er een voorbeeld volgt ter verduidelijking.</div>
+            <div class="fc-vb">denk aan · bijvoorbeeld · zoals · onder andere · als</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Verduidelijking</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat iets nader wordt uitgelegd of toegelicht.</div>
+            <div class="fc-vb">dit betekent · met name · dit houdt in · dat wil zeggen · onder meer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Conclusie</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat er een eindconclusie of gevolgtrekking volgt.</div>
+            <div class="fc-vb">dus · concluderend · dan ook</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('open')">
+        <div class="fc-inner">
+          <div class="fc-voor"><span>Samenvatting</span><small>klik om te draaien</small></div>
+          <div class="fc-achter">
+            <div class="fc-def">Geeft aan dat het voorgaande in het kort wordt herhaald.</div>
+            <div class="fc-vb">samengevat · kortom</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <div class="kaart">
