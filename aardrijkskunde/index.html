@@ -3,88 +3,999 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aardrijkskunde — Huiswerk Oefenen</title>
+<title>Aardrijkskunde — Steden · Huiswerk Oefenen</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --groen: #276749;
+  --groen-mid: #38a169;
+  --groen-licht: #48bb78;
+  --groen-bg: #f0fff4;
+  --groen-rand: #c6f6d5;
+  --tekst: #1a202c;
+  --tekst-licht: #4a5568;
+  --wit: #ffffff;
+  --goed: #276749;
+  --goed-bg: #f0fff4;
+  --fout: #c53030;
+  --fout-bg: #fff5f5;
+  --blauw: #2b6cb0;
+  --blauw-bg: #ebf8ff;
+  --oranje: #c05621;
+  --oranje-bg: #fffaf0;
+  --achtergrond: #f7fafc;
+}
+
 body {
   font-family: 'Nunito', sans-serif;
-  background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+  background: var(--achtergrond);
+  color: var(--tekst);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  text-align: center;
 }
-.kaart {
-  background: #fff;
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  max-width: 480px;
-  width: 100%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  border-top: 8px solid #276749;
-}
-.emoji { font-size: 4rem; margin-bottom: 0.5rem; line-height: 1; }
-h1 { font-size: 2rem; font-weight: 900; color: #1a202c; margin-bottom: 0.5rem; }
-.beschrijving { color: #4a5568; font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.5; }
-.binnenkort {
-  background: #276749;
-  color: #fff;
-  border-radius: 16px;
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.binnenkort p { font-size: 1.05rem; font-weight: 700; }
-.binnenkort small { font-size: 0.85rem; opacity: 0.9; display: block; margin-top: 0.3rem; }
-.tips {
-  background: #f7fafc;
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  text-align: left;
-  margin-bottom: 1.5rem;
-}
-.tips h3 { font-size: 0.9rem; font-weight: 800; color: #2d3748; margin-bottom: 0.5rem; }
-.tips ul { list-style: none; }
-.tips li { font-size: 0.88rem; color: #4a5568; font-weight: 600; padding: 0.2rem 0; }
-.tips li::before { content: '→ '; color: #276749; font-weight: 800; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 24px 16px 64px; }
+
+/* ── Terug-knop ── */
 .terug {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: #edf2f7;
-  color: #2d3748;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 0.95rem;
-  padding: 0.7rem 1.3rem;
-  border-radius: 10px;
-  transition: background 0.15s;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--wit); border: 2px solid var(--groen-rand);
+  color: var(--groen); font-weight: 800; font-size: 0.9rem;
+  text-decoration: none; padding: 8px 16px; border-radius: 20px;
+  margin-bottom: 20px; transition: background 0.15s;
 }
-.terug:hover { background: #e2e8f0; }
+.terug:hover { background: var(--groen-bg); }
+
+/* ── Header ── */
+.pagina-header { text-align: center; margin-bottom: 28px; }
+.pagina-header h1 { font-size: 2rem; font-weight: 900; color: var(--groen); }
+.pagina-header p { color: var(--tekst-licht); margin-top: 6px; font-size: 0.95rem; font-weight: 600; }
+
+/* ── Tabs ── */
+.tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.tab-knop {
+  flex: 1; min-width: 140px; padding: 12px 16px;
+  border: 2px solid var(--groen-rand); border-radius: 12px;
+  background: var(--wit); font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 800; cursor: pointer;
+  color: var(--tekst-licht); transition: all 0.15s;
+}
+.tab-knop:hover { background: var(--groen-bg); border-color: var(--groen-licht); }
+.tab-knop.actief { background: var(--groen); border-color: var(--groen); color: var(--wit); }
+.tab-inhoud { display: none; }
+.tab-inhoud.zichtbaar { display: block; }
+
+/* ── Kaart ── */
+.kaart {
+  background: var(--wit); border-radius: 16px;
+  border: 2px solid var(--groen-rand); padding: 24px;
+  margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.kaart-header {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.1rem; font-weight: 900; color: var(--groen);
+  margin-bottom: 18px; padding-bottom: 12px;
+  border-bottom: 2px solid var(--groen-bg);
+}
+.para-badge {
+  background: var(--groen); color: var(--wit);
+  font-size: 0.72rem; font-weight: 800; padding: 3px 10px;
+  border-radius: 20px; white-space: nowrap; letter-spacing: 0.3px;
+}
+
+/* ── Theorie ── */
+.kaart h3 { font-size: 0.98rem; font-weight: 900; color: var(--groen); margin: 16px 0 6px; }
+.kaart h3:first-of-type { margin-top: 0; }
+.kaart p { line-height: 1.75; color: var(--tekst); margin-bottom: 8px; font-size: 0.93rem; }
+.kaart ul, .kaart ol { padding-left: 20px; margin-bottom: 10px; }
+.kaart li { line-height: 1.75; margin-bottom: 3px; font-size: 0.93rem; }
+
+.info-blok {
+  background: var(--blauw-bg); border-left: 4px solid var(--blauw);
+  border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0;
+  font-size: 0.9rem; line-height: 1.65;
+}
+.info-blok strong { color: var(--blauw); }
+
+.voorbeeld-blok {
+  background: var(--groen-bg); border-left: 4px solid var(--groen-mid);
+  border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0;
+  font-size: 0.9rem; line-height: 1.65;
+}
+.voorbeeld-blok strong { color: var(--groen); }
+
+.let-op {
+  background: var(--oranje-bg); border-left: 4px solid var(--oranje);
+  border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0;
+  font-size: 0.9rem; line-height: 1.65;
+}
+.let-op strong { color: var(--oranje); }
+
+.begrip-lijst { margin: 8px 0; }
+.begrip-rij {
+  display: flex; gap: 10px; padding: 8px 0;
+  border-bottom: 1px solid var(--groen-bg); font-size: 0.9rem;
+}
+.begrip-rij:last-child { border-bottom: none; }
+.begrip-term { font-weight: 800; color: var(--groen); min-width: 190px; flex-shrink: 0; }
+.begrip-def { color: var(--tekst); line-height: 1.5; }
+
+.vergelijk-tabel { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88rem; }
+.vergelijk-tabel th {
+  background: var(--groen); color: var(--wit);
+  padding: 9px 12px; text-align: left; font-weight: 800;
+}
+.vergelijk-tabel td { padding: 8px 12px; border-bottom: 1px solid var(--groen-rand); vertical-align: top; }
+.vergelijk-tabel tr:nth-child(even) td { background: var(--groen-bg); }
+
+/* ── Flashcards ── */
+.fc-voortgang {
+  text-align: center; font-weight: 700; color: var(--tekst-licht);
+  margin-bottom: 10px; font-size: 0.88rem;
+}
+.fc-dot-rij {
+  display: flex; gap: 5px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 18px;
+}
+.fc-dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--groen-rand); transition: all 0.2s; flex-shrink: 0;
+}
+.fc-dot.gezien { background: var(--groen-licht); }
+.fc-dot.huidig { background: var(--groen); transform: scale(1.4); }
+
+.fc-filter-rij {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  justify-content: center; margin-bottom: 18px;
+}
+.fc-filter-knop {
+  padding: 5px 13px; border-radius: 20px; border: 2px solid var(--groen-rand);
+  background: var(--wit); font-family: 'Nunito', sans-serif; font-size: 0.8rem;
+  font-weight: 800; cursor: pointer; color: var(--tekst-licht); transition: all 0.15s;
+}
+.fc-filter-knop.actief { background: var(--groen); border-color: var(--groen); color: var(--wit); }
+
+.fc-scene { perspective: 800px; width: 100%; max-width: 520px; margin: 0 auto 18px; height: 230px; }
+.fc-kaart {
+  width: 100%; height: 100%; position: relative;
+  transform-style: preserve-3d; transition: transform 0.45s ease;
+  cursor: pointer;
+}
+.fc-kaart.gedraaid { transform: rotateY(180deg); }
+.fc-voorkant, .fc-achterkant {
+  position: absolute; inset: 0; border-radius: 16px;
+  border: 2px solid var(--groen-rand); padding: 24px;
+  backface-visibility: hidden; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+}
+.fc-voorkant {
+  background: var(--wit);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.fc-achterkant {
+  background: var(--groen-bg);
+  transform: rotateY(180deg);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.fc-tag {
+  font-size: 0.72rem; font-weight: 800; color: var(--groen);
+  text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;
+  background: var(--groen-bg); padding: 3px 10px; border-radius: 20px;
+}
+.fc-achterkant .fc-tag { background: var(--wit); }
+.fc-begrip { font-size: 1.2rem; font-weight: 900; color: var(--groen); margin-bottom: 8px; }
+.fc-definitie { font-size: 0.9rem; line-height: 1.65; color: var(--tekst); }
+.fc-hint { font-size: 0.75rem; color: var(--tekst-licht); margin-top: 14px; }
+
+.fc-knoppen { display: flex; gap: 10px; justify-content: center; margin-bottom: 18px; flex-wrap: wrap; }
+.fc-btn {
+  padding: 10px 20px; border-radius: 10px; border: 2px solid var(--groen-rand);
+  background: var(--wit); font-family: 'Nunito', sans-serif; font-size: 0.88rem;
+  font-weight: 800; cursor: pointer; color: var(--tekst-licht); transition: all 0.15s;
+}
+.fc-btn:hover { background: var(--groen-bg); border-color: var(--groen-licht); }
+.fc-btn.primair { background: var(--groen); border-color: var(--groen); color: var(--wit); }
+.fc-btn.primair:hover { background: #1f5138; }
+
+.fc-klaar { text-align: center; padding: 32px 16px; display: none; }
+.fc-klaar.zichtbaar { display: block; }
+.fc-klaar-emoji { font-size: 3rem; margin-bottom: 12px; }
+.fc-klaar h3 { font-size: 1.25rem; font-weight: 900; color: var(--groen); margin-bottom: 8px; }
+.fc-klaar p { color: var(--tekst-licht); margin-bottom: 20px; font-size: 0.92rem; }
+
+/* ── Oefeningen ── */
+.score-balk { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.score-item {
+  flex: 1; min-width: 90px; padding: 12px 8px;
+  border-radius: 12px; text-align: center; font-weight: 800;
+}
+.score-item span { display: block; font-size: 1.6rem; }
+.score-item small { font-size: 0.75rem; font-weight: 700; }
+.score-item.goed { background: var(--goed-bg); color: var(--goed); border: 2px solid var(--groen-rand); }
+.score-item.fout { background: var(--fout-bg); color: var(--fout); border: 2px solid #fed7d7; }
+.score-item.totaal { background: var(--blauw-bg); color: var(--blauw); border: 2px solid #bee3f8; }
+
+.sectie-kop {
+  font-size: 0.95rem; font-weight: 900; color: var(--groen);
+  padding: 10px 16px; background: var(--groen-bg);
+  border-radius: 10px; margin: 24px 0 14px;
+  border-left: 4px solid var(--groen);
+}
+
+.vraag-blok {
+  background: var(--wit); border-radius: 14px; border: 2px solid var(--groen-rand);
+  padding: 20px; margin-bottom: 14px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+.vraag-nr {
+  display: inline-block; background: var(--groen); color: var(--wit);
+  font-weight: 800; font-size: 0.75rem; padding: 3px 10px;
+  border-radius: 20px; margin-bottom: 10px;
+}
+.vraag-tekst { font-size: 0.93rem; line-height: 1.75; margin-bottom: 14px; color: var(--tekst); }
+.vraag-tekst strong { color: var(--groen); }
+
+.mc-opties { display: flex; flex-direction: column; gap: 7px; }
+.mc-optie {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px;
+  border-radius: 10px; border: 2px solid var(--groen-rand); background: var(--wit);
+  font-family: 'Nunito', sans-serif; font-size: 0.9rem; cursor: pointer;
+  text-align: left; transition: all 0.15s; font-weight: 600; line-height: 1.5;
+}
+.mc-optie:hover:not(:disabled) { background: var(--groen-bg); border-color: var(--groen-licht); }
+.optie-letter {
+  min-width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: var(--groen-bg); color: var(--groen);
+  font-weight: 800; font-size: 0.82rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.mc-optie.goed { background: var(--goed-bg); border-color: var(--goed); }
+.mc-optie.goed .optie-letter { background: var(--goed); color: var(--wit); }
+.mc-optie.fout { background: var(--fout-bg); border-color: var(--fout); }
+.mc-optie.fout .optie-letter { background: var(--fout); color: var(--wit); }
+.mc-optie:disabled { cursor: not-allowed; opacity: 0.85; }
+
+.mc-feedback {
+  font-size: 0.86rem; padding: 9px 14px; border-radius: 8px;
+  margin-top: 8px; font-weight: 700; display: none;
+}
+.mc-feedback.zichtbaar { display: block; }
+.mc-feedback.goed { background: var(--goed-bg); color: var(--goed); border: 1.5px solid var(--groen-rand); }
+.mc-feedback.fout { background: var(--fout-bg); color: var(--fout); border: 1.5px solid #fed7d7; }
+
+.open-textarea {
+  width: 100%; min-height: 80px; padding: 12px; border-radius: 10px;
+  border: 2px solid var(--groen-rand); font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem; resize: vertical; margin-bottom: 10px;
+  outline: none; transition: border-color 0.15s; color: var(--tekst);
+}
+.open-textarea:focus { border-color: var(--groen-mid); }
+
+.btn-model {
+  padding: 8px 16px; border-radius: 10px; border: 2px solid var(--groen);
+  background: var(--wit); font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+  font-weight: 800; cursor: pointer; color: var(--groen); transition: all 0.15s;
+}
+.btn-model:hover { background: var(--groen-bg); }
+
+.model-antwoord {
+  background: var(--groen-bg); border-radius: 10px; padding: 12px 16px;
+  margin-top: 10px; font-size: 0.88rem; line-height: 1.7; display: none;
+  border-left: 4px solid var(--groen-mid);
+}
+.model-antwoord.zichtbaar { display: block; }
+.model-antwoord strong { color: var(--groen); }
+
+/* ── Responsive ── */
+@media (max-width: 580px) {
+  .pagina-header h1 { font-size: 1.5rem; }
+  .begrip-rij { flex-direction: column; }
+  .begrip-term { min-width: unset; }
+  .fc-scene { height: 270px; }
+  .vergelijk-tabel { font-size: 0.8rem; }
+  .tab-knop { font-size: 0.85rem; padding: 10px 10px; }
+}
 </style>
 </head>
 <body>
-<div class="kaart">
-  <div class="emoji">🌍</div>
-  <h1>Aardrijkskunde</h1>
-  <p class="beschrijving">Landen, klimaatzones, topografie en mensen — de wereld wacht op je!</p>
-  <div class="binnenkort">
-    <p>🚧 Oefeningen komen binnenkort!</p>
-    <small>Claude is nog hard aan het werk om leuke oefeningen te maken.</small>
+<div class="container">
+
+  <a href="/huiswerk-oefenen/" class="terug">← Terug naar overzicht</a>
+
+  <header class="pagina-header">
+    <h1>🌍 Aardrijkskunde — Steden</h1>
+    <p>Hoofdstuk 2 · HAVO/VWO · Theorie, begrippen &amp; oefeningen</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-knop actief" onclick="wisselTab('theorie', this)">📚 Theorie</button>
+    <button class="tab-knop" onclick="wisselTab('flashcards', this)">🃏 Flashcards</button>
+    <button class="tab-knop" onclick="wisselTab('oefeningen', this)">✏️ Oefeningen</button>
   </div>
-  <div class="tips">
-    <h3>💡 Wat gaat er komen?</h3>
-    <ul>
-      <li>Topografie: hoofdsteden en landen</li>
-      <li>Klimaattypen en plaatbewegingen</li>
-      <li>Bevolking, migratie en armoede</li>
-      <li>Kaartlezen en grafieken analyseren</li>
-    </ul>
-  </div>
-  <a class="terug" href="/huiswerk-oefenen/">← Terug naar alle vakken</a>
-</div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 1: THEORIE
+  ═══════════════════════════════════════ -->
+  <div id="tab-theorie" class="tab-inhoud zichtbaar">
+
+    <!-- §2.1 -->
+    <div class="kaart">
+      <div class="kaart-header"><span class="para-badge">§2.1</span> Steden worden steeds belangrijker</div>
+
+      <h3>Stedelijk vs. landelijk gebied</h3>
+      <p>Een <strong>stedelijk gebied</strong> heeft een hoge bevolkings- en bebouwingsdichtheid en weinig natuur. Een <strong>landelijk gebied</strong> heeft juist een lage dichtheid en veel natuur en open ruimte. Er is geen vaste grens: elk land hanteert zijn eigen definitie.</p>
+      <p>De <strong>hoofdstad</strong> is de belangrijkste stad van een land, waar meestal de regering zetelt.</p>
+
+      <h3>Urbanisatie</h3>
+      <p><strong>Urbanisatie</strong> is het vrijwillige proces waarbij mensen vanuit het landelijk gebied naar de stad verhuizen. Het <strong>verstedelijkingstempo</strong> is het percentage waarmee de verstedelijking jaarlijks toeneemt.</p>
+      <p>In 1800 woonde slechts ~3% van de wereldbevolking in steden. Nu is dat meer dan 55% en dit blijft groeien — vooral in Afrika en Azië.</p>
+
+      <div class="info-blok">
+        <strong>💡 Trek- en duwfactoren</strong><br>
+        <strong>Trek van de stad:</strong> meer werk, betere scholen, hogere lonen, meer voorzieningen.<br>
+        <strong>Duw van het platteland:</strong> weinig werk in de landbouw, armoede, gebrekkige infrastructuur.
+      </div>
+
+      <h3>Megasteden en wereldsteden</h3>
+      <p>Een <strong>megastad</strong> heeft meer dan 10 miljoen inwoners. Voorbeelden: Tokyo, Delhi, Shanghai, Cairo, São Paulo.</p>
+      <p>Een <strong>wereldstad</strong> is een stad die wereldwijd zeer belangrijk is — niet alleen door omvang, maar door economische, politieke en culturele invloed. Voorbeelden: New York, Londen, Parijs, Tokyo.</p>
+
+      <div class="let-op">
+        <strong>⚠️ Let op het verschil:</strong> Een megastad is groot (>10 mln inwoners). Een wereldstad heeft grote internationale invloed. Tokyo is allebei; Dhaka is alleen een megastad; Londen is een wereldstad maar geen megastad.
+      </div>
+    </div>
+
+    <!-- §2.2 -->
+    <div class="kaart">
+      <div class="kaart-header"><span class="para-badge">§2.2</span> De spreiding van steden in een land</div>
+
+      <h3>Stratenpatroon</h3>
+      <p>Het <strong>stratenpatroon</strong> is de manier waarop de wegen in een stad zijn georganiseerd. De twee hoofdtypen:</p>
+      <table class="vergelijk-tabel">
+        <tr><th>Grid (rechthoekig)</th><th>Organisch</th></tr>
+        <tr><td>Straten staan loodrecht op elkaar; overzichtelijk en makkelijk navigeren</td><td>Slingerende straten zonder vast patroon; historisch gegroeid</td></tr>
+        <tr><td>Gepland vanuit scratch — vaak VS, Latijns-Amerika, koloniale steden</td><td>Middeleeuwse Europese binnensteden, Arabische medina's</td></tr>
+      </table>
+
+      <h3>Primaire stad</h3>
+      <p>In veel ontwikkelingslanden is er één <strong>primaire stad</strong>: de grootste stad die veel groter is dan alle andere steden én economisch, politiek en cultureel domineert.</p>
+      <div class="voorbeeld-blok">
+        <strong>Voorbeelden:</strong> Lima (Peru), Bangkok (Thailand), Lagos (Nigeria). De primaire stad is vaak de hoofdstad, maar niet altijd.
+      </div>
+
+      <h3>Koloniale dubbelstad</h3>
+      <p>In voormalige kolonies zie je soms een <strong>koloniale dubbelstad</strong>: een stad opgebouwd uit een inheems deel (met organisch stratenpatroon) en een koloniaal deel (met grid, brede lanen en koloniale gebouwen) naast of rondom elkaar.</p>
+
+      <h3>Relatieve ligging en satellietsteden</h3>
+      <p>De <strong>relatieve ligging</strong> beschrijft hoe een stad ligt ten opzichte van andere plaatsen — een rivier, de kust, een bergketen, andere steden. Dit bepaalt mede de groei en functie van de stad.</p>
+      <p>Een <strong>satellietstad</strong> is een nieuwe stad gebouwd op enige afstand van een grote stad, om de bevolkingsdruk te spreiden.</p>
+
+      <h3>Stedelijk netwerk</h3>
+      <p>Een <strong>stedelijk netwerk</strong> is een groep steden die op veel manieren met elkaar verbonden zijn (infrastructuur, economie, cultuur). De steden versterken elkaar.</p>
+      <div class="voorbeeld-blok">
+        <strong>Voorbeeld:</strong> De Randstad (Amsterdam, Rotterdam, Utrecht, Den Haag) is een sterk stedelijk netwerk in Nederland.
+      </div>
+    </div>
+
+    <!-- §2.3 -->
+    <div class="kaart">
+      <div class="kaart-header"><span class="para-badge">§2.3</span> De opbouw van steden</div>
+
+      <h3>Opbouw in welvarende landen</h3>
+      <p>Van binnen naar buiten:</p>
+      <ul>
+        <li><strong>CBD (Central Business District)</strong> — stadscentrum met kantoren, winkels, hoogbouw en hoge grondprijzen</li>
+        <li><strong>Historische woonwijken</strong> — rondom het centrum, oudere bebouwing</li>
+        <li><strong>Naoorlogse wijken</strong> — flats en rijtjeshuizen gebouwd na WOII (1945–1990)</li>
+        <li><strong>Suburbane wijken</strong> — ruime, groene woonwijken aan de rand voor hogere inkomens</li>
+      </ul>
+
+      <div class="info-blok">
+        <strong>CBD = Central Business District</strong><br>
+        Het economisch hart van de stad: weinig wonen, veel kantoren en winkels, hoogbouw, dure grond. In Europa valt het centrum vaak samen met de historische binnenstad.
+      </div>
+
+      <h3>Opbouw in minder welvarende landen</h3>
+      <p>In minder welvarende landen is de opbouw <em>omgekeerd</em>: rijkere mensen wonen dichterbij het centrum (veiligheid, voorzieningen), arme mensen aan de rand in <strong>slopenwijken / informele nederzettingen</strong> (favela's, barrios, shanty towns).</p>
+
+      <div class="let-op">
+        <strong>⚠️ Omgekeerde opbouw:</strong> In welvarende landen = arm centrum, rijk aan de rand. In minder welvarende landen = rijk centrum, arm aan de rand.
+      </div>
+
+      <h3>Gentrificatie</h3>
+      <p><strong>Gentrificatie</strong> is het proces waarbij rijkere mensen een (voormalig arme) wijk gaan bewonen. De wijk verbetert qua uitstraling en voorzieningen, maar de huren en koopprijzen stijgen — waardoor oorspronkelijke bewoners worden verdreven.</p>
+
+      <h3>Re-urbanisatie</h3>
+      <p><strong>Re-urbanisatie</strong> is het proces waarbij mensen en bedrijven terúgkeren naar de stad na een periode van suburbanisatie. Dit gebeurt als de stad aantrekkelijker wordt gemaakt (betere woningen, veiligheid, voorzieningen).</p>
+    </div>
+
+    <!-- §2.4 -->
+    <div class="kaart">
+      <div class="kaart-header"><span class="para-badge">§2.4</span> Stadsplanning: nieuwe en groeiende steden</div>
+
+      <h3>Wat is stadsplanning?</h3>
+      <p><strong>Stadsplanning</strong> is van tevoren nadenken over de inrichting van de ruimte — wonen, werken, recreatie, natuur, infrastructuur. Hoe verdeel je de beschikbare ruimte op een slimme manier?</p>
+
+      <table class="vergelijk-tabel">
+        <tr><th>Top-down</th><th>Bottom-up</th></tr>
+        <tr><td>Overheid beslist van bovenaf</td><td>Bewoners denken mee</td></tr>
+        <tr><td>Snel en grootschalig</td><td>Meer draagvlak, maar langzamer</td></tr>
+        <tr><td>Risico: sluit niet aan op de praktijk</td><td>Beter afgestemd op wensen bewoners</td></tr>
+        <tr><td>Bijv. Singapore, nieuwe steden in China</td><td>Bijv. buurtinitiatieven in Amsterdam</td></tr>
+      </table>
+
+      <h3>Uitdagingen bij stadsplanning</h3>
+      <ul>
+        <li>Bevolkingsgroei → meer woningen nodig</li>
+        <li>Ruimtegebrek → minder plek voor groen en natuur</li>
+        <li>Verkeersdrukte → files, luchtvervuiling</li>
+        <li>Informele sector → zelfbouw moeilijk te reguleren</li>
+      </ul>
+
+      <h3>De Randstad en het Groene Hart</h3>
+      <p>De <strong>Randstad</strong> is het stedelijk gebied in het westen van Nederland: Amsterdam, Rotterdam, Utrecht en Den Haag. Daartussenin ligt het <strong>Groene Hart</strong>: een groen, landelijk gebied dat bewust beschermd wordt van bebouwing.</p>
+
+      <div class="begrip-lijst">
+        <div class="begrip-rij"><span class="begrip-term">Agglomeratie</span><span class="begrip-def">Aaneengesloten stedelijke bebouwing van meerdere gemeenten</span></div>
+        <div class="begrip-rij"><span class="begrip-term">Stedelijke regio</span><span class="begrip-def">Gebied dat op een grote stad gericht is, inclusief omliggende gemeenten en dorpen</span></div>
+        <div class="begrip-rij"><span class="begrip-term">Verzorgingsgebied</span><span class="begrip-def">Het gebied dat de stad van diensten voorziet (winkels, scholen, ziekenhuizen)</span></div>
+        <div class="begrip-rij"><span class="begrip-term">Vinexwijk</span><span class="begrip-def">Nieuwe woonwijk gebouwd na 1990 als geplande uitbreidingslocatie van bestaande steden</span></div>
+        <div class="begrip-rij"><span class="begrip-term">Voorzieningen</span><span class="begrip-def">Diensten en gebouwen die een stad biedt: winkels, scholen, ziekenhuizen, sportfaciliteiten</span></div>
+      </div>
+    </div>
+
+    <!-- §2.5 -->
+    <div class="kaart">
+      <div class="kaart-header"><span class="para-badge">§2.5</span> Urbanisatie in Nederland</div>
+
+      <h3>Van stad tot stedelijke regio</h3>
+      <p>Meer dan 90% van de Nederlandse bevolking woont in stedelijk gebied. Vroeger losstaande steden zijn door de tijd heen gegroeid en samengesmolten tot agglomeraties en stedelijke regio's.</p>
+
+      <h3>Suburbanisatie</h3>
+      <p><strong>Suburbanisatie</strong> is het proces waarbij mensen vanuit de stad naar de rand of het omliggende gebied verhuizen. Ze willen meer ruimte, groen en rust — maar werken nog wel in de stad (forensen).</p>
+
+      <div class="info-blok">
+        <strong>Gevolgen van suburbanisatie:</strong><br>
+        – Meer forensen → meer verkeer en files<br>
+        – Groei van dorpen en kleine steden rond de grote stad<br>
+        – Leegloop van de binnenstad; leegstand en verloedering
+      </div>
+
+      <h3>Functies van het landelijk gebied</h3>
+      <p>Het omliggende landelijk gebied dient als <strong>woongebied</strong> (suburbs, dorpen), <strong>voedselproductiegebied</strong> (landbouw, tuinbouw) en <strong>recreatiegebied</strong> voor stedelingen. Hoe meer voorzieningen een stad heeft, hoe groter haar verzorgingsgebied.</p>
+
+      <h3>Sociale woningbouw</h3>
+      <p><strong>Sociale woningbouw</strong> is de bouw van betaalbare woningen voor mensen met lage inkomens, gefinancierd door de overheid of woningcorporaties. Nederland heeft relatief veel sociale huurwoningen (±30% van de woningvoorraad).</p>
+    </div>
+
+    <!-- §2.6 -->
+    <div class="kaart">
+      <div class="kaart-header"><span class="para-badge">§2.6</span> Is Nederland klaar voor de toekomst?</div>
+
+      <h3>De stad wordt verbouwd</h3>
+      <p>Woningnood, verouderde gebouwen en klimaateisen zorgen voor grote verbouwoperaties in Nederlandse steden. Twee soorten naoorlogse wijken staan centraal:</p>
+
+      <div class="begrip-lijst">
+        <div class="begrip-rij"><span class="begrip-term">Naoorlogse hoogbouw</span><span class="begrip-def">Woonwijk met flatgebouwen (meerdere verdiepingen), gebouwd 1965–1990, vaak sociale huurwoningen</span></div>
+        <div class="begrip-rij"><span class="begrip-term">Naoorlogse laagbouw</span><span class="begrip-def">Woonwijk met rijtjeshuizen/eengezinswoningen, gebouwd 1965–1990</span></div>
+      </div>
+
+      <h3>Wat wordt er gedaan?</h3>
+      <div class="begrip-lijst">
+        <div class="begrip-rij"><span class="begrip-term">Herstructurering</span><span class="begrip-def">Slopen van verouderde woningen en wijken, vervangen door nieuwbouw</span></div>
+        <div class="begrip-rij"><span class="begrip-term">Renoveren</span><span class="begrip-def">Bestaande woningen opknappen zonder sloop (goedkoper en minder ingrijpend)</span></div>
+        <div class="begrip-rij"><span class="begrip-term">Verduurzaming</span><span class="begrip-def">Woningen milieuvriendelijker maken: isolatie, zonnepanelen, warmtepompen</span></div>
+      </div>
+
+      <h3>Klimaatbestendige stad</h3>
+      <p>Steden moeten ook rekening houden met klimaatverandering: meer hittegolven, wateroverlast en droogte. Oplossingen: meer groen in de stad (parken, groene daken), betere wateropvang, en betere isolatie.</p>
+
+      <div class="let-op">
+        <strong>⚠️ Dilemma herstructurering:</strong> Als een wijk gesloopt wordt voor nieuwbouw, moeten bestaande bewoners verhuizen. Dit stuit op verzet — er is een spanning tussen wijk verbeteren én het recht om te blijven wonen.
+      </div>
+    </div>
+
+    <!-- Vaardigheden -->
+    <div class="kaart">
+      <div class="kaart-header"><span class="para-badge">📐</span> Vaardigheden: kaartlezen &amp; schaal</div>
+
+      <h3>Schaal berekenen</h3>
+      <p>Een schaal geeft aan hoeveel kleiner de kaart is dan de werkelijkheid. Schaal 1:25.000 betekent: 1 cm op de kaart = 25.000 cm = 250 m in het echt.</p>
+
+      <div class="info-blok">
+        <strong>Formules:</strong><br>
+        Werkelijke afstand = afstand op kaart × noemergetal<br>
+        Afstand op kaart = werkelijke afstand ÷ noemergetal<br><br>
+        <strong>Voorbeeld:</strong> Schaal 1:50.000, afstand op kaart = 4 cm → werkelijk = 4 × 50.000 = 200.000 cm = <strong>2 km</strong>
+      </div>
+
+      <h3>Kleine vs. grote schaal</h3>
+      <table class="vergelijk-tabel">
+        <tr><th>Kleine schaal</th><th>Grote schaal</th></tr>
+        <tr><td>Groot noemergetal (bijv. 1:1.000.000)</td><td>Klein noemergetal (bijv. 1:25.000)</td></tr>
+        <tr><td>Wereldkaart of landkaart</td><td>Stads- of topografische kaart</td></tr>
+        <tr><td>Weinig detail, groot gebied</td><td>Veel detail, klein gebied</td></tr>
+      </table>
+
+      <h3>Relatieve ligging beschrijven</h3>
+      <p>Beschrijf de ligging altijd ten opzichte van iets herkenbaars: een rivier, kust, bergketen of andere stad. Gebruik windrichtingen (NW, ZO, etc.) en een schatting van de afstand.</p>
+    </div>
+
+  </div><!-- /tab-theorie -->
+
+  <!-- ═══════════════════════════════════════
+       TAB 2: FLASHCARDS
+  ═══════════════════════════════════════ -->
+  <div id="tab-flashcards" class="tab-inhoud">
+
+    <div id="fc-voortgang" class="fc-voortgang">Kaart 1 van 33</div>
+    <div id="fc-dot-rij" class="fc-dot-rij"></div>
+
+    <div class="fc-filter-rij">
+      <button class="fc-filter-knop actief" onclick="filterFC('alles', this)">Alle begrippen</button>
+      <button class="fc-filter-knop" onclick="filterFC('2.1', this)">§2.1</button>
+      <button class="fc-filter-knop" onclick="filterFC('2.2', this)">§2.2</button>
+      <button class="fc-filter-knop" onclick="filterFC('2.3', this)">§2.3</button>
+      <button class="fc-filter-knop" onclick="filterFC('2.4', this)">§2.4</button>
+      <button class="fc-filter-knop" onclick="filterFC('2.5', this)">§2.5</button>
+      <button class="fc-filter-knop" onclick="filterFC('2.6', this)">§2.6</button>
+    </div>
+
+    <div class="fc-scene">
+      <div id="fc-kaart" class="fc-kaart" onclick="draaiFC()">
+        <div class="fc-voorkant">
+          <div id="fc-tag-voor" class="fc-tag">§2.1</div>
+          <div id="fc-begrip" class="fc-begrip">megastad</div>
+          <div class="fc-hint">Klik om de definitie te zien →</div>
+        </div>
+        <div class="fc-achterkant">
+          <div id="fc-tag-achter" class="fc-tag">§2.1</div>
+          <div id="fc-definitie" class="fc-definitie">Stad met meer dan 10 miljoen inwoners.</div>
+          <div class="fc-hint">← Klik om terug te draaien</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="fc-klaar" class="fc-klaar">
+      <div class="fc-klaar-emoji">🎉</div>
+      <h3>Alle begrippen gezien!</h3>
+      <p>Goed gedaan — je hebt alle flashcards doorlopen.</p>
+      <button class="fc-btn primair" onclick="herlaadFC()">Opnieuw beginnen</button>
+    </div>
+
+    <div class="fc-knoppen">
+      <button class="fc-btn" onclick="vorigeFC()">← Vorige</button>
+      <button class="fc-btn primair" onclick="draaiFC()">Draai om 🔄</button>
+      <button class="fc-btn" onclick="volgendeFC()">Volgende →</button>
+      <button class="fc-btn" onclick="shuffleFC()">Schudden 🔀</button>
+    </div>
+
+  </div><!-- /tab-flashcards -->
+
+  <!-- ═══════════════════════════════════════
+       TAB 3: OEFENINGEN
+  ═══════════════════════════════════════ -->
+  <div id="tab-oefeningen" class="tab-inhoud">
+
+    <div class="score-balk">
+      <div class="score-item goed"><span id="score-goed">0</span><small>Goed ✓</small></div>
+      <div class="score-item fout"><span id="score-fout">0</span><small>Fout ✗</small></div>
+      <div class="score-item totaal"><span id="score-totaal">0</span><small>Beantwoord</small></div>
+    </div>
+
+    <!-- ── Sectie A: Meerkeuze ── -->
+    <div class="sectie-kop">📋 Sectie A — Meerkeuze vragen</div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 1</span>
+      <p class="vraag-tekst">Wat is het <strong>verstedelijkingstempo</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc1',false)"><span class="optie-letter">A</span>Het totale aantal mensen dat in steden woont</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc1',true)"><span class="optie-letter">B</span>Het percentage waarmee de verstedelijking jaarlijks toeneemt</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc1',false)"><span class="optie-letter">C</span>De oppervlakte van een stad in km²</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc1',false)"><span class="optie-letter">D</span>Het aantal megasteden per continent</button>
+      </div>
+      <div id="mc1-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 2</span>
+      <p class="vraag-tekst">Hoe woont een arme inwoner in een stad in een <strong>minder welvarend land</strong> — vergeleken met een welvarend land?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc2',false)"><span class="optie-letter">A</span>Ook aan de rand, net als in een welvarend land</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc2',false)"><span class="optie-letter">B</span>In het centrum, omdat dat het goedkoopste is</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc2',true)"><span class="optie-letter">C</span>Aan de rand van de stad in slopenwijken (informele nederzettingen)</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc2',false)"><span class="optie-letter">D</span>In naoorlogse flatwijken in de buitenrand</button>
+      </div>
+      <div id="mc2-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 3</span>
+      <p class="vraag-tekst">Wat is een <strong>primaire stad</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc3',false)"><span class="optie-letter">A</span>De eerste stad die in een land gesticht is</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc3',false)"><span class="optie-letter">B</span>Een stad met meer dan 10 miljoen inwoners</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc3',true)"><span class="optie-letter">C</span>De grootste stad in een land, die veel groter is dan alle andere steden en economisch, politiek of cultureel domineert</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc3',false)"><span class="optie-letter">D</span>Altijd de hoofdstad van een land</button>
+      </div>
+      <div id="mc3-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 4</span>
+      <p class="vraag-tekst">Wat beschrijft het begrip <strong>gentrificatie</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc4',false)"><span class="optie-letter">A</span>Het sloopproces van verouderde wijken door de gemeente</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc4',true)"><span class="optie-letter">B</span>Het proces waarbij rijkere mensen een arme wijk overnemen — huren stijgen en arme bewoners worden verdreven</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc4',false)"><span class="optie-letter">C</span>Het bouwen van nieuwe wijken buiten de stad</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc4',false)"><span class="optie-letter">D</span>Mensen die terugkeren naar de stad na suburbanisatie</button>
+      </div>
+      <div id="mc4-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 5</span>
+      <p class="vraag-tekst">Wat is het <strong>Groene Hart</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc5',false)"><span class="optie-letter">A</span>Een groot stadspark in Amsterdam</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc5',false)"><span class="optie-letter">B</span>Een nationaal park in Friesland</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc5',true)"><span class="optie-letter">C</span>Het groene, landelijke middengebied dat omringd wordt door de Randstad en bewust beschermd wordt</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc5',false)"><span class="optie-letter">D</span>De binnenstad van Utrecht</button>
+      </div>
+      <div id="mc5-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 6</span>
+      <p class="vraag-tekst">Wat is het verschil tussen <strong>renoveren</strong> en <strong>herstructurering</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc6',false)"><span class="optie-letter">A</span>Renoveren is nieuwbouw, herstructurering is opknappen</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc6',true)"><span class="optie-letter">B</span>Renoveren is bestaande woningen opknappen; herstructurering is slopen en vervangen door nieuwbouw</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc6',false)"><span class="optie-letter">C</span>Het zijn synoniemen — ze betekenen hetzelfde</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc6',false)"><span class="optie-letter">D</span>Renoveren is alleen voor rijke wijken, herstructurering voor arme wijken</button>
+      </div>
+      <div id="mc6-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 7</span>
+      <p class="vraag-tekst">Welke omschrijving past bij <strong>suburbanisatie</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc7',false)"><span class="optie-letter">A</span>Mensen trekken van het platteland naar de stad</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc7',false)"><span class="optie-letter">B</span>Mensen keren terug naar de stad vanuit de regio</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc7',true)"><span class="optie-letter">C</span>Mensen verhuizen vanuit de stad naar de omliggende regio (voorsteden, dorpen)</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc7',false)"><span class="optie-letter">D</span>Steden smelten samen tot één grote agglomeratie</button>
+      </div>
+      <div id="mc7-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 8</span>
+      <p class="vraag-tekst">Wat is een <strong>grid</strong> in de context van steden?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc8',false)"><span class="optie-letter">A</span>Het elektriciteitsnet van een stad</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc8',true)"><span class="optie-letter">B</span>Een rechthoekig stratenpatroon waarbij straten loodrecht op elkaar staan</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc8',false)"><span class="optie-letter">C</span>Een ringweg rondom een stad</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc8',false)"><span class="optie-letter">D</span>Een stelsel van grachten in een historische binnenstad</button>
+      </div>
+      <div id="mc8-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 9</span>
+      <p class="vraag-tekst">Wat is een <strong>Vinexwijk</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc9',false)"><span class="optie-letter">A</span>Een historische binnenstad uit de middeleeuwen</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc9',false)"><span class="optie-letter">B</span>Een naoorlogse flatwijk gebouwd tussen 1965 en 1990</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc9',true)"><span class="optie-letter">C</span>Een nieuwe woonwijk gebouwd na 1990 als geplande uitbreidingslocatie van een bestaande stad</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc9',false)"><span class="optie-letter">D</span>Een industrieterrein aan de rand van de stad</button>
+      </div>
+      <div id="mc9-feedback" class="mc-feedback"></div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 10</span>
+      <p class="vraag-tekst">Wat is een <strong>satellietstad</strong>?</p>
+      <div class="mc-opties">
+        <button class="mc-optie" onclick="checkMC(this,'mc10',false)"><span class="optie-letter">A</span>Een stad die volledig afhankelijk is van toerisme</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc10',false)"><span class="optie-letter">B</span>Een stad met veel technologiebedrijven</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc10',true)"><span class="optie-letter">C</span>Een nieuwe stad gebouwd op enige afstand van een grote stad om de bevolkingsdruk te spreiden</button>
+        <button class="mc-optie" onclick="checkMC(this,'mc10',false)"><span class="optie-letter">D</span>Een kleine stad die volledig in een agglomeratie is opgenomen</button>
+      </div>
+      <div id="mc10-feedback" class="mc-feedback"></div>
+    </div>
+
+    <!-- ── Sectie B: Open vragen ── -->
+    <div class="sectie-kop">📝 Sectie B — Open vragen</div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 11</span>
+      <p class="vraag-tekst">Leg uit wat <strong>urbanisatie</strong> is en noem twee oorzaken waarom mensen vanuit het platteland naar de stad trekken.</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open1')">Laat modelantwoord zien</button>
+      <div id="open1-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        Urbanisatie is het vrijwillige proces waarbij mensen van het platteland naar de stad verhuizen.<br><br>
+        Twee oorzaken (kies er twee):<br>
+        • <strong>Trek van de stad:</strong> meer werkgelegenheid, betere scholen en ziekenhuizen, hogere lonen.<br>
+        • <strong>Duw van het platteland:</strong> weinig werk in de landbouw, armoede, slechte infrastructuur, conflicten.
+      </div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 12</span>
+      <p class="vraag-tekst">Wat is het verschil tussen een <strong>megastad</strong> en een <strong>wereldstad</strong>? Geef van elk een voorbeeld.</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open2')">Laat modelantwoord zien</button>
+      <div id="open2-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        Een <strong>megastad</strong> heeft meer dan 10 miljoen inwoners (bijv. Cairo of Dhaka).<br>
+        Een <strong>wereldstad</strong> heeft grote internationale invloed op economie, politiek en cultuur (bijv. New York of Londen).<br><br>
+        Niet alle megasteden zijn wereldsteden en andersom. Tokyo is beide.
+      </div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 13</span>
+      <p class="vraag-tekst">Beschrijf de <strong>opbouw van een stad in een welvarend land</strong> van het centrum naar de rand. Gebruik de begrippen CBD, naoorlogse wijk en suburbane wijk.</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open3')">Laat modelantwoord zien</button>
+      <div id="open3-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        In het centrum ligt de <strong>CBD</strong> met kantoren, winkels en hoogbouw. Eromheen liggen historische woonwijken. Verder naar buiten liggen <strong>naoorlogse wijken</strong> (1945–1990, flats en rijtjeshuizen). Aan de rand bevinden zich <strong>suburbane wijken</strong>: ruime, groene woonwijken met eengezinswoningen, vooral voor hogere inkomens.
+      </div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 14</span>
+      <p class="vraag-tekst">Wat is het verschil tussen <strong>top-down</strong> en <strong>bottom-up stadsplanning</strong>? Welke aanpak heeft jouw voorkeur? Leg uit.</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open4')">Laat modelantwoord zien</button>
+      <div id="open4-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        Bij <strong>top-down</strong> beslist de overheid van bovenaf: snel en grootschalig, maar sluit soms niet aan bij de wensen van bewoners.<br>
+        Bij <strong>bottom-up</strong> denken bewoners mee: meer draagvlak en beter afgestemd, maar langzamer.<br><br>
+        Een eigen mening is acceptabel als die goed beargumenteerd is.
+      </div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 15</span>
+      <p class="vraag-tekst">Wat is <strong>gentrificatie</strong> en wat zijn de gevolgen voor de oorspronkelijke bewoners van de wijk?</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open5')">Laat modelantwoord zien</button>
+      <div id="open5-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        Gentrificatie is het proces waarbij rijkere mensen een arme wijk gaan bewonen. De wijk verbetert qua uitstraling, maar huren en koopprijzen stijgen.<br><br>
+        <strong>Gevolgen voor oorspronkelijke bewoners:</strong><br>
+        • Ze kunnen de huur niet meer betalen en moeten de wijk verlaten.<br>
+        • Ze verhuizen naar goedkopere, veelal slechtere wijken elders.<br>
+        • De sociale cohesie in de wijk verdwijnt.
+      </div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 16</span>
+      <p class="vraag-tekst">Waarom kan <strong>suburbanisatie</strong> een probleem zijn voor de stad? Noem twee gevolgen.</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open6')">Laat modelantwoord zien</button>
+      <div id="open6-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        Twee gevolgen van suburbanisatie voor de stad (kies er twee):<br>
+        • <strong>Leegloop:</strong> minder inwoners → leegstaande woningen en winkels in de stad.<br>
+        • <strong>Meer verkeer:</strong> forensen reizen dagelijks heen en weer → files en luchtvervuiling.<br>
+        • <strong>Minder belastinginkomsten:</strong> minder inwoners = minder geld voor de gemeente.
+      </div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 17</span>
+      <p class="vraag-tekst">Wat verstaan we onder <strong>verduurzaming</strong> van een wijk? Noem twee concrete maatregelen.</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open7')">Laat modelantwoord zien</button>
+      <div id="open7-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        Verduurzaming betekent woningen en wijken milieuvriendelijker maken, zodat ze minder energie verbruiken en minder CO₂ uitstoten.<br><br>
+        Twee maatregelen (kies er twee):<br>
+        • <strong>Betere isolatie</strong> van muren, dak en vloer<br>
+        • <strong>Zonnepanelen</strong> op daken plaatsen<br>
+        • <strong>Warmtepomp</strong> in plaats van een gasketel<br>
+        • <strong>Groene daken of gevels</strong> aanleggen
+      </div>
+    </div>
+
+    <div class="vraag-blok">
+      <span class="vraag-nr">Vraag 18</span>
+      <p class="vraag-tekst">Vergelijk de steden <strong>Parijs</strong> (welvarend land) en <strong>Mumbai</strong> (minder welvarend land). Noem één overeenkomst en één verschil in stedelijke opbouw.</p>
+      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
+      <button class="btn-model" onclick="toonModel('open8')">Laat modelantwoord zien</button>
+      <div id="open8-model" class="model-antwoord">
+        <strong>Modelantwoord:</strong><br>
+        <strong>Overeenkomst:</strong> Beide steden hebben een herkenbaar centrum met historische bebouwing en zijn economisch belangrijk in hun land.<br><br>
+        <strong>Verschil:</strong> In Parijs (welvarend) wonen rijkere mensen aan de rand en zijn er arme wijken dichter bij het centrum. In Mumbai (minder welvarend) wonen de armsten juist aan de rand in grote slopenwijken (bijv. Dharavi) terwijl rijkere bewoners meer centraal wonen.
+      </div>
+    </div>
+
+  </div><!-- /tab-oefeningen -->
+
+</div><!-- /container -->
+
+<script>
+// ─── Tab wisselen ────────────────────────────────────
+function wisselTab(naam, knop) {
+  document.querySelectorAll('.tab-inhoud').forEach(t => t.classList.remove('zichtbaar'));
+  document.querySelectorAll('.tab-knop').forEach(k => k.classList.remove('actief'));
+  document.getElementById('tab-' + naam).classList.add('zichtbaar');
+  knop.classList.add('actief');
+}
+
+// ─── Multiple choice ─────────────────────────────────
+let scoreGoed = 0, scoreFout = 0;
+
+function checkMC(knop, id, isGoed) {
+  const blok = knop.closest('.vraag-blok');
+  blok.querySelectorAll('.mc-optie').forEach(o => o.disabled = true);
+  const feedback = document.getElementById(id + '-feedback');
+
+  if (isGoed) {
+    knop.classList.add('goed');
+    feedback.textContent = '✓ Correct!';
+    feedback.className = 'mc-feedback zichtbaar goed';
+    scoreGoed++;
+  } else {
+    knop.classList.add('fout');
+    feedback.textContent = '✗ Helaas, dat is niet juist. Bekijk de theorie nog eens.';
+    feedback.className = 'mc-feedback zichtbaar fout';
+    blok.querySelectorAll('.mc-optie').forEach(o => {
+      if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) {
+        o.classList.add('goed');
+      }
+    });
+    scoreFout++;
+  }
+  document.getElementById('score-goed').textContent = scoreGoed;
+  document.getElementById('score-fout').textContent = scoreFout;
+  document.getElementById('score-totaal').textContent = scoreGoed + scoreFout;
+}
+
+// ─── Open vragen ─────────────────────────────────────
+function toonModel(id) {
+  const el = document.getElementById(id + '-model');
+  el.classList.toggle('zichtbaar');
+}
+
+// ─── Flashcards ──────────────────────────────────────
+const alleKaarten = [
+  // §2.1
+  { tag:'§2.1', begrip:'megastad',              def:'Stad met meer dan 10 miljoen inwoners.' },
+  { tag:'§2.1', begrip:'stedelijk gebied',      def:'Gebied met een hoge bevolkings- en bebouwingsdichtheid en weinig natuur.' },
+  { tag:'§2.1', begrip:'landelijk gebied',      def:'Gebied met een lage bevolkings- en bebouwingsdichtheid en veel natuur.' },
+  { tag:'§2.1', begrip:'hoofdstad',             def:'Belangrijkste stad van een land, waar meestal de regering zetelt.' },
+  { tag:'§2.1', begrip:'urbanisatie',           def:'Vrijwillig proces waarbij mensen vanuit het landelijk gebied naar de stad verhuizen.' },
+  { tag:'§2.1', begrip:'verstedelijkingstempo', def:'Percentage waarmee de verstedelijking jaarlijks toeneemt.' },
+  { tag:'§2.1', begrip:'wereldstad',            def:'Stad die wereldwijd zeer belangrijk is op economisch, politiek en cultureel gebied.' },
+  // §2.2
+  { tag:'§2.2', begrip:'stratenpatroon',        def:'De manier waarop de wegen in een stad zijn georganiseerd (bijv. grid of organisch).' },
+  { tag:'§2.2', begrip:'grid',                  def:'Rechthoekig stratenpatroon waarbij straten loodrecht op elkaar staan.' },
+  { tag:'§2.2', begrip:'primaire stad',         def:'Grootste stad in een land, die veel groter is dan alle andere steden en economisch, politiek of cultureel domineert.' },
+  { tag:'§2.2', begrip:'koloniale dubbelstad',  def:'Stad opgebouwd uit een inheems deel en een koloniaal deel naast of rondom elkaar.' },
+  { tag:'§2.2', begrip:'relatieve ligging',     def:'Hoe een plaats ligt ten opzichte van andere plaatsen (rivier, kust, andere stad).' },
+  { tag:'§2.2', begrip:'satellietstad',         def:'Nieuwe stad gebouwd op enige afstand van een grote stad om de bevolkingsdruk te spreiden.' },
+  { tag:'§2.2', begrip:'stedelijk netwerk',     def:'Groep steden die op veel manieren met elkaar verbonden zijn (verkeer, economie, cultuur).' },
+  // §2.3
+  { tag:'§2.3', begrip:'Central Business District (CBD)', def:'Deel van de stad waar zakelijke activiteiten geconcentreerd zijn; hoogbouw en hoge grondprijzen.' },
+  { tag:'§2.3', begrip:'gentrificatie',         def:'Proces waarbij rijkere mensen een arme wijk overnemen; huren stijgen en arme bewoners worden verdreven.' },
+  { tag:'§2.3', begrip:'re-urbanisatie',        def:'Proces waarbij mensen en bedrijven terugkeren naar de stad na een periode van suburbanisatie.' },
+  { tag:'§2.3', begrip:'suburbane wijk',        def:'Ruime woonwijk aan de rand van een stad, met lage bebouwing en veel groen; vaak hogere inkomens.' },
+  // §2.4
+  { tag:'§2.4', begrip:'stadsplanning',         def:'Van tevoren nadenken over de inrichting van de ruimte in een stad of regio.' },
+  { tag:'§2.4', begrip:'agglomeratie',          def:'Aaneengesloten stedelijke bebouwing van meerdere gemeenten.' },
+  { tag:'§2.4', begrip:'Randstad',              def:'Stedelijk gebied in het westen van Nederland: Amsterdam, Rotterdam, Utrecht en Den Haag.' },
+  { tag:'§2.4', begrip:'Groene Hart',           def:'Groen, landelijk middengebied omringd door de Randstad, dat bewust beschermd wordt.' },
+  { tag:'§2.4', begrip:'stedelijke regio',      def:'Gebied dat op een grote stad gericht is, inclusief omliggende gemeenten en dorpen.' },
+  { tag:'§2.4', begrip:'verzorgingsgebied',     def:'Het gebied dat de stad van diensten voorziet (winkels, scholen, ziekenhuizen).' },
+  { tag:'§2.4', begrip:'Vinexwijk',             def:'Nieuwe woonwijk gebouwd na 1990 als geplande uitbreidingslocatie van bestaande steden.' },
+  { tag:'§2.4', begrip:'voorzieningen',         def:'Diensten en gebouwen die een stad biedt aan zijn inwoners: winkels, scholen, ziekenhuizen, sport.' },
+  // §2.5
+  { tag:'§2.5', begrip:'suburbanisatie',        def:'Proces waarbij mensen vanuit de stad naar de omliggende regio (voorsteden, dorpen) verhuizen.' },
+  { tag:'§2.5', begrip:'sociale woningbouw',    def:'Bouw van betaalbare woningen voor mensen met lage inkomens, gefinancierd door overheid of corporaties.' },
+  // §2.6
+  { tag:'§2.6', begrip:'herstructurering',      def:'Slopen van verouderde woningen en wijken en vervangen door nieuwbouw.' },
+  { tag:'§2.6', begrip:'renoveren',             def:'Bestaande woningen opknappen zonder sloop (goedkoper en minder ingrijpend dan herstructurering).' },
+  { tag:'§2.6', begrip:'verduurzaming',         def:'Woningen en wijken milieuvriendelijker maken: isolatie, zonnepanelen, warmtepompen.' },
+  { tag:'§2.6', begrip:'naoorlogse hoogbouw',   def:'Woonwijk met flatgebouwen, gebouwd 1965–1990, vaak sociale huurwoningen.' },
+  { tag:'§2.6', begrip:'naoorlogse laagbouw',   def:'Woonwijk met rijtjeshuizen/eengezinswoningen, gebouwd 1965–1990.' },
+];
+
+let huidigeLijst = [...alleKaarten];
+let huidigIndex  = 0;
+const gezien     = new Set();
+
+function bouwDots() {
+  const rij = document.getElementById('fc-dot-rij');
+  rij.innerHTML = '';
+  huidigeLijst.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'fc-dot' +
+      (i === huidigIndex ? ' huidig' : '') +
+      (gezien.has(i) ? ' gezien' : '');
+    rij.appendChild(d);
+  });
+}
+
+function toonFC(index) {
+  const kaart  = document.getElementById('fc-kaart');
+  const klaar  = document.getElementById('fc-klaar');
+  const voortg = document.getElementById('fc-voortgang');
+
+  if (index >= huidigeLijst.length) {
+    kaart.style.display = 'none';
+    klaar.classList.add('zichtbaar');
+    voortg.textContent = 'Alle kaarten gezien!';
+    return;
+  }
+
+  kaart.style.display = '';
+  klaar.classList.remove('zichtbaar');
+
+  const k = huidigeLijst[index];
+  document.getElementById('fc-tag-voor').textContent  = k.tag;
+  document.getElementById('fc-tag-achter').textContent = k.tag;
+  document.getElementById('fc-begrip').textContent    = k.begrip;
+  document.getElementById('fc-definitie').textContent = k.def;
+  kaart.classList.remove('gedraaid');
+
+  voortg.textContent = `Kaart ${index + 1} van ${huidigeLijst.length}`;
+  gezien.add(index);
+  bouwDots();
+}
+
+function draaiFC()   { document.getElementById('fc-kaart').classList.toggle('gedraaid'); }
+
+function volgendeFC() {
+  huidigIndex = (huidigIndex < huidigeLijst.length - 1) ? huidigIndex + 1 : huidigeLijst.length;
+  toonFC(huidigIndex);
+}
+
+function vorigeFC() {
+  if (huidigIndex > 0) { huidigIndex--; toonFC(huidigIndex); }
+}
+
+function shuffleFC() {
+  for (let i = huidigeLijst.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [huidigeLijst[i], huidigeLijst[j]] = [huidigeLijst[j], huidigeLijst[i]];
+  }
+  huidigIndex = 0;
+  gezien.clear();
+  document.getElementById('fc-kaart').style.display = '';
+  toonFC(0);
+}
+
+function herlaadFC() {
+  huidigeLijst = [...alleKaarten];
+  huidigIndex  = 0;
+  gezien.clear();
+  toonFC(0);
+}
+
+function filterFC(para, knop) {
+  document.querySelectorAll('.fc-filter-knop').forEach(k => k.classList.remove('actief'));
+  knop.classList.add('actief');
+  huidigeLijst = para === 'alles'
+    ? [...alleKaarten]
+    : alleKaarten.filter(k => k.tag === '§' + para);
+  huidigIndex = 0;
+  gezien.clear();
+  document.getElementById('fc-kaart').style.display = '';
+  document.getElementById('fc-klaar').classList.remove('zichtbaar');
+  toonFC(0);
+}
+
+// Init
+toonFC(0);
+</script>
 </body>
 </html>
