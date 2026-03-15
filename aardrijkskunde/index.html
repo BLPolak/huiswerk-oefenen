@@ -529,7 +529,7 @@ body {
   ═══════════════════════════════════════ -->
   <div id="tab-flashcards" class="tab-inhoud">
 
-    <div id="fc-voortgang" class="fc-voortgang">Kaart 1 van 33</div>
+    <div id="fc-voortgang" class="fc-voortgang">Kaart 1 van 66</div>
     <div id="fc-dot-rij" class="fc-dot-rij"></div>
 
     <div class="fc-filter-rij">
@@ -547,12 +547,12 @@ body {
         <div class="fc-voorkant">
           <div id="fc-tag-voor" class="fc-tag">§2.1</div>
           <div id="fc-begrip" class="fc-begrip">megastad</div>
-          <div class="fc-hint">Klik om de definitie te zien →</div>
+          <div id="fc-hint-voor" class="fc-hint">Klik om de definitie te zien →</div>
         </div>
         <div class="fc-achterkant">
           <div id="fc-tag-achter" class="fc-tag">§2.1</div>
           <div id="fc-definitie" class="fc-definitie">Stad met meer dan 10 miljoen inwoners.</div>
-          <div class="fc-hint">← Klik om terug te draaien</div>
+          <div id="fc-hint-achter" class="fc-hint">← Klik om terug te draaien</div>
         </div>
       </div>
     </div>
@@ -867,6 +867,13 @@ function toonModel(id) {
 }
 
 // ─── Flashcards ──────────────────────────────────────
+// Bouw een lijst op met normale + omgekeerde kaarten per pack
+function maakUitgebreideLijst(basis) {
+  const normaal   = basis.map(k => Object.assign({}, k, { omgekeerd: false }));
+  const omgekeerd = basis.map(k => Object.assign({}, k, { omgekeerd: true  }));
+  return normaal.concat(omgekeerd);
+}
+
 const alleKaarten = [
   // §2.1
   { tag:'§2.1', begrip:'megastad',              def:'Stad met meer dan 10 miljoen inwoners.' },
@@ -909,7 +916,7 @@ const alleKaarten = [
   { tag:'§2.6', begrip:'naoorlogse laagbouw',   def:'Woonwijk met rijtjeshuizen/eengezinswoningen, gebouwd 1965–1990.' },
 ];
 
-let huidigeLijst = [...alleKaarten];
+let huidigeLijst = maakUitgebreideLijst(alleKaarten);
 let huidigIndex  = 0;
 const gezien     = new Set();
 
@@ -941,10 +948,21 @@ function toonFC(index) {
   klaar.classList.remove('zichtbaar');
 
   const k = huidigeLijst[index];
-  document.getElementById('fc-tag-voor').textContent  = k.tag;
+  document.getElementById('fc-tag-voor').textContent   = k.tag;
   document.getElementById('fc-tag-achter').textContent = k.tag;
-  document.getElementById('fc-begrip').textContent    = k.begrip;
-  document.getElementById('fc-definitie').textContent = k.def;
+
+  if (k.omgekeerd) {
+    document.getElementById('fc-begrip').textContent    = k.def;
+    document.getElementById('fc-definitie').textContent = k.begrip;
+    document.getElementById('fc-hint-voor').textContent = 'Welk begrip hoort hierbij? Klik om te zien →';
+    document.getElementById('fc-hint-achter').textContent = '← Klik om terug te draaien';
+  } else {
+    document.getElementById('fc-begrip').textContent    = k.begrip;
+    document.getElementById('fc-definitie').textContent = k.def;
+    document.getElementById('fc-hint-voor').textContent = 'Klik om de definitie te zien →';
+    document.getElementById('fc-hint-achter').textContent = '← Klik om terug te draaien';
+  }
+
   kaart.classList.remove('gedraaid');
 
   voortg.textContent = `Kaart ${index + 1} van ${huidigeLijst.length}`;
@@ -975,19 +993,21 @@ function shuffleFC() {
 }
 
 function herlaadFC() {
-  huidigeLijst = [...alleKaarten];
+  huidigeLijst = maakUitgebreideLijst(alleKaarten);
   huidigIndex  = 0;
   gezien.clear();
+  document.getElementById('fc-kaart').style.display = '';
   toonFC(0);
 }
 
 function filterFC(para, knop) {
   document.querySelectorAll('.fc-filter-knop').forEach(k => k.classList.remove('actief'));
   knop.classList.add('actief');
-  huidigeLijst = para === 'alles'
-    ? [...alleKaarten]
+  const basis = para === 'alles'
+    ? alleKaarten
     : alleKaarten.filter(k => k.tag === '§' + para);
-  huidigIndex = 0;
+  huidigeLijst = maakUitgebreideLijst(basis);
+  huidigIndex  = 0;
   gezien.clear();
   document.getElementById('fc-kaart').style.display = '';
   document.getElementById('fc-klaar').classList.remove('zichtbaar');
