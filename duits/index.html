@@ -169,6 +169,41 @@ body {
 .vocab-table td:first-child { font-weight: 700; color: var(--donker); width: 50%; }
 .vocab-table td:last-child { color: #e53e3e; font-weight: 700; }
 
+/* 3-column vocab table + search */
+.vocab-search {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0.8rem 0 0.5rem;
+  outline: none;
+  color: var(--donker);
+  transition: border-color 0.15s;
+}
+.vocab-search:focus { border-color: var(--rood); }
+.vocab-table thead th {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--grijs);
+  border-bottom: 2px solid #e2e8f0;
+  text-align: left;
+}
+.vocab-table.col3 td:first-child { width: 33%; }
+.vocab-table.col3 td:nth-child(2) { color: var(--rood); font-weight: 700; width: 33%; }
+.vocab-table.col3 td:last-child { color: var(--grijs); font-weight: 600; font-style: italic; }
+.vocab-table tr.vocab-groep { background: #f0f4f8 !important; }
+.vocab-table tr.vocab-groep td {
+  font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.7px; color: var(--grijs); padding: 0.5rem 0.6rem 0.3rem;
+  border-top: 1px solid #cbd5e0;
+}
+
 /* ── GRAMMAR BOX ── */
 .grammar-box {
   background: #fffbeb;
@@ -518,347 +553,265 @@ body {
   <!-- ══ THEORIE ══ -->
   <div id="tab-theorie" class="sectie actief">
 
-    <!-- Vocabulaire -->
+    <!-- Lernliste B -->
     <div class="accordion">
       <button class="accordion-header" onclick="toggleAccordion(this)">
-        📚 Vocabulaire 4.1 – 4.4
+        📚 Woordenschat — Lernliste B
         <span class="chevron">▼</span>
       </button>
       <div class="accordion-body">
-
-        <div class="vocab-sectie">
-          <h4>4.1 — School &amp; klas</h4>
-          <table class="vocab-table">
-            <tr><td>de leerling</td><td>el alumno / la alumna</td></tr>
-            <tr><td>de docent(e)</td><td>el/la profe / el/la profesor(a)</td></tr>
-            <tr><td>de school</td><td>la escuela</td></tr>
-            <tr><td>de middelbare school</td><td>el instituto</td></tr>
-            <tr><td>de les / de klas</td><td>la clase</td></tr>
-            <tr><td>het leerjaar / de klas</td><td>el curso</td></tr>
-            <tr><td>het cijfer</td><td>la nota</td></tr>
-            <tr><td>hoog</td><td>alto/-a</td></tr>
-            <tr><td>geschiedenis</td><td>la historia</td></tr>
-            <tr><td>aardrijkskunde</td><td>la geografía</td></tr>
-            <tr><td>Engels</td><td>el inglés</td></tr>
-            <tr><td>gym</td><td>la educación física</td></tr>
-            <tr><td>scheikunde</td><td>la química</td></tr>
-            <tr><td>natuurkunde</td><td>la física</td></tr>
-            <tr><td>biologie</td><td>la biología</td></tr>
-            <tr><td>Spaans</td><td>el castellano</td></tr>
-            <tr><td>het vak</td><td>la asignatura</td></tr>
-            <tr><td>muziek</td><td>la música</td></tr>
-            <tr><td>wiskunde</td><td>las matemáticas</td></tr>
-            <tr><td>het huiswerk</td><td>los deberes</td></tr>
-            <tr><td>huiswerk maken</td><td>hacer los deberes</td></tr>
-            <tr><td>doen / maken</td><td>hacer</td></tr>
-            <tr><td>ze ontmoeten elkaar</td><td>se encuentran</td></tr>
-            <tr><td>Waar ga je heen?</td><td>¿Adónde vas?</td></tr>
-            <tr><td>Hoe is het?</td><td>¿Qué tal?</td></tr>
-            <tr><td>de gang</td><td>el pasillo</td></tr>
-            <tr><td>de verdieping</td><td>la planta</td></tr>
-            <tr><td>de kantine</td><td>el comedor</td></tr>
-            <tr><td>daar</td><td>allí</td></tr>
-            <tr><td>hier</td><td>aquí</td></tr>
-            <tr><td>honger</td><td>hambre</td></tr>
-            <tr><td>dorst</td><td>sed</td></tr>
-            <tr><td>streng</td><td>duro/-a</td></tr>
-            <tr><td>aardig</td><td>amable</td></tr>
-            <tr><td>(daar)na</td><td>después</td></tr>
-            <tr><td>goed idee</td><td>buena idea</td></tr>
-            <tr><td>begint</td><td>empieza</td></tr>
-            <tr><td>nu</td><td>ahora</td></tr>
-          </table>
-        </div>
-
-        <div class="vocab-sectie">
-          <h4>4.2 — Dagindeling &amp; eten</h4>
-          <table class="vocab-table">
-            <tr><td>het leven</td><td>la vida</td></tr>
-            <tr><td>het ontbijt</td><td>el desayuno</td></tr>
-            <tr><td>het middageten / de lunch</td><td>la comida</td></tr>
-            <tr><td>het avondeten</td><td>la cena</td></tr>
-            <tr><td>het toetje</td><td>el postre</td></tr>
-            <tr><td>het glas</td><td>el vaso</td></tr>
-            <tr><td>de melk</td><td>la leche</td></tr>
-            <tr><td>het broodje</td><td>el bocadillo</td></tr>
-            <tr><td>het fruit</td><td>la fruta</td></tr>
-            <tr><td>beginnen met</td><td>empezar con</td></tr>
-            <tr><td>een uur</td><td>una hora</td></tr>
-            <tr><td>een half uur</td><td>una media hora</td></tr>
-            <tr><td>vroeg</td><td>temprano</td></tr>
-            <tr><td>laat</td><td>tarde</td></tr>
-            <tr><td>ik heb liever</td><td>prefiero</td></tr>
-            <tr><td>lievelings-</td><td>preferido/-a</td></tr>
-            <tr><td>leren</td><td>aprender</td></tr>
-            <tr><td>de (school)bus</td><td>el autobús (escolar)</td></tr>
-            <tr><td>met de bus</td><td>en autobús</td></tr>
-            <tr><td>lopend</td><td>a pie</td></tr>
-            <tr><td>de pauze</td><td>el recreo / la pausa</td></tr>
-            <tr><td>voetballen</td><td>jugar al fútbol</td></tr>
-            <tr><td>eindelijk</td><td>por fin</td></tr>
-            <tr><td>thuiskomen</td><td>llegar a casa</td></tr>
-            <tr><td>slapen</td><td>dormir</td></tr>
-            <tr><td>moe</td><td>cansado/-a</td></tr>
-            <tr><td>gitaar spelen</td><td>tocar la guitarra</td></tr>
-            <tr><td>lachen</td><td>reír</td></tr>
-            <tr><td>dragen</td><td>llevar</td></tr>
-            <tr><td>de kleren</td><td>la ropa</td></tr>
-            <tr><td>eigen</td><td>propio/-a</td></tr>
-            <tr><td>een heleboel</td><td>un montón</td></tr>
-            <tr><td>daarom</td><td>por eso</td></tr>
-            <tr><td>nooit</td><td>nunca</td></tr>
-          </table>
-        </div>
-
-        <div class="vocab-sectie">
-          <h4>4.3 — Dagen &amp; bijvoeglijke naamwoorden</h4>
-          <table class="vocab-table">
-            <tr><td>maandag</td><td>lunes</td></tr>
-            <tr><td>dinsdag</td><td>martes</td></tr>
-            <tr><td>woensdag</td><td>miércoles</td></tr>
-            <tr><td>donderdag</td><td>jueves</td></tr>
-            <tr><td>vrijdag</td><td>viernes</td></tr>
-            <tr><td>zaterdag</td><td>sábado</td></tr>
-            <tr><td>zondag</td><td>domingo</td></tr>
-            <tr><td>leuk</td><td>divertido/-a</td></tr>
-            <tr><td>saai</td><td>aburrido/-a</td></tr>
-            <tr><td>stom</td><td>estúpido/-a</td></tr>
-            <tr><td>grappig</td><td>gracioso/-a</td></tr>
-            <tr><td>lelijk</td><td>feo/-a</td></tr>
-            <tr><td>moeilijk</td><td>difícil</td></tr>
-            <tr><td>makkelijk</td><td>fácil</td></tr>
-            <tr><td>het mentoruur</td><td>la tutoría</td></tr>
-            <tr><td>economie</td><td>la economía</td></tr>
-            <tr><td>technisch tekenen</td><td>el dibujo técnico</td></tr>
-            <tr><td>tekstboek</td><td>el libro de texto</td></tr>
-            <tr><td>werkboek</td><td>el libro de trabajo</td></tr>
-            <tr><td>kleurpotlood</td><td>el lápiz de color</td></tr>
-            <tr><td>dankzij</td><td>gracias a</td></tr>
-          </table>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Ontkenningen -->
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        🚫 Ontkenningen (negación)
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="grammar-box">
-          <strong>Regel:</strong> <em>Niet</em> of <em>geen</em> vertaal je in het Spaans met <strong>no</strong>. Dit woordje staat <strong>vóór</strong> de persoonsvorm.
-        </div>
-
-        <table class="example-table">
-          <tr><td>No quiero bailar.</td><td>Ik wil niet dansen.</td></tr>
-          <tr><td>Ahora no tengo clase.</td><td>Ik heb nu geen les.</td></tr>
+        <input class="vocab-search" type="search" placeholder="🔍 Zoeken..." oninput="zoekVocab(this, 'lernliste-b-tbody')">
+        <table class="vocab-table col3">
+          <thead><tr><th>Nederlands</th><th>Duits</th><th>Meervoud</th></tr></thead>
+          <tbody id="lernliste-b-tbody">
+            <tr class="vocab-groep"><td colspan="3">Dieren — der</td></tr>
+            <tr class="vocab-row"><td>de aap</td><td>der Affe</td><td>die Affen</td></tr>
+            <tr class="vocab-row"><td>de hamster</td><td>der Hamster</td><td>—</td></tr>
+            <tr class="vocab-row"><td>de hond</td><td>der Hund</td><td>die Hunde</td></tr>
+            <tr class="vocab-row"><td>de olifant</td><td>der Elefant</td><td>die Elefanten</td></tr>
+            <tr class="vocab-row"><td>de tand</td><td>der Zahn</td><td>die Zähne</td></tr>
+            <tr class="vocab-row"><td>de vis</td><td>der Fisch</td><td>die Fische</td></tr>
+            <tr class="vocab-row"><td>de vlek</td><td>der Fleck</td><td>die Flecken</td></tr>
+            <tr class="vocab-row"><td>de vogel</td><td>der Vogel</td><td>die Vögel</td></tr>
+            <tr class="vocab-row"><td>de wolf</td><td>der Wolf</td><td>die Wölfe</td></tr>
+            <tr class="vocab-groep"><td colspan="3">Dieren — die</td></tr>
+            <tr class="vocab-row"><td>de kat</td><td>die Katze</td><td>die Katzen</td></tr>
+            <tr class="vocab-row"><td>de koe</td><td>die Kuh</td><td>die Kühe</td></tr>
+            <tr class="vocab-row"><td>de muis</td><td>die Maus</td><td>die Mäuse</td></tr>
+            <tr class="vocab-row"><td>de schildpad</td><td>die Schildkröte</td><td>die Schildkröten</td></tr>
+            <tr class="vocab-row"><td>de slang</td><td>die Schlange</td><td>die Schlangen</td></tr>
+            <tr class="vocab-row"><td>de spin</td><td>die Spinne</td><td>die Spinnen</td></tr>
+            <tr class="vocab-groep"><td colspan="3">Dieren — das</td></tr>
+            <tr class="vocab-row"><td>de cavia</td><td>das Meerschweinchen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>het dier</td><td>das Tier</td><td>die Tiere</td></tr>
+            <tr class="vocab-row"><td>het huisdier</td><td>das Haustier</td><td>die Haustiere</td></tr>
+            <tr class="vocab-row"><td>de kip</td><td>das Huhn</td><td>die Hühner</td></tr>
+            <tr class="vocab-row"><td>het konijn</td><td>das Kaninchen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>het lievelingsdier</td><td>das Lieblingstier</td><td>die Lieblingstiere</td></tr>
+            <tr class="vocab-row"><td>het paard</td><td>das Pferd</td><td>die Pferde</td></tr>
+            <tr class="vocab-row"><td>de poot</td><td>das Bein</td><td>die Beine</td></tr>
+            <tr class="vocab-row"><td>het schaap</td><td>das Schaf</td><td>die Schafe</td></tr>
+            <tr class="vocab-row"><td>de vacht</td><td>das Fell</td><td>—</td></tr>
+            <tr class="vocab-row"><td>het varken</td><td>das Schwein</td><td>die Schweine</td></tr>
+            <tr class="vocab-row"><td>het vlees</td><td>das Fleisch</td><td>—</td></tr>
+            <tr class="vocab-groep"><td colspan="3">Overig</td></tr>
+            <tr class="vocab-row"><td>het fruit</td><td>das Obst</td><td>—</td></tr>
+            <tr class="vocab-row"><td>de groente</td><td>das Gemüse</td><td>—</td></tr>
+            <tr class="vocab-row"><td>de sla</td><td>der Salat</td><td>—</td></tr>
+            <tr class="vocab-groep"><td colspan="3">Werkwoorden</td></tr>
+            <tr class="vocab-row"><td>aaien</td><td>streicheln</td><td>—</td></tr>
+            <tr class="vocab-row"><td>beschrijven (beschreven)</td><td>beschreiben</td><td>beschrieben</td></tr>
+            <tr class="vocab-row"><td>eten (bij dieren)</td><td>fressen</td><td>gefressen</td></tr>
+            <tr class="vocab-row"><td>lopen</td><td>laufen</td><td>gelaufen</td></tr>
+            <tr class="vocab-row"><td>spelen</td><td>spielen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>verzorgen</td><td>versorgen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>wensen</td><td>wünschen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>zwemmen (gezwommen)</td><td>schwimmen</td><td>geschwommen</td></tr>
+            <tr class="vocab-groep"><td colspan="3">Bijvoeglijke naamwoorden &amp; overig</td></tr>
+            <tr class="vocab-row"><td>dik</td><td>dick</td><td>—</td></tr>
+            <tr class="vocab-row"><td>dun</td><td>dünn</td><td>—</td></tr>
+            <tr class="vocab-row"><td>kort</td><td>kurz</td><td>—</td></tr>
+            <tr class="vocab-row"><td>lang</td><td>lang</td><td>—</td></tr>
+            <tr class="vocab-row"><td>lief</td><td>lieb</td><td>—</td></tr>
+            <tr class="vocab-row"><td>ondeugend</td><td>frech</td><td>—</td></tr>
+            <tr class="vocab-row"><td>schattig</td><td>süß</td><td>—</td></tr>
+            <tr class="vocab-row"><td>scherp</td><td>scharf</td><td>—</td></tr>
+            <tr class="vocab-row"><td>schuw</td><td>scheu</td><td>—</td></tr>
+            <tr class="vocab-row"><td>speels</td><td>verspielt</td><td>—</td></tr>
+            <tr class="vocab-row"><td>zacht</td><td>weich</td><td>—</td></tr>
+            <tr class="vocab-row"><td>maar</td><td>aber</td><td>—</td></tr>
+            <tr class="vocab-row"><td>vaak</td><td>oft</td><td>—</td></tr>
+            <tr class="vocab-groep"><td colspan="3">Wiederholung — werkwoorden</td></tr>
+            <tr class="vocab-row"><td>bezoeken</td><td>besuchen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>doen / maken</td><td>machen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>erg houden van</td><td>lieben</td><td>—</td></tr>
+            <tr class="vocab-row"><td>gaan</td><td>gehen</td><td>gegangen</td></tr>
+            <tr class="vocab-row"><td>hebben</td><td>haben</td><td>gehabt</td></tr>
+            <tr class="vocab-row"><td>heten</td><td>heißen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>komen</td><td>kommen</td><td>gekommen</td></tr>
+            <tr class="vocab-row"><td>schrijven</td><td>schreiben</td><td>geschrieben</td></tr>
+            <tr class="vocab-row"><td>vinden</td><td>finden</td><td>gefunden</td></tr>
+            <tr class="vocab-row"><td>wonen</td><td>wohnen</td><td>—</td></tr>
+            <tr class="vocab-row"><td>zijn</td><td>sein</td><td>gewesen</td></tr>
+          </tbody>
         </table>
+      </div>
+    </div>
 
-        <p style="font-size:0.9rem;font-weight:700;color:#2d3748;margin:0.8rem 0 0.4rem;">Andere ontkennende woorden:</p>
-        <div class="neg-words">
-          <div class="neg-pill">nada <span>= niets</span></div>
-          <div class="neg-pill">nadie <span>= niemand</span></div>
-          <div class="neg-pill">nunca <span>= nooit</span></div>
-        </div>
-
-        <div class="grammar-box">
-          Deze woorden komen direct <strong>achter</strong> de persoonsvorm (met <em>no</em> ervoor). <em>Nunca</em> en <em>nadie</em> kunnen ook <strong>vóór</strong> de persoonsvorm — dan gebruik je geen <em>no</em> meer.
-        </div>
-
-        <table class="example-table">
-          <tr><td>Flor no dice nada.</td><td>Flor zegt niets.</td></tr>
-          <tr><td>No hay nadie en casa.</td><td>Er is niemand thuis.</td></tr>
-          <tr><td>No voy nunca al comedor.</td><td>Ik ga nooit naar de kantine.</td></tr>
-          <tr><td>Nunca voy al cine.</td><td>Ik ga nooit naar de bioscoop.</td></tr>
-          <tr><td>Nadie tiene hambre.</td><td>Niemand heeft honger.</td></tr>
+    <!-- Lernliste A -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Lernliste A — Duits → Nederlands
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+        <table class="vocab-table">
+          <tr><td>sich verhalten</td><td>zich gedragen</td></tr>
+          <tr><td>draußen</td><td>buiten</td></tr>
+          <tr><td>der Körper</td><td>het lichaam</td></tr>
+          <tr><td>immer</td><td>altijd</td></tr>
+          <tr><td>wichtig</td><td>belangrijk</td></tr>
+          <tr><td>der Zoo</td><td>de dierentuin</td></tr>
+          <tr><td>die Art</td><td>de soort</td></tr>
+          <tr><td>die Arbeit</td><td>het werk</td></tr>
+          <tr><td>beschäftigt sein</td><td>bezig zijn</td></tr>
+          <tr><td>die Ausrede</td><td>de smoes</td></tr>
+          <tr><td>der Frosch</td><td>de kikker</td></tr>
+          <tr><td>die Geschwindigkeit</td><td>de snelheid</td></tr>
+          <tr><td>die Zunge</td><td>de tong</td></tr>
+          <tr><td>die Welt</td><td>de wereld</td></tr>
+          <tr><td>einfach</td><td>gewoon</td></tr>
+          <tr><td>schaffen</td><td>voor elkaar krijgen</td></tr>
+          <tr><td>weit</td><td>ver</td></tr>
+          <tr><td>die Strecke</td><td>de afstand</td></tr>
+          <tr><td>die Klamotten</td><td>de kleren</td></tr>
+          <tr><td>die Kopfbedeckung</td><td>de hoofdbedekking</td></tr>
+          <tr><td>der Rucksack</td><td>de rugzak</td></tr>
+          <tr><td>der Schlafsack</td><td>de slaapzak</td></tr>
+          <tr><td>die Zahnbürste</td><td>de tandenborstel</td></tr>
         </table>
-
       </div>
     </div>
 
-    <!-- Frases clave -->
+    <!-- Präsens -->
     <div class="accordion">
       <button class="accordion-header" onclick="toggleAccordion(this)">
-        💬 Frases clave (blz 37 + 40)
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="frases-sectie">
-          <h4>Pagina 37 — ¡Vamos al instituto!</h4>
-          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin-bottom:0.5rem;">Om te vragen</p>
-          <table class="frases-table">
-            <tr><td>¿Vas al instituto?</td><td>Ga je naar de middelbare school?</td></tr>
-            <tr><td>¿En qué curso estás?</td><td>In welk jaar zit jij?</td></tr>
-            <tr><td>¿Es una escuela grande?</td><td>Is het een grote school?</td></tr>
-            <tr><td>¿Quién es tu profe de geografía?</td><td>Wie is jouw aardrijkskundeleraar?</td></tr>
-            <tr><td>Tu profe de música, ¿es amable?</td><td>Is jouw muziekleraar/-lerares aardig?</td></tr>
-          </table>
-          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin:0.8rem 0 0.5rem;">Om te antwoorden</p>
-          <table class="frases-table">
-            <tr><td>Sí, voy al instituto.</td><td>Ja, ik ga naar de middelbare school.</td></tr>
-            <tr><td>Estoy en el segundo curso.</td><td>Ik zit in de tweede klas.</td></tr>
-            <tr><td>No, es una escuela pequeña.</td><td>Nee, het is een kleine school.</td></tr>
-            <tr><td>Es el señor / la señora Castillo.</td><td>Het is meneer / mevrouw Castillo.</td></tr>
-            <tr><td>No, es duro/-a, pero mi profe de biología es muy amable.</td><td>Nee, hij/zij is streng, maar mijn biologieleraar is heel aardig.</td></tr>
-          </table>
-        </div>
-
-        <div class="frases-sectie">
-          <h4>Pagina 40 — School &amp; huiswerk</h4>
-          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin-bottom:0.5rem;">Om te vragen</p>
-          <table class="frases-table">
-            <tr><td>¿Dónde está tu escuela?</td><td>Waar staat je school?</td></tr>
-            <tr><td>¿A qué hora empiezan tus clases?</td><td>Hoe laat beginnen je lessen?</td></tr>
-            <tr><td>¿Te gusta la historia?</td><td>Vind je geschiedenis leuk?</td></tr>
-            <tr><td>Y ¿tenéis un comedor en el instituto?</td><td>En hebben jullie een kantine op school?</td></tr>
-            <tr><td>¿Tienes deberes para mañana?</td><td>Heb je huiswerk voor morgen?</td></tr>
-          </table>
-          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin:0.8rem 0 0.5rem;">Om te antwoorden</p>
-          <table class="frases-table">
-            <tr><td>Mi escuela está cerca / lejos, está en Pamplona.</td><td>Mijn school is ver weg / dichtbij, hij staat in Pamplona.</td></tr>
-            <tr><td>Mis clases empiezan a las ocho.</td><td>Mijn lessen beginnen om acht uur.</td></tr>
-            <tr><td>No, no me gusta, prefiero las matemáticas.</td><td>Nee, daar houd ik niet van, ik vind wiskunde leuker.</td></tr>
-            <tr><td>Sí, pero nunca voy al comedor.</td><td>Ja, maar ik ga nooit naar de kantine.</td></tr>
-            <tr><td>Sí, para inglés y biología.</td><td>Ja, voor Engels en biologie.</td></tr>
-          </table>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Kloktijden -->
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        🕐 Kloktijden (blz 77)
+        📝 Grammatica — Das Präsens
         <span class="chevron">▼</span>
       </button>
       <div class="accordion-body">
 
         <div class="grammar-box">
-          <strong>Hoe zeg je de tijd in het Spaans?</strong><br><br>
-          Spanjaarden beginnen met het <strong>uur</strong>, dan hoeveel minuten erbij (<em>y</em>) of eraf (<em>menos</em>). Het woord <em>hora</em> (uur) laten ze weg.<br><br>
-          • Bij <strong>1 uur</strong>: gebruik <strong>Es la una</strong> (enkelvoud)<br>
-          • Bij <strong>alle andere uren</strong>: gebruik <strong>Son las...</strong> (meervoud)<br>
-          • <em>Es mediodía</em> = het is twaalf uur 's middags<br>
-          • <em>Es medianoche</em> = het is twaalf uur 's nachts
+          <strong>Regel:</strong> stam = infinitief − <em>en</em>. De persoonsvorm = stam + uitgang.<br><br>
+          ⚠️ <strong>Sisklank</strong> (s / ss / ß / x / z) + <em>du</em> → uitgang is <strong>-t</strong> (niet -st).<br><br>
+          💡 Ezelsbruggetje uitgangen: <strong>(fe)sttenten</strong>
         </div>
-
-        <table class="klok-table">
-          <tr><td>Son las siete.</td><td>Het is zeven uur.</td></tr>
-          <tr><td>Son las siete y cinco.</td><td>Het is vijf over zeven.</td></tr>
-          <tr><td>Son las siete y diez.</td><td>Het is tien over zeven.</td></tr>
-          <tr><td>Son las siete y cuarto.</td><td>Het is kwart over zeven.</td></tr>
-          <tr><td>Son las siete y veinte.</td><td>Het is twintig over zeven.</td></tr>
-          <tr><td>Son las siete y veinticinco.</td><td>Het is vijf voor half acht.</td></tr>
-          <tr><td>Son las siete y media.</td><td>Het is half acht.</td></tr>
-          <tr><td>Son las ocho menos veinticinco.</td><td>Het is vijf over half acht.</td></tr>
-          <tr><td>Son las ocho menos veinte.</td><td>Het is twintig voor acht.</td></tr>
-          <tr><td>Son las ocho menos cuarto.</td><td>Het is kwart voor acht.</td></tr>
-          <tr><td>Son las ocho menos diez.</td><td>Het is tien voor acht.</td></tr>
-          <tr><td>Son las ocho menos cinco.</td><td>Het is vijf voor acht.</td></tr>
-          <tr><td>Es la una.</td><td>Het is één uur.</td></tr>
-          <tr><td>Es mediodía.</td><td>Het is twaalf uur 's middags.</td></tr>
-          <tr><td>Es medianoche.</td><td>Het is twaalf uur 's nachts.</td></tr>
-        </table>
-
-      </div>
-    </div>
-
-    <!-- Getallen -->
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        🔢 Getallen 1 – 25 (blz 73)
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="grammar-box">
-          <strong>Let op:</strong> Vanaf 31 schrijf je de getallen <em>niet</em> meer aan elkaar. Tussen tientallen en eenheden komt <strong>y</strong> (en): <em>treinta y uno</em>.
-        </div>
-
-        <div class="getallen-grid">
-          <div class="getal-item"><div class="getal-num">1</div><div class="getal-spa">uno</div></div>
-          <div class="getal-item"><div class="getal-num">2</div><div class="getal-spa">dos</div></div>
-          <div class="getal-item"><div class="getal-num">3</div><div class="getal-spa">tres</div></div>
-          <div class="getal-item"><div class="getal-num">4</div><div class="getal-spa">cuatro</div></div>
-          <div class="getal-item"><div class="getal-num">5</div><div class="getal-spa">cinco</div></div>
-          <div class="getal-item"><div class="getal-num">6</div><div class="getal-spa">seis</div></div>
-          <div class="getal-item"><div class="getal-num">7</div><div class="getal-spa">siete</div></div>
-          <div class="getal-item"><div class="getal-num">8</div><div class="getal-spa">ocho</div></div>
-          <div class="getal-item"><div class="getal-num">9</div><div class="getal-spa">nueve</div></div>
-          <div class="getal-item"><div class="getal-num">10</div><div class="getal-spa">diez</div></div>
-          <div class="getal-item"><div class="getal-num">11</div><div class="getal-spa">once</div></div>
-          <div class="getal-item"><div class="getal-num">12</div><div class="getal-spa">doce</div></div>
-          <div class="getal-item"><div class="getal-num">13</div><div class="getal-spa">trece</div></div>
-          <div class="getal-item"><div class="getal-num">14</div><div class="getal-spa">catorce</div></div>
-          <div class="getal-item"><div class="getal-num">15</div><div class="getal-spa">quince</div></div>
-          <div class="getal-item"><div class="getal-num">16</div><div class="getal-spa">dieciséis</div></div>
-          <div class="getal-item"><div class="getal-num">17</div><div class="getal-spa">diecisiete</div></div>
-          <div class="getal-item"><div class="getal-num">18</div><div class="getal-spa">dieciocho</div></div>
-          <div class="getal-item"><div class="getal-num">19</div><div class="getal-spa">diecinueve</div></div>
-          <div class="getal-item"><div class="getal-num">20</div><div class="getal-spa">veinte</div></div>
-          <div class="getal-item"><div class="getal-num">21</div><div class="getal-spa">veintiuno</div></div>
-          <div class="getal-item"><div class="getal-num">22</div><div class="getal-spa">veintidós</div></div>
-          <div class="getal-item"><div class="getal-num">23</div><div class="getal-spa">veintitrés</div></div>
-          <div class="getal-item"><div class="getal-num">24</div><div class="getal-spa">veinticuatro</div></div>
-          <div class="getal-item"><div class="getal-num">25</div><div class="getal-spa">veinticinco</div></div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Werkwoorden -->
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📝 Werkwoorden: ir, ser &amp; tener (blz 76)
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
 
         <div class="werkwoord-grid">
-
           <div class="conj-card">
-            <div class="conj-card-header">ser <span>zijn (wie/wat)</span></div>
+            <div class="conj-card-header">spielen <span>spelen</span></div>
             <table class="conj-table">
-              <tr><td>soy</td><td>ik ben</td></tr>
-              <tr><td>eres</td><td>jij bent</td></tr>
-              <tr><td>es</td><td>hij/zij is, u bent</td></tr>
-              <tr class="conj-divider"><td>somos</td><td>wij zijn</td></tr>
-              <tr><td>sois</td><td>jullie zijn</td></tr>
-              <tr><td>son</td><td>zij zijn / u bent (mv)</td></tr>
+              <tr><td>ich spiele</td><td>ik speel</td></tr>
+              <tr><td>du spielst</td><td>jij speelt</td></tr>
+              <tr><td>er/sie/es spielt</td><td>hij/zij/het speelt</td></tr>
+              <tr class="conj-divider"><td>wir spielen</td><td>wij spelen</td></tr>
+              <tr><td>ihr spielt</td><td>jullie spelen</td></tr>
+              <tr><td>sie/Sie spielen</td><td>zij/u spelen</td></tr>
             </table>
           </div>
-
           <div class="conj-card">
-            <div class="conj-card-header">tener <span>hebben</span></div>
+            <div class="conj-card-header">heißen <span>heten</span></div>
             <table class="conj-table">
-              <tr><td>tengo</td><td>ik heb</td></tr>
-              <tr><td>tienes</td><td>jij hebt</td></tr>
-              <tr><td>tiene</td><td>hij/zij/u heeft</td></tr>
-              <tr class="conj-divider"><td>tenemos</td><td>wij hebben</td></tr>
-              <tr><td>tenéis</td><td>jullie hebben</td></tr>
-              <tr><td>tienen</td><td>zij hebben / u heeft (mv)</td></tr>
+              <tr><td>ich heiße</td><td>ik heet</td></tr>
+              <tr><td>du heißt</td><td>jij heet</td></tr>
+              <tr><td>er/sie/es heißt</td><td>hij/zij/het heet</td></tr>
+              <tr class="conj-divider"><td>wir heißen</td><td>wij heten</td></tr>
+              <tr><td>ihr heißt</td><td>jullie heten</td></tr>
+              <tr><td>sie/Sie heißen</td><td>zij/u heten</td></tr>
             </table>
           </div>
-
-          <div class="conj-card">
-            <div class="conj-card-header">ir <span>gaan</span></div>
-            <table class="conj-table">
-              <tr><td>voy</td><td>ik ga</td></tr>
-              <tr><td>vas</td><td>jij gaat</td></tr>
-              <tr><td>va</td><td>hij/zij/u gaat</td></tr>
-              <tr class="conj-divider"><td>vamos</td><td>wij gaan</td></tr>
-              <tr><td>vais</td><td>jullie gaan</td></tr>
-              <tr><td>van</td><td>zij gaan / u gaat (mv)</td></tr>
-            </table>
-          </div>
-
         </div>
 
+      </div>
+    </div>
+
+    <!-- Partizip -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✅ Grammatica — Das Partizip
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="vocab-sectie">
+          <h4>Zwakke werkwoorden: ge- + stam + t</h4>
+          <table class="vocab-table">
+            <tr><td>hören</td><td>gehört</td></tr>
+            <tr><td>spielen</td><td>gespielt</td></tr>
+            <tr><td>kaufen</td><td>gekauft</td></tr>
+            <tr><td>lachen</td><td>gelacht</td></tr>
+            <tr><td>holen</td><td>geholt</td></tr>
+            <tr><td>sagen</td><td>gesagt</td></tr>
+            <tr><td>füttern</td><td>gefüttert</td></tr>
+            <tr><td>schicken</td><td>geschickt</td></tr>
+          </table>
+        </div>
+
+        <div class="vocab-sectie">
+          <h4>Werkwoorden op -ieren: stam + t (geen ge-)</h4>
+          <table class="vocab-table">
+            <tr><td>fotografieren</td><td>fotografiert</td></tr>
+            <tr><td>studieren</td><td>studiert</td></tr>
+          </table>
+        </div>
+
+        <div class="vocab-sectie">
+          <h4>Werkwoorden met be-/ver-: stam + t (geen ge-)</h4>
+          <table class="vocab-table">
+            <tr><td>versorgen</td><td>versorgt</td></tr>
+            <tr><td>besuchen</td><td>besucht</td></tr>
+          </table>
+        </div>
+
+        <div class="vocab-sectie">
+          <h4>Sterke werkwoorden (onregelmatig)</h4>
+          <table class="vocab-table">
+            <tr><td>beschreiben</td><td>beschrieben</td></tr>
+            <tr><td>schwimmen</td><td>geschwommen</td></tr>
+            <tr><td>fressen</td><td>gefressen</td></tr>
+            <tr><td>gehen</td><td>gegangen</td></tr>
+            <tr><td>haben</td><td>gehabt</td></tr>
+            <tr><td>kommen</td><td>gekommen</td></tr>
+            <tr><td>schreiben</td><td>geschrieben</td></tr>
+            <tr><td>finden</td><td>gefunden</td></tr>
+            <tr><td>sein</td><td>gewesen</td></tr>
+            <tr><td>laufen</td><td>gelaufen</td></tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sprachmittel -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        💬 Sprachmittel
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+        <table class="frases-table">
+          <tr><td>Wat is je lievelingsdier?</td><td>Was ist dein Lieblingstier?</td></tr>
+          <tr><td>Mijn lievelingsdier is ... .</td><td>Mein Lieblingstier ist ... .</td></tr>
+          <tr><td>Heb je een huisdier?</td><td>Hast du ein Haustier?</td></tr>
+          <tr><td>Ja, ik heb ... .</td><td>Ja, ich habe ... .</td></tr>
+          <tr><td>Nee, maar ik wil graag ... .</td><td>Nein, aber ich wünsche mir ... .</td></tr>
+          <tr><td>Hebben jullie een hond?</td><td>Habt ihr einen Hund?</td></tr>
+          <tr><td>Kun je ... beschrijven?</td><td>Kannst du ... beschreiben?</td></tr>
+          <tr><td>Het dier is / heeft ... .</td><td>Das Tier ist / hat ... .</td></tr>
+          <tr><td>Het kan (niet) ... .</td><td>Es kann (nicht) ... .</td></tr>
+          <tr><td>Eet het dier ... of ...?</td><td>Frisst das Tier ... oder ...?</td></tr>
+          <tr><td>Wat eten ...?</td><td>Was fressen ...?</td></tr>
+          <tr><td>... eet het liefst ... .</td><td>... frisst am liebsten ... .</td></tr>
+          <tr><td>... eten nooit ... .</td><td>... fressen nie ... .</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Schreibmittel -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Schreibmittel
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+        <table class="frases-table">
+          <tr><td>Gevaarlijk of lief?</td><td>Gefährlich oder lieb?</td></tr>
+          <tr><td>Mijn dier moet groot zijn.</td><td>Mein Tier soll groß sein.</td></tr>
+          <tr><td>Mijn dier eet het liefst fruit.</td><td>Mein Tier frisst am liebsten Obst.</td></tr>
+          <tr><td>Een kangoeroe kan goed springen.</td><td>Ein Känguru kann gut springen.</td></tr>
+          <tr><td>Ik wil graag een slang.</td><td>Ich wünsche mir eine Schlange.</td></tr>
+          <tr><td>Mijn dier heeft korte poten en scherpe tanden.</td><td>Mein Tier hat kurze Beine und scharfe Zähne.</td></tr>
+        </table>
       </div>
     </div>
 
@@ -989,6 +942,14 @@ function toonTab(naam, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
   document.getElementById('tab-' + naam).classList.add('actief');
   btn.classList.add('actief');
+}
+
+/* ── VOCAB SEARCH ── */
+function zoekVocab(input, tbodyId) {
+  const filter = input.value.toLowerCase();
+  document.querySelectorAll('#' + tbodyId + ' tr.vocab-row').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(filter) ? '' : 'none';
+  });
 }
 
 /* ── ACCORDION ── */
