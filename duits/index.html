@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Spaans — Huiswerk Oefenen</title>
+<title>Duits Oefenen</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --rood: #c53030;
-  --rood-licht: #feb2b2;
+  --rood: #dd6b20;
+  --rood-licht: #fbd38d;
   --geel: #d69e2e;
   --geel-licht: #fefcbf;
   --donker: #1a202c;
@@ -20,7 +20,7 @@
 
 body {
   font-family: 'Nunito', sans-serif;
-  background: linear-gradient(135deg, #c53030 0%, #9b2c2c 50%, #d69e2e 100%);
+  background: linear-gradient(135deg, #dd6b20 0%, #b7501a 50%, #d69e2e 100%);
   min-height: 100vh;
   padding: 0 0 4rem;
 }
@@ -189,7 +189,7 @@ body {
 .example-table tr { border-bottom: 1px solid #e2e8f0; }
 .example-table tr:last-child { border-bottom: none; }
 .example-table td { padding: 0.5rem 0.6rem; }
-.example-table td:first-child { font-style: italic; font-weight: 700; color: #c53030; width: 55%; }
+.example-table td:first-child { font-style: italic; font-weight: 700; color: #dd6b20; width: 55%; }
 .example-table td:last-child { color: #2d3748; }
 
 .neg-words {
@@ -236,7 +236,7 @@ body {
 .conj-table { width: 100%; font-size: 0.88rem; }
 .conj-table tr:nth-child(even) { background: #f7fafc; }
 .conj-table td { padding: 0.38rem 0.8rem; }
-.conj-table td:first-child { font-weight: 700; color: #c53030; width: 45%; }
+.conj-table td:first-child { font-weight: 700; color: #dd6b20; width: 45%; }
 .conj-table td:last-child { color: #2d3748; }
 .conj-divider td { border-top: 2px solid #e2e8f0 !important; }
 
@@ -249,7 +249,7 @@ body {
 }
 .klok-table tr:nth-child(even) { background: #f7fafc; }
 .klok-table td { padding: 0.45rem 0.7rem; border-bottom: 1px solid #e2e8f0; }
-.klok-table td:first-child { font-weight: 700; color: #c53030; width: 55%; font-style: italic; }
+.klok-table td:first-child { font-weight: 700; color: #dd6b20; width: 55%; font-style: italic; }
 .klok-table td:last-child { color: #2d3748; font-weight: 600; }
 
 /* ── GETALLEN GRID ── */
@@ -288,7 +288,7 @@ body {
 .frases-table tr:last-child { border-bottom: none; }
 .frases-table tr:nth-child(even) { background: #f7fafc; }
 .frases-table td { padding: 0.5rem 0.6rem; vertical-align: top; }
-.frases-table td:first-child { font-weight: 700; color: #c53030; font-style: italic; width: 50%; }
+.frases-table td:first-child { font-weight: 700; color: #dd6b20; font-style: italic; width: 50%; }
 .frases-table td:last-child { color: #2d3748; }
 
 /* ── FLASHCARD SETS ── */
@@ -473,7 +473,7 @@ body {
 .fc-btn-prev { background: #e2e8f0; color: #2d3748; }
 .fc-btn-prev:hover { background: #cbd5e0; }
 .fc-btn-flip { background: var(--rood); color: #fff; flex: 1.4; }
-.fc-btn-flip:hover { background: #9b2c2c; }
+.fc-btn-flip:hover { background: #b7501a; }
 .fc-btn-next { background: #e2e8f0; color: #2d3748; }
 .fc-btn-next:hover { background: #cbd5e0; }
 
@@ -503,13 +503,14 @@ body {
 
 <div class="header">
   <a class="terug" href="/huiswerk-oefenen/">← Terug</a>
-  <div class="header-title">🇪🇸 Spaans</div>
+  <div class="header-title">🇩🇪 Duits</div>
   <div style="width:80px"></div>
 </div>
 
 <div class="tabs">
   <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
   <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="toonTab('oefenen', this)">✏️ Oefenen</button>
 </div>
 
 <div class="content">
@@ -941,6 +942,10 @@ body {
 
     </div>
   </div><!-- /tab-flashcards -->
+
+  <!-- ══ OEFENEN ══ -->
+  <div id="tab-oefenen" class="sectie">
+  </div><!-- /tab-oefenen -->
 
 </div><!-- /content -->
 
