@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Spaans — Huiswerk Oefenen</title>
+<title>Biologie — Huiswerk Oefenen</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --rood: #c53030;
-  --rood-licht: #feb2b2;
+  --groen: #16a34a;
+  --groen-licht: #bbf7d0;
   --geel: #d69e2e;
   --geel-licht: #fefcbf;
   --donker: #1a202c;
@@ -20,7 +20,7 @@
 
 body {
   font-family: 'Nunito', sans-serif;
-  background: linear-gradient(135deg, #c53030 0%, #9b2c2c 50%, #d69e2e 100%);
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 50%, #4ade80 100%);
   min-height: 100vh;
   padding: 0 0 4rem;
 }
@@ -89,7 +89,7 @@ body {
 }
 .tab-btn.actief {
   background: #fff;
-  color: var(--rood);
+  color: var(--groen);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 .tab-btn:hover:not(.actief) { background: rgba(255,255,255,0.3); color: #fff; }
@@ -127,10 +127,10 @@ body {
   font-size: 1.05rem;
   color: var(--donker);
   text-align: left;
-  border-left: 5px solid var(--rood);
+  border-left: 5px solid var(--groen);
   transition: background 0.15s;
 }
-.accordion-header:hover { background: #fff5f5; }
+.accordion-header:hover { background: #f0fdf4; }
 .accordion-header .chevron {
   font-size: 1rem;
   transition: transform 0.25s;
@@ -152,7 +152,7 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--rood);
+  color: var(--groen);
   margin: 1rem 0 0.5rem;
 }
 
@@ -167,7 +167,7 @@ body {
   border-bottom: 1px solid #e2e8f0;
 }
 .vocab-table td:first-child { font-weight: 700; color: var(--donker); width: 50%; }
-.vocab-table td:last-child { color: #e53e3e; font-weight: 700; }
+.vocab-table td:last-child { color: #16a34a; font-weight: 700; }
 
 /* ── GRAMMAR BOX ── */
 .grammar-box {
@@ -189,7 +189,7 @@ body {
 .example-table tr { border-bottom: 1px solid #e2e8f0; }
 .example-table tr:last-child { border-bottom: none; }
 .example-table td { padding: 0.5rem 0.6rem; }
-.example-table td:first-child { font-style: italic; font-weight: 700; color: #c53030; width: 55%; }
+.example-table td:first-child { font-style: italic; font-weight: 700; color: #16a34a; width: 55%; }
 .example-table td:last-child { color: #2d3748; }
 
 .neg-words {
@@ -199,13 +199,13 @@ body {
   margin: 0.8rem 0;
 }
 .neg-pill {
-  background: #fff5f5;
-  border: 2px solid var(--rood-licht);
+  background: #f0fdf4;
+  border: 2px solid var(--groen-licht);
   border-radius: 10px;
   padding: 0.4rem 0.9rem;
   font-weight: 800;
   font-size: 0.9rem;
-  color: var(--rood);
+  color: var(--groen);
 }
 .neg-pill span { color: var(--grijs); font-weight: 600; margin-left: 0.4rem; }
 
@@ -223,7 +223,7 @@ body {
   border: 1px solid #e2e8f0;
 }
 .conj-card-header {
-  background: var(--rood);
+  background: var(--groen);
   color: #fff;
   font-weight: 900;
   font-size: 1rem;
@@ -236,7 +236,7 @@ body {
 .conj-table { width: 100%; font-size: 0.88rem; }
 .conj-table tr:nth-child(even) { background: #f7fafc; }
 .conj-table td { padding: 0.38rem 0.8rem; }
-.conj-table td:first-child { font-weight: 700; color: #c53030; width: 45%; }
+.conj-table td:first-child { font-weight: 700; color: #16a34a; width: 45%; }
 .conj-table td:last-child { color: #2d3748; }
 .conj-divider td { border-top: 2px solid #e2e8f0 !important; }
 
@@ -249,7 +249,7 @@ body {
 }
 .klok-table tr:nth-child(even) { background: #f7fafc; }
 .klok-table td { padding: 0.45rem 0.7rem; border-bottom: 1px solid #e2e8f0; }
-.klok-table td:first-child { font-weight: 700; color: #c53030; width: 55%; font-style: italic; }
+.klok-table td:first-child { font-weight: 700; color: #16a34a; width: 55%; font-style: italic; }
 .klok-table td:last-child { color: #2d3748; font-weight: 600; }
 
 /* ── GETALLEN GRID ── */
@@ -260,13 +260,13 @@ body {
   margin-top: 0.8rem;
 }
 .getal-item {
-  background: #fff5f5;
-  border: 1px solid var(--rood-licht);
+  background: #f0fdf4;
+  border: 1px solid var(--groen-licht);
   border-radius: 8px;
   padding: 0.5rem 0.7rem;
   text-align: center;
 }
-.getal-num { font-size: 1.2rem; font-weight: 900; color: var(--rood); }
+.getal-num { font-size: 1.2rem; font-weight: 900; color: var(--groen); }
 .getal-spa { font-size: 0.82rem; font-weight: 700; color: #2d3748; margin-top: 0.1rem; }
 
 /* ── FRASES TABLE ── */
@@ -276,7 +276,7 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--rood);
+  color: var(--groen);
   margin: 1rem 0 0.5rem;
 }
 .frases-table {
@@ -288,7 +288,7 @@ body {
 .frases-table tr:last-child { border-bottom: none; }
 .frases-table tr:nth-child(even) { background: #f7fafc; }
 .frases-table td { padding: 0.5rem 0.6rem; vertical-align: top; }
-.frases-table td:first-child { font-weight: 700; color: #c53030; font-style: italic; width: 50%; }
+.frases-table td:first-child { font-weight: 700; color: #16a34a; font-style: italic; width: 50%; }
 .frases-table td:last-child { color: #2d3748; }
 
 /* ── FLASHCARD SETS ── */
@@ -311,16 +311,16 @@ body {
   gap: 0.4rem;
 }
 .set-kaart:hover {
-  border-color: var(--rood);
+  border-color: var(--groen);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(197,48,48,0.2);
+  box-shadow: 0 8px 24px rgba(22,163,74,0.2);
 }
 .set-emoji { font-size: 1.8rem; line-height: 1; }
 .set-naam { font-weight: 800; font-size: 1rem; color: var(--donker); }
 .set-info { font-size: 0.82rem; color: var(--grijs); font-weight: 600; }
 .set-richting {
-  background: #fff5f5;
-  color: var(--rood);
+  background: #f0fdf4;
+  color: var(--groen);
   font-size: 0.75rem;
   font-weight: 800;
   padding: 0.2rem 0.6rem;
@@ -386,7 +386,7 @@ body {
 }
 .fc-progress-fill {
   height: 100%;
-  background: var(--rood);
+  background: var(--groen);
   border-radius: 3px;
   transition: width 0.3s;
 }
@@ -425,8 +425,8 @@ body {
   min-height: 200px;
 }
 .flip-front {
-  background: linear-gradient(135deg, #fff5f5, #fff);
-  border: 2px solid var(--rood-licht);
+  background: linear-gradient(135deg, #f0fdf4, #fff);
+  border: 2px solid var(--groen-licht);
 }
 .flip-back {
   background: linear-gradient(135deg, #fffbeb, #fff);
@@ -472,8 +472,8 @@ body {
 }
 .fc-btn-prev { background: #e2e8f0; color: #2d3748; }
 .fc-btn-prev:hover { background: #cbd5e0; }
-.fc-btn-flip { background: var(--rood); color: #fff; flex: 1.4; }
-.fc-btn-flip:hover { background: #9b2c2c; }
+.fc-btn-flip { background: var(--groen); color: #fff; flex: 1.4; }
+.fc-btn-flip:hover { background: #15803d; }
 .fc-btn-next { background: #e2e8f0; color: #2d3748; }
 .fc-btn-next:hover { background: #cbd5e0; }
 
@@ -489,7 +489,7 @@ body {
   cursor: pointer;
   transition: all 0.15s;
 }
-.fc-shuffle:hover { border-color: var(--rood); color: var(--rood); }
+.fc-shuffle:hover { border-color: var(--groen); color: var(--groen); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
@@ -503,13 +503,14 @@ body {
 
 <div class="header">
   <a class="terug" href="/huiswerk-oefenen/">← Terug</a>
-  <div class="header-title">🇪🇸 Spaans</div>
+  <div class="header-title">🧬 Biologie</div>
   <div style="width:80px"></div>
 </div>
 
 <div class="tabs">
   <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
   <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="toonTab('oefenen', this)">✏️ Oefenen</button>
 </div>
 
 <div class="content">
@@ -941,6 +942,10 @@ body {
 
     </div>
   </div><!-- /tab-flashcards -->
+
+  <!-- ══ OEFENEN ══ -->
+  <div id="tab-oefenen" class="sectie">
+  </div><!-- /tab-oefenen -->
 
 </div><!-- /content -->
 
