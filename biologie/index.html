@@ -491,6 +491,23 @@ body {
 }
 .fc-shuffle:hover { border-color: var(--rood); color: var(--rood); }
 
+/* ── SET RICHTING TOGGLE ── */
+.set-toggle {
+  margin-top: 0.3rem;
+  background: none;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--grijs);
+  cursor: pointer;
+  transition: all 0.15s;
+  align-self: flex-start;
+}
+.set-toggle:hover { border-color: var(--rood); color: var(--rood); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
   .header-title { font-size: 1.2rem; }
@@ -928,7 +945,26 @@ body {
   <!-- ══ FLASHCARDS ══ -->
   <div id="tab-flashcards" class="sectie">
 
-  
+    <div class="sets-grid">
+
+      <div class="set-kaart" id="card-bio-p1" onclick="startSet(getBioSet('bio-p1'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 1 — Je verandert</div>
+        <div class="set-info">begrippen · 10 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p1">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p1')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p2" onclick="startSet(getBioSet('bio-p2'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 2 — Voortplantingsstelsel man</div>
+        <div class="set-info">begrippen · 11 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p2">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p2')">⇄ Wissel richting</button>
+      </div>
+
+    </div>
+
   </div><!-- /tab-flashcards -->
 
   <!-- ══ OEFENEN ══ -->
@@ -1842,8 +1878,91 @@ const sets = {
       {front:"vais",back:"jullie gaan (ir)"},
       {front:"van",back:"zij gaan / u gaat mv (ir)"}
     ]
+  },
+
+  /* ── BIOLOGIE SETS ── */
+  "bio-p1-begrip-def": {
+    titel: "P1: Je verandert — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"puberteit",back:"periode waarin je lichaam verandert van kind naar volwassene (vanaf ~12 jaar)"},
+      {front:"hormoon",back:"stof geproduceerd door hormoonklier, vervoerd via bloed, regelt lichaamsprocessen"},
+      {front:"hypofyse",back:"hormoonklier in de hersenen die andere klieren aanstuurt"},
+      {front:"primaire geslachtskenmerken",back:"geslachtskenmerken aanwezig bij geboorte"},
+      {front:"secundaire geslachtskenmerken",back:"geslachtskenmerken die ontstaan in de puberteit"},
+      {front:"groeispurt",back:"snelle lengtegroei in de puberteit"},
+      {front:"heteroseksueel",back:"aangetrokken tot personen van het andere geslacht"},
+      {front:"homoseksueel",back:"aangetrokken tot personen van hetzelfde geslacht"},
+      {front:"transgender",back:"persoon die zich niet thuis voelt in het geslacht waarmee geboren"},
+      {front:"androgyn",back:"persoon met uiterlijke kenmerken van beide geslachten"}
+    ]
+  },
+  "bio-p1-def-begrip": {
+    titel: "P1: Je verandert — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"periode waarin je lichaam verandert van kind naar volwassene (vanaf ~12 jaar)",back:"puberteit"},
+      {front:"stof geproduceerd door hormoonklier, vervoerd via bloed, regelt lichaamsprocessen",back:"hormoon"},
+      {front:"hormoonklier in de hersenen die andere klieren aanstuurt",back:"hypofyse"},
+      {front:"geslachtskenmerken aanwezig bij geboorte",back:"primaire geslachtskenmerken"},
+      {front:"geslachtskenmerken die ontstaan in de puberteit",back:"secundaire geslachtskenmerken"},
+      {front:"snelle lengtegroei in de puberteit",back:"groeispurt"},
+      {front:"aangetrokken tot personen van het andere geslacht",back:"heteroseksueel"},
+      {front:"aangetrokken tot personen van hetzelfde geslacht",back:"homoseksueel"},
+      {front:"persoon die zich niet thuis voelt in het geslacht waarmee geboren",back:"transgender"},
+      {front:"persoon met uiterlijke kenmerken van beide geslachten",back:"androgyn"}
+    ]
+  },
+  "bio-p2-begrip-def": {
+    titel: "P2: Voortplantingsstelsel man — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"teelbal",back:"orgaan in de balzak dat zaadcellen produceert"},
+      {front:"bijbal",back:"orgaan naast de teelbal waar zaadcellen worden opgeslagen"},
+      {front:"zaadleider",back:"buis die zaadcellen van bijbal naar zaadblaasje vervoert"},
+      {front:"zaadblaasje",back:"klier die vocht toevoegt aan zaadcellen"},
+      {front:"prostaat",back:"klier die vocht toevoegt aan zaadcellen; samen met zaadblaasjes vormt dit sperma"},
+      {front:"urinebuis",back:"buis die zowel urine als sperma naar buiten vervoert"},
+      {front:"erectie",back:"het stijf worden van de penis doordat zwellichamen vollopen met bloed"},
+      {front:"zaadlozing",back:"het vrijkomen van sperma uit de penis bij orgasme"},
+      {front:"sperma",back:"vloeistof met zaadcellen geproduceerd door zaadblaasjes en prostaat"},
+      {front:"masturbatie",back:"zelfbevrediging"},
+      {front:"orgasme",back:"hoogtepunt van seksuele opwinding"}
+    ]
+  },
+  "bio-p2-def-begrip": {
+    titel: "P2: Voortplantingsstelsel man — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"orgaan in de balzak dat zaadcellen produceert",back:"teelbal"},
+      {front:"orgaan naast de teelbal waar zaadcellen worden opgeslagen",back:"bijbal"},
+      {front:"buis die zaadcellen van bijbal naar zaadblaasje vervoert",back:"zaadleider"},
+      {front:"klier die vocht toevoegt aan zaadcellen",back:"zaadblaasje"},
+      {front:"klier die vocht toevoegt aan zaadcellen; samen met zaadblaasjes vormt dit sperma",back:"prostaat"},
+      {front:"buis die zowel urine als sperma naar buiten vervoert",back:"urinebuis"},
+      {front:"het stijf worden van de penis doordat zwellichamen vollopen met bloed",back:"erectie"},
+      {front:"het vrijkomen van sperma uit de penis bij orgasme",back:"zaadlozing"},
+      {front:"vloeistof met zaadcellen geproduceerd door zaadblaasjes en prostaat",back:"sperma"},
+      {front:"zelfbevrediging",back:"masturbatie"},
+      {front:"hoogtepunt van seksuele opwinding",back:"orgasme"}
+    ]
   }
 };
+
+/* ── BIO SET RICHTING TOGGLE ── */
+const bioRichtingen = {};
+
+function getBioSet(prefix) {
+  return bioRichtingen[prefix] || (prefix + '-begrip-def');
+}
+
+function toggleRichting(e, prefix) {
+  e.stopPropagation();
+  const current = getBioSet(prefix);
+  const next = current.endsWith('-begrip-def') ? prefix + '-def-begrip' : prefix + '-begrip-def';
+  bioRichtingen[prefix] = next;
+  document.getElementById('richting-' + prefix).textContent = next.endsWith('-begrip-def') ? 'BEGRIP → DEF' : 'DEF → BEGRIP';
+}
 
 /* ── FLASHCARD STATE ── */
 let huidigSet = null;
