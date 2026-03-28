@@ -963,6 +963,22 @@ body {
         <button class="set-toggle" onclick="toggleRichting(event, 'bio-p2')">⇄ Wissel richting</button>
       </div>
 
+      <div class="set-kaart" id="card-bio-p3" onclick="startSet(getBioSet('bio-p3'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 3 — Voortplantingsstelsel vrouw</div>
+        <div class="set-info">begrippen · 11 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p3">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p3')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p4" onclick="startSet(getBioSet('bio-p4'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 4 — Menstruatie</div>
+        <div class="set-info">begrippen · 4 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p4">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p4')">⇄ Wissel richting</button>
+      </div>
+
     </div>
 
   </div><!-- /tab-flashcards -->
@@ -1945,6 +1961,60 @@ const sets = {
       {front:"vloeistof met zaadcellen geproduceerd door zaadblaasjes en prostaat",back:"sperma"},
       {front:"zelfbevrediging",back:"masturbatie"},
       {front:"hoogtepunt van seksuele opwinding",back:"orgasme"}
+    ]
+  },
+  "bio-p3-begrip-def": {
+    titel: "P3: Voortplantingsstelsel vrouw — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"eierstok",back:"orgaan dat eicellen bevat"},
+      {front:"eileider",back:"buis die eierstok met baarmoeder verbindt; plaats van bevruchting"},
+      {front:"baarmoeder",back:"spierachtig hol orgaan waar embryo zich ontwikkelt"},
+      {front:"baarmoederslijmvlies",back:"binnenste laag van de baarmoeder"},
+      {front:"vagina",back:"rekbare buis tussen baarmoeder en buitenwereld"},
+      {front:"clitoris",back:"uitwendig orgaan bij de vrouw, gevoelig voor seksuele prikkeling"},
+      {front:"maagdenvlies",back:"randje weefsel aan het begin van de vagina"},
+      {front:"ovulatie",back:"het vrijkomen van een rijpe eicel uit de eierstok (~dag 14)"},
+      {front:"eicel",back:"vrouwelijke geslachtscel (leeft 12–24 uur na ovulatie)"},
+      {front:"bevruchting",back:"het versmelten van de kernen van zaadcel en eicel"},
+      {front:"innesteling",back:"het nestelen van de bevruchte eicel in het baarmoederslijmvlies"}
+    ]
+  },
+  "bio-p3-def-begrip": {
+    titel: "P3: Voortplantingsstelsel vrouw — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"orgaan dat eicellen bevat",back:"eierstok"},
+      {front:"buis die eierstok met baarmoeder verbindt; plaats van bevruchting",back:"eileider"},
+      {front:"spierachtig hol orgaan waar embryo zich ontwikkelt",back:"baarmoeder"},
+      {front:"binnenste laag van de baarmoeder",back:"baarmoederslijmvlies"},
+      {front:"rekbare buis tussen baarmoeder en buitenwereld",back:"vagina"},
+      {front:"uitwendig orgaan bij de vrouw, gevoelig voor seksuele prikkeling",back:"clitoris"},
+      {front:"randje weefsel aan het begin van de vagina",back:"maagdenvlies"},
+      {front:"het vrijkomen van een rijpe eicel uit de eierstok (~dag 14)",back:"ovulatie"},
+      {front:"vrouwelijke geslachtscel (leeft 12–24 uur na ovulatie)",back:"eicel"},
+      {front:"het versmelten van de kernen van zaadcel en eicel",back:"bevruchting"},
+      {front:"het nestelen van de bevruchte eicel in het baarmoederslijmvlies",back:"innesteling"}
+    ]
+  },
+  "bio-p4-begrip-def": {
+    titel: "P4: Menstruatie — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"menstruatie",back:"het afstoten van baarmoederslijmvlies en bloed bij geen bevruchting"},
+      {front:"menstruatiecyclus",back:"cyclus van ~28 dagen van opbouw en afstoting van baarmoederslijmvlies"},
+      {front:"maandverband",back:"absorberend materiaal dat bloed opvangt aan buitenkant vagina"},
+      {front:"tampon",back:"absorberend materiaal dat in de vagina wordt geplaatst"}
+    ]
+  },
+  "bio-p4-def-begrip": {
+    titel: "P4: Menstruatie — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"het afstoten van baarmoederslijmvlies en bloed bij geen bevruchting",back:"menstruatie"},
+      {front:"cyclus van ~28 dagen van opbouw en afstoting van baarmoederslijmvlies",back:"menstruatiecyclus"},
+      {front:"absorberend materiaal dat bloed opvangt aan buitenkant vagina",back:"maandverband"},
+      {front:"absorberend materiaal dat in de vagina wordt geplaatst",back:"tampon"}
     ]
   }
 };
