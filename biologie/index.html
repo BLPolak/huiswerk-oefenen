@@ -497,6 +497,84 @@ body {
   .flip-tekst { font-size: 1.2rem; }
   .werkwoord-grid { grid-template-columns: 1fr; }
 }
+
+/* ── OEFENEN: MULTIPLE CHOICE ── */
+.mc-vraag {
+  margin-bottom: 1.2rem;
+}
+.mc-vraag p {
+  font-weight: 700;
+  color: var(--donker);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+.mc-opties {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.mc-optie {
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--donker);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+.mc-optie:hover:not(:disabled) { border-color: var(--rood); background: #fff5f5; }
+.mc-optie.goed { background: #f0fff4; border-color: #38a169; color: #276749; }
+.mc-optie.fout { background: #fff5f5; border-color: var(--rood); color: var(--rood); }
+.mc-optie:disabled { cursor: default; }
+
+/* ── OEFENEN: OPEN VRAGEN ── */
+.open-vraag {
+  margin-bottom: 1rem;
+}
+.open-vraag p {
+  font-weight: 700;
+  color: var(--donker);
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+.toon-antwoord-btn {
+  background: none;
+  border: 2px solid var(--rood);
+  border-radius: 10px;
+  padding: 0.45rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rood);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.toon-antwoord-btn:hover { background: #fff5f5; }
+.open-antwoord {
+  display: none;
+  margin-top: 0.5rem;
+  background: #f0fff4;
+  border-left: 4px solid #38a169;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: #276749;
+  font-weight: 600;
+}
+.open-antwoord.zichtbaar { display: block; }
+
+.oefenen-sectie-titel {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--rood);
+  margin: 1rem 0 0.8rem;
+}
 </style>
 </head>
 <body>
@@ -946,6 +1024,90 @@ body {
   <!-- ══ OEFENEN ══ -->
   <div id="tab-oefenen" class="sectie">
 
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 1 — Je verandert
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Welke klier speelt de belangrijkste rol bij de puberteit?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) De alvleesklier</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) De hypofyse</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) De schildklier</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) De bijnier</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Wat zijn primaire geslachtskenmerken?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Kenmerken die ontstaan in de puberteit</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Kenmerken die je pas na de puberteit krijgt</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Kenmerken waarmee je het geslacht kunt herkennen, al aanwezig bij geboorte</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Kenmerken die bij jongens en meisjes hetzelfde zijn</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Welke verandering is een secundair geslachtskenmerk bij jongens?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Penis</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Balzak</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Baardgroei</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Zaadcellen</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Hoe worden hormonen door het lichaam vervoerd?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Via de zenuwen</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Via het bloed</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Via de lymfevaten</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Via de spijsvertering</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Iemand aangetrokken tot hetzelfde geslacht noemen we:</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Transgender</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Androgyn</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Heteroseksueel</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">D) Homoseksueel</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Noem twee secundaire geslachtskenmerken bij meisjes.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Borsten; brede heupen (ook: okselhaar, schaamhaar)</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Wat is het verschil tussen primaire en secundaire geslachtskenmerken?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Primaire kenmerken zijn aanwezig bij geboorte. Secundaire kenmerken ontstaan pas in de puberteit.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>3. Leg uit wat hormonen zijn en hoe ze werken.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Hormonen zijn stoffen geproduceerd door hormoonklieren, vervoerd via het bloed, die opdrachten geven aan organen.</div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /tab-oefenen -->
 
 </div><!-- /content -->
@@ -998,6 +1160,24 @@ function toggleAccordion(header) {
   const isOpen = body.classList.contains('open');
   header.classList.toggle('open', !isOpen);
   body.classList.toggle('open', !isOpen);
+}
+
+/* ── OEFENEN: MULTIPLE CHOICE ── */
+function checkMC(btn, correct) {
+  const groep = btn.closest('.mc-opties');
+  groep.querySelectorAll('.mc-optie').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'goed' : 'fout');
+  if (!correct) {
+    groep.querySelectorAll('.mc-optie').forEach(b => {
+      if (b.getAttribute('onclick').includes('true')) b.classList.add('goed');
+    });
+  }
+}
+
+/* ── OEFENEN: OPEN VRAGEN ── */
+function toonAntwoord(btn) {
+  btn.nextElementSibling.classList.add('zichtbaar');
+  btn.style.display = 'none';
 }
 
 /* ── FLASHCARD DATA ── */
