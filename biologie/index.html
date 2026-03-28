@@ -491,6 +491,23 @@ body {
 }
 .fc-shuffle:hover { border-color: var(--rood); color: var(--rood); }
 
+/* ── SET RICHTING TOGGLE ── */
+.set-toggle {
+  margin-top: 0.3rem;
+  background: none;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--grijs);
+  cursor: pointer;
+  transition: all 0.15s;
+  align-self: flex-start;
+}
+.set-toggle:hover { border-color: var(--rood); color: var(--rood); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
   .header-title { font-size: 1.2rem; }
@@ -575,6 +592,29 @@ body {
   color: var(--rood);
   margin: 1rem 0 0.8rem;
 }
+
+/* ── THEORIE BLOKKEN ── */
+.theorie-blok {
+  background: #f7fafc;
+  border-left: 4px solid var(--rood);
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.92rem;
+  color: var(--donker);
+}
+.theorie-blok-titel {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--rood);
+  margin-bottom: 0.5rem;
+}
+.theorie-blok p { margin-bottom: 0.4rem; line-height: 1.55; }
+.theorie-blok p:last-child { margin-bottom: 0; }
+.theorie-blok ul { margin: 0.3rem 0 0 1.1rem; }
+.theorie-blok li { margin-bottom: 0.2rem; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -596,7 +636,308 @@ body {
   <!-- ══ THEORIE ══ -->
   <div id="tab-theorie" class="sectie actief">
 
-  
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 1 — Je verandert
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Puberteit</p>
+          <p>Vanaf je 12e jaar vinden er veranderingen plaats. Hormoonklieren produceren hormonen die via het bloed door het lichaam stromen. De hypofyse in de hersenen speelt een centrale rol.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Primaire geslachtskenmerken</p>
+          <p>Kenmerken waarmee je het geslacht kunt herkennen, al aanwezig bij de geboorte.</p>
+          <ul>
+            <li>Jongens: penis en balzak</li>
+            <li>Meisjes: vagina en schaamlippen</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Secundaire geslachtskenmerken</p>
+          <p>Ontstaan in de puberteit vanaf ongeveer je 10e levensjaar.</p>
+          <ul>
+            <li>Jongens: borsthaar, baardgroei, zwaardere stem, gespierde lichaamsbouw</li>
+            <li>Meisjes: borsten, brede heupen</li>
+            <li>Beiden: schaamhaar, okselhaar, groeispurt</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Seksualiteit en identiteit</p>
+          <p>Je kunt je aangetrokken voelen tot personen van hetzelfde of het andere geslacht. Heteroseksueel: aangetrokken tot ander geslacht. Homoseksueel: aangetrokken tot zelfde geslacht. Transgender: voelt zich niet thuis in geboortegeslacht. Androgyn: uiterlijke kenmerken van beide geslachten.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 2 — Voortplantingsstelsel van een man
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Onderdelen</p>
+          <p>Urineblaas, zaadleiders, zaadblaasjes, prostaat, bijbal, teelbal, balzak, urinebuis, penis (eikel + voorhuid).</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Functies</p>
+          <ul>
+            <li><strong>Teelballen:</strong> produceren zaadcellen. Productie begint op ~13 jaar, miljoenen per dag. Liggen in balzak vanwege lagere temperatuur.</li>
+            <li><strong>Bijballen:</strong> opslag van zaadcellen</li>
+            <li><strong>Zaadleiders:</strong> vervoeren zaadcellen naar zaadblaasjes</li>
+            <li><strong>Zaadblaasjes + prostaat:</strong> voegen vocht toe aan zaadcellen → sperma</li>
+            <li><strong>Urinebuis:</strong> vervoert sperma én urine naar buiten</li>
+            <li><strong>Penis:</strong> top = eikel. Voorhuid bedekt de eikel. Besnijdenis = voorhuid verwijderd.</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Erectie</p>
+          <p>Zwellichamen in de penis lopen vol met bloed → penis wordt groter en stijf.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Zaadlozing</p>
+          <p>Bij geslachtsgemeenschap of zelfbevrediging krijgt de man een orgasme en zaadlozing. Sperma is kleverig en melkwit. Per zaadlozing ~1 theelepel. Eerste zaadlozing gemiddeld op 13 jaar. Kan ook tijdens slaap (natte droom).</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Zaadcel</p>
+          <p>Bestaat uit kop met kern en zweepstaart.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 3 — Voortplantingsstelsel van een vrouw
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Inwendige organen</p>
+          <ul>
+            <li><strong>Eierstokken (2x):</strong> bevatten eicellen. Vanaf puberteit rijpen geleidelijk eicellen.</li>
+            <li><strong>Eileiders (2x):</strong> verbinden eierstokken met baarmoeder. Bevruchting vindt hier plaats. Eicel leeft 12–24 uur.</li>
+            <li><strong>Baarmoeder:</strong> spierlaag + baarmoederslijmvlies. Groeit mee tijdens zwangerschap.</li>
+            <li><strong>Vagina:</strong> rekbaar, reinigt zichzelf.</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Uitwendige organen</p>
+          <ul>
+            <li><strong>Clitoris:</strong> voor seksueel gevoel en orgasme</li>
+            <li><strong>Kleine schaamlippen:</strong> rondom vaginaopening</li>
+            <li><strong>Grote schaamlippen:</strong> buitenste schaamlippen</li>
+            <li><strong>Maagdenvlies:</strong> randje weefsel aan begin vagina. Kan licht bloeden bij eerste gemeenschap.</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Ovulatie</p>
+          <p>Gemiddeld eenmaal per vier weken komt een eicel vrij uit een eierstok.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Bevruchting</p>
+          <p>Kop van één zaadcel dringt eicel binnen → kernen versmelten. Buitenste laag eicel wordt ondoordringbaar.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Innesteling</p>
+          <p>Bevruchte eicel deelt zich → klompje cellen nestelt in baarmoederslijmvlies.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 4 — Menstruatie
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Menstruatie</p>
+          <p>Bij geen bevruchting trekt het baarmoederslijmvlies samen en wordt afgestoten samen met bloed. Kan gepaard gaan met buikpijn, rugpijn, hoofdpijn, kribbigheid.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Menstruatiecyclus (~28 dagen)</p>
+          <ul>
+            <li>Dag 1–5: menstruatie</li>
+            <li>Dag 5–13: slijmvlies wordt opnieuw opgebouwd</li>
+            <li>Dag ~14: ovulatie</li>
+            <li>Dag 14–28: slijmvlies wordt dikker</li>
+            <li>Dag 28: bij geen bevruchting → nieuwe menstruatie</li>
+          </ul>
+          <p>Eerste menstruatie gemiddeld op 13 jaar (range 10–16 jaar). Eerste jaren vaak onregelmatig.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Maandverband en tampons</p>
+          <ul>
+            <li><strong>Maandverband:</strong> vangt bloed op aan buitenkant vagina</li>
+            <li><strong>Tampon:</strong> wordt in de vagina geplaatst</li>
+          </ul>
+          <p>Regelmatig vervangen. Geen zeep in de vagina gebruiken.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 6 — Geboorteregeling
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Anticonceptie</p>
+          <p>Anticonceptie = zwangerschap voorkomen.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Onbetrouwbare methoden</p>
+          <ul>
+            <li><strong>Periodieke onthouding:</strong> niet vrijen rond ovulatie. Onbetrouwbaar want ovulatie niet precies te voorspellen.</li>
+            <li><strong>Coïtus interruptus:</strong> penis terugtrekken vóór zaadlozing. Onbetrouwbaar: voorvocht kan al zaadcellen bevatten.</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Het condoom</p>
+          <p>Dun rubberen hoesje over de penis. Beschermt tegen zwangerschap én soa's. Eenmalig gebruik. Alleen met CE-keurmerk. Vóór gemeenschap opdoen. Femicondom = condoom voor de vrouw.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">De pil</p>
+          <p>Dagelijks innemen op zelfde tijdstip. Remt ovulatie. Zeer betrouwbaar. Bijwerkingen mogelijk. Voorgeschreven door arts.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Morning-afterpil</p>
+          <p>Noodmaatregel binnen 72 uur na onbeschermde seks. Verkrijgbaar zonder recept bij apotheek of drogist.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Abortus</p>
+          <p>Tot 13e week wettelijk toegestaan in Nederland. Na 13e week (late abortus) tot 23e week onder strenge voorwaarden. Gratis en wettelijk geregeld. Verplicht gesprek met arts vooraf.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 7 — Zwangerschap en geboorte
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Zwangerschap</p>
+          <p>Bevruchte eicel nestelt in baarmoederslijmvlies. Menstruatie blijft uit. Duur: ~38 weken.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Embryo</p>
+          <p>Ontwikkelt zich in de baarmoeder. Voedt zich via baarmoederslijmvlies.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Placenta (moederkoek)</p>
+          <p>Wisselt voedingsstoffen en zuurstof uit van moeder naar embryo, afvalstoffen andersom. Bloed van moeder en embryo blijft gescheiden via dunne vliezen.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Navelstreng</p>
+          <p>Verbindt embryo met placenta.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Vruchtvliezen en vruchtwater</p>
+          <p>Twee vliezen om het embryo. Vruchtwater beschermt embryo, houdt temperatuur stabiel, laat embryo bewegen.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Zwangerschapstest</p>
+          <p>Betrouwbaar, verkrijgbaar bij apotheek of drogist. Positieve uitslag: bezoek huisarts of consultatieburo.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">De bevalling</p>
+          <ol style="margin: 0.3rem 0 0 1.1rem;">
+            <li>Weeën beginnen: samentrekkingen van baarmoederwand</li>
+            <li>Vliezen breken → vruchtwater loopt af</li>
+            <li>Ontsluiting: baarmoedermond wordt wijder tot ~10 cm</li>
+            <li>Uitdrijving: baby wordt geboren (meestal hoofd eerst)</li>
+            <li>Nageboorte: placenta en vruchtvliezen komen eruit</li>
+          </ol>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Stuitligging</p>
+          <p>Baby ligt met billen naar beneden → vaak keizersnede (operatie via buikwand).</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 8 — Seksueel overdraagbare aandoeningen
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Wat is een soa?</p>
+          <p>SOA = Seksueel Overdraagbare Aandoening. Besmetting via seksueel contact of bloed.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Meest voorkomend in Nederland</p>
+          <ol style="margin: 0.3rem 0 0 1.1rem;">
+            <li>Chlamydia: ~60.000/jaar (meest voorkomend)</li>
+            <li>Genitale wratten: ~25.000/jaar</li>
+            <li>Gonorroe: ~12.000/jaar</li>
+            <li>Syfilis: ~6.000/jaar</li>
+            <li>Hepatitis B: ~2.000/jaar</li>
+            <li>HIV/aids: ~750/jaar</li>
+          </ol>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Chlamydia</p>
+          <p>Veroorzaker: bacterie. Vaak geen klachten. Gevolg onbehandeld: onvruchtbaarheid of buitenbaarmoederse zwangerschap. Behandeling: antibiotica.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">HIV/aids</p>
+          <p>HIV tast het afweersysteem aan. Besmet persoon = seropositief. Hiv-remmers vertragen verspreiding (levenslang). Genezing nog niet mogelijk. Besmetting via: bloed, sperma, vaginaal vocht, moedermelk. NIET via gewoon contact.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Bescherming</p>
+          <p>Condoom gebruiken. Soa-test laten doen bij nieuwe partner of klachten.</p>
+        </div>
+
+      </div>
+    </div>
 
   </div><!-- /tab-theorie -->
 
@@ -604,7 +945,66 @@ body {
   <!-- ══ FLASHCARDS ══ -->
   <div id="tab-flashcards" class="sectie">
 
-  
+    <div class="sets-grid">
+
+      <div class="set-kaart" id="card-bio-p1" onclick="startSet(getBioSet('bio-p1'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 1 — Je verandert</div>
+        <div class="set-info">begrippen · 10 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p1">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p1')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p2" onclick="startSet(getBioSet('bio-p2'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 2 — Voortplantingsstelsel man</div>
+        <div class="set-info">begrippen · 11 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p2">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p2')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p3" onclick="startSet(getBioSet('bio-p3'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 3 — Voortplantingsstelsel vrouw</div>
+        <div class="set-info">begrippen · 11 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p3">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p3')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p4" onclick="startSet(getBioSet('bio-p4'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 4 — Menstruatie</div>
+        <div class="set-info">begrippen · 4 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p4">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p4')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p6" onclick="startSet(getBioSet('bio-p6'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 6 — Geboorteregeling</div>
+        <div class="set-info">begrippen · 7 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p6">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p6')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p7" onclick="startSet(getBioSet('bio-p7'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 7 — Zwangerschap en geboorte</div>
+        <div class="set-info">begrippen · 11 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p7">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p7')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p8" onclick="startSet(getBioSet('bio-p8'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 8 — Soa's</div>
+        <div class="set-info">begrippen · 6 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p8">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p8')">⇄ Wissel richting</button>
+      </div>
+
+    </div>
+
   </div><!-- /tab-flashcards -->
 
   <!-- ══ OEFENEN ══ -->
@@ -1518,8 +1918,229 @@ const sets = {
       {front:"vais",back:"jullie gaan (ir)"},
       {front:"van",back:"zij gaan / u gaat mv (ir)"}
     ]
+  },
+
+  /* ── BIOLOGIE SETS ── */
+  "bio-p1-begrip-def": {
+    titel: "P1: Je verandert — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"puberteit",back:"periode waarin je lichaam verandert van kind naar volwassene (vanaf ~12 jaar)"},
+      {front:"hormoon",back:"stof geproduceerd door hormoonklier, vervoerd via bloed, regelt lichaamsprocessen"},
+      {front:"hypofyse",back:"hormoonklier in de hersenen die andere klieren aanstuurt"},
+      {front:"primaire geslachtskenmerken",back:"geslachtskenmerken aanwezig bij geboorte"},
+      {front:"secundaire geslachtskenmerken",back:"geslachtskenmerken die ontstaan in de puberteit"},
+      {front:"groeispurt",back:"snelle lengtegroei in de puberteit"},
+      {front:"heteroseksueel",back:"aangetrokken tot personen van het andere geslacht"},
+      {front:"homoseksueel",back:"aangetrokken tot personen van hetzelfde geslacht"},
+      {front:"transgender",back:"persoon die zich niet thuis voelt in het geslacht waarmee geboren"},
+      {front:"androgyn",back:"persoon met uiterlijke kenmerken van beide geslachten"}
+    ]
+  },
+  "bio-p1-def-begrip": {
+    titel: "P1: Je verandert — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"periode waarin je lichaam verandert van kind naar volwassene (vanaf ~12 jaar)",back:"puberteit"},
+      {front:"stof geproduceerd door hormoonklier, vervoerd via bloed, regelt lichaamsprocessen",back:"hormoon"},
+      {front:"hormoonklier in de hersenen die andere klieren aanstuurt",back:"hypofyse"},
+      {front:"geslachtskenmerken aanwezig bij geboorte",back:"primaire geslachtskenmerken"},
+      {front:"geslachtskenmerken die ontstaan in de puberteit",back:"secundaire geslachtskenmerken"},
+      {front:"snelle lengtegroei in de puberteit",back:"groeispurt"},
+      {front:"aangetrokken tot personen van het andere geslacht",back:"heteroseksueel"},
+      {front:"aangetrokken tot personen van hetzelfde geslacht",back:"homoseksueel"},
+      {front:"persoon die zich niet thuis voelt in het geslacht waarmee geboren",back:"transgender"},
+      {front:"persoon met uiterlijke kenmerken van beide geslachten",back:"androgyn"}
+    ]
+  },
+  "bio-p2-begrip-def": {
+    titel: "P2: Voortplantingsstelsel man — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"teelbal",back:"orgaan in de balzak dat zaadcellen produceert"},
+      {front:"bijbal",back:"orgaan naast de teelbal waar zaadcellen worden opgeslagen"},
+      {front:"zaadleider",back:"buis die zaadcellen van bijbal naar zaadblaasje vervoert"},
+      {front:"zaadblaasje",back:"klier die vocht toevoegt aan zaadcellen"},
+      {front:"prostaat",back:"klier die vocht toevoegt aan zaadcellen; samen met zaadblaasjes vormt dit sperma"},
+      {front:"urinebuis",back:"buis die zowel urine als sperma naar buiten vervoert"},
+      {front:"erectie",back:"het stijf worden van de penis doordat zwellichamen vollopen met bloed"},
+      {front:"zaadlozing",back:"het vrijkomen van sperma uit de penis bij orgasme"},
+      {front:"sperma",back:"vloeistof met zaadcellen geproduceerd door zaadblaasjes en prostaat"},
+      {front:"masturbatie",back:"zelfbevrediging"},
+      {front:"orgasme",back:"hoogtepunt van seksuele opwinding"}
+    ]
+  },
+  "bio-p2-def-begrip": {
+    titel: "P2: Voortplantingsstelsel man — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"orgaan in de balzak dat zaadcellen produceert",back:"teelbal"},
+      {front:"orgaan naast de teelbal waar zaadcellen worden opgeslagen",back:"bijbal"},
+      {front:"buis die zaadcellen van bijbal naar zaadblaasje vervoert",back:"zaadleider"},
+      {front:"klier die vocht toevoegt aan zaadcellen",back:"zaadblaasje"},
+      {front:"klier die vocht toevoegt aan zaadcellen; samen met zaadblaasjes vormt dit sperma",back:"prostaat"},
+      {front:"buis die zowel urine als sperma naar buiten vervoert",back:"urinebuis"},
+      {front:"het stijf worden van de penis doordat zwellichamen vollopen met bloed",back:"erectie"},
+      {front:"het vrijkomen van sperma uit de penis bij orgasme",back:"zaadlozing"},
+      {front:"vloeistof met zaadcellen geproduceerd door zaadblaasjes en prostaat",back:"sperma"},
+      {front:"zelfbevrediging",back:"masturbatie"},
+      {front:"hoogtepunt van seksuele opwinding",back:"orgasme"}
+    ]
+  },
+  "bio-p3-begrip-def": {
+    titel: "P3: Voortplantingsstelsel vrouw — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"eierstok",back:"orgaan dat eicellen bevat"},
+      {front:"eileider",back:"buis die eierstok met baarmoeder verbindt; plaats van bevruchting"},
+      {front:"baarmoeder",back:"spierachtig hol orgaan waar embryo zich ontwikkelt"},
+      {front:"baarmoederslijmvlies",back:"binnenste laag van de baarmoeder"},
+      {front:"vagina",back:"rekbare buis tussen baarmoeder en buitenwereld"},
+      {front:"clitoris",back:"uitwendig orgaan bij de vrouw, gevoelig voor seksuele prikkeling"},
+      {front:"maagdenvlies",back:"randje weefsel aan het begin van de vagina"},
+      {front:"ovulatie",back:"het vrijkomen van een rijpe eicel uit de eierstok (~dag 14)"},
+      {front:"eicel",back:"vrouwelijke geslachtscel (leeft 12–24 uur na ovulatie)"},
+      {front:"bevruchting",back:"het versmelten van de kernen van zaadcel en eicel"},
+      {front:"innesteling",back:"het nestelen van de bevruchte eicel in het baarmoederslijmvlies"}
+    ]
+  },
+  "bio-p3-def-begrip": {
+    titel: "P3: Voortplantingsstelsel vrouw — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"orgaan dat eicellen bevat",back:"eierstok"},
+      {front:"buis die eierstok met baarmoeder verbindt; plaats van bevruchting",back:"eileider"},
+      {front:"spierachtig hol orgaan waar embryo zich ontwikkelt",back:"baarmoeder"},
+      {front:"binnenste laag van de baarmoeder",back:"baarmoederslijmvlies"},
+      {front:"rekbare buis tussen baarmoeder en buitenwereld",back:"vagina"},
+      {front:"uitwendig orgaan bij de vrouw, gevoelig voor seksuele prikkeling",back:"clitoris"},
+      {front:"randje weefsel aan het begin van de vagina",back:"maagdenvlies"},
+      {front:"het vrijkomen van een rijpe eicel uit de eierstok (~dag 14)",back:"ovulatie"},
+      {front:"vrouwelijke geslachtscel (leeft 12–24 uur na ovulatie)",back:"eicel"},
+      {front:"het versmelten van de kernen van zaadcel en eicel",back:"bevruchting"},
+      {front:"het nestelen van de bevruchte eicel in het baarmoederslijmvlies",back:"innesteling"}
+    ]
+  },
+  "bio-p4-begrip-def": {
+    titel: "P4: Menstruatie — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"menstruatie",back:"het afstoten van baarmoederslijmvlies en bloed bij geen bevruchting"},
+      {front:"menstruatiecyclus",back:"cyclus van ~28 dagen van opbouw en afstoting van baarmoederslijmvlies"},
+      {front:"maandverband",back:"absorberend materiaal dat bloed opvangt aan buitenkant vagina"},
+      {front:"tampon",back:"absorberend materiaal dat in de vagina wordt geplaatst"}
+    ]
+  },
+  "bio-p4-def-begrip": {
+    titel: "P4: Menstruatie — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"het afstoten van baarmoederslijmvlies en bloed bij geen bevruchting",back:"menstruatie"},
+      {front:"cyclus van ~28 dagen van opbouw en afstoting van baarmoederslijmvlies",back:"menstruatiecyclus"},
+      {front:"absorberend materiaal dat bloed opvangt aan buitenkant vagina",back:"maandverband"},
+      {front:"absorberend materiaal dat in de vagina wordt geplaatst",back:"tampon"}
+    ]
+  },
+  "bio-p6-begrip-def": {
+    titel: "P6: Geboorteregeling — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"anticonceptie",back:"het voorkomen van zwangerschap"},
+      {front:"condoom",back:"rubberen hoesje over de penis; beschermt ook tegen soa's"},
+      {front:"de pil",back:"dagelijks in te nemen anticonceptiemiddel dat ovulatie remt"},
+      {front:"morning-afterpil",back:"noodanticonceptie, in te nemen binnen 72 uur"},
+      {front:"periodieke onthouding",back:"onbetrouwbare methode: niet vrijen in vruchtbare periode"},
+      {front:"coïtus interruptus",back:"onbetrouwbare methode: penis terugtrekken voor zaadlozing"},
+      {front:"abortus",back:"beëindigen van zwangerschap (in NL tot 13 weken wettelijk toegestaan)"}
+    ]
+  },
+  "bio-p6-def-begrip": {
+    titel: "P6: Geboorteregeling — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"het voorkomen van zwangerschap",back:"anticonceptie"},
+      {front:"rubberen hoesje over de penis; beschermt ook tegen soa's",back:"condoom"},
+      {front:"dagelijks in te nemen anticonceptiemiddel dat ovulatie remt",back:"de pil"},
+      {front:"noodanticonceptie, in te nemen binnen 72 uur",back:"morning-afterpil"},
+      {front:"onbetrouwbare methode: niet vrijen in vruchtbare periode",back:"periodieke onthouding"},
+      {front:"onbetrouwbare methode: penis terugtrekken voor zaadlozing",back:"coïtus interruptus"},
+      {front:"beëindigen van zwangerschap (in NL tot 13 weken wettelijk toegestaan)",back:"abortus"}
+    ]
+  },
+  "bio-p7-begrip-def": {
+    titel: "P7: Zwangerschap en geboorte — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"zwangerschap",back:"periode van innesteling tot geboorte (~38 weken)"},
+      {front:"embryo",back:"de zich ontwikkelende vrucht in de baarmoeder"},
+      {front:"placenta",back:"orgaan dat moeder en embryo verbindt; wisselt voedingsstoffen uit"},
+      {front:"navelstreng",back:"verbinding tussen embryo en placenta"},
+      {front:"vruchtwater",back:"vocht om het embryo; beschermt en houdt temperatuur stabiel"},
+      {front:"weeën",back:"samentrekkingen van de baarmoeder bij de bevalling"},
+      {front:"ontsluiting",back:"het wijder worden van de baarmoedermond bij de bevalling"},
+      {front:"uitdrijving",back:"het daadwerkelijk geboren worden van de baby"},
+      {front:"nageboorte",back:"het uitkomen van placenta en vruchtvliezen na geboorte"},
+      {front:"keizersnede",back:"geboorte via operatie door de buikwand"},
+      {front:"stuitligging",back:"baby ligt met billen naar beneden in de baarmoeder"}
+    ]
+  },
+  "bio-p7-def-begrip": {
+    titel: "P7: Zwangerschap en geboorte — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"periode van innesteling tot geboorte (~38 weken)",back:"zwangerschap"},
+      {front:"de zich ontwikkelende vrucht in de baarmoeder",back:"embryo"},
+      {front:"orgaan dat moeder en embryo verbindt; wisselt voedingsstoffen uit",back:"placenta"},
+      {front:"verbinding tussen embryo en placenta",back:"navelstreng"},
+      {front:"vocht om het embryo; beschermt en houdt temperatuur stabiel",back:"vruchtwater"},
+      {front:"samentrekkingen van de baarmoeder bij de bevalling",back:"weeën"},
+      {front:"het wijder worden van de baarmoedermond bij de bevalling",back:"ontsluiting"},
+      {front:"het daadwerkelijk geboren worden van de baby",back:"uitdrijving"},
+      {front:"het uitkomen van placenta en vruchtvliezen na geboorte",back:"nageboorte"},
+      {front:"geboorte via operatie door de buikwand",back:"keizersnede"},
+      {front:"baby ligt met billen naar beneden in de baarmoeder",back:"stuitligging"}
+    ]
+  },
+  "bio-p8-begrip-def": {
+    titel: "P8: Soa's — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"soa",back:"seksueel overdraagbare aandoening"},
+      {front:"chlamydia",back:"meest voorkomende soa in NL; bacterie; behandelbaar met antibiotica"},
+      {front:"HIV",back:"virus dat het afweersysteem aantast; veroorzaakt aids"},
+      {front:"aids",back:"ziekte waarbij afweersysteem ernstig is aangetast door HIV"},
+      {front:"seropositief",back:"besmet met HIV"},
+      {front:"hiv-remmers",back:"medicijnen die HIV-verspreiding vertragen (levenslang)"}
+    ]
+  },
+  "bio-p8-def-begrip": {
+    titel: "P8: Soa's — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"seksueel overdraagbare aandoening",back:"soa"},
+      {front:"meest voorkomende soa in NL; bacterie; behandelbaar met antibiotica",back:"chlamydia"},
+      {front:"virus dat het afweersysteem aantast; veroorzaakt aids",back:"HIV"},
+      {front:"ziekte waarbij afweersysteem ernstig is aangetast door HIV",back:"aids"},
+      {front:"besmet met HIV",back:"seropositief"},
+      {front:"medicijnen die HIV-verspreiding vertragen (levenslang)",back:"hiv-remmers"}
+    ]
   }
 };
+
+/* ── BIO SET RICHTING TOGGLE ── */
+const bioRichtingen = {};
+
+function getBioSet(prefix) {
+  return bioRichtingen[prefix] || (prefix + '-begrip-def');
+}
+
+function toggleRichting(e, prefix) {
+  e.stopPropagation();
+  const current = getBioSet(prefix);
+  const next = current.endsWith('-begrip-def') ? prefix + '-def-begrip' : prefix + '-begrip-def';
+  bioRichtingen[prefix] = next;
+  document.getElementById('richting-' + prefix).textContent = next.endsWith('-begrip-def') ? 'BEGRIP → DEF' : 'DEF → BEGRIP';
+}
 
 /* ── FLASHCARD STATE ── */
 let huidigSet = null;
