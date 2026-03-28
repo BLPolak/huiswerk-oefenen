@@ -497,6 +497,84 @@ body {
   .flip-tekst { font-size: 1.2rem; }
   .werkwoord-grid { grid-template-columns: 1fr; }
 }
+
+/* ── OEFENEN: MULTIPLE CHOICE ── */
+.mc-vraag {
+  margin-bottom: 1.2rem;
+}
+.mc-vraag p {
+  font-weight: 700;
+  color: var(--donker);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+.mc-opties {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.mc-optie {
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--donker);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+.mc-optie:hover:not(:disabled) { border-color: var(--rood); background: #fff5f5; }
+.mc-optie.goed { background: #f0fff4; border-color: #38a169; color: #276749; }
+.mc-optie.fout { background: #fff5f5; border-color: var(--rood); color: var(--rood); }
+.mc-optie:disabled { cursor: default; }
+
+/* ── OEFENEN: OPEN VRAGEN ── */
+.open-vraag {
+  margin-bottom: 1rem;
+}
+.open-vraag p {
+  font-weight: 700;
+  color: var(--donker);
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+.toon-antwoord-btn {
+  background: none;
+  border: 2px solid var(--rood);
+  border-radius: 10px;
+  padding: 0.45rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rood);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.toon-antwoord-btn:hover { background: #fff5f5; }
+.open-antwoord {
+  display: none;
+  margin-top: 0.5rem;
+  background: #f0fff4;
+  border-left: 4px solid #38a169;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: #276749;
+  font-weight: 600;
+}
+.open-antwoord.zichtbaar { display: block; }
+
+.oefenen-sectie-titel {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--rood);
+  margin: 1rem 0 0.8rem;
+}
 </style>
 </head>
 <body>
@@ -510,6 +588,7 @@ body {
 <div class="tabs">
   <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
   <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="toonTab('oefenen', this)">✏️ Oefenen</button>
 </div>
 
 <div class="content">
@@ -942,6 +1021,575 @@ body {
     </div>
   </div><!-- /tab-flashcards -->
 
+  <!-- ══ OEFENEN ══ -->
+  <div id="tab-oefenen" class="sectie">
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 1 — Je verandert
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Welke klier speelt de belangrijkste rol bij de puberteit?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) De alvleesklier</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) De hypofyse</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) De schildklier</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) De bijnier</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Wat zijn primaire geslachtskenmerken?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Kenmerken die ontstaan in de puberteit</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Kenmerken die je pas na de puberteit krijgt</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Kenmerken waarmee je het geslacht kunt herkennen, al aanwezig bij geboorte</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Kenmerken die bij jongens en meisjes hetzelfde zijn</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Welke verandering is een secundair geslachtskenmerk bij jongens?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Penis</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Balzak</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Baardgroei</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Zaadcellen</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Hoe worden hormonen door het lichaam vervoerd?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Via de zenuwen</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Via het bloed</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Via de lymfevaten</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Via de spijsvertering</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Iemand aangetrokken tot hetzelfde geslacht noemen we:</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Transgender</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Androgyn</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Heteroseksueel</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">D) Homoseksueel</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Noem twee secundaire geslachtskenmerken bij meisjes.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Borsten; brede heupen (ook: okselhaar, schaamhaar)</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Wat is het verschil tussen primaire en secundaire geslachtskenmerken?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Primaire kenmerken zijn aanwezig bij geboorte. Secundaire kenmerken ontstaan pas in de puberteit.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>3. Leg uit wat hormonen zijn en hoe ze werken.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Hormonen zijn stoffen geproduceerd door hormoonklieren, vervoerd via het bloed, die opdrachten geven aan organen.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 2 — Voortplantingsstelsel man
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Waar worden zaadcellen geproduceerd?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) In de bijballen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) In de zaadleiders</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) In de teelballen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) In de prostaat</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Welke functie heeft de prostaat?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Zaadcellen produceren</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Zaadcellen opslaan</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Vocht toevoegen aan zaadcellen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Zaadcellen vervoeren</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wat is een erectie?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het vrijkomen van sperma</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het stijf worden van de penis doordat zwellichamen vollopen met bloed</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) De productie van zaadcellen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Een zaadlozing tijdens de slaap</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Hoe lang leven zaadcellen in het lichaam van de vrouw?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 1–2 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) 12–24 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Enkele dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Een week</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Wat is sperma?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Alleen zaadcellen</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Een mengsel van zaadcellen en vocht van zaadblaasjes en prostaat</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Urine vermengd met zaadcellen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Vocht geproduceerd door de teelballen</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Beschrijf de weg die een zaadcel aflegt van productie tot buiten het lichaam.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Teelbal → bijbal → zaadleider → zaadblaasjes + prostaat (vocht toegevoegd = sperma) → urinebuis → buiten via de penis.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Waarom liggen de teelballen buiten het lichaam in de balzak?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Omdat de temperatuur daar iets lager is. Zaadcellen kunnen alleen goed worden geproduceerd bij een lagere temperatuur.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>3. Noem twee manieren waarop een zaadlozing kan plaatsvinden.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Bij geslachtsgemeenschap / bij masturbatie / tijdens de slaap (natte droom).</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 3 — Voortplantingsstelsel vrouw
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Waar vindt de bevruchting normaal gesproken plaats?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) In de baarmoeder</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) In de eierstok</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) In de eileider</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) In de vagina</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Hoe lang leeft een eicel nadat ze vrijgekomen is?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Enkele minuten</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) 12 tot 24 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) 3 tot 5 dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Een week</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wat is de functie van het baarmoederslijmvlies?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Eicellen produceren</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Eicellen vervoeren</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Voeding bieden aan een ingesteld embryo</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Hormonen produceren</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Wat is innesteling?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het vrijkomen van de eicel uit de eierstok</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Het versmelten van zaadcel en eicel</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Het nestelen van de bevruchte eicel in het baarmoederslijmvlies</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het afstoten van het baarmoederslijmvlies</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Wat is de functie van de clitoris?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Eicellen produceren</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Hormonen produceren</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Seksueel gevoel; orgasme</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Slijm produceren</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Leg uit wat ovulatie is en wanneer het plaatsvindt.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Ovulatie is het vrijkomen van een rijpe eicel uit de eierstok. Dit vindt gemiddeld plaats op dag 14 van de menstruatiecyclus.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Wat gebeurt er als een zaadcel de eicel heeft bevrucht?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">De kernen versmelten. De buitenste laag van de eicel wordt ondoordringbaar. De bevruchte eicel begint zich te delen en beweegt via de eileider naar de baarmoeder waar innesteling plaatsvindt.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 4 — Menstruatie
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Wat is de gemiddelde duur van de menstruatiecyclus?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 14 dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) 21 dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) 28 dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 35 dagen</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Wat gebeurt er met het baarmoederslijmvlies als er GEEN bevruchting plaatsvindt?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het wordt dikker</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het wordt afgestoten — menstruatie</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het blijft gelijk</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het wordt dunner maar blijft aanwezig</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wanneer in de cyclus vindt ovulatie gemiddeld plaats?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Dag 1</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Dag 7</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Dag 14</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Dag 21</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Op welke gemiddelde leeftijd begint de eerste menstruatie?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 10 jaar</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) 13 jaar</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) 16 jaar</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 11 jaar</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Wat is het verschil tussen maandverband en tampon?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Er is geen verschil</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Maandverband wordt in de vagina geplaatst</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Tampon wordt in de vagina geplaatst, maandverband vangt bloed op aan de buitenkant</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Een tampon wordt alleen 's nachts gebruikt</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Beschrijf de menstruatiecyclus van dag 1 tot dag 28.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Dag 1–5: menstruatie. Dag 5–13: slijmvlies wordt opgebouwd. Dag ~14: ovulatie. Dag 14–28: slijmvlies wordt dikker. Dag 28: bij geen bevruchting begint nieuwe menstruatie.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Wat zijn mogelijke klachten tijdens de menstruatie?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Buikpijn, rugpijn, hoofdpijn, kribbigheid.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 6 — Geboorteregeling
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Welke anticonceptiemethode beschermt ook tegen soa's?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) De pil</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het condoom</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Periodieke onthouding</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Morning-afterpil</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Waarom is de periodieke onthouding onbetrouwbaar?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het is moeilijk uit te voeren</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Ovulatie is niet precies te voorspellen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het is illegaal</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het beschermt niet tegen soa's</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wanneer moet de morning-afterpil worden ingenomen?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Binnen 24 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Binnen 48 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Binnen 72 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Binnen een week</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Hoe werkt de pil?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Ze doodt zaadcellen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Ze vormt een barrière in de vagina</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Ze remt de ovulatie</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Ze verhindert innesteling altijd</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Tot hoeveel weken is abortus in Nederland wettelijk toegestaan zonder extra voorwaarden?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 6 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) 10 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) 13 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 20 weken</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Noem twee onbetrouwbare anticonceptiemethoden en leg uit waarom ze onbetrouwbaar zijn.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Periodieke onthouding: ovulatie is niet precies te voorspellen. Coïtus interruptus: voorvocht kan al zaadcellen bevatten.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Leg uit hoe het condoom correct wordt gebruikt en waarom het effectief is.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Het condoom wordt over de stijve penis gerold vóór de gemeenschap. Het vangt sperma op zodat zaadcellen niet in de vagina komen. Het beschermt ook tegen soa's. Alleen met CE-keurmerk, eenmalig gebruik.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 7 — Zwangerschap en geboorte
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Wat is de functie van de placenta?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het beschermen van het embryo tegen schokken</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het uitwisselen van voedingsstoffen en afvalstoffen tussen moeder en embryo</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het produceren van vruchtwater</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het verbinden van embryo met baarmoederwand door spieren</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Hoe lang duurt een zwangerschap gemiddeld?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 28 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) 32 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) 38 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 42 weken</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wat is vruchtwater?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het bloed van de moeder dat naar het embryo stroomt</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het vocht om het embryo dat het beschermt</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het vocht in de placenta</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het bloed van het embryo</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Wat zijn weeën?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het opengaan van de baarmoedermond</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Samentrekkingen van de baarmoederwand tijdens de bevalling</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het afbreken van de vruchtvliezen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het persen van de baby naar buiten</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Wanneer spreek je van een keizersnede?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Als de baby te vroeg geboren wordt</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Als de bevalling te lang duurt</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Als er een operatie via de buikwand nodig is, bijv. bij stuitligging</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Als er tweelingen worden geboren</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Beschrijf de stappen van de bevalling in de juiste volgorde.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">1. Weeën beginnen. 2. Vliezen breken, vruchtwater loopt af. 3. Ontsluiting (tot ~10 cm). 4. Uitdrijving: baby wordt geboren. 5. Nageboorte: placenta en vruchtvliezen komen eruit.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Leg uit hoe de placenta werkt en waarom het bloed van moeder en embryo gescheiden blijft.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">De placenta wisselt voedingsstoffen en zuurstof uit van moeder naar embryo, en afvalstoffen de andere kant op. Het bloed blijft gescheiden via dunne vliezen zodat de bloedgroepen niet mengen.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 8 — Seksueel overdraagbare aandoeningen
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Wat is de meest voorkomende soa in Nederland?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) HIV</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Gonorroe</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Chlamydia</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Syfilis</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Wat is een soa?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Een ziekte die alleen via bloed wordt overgedragen</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Een ziekte die via seksueel contact wordt overgedragen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Een ziekte die alleen bij onveilige seks wordt overgedragen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Een ziekte die alleen bij heteroseksueel contact wordt overgedragen</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Hoe wordt chlamydia behandeld?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Met hiv-remmers</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Er is geen behandeling</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Met antibiotica</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Met een vaccin</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Waardoor wordt HIV overgedragen?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Via hoesten en niezen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Via handdruk of knuffel</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Via bloed, sperma, vaginaal vocht of moedermelk</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Via normaal sociaal contact</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Wat is een seropositief persoon?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Iemand die aids heeft</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Iemand die besmet is met HIV</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Iemand die immuun is voor HIV</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Iemand die hiv-remmers gebruikt</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Noem twee gevolgen van onbehandelde chlamydia.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Onvruchtbaarheid bij vrouwen (door verstopping eileiders) / buitenbaarmoederse zwangerschap.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Wat is het verschil tussen HIV en aids?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">HIV is het virus dat het afweersysteem aantast. Aids is de ziekte die ontstaat als het afweersysteem zo ernstig is aangetast dat het lichaam infecties niet meer kan bestrijden.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>3. Hoe kun je jezelf beschermen tegen soa's?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Condoom gebruiken bij elke vorm van seks. Regelmatig een soa-test laten doen bij een nieuwe partner. Bij klachten direct naar de huisarts.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /tab-oefenen -->
+
 </div><!-- /content -->
 
 
@@ -992,6 +1640,24 @@ function toggleAccordion(header) {
   const isOpen = body.classList.contains('open');
   header.classList.toggle('open', !isOpen);
   body.classList.toggle('open', !isOpen);
+}
+
+/* ── OEFENEN: MULTIPLE CHOICE ── */
+function checkMC(btn, correct) {
+  const groep = btn.closest('.mc-opties');
+  groep.querySelectorAll('.mc-optie').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'goed' : 'fout');
+  if (!correct) {
+    groep.querySelectorAll('.mc-optie').forEach(b => {
+      if (b.getAttribute('onclick').includes('true')) b.classList.add('goed');
+    });
+  }
+}
+
+/* ── OEFENEN: OPEN VRAGEN ── */
+function toonAntwoord(btn) {
+  btn.nextElementSibling.classList.add('zichtbaar');
+  btn.style.display = 'none';
 }
 
 /* ── FLASHCARD DATA ── */
