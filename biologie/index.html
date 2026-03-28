@@ -979,6 +979,30 @@ body {
         <button class="set-toggle" onclick="toggleRichting(event, 'bio-p4')">⇄ Wissel richting</button>
       </div>
 
+      <div class="set-kaart" id="card-bio-p6" onclick="startSet(getBioSet('bio-p6'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 6 — Geboorteregeling</div>
+        <div class="set-info">begrippen · 7 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p6">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p6')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p7" onclick="startSet(getBioSet('bio-p7'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 7 — Zwangerschap en geboorte</div>
+        <div class="set-info">begrippen · 11 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p7">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p7')">⇄ Wissel richting</button>
+      </div>
+
+      <div class="set-kaart" id="card-bio-p8" onclick="startSet(getBioSet('bio-p8'))">
+        <div class="set-emoji">🔬</div>
+        <div class="set-naam">Paragraaf 8 — Soa's</div>
+        <div class="set-info">begrippen · 6 kaartjes</div>
+        <div class="set-richting" id="richting-bio-p8">BEGRIP → DEF</div>
+        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p8')">⇄ Wissel richting</button>
+      </div>
+
     </div>
 
   </div><!-- /tab-flashcards -->
@@ -2015,6 +2039,90 @@ const sets = {
       {front:"cyclus van ~28 dagen van opbouw en afstoting van baarmoederslijmvlies",back:"menstruatiecyclus"},
       {front:"absorberend materiaal dat bloed opvangt aan buitenkant vagina",back:"maandverband"},
       {front:"absorberend materiaal dat in de vagina wordt geplaatst",back:"tampon"}
+    ]
+  },
+  "bio-p6-begrip-def": {
+    titel: "P6: Geboorteregeling — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"anticonceptie",back:"het voorkomen van zwangerschap"},
+      {front:"condoom",back:"rubberen hoesje over de penis; beschermt ook tegen soa's"},
+      {front:"de pil",back:"dagelijks in te nemen anticonceptiemiddel dat ovulatie remt"},
+      {front:"morning-afterpil",back:"noodanticonceptie, in te nemen binnen 72 uur"},
+      {front:"periodieke onthouding",back:"onbetrouwbare methode: niet vrijen in vruchtbare periode"},
+      {front:"coïtus interruptus",back:"onbetrouwbare methode: penis terugtrekken voor zaadlozing"},
+      {front:"abortus",back:"beëindigen van zwangerschap (in NL tot 13 weken wettelijk toegestaan)"}
+    ]
+  },
+  "bio-p6-def-begrip": {
+    titel: "P6: Geboorteregeling — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"het voorkomen van zwangerschap",back:"anticonceptie"},
+      {front:"rubberen hoesje over de penis; beschermt ook tegen soa's",back:"condoom"},
+      {front:"dagelijks in te nemen anticonceptiemiddel dat ovulatie remt",back:"de pil"},
+      {front:"noodanticonceptie, in te nemen binnen 72 uur",back:"morning-afterpil"},
+      {front:"onbetrouwbare methode: niet vrijen in vruchtbare periode",back:"periodieke onthouding"},
+      {front:"onbetrouwbare methode: penis terugtrekken voor zaadlozing",back:"coïtus interruptus"},
+      {front:"beëindigen van zwangerschap (in NL tot 13 weken wettelijk toegestaan)",back:"abortus"}
+    ]
+  },
+  "bio-p7-begrip-def": {
+    titel: "P7: Zwangerschap en geboorte — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"zwangerschap",back:"periode van innesteling tot geboorte (~38 weken)"},
+      {front:"embryo",back:"de zich ontwikkelende vrucht in de baarmoeder"},
+      {front:"placenta",back:"orgaan dat moeder en embryo verbindt; wisselt voedingsstoffen uit"},
+      {front:"navelstreng",back:"verbinding tussen embryo en placenta"},
+      {front:"vruchtwater",back:"vocht om het embryo; beschermt en houdt temperatuur stabiel"},
+      {front:"weeën",back:"samentrekkingen van de baarmoeder bij de bevalling"},
+      {front:"ontsluiting",back:"het wijder worden van de baarmoedermond bij de bevalling"},
+      {front:"uitdrijving",back:"het daadwerkelijk geboren worden van de baby"},
+      {front:"nageboorte",back:"het uitkomen van placenta en vruchtvliezen na geboorte"},
+      {front:"keizersnede",back:"geboorte via operatie door de buikwand"},
+      {front:"stuitligging",back:"baby ligt met billen naar beneden in de baarmoeder"}
+    ]
+  },
+  "bio-p7-def-begrip": {
+    titel: "P7: Zwangerschap en geboorte — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"periode van innesteling tot geboorte (~38 weken)",back:"zwangerschap"},
+      {front:"de zich ontwikkelende vrucht in de baarmoeder",back:"embryo"},
+      {front:"orgaan dat moeder en embryo verbindt; wisselt voedingsstoffen uit",back:"placenta"},
+      {front:"verbinding tussen embryo en placenta",back:"navelstreng"},
+      {front:"vocht om het embryo; beschermt en houdt temperatuur stabiel",back:"vruchtwater"},
+      {front:"samentrekkingen van de baarmoeder bij de bevalling",back:"weeën"},
+      {front:"het wijder worden van de baarmoedermond bij de bevalling",back:"ontsluiting"},
+      {front:"het daadwerkelijk geboren worden van de baby",back:"uitdrijving"},
+      {front:"het uitkomen van placenta en vruchtvliezen na geboorte",back:"nageboorte"},
+      {front:"geboorte via operatie door de buikwand",back:"keizersnede"},
+      {front:"baby ligt met billen naar beneden in de baarmoeder",back:"stuitligging"}
+    ]
+  },
+  "bio-p8-begrip-def": {
+    titel: "P8: Soa's — BEGRIP → DEF",
+    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
+    kaarten: [
+      {front:"soa",back:"seksueel overdraagbare aandoening"},
+      {front:"chlamydia",back:"meest voorkomende soa in NL; bacterie; behandelbaar met antibiotica"},
+      {front:"HIV",back:"virus dat het afweersysteem aantast; veroorzaakt aids"},
+      {front:"aids",back:"ziekte waarbij afweersysteem ernstig is aangetast door HIV"},
+      {front:"seropositief",back:"besmet met HIV"},
+      {front:"hiv-remmers",back:"medicijnen die HIV-verspreiding vertragen (levenslang)"}
+    ]
+  },
+  "bio-p8-def-begrip": {
+    titel: "P8: Soa's — DEF → BEGRIP",
+    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
+    kaarten: [
+      {front:"seksueel overdraagbare aandoening",back:"soa"},
+      {front:"meest voorkomende soa in NL; bacterie; behandelbaar met antibiotica",back:"chlamydia"},
+      {front:"virus dat het afweersysteem aantast; veroorzaakt aids",back:"HIV"},
+      {front:"ziekte waarbij afweersysteem ernstig is aangetast door HIV",back:"aids"},
+      {front:"besmet met HIV",back:"seropositief"},
+      {front:"medicijnen die HIV-verspreiding vertragen (levenslang)",back:"hiv-remmers"}
     ]
   }
 };
