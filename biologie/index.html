@@ -1426,6 +1426,84 @@ body {
       </div>
     </div>
 
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 7 — Zwangerschap en geboorte
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Wat is de functie van de placenta?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het beschermen van het embryo tegen schokken</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het uitwisselen van voedingsstoffen en afvalstoffen tussen moeder en embryo</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het produceren van vruchtwater</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het verbinden van embryo met baarmoederwand door spieren</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Hoe lang duurt een zwangerschap gemiddeld?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 28 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) 32 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) 38 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 42 weken</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wat is vruchtwater?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het bloed van de moeder dat naar het embryo stroomt</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het vocht om het embryo dat het beschermt</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het vocht in de placenta</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het bloed van het embryo</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Wat zijn weeën?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het opengaan van de baarmoedermond</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Samentrekkingen van de baarmoederwand tijdens de bevalling</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het afbreken van de vruchtvliezen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het persen van de baby naar buiten</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Wanneer spreek je van een keizersnede?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Als de baby te vroeg geboren wordt</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Als de bevalling te lang duurt</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Als er een operatie via de buikwand nodig is, bijv. bij stuitligging</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Als er tweelingen worden geboren</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Beschrijf de stappen van de bevalling in de juiste volgorde.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">1. Weeën beginnen. 2. Vliezen breken, vruchtwater loopt af. 3. Ontsluiting (tot ~10 cm). 4. Uitdrijving: baby wordt geboren. 5. Nageboorte: placenta en vruchtvliezen komen eruit.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Leg uit hoe de placenta werkt en waarom het bloed van moeder en embryo gescheiden blijft.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">De placenta wisselt voedingsstoffen en zuurstof uit van moeder naar embryo, en afvalstoffen de andere kant op. Het bloed blijft gescheiden via dunne vliezen zodat de bloedgroepen niet mengen.</div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /tab-oefenen -->
 
 </div><!-- /content -->
