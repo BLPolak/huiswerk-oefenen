@@ -575,6 +575,29 @@ body {
   color: var(--rood);
   margin: 1rem 0 0.8rem;
 }
+
+/* ── THEORIE BLOKKEN ── */
+.theorie-blok {
+  background: #f7fafc;
+  border-left: 4px solid var(--rood);
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.92rem;
+  color: var(--donker);
+}
+.theorie-blok-titel {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--rood);
+  margin-bottom: 0.5rem;
+}
+.theorie-blok p { margin-bottom: 0.4rem; line-height: 1.55; }
+.theorie-blok p:last-child { margin-bottom: 0; }
+.theorie-blok ul { margin: 0.3rem 0 0 1.1rem; }
+.theorie-blok li { margin-bottom: 0.2rem; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -596,7 +619,44 @@ body {
   <!-- ══ THEORIE ══ -->
   <div id="tab-theorie" class="sectie actief">
 
-  
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📖 Paragraaf 1 — Je verandert
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Puberteit</p>
+          <p>Vanaf je 12e jaar vinden er veranderingen plaats. Hormoonklieren produceren hormonen die via het bloed door het lichaam stromen. De hypofyse in de hersenen speelt een centrale rol.</p>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Primaire geslachtskenmerken</p>
+          <p>Kenmerken waarmee je het geslacht kunt herkennen, al aanwezig bij de geboorte.</p>
+          <ul>
+            <li>Jongens: penis en balzak</li>
+            <li>Meisjes: vagina en schaamlippen</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Secundaire geslachtskenmerken</p>
+          <p>Ontstaan in de puberteit vanaf ongeveer je 10e levensjaar.</p>
+          <ul>
+            <li>Jongens: borsthaar, baardgroei, zwaardere stem, gespierde lichaamsbouw</li>
+            <li>Meisjes: borsten, brede heupen</li>
+            <li>Beiden: schaamhaar, okselhaar, groeispurt</li>
+          </ul>
+        </div>
+
+        <div class="theorie-blok">
+          <p class="theorie-blok-titel">Seksualiteit en identiteit</p>
+          <p>Je kunt je aangetrokken voelen tot personen van hetzelfde of het andere geslacht. Heteroseksueel: aangetrokken tot ander geslacht. Homoseksueel: aangetrokken tot zelfde geslacht. Transgender: voelt zich niet thuis in geboortegeslacht. Androgyn: uiterlijke kenmerken van beide geslachten.</p>
+        </div>
+
+      </div>
+    </div>
 
   </div><!-- /tab-theorie -->
 
