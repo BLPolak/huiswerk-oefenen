@@ -1348,6 +1348,84 @@ body {
       </div>
     </div>
 
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 6 — Geboorteregeling
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Welke anticonceptiemethode beschermt ook tegen soa's?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) De pil</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het condoom</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Periodieke onthouding</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Morning-afterpil</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Waarom is de periodieke onthouding onbetrouwbaar?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het is moeilijk uit te voeren</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Ovulatie is niet precies te voorspellen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het is illegaal</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het beschermt niet tegen soa's</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wanneer moet de morning-afterpil worden ingenomen?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Binnen 24 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Binnen 48 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Binnen 72 uur</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Binnen een week</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Hoe werkt de pil?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Ze doodt zaadcellen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Ze vormt een barrière in de vagina</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Ze remt de ovulatie</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Ze verhindert innesteling altijd</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Tot hoeveel weken is abortus in Nederland wettelijk toegestaan zonder extra voorwaarden?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 6 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) 10 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) 13 weken</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 20 weken</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Noem twee onbetrouwbare anticonceptiemethoden en leg uit waarom ze onbetrouwbaar zijn.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Periodieke onthouding: ovulatie is niet precies te voorspellen. Coïtus interruptus: voorvocht kan al zaadcellen bevatten.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Leg uit hoe het condoom correct wordt gebruikt en waarom het effectief is.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Het condoom wordt over de stijve penis gerold vóór de gemeenschap. Het vangt sperma op zodat zaadcellen niet in de vagina komen. Het beschermt ook tegen soa's. Alleen met CE-keurmerk, eenmalig gebruik.</div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /tab-oefenen -->
 
 </div><!-- /content -->
