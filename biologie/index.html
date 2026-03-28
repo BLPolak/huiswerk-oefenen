@@ -1270,6 +1270,84 @@ body {
       </div>
     </div>
 
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        ✏️ Paragraaf 4 — Menstruatie
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <!-- MULTIPLE CHOICE -->
+        <p class="oefenen-sectie-titel">Multiple choice</p>
+
+        <div class="mc-vraag">
+          <p>1. Wat is de gemiddelde duur van de menstruatiecyclus?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 14 dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) 21 dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) 28 dagen</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 35 dagen</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>2. Wat gebeurt er met het baarmoederslijmvlies als er GEEN bevruchting plaatsvindt?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Het wordt dikker</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) Het wordt afgestoten — menstruatie</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) Het blijft gelijk</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Het wordt dunner maar blijft aanwezig</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>3. Wanneer in de cyclus vindt ovulatie gemiddeld plaats?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Dag 1</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Dag 7</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Dag 14</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Dag 21</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>4. Op welke gemiddelde leeftijd begint de eerste menstruatie?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) 10 jaar</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">B) 13 jaar</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">C) 16 jaar</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) 11 jaar</button>
+          </div>
+        </div>
+
+        <div class="mc-vraag">
+          <p>5. Wat is het verschil tussen maandverband en tampon?</p>
+          <div class="mc-opties">
+            <button class="mc-optie" onclick="checkMC(this, false)">A) Er is geen verschil</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">B) Maandverband wordt in de vagina geplaatst</button>
+            <button class="mc-optie" onclick="checkMC(this, true)">C) Tampon wordt in de vagina geplaatst, maandverband vangt bloed op aan de buitenkant</button>
+            <button class="mc-optie" onclick="checkMC(this, false)">D) Een tampon wordt alleen 's nachts gebruikt</button>
+          </div>
+        </div>
+
+        <!-- OPEN VRAGEN -->
+        <p class="oefenen-sectie-titel">Open vragen</p>
+
+        <div class="open-vraag">
+          <p>1. Beschrijf de menstruatiecyclus van dag 1 tot dag 28.</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Dag 1–5: menstruatie. Dag 5–13: slijmvlies wordt opgebouwd. Dag ~14: ovulatie. Dag 14–28: slijmvlies wordt dikker. Dag 28: bij geen bevruchting begint nieuwe menstruatie.</div>
+        </div>
+
+        <div class="open-vraag">
+          <p>2. Wat zijn mogelijke klachten tijdens de menstruatie?</p>
+          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
+          <div class="open-antwoord">Buikpijn, rugpijn, hoofdpijn, kribbigheid.</div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /tab-oefenen -->
 
 </div><!-- /content -->
