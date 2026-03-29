@@ -502,6 +502,82 @@ footer {
     </div>
   </div>
 
+  <!-- Kaart 5: Massa en zwaartekracht -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">7.3 ⚖️ Massa en zwaartekracht</div>
+    <div class="uitleg-kaart-body">
+      <p>De <strong>zwaartekracht</strong> (F<sub>z</sub>) is de aantrekkingskracht van de aarde op een voorwerp. Hoe groter de massa van een voorwerp, hoe groter de zwaartekracht.</p>
+      <div class="formule-blok">F<sub>z</sub> = m × g</div>
+      <p>
+        📌 <strong>F<sub>z</sub></strong> = de zwaartekracht in newton (N)<br>
+        📌 <strong>m</strong> = de massa in kilogram (kg)<br>
+        📌 <strong>g</strong> = 9,81 newton per kilogram (N/kg) — dit is de waarde in Nederland
+      </p>
+      <div class="info-blok">
+        💡 <strong>Let op het verschil:</strong><br>
+        • <strong>Massa (m)</strong> is hoeveel stof er in een voorwerp zit — gemeten in kg of g<br>
+        • <strong>Zwaartekracht (F<sub>z</sub>)</strong> is de kracht waarmee de aarde eraan trekt — gemeten in N
+      </div>
+      <div class="voorbeeld-blok">
+        🔍 <strong>Voorbeeld:</strong> Een etui heeft een massa van 250 g = 0,250 kg.<br>
+        F<sub>z</sub> = 0,250 × 9,81 = <strong>2,45 N</strong>
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=zwaartekracht+berekenen+NaSk+klas+2+havo>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "zwaartekracht berekenen NaSk klas 2 havo"
+        </a>
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=massa+en+gewicht+verschil+NaSk+uitleg>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "massa en gewicht verschil NaSk uitleg"
+        </a>
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=Fz+%3D+m+x+g+uitleg+klas+2+havo>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "Fz = m x g uitleg klas 2 havo"
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaart 6: Het zwaartepunt -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">🎯 Het zwaartepunt</div>
+    <div class="uitleg-kaart-body">
+      <p>Elk voorwerp heeft een <strong>zwaartepunt</strong>. Dat is het aangrijpingspunt van de zwaartekracht. Het zwaartepunt zit vaak in het midden van een regelmatig voorwerp — bij een onregelmatig voorwerp is het lastiger te bepalen.</p>
+      <div class="info-blok">
+        💡 <strong>Wist je dat?</strong> Je kunt het zwaartepunt vinden door een voorwerp aan een touwtje te hangen. De zwaartekracht werkt altijd recht naar beneden vanaf het zwaartepunt.
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=zwaartepunt+bepalen+NaSk+uitleg+klas+2>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "zwaartepunt bepalen NaSk uitleg klas 2"
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaart 7: Zwaartekracht op andere planeten -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">🪐 Zwaartekracht op andere planeten</div>
+    <div class="uitleg-kaart-body">
+      <p>De waarde van g verschilt per hemellichaam. Op de maan is g veel kleiner dan op aarde — je weegt daar dus veel minder. Op Jupiter is g juist groter.</p>
+      <p>
+        🌍 <strong>Aarde:</strong> g = 9,81 N/kg<br>
+        🌙 <strong>Maan:</strong> g ≈ 1,6 N/kg<br>
+        🔴 <strong>Mars:</strong> g ≈ 3,74 N/kg<br>
+        🟠 <strong>Jupiter:</strong> g ≈ 25 N/kg
+      </p>
+      <p>Je gebruikt gewoon dezelfde formule: F<sub>z</sub> = m × g — maar met de g van dat hemellichaam.</p>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=zwaartekracht+planeten+NaSk+uitleg>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "zwaartekracht planeten NaSk uitleg"
+        </a>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /sectie-uitleg -->
 
 
@@ -563,6 +639,7 @@ footer {
     <button class="filter-knop" data-filter="kracht_berekenen"       onclick="setFilter('kracht_berekenen',this)">💪 Kracht berekenen (N)</button>
     <button class="filter-knop" data-filter="pijllengte"             onclick="setFilter('pijllengte',this)">📏 Pijllengte berekenen (cm)</button>
     <button class="filter-knop" data-filter="richting"               onclick="setFilter('richting',this)">🧭 Richting herkennen</button>
+    <button class="filter-knop" data-filter="massa_zwaartekracht"   onclick="setFilter('massa_zwaartekracht',this)">⚖️ Massa &amp; zwaartekracht</button>
   </div>
 
   <div class="kaart" id="opgave-kaart">
@@ -770,13 +847,62 @@ const generatoren = {
       invoertype: 'mc',
     };
   },
+  fz_berekenen: () => {
+    const gWaarden = [
+      { g: 9.81, planeet: 'de aarde' },
+      { g: 9.81, planeet: 'de aarde' },
+      { g: 9.81, planeet: 'de aarde' },
+      { g: 1.6,  planeet: 'de maan'  },
+      { g: 3.74, planeet: 'Mars'     },
+      { g: 25,   planeet: 'Jupiter'  },
+    ];
+    const massas = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 8, 10];
+    const m_kg = kies(massas);
+    const { g, planeet } = kies(gWaarden);
+    const fz = Math.round(m_kg * g * 100) / 100;
+    const voorwerpen = ['rugzak', 'tas', 'etui', 'fles water', 'boek', 'bal', 'steen', 'doos'];
+    const voorwerp = kies(voorwerpen);
+    return {
+      type: 'fz_berekenen',
+      m_kg, g, planeet, fz,
+      vraag: `Een ${voorwerp} heeft een massa van ${nl(m_kg)} kg. Bereken de zwaartekracht op ${planeet}. (g = ${nl(g)} N/kg)`,
+      antwoord: fz,
+      marge: 0.1,
+      eenheid: 'N',
+      uitleg: `Fz = m × g = ${nl(m_kg)} × ${nl(g)} = <strong>${nl(fz)} N</strong>.`,
+      hint: `Gebruik de formule: Fz = m × g. Vul in: ${nl(m_kg)} × ${nl(g)}.`,
+      formule: 'Fz (N) = m (kg) × g (N/kg)',
+      invoertype: 'getal',
+    };
+  },
+  m_berekenen: () => {
+    const massas = [1, 2, 3, 4, 5, 6, 8, 10];
+    const m_kg = kies(massas);
+    const g = 9.81;
+    const fz = Math.round(m_kg * g * 100) / 100;
+    const voorwerpen = ['rugzak', 'tas', 'doos', 'emmer', 'koffer', 'krat'];
+    const voorwerp = kies(voorwerpen);
+    return {
+      type: 'm_berekenen',
+      m_kg, g, fz,
+      vraag: `Een ${voorwerp} heeft een zwaartekracht van ${nl(fz)} N. Bereken de massa. (g = ${nl(g)} N/kg)`,
+      antwoord: m_kg,
+      marge: 0.05,
+      eenheid: 'kg',
+      uitleg: `m = Fz ÷ g = ${nl(fz)} ÷ ${nl(g)} = <strong>${nl(m_kg)} kg</strong>.`,
+      hint: `Herschrijf de formule: m = Fz ÷ g. Deel de zwaartekracht door g.`,
+      formule: 'Fz = m × g  →  m = Fz ÷ g',
+      invoertype: 'getal',
+    };
+  },
 };
 
 const filterGeneratoren = {
-  kracht_berekenen: ['kracht_berekenen'],
-  pijllengte:       ['pijllengte'],
-  richting:         ['richting'],
-  alles:            ['kracht_berekenen', 'kracht_berekenen', 'pijllengte', 'pijllengte', 'richting'],
+  kracht_berekenen:   ['kracht_berekenen'],
+  pijllengte:         ['pijllengte'],
+  richting:           ['richting'],
+  massa_zwaartekracht:['fz_berekenen', 'fz_berekenen', 'm_berekenen'],
+  alles:              ['kracht_berekenen', 'kracht_berekenen', 'pijllengte', 'pijllengte', 'richting', 'fz_berekenen', 'm_berekenen'],
 };
 
 // ── Volgende opgave ───────────────────────────────────────────────────────────
@@ -800,6 +926,8 @@ function volgende() {
     kracht_berekenen: '💪 Kracht berekenen',
     pijllengte:       '📏 Pijllengte berekenen',
     richting:         '🧭 Richting herkennen',
+    fz_berekenen:     '⚖️ Zwaartekracht berekenen',
+    m_berekenen:      '⚖️ Massa berekenen',
   };
   document.getElementById('kaart-header').textContent  = hdrs[huidigeOpgave.type] || '⚗️ Krachten';
   document.getElementById('vraag').textContent         = huidigeOpgave.vraag;
@@ -901,6 +1029,7 @@ function tekenOpgave(o) {
   if (o.type === 'kracht_berekenen') tekenKrachtAflezen(ctx, o);
   else if (o.type === 'pijllengte')  tekenPijllengte(ctx, o);
   else if (o.type === 'richting')    tekenRichting(ctx, o);
+  else if (o.type === 'fz_berekenen' || o.type === 'm_berekenen') tekenMassaZwaartekracht(ctx, o);
 }
 
 function tekenKrachtAflezen(ctx, o) {
@@ -968,6 +1097,38 @@ function tekenRichting(ctx, o) {
   ctx.fillText('Welke richting?', 200, 220);
   ctx.textAlign = 'left';
   tekenSchaalBalk(ctx, o.schaal);
+}
+
+function tekenMassaZwaartekracht(ctx, o) {
+  const cx = 200, cy = 90, w = 110, h = 60;
+  ctx.fillStyle = '#f3e8ff';
+  ctx.strokeStyle = '#6b46c1';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.rect(cx - w / 2, cy - h / 2, w, h);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#6b46c1';
+  ctx.font = 'bold 13px Nunito, sans-serif';
+  ctx.textAlign = 'center';
+  const label = o.type === 'fz_berekenen'
+    ? 'm = ' + nl(o.m_kg) + ' kg'
+    : 'Fz = ' + nl(o.fz) + ' N';
+  ctx.fillText(label, cx, cy + 5);
+  tekenPijl(ctx, cx, cy + h / 2, 270, 60, '#e53e3e');
+  tekenPunt(ctx, cx, cy + h / 2);
+  ctx.fillStyle = '#e53e3e';
+  ctx.font = 'bold 12px Nunito, sans-serif';
+  ctx.textAlign = 'center';
+  const vraagLabel = o.type === 'fz_berekenen' ? 'Fz = ? N' : 'm = ? kg';
+  ctx.fillText(vraagLabel, cx, cy + h / 2 + 78);
+  ctx.fillStyle = '#718096';
+  ctx.font = '11px Nunito, sans-serif';
+  const planeetTekst = o.planeet
+    ? 'Planeet: ' + o.planeet + '  (g = ' + nl(o.g) + ' N/kg)'
+    : 'g = 9,81 N/kg';
+  ctx.fillText(planeetTekst, cx, 215);
+  ctx.textAlign = 'left';
 }
 
 // ── Enter key support ─────────────────────────────────────────────────────────
@@ -1060,6 +1221,30 @@ const fcData = [
     definitie: 'Deel de kracht door de schaalwaarde om de juiste pijllengte te vinden.',
     extra: 'Voorbeeld: kracht = 150 N, schaal = 25 N/cm\n→ pijllengte = 150 ÷ 25 = 6 cm.',
     formule: 'Pijllengte (cm) = kracht (N) ÷ schaal (N/cm)',
+  },
+  {
+    begrip: 'Zwaartekracht (Fz)',
+    definitie: 'De aantrekkingskracht van de aarde op een voorwerp. Formule: Fz = m × g',
+    extra: 'Hoe groter de massa, hoe groter de zwaartekracht. Zwaartekracht wordt gemeten in Newton (N).',
+    formule: 'Fz = m × g',
+  },
+  {
+    begrip: 'Massa (m)',
+    definitie: 'Hoeveel stof er in een voorwerp zit, gemeten in kilogram (kg)',
+    extra: 'Let op: massa is NIET hetzelfde als zwaartekracht.\nMassa verandert niet als je naar de maan gaat. Zwaartekracht wel.',
+    formule: null,
+  },
+  {
+    begrip: 'g (valversnelling)',
+    definitie: 'De zwaartekracht per kilogram massa. In Nederland is g = 9,81 N/kg',
+    extra: 'g verschilt per hemellichaam:\n🌍 Aarde: 9,81 N/kg\n🌙 Maan: ≈ 1,6 N/kg\n🔴 Mars: ≈ 3,74 N/kg\n🟠 Jupiter: ≈ 25 N/kg',
+    formule: null,
+  },
+  {
+    begrip: 'Zwaartepunt',
+    definitie: 'Het aangrijpingspunt van de zwaartekracht op een voorwerp',
+    extra: 'Zit vaak in het midden van een regelmatig voorwerp. Je kunt het vinden door een voorwerp aan een touwtje te hangen.',
+    formule: null,
   },
 ];
 
