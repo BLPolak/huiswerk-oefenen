@@ -578,6 +578,85 @@ footer {
     </div>
   </div>
 
+  <!-- Kaart 8: Uitrekking en veerkracht -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">7.4 🌀 Uitrekking en veerkracht</div>
+    <div class="uitleg-kaart-body">
+      <p>Als je een veer uitrekt of samendrukt, oefent de veer een kracht terug uit. Die kracht heet de <strong>veerkracht</strong>. De veerkracht werkt altijd in de tegengestelde richting van de uitrekking.</p>
+      <p>De <strong>uitrekking (u)</strong> is NIET de totale lengte van de veer, maar het verschil ten opzichte van de beginlengte:</p>
+      <div class="formule-blok">u = nieuwe lengte − beginlengte (L)</div>
+      <p>Eenheid van uitrekking: centimeter (cm) of meter (m)</p>
+      <div class="voorbeeld-blok">
+        💡 <strong>Voorbeeld:</strong> Een veer is normaal 18 cm lang. Na het belasten is hij 22 cm lang.<br>
+        u = 22 − 18 = <strong>4 cm</strong>
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=veerkracht+uitrekking+NaSk+uitleg+klas+2>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "veerkracht uitrekking NaSk uitleg klas 2"
+        </a>
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=veer+uitrekking+berekenen+havo+NaSk>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "veer uitrekking berekenen havo NaSk"
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaart 9: De veerconstante -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">📐 De veerconstante</div>
+    <div class="uitleg-kaart-body">
+      <p>Elke veer heeft een <strong>veerconstante (C)</strong>. Die geeft aan hoeveel kracht nodig is voor 1 cm (of 1 m) uitrekking. Een grote veerconstante = een stugge veer. Een kleine veerconstante = een slappe veer.</p>
+      <div class="formule-blok">F = C × u</div>
+      <p>
+        📌 <strong>F</strong> = de veerkracht in newton (N)<br>
+        📌 <strong>C</strong> = de veerconstante in N/cm of N/m<br>
+        📌 <strong>u</strong> = de uitrekking in cm of m
+      </p>
+      <div class="voorbeeld-blok">
+        🔍 <strong>Voorbeeld:</strong> Een veer heeft een veerconstante van 2 N/cm. Je hangt een gewicht van 3 N eraan.<br>
+        u = F ÷ C = 3 ÷ 2 = <strong>1,5 cm</strong>
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=veerconstante+berekenen+NaSk+klas+2+havo>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "veerconstante berekenen NaSk klas 2 havo"
+        </a>
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=F+%3D+C+x+u+formule+uitleg+NaSk>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "F = C x u formule uitleg NaSk"
+        </a>
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=kracht+uitrekking+diagram+veer+NaSk>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "kracht uitrekking diagram veer NaSk"
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaart 10: Kracht-uitrekkingsdiagram -->
+  <div class="uitleg-kaart">
+    <div class="uitleg-kaart-header">📊 Kracht-uitrekkingsdiagram</div>
+    <div class="uitleg-kaart-body">
+      <p>Als je de kracht (F) uitzet tegen de uitrekking (u) in een grafiek, krijg je een <strong>rechte lijn door de oorsprong</strong>. Dat laat zien dat de uitrekking recht evenredig is met de kracht: twee keer zo veel kracht → twee keer zo grote uitrekking.</p>
+      <p>De helling van de lijn hangt af van de veerconstante:</p>
+      <p>
+        • Steile lijn → grote C → stugge veer<br>
+        • Flauwe lijn → kleine C → slappe veer
+      </p>
+      <div class="info-blok">
+        💡 <strong>Let op:</strong> Dit geldt alleen zolang de veer <em>elastisch</em> gedraagt. Als je te hard trekt, vervormt de veer blijvend (<em>plastisch</em>) en klopt de formule niet meer.
+      </div>
+
+      <h3>Meer leren</h3>
+      <div class="links-lijst">
+        <a class="link-item" href="<https://www.youtube.com/results?search_query=kracht+uitrekking+grafiek+veer+NaSk+havo>" target="_blank">
+          <span class="link-badge yt">YouTube</span> Zoek: "kracht uitrekking grafiek veer NaSk havo"
+        </a>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /sectie-uitleg -->
 
 
@@ -640,6 +719,7 @@ footer {
     <button class="filter-knop" data-filter="pijllengte"             onclick="setFilter('pijllengte',this)">📏 Pijllengte berekenen (cm)</button>
     <button class="filter-knop" data-filter="richting"               onclick="setFilter('richting',this)">🧭 Richting herkennen</button>
     <button class="filter-knop" data-filter="massa_zwaartekracht"   onclick="setFilter('massa_zwaartekracht',this)">⚖️ Massa &amp; zwaartekracht</button>
+    <button class="filter-knop" data-filter="veer"                 onclick="setFilter('veer',this)">🌀 Veerkracht &amp; uitrekking</button>
   </div>
 
   <div class="kaart" id="opgave-kaart">
@@ -895,14 +975,94 @@ const generatoren = {
       invoertype: 'getal',
     };
   },
+  u_berekenen: () => {
+    const beginlengtes = [10, 12, 15, 18, 20, 25];
+    const uitrekkingen = [1, 2, 3, 4, 5, 6, 8];
+    const L = kies(beginlengtes);
+    const u = kies(uitrekkingen);
+    const nieuweLengte = L + u;
+    return {
+      type: 'u_berekenen',
+      L, u, nieuweLengte,
+      vraag: `Een veer heeft een beginlengte van ${L} cm. Na belasting is de veer ${nieuweLengte} cm lang. Hoe groot is de uitrekking?`,
+      antwoord: u,
+      marge: 0,
+      eenheid: 'cm',
+      uitleg: `u = nieuwe lengte − beginlengte = ${nieuweLengte} − ${L} = <strong>${u} cm</strong>.`,
+      hint: `Trek de beginlengte af van de nieuwe lengte: ${nieuweLengte} − ${L}.`,
+      formule: 'u = nieuwe lengte − beginlengte (L)',
+      invoertype: 'getal',
+    };
+  },
+  u_veer_berekenen: () => {
+    const cWaarden = [1, 1.5, 2, 2.5, 3, 4, 5];
+    const uitrekkingen = [1, 1.5, 2, 2.5, 3, 4, 5, 6];
+    const C = kies(cWaarden);
+    const u = kies(uitrekkingen);
+    const F = Math.round(C * u * 10) / 10;
+    return {
+      type: 'u_veer_berekenen',
+      C, u, F,
+      vraag: `Een veer heeft veerconstante ${nl(C)} N/cm. Er hangt een gewicht van ${nl(F)} N aan. Hoe groot is de uitrekking?`,
+      antwoord: u,
+      marge: 0.05,
+      eenheid: 'cm',
+      uitleg: `u = F ÷ C = ${nl(F)} ÷ ${nl(C)} = <strong>${nl(u)} cm</strong>.`,
+      hint: `Herschrijf de formule: u = F ÷ C. Deel de kracht door de veerconstante.`,
+      formule: 'F = C × u  →  u = F ÷ C',
+      invoertype: 'getal',
+    };
+  },
+  C_berekenen: () => {
+    const cWaarden = [1, 1.5, 2, 2.5, 3, 4, 5];
+    const uitrekkingen = [1, 2, 2.5, 3, 4, 5, 6];
+    const C = kies(cWaarden);
+    const u = kies(uitrekkingen);
+    const F = Math.round(C * u * 10) / 10;
+    return {
+      type: 'C_berekenen',
+      C, u, F,
+      vraag: `Een veer rekt ${nl(u)} cm uit bij een kracht van ${nl(F)} N. Bereken de veerconstante.`,
+      antwoord: C,
+      marge: 0.05,
+      eenheid: 'N/cm',
+      uitleg: `C = F ÷ u = ${nl(F)} ÷ ${nl(u)} = <strong>${nl(C)} N/cm</strong>.`,
+      hint: `Herschrijf de formule: C = F ÷ u. Deel de kracht door de uitrekking.`,
+      formule: 'F = C × u  →  C = F ÷ u',
+      invoertype: 'getal',
+    };
+  },
+  lengte_veer_berekenen: () => {
+    const beginlengtes = [10, 12, 15, 18, 20, 25];
+    const cWaarden = [1, 1.5, 2, 2.5, 3];
+    const uitrekkingen = [1, 2, 2.5, 3, 4, 5];
+    const L = kies(beginlengtes);
+    const C = kies(cWaarden);
+    const u = kies(uitrekkingen);
+    const F = Math.round(C * u * 10) / 10;
+    const nieuweLengte = L + u;
+    return {
+      type: 'lengte_veer_berekenen',
+      L, C, u, F, nieuweLengte,
+      vraag: `Een veer heeft beginlengte ${L} cm en veerconstante ${nl(C)} N/cm. Er hangt een kracht van ${nl(F)} N aan. Hoe lang is de veer nu?`,
+      antwoord: nieuweLengte,
+      marge: 0.05,
+      eenheid: 'cm',
+      uitleg: `Uitrekking: u = F ÷ C = ${nl(F)} ÷ ${nl(C)} = ${nl(u)} cm.<br>Nieuwe lengte = L + u = ${L} + ${nl(u)} = <strong>${nl(nieuweLengte)} cm</strong>.`,
+      hint: `Stap 1: bereken u = F ÷ C. Stap 2: nieuwe lengte = beginlengte + u.`,
+      formule: 'u = F ÷ C  →  nieuwe lengte = L + u',
+      invoertype: 'getal',
+    };
+  },
 };
 
 const filterGeneratoren = {
-  kracht_berekenen:   ['kracht_berekenen'],
-  pijllengte:         ['pijllengte'],
-  richting:           ['richting'],
-  massa_zwaartekracht:['fz_berekenen', 'fz_berekenen', 'm_berekenen'],
-  alles:              ['kracht_berekenen', 'kracht_berekenen', 'pijllengte', 'pijllengte', 'richting', 'fz_berekenen', 'm_berekenen'],
+  kracht_berekenen:    ['kracht_berekenen'],
+  pijllengte:          ['pijllengte'],
+  richting:            ['richting'],
+  massa_zwaartekracht: ['fz_berekenen', 'fz_berekenen', 'm_berekenen'],
+  veer:                ['u_berekenen', 'u_veer_berekenen', 'u_veer_berekenen', 'C_berekenen', 'lengte_veer_berekenen'],
+  alles:               ['kracht_berekenen', 'kracht_berekenen', 'pijllengte', 'pijllengte', 'richting', 'fz_berekenen', 'm_berekenen', 'u_berekenen', 'u_veer_berekenen', 'C_berekenen', 'lengte_veer_berekenen'],
 };
 
 // ── Volgende opgave ───────────────────────────────────────────────────────────
@@ -926,8 +1086,12 @@ function volgende() {
     kracht_berekenen: '💪 Kracht berekenen',
     pijllengte:       '📏 Pijllengte berekenen',
     richting:         '🧭 Richting herkennen',
-    fz_berekenen:     '⚖️ Zwaartekracht berekenen',
-    m_berekenen:      '⚖️ Massa berekenen',
+    fz_berekenen:          '⚖️ Zwaartekracht berekenen',
+    m_berekenen:           '⚖️ Massa berekenen',
+    u_berekenen:           '🌀 Uitrekking berekenen',
+    u_veer_berekenen:      '🌀 Uitrekking berekenen',
+    C_berekenen:           '📐 Veerconstante berekenen',
+    lengte_veer_berekenen: '📐 Nieuwe lengte berekenen',
   };
   document.getElementById('kaart-header').textContent  = hdrs[huidigeOpgave.type] || '⚗️ Krachten';
   document.getElementById('vraag').textContent         = huidigeOpgave.vraag;
@@ -1030,6 +1194,7 @@ function tekenOpgave(o) {
   else if (o.type === 'pijllengte')  tekenPijllengte(ctx, o);
   else if (o.type === 'richting')    tekenRichting(ctx, o);
   else if (o.type === 'fz_berekenen' || o.type === 'm_berekenen') tekenMassaZwaartekracht(ctx, o);
+  else if (['u_berekenen','u_veer_berekenen','C_berekenen','lengte_veer_berekenen'].includes(o.type)) tekenVeer(ctx, o);
 }
 
 function tekenKrachtAflezen(ctx, o) {
@@ -1128,6 +1293,55 @@ function tekenMassaZwaartekracht(ctx, o) {
     ? 'Planeet: ' + o.planeet + '  (g = ' + nl(o.g) + ' N/kg)'
     : 'g = 9,81 N/kg';
   ctx.fillText(planeetTekst, cx, 215);
+  ctx.textAlign = 'left';
+}
+
+function tekenVeer(ctx, o) {
+  const cx = 120;
+  // Support bar
+  ctx.strokeStyle = '#2d3748'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(cx - 25, 18); ctx.lineTo(cx + 25, 18); ctx.stroke();
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath(); ctx.moveTo(cx - 20 + i * 10, 18); ctx.lineTo(cx - 25 + i * 10, 10); ctx.stroke();
+  }
+  // Spring (zigzag)
+  const springTop = 18, springBot = 125;
+  const coils = 5;
+  const segH = (springBot - springTop) / (coils * 2 + 2);
+  ctx.strokeStyle = '#6b46c1'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cx, springTop);
+  ctx.lineTo(cx, springTop + segH);
+  for (let i = 0; i < coils; i++) {
+    ctx.lineTo(cx + 18, springTop + segH * (i * 2 + 2));
+    ctx.lineTo(cx - 18, springTop + segH * (i * 2 + 3));
+  }
+  ctx.lineTo(cx, springBot);
+  ctx.stroke();
+  // Weight box
+  const bw = 60, bh = 30;
+  ctx.fillStyle = '#f3e8ff'; ctx.strokeStyle = '#6b46c1'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.rect(cx - bw / 2, springBot, bw, bh); ctx.fill(); ctx.stroke();
+  // F arrow
+  tekenPijl(ctx, cx, springBot + bh, 270, 38, '#e53e3e');
+  // Data labels (right side)
+  const tx = 200;
+  let ty = 35;
+  const veerLabels = {
+    u_berekenen:           [['beginlengte', o.L + ' cm'], ['nieuwe lengte', o.nieuweLengte + ' cm'], ['u = ?', '? cm']],
+    u_veer_berekenen:      [['C', nl(o.C) + ' N/cm'], ['F', nl(o.F) + ' N'], ['u = ?', '? cm']],
+    C_berekenen:           [['u', nl(o.u) + ' cm'], ['F', nl(o.F) + ' N'], ['C = ?', '? N/cm']],
+    lengte_veer_berekenen: [['beginlengte', o.L + ' cm'], ['C', nl(o.C) + ' N/cm'], ['F', nl(o.F) + ' N'], ['nieuwe lengte = ?', '? cm']],
+  };
+  const regels = veerLabels[o.type] || [];
+  regels.forEach(([sleutel, waarde], i) => {
+    const isVraag = waarde.includes('?');
+    ctx.fillStyle = isVraag ? '#e53e3e' : '#2d3748';
+    ctx.font = isVraag ? 'bold 13px Nunito, sans-serif' : '12px Nunito, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(isVraag ? sleutel : sleutel + ' = ' + waarde, tx, ty + i * 26);
+  });
   ctx.textAlign = 'left';
 }
 
@@ -1244,6 +1458,36 @@ const fcData = [
     begrip: 'Zwaartepunt',
     definitie: 'Het aangrijpingspunt van de zwaartekracht op een voorwerp',
     extra: 'Zit vaak in het midden van een regelmatig voorwerp. Je kunt het vinden door een voorwerp aan een touwtje te hangen.',
+    formule: null,
+  },
+  {
+    begrip: 'Veerkracht',
+    definitie: 'De kracht die een veer uitoefent bij uitrekking of indrukking, tegengesteld aan de richting van de uitrekking',
+    extra: 'Hoe verder je de veer uitrekt, hoe groter de veerkracht. Eenheid: Newton (N).',
+    formule: 'F = C × u',
+  },
+  {
+    begrip: 'Uitrekking (u)',
+    definitie: 'Het verschil tussen de nieuwe lengte en de beginlengte van de veer: u = nieuwe lengte − L',
+    extra: 'Let op: u is NIET de totale lengte, maar alleen het extra stuk!\nVoorbeeld: veer 18 cm → 22 cm: u = 22 − 18 = 4 cm.',
+    formule: 'u = nieuwe lengte − beginlengte (L)',
+  },
+  {
+    begrip: 'Veerconstante (C)',
+    definitie: 'Geeft aan hoeveel kracht nodig is per centimeter uitrekking. Eenheid: N/cm of N/m',
+    extra: 'Grote C → stugge veer (moeilijk uit te rekken).\nKleine C → slappe veer (makkelijk uit te rekken).',
+    formule: 'C = F ÷ u',
+  },
+  {
+    begrip: 'Elastisch',
+    definitie: 'De veer keert terug naar zijn beginlengte als de kracht wegvalt',
+    extra: 'Binnen het elastisch gebied geldt F = C × u. Zodra je te ver uitrekt, gaat de veer plastisch vervormen.',
+    formule: null,
+  },
+  {
+    begrip: 'Plastisch',
+    definitie: 'De veer behoudt zijn nieuwe vorm als de kracht wegvalt — blijvende vervorming',
+    extra: 'Buiten het elastisch gebied geldt F = C × u niet meer. De veer is dan "overrekt".',
     formule: null,
   },
 ];
