@@ -491,6 +491,75 @@ body {
 }
 .fc-shuffle:hover { border-color: var(--rood); color: var(--rood); }
 
+/* ── SO BANNER ── */
+.so-banner {
+  background: linear-gradient(135deg, #744210 0%, #d69e2e 100%);
+  border-radius: 16px;
+  padding: 1.1rem 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+}
+.so-banner-tekst {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  letter-spacing: 0.4px;
+}
+
+/* ── SET TABS (inner nav) ── */
+.set-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.set-tab-btn {
+  padding: 0.5rem 0.95rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.set-tab-btn.actief {
+  background: #fff;
+  color: var(--rood);
+  border-color: #fff;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+.set-tab-btn:hover:not(.actief) {
+  background: rgba(255,255,255,0.28);
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+}
+.set-sectie { display: none; }
+.set-sectie.actief { display: block; }
+
+.leeg-melding {
+  background: rgba(255,255,255,0.12);
+  border: 2px dashed rgba(255,255,255,0.35);
+  border-radius: 16px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.leeg-melding small {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.65;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
   .header-title { font-size: 1.2rem; }
@@ -513,6 +582,11 @@ body {
 </div>
 
 <div class="content">
+
+  <!-- ══ SO BANNER ══ -->
+  <div class="so-banner">
+    <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 10 april</div>
+  </div>
 
   <!-- ══ THEORIE ══ -->
   <div id="tab-theorie" class="sectie actief">
@@ -867,79 +941,133 @@ body {
   <!-- ══ FLASHCARDS ══ -->
   <div id="tab-flashcards" class="sectie">
 
-    <div class="sets-grid">
-
-      <div class="set-kaart" onclick="startSet('vocab-nl-spa')">
-        <div class="set-emoji">📚</div>
-        <div class="set-naam">Vocabulaire</div>
-        <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('vocab-spa-nl')">
-        <div class="set-emoji">📚</div>
-        <div class="set-naam">Vocabulaire</div>
-        <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('ontkenningen-nl-spa')">
-        <div class="set-emoji">🚫</div>
-        <div class="set-naam">Ontkenningen</div>
-        <div class="set-info">nada, nadie, nunca · 10 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('frases-nl-spa')">
-        <div class="set-emoji">💬</div>
-        <div class="set-naam">Frases clave</div>
-        <div class="set-info">blz 37 + 40 · 20 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('kloktijden-nl-spa')">
-        <div class="set-emoji">🕐</div>
-        <div class="set-naam">Kloktijden</div>
-        <div class="set-info">blz 77 · 15 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('kloktijden-spa-nl')">
-        <div class="set-emoji">🕐</div>
-        <div class="set-naam">Kloktijden</div>
-        <div class="set-info">blz 77 · 15 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('getallen-nl-spa')">
-        <div class="set-emoji">🔢</div>
-        <div class="set-naam">Getallen 1 – 25</div>
-        <div class="set-info">blz 73 · 25 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('getallen-spa-nl')">
-        <div class="set-emoji">🔢</div>
-        <div class="set-naam">Getallen 1 – 25</div>
-        <div class="set-info">blz 73 · 25 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('werkwoorden-nl-spa')">
-        <div class="set-emoji">📝</div>
-        <div class="set-naam">ir, ser &amp; tener</div>
-        <div class="set-info">gemengd · 18 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('werkwoorden-spa-nl')">
-        <div class="set-emoji">📝</div>
-        <div class="set-naam">ir, ser &amp; tener</div>
-        <div class="set-info">gemengd · 18 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
+    <!-- Set navigator -->
+    <div class="set-tabs">
+      <button class="set-tab-btn actief" onclick="toonSetTab('h4', this)">📚 H4 — Alle sets</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v51', this)">Vocab 5.1 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v52', this)">Vocab 5.2 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v53', this)">Vocab 5.3 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('fc-nl-spa', this)">Frases — NL→SPA</button>
+      <button class="set-tab-btn" onclick="toonSetTab('fc-spa-nl', this)">Frases — SPA→NL</button>
     </div>
+
+    <!-- ── H4 sets (bestaand) ── -->
+    <div id="set-h4" class="set-sectie actief">
+      <div class="sets-grid">
+
+        <div class="set-kaart" onclick="startSet('vocab-nl-spa')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire</div>
+          <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('vocab-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire</div>
+          <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('ontkenningen-nl-spa')">
+          <div class="set-emoji">🚫</div>
+          <div class="set-naam">Ontkenningen</div>
+          <div class="set-info">nada, nadie, nunca · 10 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('frases-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">blz 37 + 40 · 20 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('kloktijden-nl-spa')">
+          <div class="set-emoji">🕐</div>
+          <div class="set-naam">Kloktijden</div>
+          <div class="set-info">blz 77 · 15 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('kloktijden-spa-nl')">
+          <div class="set-emoji">🕐</div>
+          <div class="set-naam">Kloktijden</div>
+          <div class="set-info">blz 77 · 15 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('getallen-nl-spa')">
+          <div class="set-emoji">🔢</div>
+          <div class="set-naam">Getallen 1 – 25</div>
+          <div class="set-info">blz 73 · 25 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('getallen-spa-nl')">
+          <div class="set-emoji">🔢</div>
+          <div class="set-naam">Getallen 1 – 25</div>
+          <div class="set-info">blz 73 · 25 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('werkwoorden-nl-spa')">
+          <div class="set-emoji">📝</div>
+          <div class="set-naam">ir, ser &amp; tener</div>
+          <div class="set-info">gemengd · 18 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('werkwoorden-spa-nl')">
+          <div class="set-emoji">📝</div>
+          <div class="set-naam">ir, ser &amp; tener</div>
+          <div class="set-info">gemengd · 18 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+      </div>
+    </div><!-- /set-h4 -->
+
+    <!-- ── Vocabulaire 5.1 — Spaans → Nederlands (leeg) ── -->
+    <div id="set-v51" class="set-sectie">
+      <div class="leeg-melding">
+        Vocabulaire 5.1 — Spaans → Nederlands
+        <small>Nog geen kaartjes — komt binnenkort!</small>
+      </div>
+    </div>
+
+    <!-- ── Vocabulaire 5.2 — Spaans → Nederlands (leeg) ── -->
+    <div id="set-v52" class="set-sectie">
+      <div class="leeg-melding">
+        Vocabulaire 5.2 — Spaans → Nederlands
+        <small>Nog geen kaartjes — komt binnenkort!</small>
+      </div>
+    </div>
+
+    <!-- ── Vocabulaire 5.3 — Spaans → Nederlands (leeg) ── -->
+    <div id="set-v53" class="set-sectie">
+      <div class="leeg-melding">
+        Vocabulaire 5.3 — Spaans → Nederlands
+        <small>Nog geen kaartjes — komt binnenkort!</small>
+      </div>
+    </div>
+
+    <!-- ── Frases clave — Nederlands → Spaans (leeg) ── -->
+    <div id="set-fc-nl-spa" class="set-sectie">
+      <div class="leeg-melding">
+        Frases clave — Nederlands → Spaans
+        <small>Nog geen kaartjes — komt binnenkort!</small>
+      </div>
+    </div>
+
+    <!-- ── Frases clave — Spaans → Nederlands (leeg) ── -->
+    <div id="set-fc-spa-nl" class="set-sectie">
+      <div class="leeg-melding">
+        Frases clave — Spaans → Nederlands
+        <small>Nog geen kaartjes — komt binnenkort!</small>
+      </div>
+    </div>
+
   </div><!-- /tab-flashcards -->
 
 </div><!-- /content -->
@@ -983,6 +1111,14 @@ function toonTab(naam, btn) {
   document.querySelectorAll('.sectie').forEach(s => s.classList.remove('actief'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
   document.getElementById('tab-' + naam).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+/* ── SET TAB SWITCHING (inner flashcard nav) ── */
+function toonSetTab(naam, btn) {
+  document.querySelectorAll('.set-sectie').forEach(s => s.classList.remove('actief'));
+  document.querySelectorAll('.set-tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('set-' + naam).classList.add('actief');
   btn.classList.add('actief');
 }
 
