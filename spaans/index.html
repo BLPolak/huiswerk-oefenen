@@ -1064,19 +1064,27 @@ body {
       </div>
     </div>
 
-    <!-- ── Frases clave — Nederlands → Spaans (leeg) ── -->
+    <!-- ── Frases clave — Nederlands → Spaans ── -->
     <div id="set-fc-nl-spa" class="set-sectie">
-      <div class="leeg-melding">
-        Frases clave — Nederlands → Spaans
-        <small>Nog geen kaartjes — komt binnenkort!</small>
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases5-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
       </div>
     </div>
 
-    <!-- ── Frases clave — Spaans → Nederlands (leeg) ── -->
+    <!-- ── Frases clave — Spaans → Nederlands ── -->
     <div id="set-fc-spa-nl" class="set-sectie">
-      <div class="leeg-melding">
-        Frases clave — Spaans → Nederlands
-        <small>Nog geen kaartjes — komt binnenkort!</small>
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases5-spa-nl')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
       </div>
     </div>
 
@@ -1243,6 +1251,42 @@ const vocabBase = [
 ];
 
 const sets = {
+  "frases5-nl-spa": {
+    titel: "Frases clave — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Zullen we gaan winkelen?",                     back:"¿Vamos de compras?"},
+      {front:"Wat is je favoriete winkel?",                   back:"¿Cuál es tu tienda favorita?"},
+      {front:"Is het een dure winkel?",                       back:"¿Es una tienda cara?"},
+      {front:"Wat wil je kopen?",                             back:"¿Qué quieres comprar?"},
+      {front:"Welke kleur wil je?",                           back:"¿Qué color prefieres?"},
+      {front:"Welke maat heb je?",                            back:"¿Qué talla tienes?"},
+      {front:"Natuurlijk, ik vind winkelen geweldig.",        back:"Claro, me encanta ir de compras."},
+      {front:"Mijn lievelingswinkel is Zara.",                back:"Mi tienda favorita es Zara."},
+      {front:"Nee, het is een goedkope winkel.",              back:"No, es una tienda barata."},
+      {front:"Ik wil een jurk kopen.",                        back:"Quiero comprar un vestido."},
+      {front:"Ik wil liever de gele.",                        back:"Prefiero el amarillo."},
+      {front:"Ik heb maat M.",                                back:"Tengo la talla M."}
+    ]
+  },
+  "frases5-spa-nl": {
+    titel: "Frases clave — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"¿Vamos de compras?",                back:"Zullen we gaan winkelen?"},
+      {front:"¿Cuál es tu tienda favorita?",       back:"Wat is je favoriete winkel?"},
+      {front:"¿Es una tienda cara?",               back:"Is het een dure winkel?"},
+      {front:"¿Qué quieres comprar?",              back:"Wat wil je kopen?"},
+      {front:"¿Qué color prefieres?",              back:"Welke kleur wil je?"},
+      {front:"¿Qué talla tienes?",                 back:"Welke maat heb je?"},
+      {front:"Claro, me encanta ir de compras.",   back:"Natuurlijk, ik vind winkelen geweldig."},
+      {front:"Mi tienda favorita es Zara.",         back:"Mijn lievelingswinkel is Zara."},
+      {front:"No, es una tienda barata.",           back:"Nee, het is een goedkope winkel."},
+      {front:"Quiero comprar un vestido.",          back:"Ik wil een jurk kopen."},
+      {front:"Prefiero el amarillo.",               back:"Ik wil liever de gele."},
+      {front:"Tengo la talla M.",                   back:"Ik heb maat M."}
+    ]
+  },
   "vocab53-spa-nl": {
     titel: "Vocabulaire 5.3 — SPA → NL",
     frontLabel: "SPAANS", backLabel: "NEDERLANDS",
