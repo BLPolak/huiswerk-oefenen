@@ -560,6 +560,95 @@ body {
   opacity: 0.65;
 }
 
+/* ── EXTRA GRAMMAR SECTION ── */
+.extra-grammar {
+  max-width: 860px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+.extra-grammar-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.6rem;
+}
+.extra-grammar-card {
+  background: #fff;
+  border: 2px solid #cbd5e0;
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+.extra-grammar-card h3 {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--donker);
+  margin-bottom: 0.6rem;
+}
+.extra-grammar-card p {
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.poss-table-wrap { margin-bottom: 1.2rem; }
+.poss-table-wrap h4 {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--grijs);
+  margin-bottom: 0.45rem;
+}
+.poss-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.poss-table th {
+  background: #f7fafc;
+  font-weight: 800;
+  color: var(--donker);
+  padding: 0.45rem 0.7rem;
+  border-bottom: 2px solid #e2e8f0;
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.poss-table td {
+  padding: 0.42rem 0.7rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2d3748;
+}
+.poss-table tr:last-child td { border-bottom: none; }
+.poss-table td:first-child { font-weight: 700; color: var(--donker); width: 30%; }
+.poss-table td:not(:first-child) { font-weight: 700; color: #c53030; font-style: italic; }
+.poss-tip {
+  background: #fffbeb;
+  border-left: 4px solid var(--geel);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+  color: #744210;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+}
+.poss-examples { list-style: none; }
+.poss-examples li {
+  font-size: 0.9rem;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.poss-examples li:last-child { border-bottom: none; }
+.poss-spa { font-weight: 700; color: #c53030; font-style: italic; }
+.poss-nl  { color: #4a5568; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
   .header-title { font-size: 1.2rem; }
@@ -1091,6 +1180,65 @@ body {
   </div><!-- /tab-flashcards -->
 
 </div><!-- /content -->
+
+
+<!-- ══ EXTRA GRAMMATICA ══ -->
+<div class="extra-grammar">
+  <div class="extra-grammar-label">⚠️ Niet voor het SO — extra grammatica</div>
+  <div class="extra-grammar-card">
+
+    <h3>Het bezittelijk voornaamwoord / El pronombre posesivo</h3>
+    <p>Een bezittelijk voornaamwoord geeft aan van wie iets is. In het Spaans past de vorm zich aan het zelfstandig naamwoord aan.</p>
+
+    <!-- Enkelvoud -->
+    <div class="poss-table-wrap">
+      <h4>Enkelvoud</h4>
+      <table class="poss-table">
+        <thead>
+          <tr><th>Persoon</th><th>Mannelijk</th><th>Vrouwelijk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>mijn</td><td>mi</td><td>mi</td></tr>
+          <tr><td>jouw</td><td>tu</td><td>tu</td></tr>
+          <tr><td>zijn / haar / uw</td><td>su</td><td>su</td></tr>
+          <tr><td>ons / onze</td><td>nuestro</td><td>nuestra</td></tr>
+          <tr><td>jullie</td><td>vuestro</td><td>vuestra</td></tr>
+          <tr><td>hun / uw</td><td>su</td><td>su</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Meervoud -->
+    <div class="poss-table-wrap">
+      <h4>Meervoud</h4>
+      <table class="poss-table">
+        <thead>
+          <tr><th>Persoon</th><th>Mannelijk</th><th>Vrouwelijk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>mijn</td><td>mis</td><td>mis</td></tr>
+          <tr><td>jouw</td><td>tus</td><td>tus</td></tr>
+          <tr><td>zijn / haar / uw</td><td>sus</td><td>sus</td></tr>
+          <tr><td>ons / onze</td><td>nuestros</td><td>nuestras</td></tr>
+          <tr><td>jullie</td><td>vuestros</td><td>vuestras</td></tr>
+          <tr><td>hun / uw</td><td>sus</td><td>sus</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="poss-tip">
+      <strong>Let op:</strong> su/sus kan verwijzen naar zijn, haar, uw, jullie én hun.
+    </div>
+
+    <ul class="poss-examples">
+      <li><span class="poss-spa">Mi tienda favorita es Zara.</span><span class="poss-nl">→ Mijn lievelingswinkel is Zara.</span></li>
+      <li><span class="poss-spa">Tus zapatillas son bonitas.</span><span class="poss-nl">→ Jouw sneakers zijn mooi.</span></li>
+      <li><span class="poss-spa">Nuestra ropa es cara.</span><span class="poss-nl">→ Onze kleding is duur.</span></li>
+      <li><span class="poss-spa">Es su libro.</span><span class="poss-nl">→ Het is zijn/haar boek.</span></li>
+    </ul>
+
+  </div>
+</div>
 
 
 <!-- ══ FLASHCARD MODAL ══ -->
