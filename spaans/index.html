@@ -1052,11 +1052,15 @@ body {
       </div>
     </div>
 
-    <!-- ── Vocabulaire 5.3 — Spaans → Nederlands (leeg) ── -->
+    <!-- ── Vocabulaire 5.3 — Spaans → Nederlands ── -->
     <div id="set-v53" class="set-sectie">
-      <div class="leeg-melding">
-        Vocabulaire 5.3 — Spaans → Nederlands
-        <small>Nog geen kaartjes — komt binnenkort!</small>
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab53-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.3</div>
+          <div class="set-info">26 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
       </div>
     </div>
 
@@ -1239,6 +1243,38 @@ const vocabBase = [
 ];
 
 const sets = {
+  "vocab53-spa-nl": {
+    titel: "Vocabulaire 5.3 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"el mercado",              back:"de markt"},
+      {front:"estar de rebajas",        back:"in de uitverkoop zijn"},
+      {front:"estar de oferta",         back:"in de aanbieding zijn"},
+      {front:"la prenda",               back:"het kledingstuk"},
+      {front:"la camisa",               back:"de blouse"},
+      {front:"los vaqueros",            back:"de spijkerbroek"},
+      {front:"los zapatos",             back:"de schoenen"},
+      {front:"las botas",               back:"de laarzen"},
+      {front:"los calcetines",          back:"de sokken"},
+      {front:"las sandalias",           back:"de sandalen"},
+      {front:"el jersey",               back:"het vest"},
+      {front:"el suéter",               back:"de sweater"},
+      {front:"la rebeca",               back:"het vestje"},
+      {front:"las medias",              back:"de kousen"},
+      {front:"el almacén",              back:"het warenhuis"},
+      {front:"el dependiente",          back:"de winkelbediende (m)"},
+      {front:"la dependienta",          back:"de winkelbediende (v)"},
+      {front:"el vestido",              back:"de jurk"},
+      {front:"el guante",               back:"de want"},
+      {front:"la bufanda",              back:"de sjaal"},
+      {front:"los pendientes",          back:"de oorbellen"},
+      {front:"el collar",               back:"de ketting"},
+      {front:"el reloj",                back:"het horloge"},
+      {front:"el monedero",             back:"de portemonnee"},
+      {front:"las gafas de sol",        back:"de zonnebril"},
+      {front:"la colección",            back:"de collectie"}
+    ]
+  },
   "vocab52-spa-nl": {
     titel: "Vocabulaire 5.2 — SPA → NL",
     frontLabel: "SPAANS", backLabel: "NEDERLANDS",
