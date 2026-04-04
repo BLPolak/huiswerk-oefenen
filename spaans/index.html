@@ -491,6 +491,164 @@ body {
 }
 .fc-shuffle:hover { border-color: var(--rood); color: var(--rood); }
 
+/* ── SO BANNER ── */
+.so-banner {
+  background: linear-gradient(135deg, #744210 0%, #d69e2e 100%);
+  border-radius: 16px;
+  padding: 1.1rem 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+}
+.so-banner-tekst {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  letter-spacing: 0.4px;
+}
+
+/* ── SET TABS (inner nav) ── */
+.set-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.set-tab-btn {
+  padding: 0.5rem 0.95rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.set-tab-btn.actief {
+  background: #fff;
+  color: var(--rood);
+  border-color: #fff;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+.set-tab-btn:hover:not(.actief) {
+  background: rgba(255,255,255,0.28);
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+}
+.set-sectie { display: none; }
+.set-sectie.actief { display: block; }
+
+.leeg-melding {
+  background: rgba(255,255,255,0.12);
+  border: 2px dashed rgba(255,255,255,0.35);
+  border-radius: 16px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.leeg-melding small {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.65;
+}
+
+/* ── EXTRA GRAMMAR SECTION ── */
+.extra-grammar {
+  max-width: 860px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+.extra-grammar-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.6rem;
+}
+.extra-grammar-card {
+  background: #fff;
+  border: 2px solid #cbd5e0;
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+.extra-grammar-card h3 {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--donker);
+  margin-bottom: 0.6rem;
+}
+.extra-grammar-card p {
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.poss-table-wrap { margin-bottom: 1.2rem; }
+.poss-table-wrap h4 {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--grijs);
+  margin-bottom: 0.45rem;
+}
+.poss-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.poss-table th {
+  background: #f7fafc;
+  font-weight: 800;
+  color: var(--donker);
+  padding: 0.45rem 0.7rem;
+  border-bottom: 2px solid #e2e8f0;
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.poss-table td {
+  padding: 0.42rem 0.7rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2d3748;
+}
+.poss-table tr:last-child td { border-bottom: none; }
+.poss-table td:first-child { font-weight: 700; color: var(--donker); width: 30%; }
+.poss-table td:not(:first-child) { font-weight: 700; color: #c53030; font-style: italic; }
+.poss-tip {
+  background: #fffbeb;
+  border-left: 4px solid var(--geel);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+  color: #744210;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+}
+.poss-examples { list-style: none; }
+.poss-examples li {
+  font-size: 0.9rem;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.poss-examples li:last-child { border-bottom: none; }
+.poss-spa { font-weight: 700; color: #c53030; font-style: italic; }
+.poss-nl  { color: #4a5568; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
   .header-title { font-size: 1.2rem; }
@@ -513,6 +671,11 @@ body {
 </div>
 
 <div class="content">
+
+  <!-- ══ SO BANNER ══ -->
+  <div class="so-banner">
+    <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 10 april</div>
+  </div>
 
   <!-- ══ THEORIE ══ -->
   <div id="tab-theorie" class="sectie actief">
@@ -867,82 +1030,215 @@ body {
   <!-- ══ FLASHCARDS ══ -->
   <div id="tab-flashcards" class="sectie">
 
-    <div class="sets-grid">
-
-      <div class="set-kaart" onclick="startSet('vocab-nl-spa')">
-        <div class="set-emoji">📚</div>
-        <div class="set-naam">Vocabulaire</div>
-        <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('vocab-spa-nl')">
-        <div class="set-emoji">📚</div>
-        <div class="set-naam">Vocabulaire</div>
-        <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('ontkenningen-nl-spa')">
-        <div class="set-emoji">🚫</div>
-        <div class="set-naam">Ontkenningen</div>
-        <div class="set-info">nada, nadie, nunca · 10 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('frases-nl-spa')">
-        <div class="set-emoji">💬</div>
-        <div class="set-naam">Frases clave</div>
-        <div class="set-info">blz 37 + 40 · 20 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('kloktijden-nl-spa')">
-        <div class="set-emoji">🕐</div>
-        <div class="set-naam">Kloktijden</div>
-        <div class="set-info">blz 77 · 15 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('kloktijden-spa-nl')">
-        <div class="set-emoji">🕐</div>
-        <div class="set-naam">Kloktijden</div>
-        <div class="set-info">blz 77 · 15 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('getallen-nl-spa')">
-        <div class="set-emoji">🔢</div>
-        <div class="set-naam">Getallen 1 – 25</div>
-        <div class="set-info">blz 73 · 25 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('getallen-spa-nl')">
-        <div class="set-emoji">🔢</div>
-        <div class="set-naam">Getallen 1 – 25</div>
-        <div class="set-info">blz 73 · 25 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('werkwoorden-nl-spa')">
-        <div class="set-emoji">📝</div>
-        <div class="set-naam">ir, ser &amp; tener</div>
-        <div class="set-info">gemengd · 18 kaartjes</div>
-        <div class="set-richting">NL → SPA</div>
-      </div>
-
-      <div class="set-kaart" onclick="startSet('werkwoorden-spa-nl')">
-        <div class="set-emoji">📝</div>
-        <div class="set-naam">ir, ser &amp; tener</div>
-        <div class="set-info">gemengd · 18 kaartjes</div>
-        <div class="set-richting">SPA → NL</div>
-      </div>
-
+    <!-- Set navigator -->
+    <div class="set-tabs">
+      <button class="set-tab-btn actief" onclick="toonSetTab('h4', this)">📚 H4 — Alle sets</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v51', this)">Vocab 5.1 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v52', this)">Vocab 5.2 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v53', this)">Vocab 5.3 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('fc-nl-spa', this)">Frases — NL→SPA</button>
+      <button class="set-tab-btn" onclick="toonSetTab('fc-spa-nl', this)">Frases — SPA→NL</button>
     </div>
+
+    <!-- ── H4 sets (bestaand) ── -->
+    <div id="set-h4" class="set-sectie actief">
+      <div class="sets-grid">
+
+        <div class="set-kaart" onclick="startSet('vocab-nl-spa')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire</div>
+          <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('vocab-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire</div>
+          <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('ontkenningen-nl-spa')">
+          <div class="set-emoji">🚫</div>
+          <div class="set-naam">Ontkenningen</div>
+          <div class="set-info">nada, nadie, nunca · 10 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('frases-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">blz 37 + 40 · 20 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('kloktijden-nl-spa')">
+          <div class="set-emoji">🕐</div>
+          <div class="set-naam">Kloktijden</div>
+          <div class="set-info">blz 77 · 15 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('kloktijden-spa-nl')">
+          <div class="set-emoji">🕐</div>
+          <div class="set-naam">Kloktijden</div>
+          <div class="set-info">blz 77 · 15 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('getallen-nl-spa')">
+          <div class="set-emoji">🔢</div>
+          <div class="set-naam">Getallen 1 – 25</div>
+          <div class="set-info">blz 73 · 25 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('getallen-spa-nl')">
+          <div class="set-emoji">🔢</div>
+          <div class="set-naam">Getallen 1 – 25</div>
+          <div class="set-info">blz 73 · 25 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('werkwoorden-nl-spa')">
+          <div class="set-emoji">📝</div>
+          <div class="set-naam">ir, ser &amp; tener</div>
+          <div class="set-info">gemengd · 18 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('werkwoorden-spa-nl')">
+          <div class="set-emoji">📝</div>
+          <div class="set-naam">ir, ser &amp; tener</div>
+          <div class="set-info">gemengd · 18 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+      </div>
+    </div><!-- /set-h4 -->
+
+    <!-- ── Vocabulaire 5.1 — Spaans → Nederlands ── -->
+    <div id="set-v51" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab51-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.1</div>
+          <div class="set-info">17 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Vocabulaire 5.2 — Spaans → Nederlands ── -->
+    <div id="set-v52" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab52-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.2</div>
+          <div class="set-info">22 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Vocabulaire 5.3 — Spaans → Nederlands ── -->
+    <div id="set-v53" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab53-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.3</div>
+          <div class="set-info">26 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Frases clave — Nederlands → Spaans ── -->
+    <div id="set-fc-nl-spa" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases5-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Frases clave — Spaans → Nederlands ── -->
+    <div id="set-fc-spa-nl" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases5-spa-nl')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /tab-flashcards -->
 
 </div><!-- /content -->
+
+
+<!-- ══ EXTRA GRAMMATICA ══ -->
+<div class="extra-grammar">
+  <div class="extra-grammar-label">⚠️ Niet voor het SO — extra grammatica</div>
+  <div class="extra-grammar-card">
+
+    <h3>Het bezittelijk voornaamwoord / El pronombre posesivo</h3>
+    <p>Een bezittelijk voornaamwoord geeft aan van wie iets is. In het Spaans past de vorm zich aan het zelfstandig naamwoord aan.</p>
+
+    <!-- Enkelvoud -->
+    <div class="poss-table-wrap">
+      <h4>Enkelvoud</h4>
+      <table class="poss-table">
+        <thead>
+          <tr><th>Persoon</th><th>Mannelijk</th><th>Vrouwelijk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>mijn</td><td>mi</td><td>mi</td></tr>
+          <tr><td>jouw</td><td>tu</td><td>tu</td></tr>
+          <tr><td>zijn / haar / uw</td><td>su</td><td>su</td></tr>
+          <tr><td>ons / onze</td><td>nuestro</td><td>nuestra</td></tr>
+          <tr><td>jullie</td><td>vuestro</td><td>vuestra</td></tr>
+          <tr><td>hun / uw</td><td>su</td><td>su</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Meervoud -->
+    <div class="poss-table-wrap">
+      <h4>Meervoud</h4>
+      <table class="poss-table">
+        <thead>
+          <tr><th>Persoon</th><th>Mannelijk</th><th>Vrouwelijk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>mijn</td><td>mis</td><td>mis</td></tr>
+          <tr><td>jouw</td><td>tus</td><td>tus</td></tr>
+          <tr><td>zijn / haar / uw</td><td>sus</td><td>sus</td></tr>
+          <tr><td>ons / onze</td><td>nuestros</td><td>nuestras</td></tr>
+          <tr><td>jullie</td><td>vuestros</td><td>vuestras</td></tr>
+          <tr><td>hun / uw</td><td>sus</td><td>sus</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="poss-tip">
+      <strong>Let op:</strong> su/sus kan verwijzen naar zijn, haar, uw, jullie én hun.
+    </div>
+
+    <ul class="poss-examples">
+      <li><span class="poss-spa">Mi tienda favorita es Zara.</span><span class="poss-nl">→ Mijn lievelingswinkel is Zara.</span></li>
+      <li><span class="poss-spa">Tus zapatillas son bonitas.</span><span class="poss-nl">→ Jouw sneakers zijn mooi.</span></li>
+      <li><span class="poss-spa">Nuestra ropa es cara.</span><span class="poss-nl">→ Onze kleding is duur.</span></li>
+      <li><span class="poss-spa">Es su libro.</span><span class="poss-nl">→ Het is zijn/haar boek.</span></li>
+    </ul>
+
+  </div>
+</div>
 
 
 <!-- ══ FLASHCARD MODAL ══ -->
@@ -983,6 +1279,14 @@ function toonTab(naam, btn) {
   document.querySelectorAll('.sectie').forEach(s => s.classList.remove('actief'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
   document.getElementById('tab-' + naam).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+/* ── SET TAB SWITCHING (inner flashcard nav) ── */
+function toonSetTab(naam, btn) {
+  document.querySelectorAll('.set-sectie').forEach(s => s.classList.remove('actief'));
+  document.querySelectorAll('.set-tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('set-' + naam).classList.add('actief');
   btn.classList.add('actief');
 }
 
@@ -1095,6 +1399,125 @@ const vocabBase = [
 ];
 
 const sets = {
+  "frases5-nl-spa": {
+    titel: "Frases clave — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Zullen we gaan winkelen?",                     back:"¿Vamos de compras?"},
+      {front:"Wat is je favoriete winkel?",                   back:"¿Cuál es tu tienda favorita?"},
+      {front:"Is het een dure winkel?",                       back:"¿Es una tienda cara?"},
+      {front:"Wat wil je kopen?",                             back:"¿Qué quieres comprar?"},
+      {front:"Welke kleur wil je?",                           back:"¿Qué color prefieres?"},
+      {front:"Welke maat heb je?",                            back:"¿Qué talla tienes?"},
+      {front:"Natuurlijk, ik vind winkelen geweldig.",        back:"Claro, me encanta ir de compras."},
+      {front:"Mijn lievelingswinkel is Zara.",                back:"Mi tienda favorita es Zara."},
+      {front:"Nee, het is een goedkope winkel.",              back:"No, es una tienda barata."},
+      {front:"Ik wil een jurk kopen.",                        back:"Quiero comprar un vestido."},
+      {front:"Ik wil liever de gele.",                        back:"Prefiero el amarillo."},
+      {front:"Ik heb maat M.",                                back:"Tengo la talla M."}
+    ]
+  },
+  "frases5-spa-nl": {
+    titel: "Frases clave — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"¿Vamos de compras?",                back:"Zullen we gaan winkelen?"},
+      {front:"¿Cuál es tu tienda favorita?",       back:"Wat is je favoriete winkel?"},
+      {front:"¿Es una tienda cara?",               back:"Is het een dure winkel?"},
+      {front:"¿Qué quieres comprar?",              back:"Wat wil je kopen?"},
+      {front:"¿Qué color prefieres?",              back:"Welke kleur wil je?"},
+      {front:"¿Qué talla tienes?",                 back:"Welke maat heb je?"},
+      {front:"Claro, me encanta ir de compras.",   back:"Natuurlijk, ik vind winkelen geweldig."},
+      {front:"Mi tienda favorita es Zara.",         back:"Mijn lievelingswinkel is Zara."},
+      {front:"No, es una tienda barata.",           back:"Nee, het is een goedkope winkel."},
+      {front:"Quiero comprar un vestido.",          back:"Ik wil een jurk kopen."},
+      {front:"Prefiero el amarillo.",               back:"Ik wil liever de gele."},
+      {front:"Tengo la talla M.",                   back:"Ik heb maat M."}
+    ]
+  },
+  "vocab53-spa-nl": {
+    titel: "Vocabulaire 5.3 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"el mercado",              back:"de markt"},
+      {front:"estar de rebajas",        back:"in de uitverkoop zijn"},
+      {front:"estar de oferta",         back:"in de aanbieding zijn"},
+      {front:"la prenda",               back:"het kledingstuk"},
+      {front:"la camisa",               back:"de blouse"},
+      {front:"los vaqueros",            back:"de spijkerbroek"},
+      {front:"los zapatos",             back:"de schoenen"},
+      {front:"las botas",               back:"de laarzen"},
+      {front:"los calcetines",          back:"de sokken"},
+      {front:"las sandalias",           back:"de sandalen"},
+      {front:"el jersey",               back:"het vest"},
+      {front:"el suéter",               back:"de sweater"},
+      {front:"la rebeca",               back:"het vestje"},
+      {front:"las medias",              back:"de kousen"},
+      {front:"el almacén",              back:"het warenhuis"},
+      {front:"el dependiente",          back:"de winkelbediende (m)"},
+      {front:"la dependienta",          back:"de winkelbediende (v)"},
+      {front:"el vestido",              back:"de jurk"},
+      {front:"el guante",               back:"de want"},
+      {front:"la bufanda",              back:"de sjaal"},
+      {front:"los pendientes",          back:"de oorbellen"},
+      {front:"el collar",               back:"de ketting"},
+      {front:"el reloj",                back:"het horloge"},
+      {front:"el monedero",             back:"de portemonnee"},
+      {front:"las gafas de sol",        back:"de zonnebril"},
+      {front:"la colección",            back:"de collectie"}
+    ]
+  },
+  "vocab52-spa-nl": {
+    titel: "Vocabulaire 5.2 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"la tienda",          back:"de winkel"},
+      {front:"el estilo",          back:"de stijl, de smaak"},
+      {front:"primero",            back:"eerst"},
+      {front:"encantar",           back:"heel leuk vinden"},
+      {front:"ir de compras",      back:"winkelen"},
+      {front:"ir de tiendas",      back:"langs winkels gaan"},
+      {front:"pasar",              back:"langsgaan"},
+      {front:"la talla",           back:"de maat"},
+      {front:"el probador",        back:"de paskamer"},
+      {front:"barato/-a",          back:"goedkoop"},
+      {front:"caro/-a",            back:"duur"},
+      {front:"pagar",              back:"betalen"},
+      {front:"el color",           back:"de kleur"},
+      {front:"necesitar",          back:"nodig hebben"},
+      {front:"preferir",           back:"liever willen"},
+      {front:"el artículo",        back:"het product"},
+      {front:"elegante",           back:"elegant"},
+      {front:"deportivo/-a",       back:"sportief"},
+      {front:"alternativo/-a",     back:"alternatief"},
+      {front:"original",           back:"origineel"},
+      {front:"la zapatilla",       back:"de sneaker"},
+      {front:"el bolso",           back:"de tas"}
+    ]
+  },
+  "vocab51-spa-nl": {
+    titel: "Vocabulaire 5.1 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"la plaza",         back:"het plein"},
+      {front:"la capital",       back:"de hoofdstad"},
+      {front:"famoso/-a",        back:"beroemd"},
+      {front:"el regalo",        back:"het cadeau"},
+      {front:"juntos/-as",       back:"samen"},
+      {front:"el videojuego",    back:"het computerspel"},
+      {front:"comprar",          back:"kopen"},
+      {front:"la cosa",          back:"het ding"},
+      {front:"la camiseta",      back:"het T-shirt"},
+      {front:"los pantalones",   back:"de broek"},
+      {front:"la falda",         back:"de rok"},
+      {front:"ir a pie",         back:"te voet gaan"},
+      {front:"el cajero automático", back:"de pinautomaat"},
+      {front:"el dinero",        back:"het geld"},
+      {front:"la oferta",        back:"de aanbieding"},
+      {front:"enorme",           back:"enorm"},
+      {front:"costar",           back:"kosten"}
+    ]
+  },
   "vocab-nl-spa": {
     titel: "Vocabulaire — NL → SPA",
     frontLabel: "NEDERLANDS", backLabel: "SPAANS",
