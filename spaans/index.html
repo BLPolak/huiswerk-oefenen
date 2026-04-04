@@ -1028,11 +1028,15 @@ body {
       </div>
     </div><!-- /set-h4 -->
 
-    <!-- ── Vocabulaire 5.1 — Spaans → Nederlands (leeg) ── -->
+    <!-- ── Vocabulaire 5.1 — Spaans → Nederlands ── -->
     <div id="set-v51" class="set-sectie">
-      <div class="leeg-melding">
-        Vocabulaire 5.1 — Spaans → Nederlands
-        <small>Nog geen kaartjes — komt binnenkort!</small>
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab51-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.1</div>
+          <div class="set-info">17 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
       </div>
     </div>
 
@@ -1231,6 +1235,29 @@ const vocabBase = [
 ];
 
 const sets = {
+  "vocab51-spa-nl": {
+    titel: "Vocabulaire 5.1 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"la plaza",         back:"het plein"},
+      {front:"la capital",       back:"de hoofdstad"},
+      {front:"famoso/-a",        back:"beroemd"},
+      {front:"el regalo",        back:"het cadeau"},
+      {front:"juntos/-as",       back:"samen"},
+      {front:"el videojuego",    back:"het computerspel"},
+      {front:"comprar",          back:"kopen"},
+      {front:"la cosa",          back:"het ding"},
+      {front:"la camiseta",      back:"het T-shirt"},
+      {front:"los pantalones",   back:"de broek"},
+      {front:"la falda",         back:"de rok"},
+      {front:"ir a pie",         back:"te voet gaan"},
+      {front:"el cajero automático", back:"de pinautomaat"},
+      {front:"el dinero",        back:"het geld"},
+      {front:"la oferta",        back:"de aanbieding"},
+      {front:"enorme",           back:"enorm"},
+      {front:"costar",           back:"kosten"}
+    ]
+  },
   "vocab-nl-spa": {
     titel: "Vocabulaire — NL → SPA",
     frontLabel: "NEDERLANDS", backLabel: "SPAANS",
