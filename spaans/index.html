@@ -1040,11 +1040,15 @@ body {
       </div>
     </div>
 
-    <!-- ── Vocabulaire 5.2 — Spaans → Nederlands (leeg) ── -->
+    <!-- ── Vocabulaire 5.2 — Spaans → Nederlands ── -->
     <div id="set-v52" class="set-sectie">
-      <div class="leeg-melding">
-        Vocabulaire 5.2 — Spaans → Nederlands
-        <small>Nog geen kaartjes — komt binnenkort!</small>
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab52-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.2</div>
+          <div class="set-info">22 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
       </div>
     </div>
 
@@ -1235,6 +1239,34 @@ const vocabBase = [
 ];
 
 const sets = {
+  "vocab52-spa-nl": {
+    titel: "Vocabulaire 5.2 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"la tienda",          back:"de winkel"},
+      {front:"el estilo",          back:"de stijl, de smaak"},
+      {front:"primero",            back:"eerst"},
+      {front:"encantar",           back:"heel leuk vinden"},
+      {front:"ir de compras",      back:"winkelen"},
+      {front:"ir de tiendas",      back:"langs winkels gaan"},
+      {front:"pasar",              back:"langsgaan"},
+      {front:"la talla",           back:"de maat"},
+      {front:"el probador",        back:"de paskamer"},
+      {front:"barato/-a",          back:"goedkoop"},
+      {front:"caro/-a",            back:"duur"},
+      {front:"pagar",              back:"betalen"},
+      {front:"el color",           back:"de kleur"},
+      {front:"necesitar",          back:"nodig hebben"},
+      {front:"preferir",           back:"liever willen"},
+      {front:"el artículo",        back:"het product"},
+      {front:"elegante",           back:"elegant"},
+      {front:"deportivo/-a",       back:"sportief"},
+      {front:"alternativo/-a",     back:"alternatief"},
+      {front:"original",           back:"origineel"},
+      {front:"la zapatilla",       back:"de sneaker"},
+      {front:"el bolso",           back:"de tas"}
+    ]
+  },
   "vocab51-spa-nl": {
     titel: "Vocabulaire 5.1 — SPA → NL",
     frontLabel: "SPAANS", backLabel: "NEDERLANDS",
