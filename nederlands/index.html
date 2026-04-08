@@ -553,6 +553,148 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
   font-size: 1rem; font-weight: 800; cursor: pointer; transition: opacity 0.15s;
 }
 .bvn-opnieuw-knop:hover { opacity: 0.88; }
+
+/* ── TRAPPEN VAN VERGELIJKING ── */
+.trv-score {
+  text-align: center; font-size: 0.92rem; font-weight: 800;
+  color: var(--grijs); margin-bottom: 1.2rem; letter-spacing: 0.4px;
+}
+.trv-score strong { color: var(--rood); font-size: 1.05rem; }
+
+.trv-kaart {
+  background: var(--rood); border-radius: 18px;
+  padding: 1.8rem 2rem; text-align: center; margin-bottom: 1.2rem;
+  box-shadow: 0 6px 24px rgba(229,62,62,0.25);
+}
+.trv-kaart .trv-label {
+  font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.7);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem;
+}
+.trv-kaart .trv-stellend { font-size: 2.2rem; font-weight: 900; color: #fff; }
+
+.trv-velden {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.9rem;
+}
+.trv-veld-label {
+  display: block; font-size: 0.78rem; font-weight: 800; color: var(--grijs);
+  text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 0.35rem;
+}
+.trv-input {
+  width: 100%; border: 2px solid #e2e8f0; border-radius: 12px;
+  padding: 0.7rem 0.9rem; font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 700; color: var(--donker);
+  transition: border-color 0.15s;
+}
+.trv-input:focus { outline: none; border-color: var(--rood); }
+.trv-input:disabled { background: #f7fafc; }
+.trv-input.goed { border-color: var(--geel); background: var(--geel-bg); color: #744210; }
+.trv-input.fout { border-color: var(--rood); background: var(--rood-bg); color: #742a2a; }
+
+.trv-veld-fb {
+  min-height: 1.3rem; font-size: 0.82rem; font-weight: 700;
+  margin-top: 0.35rem; line-height: 1.4;
+}
+.trv-veld-fb.goed { color: #744210; }
+.trv-veld-fb.fout { color: #742a2a; }
+
+.trv-controleer {
+  width: 100%; background: var(--rood); color: #fff; border: none;
+  border-radius: 12px; padding: 0.8rem; font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 800; cursor: pointer;
+  transition: opacity 0.15s; margin-bottom: 0.7rem;
+}
+.trv-controleer:hover:not(:disabled) { opacity: 0.88; }
+.trv-controleer:disabled { opacity: 0.4; cursor: default; }
+
+.trv-volgende {
+  display: none; width: 100%; background: var(--donker); color: #fff;
+  border: none; border-radius: 12px; padding: 0.85rem;
+  font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.15s; text-align: center;
+}
+.trv-volgende.zichtbaar { display: block; }
+.trv-volgende:hover { opacity: 0.85; }
+
+.trv-einde-kaart {
+  background: #fff; border-radius: 18px; padding: 2.5rem 2rem;
+  text-align: center; box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  border-top: 5px solid var(--rood);
+}
+.trv-einde-score { font-size: 3rem; font-weight: 900; color: var(--rood); line-height: 1; margin-bottom: 0.4rem; }
+.trv-einde-label { font-size: 1rem; font-weight: 700; color: var(--grijs); margin-bottom: 1.5rem; }
+.trv-opnieuw-knop {
+  background: var(--rood); color: #fff; border: none; border-radius: 12px;
+  padding: 0.85rem 2rem; font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 800; cursor: pointer; transition: opacity 0.15s;
+}
+.trv-opnieuw-knop:hover { opacity: 0.88; }
+
+/* ── SAMENSTELLINGEN ── */
+.sam-score {
+  text-align: center; font-size: 0.92rem; font-weight: 800;
+  color: var(--grijs); margin-bottom: 1.2rem; letter-spacing: 0.4px;
+}
+.sam-score strong { color: var(--rood); font-size: 1.05rem; }
+
+.sam-kaart {
+  background: var(--rood); border-radius: 18px;
+  padding: 2rem 1.8rem; text-align: center; margin-bottom: 1.2rem;
+  box-shadow: 0 6px 24px rgba(229,62,62,0.25);
+}
+.sam-kaart .sam-label {
+  font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.7);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;
+}
+.sam-kaart .sam-delen { font-size: 1.6rem; font-weight: 900; color: #fff; line-height: 1.4; }
+.sam-sep { font-size: 1.2rem; font-weight: 400; opacity: 0.55; margin: 0 0.2rem; }
+
+.sam-input-rij { display: flex; gap: 0.6rem; margin-bottom: 0.9rem; }
+.sam-input {
+  flex: 1; border: 2px solid #e2e8f0; border-radius: 12px;
+  padding: 0.75rem 1rem; font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--donker); transition: border-color 0.15s;
+}
+.sam-input:focus { outline: none; border-color: var(--rood); }
+.sam-input:disabled { background: #f7fafc; color: #a0aec0; }
+
+.sam-controleer {
+  background: var(--rood); color: #fff; border: none; border-radius: 12px;
+  padding: 0.75rem 1.4rem; font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 800; cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+}
+.sam-controleer:hover:not(:disabled) { opacity: 0.88; }
+.sam-controleer:disabled { opacity: 0.4; cursor: default; }
+
+.sam-feedback {
+  display: none; border-radius: 12px; padding: 0.85rem 1.1rem;
+  font-size: 0.92rem; font-weight: 700; line-height: 1.5; margin-bottom: 0.9rem;
+}
+.sam-feedback.zichtbaar { display: block; }
+.sam-feedback.goed { background: var(--geel-bg); border: 2px solid var(--geel-rand); color: #744210; }
+.sam-feedback.fout { background: var(--rood-bg); border: 2px solid var(--rood-licht); color: #742a2a; }
+
+.sam-volgende {
+  display: none; width: 100%; background: var(--donker); color: #fff;
+  border: none; border-radius: 12px; padding: 0.85rem;
+  font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.15s; text-align: center;
+}
+.sam-volgende.zichtbaar { display: block; }
+.sam-volgende:hover { opacity: 0.85; }
+
+.sam-einde-kaart {
+  background: #fff; border-radius: 18px; padding: 2.5rem 2rem;
+  text-align: center; box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  border-top: 5px solid var(--rood);
+}
+.sam-einde-score { font-size: 3rem; font-weight: 900; color: var(--rood); line-height: 1; margin-bottom: 0.4rem; }
+.sam-einde-label { font-size: 1rem; font-weight: 700; color: var(--grijs); margin-bottom: 1.5rem; }
+.sam-opnieuw-knop {
+  background: var(--rood); color: #fff; border: none; border-radius: 12px;
+  padding: 0.85rem 2rem; font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 800; cursor: pointer; transition: opacity 0.15s;
+}
+.sam-opnieuw-knop:hover { opacity: 0.88; }
 </style>
 </head>
 <body>
@@ -655,11 +797,80 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
 </div>
 
 <div id="tab-vergelijking" class="tab-inhoud">
-  <p>Oefeningen volgen…</p>
+
+  <p class="trv-score">Score: <strong><span id="trv-score-goed">0</span> / <span id="trv-score-totaal">20</span></strong></p>
+
+  <div id="trv-oefening">
+    <div class="trv-kaart">
+      <div class="trv-label">Stellende trap:</div>
+      <div class="trv-stellend" id="trv-stellend-display">—</div>
+    </div>
+
+    <div class="trv-velden">
+      <div class="trv-veld">
+        <label class="trv-veld-label" for="trv-verg">Vergrotende trap</label>
+        <input type="text" id="trv-verg" class="trv-input"
+               placeholder="…er / …der"
+               autocomplete="off" spellcheck="false"
+               onkeydown="if(event.key==='Enter') trvControleer()" />
+        <div id="trv-verg-fb" class="trv-veld-fb"></div>
+      </div>
+      <div class="trv-veld">
+        <label class="trv-veld-label" for="trv-overtr">Overtreffende trap</label>
+        <input type="text" id="trv-overtr" class="trv-input"
+               placeholder="…st / meest…"
+               autocomplete="off" spellcheck="false"
+               onkeydown="if(event.key==='Enter') trvControleer()" />
+        <div id="trv-overtr-fb" class="trv-veld-fb"></div>
+      </div>
+    </div>
+
+    <button id="trv-controleer-knop" class="trv-controleer" onclick="trvControleer()">Controleer</button>
+
+    <button id="trv-volgende-knop" class="trv-volgende" onclick="trvVolgende()">Volgende →</button>
+  </div>
+
+  <div id="trv-einde" style="display:none;">
+    <div class="trv-einde-kaart">
+      <div class="trv-einde-score" id="trv-einde-score">0 / 20</div>
+      <div class="trv-einde-label">Klaar! Klik op Opnieuw om opnieuw te oefenen.</div>
+      <button class="trv-opnieuw-knop" onclick="trvOpnieuw()">Opnieuw</button>
+    </div>
+  </div>
+
 </div>
 
 <div id="tab-samenstellingen" class="tab-inhoud">
-  <p>Oefeningen volgen…</p>
+
+  <p class="sam-score">Score: <strong><span id="sam-score-goed">0</span> / <span id="sam-score-totaal">16</span></strong></p>
+
+  <div id="sam-oefening">
+    <div class="sam-kaart">
+      <div class="sam-label">Maak de samenstelling:</div>
+      <div class="sam-delen" id="sam-delen-display">—</div>
+    </div>
+
+    <div class="sam-input-rij">
+      <input type="text" id="sam-input" class="sam-input"
+             placeholder="typ de samenstelling…"
+             autocomplete="off" spellcheck="false"
+             onkeydown="if(event.key==='Enter') samControleer()" />
+      <button id="sam-controleer-knop" class="sam-controleer" onclick="samControleer()">Controleer</button>
+    </div>
+
+    <div id="sam-feedback" class="sam-feedback"></div>
+
+    <button id="sam-volgende-knop" class="sam-volgende" onclick="samVolgende()">Volgende →</button>
+  </div>
+
+  <div id="sam-einde" style="display:none;">
+    <div class="sam-einde-kaart">
+      <div class="sam-einde-score" id="sam-einde-score">0 / 16</div>
+      <div class="sam-einde-label">Klaar! Klik op Opnieuw om opnieuw te oefenen.</div>
+      <button class="sam-opnieuw-knop" onclick="samOpnieuw()">Opnieuw</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -896,6 +1107,203 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
   }
 
   bvnInit();
+
+  // ── TRAPPEN VAN VERGELIJKING ──
+  const trappen = [
+    { stellend: "blij",      vergrotend: "blijer",      overtreffend: ["blijst", "blijste"],          type: "standaard" },
+    { stellend: "creatief",  vergrotend: "creatiever",  overtreffend: ["creatiefst", "creatiefste"],  type: "f→v spelling" },
+    { stellend: "chic",      vergrotend: "chiquer",     overtreffend: ["chicst", "chicste"],           type: "spellingverandering" },
+    { stellend: "los",       vergrotend: "losser",      overtreffend: ["lost", "loste"],               type: "verdubbeling" },
+    { stellend: "precies",   vergrotend: "preciezer",   overtreffend: ["preciest"],                    type: "eindigt op -s" },
+    { stellend: "raar",      vergrotend: "raarder",     overtreffend: ["raarst", "raarste"],           type: "eindigt op -r" },
+    { stellend: "roze",      vergrotend: "rozer",       overtreffend: ["meest roze"],                  type: "onregelmatig" },
+    { stellend: "verbaasd",  vergrotend: "verbaasder",  overtreffend: ["meest verbaasd"],              type: "eindigt op -sd" },
+    { stellend: "komisch",   vergrotend: "komischer",   overtreffend: ["komischst", "komischste"],     type: "eindigt op -isch" },
+    { stellend: "weinig",    vergrotend: "minder",      overtreffend: ["minst", "minste"],             type: "onregelmatig" },
+  ];
+
+  let trvLijst = [];
+  let trvIndex = 0;
+  let trvGoedCount = 0;
+
+  function trvInit() {
+    trvLijst = mvSchud([...trappen]);
+    trvIndex = 0;
+    trvGoedCount = 0;
+    document.getElementById('trv-score-totaal').textContent = trvLijst.length * 2;
+    document.getElementById('trv-oefening').style.display = '';
+    document.getElementById('trv-einde').style.display = 'none';
+    trvToonVraag();
+  }
+
+  function trvToonVraag() {
+    const item = trvLijst[trvIndex];
+    document.getElementById('trv-stellend-display').textContent = item.stellend;
+    document.getElementById('trv-score-goed').textContent = trvGoedCount;
+
+    ['trv-verg', 'trv-overtr'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = '';
+      el.disabled = false;
+      el.className = 'trv-input';
+    });
+    ['trv-verg-fb', 'trv-overtr-fb'].forEach(id => {
+      const el = document.getElementById(id);
+      el.className = 'trv-veld-fb';
+      el.textContent = '';
+    });
+
+    document.getElementById('trv-controleer-knop').disabled = false;
+    document.getElementById('trv-volgende-knop').className = 'trv-volgende';
+    document.getElementById('trv-verg').focus();
+  }
+
+  function trvControleer() {
+    const vergEl   = document.getElementById('trv-verg');
+    const overtrEl = document.getElementById('trv-overtr');
+    if (!vergEl.value.trim() && !overtrEl.value.trim()) return;
+
+    const item = trvLijst[trvIndex];
+    const vergGoed  = vergEl.value.trim().toLowerCase() === item.vergrotend.toLowerCase();
+    const overtrGoed = item.overtreffend.some(a => a.toLowerCase() === overtrEl.value.trim().toLowerCase());
+
+    vergEl.disabled = true;
+    overtrEl.disabled = true;
+    document.getElementById('trv-controleer-knop').disabled = true;
+
+    vergEl.classList.add(vergGoed ? 'goed' : 'fout');
+    const vergFb = document.getElementById('trv-verg-fb');
+    vergFb.className = 'trv-veld-fb ' + (vergGoed ? 'goed' : 'fout');
+    vergFb.textContent = (vergGoed ? '✓ ' : '✗ ') + item.vergrotend;
+
+    overtrEl.classList.add(overtrGoed ? 'goed' : 'fout');
+    const overtrFb = document.getElementById('trv-overtr-fb');
+    overtrFb.className = 'trv-veld-fb ' + (overtrGoed ? 'goed' : 'fout');
+    overtrFb.textContent = (overtrGoed ? '✓ ' : '✗ ') + item.overtreffend.join(' / ');
+
+    if (vergGoed)  trvGoedCount++;
+    if (overtrGoed) trvGoedCount++;
+    document.getElementById('trv-score-goed').textContent = trvGoedCount;
+
+    document.getElementById('trv-volgende-knop').className = 'trv-volgende zichtbaar';
+  }
+
+  function trvVolgende() {
+    trvIndex++;
+    if (trvIndex >= trvLijst.length) {
+      trvToonEinde();
+    } else {
+      trvToonVraag();
+    }
+  }
+
+  function trvToonEinde() {
+    document.getElementById('trv-oefening').style.display = 'none';
+    document.getElementById('trv-einde').style.display = '';
+    document.getElementById('trv-einde-score').textContent = trvGoedCount + ' / ' + (trvLijst.length * 2);
+    document.getElementById('trv-score-goed').textContent = trvGoedCount;
+  }
+
+  function trvOpnieuw() { trvInit(); }
+
+  trvInit();
+
+  // ── SAMENSTELLINGEN ──
+  const samenstellingen = [
+    { delen: ["vrij", "heid", "beeld"],      antwoord: "vrijheidsbeeld",         uitleg: "vrij+heids+beeld – na -heid → tussen-s" },
+    { delen: ["leven", "stijl"],             antwoord: "levensstijl",            uitleg: "leven+s+stijl" },
+    { delen: ["verstands", "verbijstering"], antwoord: "verstandsverbijstering", uitleg: "verstands+verbijstering" },
+    { delen: ["boek", "week"],               antwoord: "boekenweek",             uitleg: "boek+en+week" },
+    { delen: ["krant", "bezorger"],          antwoord: "krantenbezorger",        uitleg: "krant+en+bezorger" },
+    { delen: ["brand", "weer", "ladder"],    antwoord: "brandweerladder",        uitleg: "gewone samenstelling, geen tussenklank" },
+    { delen: ["verrassing", "effect"],       antwoord: "verrassingseffect",      uitleg: "verrassing+s+effect" },
+    { delen: ["klant", "service"],           antwoord: "klantenservice",         uitleg: "klant+en+service" },
+    { delen: ["luitenant", "kolonel"],       antwoord: "luitenant-kolonel",      uitleg: "combinatie van titels → koppelteken" },
+    { delen: ["anti", "Frans"],              antwoord: "anti-Frans",             uitleg: "tweede deel begint met hoofdletter → koppelteken" },
+    { delen: ["Amsterdam", "Oost"],          antwoord: "Amsterdam-Oost",         uitleg: "aardrijkskundige naam → koppelteken" },
+    { delen: ["Nieuw", "Zeelander"],         antwoord: "Nieuw-Zeelander",        uitleg: "aardrijkskundige naam → koppelteken" },
+    { delen: ["domino", "effect"],           antwoord: "domino-effect",          uitleg: "botsende klinkers (o+e) → koppelteken" },
+    { delen: ["mega", "aanbieding"],         antwoord: "mega-aanbieding",        uitleg: "botsende klinkers (a+aa) → koppelteken" },
+    { delen: ["pijlstaart", "inkt", "vis"],  antwoord: "pijlstaartinktvis",      uitleg: "gewone samenstelling" },
+    { delen: ["kind", "boek", "schrijver"],  antwoord: "kinderboekschrijver",    uitleg: "kind+er+boek+schrijver – kind krijgt -er" },
+  ];
+
+  let samLijst = [];
+  let samIndex = 0;
+  let samGoedCount = 0;
+
+  function samInit() {
+    samLijst = mvSchud([...samenstellingen]);
+    samIndex = 0;
+    samGoedCount = 0;
+    document.getElementById('sam-score-totaal').textContent = samLijst.length;
+    document.getElementById('sam-oefening').style.display = '';
+    document.getElementById('sam-einde').style.display = 'none';
+    samToonVraag();
+  }
+
+  function samToonVraag() {
+    const item = samLijst[samIndex];
+    document.getElementById('sam-delen-display').textContent = item.delen.join(' + ');
+    document.getElementById('sam-score-goed').textContent = samGoedCount;
+
+    const input = document.getElementById('sam-input');
+    input.value = '';
+    input.disabled = false;
+    input.focus();
+
+    const feedback = document.getElementById('sam-feedback');
+    feedback.className = 'sam-feedback';
+    feedback.innerHTML = '';
+
+    document.getElementById('sam-controleer-knop').disabled = false;
+    document.getElementById('sam-volgende-knop').className = 'sam-volgende';
+  }
+
+  function samControleer() {
+    const input = document.getElementById('sam-input');
+    const antwoord = input.value.trim().toLowerCase();
+    if (!antwoord) return;
+
+    const item = samLijst[samIndex];
+    const isGoed = antwoord === item.antwoord.toLowerCase();
+
+    input.disabled = true;
+    document.getElementById('sam-controleer-knop').disabled = true;
+
+    const feedback = document.getElementById('sam-feedback');
+    if (isGoed) {
+      samGoedCount++;
+      document.getElementById('sam-score-goed').textContent = samGoedCount;
+      feedback.className = 'sam-feedback zichtbaar goed';
+      feedback.innerHTML = `✓ Correct! <strong>${item.antwoord}</strong> — ${item.uitleg}`;
+    } else {
+      feedback.className = 'sam-feedback zichtbaar fout';
+      feedback.innerHTML = `✗ Helaas. Goed antwoord: <strong>${item.antwoord}</strong> — ${item.uitleg}`;
+    }
+
+    document.getElementById('sam-volgende-knop').className = 'sam-volgende zichtbaar';
+  }
+
+  function samVolgende() {
+    samIndex++;
+    if (samIndex >= samLijst.length) {
+      samToonEinde();
+    } else {
+      samToonVraag();
+    }
+  }
+
+  function samToonEinde() {
+    document.getElementById('sam-oefening').style.display = 'none';
+    document.getElementById('sam-einde').style.display = '';
+    document.getElementById('sam-einde-score').textContent = samGoedCount + ' / ' + samLijst.length;
+    document.getElementById('sam-score-goed').textContent = samGoedCount;
+  }
+
+  function samOpnieuw() { samInit(); }
+
+  samInit();
 </script>
 
 </body>
