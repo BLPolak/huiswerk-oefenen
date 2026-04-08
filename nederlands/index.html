@@ -450,6 +450,109 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
   cursor: pointer; transition: opacity 0.15s;
 }
 .mv-opnieuw-knop:hover { opacity: 0.88; }
+
+/* ── BVN OEFENING ── */
+.bvn-uitleg {
+  background: #fff; border-radius: 14px;
+  padding: 1rem 1.5rem; margin-bottom: 1.2rem;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+  border-left: 4px solid var(--rood);
+}
+.bvn-uitleg summary {
+  list-style: none; cursor: pointer;
+  font-size: 0.95rem; font-weight: 800; color: var(--donker);
+  padding: 0.3rem 0; user-select: none;
+}
+.bvn-uitleg summary::-webkit-details-marker { display: none; }
+.bvn-uitleg summary::before { content: '▶  '; font-size: 0.68rem; color: var(--rood); }
+.bvn-uitleg[open] summary::before { content: '▼  '; }
+.bvn-uitleg[open] summary { margin-bottom: 0.8rem; }
+
+.bvn-tabel { width: 100%; border-collapse: collapse; }
+.bvn-tabel th, .bvn-tabel td {
+  border: 1px solid #e2e8f0; padding: 0.5rem 0.8rem;
+  font-size: 0.84rem; font-weight: 600; text-align: left;
+}
+.bvn-tabel th { background: var(--rood-bg); font-weight: 800; color: var(--rood); }
+.bvn-tabel td:nth-child(2) { font-weight: 800; color: var(--donker); }
+.bvn-tabel tr:nth-child(even) td { background: #fafafa; }
+
+.bvn-score {
+  text-align: center; font-size: 0.92rem; font-weight: 800;
+  color: var(--grijs); margin-bottom: 1.2rem; letter-spacing: 0.4px;
+}
+.bvn-score strong { color: var(--rood); font-size: 1.05rem; }
+
+.bvn-kaart {
+  background: var(--rood); border-radius: 18px;
+  padding: 2rem 1.8rem; text-align: center; margin-bottom: 1.2rem;
+  box-shadow: 0 6px 24px rgba(229,62,62,0.25);
+}
+.bvn-zin {
+  font-size: 1.25rem; font-weight: 800; color: #fff;
+  line-height: 1.6; margin-bottom: 0.8rem;
+}
+.bvn-blank {
+  display: inline-block;
+  border-bottom: 3px solid rgba(255,255,255,0.6);
+  min-width: 80px; padding: 0 4px;
+  color: rgba(255,255,255,0.45);
+  font-style: italic;
+}
+.bvn-basis {
+  font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.75);
+}
+.bvn-basis span { color: #fff; font-weight: 900; }
+
+.bvn-input-rij { display: flex; gap: 0.6rem; margin-bottom: 0.9rem; }
+.bvn-input {
+  flex: 1; border: 2px solid #e2e8f0; border-radius: 12px;
+  padding: 0.75rem 1rem; font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--donker);
+  transition: border-color 0.15s;
+}
+.bvn-input:focus { outline: none; border-color: var(--rood); }
+.bvn-input:disabled { background: #f7fafc; color: #a0aec0; }
+
+.bvn-controleer {
+  background: var(--rood); color: #fff; border: none; border-radius: 12px;
+  padding: 0.75rem 1.4rem; font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 800; cursor: pointer;
+  transition: opacity 0.15s; white-space: nowrap;
+}
+.bvn-controleer:hover:not(:disabled) { opacity: 0.88; }
+.bvn-controleer:disabled { opacity: 0.4; cursor: default; }
+
+.bvn-feedback {
+  display: none; border-radius: 12px; padding: 0.85rem 1.1rem;
+  font-size: 0.92rem; font-weight: 700; line-height: 1.5; margin-bottom: 0.9rem;
+}
+.bvn-feedback.zichtbaar { display: block; }
+.bvn-feedback.goed { background: var(--geel-bg); border: 2px solid var(--geel-rand); color: #744210; }
+.bvn-feedback.fout { background: var(--rood-bg); border: 2px solid var(--rood-licht); color: #742a2a; }
+
+.bvn-volgende {
+  display: none; width: 100%; background: var(--donker); color: #fff;
+  border: none; border-radius: 12px; padding: 0.85rem;
+  font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.15s; text-align: center;
+}
+.bvn-volgende.zichtbaar { display: block; }
+.bvn-volgende:hover { opacity: 0.85; }
+
+.bvn-einde-kaart {
+  background: #fff; border-radius: 18px; padding: 2.5rem 2rem;
+  text-align: center; box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  border-top: 5px solid var(--rood);
+}
+.bvn-einde-score { font-size: 3rem; font-weight: 900; color: var(--rood); line-height: 1; margin-bottom: 0.4rem; }
+.bvn-einde-label { font-size: 1rem; font-weight: 700; color: var(--grijs); margin-bottom: 1.5rem; }
+.bvn-opnieuw-knop {
+  background: var(--rood); color: #fff; border: none; border-radius: 12px;
+  padding: 0.85rem 2rem; font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 800; cursor: pointer; transition: opacity 0.15s;
+}
+.bvn-opnieuw-knop:hover { opacity: 0.88; }
 </style>
 </head>
 <body>
@@ -501,7 +604,54 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
 </div>
 
 <div id="tab-bvn" class="tab-inhoud">
-  <p>Oefeningen volgen…</p>
+
+  <!-- Section 1: Uitleg -->
+  <details class="bvn-uitleg" open>
+    <summary>Regels bijvoeglijk naamwoord</summary>
+    <table class="bvn-tabel">
+      <thead>
+        <tr><th>Situatie</th><th>Uitgang</th><th>Voorbeeld</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>de-woord + BVN</td><td>altijd -e</td><td><em>de grote auto</em></td></tr>
+        <tr><td>het-woord + bepaald lidwoord + BVN</td><td>-e</td><td><em>het grote huis</em></td></tr>
+        <tr><td>het-woord + onbepaald lidwoord + BVN</td><td>geen -e</td><td><em>een groot huis</em></td></tr>
+        <tr><td>Predicatief (na zijn/worden/blijven)</td><td>geen -e</td><td><em>De auto is groot</em></td></tr>
+        <tr><td>Stoffelijk BVN (houten, gouden…)</td><td>-en of onveranderd</td><td><em>een houten tafel</em></td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <!-- Section 2: Oefening -->
+  <p class="bvn-score">Score: <strong><span id="bvn-score-goed">0</span> / <span id="bvn-score-totaal">14</span></strong></p>
+
+  <div id="bvn-oefening">
+    <div class="bvn-kaart">
+      <div class="bvn-zin" id="bvn-zin-display">—</div>
+      <div class="bvn-basis">Basisvorm: <span id="bvn-basis-display">—</span></div>
+    </div>
+
+    <div class="bvn-input-rij">
+      <input type="text" id="bvn-input" class="bvn-input"
+             placeholder="typ de juiste vorm…"
+             autocomplete="off" spellcheck="false"
+             onkeydown="if(event.key==='Enter') bvnControleer()" />
+      <button id="bvn-controleer-knop" class="bvn-controleer" onclick="bvnControleer()">Controleer</button>
+    </div>
+
+    <div id="bvn-feedback" class="bvn-feedback"></div>
+
+    <button id="bvn-volgende-knop" class="bvn-volgende" onclick="bvnVolgende()">Volgende →</button>
+  </div>
+
+  <div id="bvn-einde" style="display:none;">
+    <div class="bvn-einde-kaart">
+      <div class="bvn-einde-score" id="bvn-einde-score">0 / 14</div>
+      <div class="bvn-einde-label">Klaar! Klik op Opnieuw om opnieuw te oefenen.</div>
+      <button class="bvn-opnieuw-knop" onclick="bvnOpnieuw()">Opnieuw</button>
+    </div>
+  </div>
+
 </div>
 
 <div id="tab-vergelijking" class="tab-inhoud">
@@ -647,6 +797,105 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
   }
 
   mvInit();
+
+  // ── BIJVOEGLIJK NAAMWOORD OEFENING ──
+  const zinnen = [
+    { zin: "Geef me de ___ map.",                 basis: "groen",         antwoord: "groene",         uitleg: "de-woord → -e" },
+    { zin: "Het ___ huis staat op de hoek.",       basis: "groot",         antwoord: "grote",          uitleg: "het-woord + bepaald lidwoord → -e" },
+    { zin: "Dat is een ___ huis.",                 basis: "groot",         antwoord: "groot",          uitleg: "het-woord + onbepaald lidwoord → geen -e" },
+    { zin: "Het huis is ___.",                     basis: "groot",         antwoord: "groot",          uitleg: "predicatief → geen -e" },
+    { zin: "De ___ dj draait muziek.",             basis: "populair",      antwoord: "populaire",      uitleg: "de-woord → -e" },
+    { zin: "Hij draagt een ___ horloge.",          basis: "goud",          antwoord: "gouden",         uitleg: "stoffelijk BVN → -en" },
+    { zin: "De soep zit in een ___ zak.",          basis: "plastic",       antwoord: "plastic",        uitleg: "stoffelijk BVN (leenwoord) → onveranderd" },
+    { zin: "Dat antwoord is ___.",                 basis: "goed",          antwoord: "goed",           uitleg: "predicatief → geen -e" },
+    { zin: "Ze wandelen door een ___ gebied.",     basis: "onherbergzaam", antwoord: "onherbergzaam",  uitleg: "het-woord + onbepaald lidwoord → geen -e" },
+    { zin: "Een ___ hond blaft niet.",             basis: "braaf",         antwoord: "brave",          uitleg: "de-woord + onbepaald lidwoord → -e" },
+    { zin: "Ze dragen een ___ ketel.",             basis: "koper",         antwoord: "koperen",        uitleg: "stoffelijk BVN → -en" },
+    { zin: "Ze leggen een ___ deken op het bed.",  basis: "fleece",        antwoord: "fleece",         uitleg: "stoffelijk leenwoord → onveranderd" },
+    { zin: "Het ___ ongeluk werd gemeld.",         basis: "bizar",         antwoord: "bizarre",        uitleg: "het-woord + bepaald lidwoord → -e (verdubbeling z)" },
+    { zin: "Ze wonnen een ___ medaille.",          basis: "brons",         antwoord: "bronzen",        uitleg: "stoffelijk BVN → -en" },
+  ];
+
+  let bvnLijst = [];
+  let bvnIndex = 0;
+  let bvnGoedCount = 0;
+
+  function bvnInit() {
+    bvnLijst = mvSchud([...zinnen]);
+    bvnIndex = 0;
+    bvnGoedCount = 0;
+    document.getElementById('bvn-score-totaal').textContent = bvnLijst.length;
+    document.getElementById('bvn-oefening').style.display = '';
+    document.getElementById('bvn-einde').style.display = 'none';
+    bvnToonVraag();
+  }
+
+  function bvnToonVraag() {
+    const item = bvnLijst[bvnIndex];
+    document.getElementById('bvn-zin-display').innerHTML =
+      item.zin.replace('___', '<span class="bvn-blank">___</span>');
+    document.getElementById('bvn-basis-display').textContent = item.basis;
+    document.getElementById('bvn-score-goed').textContent = bvnGoedCount;
+
+    const input = document.getElementById('bvn-input');
+    input.value = '';
+    input.disabled = false;
+    input.focus();
+
+    const feedback = document.getElementById('bvn-feedback');
+    feedback.className = 'bvn-feedback';
+    feedback.innerHTML = '';
+
+    document.getElementById('bvn-controleer-knop').disabled = false;
+    document.getElementById('bvn-volgende-knop').className = 'bvn-volgende';
+  }
+
+  function bvnControleer() {
+    const input = document.getElementById('bvn-input');
+    const antwoord = input.value.trim().toLowerCase();
+    if (!antwoord) return;
+
+    const item = bvnLijst[bvnIndex];
+    const isGoed = antwoord === item.antwoord.toLowerCase();
+
+    input.disabled = true;
+    document.getElementById('bvn-controleer-knop').disabled = true;
+
+    const feedback = document.getElementById('bvn-feedback');
+    if (isGoed) {
+      bvnGoedCount++;
+      document.getElementById('bvn-score-goed').textContent = bvnGoedCount;
+      feedback.className = 'bvn-feedback zichtbaar goed';
+      feedback.innerHTML = `✓ Correct! <strong>${item.antwoord}</strong> — ${item.uitleg}`;
+    } else {
+      feedback.className = 'bvn-feedback zichtbaar fout';
+      feedback.innerHTML = `✗ Helaas. Goed antwoord: <strong>${item.antwoord}</strong> — ${item.uitleg}`;
+    }
+
+    document.getElementById('bvn-volgende-knop').className = 'bvn-volgende zichtbaar';
+  }
+
+  function bvnVolgende() {
+    bvnIndex++;
+    if (bvnIndex >= bvnLijst.length) {
+      bvnToonEinde();
+    } else {
+      bvnToonVraag();
+    }
+  }
+
+  function bvnToonEinde() {
+    document.getElementById('bvn-oefening').style.display = 'none';
+    document.getElementById('bvn-einde').style.display = '';
+    document.getElementById('bvn-einde-score').textContent = bvnGoedCount + ' / ' + bvnLijst.length;
+    document.getElementById('bvn-score-goed').textContent = bvnGoedCount;
+  }
+
+  function bvnOpnieuw() {
+    bvnInit();
+  }
+
+  bvnInit();
 </script>
 
 </body>
