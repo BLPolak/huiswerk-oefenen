@@ -17,6 +17,9 @@
   --oranje: #d97706;
   --blauw: #3182ce;
   --grijs: #718096;
+  --geel: #d69e2e;
+  --geel-bg: #fefcbf;
+  --geel-rand: #f6e05e;
 }
 
 body {
@@ -350,6 +353,103 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
   color: var(--rood);
   line-height: 1.5;
 }
+
+/* ── MEERVOUDEN OEFENING ── */
+.mv-score {
+  text-align: center;
+  font-size: 0.92rem; font-weight: 800; color: var(--grijs);
+  margin-bottom: 1.2rem; letter-spacing: 0.4px;
+}
+.mv-score strong { color: var(--rood); font-size: 1.05rem; }
+
+.mv-kaart {
+  background: var(--rood);
+  border-radius: 18px;
+  padding: 2.2rem 2rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 6px 24px rgba(229,62,62,0.25);
+}
+.mv-kaart .mv-label {
+  font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.7);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;
+}
+.mv-kaart .mv-woord {
+  font-size: 2.4rem; font-weight: 900; color: #fff; line-height: 1.2;
+}
+
+.mv-input-rij {
+  display: flex; gap: 0.6rem; margin-bottom: 0.9rem;
+}
+.mv-input {
+  flex: 1; border: 2px solid #e2e8f0; border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--donker);
+  transition: border-color 0.15s;
+}
+.mv-input:focus { outline: none; border-color: var(--rood); }
+.mv-input:disabled { background: #f7fafc; color: #a0aec0; }
+
+.mv-controleer {
+  background: var(--rood); color: #fff;
+  border: none; border-radius: 12px;
+  padding: 0.75rem 1.4rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+}
+.mv-controleer:hover:not(:disabled) { opacity: 0.88; }
+.mv-controleer:disabled { opacity: 0.4; cursor: default; }
+
+.mv-feedback {
+  display: none; border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.92rem; font-weight: 700; line-height: 1.5;
+  margin-bottom: 0.9rem;
+}
+.mv-feedback.zichtbaar { display: block; }
+.mv-feedback.goed {
+  background: var(--geel-bg); border: 2px solid var(--geel-rand); color: #744210;
+}
+.mv-feedback.fout {
+  background: var(--rood-bg); border: 2px solid var(--rood-licht); color: #742a2a;
+}
+
+.mv-volgende {
+  display: none; width: 100%;
+  background: var(--donker); color: #fff;
+  border: none; border-radius: 12px; padding: 0.85rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.15s; text-align: center;
+}
+.mv-volgende.zichtbaar { display: block; }
+.mv-volgende:hover { opacity: 0.85; }
+
+.mv-einde-kaart {
+  background: #fff; border-radius: 18px;
+  padding: 2.5rem 2rem; text-align: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  border-top: 5px solid var(--rood);
+}
+.mv-einde-score {
+  font-size: 3rem; font-weight: 900; color: var(--rood);
+  line-height: 1; margin-bottom: 0.4rem;
+}
+.mv-einde-label {
+  font-size: 1rem; font-weight: 700; color: var(--grijs);
+  margin-bottom: 1.5rem;
+}
+.mv-opnieuw-knop {
+  background: var(--rood); color: #fff;
+  border: none; border-radius: 12px;
+  padding: 0.85rem 2rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.15s;
+}
+.mv-opnieuw-knop:hover { opacity: 0.88; }
 </style>
 </head>
 <body>
@@ -368,7 +468,36 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
 </div>
 
 <div id="tab-meervouden" class="tab-inhoud zichtbaar">
-  <p>Oefeningen volgen…</p>
+
+  <p class="mv-score">Score: <strong><span id="mv-score-goed">0</span> / <span id="mv-score-totaal">35</span></strong></p>
+
+  <div id="mv-oefening">
+    <div class="mv-kaart">
+      <div class="mv-label">Meervoud van:</div>
+      <div class="mv-woord" id="mv-woord-display">—</div>
+    </div>
+
+    <div class="mv-input-rij">
+      <input type="text" id="mv-input" class="mv-input"
+             placeholder="typ het meervoud…"
+             autocomplete="off" spellcheck="false"
+             onkeydown="if(event.key==='Enter') mvControleer()" />
+      <button id="mv-controleer-knop" class="mv-controleer" onclick="mvControleer()">Controleer</button>
+    </div>
+
+    <div id="mv-feedback" class="mv-feedback"></div>
+
+    <button id="mv-volgende-knop" class="mv-volgende" onclick="mvVolgende()">Volgende →</button>
+  </div>
+
+  <div id="mv-einde" style="display:none;">
+    <div class="mv-einde-kaart">
+      <div class="mv-einde-score" id="mv-einde-score">0 / 35</div>
+      <div class="mv-einde-label">Klaar! Klik op Opnieuw om opnieuw te oefenen.</div>
+      <button class="mv-opnieuw-knop" onclick="mvOpnieuw()">Opnieuw</button>
+    </div>
+  </div>
+
 </div>
 
 <div id="tab-bvn" class="tab-inhoud">
@@ -391,6 +520,133 @@ header p { color: var(--grijs); font-size: 0.95rem; margin-top: 0.3rem; font-wei
     document.getElementById('tab-' + naam).classList.add('zichtbaar');
     if (knop) knop.classList.add('actief');
   }
+
+  // ── MEERVOUDEN OEFENING ──
+  const woorden = [
+    { woord: "guppy",        antwoorden: ["guppy's"],               regel: "Leenwoord op -y → 's" },
+    { woord: "djembe",       antwoorden: ["djembe's"],              regel: "Leenwoord op klinker (geen -ie) → 's" },
+    { woord: "gewelf",       antwoorden: ["gewelven"],              regel: "Op medeklinker → -en" },
+    { woord: "sms",          antwoorden: ["sms'en"],                regel: "Afkorting → 'en" },
+    { woord: "kano",         antwoorden: ["kano's"],                regel: "Op -o → 's" },
+    { woord: "toffee",       antwoorden: ["toffees"],               regel: "Leenwoord op -ee → -s" },
+    { woord: "ambulance",    antwoorden: ["ambulances"],            regel: "Frans leenwoord → -s" },
+    { woord: "cello",        antwoorden: ["cello's"],               regel: "Leenwoord op -o → 's" },
+    { woord: "been",         antwoorden: ["benen", "beenderen"],    regel: "Twee vormen: benen (lichaamsdeel) of beenderen (botten)" },
+    { woord: "motor",        antwoorden: ["motoren"],               regel: "Op -or → -en" },
+    { woord: "strip",        antwoorden: ["strips"],                regel: "Leenwoord → -s" },
+    { woord: "aquarium",     antwoorden: ["aquaria", "aquariums"],  regel: "Latijns woord → -a of -s" },
+    { woord: "eigenaar",     antwoorden: ["eigenaars", "eigenaren"], regel: "Op -aar → -s of -en" },
+    { woord: "ceremonie",    antwoorden: ["ceremonieën"],           regel: "Op -ie → -ën" },
+    { woord: "explosie",     antwoorden: ["explosies"],             regel: "Op -sie/-tie → -s" },
+    { woord: "maiskolf",     antwoorden: ["maiskolven"],            regel: "Op -f → -ven" },
+    { woord: "kalf",         antwoorden: ["kalveren"],              regel: "Onregelmatig: -f → -veren" },
+    { woord: "encyclopedie", antwoorden: ["encyclopedieën"],        regel: "Op -ie → -ën" },
+    { woord: "comedy",       antwoorden: ["comedy's"],              regel: "Engels woord op -y → 's" },
+    { woord: "hiëroglief",   antwoorden: ["hiëroglieven"],          regel: "Op -f → -ven" },
+    { woord: "graan",        antwoorden: ["granen"],                regel: "Lange klinker verkort voor -en" },
+    { woord: "kwaliteit",    antwoorden: ["kwaliteiten"],           regel: "Op -iteit → -en" },
+    { woord: "kwaal",        antwoorden: ["kwalen"],                regel: "Lange klinker → -en" },
+    { woord: "melodie",      antwoorden: ["melodieën"],             regel: "Op -ie → -ën" },
+    { woord: "idee",         antwoorden: ["ideeën"],                regel: "Op -ee → -ën" },
+    { woord: "stad",         antwoorden: ["steden"],                regel: "Onregelmatig (klinkerwisseling)" },
+    { woord: "ei",           antwoorden: ["eieren"],                regel: "Onregelmatig: -eren" },
+    { woord: "datum",        antwoorden: ["data", "datums"],        regel: "Latijns: -a of -s" },
+    { woord: "saldo",        antwoorden: ["saldo's", "saldi"],      regel: "Italiaans: 's of -i" },
+    { woord: "vlo",          antwoorden: ["vlooien"],               regel: "Onregelmatig" },
+    { woord: "keuze",        antwoorden: ["keuzen", "keuzes"],      regel: "Op -e → -n of -s" },
+    { woord: "paté",         antwoorden: ["paté's"],                regel: "Frans leenwoord met accent → 's" },
+    { woord: "lawine",       antwoorden: ["lawines"],               regel: "Leenwoord op -e → -s" },
+    { woord: "surprise",     antwoorden: ["surprises"],             regel: "Leenwoord op -e → -s" },
+    { woord: "kiwi",         antwoorden: ["kiwi's"],                regel: "Op -i → 's" },
+  ];
+
+  let mvLijst = [];
+  let mvIndex = 0;
+  let mvGoedCount = 0;
+
+  function mvSchud(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function mvInit() {
+    mvLijst = mvSchud([...woorden]);
+    mvIndex = 0;
+    mvGoedCount = 0;
+    document.getElementById('mv-score-totaal').textContent = mvLijst.length;
+    document.getElementById('mv-oefening').style.display = '';
+    document.getElementById('mv-einde').style.display = 'none';
+    mvToonVraag();
+  }
+
+  function mvToonVraag() {
+    const item = mvLijst[mvIndex];
+    document.getElementById('mv-woord-display').textContent = item.woord;
+    document.getElementById('mv-score-goed').textContent = mvGoedCount;
+
+    const input = document.getElementById('mv-input');
+    input.value = '';
+    input.disabled = false;
+    input.focus();
+
+    const feedback = document.getElementById('mv-feedback');
+    feedback.className = 'mv-feedback';
+    feedback.innerHTML = '';
+
+    document.getElementById('mv-controleer-knop').disabled = false;
+    document.getElementById('mv-volgende-knop').className = 'mv-volgende';
+  }
+
+  function mvControleer() {
+    const input = document.getElementById('mv-input');
+    const antwoord = input.value.trim().toLowerCase();
+    if (!antwoord) return;
+
+    const item = mvLijst[mvIndex];
+    const isGoed = item.antwoorden.some(a => a.toLowerCase() === antwoord);
+
+    input.disabled = true;
+    document.getElementById('mv-controleer-knop').disabled = true;
+
+    const feedback = document.getElementById('mv-feedback');
+    const juist = item.antwoorden.join(' of ');
+    if (isGoed) {
+      mvGoedCount++;
+      document.getElementById('mv-score-goed').textContent = mvGoedCount;
+      feedback.className = 'mv-feedback zichtbaar goed';
+      feedback.innerHTML = `✓ Correct! <strong>${juist}</strong> — ${item.regel}`;
+    } else {
+      feedback.className = 'mv-feedback zichtbaar fout';
+      feedback.innerHTML = `✗ Helaas. Goed antwoord: <strong>${juist}</strong> — ${item.regel}`;
+    }
+
+    document.getElementById('mv-volgende-knop').className = 'mv-volgende zichtbaar';
+  }
+
+  function mvVolgende() {
+    mvIndex++;
+    if (mvIndex >= mvLijst.length) {
+      mvToonEinde();
+    } else {
+      mvToonVraag();
+    }
+  }
+
+  function mvToonEinde() {
+    document.getElementById('mv-oefening').style.display = 'none';
+    document.getElementById('mv-einde').style.display = '';
+    document.getElementById('mv-einde-score').textContent = mvGoedCount + ' / ' + mvLijst.length;
+    document.getElementById('mv-score-goed').textContent = mvGoedCount;
+  }
+
+  function mvOpnieuw() {
+    mvInit();
+  }
+
+  mvInit();
 </script>
 
 </body>
