@@ -655,6 +655,23 @@ body {
   .flip-tekst { font-size: 1.2rem; }
   .werkwoord-grid { grid-template-columns: 1fr; }
 }
+
+/* ── OEFENINGEN ── */
+.oefen-sectie { margin-bottom: 2rem; }
+.oefen-sectie h3 { font-size: 1.05rem; font-weight: 900; color: var(--donker); margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--rood); }
+.verb-sub-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.verb-sub-tab-btn { padding: 0.4rem 1rem; border: 2px solid var(--rood); border-radius: 8px; background: #fff; color: var(--rood); font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+.verb-sub-tab-btn.actief { background: var(--rood); color: #fff; }
+.verb-panel { display: none; }
+.verb-panel.actief { display: block; }
+.oefen-input { border: 2px solid #e2e8f0; border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.9rem; font-family: inherit; width: 100%; box-sizing: border-box; }
+.oefen-input.goed { border-color: #38a169; background: #f0fff4; color: #276749; }
+.oefen-input.fout { border-color: var(--rood); background: #fff5f5; color: var(--rood); }
+.fout-antwoord { font-size: 0.8rem; color: var(--rood); margin-top: 0.2rem; font-weight: 700; }
+.oefen-btns { display: flex; gap: 0.75rem; margin-top: 0.75rem; }
+.oefen-btn { padding: 0.5rem 1.2rem; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+.oefen-btn.check { background: var(--donker); color: #fff; }
+.oefen-btn.reset { background: var(--grijs); color: #fff; }
 </style>
 </head>
 <body>
@@ -668,6 +685,7 @@ body {
 <div class="tabs">
   <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
   <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="toonTab('oefeningen', this)">✏️ Oefeningen</button>
 </div>
 
 <div class="content">
@@ -1204,6 +1222,67 @@ body {
     </div>
 
   </div><!-- /tab-flashcards -->
+  <div id="tab-oefeningen" class="sectie">
+
+    <!-- Oefening 1: Toekomende tijd -->
+    <div class="oefen-sectie">
+      <h3>Oefening 1 — Toekomende tijd: ir + a + infinitivo</h3>
+      <p style="font-size:0.88rem;color:var(--grijs);margin-bottom:0.8rem;">Vul de juiste vorm van <strong>ir</strong> in om de toekomende tijd te vormen.</p>
+      <table class="conj-table" id="oefen1-table">
+        <tr><td>Yo _____ a estudiar esta tarde.</td><td><input class="oefen-input" data-answer="voy" placeholder="ir …"></td></tr>
+        <tr><td>Tú _____ a comprar un regalo.</td><td><input class="oefen-input" data-answer="vas" placeholder="ir …"></td></tr>
+        <tr><td>María _____ a cocinar hoy.</td><td><input class="oefen-input" data-answer="va" placeholder="ir …"></td></tr>
+        <tr><td>Nosotros _____ a salir a las ocho.</td><td><input class="oefen-input" data-answer="vamos" placeholder="ir …"></td></tr>
+        <tr><td>Vosotros _____ a ver una película.</td><td><input class="oefen-input" data-answer="vais" placeholder="ir …"></td></tr>
+        <tr><td>Los chicos _____ a jugar al fútbol.</td><td><input class="oefen-input" data-answer="van" placeholder="ir …"></td></tr>
+      </table>
+      <div class="oefen-btns">
+        <button class="oefen-btn check" onclick="controleerOefen('oefen1')">✅ Controleer</button>
+        <button class="oefen-btn reset" onclick="opnieuwOefen('oefen1')">🔄 Opnieuw</button>
+      </div>
+    </div>
+
+    <!-- Oefening 2: ir & estar -->
+    <div class="oefen-sectie">
+      <h3>Oefening 2 — Werkwoorden: ir &amp; estar</h3>
+      <div class="verb-sub-tabs">
+        <button class="verb-sub-tab-btn actief" onclick="toonVerbPanel('ir', this)">ir (gaan)</button>
+        <button class="verb-sub-tab-btn" onclick="toonVerbPanel('estar', this)">estar (zijn/bevinden)</button>
+      </div>
+
+      <div id="verb-panel-ir" class="verb-panel actief">
+        <table class="conj-table" id="oefen2-ir-table">
+          <tr><td>yo</td><td><input class="oefen-input" data-answer="voy" placeholder="…"></td></tr>
+          <tr><td>tú</td><td><input class="oefen-input" data-answer="vas" placeholder="…"></td></tr>
+          <tr><td>él/ella</td><td><input class="oefen-input" data-answer="va" placeholder="…"></td></tr>
+          <tr><td>nosotros</td><td><input class="oefen-input" data-answer="vamos" placeholder="…"></td></tr>
+          <tr><td>vosotros</td><td><input class="oefen-input" data-answer="vais" placeholder="…"></td></tr>
+          <tr><td>ellos/ellas</td><td><input class="oefen-input" data-answer="van" placeholder="…"></td></tr>
+        </table>
+        <div class="oefen-btns">
+          <button class="oefen-btn check" onclick="controleerOefen('oefen2-ir')">✅ Controleer</button>
+          <button class="oefen-btn reset" onclick="opnieuwOefen('oefen2-ir')">🔄 Opnieuw</button>
+        </div>
+      </div>
+
+      <div id="verb-panel-estar" class="verb-panel">
+        <table class="conj-table" id="oefen2-estar-table">
+          <tr><td>yo</td><td><input class="oefen-input" data-answer="estoy" placeholder="…"></td></tr>
+          <tr><td>tú</td><td><input class="oefen-input" data-answer="estás" placeholder="…"></td></tr>
+          <tr><td>él/ella</td><td><input class="oefen-input" data-answer="está" placeholder="…"></td></tr>
+          <tr><td>nosotros</td><td><input class="oefen-input" data-answer="estamos" placeholder="…"></td></tr>
+          <tr><td>vosotros</td><td><input class="oefen-input" data-answer="estáis" placeholder="…"></td></tr>
+          <tr><td>ellos/ellas</td><td><input class="oefen-input" data-answer="están" placeholder="…"></td></tr>
+        </table>
+        <div class="oefen-btns">
+          <button class="oefen-btn check" onclick="controleerOefen('oefen2-estar')">✅ Controleer</button>
+          <button class="oefen-btn reset" onclick="opnieuwOefen('oefen2-estar')">🔄 Opnieuw</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-oefeningen -->
+
 
 </div><!-- /content -->
 
@@ -1868,6 +1947,46 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Enter') flipKaart();
   if (e.key === 'Escape') sluitModal();
 });
+
+/* ── VERB SUB-TAB SWITCHING ── */
+function toonVerbPanel(naam, btn) {
+  document.querySelectorAll('.verb-panel').forEach(p => p.classList.remove('actief'));
+  document.querySelectorAll('.verb-sub-tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('verb-panel-' + naam).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+/* ── OEFENING CHECK / RESET ── */
+function controleerOefen(id) {
+  const table = document.getElementById(id + '-table');
+  table.querySelectorAll('.oefen-input').forEach(input => {
+    const correct = input.dataset.answer;
+    const isGoed = input.value.trim().toLowerCase() === correct.toLowerCase();
+    input.classList.remove('goed', 'fout');
+    const existing = input.parentElement.querySelector('.fout-antwoord');
+    if (existing) existing.remove();
+    if (isGoed) {
+      input.classList.add('goed');
+    } else {
+      input.classList.add('fout');
+      const fb = document.createElement('div');
+      fb.className = 'fout-antwoord';
+      fb.textContent = '✓ ' + correct;
+      input.parentElement.appendChild(fb);
+    }
+  });
+}
+
+function opnieuwOefen(id) {
+  const table = document.getElementById(id + '-table');
+  table.querySelectorAll('.oefen-input').forEach(input => {
+    input.value = '';
+    input.classList.remove('goed', 'fout');
+    const fb = input.parentElement.querySelector('.fout-antwoord');
+    if (fb) fb.remove();
+  });
+}
+
 </script>
 
 </body>
