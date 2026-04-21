@@ -655,6 +655,120 @@ body {
   .flip-tekst { font-size: 1.2rem; }
   .werkwoord-grid { grid-template-columns: 1fr; }
 }
+
+/* ── OEFENINGEN ── */
+.oe-blok {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  margin-bottom: 1.5rem;
+}
+.oe-blok h2 {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--donker);
+  margin-bottom: 0.8rem;
+}
+.oe-teller {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--grijs);
+  margin-bottom: 0.5rem;
+}
+.oe-prompt {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--donker);
+  margin-bottom: 0.7rem;
+  line-height: 1.45;
+}
+.oe-prompt .oe-subject { color: var(--rood); font-weight: 900; }
+.oe-prompt .oe-inf { font-style: italic; }
+.oe-input-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.oe-input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--donker);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.oe-input:focus { border-color: var(--rood); }
+.oe-input.goed  { border-color: #38a169; background: #f0fff4; }
+.oe-input.fout  { border-color: #e53e3e; background: #fff5f5; }
+.oe-check-btn {
+  padding: 0.7rem 1.2rem;
+  background: var(--rood);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.oe-check-btn:hover { background: #9b2c2c; }
+.oe-feedback {
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-height: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.oe-feedback.goed { color: #38a169; }
+.oe-feedback.fout { color: #e53e3e; }
+.oe-volgende-btn {
+  padding: 0.6rem 1.2rem;
+  background: #e2e8f0;
+  color: #2d3748;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: none;
+}
+.oe-volgende-btn:hover { background: #cbd5e0; }
+.oe-klaar {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+}
+.oe-score-groot {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--rood);
+}
+.oe-klaar p {
+  color: var(--grijs);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+.oe-opnieuw-btn {
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background: var(--rood);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.oe-opnieuw-btn:hover { background: #9b2c2c; }
 </style>
 </head>
 <body>
@@ -668,13 +782,14 @@ body {
 <div class="tabs">
   <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
   <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="toonTab('oefeningen', this)">✏️ Oefeningen</button>
 </div>
 
 <div class="content">
 
   <!-- ══ SO BANNER ══ -->
   <div class="so-banner">
-    <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 10 april</div>
+    <div class="so-banner-tekst">Proefwerk Spaans &nbsp;·&nbsp; 6 mei</div>
   </div>
 
   <!-- ══ THEORIE ══ -->
@@ -1038,6 +1153,8 @@ body {
       <button class="set-tab-btn" onclick="toonSetTab('v53', this)">Vocab 5.3 — SPA→NL</button>
       <button class="set-tab-btn" onclick="toonSetTab('fc-nl-spa', this)">Frases — NL→SPA</button>
       <button class="set-tab-btn" onclick="toonSetTab('fc-spa-nl', this)">Frases — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v54', this)">Voca §5.4 NL→SPA</button>
+      <button class="set-tab-btn" onclick="toonSetTab('frases48', this)">Frases p.48 NL→SPA</button>
     </div>
 
     <!-- ── H4 sets (bestaand) ── -->
@@ -1177,7 +1294,55 @@ body {
       </div>
     </div>
 
+    <!-- ── Vocabulaire §5.4 — Nederlands → Spaans ── -->
+    <div id="set-v54" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab54-nl-spa')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire §5.4 — NL → Spaans</div>
+          <div class="set-info">61 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Frases clave p.48 — Nederlands → Spaans ── -->
+    <div id="set-frases48" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases48-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave p.48 — NL → Spaans</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /tab-flashcards -->
+
+  <!-- ══ OEFENINGEN ══ -->
+  <div id="tab-oefeningen" class="sectie">
+
+    <!-- Oefening 1: Toekomende tijd -->
+    <div class="oe-blok">
+      <h2>De toekomende tijd — ir + a + infinitief</h2>
+      <div class="grammar-box">
+        <strong>Vorm:</strong> onderwerp + ir (vervogen) + a + heel werkwoord<br>
+        Ik ga T-shirts kopen. = <em>Voy a comprar camisetas.</em>
+      </div>
+      <div id="oe1-container" style="margin-top:1rem;"></div>
+    </div>
+
+    <!-- Oefening 2: Vocabulaire typen -->
+    <div class="oe-blok">
+      <h2>Vocabulaire — schrijf de Spaanse vertaling</h2>
+      <div class="grammar-box">
+        <strong>Tip:</strong> Typ het Spaanse woord of de Spaanse zin. Let op lidwoorden!
+      </div>
+      <div id="oe2-container" style="margin-top:1rem;"></div>
+    </div>
+
+  </div><!-- /tab-oefeningen -->
 
 </div><!-- /content -->
 
@@ -1689,6 +1854,91 @@ const sets = {
       {front:"vais",back:"jullie gaan (ir)"},
       {front:"van",back:"zij gaan / u gaat mv (ir)"}
     ]
+  },
+  "vocab54-nl-spa": {
+    titel: "Vocabulaire §5.4 — NL → Spaans",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"het plein", back:"la plaza"},
+      {front:"beroemd", back:"famoso/-a"},
+      {front:"winkelen (rondkijken)", back:"ir de tiendas"},
+      {front:"winkelen (kopen)", back:"ir de compras"},
+      {front:"het cadeau", back:"el regalo"},
+      {front:"het computerspel", back:"el videojuego"},
+      {front:"kopen", back:"comprar"},
+      {front:"de kleding", back:"la ropa"},
+      {front:"het shirt", back:"la camiseta"},
+      {front:"de broek", back:"los pantalones"},
+      {front:"de rok", back:"la falda"},
+      {front:"de winkel", back:"la tienda"},
+      {front:"de stijl, de smaak", back:"el estilo"},
+      {front:"enorm", back:"enorme"},
+      {front:"een hekel hebben aan", back:"odiar"},
+      {front:"heel leuk vinden", back:"encantar"},
+      {front:"kosten", back:"costar"},
+      {front:"goedkoop", back:"barato/-a"},
+      {front:"duur", back:"caro/-a"},
+      {front:"betalen", back:"pagar"},
+      {front:"de kleur", back:"el color"},
+      {front:"nodig hebben", back:"necesitar"},
+      {front:"liever willen", back:"preferir"},
+      {front:"de maat", back:"la talla"},
+      {front:"de paskamer", back:"el probador"},
+      {front:"de tas", back:"el bolso"},
+      {front:"de sneaker", back:"la zapatilla"},
+      {front:"origineel", back:"original"},
+      {front:"sportief", back:"deportivo/-a"},
+      {front:"elegant", back:"elegante"},
+      {front:"alternatief", back:"alternativo/-a"},
+      {front:"de spijkerbroek", back:"los vaqueros"},
+      {front:"de schoenen", back:"los zapatos"},
+      {front:"in de uitverkoop zijn", back:"estar de rebajas"},
+      {front:"in de aanbieding zijn", back:"estar de oferta"},
+      {front:"de laarzen", back:"las botas"},
+      {front:"de trui", back:"el jersey"},
+      {front:"het jasje", back:"la chaqueta"},
+      {front:"het vestje", back:"la rebeca"},
+      {front:"de sweater", back:"el suéter"},
+      {front:"de winterjas", back:"el abrigo"},
+      {front:"het kledingstuk", back:"la prenda"},
+      {front:"de blouse", back:"la camisa"},
+      {front:"de folder", back:"el folleto"},
+      {front:"een wandeling maken", back:"dar un paseo"},
+      {front:"de hoed", back:"el sombrero"},
+      {front:"het standbeeld", back:"la estatua"},
+      {front:"de openingstijden", back:"el horario"},
+      {front:"het toegangsbewijs", back:"la entrada"},
+      {front:"uitrusten", back:"descansar"},
+      {front:"iets drinken", back:"tomar algo"},
+      {front:"het voetbalstadion", back:"el estadio de fútbol"},
+      {front:"de mode", back:"la moda"},
+      {front:"de zonnebril", back:"las gafas de sol"},
+      {front:"de portemonnee", back:"el monedero"},
+      {front:"het horloge", back:"el reloj"},
+      {front:"de ketting", back:"el collar"},
+      {front:"de oorbellen", back:"los pendientes"},
+      {front:"de rugzak", back:"la mochila"},
+      {front:"de accessoire", back:"el complemento"},
+      {front:"de markt", back:"el mercado"}
+    ]
+  },
+  "frases48-nl-spa": {
+    titel: "Frases clave p.48 — NL → Spaans",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Wat gaan jullie vanmiddag doen?", back:"¿Qué vais a hacer esta tarde?"},
+      {front:"Waar gaan jullie heen?", back:"¿Adónde vais?"},
+      {front:"Ga je iets kopen?", back:"¿Vas a comprar algo?"},
+      {front:"Hoeveel kosten de laarzen?", back:"¿Cuánto cuestan las botas?"},
+      {front:"Wat gaan jullie daarna doen?", back:"¿Y qué vais a hacer después?"},
+      {front:"Hoe ziet het park eruit?", back:"El parque, ¿cómo es?"},
+      {front:"We gaan een stukje lopen.", back:"Vamos a dar un paseo."},
+      {front:"We gaan naar de nieuwe winkel van BLANCO.", back:"Vamos a la tienda nueva de BLANCO."},
+      {front:"Ja, ik wil een paar laarzen kopen.", back:"Sí, quiero comprar unas botas."},
+      {front:"De laarzen kosten 111 euro.", back:"Las botas cuestan 111 euros."},
+      {front:"Daarna gaan we iets drinken in het park.", back:"Después vamos a tomar algo en el parque."},
+      {front:"Het is groot en mooi.", back:"Es grande y bonito."}
+    ]
   }
 };
 
@@ -1757,6 +2007,141 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Enter') flipKaart();
   if (e.key === 'Escape') sluitModal();
 });
+
+/* ── OEFENINGEN ── */
+const oefeningData = {
+  oe1: {
+    vragen: [
+      { onderwerp: "ik (yo)",           infinitief: "comprar camisetas",         antwoord: "Voy a comprar camisetas." },
+      { onderwerp: "jij (tú)",          infinitief: "buscar el supermercado",    antwoord: "Vas a buscar el supermercado." },
+      { onderwerp: "hij/zij (él/ella)", infinitief: "tocar la guitarra",         antwoord: "Va a tocar la guitarra." },
+      { onderwerp: "wij (nosotros)",    infinitief: "ver la tele",               antwoord: "Vamos a ver la tele." },
+      { onderwerp: "jullie (vosotros)", infinitief: "llamar a Carlos",           antwoord: "Vais a llamar a Carlos." },
+      { onderwerp: "zij (ellos)",       infinitief: "comprar T-shirts",          antwoord: "Van a comprar T-shirts." },
+      { onderwerp: "ik (yo)",           infinitief: "vivir cerca del instituto", antwoord: "Voy a vivir cerca del instituto." },
+      { onderwerp: "jij (tú)",          infinitief: "comer en casa",             antwoord: "Vas a comer en casa." },
+      { onderwerp: "wij (nosotros)",    infinitief: "ir de compras",             antwoord: "Vamos a ir de compras." },
+      { onderwerp: "jullie (vosotros)", infinitief: "ver una película",          antwoord: "Vais a ver una película." }
+    ]
+  },
+  oe2: {
+    vragen: [
+      { vraag: "de leerling",           antwoord: "el alumno / la alumna" },
+      { vraag: "de middelbare school",  antwoord: "el instituto" },
+      { vraag: "het huiswerk maken",    antwoord: "hacer los deberes" },
+      { vraag: "vroeg",                 antwoord: "temprano" },
+      { vraag: "gitaar spelen",         antwoord: "tocar la guitarra" },
+      { vraag: "thuiskomen",            antwoord: "llegar a casa" },
+      { vraag: "de pauze",              antwoord: "el recreo / la pausa" },
+      { vraag: "de winkel",             antwoord: "la tienda" },
+      { vraag: "goedkoop",              antwoord: "barato/-a" },
+      { vraag: "duur",                  antwoord: "caro/-a" }
+    ]
+  }
+};
+
+const oeState = {
+  oe1: { index: 0, score: 0, afgerond: false },
+  oe2: { index: 0, score: 0, afgerond: false }
+};
+
+function oeRenderVraag(id) {
+  const state = oeState[id];
+  const data  = oefeningData[id];
+  const container = document.getElementById(id + '-container');
+  const totaal = data.vragen.length;
+
+  if (state.afgerond) {
+    container.innerHTML = `
+      <div class="oe-klaar">
+        <div class="oe-score-groot">${state.score} / ${totaal}</div>
+        <p>Goed gedaan! ${state.score === totaal ? '🎉 Perfect!' : 'Oefenen maar!'}</p>
+        <button class="oe-opnieuw-btn" onclick="oeOpnieuw('${id}')">🔄 Opnieuw</button>
+      </div>`;
+    return;
+  }
+
+  const v = data.vragen[state.index];
+  let promptHTML;
+  if (id === 'oe1') {
+    promptHTML = `Maak een zin: <span class="oe-subject">${v.onderwerp}</span> + <span class="oe-inf">${v.infinitief}</span>`;
+  } else {
+    promptHTML = `Schrijf in het Spaans: <span class="oe-subject">${v.vraag}</span>`;
+  }
+
+  container.innerHTML = `
+    <div class="oe-teller">${state.index + 1} / ${totaal}</div>
+    <div class="oe-prompt">${promptHTML}</div>
+    <div class="oe-input-row">
+      <input class="oe-input" id="${id}-input" type="text" placeholder="Typ je antwoord..." autocomplete="off" autocorrect="off" spellcheck="false" />
+      <button class="oe-check-btn" id="${id}-check" onclick="oeControleer('${id}')">Controleer</button>
+    </div>
+    <div class="oe-feedback" id="${id}-feedback"></div>
+    <button class="oe-volgende-btn" id="${id}-volgende" onclick="oeVolgende('${id}')">Volgende →</button>`;
+
+  const inp = document.getElementById(id + '-input');
+  inp.focus();
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') oeControleer(id);
+  });
+}
+
+function oeControleer(id) {
+  const state    = oeState[id];
+  const data     = oefeningData[id];
+  const v        = data.vragen[state.index];
+  const inp      = document.getElementById(id + '-input');
+  const feedback = document.getElementById(id + '-feedback');
+  const volgende = document.getElementById(id + '-volgende');
+  const checkBtn = document.getElementById(id + '-check');
+
+  if (inp.disabled) return;
+
+  const gegeven   = inp.value.trim();
+  const verwacht  = v.antwoord;
+  const isGoed    = gegeven.toLowerCase() === verwacht.toLowerCase();
+
+  inp.disabled    = true;
+  checkBtn.disabled = true;
+
+  if (isGoed) {
+    state.score++;
+    inp.classList.add('goed');
+    feedback.textContent = '✅ Correct!';
+    feedback.className   = 'oe-feedback goed';
+    setTimeout(() => oeVolgende(id), 1000);
+  } else {
+    inp.classList.add('fout');
+    feedback.innerHTML = `❌ Fout. Het goede antwoord is: <strong>${verwacht}</strong>`;
+    feedback.className = 'oe-feedback fout';
+    volgende.style.display = 'inline-block';
+  }
+}
+
+function oeVolgende(id) {
+  const state = oeState[id];
+  const totaal = oefeningData[id].vragen.length;
+  state.index++;
+  if (state.index >= totaal) state.afgerond = true;
+  oeRenderVraag(id);
+}
+
+function oeOpnieuw(id) {
+  oeState[id] = { index: 0, score: 0, afgerond: false };
+  oeRenderVraag(id);
+}
+
+/* Render exercises when Oefeningen tab is first shown */
+(function() {
+  const origToonTab = window.toonTab;
+  window.toonTab = function(naam, btn) {
+    origToonTab(naam, btn);
+    if (naam === 'oefeningen') {
+      if (!oeState.oe1._rendered) { oeState.oe1._rendered = true; oeRenderVraag('oe1'); }
+      if (!oeState.oe2._rendered) { oeState.oe2._rendered = true; oeRenderVraag('oe2'); }
+    }
+  };
+})();
 </script>
 
 </body>
