@@ -655,6 +655,23 @@ body {
   .flip-tekst { font-size: 1.2rem; }
   .werkwoord-grid { grid-template-columns: 1fr; }
 }
+
+/* ── OEFENINGEN ── */
+.oefen-sectie { margin-bottom: 2rem; }
+.oefen-sectie h3 { font-size: 1.05rem; font-weight: 900; color: var(--donker); margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--rood); }
+.verb-sub-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.verb-sub-tab-btn { padding: 0.4rem 1rem; border: 2px solid var(--rood); border-radius: 8px; background: #fff; color: var(--rood); font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+.verb-sub-tab-btn.actief { background: var(--rood); color: #fff; }
+.verb-panel { display: none; }
+.verb-panel.actief { display: block; }
+.oefen-input { border: 2px solid #e2e8f0; border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.9rem; font-family: inherit; width: 100%; box-sizing: border-box; }
+.oefen-input.goed { border-color: #38a169; background: #f0fff4; color: #276749; }
+.oefen-input.fout { border-color: var(--rood); background: #fff5f5; color: var(--rood); }
+.fout-antwoord { font-size: 0.8rem; color: var(--rood); margin-top: 0.2rem; font-weight: 700; }
+.oefen-btns { display: flex; gap: 0.75rem; margin-top: 0.75rem; }
+.oefen-btn { padding: 0.5rem 1.2rem; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+.oefen-btn.check { background: var(--donker); color: #fff; }
+.oefen-btn.reset { background: var(--grijs); color: #fff; }
 </style>
 </head>
 <body>
@@ -668,13 +685,14 @@ body {
 <div class="tabs">
   <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
   <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="toonTab('oefeningen', this)">✏️ Oefeningen</button>
 </div>
 
 <div class="content">
 
   <!-- ══ SO BANNER ══ -->
   <div class="so-banner">
-    <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 10 april</div>
+    <div class="so-banner-tekst">Proefwerk Spaans &nbsp;·&nbsp; 6 mei</div>
   </div>
 
   <!-- ══ THEORIE ══ -->
@@ -1038,6 +1056,8 @@ body {
       <button class="set-tab-btn" onclick="toonSetTab('v53', this)">Vocab 5.3 — SPA→NL</button>
       <button class="set-tab-btn" onclick="toonSetTab('fc-nl-spa', this)">Frases — NL→SPA</button>
       <button class="set-tab-btn" onclick="toonSetTab('fc-spa-nl', this)">Frases — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v54', this)">Voca §5.4 NL→SPA</button>
+      <button class="set-tab-btn" onclick="toonSetTab('frases48', this)">Frases p.48 NL→SPA</button>
     </div>
 
     <!-- ── H4 sets (bestaand) ── -->
@@ -1177,7 +1197,122 @@ body {
       </div>
     </div>
 
+    <!-- ── Vocabulaire §5.4 — Nederlands → Spaans ── -->
+    <div id="set-v54" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab54-nl-spa')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire §5.4 — NL → Spaans</div>
+          <div class="set-info">61 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Frases clave p.48 — Nederlands → Spaans ── -->
+    <div id="set-frases48" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases48-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave p.48 — NL → Spaans</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /tab-flashcards -->
+  <div id="tab-oefeningen" class="sectie">
+
+    <!-- Oefening 1: Toekomende tijd -->
+    <div class="oefen-sectie">
+      <h3>Oefening 1 — Toekomende tijd: ir + a + infinitivo</h3>
+      <p style="font-size:0.88rem;color:var(--grijs);margin-bottom:0.8rem;">Vul de juiste vorm van <strong>ir</strong> in om de toekomende tijd te vormen.</p>
+      <table class="conj-table" id="oefen1-table">
+        <tr><td>Yo _____ a estudiar esta tarde.</td><td><input class="oefen-input" data-answer="voy" placeholder="ir …"></td></tr>
+        <tr><td>Tú _____ a comprar un regalo.</td><td><input class="oefen-input" data-answer="vas" placeholder="ir …"></td></tr>
+        <tr><td>María _____ a cocinar hoy.</td><td><input class="oefen-input" data-answer="va" placeholder="ir …"></td></tr>
+        <tr><td>Nosotros _____ a salir a las ocho.</td><td><input class="oefen-input" data-answer="vamos" placeholder="ir …"></td></tr>
+        <tr><td>Vosotros _____ a ver una película.</td><td><input class="oefen-input" data-answer="vais" placeholder="ir …"></td></tr>
+        <tr><td>Los chicos _____ a jugar al fútbol.</td><td><input class="oefen-input" data-answer="van" placeholder="ir …"></td></tr>
+      </table>
+      <div class="oefen-btns">
+        <button class="oefen-btn check" onclick="controleerOefen('oefen1')">✅ Controleer</button>
+        <button class="oefen-btn reset" onclick="opnieuwOefen('oefen1')">🔄 Opnieuw</button>
+      </div>
+    </div>
+
+    <!-- Oefening 2: ir & estar -->
+    <div class="oefen-sectie">
+      <h3>Oefening 2 — Werkwoorden: ir &amp; estar</h3>
+      <div class="verb-sub-tabs">
+        <button class="verb-sub-tab-btn actief" onclick="toonVerbPanel('ir', this)">ir (gaan)</button>
+        <button class="verb-sub-tab-btn" onclick="toonVerbPanel('estar', this)">estar (zijn/bevinden)</button>
+      </div>
+
+      <div id="verb-panel-ir" class="verb-panel actief">
+        <table class="conj-table" id="oefen2-ir-table">
+          <tr><td>yo</td><td><input class="oefen-input" data-answer="voy" placeholder="…"></td></tr>
+          <tr><td>tú</td><td><input class="oefen-input" data-answer="vas" placeholder="…"></td></tr>
+          <tr><td>él/ella</td><td><input class="oefen-input" data-answer="va" placeholder="…"></td></tr>
+          <tr><td>nosotros</td><td><input class="oefen-input" data-answer="vamos" placeholder="…"></td></tr>
+          <tr><td>vosotros</td><td><input class="oefen-input" data-answer="vais" placeholder="…"></td></tr>
+          <tr><td>ellos/ellas</td><td><input class="oefen-input" data-answer="van" placeholder="…"></td></tr>
+        </table>
+        <div class="oefen-btns">
+          <button class="oefen-btn check" onclick="controleerOefen('oefen2-ir')">✅ Controleer</button>
+          <button class="oefen-btn reset" onclick="opnieuwOefen('oefen2-ir')">🔄 Opnieuw</button>
+        </div>
+      </div>
+
+      <div id="verb-panel-estar" class="verb-panel">
+        <table class="conj-table" id="oefen2-estar-table">
+          <tr><td>yo</td><td><input class="oefen-input" data-answer="estoy" placeholder="…"></td></tr>
+          <tr><td>tú</td><td><input class="oefen-input" data-answer="estás" placeholder="…"></td></tr>
+          <tr><td>él/ella</td><td><input class="oefen-input" data-answer="está" placeholder="…"></td></tr>
+          <tr><td>nosotros</td><td><input class="oefen-input" data-answer="estamos" placeholder="…"></td></tr>
+          <tr><td>vosotros</td><td><input class="oefen-input" data-answer="estáis" placeholder="…"></td></tr>
+          <tr><td>ellos/ellas</td><td><input class="oefen-input" data-answer="están" placeholder="…"></td></tr>
+        </table>
+        <div class="oefen-btns">
+          <button class="oefen-btn check" onclick="controleerOefen('oefen2-estar')">✅ Controleer</button>
+          <button class="oefen-btn reset" onclick="opnieuwOefen('oefen2-estar')">🔄 Opnieuw</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Oefening 3: Getallen -->
+    <div class="oefen-sectie">
+      <h3>Oefening 3 — Getallen 0 – 1000</h3>
+      <div class="grammar-box">
+        <strong>Let op:</strong> Vanaf 31 schrijf je getallen <em>niet</em> meer aan elkaar. Gebruik <strong>y</strong> tussen tientallen en eenheden: <em>treinta y uno</em>. Schrijf accenten correct: <em>dieciséis, veintidós, veintitrés</em>.
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;">
+        <div style="display:flex;gap:0.5rem;">
+          <button class="verb-sub-tab-btn actief" id="getal-richting-btn-nl" onclick="getalRichting('nl-spa', this)">Cijfer → Spaans</button>
+          <button class="verb-sub-tab-btn" id="getal-richting-btn-spa" onclick="getalRichting('spa-nl', this)">Spaans → Cijfer</button>
+        </div>
+        <span id="getal-score-display" style="font-weight:800;color:var(--rood);font-size:0.95rem;">Score: 0 / 0</span>
+      </div>
+
+      <div id="getal-vraag-box" style="background:#fff5f5;border:2px solid var(--rood-licht);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.8rem;text-align:center;">
+        <div id="getal-vraag" style="font-size:2rem;font-weight:900;color:var(--donker);margin-bottom:0.6rem;">—</div>
+        <div style="font-size:0.82rem;color:var(--grijs);font-weight:700;" id="getal-instructie">Typ het Spaanse woord</div>
+      </div>
+
+      <input class="oefen-input" id="getal-antwoord" placeholder="Typ hier je antwoord…" style="margin-bottom:0.6rem;font-size:1rem;" onkeydown="if(event.key==='Enter')controleerGetal()">
+      <div id="getal-feedback" style="font-size:0.88rem;font-weight:700;min-height:1.4rem;margin-bottom:0.6rem;"></div>
+
+      <div class="oefen-btns">
+        <button class="oefen-btn check" onclick="controleerGetal()">✅ Controleer</button>
+        <button class="oefen-btn reset" onclick="volgendGetal()">➡️ Volgende</button>
+        <button class="oefen-btn" style="background:#e2e8f0;color:#2d3748;" onclick="resetGetalScore()">🔄 Reset score</button>
+      </div>
+    </div>
+
+  </div><!-- /tab-oefeningen -->
+
 
 </div><!-- /content -->
 
@@ -1689,6 +1824,91 @@ const sets = {
       {front:"vais",back:"jullie gaan (ir)"},
       {front:"van",back:"zij gaan / u gaat mv (ir)"}
     ]
+  },
+  "vocab54-nl-spa": {
+    titel: "Vocabulaire §5.4 — NL → Spaans",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"het plein", back:"la plaza"},
+      {front:"beroemd", back:"famoso/-a"},
+      {front:"winkelen (rondkijken)", back:"ir de tiendas"},
+      {front:"winkelen (kopen)", back:"ir de compras"},
+      {front:"het cadeau", back:"el regalo"},
+      {front:"het computerspel", back:"el videojuego"},
+      {front:"kopen", back:"comprar"},
+      {front:"de kleding", back:"la ropa"},
+      {front:"het shirt", back:"la camiseta"},
+      {front:"de broek", back:"los pantalones"},
+      {front:"de rok", back:"la falda"},
+      {front:"de winkel", back:"la tienda"},
+      {front:"de stijl, de smaak", back:"el estilo"},
+      {front:"enorm", back:"enorme"},
+      {front:"een hekel hebben aan", back:"odiar"},
+      {front:"heel leuk vinden", back:"encantar"},
+      {front:"kosten", back:"costar"},
+      {front:"goedkoop", back:"barato/-a"},
+      {front:"duur", back:"caro/-a"},
+      {front:"betalen", back:"pagar"},
+      {front:"de kleur", back:"el color"},
+      {front:"nodig hebben", back:"necesitar"},
+      {front:"liever willen", back:"preferir"},
+      {front:"de maat", back:"la talla"},
+      {front:"de paskamer", back:"el probador"},
+      {front:"de tas", back:"el bolso"},
+      {front:"de sneaker", back:"la zapatilla"},
+      {front:"origineel", back:"original"},
+      {front:"sportief", back:"deportivo/-a"},
+      {front:"elegant", back:"elegante"},
+      {front:"alternatief", back:"alternativo/-a"},
+      {front:"de spijkerbroek", back:"los vaqueros"},
+      {front:"de schoenen", back:"los zapatos"},
+      {front:"in de uitverkoop zijn", back:"estar de rebajas"},
+      {front:"in de aanbieding zijn", back:"estar de oferta"},
+      {front:"de laarzen", back:"las botas"},
+      {front:"de trui", back:"el jersey"},
+      {front:"het jasje", back:"la chaqueta"},
+      {front:"het vestje", back:"la rebeca"},
+      {front:"de sweater", back:"el suéter"},
+      {front:"de winterjas", back:"el abrigo"},
+      {front:"het kledingstuk", back:"la prenda"},
+      {front:"de blouse", back:"la camisa"},
+      {front:"de folder", back:"el folleto"},
+      {front:"een wandeling maken", back:"dar un paseo"},
+      {front:"de hoed", back:"el sombrero"},
+      {front:"het standbeeld", back:"la estatua"},
+      {front:"de openingstijden", back:"el horario"},
+      {front:"het toegangsbewijs", back:"la entrada"},
+      {front:"uitrusten", back:"descansar"},
+      {front:"iets drinken", back:"tomar algo"},
+      {front:"het voetbalstadion", back:"el estadio de fútbol"},
+      {front:"de mode", back:"la moda"},
+      {front:"de zonnebril", back:"las gafas de sol"},
+      {front:"de portemonnee", back:"el monedero"},
+      {front:"het horloge", back:"el reloj"},
+      {front:"de ketting", back:"el collar"},
+      {front:"de oorbellen", back:"los pendientes"},
+      {front:"de rugzak", back:"la mochila"},
+      {front:"de accessoire", back:"el complemento"},
+      {front:"de markt", back:"el mercado"}
+    ]
+  },
+  "frases48-nl-spa": {
+    titel: "Frases clave p.48 — NL → Spaans",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Wat gaan jullie vanmiddag doen?", back:"¿Qué vais a hacer esta tarde?"},
+      {front:"Waar gaan jullie heen?", back:"¿Adónde vais?"},
+      {front:"Ga je iets kopen?", back:"¿Vas a comprar algo?"},
+      {front:"Hoeveel kosten de laarzen?", back:"¿Cuánto cuestan las botas?"},
+      {front:"Wat gaan jullie daarna doen?", back:"¿Y qué vais a hacer después?"},
+      {front:"Hoe ziet het park eruit?", back:"El parque, ¿cómo es?"},
+      {front:"We gaan een stukje lopen.", back:"Vamos a dar un paseo."},
+      {front:"We gaan naar de nieuwe winkel van BLANCO.", back:"Vamos a la tienda nueva de BLANCO."},
+      {front:"Ja, ik wil een paar laarzen kopen.", back:"Sí, quiero comprar unas botas."},
+      {front:"De laarzen kosten 111 euro.", back:"Las botas cuestan 111 euros."},
+      {front:"Daarna gaan we iets drinken in het park.", back:"Después vamos a tomar algo en el parque."},
+      {front:"Het is groot en mooi.", back:"Es grande y bonito."}
+    ]
   }
 };
 
@@ -1757,6 +1977,125 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Enter') flipKaart();
   if (e.key === 'Escape') sluitModal();
 });
+
+/* ── VERB SUB-TAB SWITCHING ── */
+function toonVerbPanel(naam, btn) {
+  document.querySelectorAll('.verb-panel').forEach(p => p.classList.remove('actief'));
+  document.querySelectorAll('.verb-sub-tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('verb-panel-' + naam).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+/* ── OEFENING CHECK / RESET ── */
+function controleerOefen(id) {
+  const table = document.getElementById(id + '-table');
+  table.querySelectorAll('.oefen-input').forEach(input => {
+    const correct = input.dataset.answer;
+    const isGoed = input.value.trim().toLowerCase() === correct.toLowerCase();
+    input.classList.remove('goed', 'fout');
+    const existing = input.parentElement.querySelector('.fout-antwoord');
+    if (existing) existing.remove();
+    if (isGoed) {
+      input.classList.add('goed');
+    } else {
+      input.classList.add('fout');
+      const fb = document.createElement('div');
+      fb.className = 'fout-antwoord';
+      fb.textContent = '✓ ' + correct;
+      input.parentElement.appendChild(fb);
+    }
+  });
+}
+
+function opnieuwOefen(id) {
+  const table = document.getElementById(id + '-table');
+  table.querySelectorAll('.oefen-input').forEach(input => {
+    input.value = '';
+    input.classList.remove('goed', 'fout');
+    const fb = input.parentElement.querySelector('.fout-antwoord');
+    if (fb) fb.remove();
+  });
+}
+
+/* ── GETALLEN OEFENING ── */
+const getallenData = [
+  [0,'cero'],[1,'uno'],[2,'dos'],[3,'tres'],[4,'cuatro'],[5,'cinco'],
+  [6,'seis'],[7,'siete'],[8,'ocho'],[9,'nueve'],[10,'diez'],
+  [11,'once'],[12,'doce'],[13,'trece'],[14,'catorce'],[15,'quince'],
+  [16,'dieciséis'],[17,'diecisiete'],[18,'dieciocho'],[19,'diecinueve'],[20,'veinte'],
+  [21,'veintiuno'],[22,'veintidós'],[23,'veintitrés'],[24,'veinticuatro'],[25,'veinticinco'],
+  [26,'veintiséis'],[27,'veintisiete'],[28,'veintiocho'],[29,'veintinueve'],[30,'treinta'],
+  [31,'treinta y uno'],[32,'treinta y dos'],[40,'cuarenta'],[41,'cuarenta y uno'],
+  [50,'cincuenta'],[51,'cincuenta y uno'],[60,'sesenta'],[70,'setenta'],
+  [80,'ochenta'],[90,'noventa'],[100,'cien'],[101,'ciento uno'],[110,'ciento diez'],
+  [200,'doscientos'],[300,'trescientos'],[400,'cuatrocientos'],[500,'quinientos'],
+  [600,'seiscientos'],[700,'setecientos'],[800,'ochocientos'],[900,'novecientos'],
+  [1000,'mil']
+];
+
+let getalRichtingMode = 'nl-spa';
+let getalScore = 0;
+let getalTotaal = 0;
+let huidigGetal = null;
+
+function getalRichting(mode, btn) {
+  getalRichtingMode = mode;
+  document.querySelectorAll('#getal-richting-btn-nl, #getal-richting-btn-spa').forEach(b => b.classList.remove('actief'));
+  btn.classList.add('actief');
+  volgendGetal();
+}
+
+function volgendGetal() {
+  const entry = getallenData[Math.floor(Math.random() * getallenData.length)];
+  huidigGetal = entry;
+  document.getElementById('getal-antwoord').value = '';
+  document.getElementById('getal-feedback').textContent = '';
+  document.getElementById('getal-antwoord').style.borderColor = '';
+  document.getElementById('getal-antwoord').style.background = '';
+  if (getalRichtingMode === 'nl-spa') {
+    document.getElementById('getal-vraag').textContent = entry[0];
+    document.getElementById('getal-instructie').textContent = 'Typ het Spaanse woord';
+  } else {
+    document.getElementById('getal-vraag').textContent = entry[1];
+    document.getElementById('getal-instructie').textContent = 'Typ het cijfer';
+  }
+  document.getElementById('getal-antwoord').focus();
+}
+
+function controleerGetal() {
+  if (!huidigGetal) return;
+  const antwoord = document.getElementById('getal-antwoord').value.trim().toLowerCase();
+  const correct = getalRichtingMode === 'nl-spa'
+    ? huidigGetal[1].toLowerCase()
+    : String(huidigGetal[0]);
+  getalTotaal++;
+  const fb = document.getElementById('getal-feedback');
+  if (antwoord === correct) {
+    getalScore++;
+    fb.textContent = '✅ Correct!';
+    fb.style.color = '#38a169';
+    document.getElementById('getal-antwoord').style.borderColor = '#38a169';
+    document.getElementById('getal-antwoord').style.background = '#f0fff4';
+    setTimeout(volgendGetal, 900);
+  } else {
+    fb.textContent = `❌ Fout — het goede antwoord is: ${getalRichtingMode === 'nl-spa' ? huidigGetal[1] : huidigGetal[0]}`;
+    fb.style.color = 'var(--rood)';
+    document.getElementById('getal-antwoord').style.borderColor = 'var(--rood)';
+    document.getElementById('getal-antwoord').style.background = '#fff5f5';
+  }
+  document.getElementById('getal-score-display').textContent = `Score: ${getalScore} / ${getalTotaal}`;
+}
+
+function resetGetalScore() {
+  getalScore = 0;
+  getalTotaal = 0;
+  document.getElementById('getal-score-display').textContent = 'Score: 0 / 0';
+  volgendGetal();
+}
+
+/* Start getallen on page load */
+document.addEventListener('DOMContentLoaded', volgendGetal);
+
 </script>
 
 </body>
