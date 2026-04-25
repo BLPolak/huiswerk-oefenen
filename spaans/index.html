@@ -4,3 +4,2182 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Spaans — Huiswerk Oefenen</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --rood: #c53030;
+  --rood-licht: #feb2b2;
+  --geel: #d69e2e;
+  --geel-licht: #fefcbf;
+  --donker: #1a202c;
+  --grijs: #718096;
+  --bg: #f7fafc;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #c53030 0%, #9b2c2c 50%, #d69e2e 100%);
+  min-height: 100vh;
+  padding: 0 0 4rem;
+}
+
+/* ── HEADER ── */
+.header {
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.terug {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: background 0.15s;
+}
+.terug:hover { background: rgba(255,255,255,0.3); }
+
+.header-title {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  flex: 1;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 800px;
+  margin: 1.5rem auto 0;
+  padding: 0 1rem;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
+  transition: all 0.2s;
+}
+.tab-btn.actief {
+  background: #fff;
+  color: var(--rood);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.tab-btn:hover:not(.actief) { background: rgba(255,255,255,0.3); color: #fff; }
+
+/* ── MAIN CONTENT ── */
+.content {
+  max-width: 860px;
+  margin: 1.5rem auto 0;
+  padding: 0 1rem;
+}
+
+.sectie { display: none; }
+.sectie.actief { display: block; }
+
+/* ── ACCORDION ── */
+.accordion {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  margin-bottom: 1rem;
+}
+
+.accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--donker);
+  text-align: left;
+  border-left: 5px solid var(--rood);
+  transition: background 0.15s;
+}
+.accordion-header:hover { background: #fff5f5; }
+.accordion-header .chevron {
+  font-size: 1rem;
+  transition: transform 0.25s;
+  color: var(--grijs);
+}
+.accordion-header.open .chevron { transform: rotate(180deg); }
+
+.accordion-body {
+  display: none;
+  padding: 0 1.4rem 1.4rem;
+  border-top: 1px solid #e2e8f0;
+}
+.accordion-body.open { display: block; }
+
+/* ── VOCAB TABLE ── */
+.vocab-sectie { margin-bottom: 1.2rem; }
+.vocab-sectie h4 {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--rood);
+  margin: 1rem 0 0.5rem;
+}
+
+.vocab-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.vocab-table tr:nth-child(even) { background: #f7fafc; }
+.vocab-table td {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.vocab-table td:first-child { font-weight: 700; color: var(--donker); width: 50%; }
+.vocab-table td:last-child { color: #e53e3e; font-weight: 700; }
+
+/* ── GRAMMAR BOX ── */
+.grammar-box {
+  background: #fffbeb;
+  border-left: 4px solid var(--geel);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 0.8rem 0;
+  font-size: 0.92rem;
+}
+.grammar-box strong { color: var(--donker); }
+
+.example-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+}
+.example-table tr { border-bottom: 1px solid #e2e8f0; }
+.example-table tr:last-child { border-bottom: none; }
+.example-table td { padding: 0.5rem 0.6rem; }
+.example-table td:first-child { font-style: italic; font-weight: 700; color: #c53030; width: 55%; }
+.example-table td:last-child { color: #2d3748; }
+
+.neg-words {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0;
+}
+.neg-pill {
+  background: #fff5f5;
+  border: 2px solid var(--rood-licht);
+  border-radius: 10px;
+  padding: 0.4rem 0.9rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--rood);
+}
+.neg-pill span { color: var(--grijs); font-weight: 600; margin-left: 0.4rem; }
+
+/* ── CONJUGATION TABLE ── */
+.werkwoord-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.conj-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+.conj-card-header {
+  background: var(--rood);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.conj-card-header span { font-weight: 600; font-size: 0.82rem; opacity: 0.85; }
+.conj-table { width: 100%; font-size: 0.88rem; }
+.conj-table tr:nth-child(even) { background: #f7fafc; }
+.conj-table td { padding: 0.38rem 0.8rem; }
+.conj-table td:first-child { font-weight: 700; color: #c53030; width: 45%; }
+.conj-table td:last-child { color: #2d3748; }
+.conj-divider td { border-top: 2px solid #e2e8f0 !important; }
+
+/* ── KLOK TABLE ── */
+.klok-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-top: 0.8rem;
+}
+.klok-table tr:nth-child(even) { background: #f7fafc; }
+.klok-table td { padding: 0.45rem 0.7rem; border-bottom: 1px solid #e2e8f0; }
+.klok-table td:first-child { font-weight: 700; color: #c53030; width: 55%; font-style: italic; }
+.klok-table td:last-child { color: #2d3748; font-weight: 600; }
+
+/* ── GETALLEN GRID ── */
+.getallen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+.getal-item {
+  background: #fff5f5;
+  border: 1px solid var(--rood-licht);
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+  text-align: center;
+}
+.getal-num { font-size: 1.2rem; font-weight: 900; color: var(--rood); }
+.getal-spa { font-size: 0.82rem; font-weight: 700; color: #2d3748; margin-top: 0.1rem; }
+
+/* ── FRASES TABLE ── */
+.frases-sectie { margin-bottom: 1.2rem; }
+.frases-sectie h4 {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--rood);
+  margin: 1rem 0 0.5rem;
+}
+.frases-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.frases-table tr { border-bottom: 1px solid #e2e8f0; }
+.frases-table tr:last-child { border-bottom: none; }
+.frases-table tr:nth-child(even) { background: #f7fafc; }
+.frases-table td { padding: 0.5rem 0.6rem; vertical-align: top; }
+.frases-table td:first-child { font-weight: 700; color: #c53030; font-style: italic; width: 50%; }
+.frases-table td:last-child { color: #2d3748; }
+
+/* ── FLASHCARD SETS ── */
+.sets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.set-kaart {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.3rem 1.2rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.set-kaart:hover {
+  border-color: var(--rood);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(197,48,48,0.2);
+}
+.set-emoji { font-size: 1.8rem; line-height: 1; }
+.set-naam { font-weight: 800; font-size: 1rem; color: var(--donker); }
+.set-info { font-size: 0.82rem; color: var(--grijs); font-weight: 600; }
+.set-richting {
+  background: #fff5f5;
+  color: var(--rood);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  align-self: flex-start;
+  margin-top: 0.2rem;
+}
+
+/* ── FLASHCARD MODAL ── */
+#fc-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+#fc-modal.open { display: flex; }
+
+#fc-container {
+  background: #fff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 520px;
+  padding: 1.5rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.fc-topbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fc-set-naam { font-weight: 900; font-size: 1.05rem; color: var(--donker); }
+#fc-close {
+  background: #e2e8f0;
+  border: none;
+  border-radius: 8px;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 800;
+  color: #4a5568;
+  display: flex; align-items: center; justify-content: center;
+}
+#fc-close:hover { background: #cbd5e0; }
+
+.fc-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.fc-progress-fill {
+  height: 100%;
+  background: var(--rood);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.fc-progress-text {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--grijs);
+  align-self: flex-end;
+}
+
+/* Flip card */
+.flip-wrapper {
+  width: 100%;
+  perspective: 1000px;
+  cursor: pointer;
+}
+.flip-card {
+  width: 100%;
+  min-height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.45s;
+}
+.flip-card.flipped { transform: rotateY(180deg); }
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  min-height: 200px;
+}
+.flip-front {
+  background: linear-gradient(135deg, #fff5f5, #fff);
+  border: 2px solid var(--rood-licht);
+}
+.flip-back {
+  background: linear-gradient(135deg, #fffbeb, #fff);
+  border: 2px solid #f6e05e;
+  transform: rotateY(180deg);
+}
+.flip-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--grijs);
+  margin-bottom: 0.8rem;
+}
+.flip-tekst {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--donker);
+  line-height: 1.3;
+}
+.flip-hint {
+  font-size: 0.78rem;
+  color: var(--grijs);
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.fc-buttons {
+  display: flex;
+  gap: 0.6rem;
+  width: 100%;
+}
+.fc-btn {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.fc-btn-prev { background: #e2e8f0; color: #2d3748; }
+.fc-btn-prev:hover { background: #cbd5e0; }
+.fc-btn-flip { background: var(--rood); color: #fff; flex: 1.4; }
+.fc-btn-flip:hover { background: #9b2c2c; }
+.fc-btn-next { background: #e2e8f0; color: #2d3748; }
+.fc-btn-next:hover { background: #cbd5e0; }
+
+.fc-shuffle {
+  background: none;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--grijs);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.fc-shuffle:hover { border-color: var(--rood); color: var(--rood); }
+
+/* ── SO BANNER ── */
+.so-banner {
+  background: linear-gradient(135deg, #744210 0%, #d69e2e 100%);
+  border-radius: 16px;
+  padding: 1.1rem 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+}
+.so-banner-tekst {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  letter-spacing: 0.4px;
+}
+
+/* ── SET TABS (inner nav) ── */
+.set-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.set-tab-btn {
+  padding: 0.5rem 0.95rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.set-tab-btn.actief {
+  background: #fff;
+  color: var(--rood);
+  border-color: #fff;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+.set-tab-btn:hover:not(.actief) {
+  background: rgba(255,255,255,0.28);
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+}
+.set-sectie { display: none; }
+.set-sectie.actief { display: block; }
+
+.leeg-melding {
+  background: rgba(255,255,255,0.12);
+  border: 2px dashed rgba(255,255,255,0.35);
+  border-radius: 16px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.leeg-melding small {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.65;
+}
+
+/* ── EXTRA GRAMMAR SECTION ── */
+.extra-grammar {
+  max-width: 860px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+.extra-grammar-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.6rem;
+}
+.extra-grammar-card {
+  background: #fff;
+  border: 2px solid #cbd5e0;
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+.extra-grammar-card h3 {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--donker);
+  margin-bottom: 0.6rem;
+}
+.extra-grammar-card p {
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.poss-table-wrap { margin-bottom: 1.2rem; }
+.poss-table-wrap h4 {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--grijs);
+  margin-bottom: 0.45rem;
+}
+.poss-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.poss-table th {
+  background: #f7fafc;
+  font-weight: 800;
+  color: var(--donker);
+  padding: 0.45rem 0.7rem;
+  border-bottom: 2px solid #e2e8f0;
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.poss-table td {
+  padding: 0.42rem 0.7rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2d3748;
+}
+.poss-table tr:last-child td { border-bottom: none; }
+.poss-table td:first-child { font-weight: 700; color: var(--donker); width: 30%; }
+.poss-table td:not(:first-child) { font-weight: 700; color: #c53030; font-style: italic; }
+.poss-tip {
+  background: #fffbeb;
+  border-left: 4px solid var(--geel);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+  color: #744210;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+}
+.poss-examples { list-style: none; }
+.poss-examples li {
+  font-size: 0.9rem;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.poss-examples li:last-child { border-bottom: none; }
+.poss-spa { font-weight: 700; color: #c53030; font-style: italic; }
+.poss-nl  { color: #4a5568; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 500px) {
+  .header-title { font-size: 1.2rem; }
+  .flip-tekst { font-size: 1.2rem; }
+  .werkwoord-grid { grid-template-columns: 1fr; }
+}
+
+/* ── OEFENINGEN ── */
+.oefen-sectie { margin-bottom: 2rem; }
+.oefen-sectie h3 { font-size: 1.05rem; font-weight: 900; color: var(--donker); margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--rood); }
+.verb-sub-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.verb-sub-tab-btn { padding: 0.4rem 1rem; border: 2px solid var(--rood); border-radius: 8px; background: #fff; color: var(--rood); font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+.verb-sub-tab-btn.actief { background: var(--rood); color: #fff; }
+.verb-panel { display: none; }
+.verb-panel.actief { display: block; }
+.oefen-input { border: 2px solid #e2e8f0; border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.9rem; font-family: inherit; width: 100%; box-sizing: border-box; }
+.oefen-input.goed { border-color: #38a169; background: #f0fff4; color: #276749; }
+.oefen-input.fout { border-color: var(--rood); background: #fff5f5; color: var(--rood); }
+.fout-antwoord { font-size: 0.8rem; color: var(--rood); margin-top: 0.2rem; font-weight: 700; }
+.oefen-btns { display: flex; gap: 0.75rem; margin-top: 0.75rem; }
+.oefen-btn { padding: 0.5rem 1.2rem; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+.oefen-btn.check { background: var(--donker); color: #fff; }
+.oefen-btn.reset { background: var(--grijs); color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="terug" href="/huiswerk-oefenen/">← Terug</a>
+  <div class="header-title">🇪🇸 Spaans</div>
+  <div style="width:80px"></div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
+  <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
+  <button class="tab-btn" onclick="toonTab('oefeningen', this)">✏️ Oefeningen</button>
+</div>
+
+<div class="content">
+
+  <!-- ══ SO BANNER ══ -->
+  <div class="so-banner">
+    <div class="so-banner-tekst">Proefwerk Spaans &nbsp;·&nbsp; 6 mei</div>
+  </div>
+
+  <!-- ══ THEORIE ══ -->
+  <div id="tab-theorie" class="sectie actief">
+
+    <!-- Vocabulaire -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📚 Vocabulaire 4.1 – 4.4
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="vocab-sectie">
+          <h4>4.1 — School &amp; klas</h4>
+          <table class="vocab-table">
+            <tr><td>de leerling</td><td>el alumno / la alumna</td></tr>
+            <tr><td>de docent(e)</td><td>el/la profe / el/la profesor(a)</td></tr>
+            <tr><td>de school</td><td>la escuela</td></tr>
+            <tr><td>de middelbare school</td><td>el instituto</td></tr>
+            <tr><td>de les / de klas</td><td>la clase</td></tr>
+            <tr><td>het leerjaar / de klas</td><td>el curso</td></tr>
+            <tr><td>het cijfer</td><td>la nota</td></tr>
+            <tr><td>hoog</td><td>alto/-a</td></tr>
+            <tr><td>geschiedenis</td><td>la historia</td></tr>
+            <tr><td>aardrijkskunde</td><td>la geografía</td></tr>
+            <tr><td>Engels</td><td>el inglés</td></tr>
+            <tr><td>gym</td><td>la educación física</td></tr>
+            <tr><td>scheikunde</td><td>la química</td></tr>
+            <tr><td>natuurkunde</td><td>la física</td></tr>
+            <tr><td>biologie</td><td>la biología</td></tr>
+            <tr><td>Spaans</td><td>el castellano</td></tr>
+            <tr><td>het vak</td><td>la asignatura</td></tr>
+            <tr><td>muziek</td><td>la música</td></tr>
+            <tr><td>wiskunde</td><td>las matemáticas</td></tr>
+            <tr><td>het huiswerk</td><td>los deberes</td></tr>
+            <tr><td>huiswerk maken</td><td>hacer los deberes</td></tr>
+            <tr><td>doen / maken</td><td>hacer</td></tr>
+            <tr><td>ze ontmoeten elkaar</td><td>se encuentran</td></tr>
+            <tr><td>Waar ga je heen?</td><td>¿Adónde vas?</td></tr>
+            <tr><td>Hoe is het?</td><td>¿Qué tal?</td></tr>
+            <tr><td>de gang</td><td>el pasillo</td></tr>
+            <tr><td>de verdieping</td><td>la planta</td></tr>
+            <tr><td>de kantine</td><td>el comedor</td></tr>
+            <tr><td>daar</td><td>allí</td></tr>
+            <tr><td>hier</td><td>aquí</td></tr>
+            <tr><td>honger</td><td>hambre</td></tr>
+            <tr><td>dorst</td><td>sed</td></tr>
+            <tr><td>streng</td><td>duro/-a</td></tr>
+            <tr><td>aardig</td><td>amable</td></tr>
+            <tr><td>(daar)na</td><td>después</td></tr>
+            <tr><td>goed idee</td><td>buena idea</td></tr>
+            <tr><td>begint</td><td>empieza</td></tr>
+            <tr><td>nu</td><td>ahora</td></tr>
+          </table>
+        </div>
+
+        <div class="vocab-sectie">
+          <h4>4.2 — Dagindeling &amp; eten</h4>
+          <table class="vocab-table">
+            <tr><td>het leven</td><td>la vida</td></tr>
+            <tr><td>het ontbijt</td><td>el desayuno</td></tr>
+            <tr><td>het middageten / de lunch</td><td>la comida</td></tr>
+            <tr><td>het avondeten</td><td>la cena</td></tr>
+            <tr><td>het toetje</td><td>el postre</td></tr>
+            <tr><td>het glas</td><td>el vaso</td></tr>
+            <tr><td>de melk</td><td>la leche</td></tr>
+            <tr><td>het broodje</td><td>el bocadillo</td></tr>
+            <tr><td>het fruit</td><td>la fruta</td></tr>
+            <tr><td>beginnen met</td><td>empezar con</td></tr>
+            <tr><td>een uur</td><td>una hora</td></tr>
+            <tr><td>een half uur</td><td>una media hora</td></tr>
+            <tr><td>vroeg</td><td>temprano</td></tr>
+            <tr><td>laat</td><td>tarde</td></tr>
+            <tr><td>ik heb liever</td><td>prefiero</td></tr>
+            <tr><td>lievelings-</td><td>preferido/-a</td></tr>
+            <tr><td>leren</td><td>aprender</td></tr>
+            <tr><td>de (school)bus</td><td>el autobús (escolar)</td></tr>
+            <tr><td>met de bus</td><td>en autobús</td></tr>
+            <tr><td>lopend</td><td>a pie</td></tr>
+            <tr><td>de pauze</td><td>el recreo / la pausa</td></tr>
+            <tr><td>voetballen</td><td>jugar al fútbol</td></tr>
+            <tr><td>eindelijk</td><td>por fin</td></tr>
+            <tr><td>thuiskomen</td><td>llegar a casa</td></tr>
+            <tr><td>slapen</td><td>dormir</td></tr>
+            <tr><td>moe</td><td>cansado/-a</td></tr>
+            <tr><td>gitaar spelen</td><td>tocar la guitarra</td></tr>
+            <tr><td>lachen</td><td>reír</td></tr>
+            <tr><td>dragen</td><td>llevar</td></tr>
+            <tr><td>de kleren</td><td>la ropa</td></tr>
+            <tr><td>eigen</td><td>propio/-a</td></tr>
+            <tr><td>een heleboel</td><td>un montón</td></tr>
+            <tr><td>daarom</td><td>por eso</td></tr>
+            <tr><td>nooit</td><td>nunca</td></tr>
+          </table>
+        </div>
+
+        <div class="vocab-sectie">
+          <h4>4.3 — Dagen &amp; bijvoeglijke naamwoorden</h4>
+          <table class="vocab-table">
+            <tr><td>maandag</td><td>lunes</td></tr>
+            <tr><td>dinsdag</td><td>martes</td></tr>
+            <tr><td>woensdag</td><td>miércoles</td></tr>
+            <tr><td>donderdag</td><td>jueves</td></tr>
+            <tr><td>vrijdag</td><td>viernes</td></tr>
+            <tr><td>zaterdag</td><td>sábado</td></tr>
+            <tr><td>zondag</td><td>domingo</td></tr>
+            <tr><td>leuk</td><td>divertido/-a</td></tr>
+            <tr><td>saai</td><td>aburrido/-a</td></tr>
+            <tr><td>stom</td><td>estúpido/-a</td></tr>
+            <tr><td>grappig</td><td>gracioso/-a</td></tr>
+            <tr><td>lelijk</td><td>feo/-a</td></tr>
+            <tr><td>moeilijk</td><td>difícil</td></tr>
+            <tr><td>makkelijk</td><td>fácil</td></tr>
+            <tr><td>het mentoruur</td><td>la tutoría</td></tr>
+            <tr><td>economie</td><td>la economía</td></tr>
+            <tr><td>technisch tekenen</td><td>el dibujo técnico</td></tr>
+            <tr><td>tekstboek</td><td>el libro de texto</td></tr>
+            <tr><td>werkboek</td><td>el libro de trabajo</td></tr>
+            <tr><td>kleurpotlood</td><td>el lápiz de color</td></tr>
+            <tr><td>dankzij</td><td>gracias a</td></tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Ontkenningen -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        🚫 Ontkenningen (negación)
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="grammar-box">
+          <strong>Regel:</strong> <em>Niet</em> of <em>geen</em> vertaal je in het Spaans met <strong>no</strong>. Dit woordje staat <strong>vóór</strong> de persoonsvorm.
+        </div>
+
+        <table class="example-table">
+          <tr><td>No quiero bailar.</td><td>Ik wil niet dansen.</td></tr>
+          <tr><td>Ahora no tengo clase.</td><td>Ik heb nu geen les.</td></tr>
+        </table>
+
+        <p style="font-size:0.9rem;font-weight:700;color:#2d3748;margin:0.8rem 0 0.4rem;">Andere ontkennende woorden:</p>
+        <div class="neg-words">
+          <div class="neg-pill">nada <span>= niets</span></div>
+          <div class="neg-pill">nadie <span>= niemand</span></div>
+          <div class="neg-pill">nunca <span>= nooit</span></div>
+        </div>
+
+        <div class="grammar-box">
+          Deze woorden komen direct <strong>achter</strong> de persoonsvorm (met <em>no</em> ervoor). <em>Nunca</em> en <em>nadie</em> kunnen ook <strong>vóór</strong> de persoonsvorm — dan gebruik je geen <em>no</em> meer.
+        </div>
+
+        <table class="example-table">
+          <tr><td>Flor no dice nada.</td><td>Flor zegt niets.</td></tr>
+          <tr><td>No hay nadie en casa.</td><td>Er is niemand thuis.</td></tr>
+          <tr><td>No voy nunca al comedor.</td><td>Ik ga nooit naar de kantine.</td></tr>
+          <tr><td>Nunca voy al cine.</td><td>Ik ga nooit naar de bioscoop.</td></tr>
+          <tr><td>Nadie tiene hambre.</td><td>Niemand heeft honger.</td></tr>
+        </table>
+
+      </div>
+    </div>
+
+    <!-- Frases clave -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        💬 Frases clave (blz 37 + 40)
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="frases-sectie">
+          <h4>Pagina 37 — ¡Vamos al instituto!</h4>
+          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin-bottom:0.5rem;">Om te vragen</p>
+          <table class="frases-table">
+            <tr><td>¿Vas al instituto?</td><td>Ga je naar de middelbare school?</td></tr>
+            <tr><td>¿En qué curso estás?</td><td>In welk jaar zit jij?</td></tr>
+            <tr><td>¿Es una escuela grande?</td><td>Is het een grote school?</td></tr>
+            <tr><td>¿Quién es tu profe de geografía?</td><td>Wie is jouw aardrijkskundeleraar?</td></tr>
+            <tr><td>Tu profe de música, ¿es amable?</td><td>Is jouw muziekleraar/-lerares aardig?</td></tr>
+          </table>
+          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin:0.8rem 0 0.5rem;">Om te antwoorden</p>
+          <table class="frases-table">
+            <tr><td>Sí, voy al instituto.</td><td>Ja, ik ga naar de middelbare school.</td></tr>
+            <tr><td>Estoy en el segundo curso.</td><td>Ik zit in de tweede klas.</td></tr>
+            <tr><td>No, es una escuela pequeña.</td><td>Nee, het is een kleine school.</td></tr>
+            <tr><td>Es el señor / la señora Castillo.</td><td>Het is meneer / mevrouw Castillo.</td></tr>
+            <tr><td>No, es duro/-a, pero mi profe de biología es muy amable.</td><td>Nee, hij/zij is streng, maar mijn biologieleraar is heel aardig.</td></tr>
+          </table>
+        </div>
+
+        <div class="frases-sectie">
+          <h4>Pagina 40 — School &amp; huiswerk</h4>
+          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin-bottom:0.5rem;">Om te vragen</p>
+          <table class="frases-table">
+            <tr><td>¿Dónde está tu escuela?</td><td>Waar staat je school?</td></tr>
+            <tr><td>¿A qué hora empiezan tus clases?</td><td>Hoe laat beginnen je lessen?</td></tr>
+            <tr><td>¿Te gusta la historia?</td><td>Vind je geschiedenis leuk?</td></tr>
+            <tr><td>Y ¿tenéis un comedor en el instituto?</td><td>En hebben jullie een kantine op school?</td></tr>
+            <tr><td>¿Tienes deberes para mañana?</td><td>Heb je huiswerk voor morgen?</td></tr>
+          </table>
+          <p style="font-size:0.82rem;font-weight:700;color:#718096;margin:0.8rem 0 0.5rem;">Om te antwoorden</p>
+          <table class="frases-table">
+            <tr><td>Mi escuela está cerca / lejos, está en Pamplona.</td><td>Mijn school is ver weg / dichtbij, hij staat in Pamplona.</td></tr>
+            <tr><td>Mis clases empiezan a las ocho.</td><td>Mijn lessen beginnen om acht uur.</td></tr>
+            <tr><td>No, no me gusta, prefiero las matemáticas.</td><td>Nee, daar houd ik niet van, ik vind wiskunde leuker.</td></tr>
+            <tr><td>Sí, pero nunca voy al comedor.</td><td>Ja, maar ik ga nooit naar de kantine.</td></tr>
+            <tr><td>Sí, para inglés y biología.</td><td>Ja, voor Engels en biologie.</td></tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Toekomende tijd -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        🔮 Toekomende tijd (blz 48)
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="grammar-box">
+          <strong>De toekomende tijd / El futuro inmediato</strong><br><br>
+          Gebruik: iets dat je van plan bent te doen of binnenkort gaat gebeuren.<br><br>
+          <strong>Vorm:</strong> <em>ir</em> (vervogen) + <strong>a</strong> + heel werkwoord (infinitief)<br><br>
+          <strong>Let op:</strong> De vervoeging van <em>ir</em> volgt dezelfde vormen als altijd.
+        </div>
+
+        <table class="example-table">
+          <tr><td>Voy a comprar camisetas.</td><td>Ik ga T-shirts kopen.</td></tr>
+          <tr><td>Vas a buscar el supermercado.</td><td>Jij gaat de supermarkt zoeken.</td></tr>
+          <tr><td>Va a tocar la guitarra.</td><td>Hij/zij gaat gitaar spelen.</td></tr>
+          <tr><td>Vamos a ver la tele.</td><td>Wij gaan tv kijken.</td></tr>
+          <tr><td>Vais a llamar a Carlos.</td><td>Jullie gaan Carlos bellen.</td></tr>
+          <tr><td>Van a comprar T-shirts.</td><td>Zij gaan T-shirts kopen.</td></tr>
+        </table>
+
+        <div class="grammar-box">
+          <strong>Vervoeging van ir (gaan):</strong><br><br>
+          yo → <strong>voy</strong> &nbsp;·&nbsp; tú → <strong>vas</strong> &nbsp;·&nbsp; él/ella → <strong>va</strong><br>
+          nosotros → <strong>vamos</strong> &nbsp;·&nbsp; vosotros → <strong>vais</strong> &nbsp;·&nbsp; ellos/ellas → <strong>van</strong>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Kloktijden -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        🕐 Kloktijden (blz 77)
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="grammar-box">
+          <strong>Hoe zeg je de tijd in het Spaans?</strong><br><br>
+          Spanjaarden beginnen met het <strong>uur</strong>, dan hoeveel minuten erbij (<em>y</em>) of eraf (<em>menos</em>). Het woord <em>hora</em> (uur) laten ze weg.<br><br>
+          • Bij <strong>1 uur</strong>: gebruik <strong>Es la una</strong> (enkelvoud)<br>
+          • Bij <strong>alle andere uren</strong>: gebruik <strong>Son las...</strong> (meervoud)<br>
+          • <em>Es mediodía</em> = het is twaalf uur 's middags<br>
+          • <em>Es medianoche</em> = het is twaalf uur 's nachts
+        </div>
+
+        <table class="klok-table">
+          <tr><td>Son las siete.</td><td>Het is zeven uur.</td></tr>
+          <tr><td>Son las siete y cinco.</td><td>Het is vijf over zeven.</td></tr>
+          <tr><td>Son las siete y diez.</td><td>Het is tien over zeven.</td></tr>
+          <tr><td>Son las siete y cuarto.</td><td>Het is kwart over zeven.</td></tr>
+          <tr><td>Son las siete y veinte.</td><td>Het is twintig over zeven.</td></tr>
+          <tr><td>Son las siete y veinticinco.</td><td>Het is vijf voor half acht.</td></tr>
+          <tr><td>Son las siete y media.</td><td>Het is half acht.</td></tr>
+          <tr><td>Son las ocho menos veinticinco.</td><td>Het is vijf over half acht.</td></tr>
+          <tr><td>Son las ocho menos veinte.</td><td>Het is twintig voor acht.</td></tr>
+          <tr><td>Son las ocho menos cuarto.</td><td>Het is kwart voor acht.</td></tr>
+          <tr><td>Son las ocho menos diez.</td><td>Het is tien voor acht.</td></tr>
+          <tr><td>Son las ocho menos cinco.</td><td>Het is vijf voor acht.</td></tr>
+          <tr><td>Es la una.</td><td>Het is één uur.</td></tr>
+          <tr><td>Es mediodía.</td><td>Het is twaalf uur 's middags.</td></tr>
+          <tr><td>Es medianoche.</td><td>Het is twaalf uur 's nachts.</td></tr>
+        </table>
+
+      </div>
+    </div>
+
+    <!-- Getallen -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        🔢 Getallen 0 – 1000 (blz 73)
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="grammar-box">
+          <strong>Let op:</strong> Vanaf 31 schrijf je de getallen <em>niet</em> meer aan elkaar. Tussen tientallen en eenheden komt <strong>y</strong> (en): <em>treinta y uno</em>.<br>
+          Schrijf accenten correct: <em>dieciséis, veintidós, veintitrés, veintiséis</em>.
+        </div>
+
+        <div class="vocab-sectie"><h4>0 – 20</h4></div>
+        <div class="getallen-grid">
+          <div class="getal-item"><div class="getal-num">0</div><div class="getal-spa">cero</div></div>
+          <div class="getal-item"><div class="getal-num">1</div><div class="getal-spa">uno</div></div>
+          <div class="getal-item"><div class="getal-num">2</div><div class="getal-spa">dos</div></div>
+          <div class="getal-item"><div class="getal-num">3</div><div class="getal-spa">tres</div></div>
+          <div class="getal-item"><div class="getal-num">4</div><div class="getal-spa">cuatro</div></div>
+          <div class="getal-item"><div class="getal-num">5</div><div class="getal-spa">cinco</div></div>
+          <div class="getal-item"><div class="getal-num">6</div><div class="getal-spa">seis</div></div>
+          <div class="getal-item"><div class="getal-num">7</div><div class="getal-spa">siete</div></div>
+          <div class="getal-item"><div class="getal-num">8</div><div class="getal-spa">ocho</div></div>
+          <div class="getal-item"><div class="getal-num">9</div><div class="getal-spa">nueve</div></div>
+          <div class="getal-item"><div class="getal-num">10</div><div class="getal-spa">diez</div></div>
+          <div class="getal-item"><div class="getal-num">11</div><div class="getal-spa">once</div></div>
+          <div class="getal-item"><div class="getal-num">12</div><div class="getal-spa">doce</div></div>
+          <div class="getal-item"><div class="getal-num">13</div><div class="getal-spa">trece</div></div>
+          <div class="getal-item"><div class="getal-num">14</div><div class="getal-spa">catorce</div></div>
+          <div class="getal-item"><div class="getal-num">15</div><div class="getal-spa">quince</div></div>
+          <div class="getal-item"><div class="getal-num">16</div><div class="getal-spa">dieciséis</div></div>
+          <div class="getal-item"><div class="getal-num">17</div><div class="getal-spa">diecisiete</div></div>
+          <div class="getal-item"><div class="getal-num">18</div><div class="getal-spa">dieciocho</div></div>
+          <div class="getal-item"><div class="getal-num">19</div><div class="getal-spa">diecinueve</div></div>
+          <div class="getal-item"><div class="getal-num">20</div><div class="getal-spa">veinte</div></div>
+        </div>
+
+        <div class="vocab-sectie"><h4>21 – 30</h4></div>
+        <div class="getallen-grid">
+          <div class="getal-item"><div class="getal-num">21</div><div class="getal-spa">veintiuno</div></div>
+          <div class="getal-item"><div class="getal-num">22</div><div class="getal-spa">veintidós</div></div>
+          <div class="getal-item"><div class="getal-num">23</div><div class="getal-spa">veintitrés</div></div>
+          <div class="getal-item"><div class="getal-num">24</div><div class="getal-spa">veinticuatro</div></div>
+          <div class="getal-item"><div class="getal-num">25</div><div class="getal-spa">veinticinco</div></div>
+          <div class="getal-item"><div class="getal-num">26</div><div class="getal-spa">veintiséis</div></div>
+          <div class="getal-item"><div class="getal-num">27</div><div class="getal-spa">veintisiete</div></div>
+          <div class="getal-item"><div class="getal-num">28</div><div class="getal-spa">veintiocho</div></div>
+          <div class="getal-item"><div class="getal-num">29</div><div class="getal-spa">veintinueve</div></div>
+          <div class="getal-item"><div class="getal-num">30</div><div class="getal-spa">treinta</div></div>
+        </div>
+
+        <div class="vocab-sectie"><h4>Tientallen</h4></div>
+        <div class="getallen-grid">
+          <div class="getal-item"><div class="getal-num">31</div><div class="getal-spa">treinta y uno</div></div>
+          <div class="getal-item"><div class="getal-num">40</div><div class="getal-spa">cuarenta</div></div>
+          <div class="getal-item"><div class="getal-num">50</div><div class="getal-spa">cincuenta</div></div>
+          <div class="getal-item"><div class="getal-num">60</div><div class="getal-spa">sesenta</div></div>
+          <div class="getal-item"><div class="getal-num">70</div><div class="getal-spa">setenta</div></div>
+          <div class="getal-item"><div class="getal-num">80</div><div class="getal-spa">ochenta</div></div>
+          <div class="getal-item"><div class="getal-num">90</div><div class="getal-spa">noventa</div></div>
+        </div>
+
+        <div class="vocab-sectie"><h4>Honderdtallen</h4></div>
+        <div class="getallen-grid">
+          <div class="getal-item"><div class="getal-num">100</div><div class="getal-spa">cien</div></div>
+          <div class="getal-item"><div class="getal-num">101</div><div class="getal-spa">ciento uno</div></div>
+          <div class="getal-item"><div class="getal-num">200</div><div class="getal-spa">doscientos</div></div>
+          <div class="getal-item"><div class="getal-num">300</div><div class="getal-spa">trescientos</div></div>
+          <div class="getal-item"><div class="getal-num">400</div><div class="getal-spa">cuatrocientos</div></div>
+          <div class="getal-item"><div class="getal-num">500</div><div class="getal-spa">quinientos</div></div>
+          <div class="getal-item"><div class="getal-num">600</div><div class="getal-spa">seiscientos</div></div>
+          <div class="getal-item"><div class="getal-num">700</div><div class="getal-spa">setecientos</div></div>
+          <div class="getal-item"><div class="getal-num">800</div><div class="getal-spa">ochocientos</div></div>
+          <div class="getal-item"><div class="getal-num">900</div><div class="getal-spa">novecientos</div></div>
+          <div class="getal-item"><div class="getal-num">1000</div><div class="getal-spa">mil</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Werkwoorden -->
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        📝 Werkwoorden: ir, ser, tener &amp; estar (blz 76)
+        <span class="chevron">▼</span>
+      </button>
+      <div class="accordion-body">
+
+        <div class="werkwoord-grid">
+
+          <div class="conj-card">
+            <div class="conj-card-header">ser <span>zijn (wie/wat)</span></div>
+            <table class="conj-table">
+              <tr><td>soy</td><td>ik ben</td></tr>
+              <tr><td>eres</td><td>jij bent</td></tr>
+              <tr><td>es</td><td>hij/zij is, u bent</td></tr>
+              <tr class="conj-divider"><td>somos</td><td>wij zijn</td></tr>
+              <tr><td>sois</td><td>jullie zijn</td></tr>
+              <tr><td>son</td><td>zij zijn / u bent (mv)</td></tr>
+            </table>
+          </div>
+
+          <div class="conj-card">
+            <div class="conj-card-header">tener <span>hebben</span></div>
+            <table class="conj-table">
+              <tr><td>tengo</td><td>ik heb</td></tr>
+              <tr><td>tienes</td><td>jij hebt</td></tr>
+              <tr><td>tiene</td><td>hij/zij/u heeft</td></tr>
+              <tr class="conj-divider"><td>tenemos</td><td>wij hebben</td></tr>
+              <tr><td>tenéis</td><td>jullie hebben</td></tr>
+              <tr><td>tienen</td><td>zij hebben / u heeft (mv)</td></tr>
+            </table>
+          </div>
+
+          <div class="conj-card">
+            <div class="conj-card-header">ir <span>gaan</span></div>
+            <table class="conj-table">
+              <tr><td>voy</td><td>ik ga</td></tr>
+              <tr><td>vas</td><td>jij gaat</td></tr>
+              <tr><td>va</td><td>hij/zij/u gaat</td></tr>
+              <tr class="conj-divider"><td>vamos</td><td>wij gaan</td></tr>
+              <tr><td>vais</td><td>jullie gaan</td></tr>
+              <tr><td>van</td><td>zij gaan / u gaat (mv)</td></tr>
+            </table>
+          </div>
+
+          <div class="conj-card">
+            <div class="conj-card-header">estar <span>zijn/bevinden</span></div>
+            <table class="conj-table">
+              <tr><td>estoy</td><td>ik ben</td></tr>
+              <tr><td>estás</td><td>jij bent</td></tr>
+              <tr><td>está</td><td>hij/zij/u is</td></tr>
+              <tr class="conj-divider"><td>estamos</td><td>wij zijn</td></tr>
+              <tr><td>estáis</td><td>jullie zijn</td></tr>
+              <tr><td>están</td><td>zij zijn / u is (mv)</td></tr>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /tab-theorie -->
+
+
+  <!-- ══ FLASHCARDS ══ -->
+  <div id="tab-flashcards" class="sectie">
+
+    <!-- Set navigator -->
+    <div class="set-tabs">
+      <button class="set-tab-btn actief" onclick="toonSetTab('h4', this)">📚 H4 — Alle sets</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v51', this)">Vocab 5.1 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v52', this)">Vocab 5.2 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v53', this)">Vocab 5.3 — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('fc-nl-spa', this)">Frases — NL→SPA</button>
+      <button class="set-tab-btn" onclick="toonSetTab('fc-spa-nl', this)">Frases — SPA→NL</button>
+      <button class="set-tab-btn" onclick="toonSetTab('v54', this)">Voca §5.4 NL→SPA</button>
+      <button class="set-tab-btn" onclick="toonSetTab('frases48', this)">Frases p.48 NL→SPA</button>
+    </div>
+
+    <!-- ── H4 sets (bestaand) ── -->
+    <div id="set-h4" class="set-sectie actief">
+      <div class="sets-grid">
+
+        <div class="set-kaart" onclick="startSet('vocab-nl-spa')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire</div>
+          <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('vocab-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire</div>
+          <div class="set-info">4.1 t/m 4.4 · 68 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('ontkenningen-nl-spa')">
+          <div class="set-emoji">🚫</div>
+          <div class="set-naam">Ontkenningen</div>
+          <div class="set-info">nada, nadie, nunca · 10 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('frases-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">blz 37 + 40 · 20 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('kloktijden-nl-spa')">
+          <div class="set-emoji">🕐</div>
+          <div class="set-naam">Kloktijden</div>
+          <div class="set-info">blz 77 · 15 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('kloktijden-spa-nl')">
+          <div class="set-emoji">🕐</div>
+          <div class="set-naam">Kloktijden</div>
+          <div class="set-info">blz 77 · 15 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('getallen-nl-spa')">
+          <div class="set-emoji">🔢</div>
+          <div class="set-naam">Getallen 1 – 25</div>
+          <div class="set-info">blz 73 · 25 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('getallen-spa-nl')">
+          <div class="set-emoji">🔢</div>
+          <div class="set-naam">Getallen 1 – 25</div>
+          <div class="set-info">blz 73 · 25 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('werkwoorden-nl-spa')">
+          <div class="set-emoji">📝</div>
+          <div class="set-naam">ir, ser &amp; tener</div>
+          <div class="set-info">gemengd · 18 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+
+        <div class="set-kaart" onclick="startSet('werkwoorden-spa-nl')">
+          <div class="set-emoji">📝</div>
+          <div class="set-naam">ir, ser &amp; tener</div>
+          <div class="set-info">gemengd · 18 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+
+      </div>
+    </div><!-- /set-h4 -->
+
+    <!-- ── Vocabulaire 5.1 — Spaans → Nederlands ── -->
+    <div id="set-v51" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab51-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.1</div>
+          <div class="set-info">17 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Vocabulaire 5.2 — Spaans → Nederlands ── -->
+    <div id="set-v52" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab52-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.2</div>
+          <div class="set-info">22 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Vocabulaire 5.3 — Spaans → Nederlands ── -->
+    <div id="set-v53" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab53-spa-nl')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire 5.3</div>
+          <div class="set-info">26 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Frases clave — Nederlands → Spaans ── -->
+    <div id="set-fc-nl-spa" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases5-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Frases clave — Spaans → Nederlands ── -->
+    <div id="set-fc-spa-nl" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases5-spa-nl')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">SPA → NL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Vocabulaire §5.4 — Nederlands → Spaans ── -->
+    <div id="set-v54" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('vocab54-nl-spa')">
+          <div class="set-emoji">📚</div>
+          <div class="set-naam">Vocabulaire §5.4 — NL → Spaans</div>
+          <div class="set-info">61 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Frases clave p.48 — Nederlands → Spaans ── -->
+    <div id="set-frases48" class="set-sectie">
+      <div class="sets-grid">
+        <div class="set-kaart" onclick="startSet('frases48-nl-spa')">
+          <div class="set-emoji">💬</div>
+          <div class="set-naam">Frases clave p.48 — NL → Spaans</div>
+          <div class="set-info">12 kaartjes</div>
+          <div class="set-richting">NL → SPA</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-flashcards -->
+  <div id="tab-oefeningen" class="sectie">
+
+    <!-- Oefening 1: Toekomende tijd -->
+    <div class="oefen-sectie">
+      <h3>Oefening 1 — Toekomende tijd: ir + a + infinitivo</h3>
+      <p style="font-size:0.88rem;color:var(--grijs);margin-bottom:0.8rem;">Vul de juiste vorm van <strong>ir</strong> in om de toekomende tijd te vormen.</p>
+      <table class="conj-table" id="oefen1-table">
+        <tr><td>Yo _____ a estudiar esta tarde.</td><td><input class="oefen-input" data-answer="voy" placeholder="ir …"></td></tr>
+        <tr><td>Tú _____ a comprar un regalo.</td><td><input class="oefen-input" data-answer="vas" placeholder="ir …"></td></tr>
+        <tr><td>María _____ a cocinar hoy.</td><td><input class="oefen-input" data-answer="va" placeholder="ir …"></td></tr>
+        <tr><td>Nosotros _____ a salir a las ocho.</td><td><input class="oefen-input" data-answer="vamos" placeholder="ir …"></td></tr>
+        <tr><td>Vosotros _____ a ver una película.</td><td><input class="oefen-input" data-answer="vais" placeholder="ir …"></td></tr>
+        <tr><td>Los chicos _____ a jugar al fútbol.</td><td><input class="oefen-input" data-answer="van" placeholder="ir …"></td></tr>
+      </table>
+      <div class="oefen-btns">
+        <button class="oefen-btn check" onclick="controleerOefen('oefen1')">✅ Controleer</button>
+        <button class="oefen-btn reset" onclick="opnieuwOefen('oefen1')">🔄 Opnieuw</button>
+      </div>
+    </div>
+
+    <!-- Oefening 2: ir & estar -->
+    <div class="oefen-sectie">
+      <h3>Oefening 2 — Werkwoorden: ir &amp; estar</h3>
+      <div class="verb-sub-tabs">
+        <button class="verb-sub-tab-btn actief" onclick="toonVerbPanel('ir', this)">ir (gaan)</button>
+        <button class="verb-sub-tab-btn" onclick="toonVerbPanel('estar', this)">estar (zijn/bevinden)</button>
+      </div>
+
+      <div id="verb-panel-ir" class="verb-panel actief">
+        <table class="conj-table" id="oefen2-ir-table">
+          <tr><td>yo</td><td><input class="oefen-input" data-answer="voy" placeholder="…"></td></tr>
+          <tr><td>tú</td><td><input class="oefen-input" data-answer="vas" placeholder="…"></td></tr>
+          <tr><td>él/ella</td><td><input class="oefen-input" data-answer="va" placeholder="…"></td></tr>
+          <tr><td>nosotros</td><td><input class="oefen-input" data-answer="vamos" placeholder="…"></td></tr>
+          <tr><td>vosotros</td><td><input class="oefen-input" data-answer="vais" placeholder="…"></td></tr>
+          <tr><td>ellos/ellas</td><td><input class="oefen-input" data-answer="van" placeholder="…"></td></tr>
+        </table>
+        <div class="oefen-btns">
+          <button class="oefen-btn check" onclick="controleerOefen('oefen2-ir')">✅ Controleer</button>
+          <button class="oefen-btn reset" onclick="opnieuwOefen('oefen2-ir')">🔄 Opnieuw</button>
+        </div>
+      </div>
+
+      <div id="verb-panel-estar" class="verb-panel">
+        <table class="conj-table" id="oefen2-estar-table">
+          <tr><td>yo</td><td><input class="oefen-input" data-answer="estoy" placeholder="…"></td></tr>
+          <tr><td>tú</td><td><input class="oefen-input" data-answer="estás" placeholder="…"></td></tr>
+          <tr><td>él/ella</td><td><input class="oefen-input" data-answer="está" placeholder="…"></td></tr>
+          <tr><td>nosotros</td><td><input class="oefen-input" data-answer="estamos" placeholder="…"></td></tr>
+          <tr><td>vosotros</td><td><input class="oefen-input" data-answer="estáis" placeholder="…"></td></tr>
+          <tr><td>ellos/ellas</td><td><input class="oefen-input" data-answer="están" placeholder="…"></td></tr>
+        </table>
+        <div class="oefen-btns">
+          <button class="oefen-btn check" onclick="controleerOefen('oefen2-estar')">✅ Controleer</button>
+          <button class="oefen-btn reset" onclick="opnieuwOefen('oefen2-estar')">🔄 Opnieuw</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Oefening 3: Getallen -->
+    <div class="oefen-sectie">
+      <h3>Oefening 3 — Getallen 0 – 1000</h3>
+      <div class="grammar-box">
+        <strong>Let op:</strong> Vanaf 31 schrijf je getallen <em>niet</em> meer aan elkaar. Gebruik <strong>y</strong> tussen tientallen en eenheden: <em>treinta y uno</em>. Schrijf accenten correct: <em>dieciséis, veintidós, veintitrés</em>.
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;">
+        <div style="display:flex;gap:0.5rem;">
+          <button class="verb-sub-tab-btn actief" id="getal-richting-btn-nl" onclick="getalRichting('nl-spa', this)">Cijfer → Spaans</button>
+          <button class="verb-sub-tab-btn" id="getal-richting-btn-spa" onclick="getalRichting('spa-nl', this)">Spaans → Cijfer</button>
+        </div>
+        <span id="getal-score-display" style="font-weight:800;color:var(--rood);font-size:0.95rem;">Score: 0 / 0</span>
+      </div>
+
+      <div id="getal-vraag-box" style="background:#fff5f5;border:2px solid var(--rood-licht);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.8rem;text-align:center;">
+        <div id="getal-vraag" style="font-size:2rem;font-weight:900;color:var(--donker);margin-bottom:0.6rem;">—</div>
+        <div style="font-size:0.82rem;color:var(--grijs);font-weight:700;" id="getal-instructie">Typ het Spaanse woord</div>
+      </div>
+
+      <input class="oefen-input" id="getal-antwoord" placeholder="Typ hier je antwoord…" style="margin-bottom:0.6rem;font-size:1rem;" onkeydown="if(event.key==='Enter')controleerGetal()">
+      <div id="getal-feedback" style="font-size:0.88rem;font-weight:700;min-height:1.4rem;margin-bottom:0.6rem;"></div>
+
+      <div class="oefen-btns">
+        <button class="oefen-btn check" onclick="controleerGetal()">✅ Controleer</button>
+        <button class="oefen-btn reset" onclick="volgendGetal()">➡️ Volgende</button>
+        <button class="oefen-btn" style="background:#e2e8f0;color:#2d3748;" onclick="resetGetalScore()">🔄 Reset score</button>
+      </div>
+    </div>
+
+  </div><!-- /tab-oefeningen -->
+
+
+</div><!-- /content -->
+
+
+<!-- ══ EXTRA GRAMMATICA ══ -->
+<div class="extra-grammar">
+  <div class="extra-grammar-label">⚠️ Niet voor het SO — extra grammatica</div>
+  <div class="extra-grammar-card">
+
+    <h3>Het bezittelijk voornaamwoord / El pronombre posesivo</h3>
+    <p>Een bezittelijk voornaamwoord geeft aan van wie iets is. In het Spaans past de vorm zich aan het zelfstandig naamwoord aan.</p>
+
+    <!-- Enkelvoud -->
+    <div class="poss-table-wrap">
+      <h4>Enkelvoud</h4>
+      <table class="poss-table">
+        <thead>
+          <tr><th>Persoon</th><th>Mannelijk</th><th>Vrouwelijk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>mijn</td><td>mi</td><td>mi</td></tr>
+          <tr><td>jouw</td><td>tu</td><td>tu</td></tr>
+          <tr><td>zijn / haar / uw</td><td>su</td><td>su</td></tr>
+          <tr><td>ons / onze</td><td>nuestro</td><td>nuestra</td></tr>
+          <tr><td>jullie</td><td>vuestro</td><td>vuestra</td></tr>
+          <tr><td>hun / uw</td><td>su</td><td>su</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Meervoud -->
+    <div class="poss-table-wrap">
+      <h4>Meervoud</h4>
+      <table class="poss-table">
+        <thead>
+          <tr><th>Persoon</th><th>Mannelijk</th><th>Vrouwelijk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>mijn</td><td>mis</td><td>mis</td></tr>
+          <tr><td>jouw</td><td>tus</td><td>tus</td></tr>
+          <tr><td>zijn / haar / uw</td><td>sus</td><td>sus</td></tr>
+          <tr><td>ons / onze</td><td>nuestros</td><td>nuestras</td></tr>
+          <tr><td>jullie</td><td>vuestros</td><td>vuestras</td></tr>
+          <tr><td>hun / uw</td><td>sus</td><td>sus</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="poss-tip">
+      <strong>Let op:</strong> su/sus kan verwijzen naar zijn, haar, uw, jullie én hun.
+    </div>
+
+    <ul class="poss-examples">
+      <li><span class="poss-spa">Mi tienda favorita es Zara.</span><span class="poss-nl">→ Mijn lievelingswinkel is Zara.</span></li>
+      <li><span class="poss-spa">Tus zapatillas son bonitas.</span><span class="poss-nl">→ Jouw sneakers zijn mooi.</span></li>
+      <li><span class="poss-spa">Nuestra ropa es cara.</span><span class="poss-nl">→ Onze kleding is duur.</span></li>
+      <li><span class="poss-spa">Es su libro.</span><span class="poss-nl">→ Het is zijn/haar boek.</span></li>
+    </ul>
+
+  </div>
+</div>
+
+
+<!-- ══ FLASHCARD MODAL ══ -->
+<div id="fc-modal">
+  <div id="fc-container">
+    <div class="fc-topbar">
+      <span class="fc-set-naam" id="fc-titel"></span>
+      <button id="fc-close" onclick="sluitModal()">✕</button>
+    </div>
+    <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-fill"></div></div>
+    <div class="fc-progress-text" id="fc-teller"></div>
+    <div class="flip-wrapper" onclick="flipKaart()">
+      <div class="flip-card" id="fc-card">
+        <div class="flip-face flip-front">
+          <div class="flip-label" id="fc-front-label">NEDERLANDS</div>
+          <div class="flip-tekst" id="fc-front-tekst"></div>
+          <div class="flip-hint">Tik om om te draaien</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-label" id="fc-back-label">SPAANS</div>
+          <div class="flip-tekst" id="fc-back-tekst"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-buttons">
+      <button class="fc-btn fc-btn-prev" onclick="vorigeKaart()">← Vorige</button>
+      <button class="fc-btn fc-btn-flip" onclick="flipKaart()">Omdraaien</button>
+      <button class="fc-btn fc-btn-next" onclick="volgendeKaart()">Volgende →</button>
+    </div>
+    <button class="fc-shuffle" onclick="schudKaarten()">🔀 Schudden</button>
+  </div>
+</div>
+
+
+<script>
+/* ── TAB SWITCHING ── */
+function toonTab(naam, btn) {
+  document.querySelectorAll('.sectie').forEach(s => s.classList.remove('actief'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('tab-' + naam).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+/* ── SET TAB SWITCHING (inner flashcard nav) ── */
+function toonSetTab(naam, btn) {
+  document.querySelectorAll('.set-sectie').forEach(s => s.classList.remove('actief'));
+  document.querySelectorAll('.set-tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('set-' + naam).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+/* ── ACCORDION ── */
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+/* ── FLASHCARD DATA ── */
+const vocabBase = [
+  // 4.1
+  ["de leerling","el alumno / la alumna"],
+  ["de docent(e)","el/la profe / el/la profesor(a)"],
+  ["de school","la escuela"],
+  ["de middelbare school","el instituto"],
+  ["de les / de klas","la clase"],
+  ["het leerjaar / de klas","el curso"],
+  ["het cijfer","la nota"],
+  ["hoog","alto/-a"],
+  ["geschiedenis","la historia"],
+  ["aardrijkskunde","la geografía"],
+  ["Engels","el inglés"],
+  ["gym","la educación física"],
+  ["scheikunde","la química"],
+  ["natuurkunde","la física"],
+  ["biologie","la biología"],
+  ["Spaans","el castellano"],
+  ["het vak","la asignatura"],
+  ["muziek","la música"],
+  ["wiskunde","las matemáticas"],
+  ["het huiswerk","los deberes"],
+  ["huiswerk maken","hacer los deberes"],
+  ["doen / maken","hacer"],
+  ["ze ontmoeten elkaar","se encuentran"],
+  ["Waar ga je heen?","¿Adónde vas?"],
+  ["Hoe is het?","¿Qué tal?"],
+  ["de gang","el pasillo"],
+  ["de verdieping","la planta"],
+  ["de kantine","el comedor"],
+  ["daar","allí"],
+  ["hier","aquí"],
+  ["honger","hambre"],
+  ["dorst","sed"],
+  ["streng","duro/-a"],
+  ["aardig","amable"],
+  ["(daar)na","después"],
+  ["goed idee","buena idea"],
+  ["begint","empieza"],
+  ["nu","ahora"],
+  // 4.2
+  ["het leven","la vida"],
+  ["het ontbijt","el desayuno"],
+  ["het middageten / de lunch","la comida"],
+  ["het avondeten","la cena"],
+  ["het toetje","el postre"],
+  ["het glas","el vaso"],
+  ["de melk","la leche"],
+  ["het broodje","el bocadillo"],
+  ["het fruit","la fruta"],
+  ["beginnen met","empezar con"],
+  ["een uur","una hora"],
+  ["een half uur","una media hora"],
+  ["vroeg","temprano"],
+  ["laat","tarde"],
+  ["ik heb liever","prefiero"],
+  ["lievelings-","preferido/-a"],
+  ["leren","aprender"],
+  ["de (school)bus","el autobús (escolar)"],
+  ["met de bus","en autobús"],
+  ["lopend","a pie"],
+  ["de pauze","el recreo / la pausa"],
+  ["voetballen","jugar al fútbol"],
+  ["eindelijk","por fin"],
+  ["thuiskomen","llegar a casa"],
+  ["slapen","dormir"],
+  ["moe","cansado/-a"],
+  ["gitaar spelen","tocar la guitarra"],
+  ["lachen","reír"],
+  ["dragen","llevar"],
+  ["de kleren","la ropa"],
+  ["eigen","propio/-a"],
+  ["een heleboel","un montón"],
+  ["daarom","por eso"],
+  ["nooit","nunca"],
+  // 4.3
+  ["maandag","lunes"],
+  ["dinsdag","martes"],
+  ["woensdag","miércoles"],
+  ["donderdag","jueves"],
+  ["vrijdag","viernes"],
+  ["zaterdag","sábado"],
+  ["zondag","domingo"],
+  ["leuk","divertido/-a"],
+  ["saai","aburrido/-a"],
+  ["stom","estúpido/-a"],
+  ["grappig","gracioso/-a"],
+  ["lelijk","feo/-a"],
+  ["moeilijk","difícil"],
+  ["makkelijk","fácil"],
+  ["het mentoruur","la tutoría"],
+  ["economie","la economía"],
+  ["technisch tekenen","el dibujo técnico"],
+  ["tekstboek","el libro de texto"],
+  ["werkboek","el libro de trabajo"],
+  ["kleurpotlood","el lápiz de color"],
+  ["dankzij","gracias a"]
+];
+
+const sets = {
+  "frases5-nl-spa": {
+    titel: "Frases clave — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Zullen we gaan winkelen?",                     back:"¿Vamos de compras?"},
+      {front:"Wat is je favoriete winkel?",                   back:"¿Cuál es tu tienda favorita?"},
+      {front:"Is het een dure winkel?",                       back:"¿Es una tienda cara?"},
+      {front:"Wat wil je kopen?",                             back:"¿Qué quieres comprar?"},
+      {front:"Welke kleur wil je?",                           back:"¿Qué color prefieres?"},
+      {front:"Welke maat heb je?",                            back:"¿Qué talla tienes?"},
+      {front:"Natuurlijk, ik vind winkelen geweldig.",        back:"Claro, me encanta ir de compras."},
+      {front:"Mijn lievelingswinkel is Zara.",                back:"Mi tienda favorita es Zara."},
+      {front:"Nee, het is een goedkope winkel.",              back:"No, es una tienda barata."},
+      {front:"Ik wil een jurk kopen.",                        back:"Quiero comprar un vestido."},
+      {front:"Ik wil liever de gele.",                        back:"Prefiero el amarillo."},
+      {front:"Ik heb maat M.",                                back:"Tengo la talla M."}
+    ]
+  },
+  "frases5-spa-nl": {
+    titel: "Frases clave — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"¿Vamos de compras?",                back:"Zullen we gaan winkelen?"},
+      {front:"¿Cuál es tu tienda favorita?",       back:"Wat is je favoriete winkel?"},
+      {front:"¿Es una tienda cara?",               back:"Is het een dure winkel?"},
+      {front:"¿Qué quieres comprar?",              back:"Wat wil je kopen?"},
+      {front:"¿Qué color prefieres?",              back:"Welke kleur wil je?"},
+      {front:"¿Qué talla tienes?",                 back:"Welke maat heb je?"},
+      {front:"Claro, me encanta ir de compras.",   back:"Natuurlijk, ik vind winkelen geweldig."},
+      {front:"Mi tienda favorita es Zara.",         back:"Mijn lievelingswinkel is Zara."},
+      {front:"No, es una tienda barata.",           back:"Nee, het is een goedkope winkel."},
+      {front:"Quiero comprar un vestido.",          back:"Ik wil een jurk kopen."},
+      {front:"Prefiero el amarillo.",               back:"Ik wil liever de gele."},
+      {front:"Tengo la talla M.",                   back:"Ik heb maat M."}
+    ]
+  },
+  "vocab53-spa-nl": {
+    titel: "Vocabulaire 5.3 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"el mercado",              back:"de markt"},
+      {front:"estar de rebajas",        back:"in de uitverkoop zijn"},
+      {front:"estar de oferta",         back:"in de aanbieding zijn"},
+      {front:"la prenda",               back:"het kledingstuk"},
+      {front:"la camisa",               back:"de blouse"},
+      {front:"los vaqueros",            back:"de spijkerbroek"},
+      {front:"los zapatos",             back:"de schoenen"},
+      {front:"las botas",               back:"de laarzen"},
+      {front:"los calcetines",          back:"de sokken"},
+      {front:"las sandalias",           back:"de sandalen"},
+      {front:"el jersey",               back:"het vest"},
+      {front:"el suéter",               back:"de sweater"},
+      {front:"la rebeca",               back:"het vestje"},
+      {front:"las medias",              back:"de kousen"},
+      {front:"el almacén",              back:"het warenhuis"},
+      {front:"el dependiente",          back:"de winkelbediende (m)"},
+      {front:"la dependienta",          back:"de winkelbediende (v)"},
+      {front:"el vestido",              back:"de jurk"},
+      {front:"el guante",               back:"de want"},
+      {front:"la bufanda",              back:"de sjaal"},
+      {front:"los pendientes",          back:"de oorbellen"},
+      {front:"el collar",               back:"de ketting"},
+      {front:"el reloj",                back:"het horloge"},
+      {front:"el monedero",             back:"de portemonnee"},
+      {front:"las gafas de sol",        back:"de zonnebril"},
+      {front:"la colección",            back:"de collectie"}
+    ]
+  },
+  "vocab52-spa-nl": {
+    titel: "Vocabulaire 5.2 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"la tienda",          back:"de winkel"},
+      {front:"el estilo",          back:"de stijl, de smaak"},
+      {front:"primero",            back:"eerst"},
+      {front:"encantar",           back:"heel leuk vinden"},
+      {front:"ir de compras",      back:"winkelen"},
+      {front:"ir de tiendas",      back:"langs winkels gaan"},
+      {front:"pasar",              back:"langsgaan"},
+      {front:"la talla",           back:"de maat"},
+      {front:"el probador",        back:"de paskamer"},
+      {front:"barato/-a",          back:"goedkoop"},
+      {front:"caro/-a",            back:"duur"},
+      {front:"pagar",              back:"betalen"},
+      {front:"el color",           back:"de kleur"},
+      {front:"necesitar",          back:"nodig hebben"},
+      {front:"preferir",           back:"liever willen"},
+      {front:"el artículo",        back:"het product"},
+      {front:"elegante",           back:"elegant"},
+      {front:"deportivo/-a",       back:"sportief"},
+      {front:"alternativo/-a",     back:"alternatief"},
+      {front:"original",           back:"origineel"},
+      {front:"la zapatilla",       back:"de sneaker"},
+      {front:"el bolso",           back:"de tas"}
+    ]
+  },
+  "vocab51-spa-nl": {
+    titel: "Vocabulaire 5.1 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"la plaza",         back:"het plein"},
+      {front:"la capital",       back:"de hoofdstad"},
+      {front:"famoso/-a",        back:"beroemd"},
+      {front:"el regalo",        back:"het cadeau"},
+      {front:"juntos/-as",       back:"samen"},
+      {front:"el videojuego",    back:"het computerspel"},
+      {front:"comprar",          back:"kopen"},
+      {front:"la cosa",          back:"het ding"},
+      {front:"la camiseta",      back:"het T-shirt"},
+      {front:"los pantalones",   back:"de broek"},
+      {front:"la falda",         back:"de rok"},
+      {front:"ir a pie",         back:"te voet gaan"},
+      {front:"el cajero automático", back:"de pinautomaat"},
+      {front:"el dinero",        back:"het geld"},
+      {front:"la oferta",        back:"de aanbieding"},
+      {front:"enorme",           back:"enorm"},
+      {front:"costar",           back:"kosten"}
+    ]
+  },
+  "vocab-nl-spa": {
+    titel: "Vocabulaire — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: vocabBase.map(([nl,spa]) => ({front:nl, back:spa}))
+  },
+  "vocab-spa-nl": {
+    titel: "Vocabulaire — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: vocabBase.map(([nl,spa]) => ({front:spa, back:nl}))
+  },
+  "ontkenningen-nl-spa": {
+    titel: "Ontkenningen — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"niets",back:"nada"},
+      {front:"niemand",back:"nadie"},
+      {front:"nooit",back:"nunca"},
+      {front:"Ik wil niet dansen.",back:"No quiero bailar."},
+      {front:"Ik heb nu geen les.",back:"Ahora no tengo clase."},
+      {front:"Flor zegt niets.",back:"Flor no dice nada."},
+      {front:"Er is niemand thuis.",back:"No hay nadie en casa."},
+      {front:"Ik ga nooit naar de kantine.",back:"No voy nunca al comedor."},
+      {front:"Ik ga nooit naar de bioscoop.",back:"Nunca voy al cine."},
+      {front:"Niemand heeft honger.",back:"Nadie tiene hambre."}
+    ]
+  },
+  "frases-nl-spa": {
+    titel: "Frases clave — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Ga je naar de middelbare school?",back:"¿Vas al instituto?"},
+      {front:"In welk jaar zit jij?",back:"¿En qué curso estás?"},
+      {front:"Is het een grote school?",back:"¿Es una escuela grande?"},
+      {front:"Wie is jouw aardrijkskundeleraar?",back:"¿Quién es tu profe de geografía?"},
+      {front:"Is jouw muziekleraar/-lerares aardig?",back:"Tu profe de música, ¿es amable?"},
+      {front:"Ja, ik ga naar de middelbare school.",back:"Sí, voy al instituto."},
+      {front:"Ik zit in de tweede klas.",back:"Estoy en el segundo curso."},
+      {front:"Nee, het is een kleine school.",back:"No, es una escuela pequeña."},
+      {front:"Het is meneer / mevrouw Castillo.",back:"Es el señor / la señora Castillo."},
+      {front:"Nee, hij/zij is streng, maar mijn biologieleraar is heel aardig.",back:"No, es duro/-a, pero mi profe de biología es muy amable."},
+      {front:"Waar staat je school?",back:"¿Dónde está tu escuela?"},
+      {front:"Hoe laat beginnen je lessen?",back:"¿A qué hora empiezan tus clases?"},
+      {front:"Vind je geschiedenis leuk?",back:"¿Te gusta la historia?"},
+      {front:"En hebben jullie een kantine op school?",back:"Y ¿tenéis un comedor en el instituto?"},
+      {front:"Heb je huiswerk voor morgen?",back:"¿Tienes deberes para mañana?"},
+      {front:"Mijn school is ver weg / dichtbij, hij staat in Pamplona.",back:"Mi escuela está cerca / lejos, está en Pamplona."},
+      {front:"Mijn lessen beginnen om acht uur.",back:"Mis clases empiezan a las ocho."},
+      {front:"Nee, daar houd ik niet van, ik vind wiskunde leuker.",back:"No, no me gusta, prefiero las matemáticas."},
+      {front:"Ja, maar ik ga nooit naar de kantine.",back:"Sí, pero nunca voy al comedor."},
+      {front:"Ja, voor Engels en biologie.",back:"Sí, para inglés y biología."}
+    ]
+  },
+  "kloktijden-nl-spa": {
+    titel: "Kloktijden — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Het is zeven uur.",back:"Son las siete."},
+      {front:"Het is vijf over zeven.",back:"Son las siete y cinco."},
+      {front:"Het is tien over zeven.",back:"Son las siete y diez."},
+      {front:"Het is kwart over zeven.",back:"Son las siete y cuarto."},
+      {front:"Het is twintig over zeven.",back:"Son las siete y veinte."},
+      {front:"Het is vijf voor half acht.",back:"Son las siete y veinticinco."},
+      {front:"Het is half acht.",back:"Son las siete y media."},
+      {front:"Het is vijf over half acht.",back:"Son las ocho menos veinticinco."},
+      {front:"Het is twintig voor acht.",back:"Son las ocho menos veinte."},
+      {front:"Het is kwart voor acht.",back:"Son las ocho menos cuarto."},
+      {front:"Het is tien voor acht.",back:"Son las ocho menos diez."},
+      {front:"Het is vijf voor acht.",back:"Son las ocho menos cinco."},
+      {front:"Het is één uur.",back:"Es la una."},
+      {front:"Het is twaalf uur 's middags.",back:"Es mediodía."},
+      {front:"Het is twaalf uur 's nachts.",back:"Es medianoche."}
+    ]
+  },
+  "kloktijden-spa-nl": {
+    titel: "Kloktijden — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"Son las siete.",back:"Het is zeven uur."},
+      {front:"Son las siete y cinco.",back:"Het is vijf over zeven."},
+      {front:"Son las siete y diez.",back:"Het is tien over zeven."},
+      {front:"Son las siete y cuarto.",back:"Het is kwart over zeven."},
+      {front:"Son las siete y veinte.",back:"Het is twintig over zeven."},
+      {front:"Son las siete y veinticinco.",back:"Het is vijf voor half acht."},
+      {front:"Son las siete y media.",back:"Het is half acht."},
+      {front:"Son las ocho menos veinticinco.",back:"Het is vijf over half acht."},
+      {front:"Son las ocho menos veinte.",back:"Het is twintig voor acht."},
+      {front:"Son las ocho menos cuarto.",back:"Het is kwart voor acht."},
+      {front:"Son las ocho menos diez.",back:"Het is tien voor acht."},
+      {front:"Son las ocho menos cinco.",back:"Het is vijf voor acht."},
+      {front:"Es la una.",back:"Het is één uur."},
+      {front:"Es mediodía.",back:"Het is twaalf uur 's middags."},
+      {front:"Es medianoche.",back:"Het is twaalf uur 's nachts."}
+    ]
+  },
+  "getallen-nl-spa": {
+    titel: "Getallen 1–25 — NL → SPA",
+    frontLabel: "GETAL", backLabel: "SPAANS",
+    kaarten: [
+      {front:"1",back:"uno"},{front:"2",back:"dos"},{front:"3",back:"tres"},
+      {front:"4",back:"cuatro"},{front:"5",back:"cinco"},{front:"6",back:"seis"},
+      {front:"7",back:"siete"},{front:"8",back:"ocho"},{front:"9",back:"nueve"},
+      {front:"10",back:"diez"},{front:"11",back:"once"},{front:"12",back:"doce"},
+      {front:"13",back:"trece"},{front:"14",back:"catorce"},{front:"15",back:"quince"},
+      {front:"16",back:"dieciséis"},{front:"17",back:"diecisiete"},{front:"18",back:"dieciocho"},
+      {front:"19",back:"diecinueve"},{front:"20",back:"veinte"},{front:"21",back:"veintiuno"},
+      {front:"22",back:"veintidós"},{front:"23",back:"veintitrés"},{front:"24",back:"veinticuatro"},
+      {front:"25",back:"veinticinco"}
+    ]
+  },
+  "getallen-spa-nl": {
+    titel: "Getallen 1–25 — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "GETAL",
+    kaarten: [
+      {front:"uno",back:"1"},{front:"dos",back:"2"},{front:"tres",back:"3"},
+      {front:"cuatro",back:"4"},{front:"cinco",back:"5"},{front:"seis",back:"6"},
+      {front:"siete",back:"7"},{front:"ocho",back:"8"},{front:"nueve",back:"9"},
+      {front:"diez",back:"10"},{front:"once",back:"11"},{front:"doce",back:"12"},
+      {front:"trece",back:"13"},{front:"catorce",back:"14"},{front:"quince",back:"15"},
+      {front:"dieciséis",back:"16"},{front:"diecisiete",back:"17"},{front:"dieciocho",back:"18"},
+      {front:"diecinueve",back:"19"},{front:"veinte",back:"20"},{front:"veintiuno",back:"21"},
+      {front:"veintidós",back:"22"},{front:"veintitrés",back:"23"},{front:"veinticuatro",back:"24"},
+      {front:"veinticinco",back:"25"}
+    ]
+  },
+  "werkwoorden-nl-spa": {
+    titel: "ir, ser & tener — NL → SPA",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"ik ben (ser)",back:"soy"},
+      {front:"jij bent (ser)",back:"eres"},
+      {front:"hij/zij is, u bent (ser)",back:"es"},
+      {front:"wij zijn (ser)",back:"somos"},
+      {front:"jullie zijn (ser)",back:"sois"},
+      {front:"zij zijn / u bent mv (ser)",back:"son"},
+      {front:"ik heb (tener)",back:"tengo"},
+      {front:"jij hebt (tener)",back:"tienes"},
+      {front:"hij/zij/u heeft (tener)",back:"tiene"},
+      {front:"wij hebben (tener)",back:"tenemos"},
+      {front:"jullie hebben (tener)",back:"tenéis"},
+      {front:"zij hebben / u heeft mv (tener)",back:"tienen"},
+      {front:"ik ga (ir)",back:"voy"},
+      {front:"jij gaat (ir)",back:"vas"},
+      {front:"hij/zij/u gaat (ir)",back:"va"},
+      {front:"wij gaan (ir)",back:"vamos"},
+      {front:"jullie gaan (ir)",back:"vais"},
+      {front:"zij gaan / u gaat mv (ir)",back:"van"}
+    ]
+  },
+  "werkwoorden-spa-nl": {
+    titel: "ir, ser & tener — SPA → NL",
+    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+    kaarten: [
+      {front:"soy",back:"ik ben (ser)"},
+      {front:"eres",back:"jij bent (ser)"},
+      {front:"es",back:"hij/zij is, u bent (ser)"},
+      {front:"somos",back:"wij zijn (ser)"},
+      {front:"sois",back:"jullie zijn (ser)"},
+      {front:"son",back:"zij zijn / u bent mv (ser)"},
+      {front:"tengo",back:"ik heb (tener)"},
+      {front:"tienes",back:"jij hebt (tener)"},
+      {front:"tiene",back:"hij/zij/u heeft (tener)"},
+      {front:"tenemos",back:"wij hebben (tener)"},
+      {front:"tenéis",back:"jullie hebben (tener)"},
+      {front:"tienen",back:"zij hebben / u heeft mv (tener)"},
+      {front:"voy",back:"ik ga (ir)"},
+      {front:"vas",back:"jij gaat (ir)"},
+      {front:"va",back:"hij/zij/u gaat (ir)"},
+      {front:"vamos",back:"wij gaan (ir)"},
+      {front:"vais",back:"jullie gaan (ir)"},
+      {front:"van",back:"zij gaan / u gaat mv (ir)"}
+    ]
+  },
+  "vocab54-nl-spa": {
+    titel: "Vocabulaire §5.4 — NL → Spaans",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"het plein", back:"la plaza"},
+      {front:"beroemd", back:"famoso/-a"},
+      {front:"winkelen (rondkijken)", back:"ir de tiendas"},
+      {front:"winkelen (kopen)", back:"ir de compras"},
+      {front:"het cadeau", back:"el regalo"},
+      {front:"het computerspel", back:"el videojuego"},
+      {front:"kopen", back:"comprar"},
+      {front:"de kleding", back:"la ropa"},
+      {front:"het shirt", back:"la camiseta"},
+      {front:"de broek", back:"los pantalones"},
+      {front:"de rok", back:"la falda"},
+      {front:"de winkel", back:"la tienda"},
+      {front:"de stijl, de smaak", back:"el estilo"},
+      {front:"enorm", back:"enorme"},
+      {front:"een hekel hebben aan", back:"odiar"},
+      {front:"heel leuk vinden", back:"encantar"},
+      {front:"kosten", back:"costar"},
+      {front:"goedkoop", back:"barato/-a"},
+      {front:"duur", back:"caro/-a"},
+      {front:"betalen", back:"pagar"},
+      {front:"de kleur", back:"el color"},
+      {front:"nodig hebben", back:"necesitar"},
+      {front:"liever willen", back:"preferir"},
+      {front:"de maat", back:"la talla"},
+      {front:"de paskamer", back:"el probador"},
+      {front:"de tas", back:"el bolso"},
+      {front:"de sneaker", back:"la zapatilla"},
+      {front:"origineel", back:"original"},
+      {front:"sportief", back:"deportivo/-a"},
+      {front:"elegant", back:"elegante"},
+      {front:"alternatief", back:"alternativo/-a"},
+      {front:"de spijkerbroek", back:"los vaqueros"},
+      {front:"de schoenen", back:"los zapatos"},
+      {front:"in de uitverkoop zijn", back:"estar de rebajas"},
+      {front:"in de aanbieding zijn", back:"estar de oferta"},
+      {front:"de laarzen", back:"las botas"},
+      {front:"de trui", back:"el jersey"},
+      {front:"het jasje", back:"la chaqueta"},
+      {front:"het vestje", back:"la rebeca"},
+      {front:"de sweater", back:"el suéter"},
+      {front:"de winterjas", back:"el abrigo"},
+      {front:"het kledingstuk", back:"la prenda"},
+      {front:"de blouse", back:"la camisa"},
+      {front:"de folder", back:"el folleto"},
+      {front:"een wandeling maken", back:"dar un paseo"},
+      {front:"de hoed", back:"el sombrero"},
+      {front:"het standbeeld", back:"la estatua"},
+      {front:"de openingstijden", back:"el horario"},
+      {front:"het toegangsbewijs", back:"la entrada"},
+      {front:"uitrusten", back:"descansar"},
+      {front:"iets drinken", back:"tomar algo"},
+      {front:"het voetbalstadion", back:"el estadio de fútbol"},
+      {front:"de mode", back:"la moda"},
+      {front:"de zonnebril", back:"las gafas de sol"},
+      {front:"de portemonnee", back:"el monedero"},
+      {front:"het horloge", back:"el reloj"},
+      {front:"de ketting", back:"el collar"},
+      {front:"de oorbellen", back:"los pendientes"},
+      {front:"de rugzak", back:"la mochila"},
+      {front:"de accessoire", back:"el complemento"},
+      {front:"de markt", back:"el mercado"}
+    ]
+  },
+  "frases48-nl-spa": {
+    titel: "Frases clave p.48 — NL → Spaans",
+    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+    kaarten: [
+      {front:"Wat gaan jullie vanmiddag doen?", back:"¿Qué vais a hacer esta tarde?"},
+      {front:"Waar gaan jullie heen?", back:"¿Adónde vais?"},
+      {front:"Ga je iets kopen?", back:"¿Vas a comprar algo?"},
+      {front:"Hoeveel kosten de laarzen?", back:"¿Cuánto cuestan las botas?"},
+      {front:"Wat gaan jullie daarna doen?", back:"¿Y qué vais a hacer después?"},
+      {front:"Hoe ziet het park eruit?", back:"El parque, ¿cómo es?"},
+      {front:"We gaan een stukje lopen.", back:"Vamos a dar un paseo."},
+      {front:"We gaan naar de nieuwe winkel van BLANCO.", back:"Vamos a la tienda nueva de BLANCO."},
+      {front:"Ja, ik wil een paar laarzen kopen.", back:"Sí, quiero comprar unas botas."},
+      {front:"De laarzen kosten 111 euro.", back:"Las botas cuestan 111 euros."},
+      {front:"Daarna gaan we iets drinken in het park.", back:"Después vamos a tomar algo en el parque."},
+      {front:"Het is groot en mooi.", back:"Es grande y bonito."}
+    ]
+  }
+};
+
+/* ── FLASHCARD STATE ── */
+let huidigSet = null;
+let kaarten = [];
+let huidigIndex = 0;
+
+function startSet(setNaam) {
+  huidigSet = sets[setNaam];
+  kaarten = [...huidigSet.kaarten];
+  huidigIndex = 0;
+  document.getElementById('fc-titel').textContent = huidigSet.titel;
+  document.getElementById('fc-front-label').textContent = huidigSet.frontLabel;
+  document.getElementById('fc-back-label').textContent = huidigSet.backLabel;
+  toonKaart();
+  document.getElementById('fc-modal').classList.add('open');
+}
+
+function toonKaart() {
+  const kaart = kaarten[huidigIndex];
+  document.getElementById('fc-card').classList.remove('flipped');
+  document.getElementById('fc-front-tekst').textContent = kaart.front;
+  document.getElementById('fc-back-tekst').textContent = kaart.back;
+  const totaal = kaarten.length;
+  document.getElementById('fc-teller').textContent = `${huidigIndex + 1} / ${totaal}`;
+  document.getElementById('fc-fill').style.width = `${((huidigIndex + 1) / totaal) * 100}%`;
+}
+
+function flipKaart() {
+  document.getElementById('fc-card').classList.toggle('flipped');
+}
+
+function volgendeKaart() {
+  if (huidigIndex < kaarten.length - 1) {
+    huidigIndex++;
+    toonKaart();
+  }
+}
+
+function vorigeKaart() {
+  if (huidigIndex > 0) {
+    huidigIndex--;
+    toonKaart();
+  }
+}
+
+function schudKaarten() {
+  for (let i = kaarten.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [kaarten[i], kaarten[j]] = [kaarten[j], kaarten[i]];
+  }
+  huidigIndex = 0;
+  toonKaart();
+}
+
+function sluitModal() {
+  document.getElementById('fc-modal').classList.remove('open');
+}
+
+/* Keyboard navigation */
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('fc-modal').classList.contains('open')) return;
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); volgendeKaart(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); vorigeKaart(); }
+  if (e.key === 'Enter') flipKaart();
+  if (e.key === 'Escape') sluitModal();
+});
+
+/* ── VERB SUB-TAB SWITCHING ── */
+function toonVerbPanel(naam, btn) {
+  document.querySelectorAll('.verb-panel').forEach(p => p.classList.remove('actief'));
+  document.querySelectorAll('.verb-sub-tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('verb-panel-' + naam).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+/* ── OEFENING CHECK / RESET ── */
+function controleerOefen(id) {
+  const table = document.getElementById(id + '-table');
+  table.querySelectorAll('.oefen-input').forEach(input => {
+    const correct = input.dataset.answer;
+    const isGoed = input.value.trim().toLowerCase() === correct.toLowerCase();
+    input.classList.remove('goed', 'fout');
+    const existing = input.parentElement.querySelector('.fout-antwoord');
+    if (existing) existing.remove();
+    if (isGoed) {
+      input.classList.add('goed');
+    } else {
+      input.classList.add('fout');
+      const fb = document.createElement('div');
+      fb.className = 'fout-antwoord';
+      fb.textContent = '✓ ' + correct;
+      input.parentElement.appendChild(fb);
+    }
+  });
+}
+
+function opnieuwOefen(id) {
+  const table = document.getElementById(id + '-table');
+  table.querySelectorAll('.oefen-input').forEach(input => {
+    input.value = '';
+    input.classList.remove('goed', 'fout');
+    const fb = input.parentElement.querySelector('.fout-antwoord');
+    if (fb) fb.remove();
+  });
+}
+
+/* ── GETALLEN OEFENING ── */
+const getallenData = [
+  [0,'cero'],[1,'uno'],[2,'dos'],[3,'tres'],[4,'cuatro'],[5,'cinco'],
+  [6,'seis'],[7,'siete'],[8,'ocho'],[9,'nueve'],[10,'diez'],
+  [11,'once'],[12,'doce'],[13,'trece'],[14,'catorce'],[15,'quince'],
+  [16,'dieciséis'],[17,'diecisiete'],[18,'dieciocho'],[19,'diecinueve'],[20,'veinte'],
+  [21,'veintiuno'],[22,'veintidós'],[23,'veintitrés'],[24,'veinticuatro'],[25,'veinticinco'],
+  [26,'veintiséis'],[27,'veintisiete'],[28,'veintiocho'],[29,'veintinueve'],[30,'treinta'],
+  [31,'treinta y uno'],[32,'treinta y dos'],[40,'cuarenta'],[41,'cuarenta y uno'],
+  [50,'cincuenta'],[51,'cincuenta y uno'],[60,'sesenta'],[70,'setenta'],
+  [80,'ochenta'],[90,'noventa'],[100,'cien'],[101,'ciento uno'],[110,'ciento diez'],
+  [200,'doscientos'],[300,'trescientos'],[400,'cuatrocientos'],[500,'quinientos'],
+  [600,'seiscientos'],[700,'setecientos'],[800,'ochocientos'],[900,'novecientos'],
+  [1000,'mil']
+];
+
+let getalRichtingMode = 'nl-spa';
+let getalScore = 0;
+let getalTotaal = 0;
+let huidigGetal = null;
+
+function getalRichting(mode, btn) {
+  getalRichtingMode = mode;
+  document.querySelectorAll('#getal-richting-btn-nl, #getal-richting-btn-spa').forEach(b => b.classList.remove('actief'));
+  btn.classList.add('actief');
+  volgendGetal();
+}
+
+function volgendGetal() {
+  const entry = getallenData[Math.floor(Math.random() * getallenData.length)];
+  huidigGetal = entry;
+  document.getElementById('getal-antwoord').value = '';
+  document.getElementById('getal-feedback').textContent = '';
+  document.getElementById('getal-antwoord').style.borderColor = '';
+  document.getElementById('getal-antwoord').style.background = '';
+  if (getalRichtingMode === 'nl-spa') {
+    document.getElementById('getal-vraag').textContent = entry[0];
+    document.getElementById('getal-instructie').textContent = 'Typ het Spaanse woord';
+  } else {
+    document.getElementById('getal-vraag').textContent = entry[1];
+    document.getElementById('getal-instructie').textContent = 'Typ het cijfer';
+  }
+  document.getElementById('getal-antwoord').focus();
+}
+
+function controleerGetal() {
+  if (!huidigGetal) return;
+  const antwoord = document.getElementById('getal-antwoord').value.trim().toLowerCase();
+  const correct = getalRichtingMode === 'nl-spa'
+    ? huidigGetal[1].toLowerCase()
+    : String(huidigGetal[0]);
+  getalTotaal++;
+  const fb = document.getElementById('getal-feedback');
+  if (antwoord === correct) {
+    getalScore++;
+    fb.textContent = '✅ Correct!';
+    fb.style.color = '#38a169';
+    document.getElementById('getal-antwoord').style.borderColor = '#38a169';
+    document.getElementById('getal-antwoord').style.background = '#f0fff4';
+    setTimeout(volgendGetal, 900);
+  } else {
+    fb.textContent = `❌ Fout — het goede antwoord is: ${getalRichtingMode === 'nl-spa' ? huidigGetal[1] : huidigGetal[0]}`;
+    fb.style.color = 'var(--rood)';
+    document.getElementById('getal-antwoord').style.borderColor = 'var(--rood)';
+    document.getElementById('getal-antwoord').style.background = '#fff5f5';
+  }
+  document.getElementById('getal-score-display').textContent = `Score: ${getalScore} / ${getalTotaal}`;
+}
+
+function resetGetalScore() {
+  getalScore = 0;
+  getalTotaal = 0;
+  document.getElementById('getal-score-display').textContent = 'Score: 0 / 0';
+  volgendGetal();
+}
+
+/* Start getallen on page load */
+document.addEventListener('DOMContentLoaded', volgendGetal);
+
+</script>
+
+</body>
+</html>
