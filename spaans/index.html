@@ -1281,6 +1281,36 @@ body {
       </div>
     </div>
 
+    <!-- Oefening 3: Getallen -->
+    <div class="oefen-sectie">
+      <h3>Oefening 3 — Getallen 0 – 1000</h3>
+      <div class="grammar-box">
+        <strong>Let op:</strong> Vanaf 31 schrijf je getallen <em>niet</em> meer aan elkaar. Gebruik <strong>y</strong> tussen tientallen en eenheden: <em>treinta y uno</em>. Schrijf accenten correct: <em>dieciséis, veintidós, veintitrés</em>.
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;">
+        <div style="display:flex;gap:0.5rem;">
+          <button class="verb-sub-tab-btn actief" id="getal-richting-btn-nl" onclick="getalRichting('nl-spa', this)">Cijfer → Spaans</button>
+          <button class="verb-sub-tab-btn" id="getal-richting-btn-spa" onclick="getalRichting('spa-nl', this)">Spaans → Cijfer</button>
+        </div>
+        <span id="getal-score-display" style="font-weight:800;color:var(--rood);font-size:0.95rem;">Score: 0 / 0</span>
+      </div>
+
+      <div id="getal-vraag-box" style="background:#fff5f5;border:2px solid var(--rood-licht);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.8rem;text-align:center;">
+        <div id="getal-vraag" style="font-size:2rem;font-weight:900;color:var(--donker);margin-bottom:0.6rem;">—</div>
+        <div style="font-size:0.82rem;color:var(--grijs);font-weight:700;" id="getal-instructie">Typ het Spaanse woord</div>
+      </div>
+
+      <input class="oefen-input" id="getal-antwoord" placeholder="Typ hier je antwoord…" style="margin-bottom:0.6rem;font-size:1rem;" onkeydown="if(event.key==='Enter')controleerGetal()">
+      <div id="getal-feedback" style="font-size:0.88rem;font-weight:700;min-height:1.4rem;margin-bottom:0.6rem;"></div>
+
+      <div class="oefen-btns">
+        <button class="oefen-btn check" onclick="controleerGetal()">✅ Controleer</button>
+        <button class="oefen-btn reset" onclick="volgendGetal()">➡️ Volgende</button>
+        <button class="oefen-btn" style="background:#e2e8f0;color:#2d3748;" onclick="resetGetalScore()">🔄 Reset score</button>
+      </div>
+    </div>
+
   </div><!-- /tab-oefeningen -->
 
 
@@ -1986,6 +2016,85 @@ function opnieuwOefen(id) {
     if (fb) fb.remove();
   });
 }
+
+/* ── GETALLEN OEFENING ── */
+const getallenData = [
+  [0,'cero'],[1,'uno'],[2,'dos'],[3,'tres'],[4,'cuatro'],[5,'cinco'],
+  [6,'seis'],[7,'siete'],[8,'ocho'],[9,'nueve'],[10,'diez'],
+  [11,'once'],[12,'doce'],[13,'trece'],[14,'catorce'],[15,'quince'],
+  [16,'dieciséis'],[17,'diecisiete'],[18,'dieciocho'],[19,'diecinueve'],[20,'veinte'],
+  [21,'veintiuno'],[22,'veintidós'],[23,'veintitrés'],[24,'veinticuatro'],[25,'veinticinco'],
+  [26,'veintiséis'],[27,'veintisiete'],[28,'veintiocho'],[29,'veintinueve'],[30,'treinta'],
+  [31,'treinta y uno'],[32,'treinta y dos'],[40,'cuarenta'],[41,'cuarenta y uno'],
+  [50,'cincuenta'],[51,'cincuenta y uno'],[60,'sesenta'],[70,'setenta'],
+  [80,'ochenta'],[90,'noventa'],[100,'cien'],[101,'ciento uno'],[110,'ciento diez'],
+  [200,'doscientos'],[300,'trescientos'],[400,'cuatrocientos'],[500,'quinientos'],
+  [600,'seiscientos'],[700,'setecientos'],[800,'ochocientos'],[900,'novecientos'],
+  [1000,'mil']
+];
+
+let getalRichtingMode = 'nl-spa';
+let getalScore = 0;
+let getalTotaal = 0;
+let huidigGetal = null;
+
+function getalRichting(mode, btn) {
+  getalRichtingMode = mode;
+  document.querySelectorAll('#getal-richting-btn-nl, #getal-richting-btn-spa').forEach(b => b.classList.remove('actief'));
+  btn.classList.add('actief');
+  volgendGetal();
+}
+
+function volgendGetal() {
+  const entry = getallenData[Math.floor(Math.random() * getallenData.length)];
+  huidigGetal = entry;
+  document.getElementById('getal-antwoord').value = '';
+  document.getElementById('getal-feedback').textContent = '';
+  document.getElementById('getal-antwoord').style.borderColor = '';
+  document.getElementById('getal-antwoord').style.background = '';
+  if (getalRichtingMode === 'nl-spa') {
+    document.getElementById('getal-vraag').textContent = entry[0];
+    document.getElementById('getal-instructie').textContent = 'Typ het Spaanse woord';
+  } else {
+    document.getElementById('getal-vraag').textContent = entry[1];
+    document.getElementById('getal-instructie').textContent = 'Typ het cijfer';
+  }
+  document.getElementById('getal-antwoord').focus();
+}
+
+function controleerGetal() {
+  if (!huidigGetal) return;
+  const antwoord = document.getElementById('getal-antwoord').value.trim().toLowerCase();
+  const correct = getalRichtingMode === 'nl-spa'
+    ? huidigGetal[1].toLowerCase()
+    : String(huidigGetal[0]);
+  getalTotaal++;
+  const fb = document.getElementById('getal-feedback');
+  if (antwoord === correct) {
+    getalScore++;
+    fb.textContent = '✅ Correct!';
+    fb.style.color = '#38a169';
+    document.getElementById('getal-antwoord').style.borderColor = '#38a169';
+    document.getElementById('getal-antwoord').style.background = '#f0fff4';
+    setTimeout(volgendGetal, 900);
+  } else {
+    fb.textContent = `❌ Fout — het goede antwoord is: ${getalRichtingMode === 'nl-spa' ? huidigGetal[1] : huidigGetal[0]}`;
+    fb.style.color = 'var(--rood)';
+    document.getElementById('getal-antwoord').style.borderColor = 'var(--rood)';
+    document.getElementById('getal-antwoord').style.background = '#fff5f5';
+  }
+  document.getElementById('getal-score-display').textContent = `Score: ${getalScore} / ${getalTotaal}`;
+}
+
+function resetGetalScore() {
+  getalScore = 0;
+  getalTotaal = 0;
+  document.getElementById('getal-score-display').textContent = 'Score: 0 / 0';
+  volgendGetal();
+}
+
+/* Start getallen on page load */
+document.addEventListener('DOMContentLoaded', volgendGetal);
 
 </script>
 
