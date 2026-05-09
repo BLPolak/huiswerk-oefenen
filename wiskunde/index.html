@@ -1,1026 +1,621 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Wiskunde — Kwadraten, Wortels &amp; Pythagoras</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiskunde – §4.1, §4.2 & §4.3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --donker: #1e1e2e;
+      --grijs: #f1f5f9;
+      --bg: #f8fafc;
+      --groen: #22c55e;
+      --rood: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--donker); }
 
-:root {
-  --teal: #1abc9c;
-  --teal-d: #16a085;
-  --blauw: #3498db;
-  --blauw-d: #2980b9;
-  --paars: #9b59b6;
-  --paars-d: #8e44ad;
-  --oranje: #f39c12;
-  --rood: #e74c3c;
-  --groen: #2ecc71;
-  --groen-d: #27ae60;
-  --donker: #2c3e50;
-  --licht: #ecf0f1;
-}
+    header {
+      background: linear-gradient(135deg, #0d9488, #0ea5e9);
+      color: white; padding: 1.2rem 1.5rem;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    header h1 { font-size: 1.3rem; font-weight: 800; }
+    header p { font-size: 0.85rem; opacity: 0.85; margin-top: 0.2rem; }
 
-body {
-  font-family: 'Nunito', sans-serif;
-  background: #f0f4f8;
-  color: var(--donker);
-  min-height: 100vh;
-  padding: 0.5rem 0.5rem 3rem;
-}
+    .banner {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: white; text-align: center;
+      padding: 0.6rem; font-weight: 700; font-size: 0.95rem;
+    }
 
-/* ── Header ── */
-header { text-align: center; padding: 1rem 1rem 0.5rem; max-width: 920px; margin: 0 auto; }
+    .tab-nav {
+      display: flex; overflow-x: auto; background: white;
+      border-bottom: 2px solid #e2e8f0; padding: 0 1rem; gap: 0.25rem;
+    }
+    .tab-btn {
+      padding: 0.75rem 1rem; border: none; background: none;
+      font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 600;
+      color: #64748b; cursor: pointer; border-bottom: 3px solid transparent;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
 
-.terug {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  background: #edf2f7; color: #2d3748; text-decoration: none;
-  font-weight: 800; font-size: 0.85rem; padding: 0.5rem 1rem;
-  border-radius: 10px; margin-bottom: 0.8rem; transition: background 0.15s;
-}
-.terug:hover { background: #e2e8f0; }
+    .tab-content { display: none; padding: 1.5rem; max-width: 700px; margin: 0 auto; }
+    .tab-content.active { display: block; }
 
-header h1 { font-size: 1.9rem; font-weight: 900; color: var(--donker); }
-header p { color: #718096; font-size: 0.9rem; margin-top: 0.3rem; font-weight: 600; }
+    .uitleg-section {
+      background: white; border-radius: 12px; padding: 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-left: 4px solid var(--teal);
+    }
+    .uitleg-section h2 { color: var(--teal); font-size: 1.1rem; margin-bottom: 1rem; }
+    .uitleg-section h3 { font-size: 0.95rem; color: #374151; margin: 1rem 0 0.4rem; }
+    .uitleg-section p { font-size: 0.9rem; line-height: 1.6; color: #374151; margin-bottom: 0.4rem; }
+    .rule-box {
+      background: #f0fdfa; border: 1px solid #99f6e4;
+      border-radius: 8px; padding: 0.75rem 1rem; margin: 0.6rem 0; font-size: 0.9rem; color: #134e4a;
+    }
+    .rule-box .formula { font-size: 1rem; font-weight: 700; color: var(--teal-dark); margin-bottom: 0.25rem; }
+    .warning-box {
+      background: #fff7ed; border: 1px solid #fed7aa;
+      border-radius: 8px; padding: 0.75rem 1rem; margin: 0.6rem 0;
+      font-size: 0.9rem; color: #92400e;
+    }
 
-/* ── Score ── */
-.scorebalk {
-  display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
-  margin: 0.8rem auto 0; max-width: 920px;
-}
-.score-item {
-  background: white; border-radius: 12px; padding: 0.4rem 1.2rem;
-  font-weight: 700; font-size: 0.95rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.score-item.goed { color: var(--groen-d); border-left: 4px solid var(--groen); }
-.score-item.fout { color: var(--rood); border-left: 4px solid var(--rood); }
+    .oefening-card {
+      background: white; border-radius: 12px; padding: 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .oefening-card h2 {
+      font-size: 1rem; color: var(--teal-dark); margin-bottom: 1rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0;
+    }
+    .score-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.85rem; color: #64748b; }
+    .progress-bar { height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-bottom: 1rem; }
+    .progress-fill { height: 100%; background: var(--teal); transition: width 0.3s; }
+    .vraag-box {
+      background: var(--grijs); border-radius: 8px; padding: 1rem;
+      margin-bottom: 1rem; font-size: 1rem; text-align: center;
+      min-height: 60px; display: flex; align-items: center; justify-content: center;
+      line-height: 1.5;
+    }
+    .antwoord-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1rem; }
+    .antwoord-btn {
+      padding: 0.6rem 1.5rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      background: white; font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+    }
+    .antwoord-btn:hover { border-color: var(--teal); background: #f0fdfa; }
+    .antwoord-btn.correct { background: #dcfce7; border-color: var(--groen); color: #166534; }
+    .antwoord-btn.fout { background: #fee2e2; border-color: var(--rood); color: #991b1b; }
 
-/* ── Tabs ── */
-.tabs-wrap { max-width: 920px; margin: 1rem auto 0; padding: 0 0.5rem; }
-.tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .antwoord-input {
+      width: 100%; padding: 0.6rem 1rem; border: 2px solid #e2e8f0;
+      border-radius: 8px; font-family: 'Nunito', sans-serif;
+      font-size: 1rem; margin-bottom: 0.75rem; outline: none; transition: border-color 0.2s;
+    }
+    .antwoord-input:focus { border-color: var(--teal); }
+    .antwoord-input.correct { border-color: var(--groen); background: #dcfce7; }
+    .antwoord-input.fout { border-color: var(--rood); background: #fee2e2; }
 
-.tab-knop {
-  padding: 0.5rem 1rem; border-radius: 20px; border: 2px solid transparent;
-  font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
-  cursor: pointer; transition: all 0.18s; background: white; color: var(--donker);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.tab-knop:hover { transform: translateY(-2px); }
-.tab-knop.actief { background: var(--teal); color: white; border-color: var(--teal-d); }
-.tab-knop.actief.b { background: var(--blauw); border-color: var(--blauw-d); }
-.tab-knop.actief.p { background: var(--paars); border-color: var(--paars-d); }
+    .btn-row { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+    .btn {
+      padding: 0.6rem 1.2rem; border: none; border-radius: 8px;
+      font-family: 'Nunito', sans-serif; font-size: 0.9rem;
+      font-weight: 700; cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--teal); color: white; }
+    .btn-secondary { background: #e2e8f0; color: var(--donker); }
 
-/* ── Sections ── */
-.sectie { max-width: 920px; margin: 1rem auto; padding: 0 0.5rem; display: none; }
-.sectie.zichtbaar { display: block; }
+    .feedback {
+      padding: 0.75rem 1rem; border-radius: 8px;
+      font-size: 0.9rem; margin-top: 0.75rem; display: none; line-height: 1.5;
+    }
+    .feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; display: block; }
+    .feedback.fout { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block; }
 
-/* ── Cards ── */
-.kaart {
-  background: white; border-radius: 18px; padding: 1.5rem;
-  margin-bottom: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
-.kaart h2 { font-size: 1.2rem; font-weight: 900; margin-bottom: 1rem; }
-.kaart h3 { font-size: 1rem; font-weight: 800; margin: 1rem 0 0.4rem; color: var(--donker); }
-
-/* ── Theory blocks ── */
-.formule-box {
-  background: #f0faf7; border: 2px solid var(--teal); border-radius: 12px;
-  padding: 0.9rem 1.2rem; margin: 0.8rem 0; text-align: center;
-  font-size: 1.05rem; font-weight: 700; line-height: 1.7;
-}
-.formule-box.b { background: #eaf4fb; border-color: var(--blauw); }
-.formule-box.p { background: #f5eefb; border-color: var(--paars); }
-
-.voorbeeld {
-  background: #fffbf0; border-left: 4px solid var(--oranje);
-  padding: 0.75rem 1rem; border-radius: 0 10px 10px 0; margin: 0.6rem 0;
-  font-size: 0.92rem; line-height: 1.8;
-}
-.voorbeeld strong { color: var(--oranje); display: block; margin-bottom: 0.2rem; }
-
-.let-op {
-  background: #fef3f2; border-left: 4px solid var(--rood);
-  padding: 0.75rem 1rem; border-radius: 0 10px 10px 0; margin: 0.6rem 0;
-  font-size: 0.92rem; line-height: 1.7;
-}
-.let-op strong { color: var(--rood); display: block; margin-bottom: 0.2rem; }
-
-.tip {
-  background: #f0faf7; border-left: 4px solid var(--groen);
-  padding: 0.75rem 1rem; border-radius: 0 10px 10px 0; margin: 0.6rem 0;
-  font-size: 0.92rem; line-height: 1.7;
-}
-.tip strong { color: var(--groen-d); }
-
-/* ── Links / Videos ── */
-.link-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 0.75rem; margin-top: 1rem;
-}
-.link-kaart {
-  display: flex; flex-direction: column; gap: 0.3rem; padding: 0.9rem 1rem;
-  border-radius: 12px; text-decoration: none; background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 4px solid var(--teal);
-  transition: transform 0.15s;
-}
-.link-kaart:hover { transform: translateY(-3px); }
-.link-kaart.b { border-color: var(--blauw); }
-.link-kaart.r { border-color: #e53e3e; }
-.link-kaart .lk-titel { font-weight: 800; font-size: 0.88rem; color: var(--donker); }
-.link-kaart .lk-sub { font-size: 0.76rem; color: #718096; line-height: 1.4; }
-.lk-badge {
-  display: inline-block; font-size: 0.68rem; font-weight: 800;
-  padding: 0.15rem 0.55rem; border-radius: 99px; width: fit-content;
-}
-.lk-badge.yt { background: #ffe0e0; color: #c0392b; }
-.lk-badge.web { background: #e0f0ff; color: #2980b9; }
-
-/* ── Exercises ── */
-.niveau-rij { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.niveau-knop {
-  padding: 0.4rem 1.2rem; border-radius: 20px; border: 2px solid #e2e8f0;
-  font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 800;
-  cursor: pointer; background: white; transition: all 0.18s;
-}
-.niveau-knop.actief.basis { background: var(--groen); border-color: var(--groen-d); color: white; }
-.niveau-knop.actief.gevorderd { background: var(--oranje); border-color: #e67e22; color: white; }
-
-.onderwerp-rij { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
-.ond-knop {
-  padding: 0.35rem 0.9rem; border-radius: 16px; border: 2px solid #e2e8f0;
-  font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700;
-  cursor: pointer; background: white; color: var(--donker); transition: all 0.15s;
-}
-.ond-knop.actief { background: var(--donker); color: white; border-color: var(--donker); }
-
-.oef-box {
-  background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
-  padding: 1.5rem; text-align: center; margin-bottom: 1rem;
-}
-.vraag-tekst {
-  font-size: 1.1rem; font-weight: 700; line-height: 1.6; min-height: 3rem;
-  margin-bottom: 1rem;
-}
-
-.input-rij { display: flex; justify-content: center; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-.ant-input {
-  font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
-  padding: 0.5rem 1rem; border: 2px solid #cbd5e0; border-radius: 10px;
-  width: 140px; text-align: center; transition: border-color 0.2s;
-}
-.ant-input:focus { outline: none; border-color: var(--teal); }
-.ant-input.juist { border-color: var(--groen); background: #f0fff4; }
-.ant-input.fout { border-color: var(--rood); background: #fff5f5; }
-
-.ant-box {
-  display: none; background: #f0faf7; border: 2px solid var(--teal);
-  border-radius: 12px; padding: 1rem; margin: 0.8rem 0;
-  font-size: 0.95rem; font-weight: 700; color: var(--teal-d); text-align: left;
-}
-.ant-box.zichtbaar { display: block; }
-.ant-box.b { background: #eaf4fb; border-color: var(--blauw); color: var(--blauw-d); }
-.ant-box.p { background: #f5eefb; border-color: var(--paars); color: var(--paars-d); }
-
-.feedback-label {
-  display: inline-block; padding: 0.22rem 0.8rem; border-radius: 99px;
-  font-size: 0.85rem; font-weight: 800; margin-top: 0.4rem;
-}
-.feedback-label.ok { background: #d4edda; color: #155724; }
-.feedback-label.nee { background: #f8d7da; color: #721c24; }
-
-/* ── Buttons ── */
-.knop {
-  padding: 0.5rem 1.3rem; border-radius: 10px; border: none; cursor: pointer;
-  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 800;
-  transition: all 0.15s;
-}
-.knop.t { background: var(--teal); color: white; }
-.knop.t:hover { background: var(--teal-d); }
-.knop.b { background: var(--blauw); color: white; }
-.knop.b:hover { background: var(--blauw-d); }
-.knop.p { background: var(--paars); color: white; }
-.knop.p:hover { background: var(--paars-d); }
-.knop.s { background: #edf2f7; color: var(--donker); }
-.knop.s:hover { background: #e2e8f0; }
-.knop-rij { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
-
-/* ── Memory table ── */
-.wortel-tabel {
-  width: 100%; border-collapse: collapse; margin: 0.6rem 0;
-  font-size: 0.88rem; text-align: center;
-}
-.wortel-tabel th { background: var(--teal); color: white; padding: 0.4rem 0.6rem; }
-.wortel-tabel td { padding: 0.35rem 0.6rem; border-bottom: 1px solid #e2e8f0; }
-.wortel-tabel tr:hover td { background: #f0faf7; }
-
-/* ── Hulplijn SVG diagram ── */
-.diagram-rij { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 0.8rem 0; }
-.diagram-box { text-align: center; font-size: 0.8rem; font-weight: 700; color: #666; }
-
-/* ── Responsive ── */
-@media (max-width: 600px) {
-  header h1 { font-size: 1.5rem; }
-  .tab-knop { font-size: 0.75rem; padding: 0.4rem 0.7rem; }
-  .kaart { padding: 1rem; }
-  .vraag-tekst { font-size: 1rem; }
-  .wortel-tabel { font-size: 0.8rem; }
-}
-</style>
+    footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.8rem; }
+  </style>
 </head>
 <body>
 
 <header>
-  <a href="/huiswerk-oefenen/" class="terug">← Alle vakken</a>
   <h1>📐 Wiskunde</h1>
-  <p>Kwadraten · Wortels · Stelling van Pythagoras — 2 HAVO</p>
+  <p>Getal en Ruimte · 2 HAVO · Hoofdstuk 4</p>
 </header>
 
-<div class="scorebalk">
-  <div class="score-item goed">✓ Goed: <span id="sGoed">0</span></div>
-  <div class="score-item fout">✗ Fout: <span id="sFout">0</span></div>
+<div class="banner">📅 Proefwerk Wiskunde · 12 mei</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('uitleg', this)">📖 Uitleg</button>
+  <button class="tab-btn" onclick="showTab('par41', this)">§4.1 Oefeningen</button>
+  <button class="tab-btn" onclick="showTab('par42', this)">§4.2 Oefeningen</button>
+  <button class="tab-btn" onclick="showTab('par43', this)">§4.3 Oefeningen</button>
+</nav>
+
+<!-- UITLEG -->
+<div id="tab-uitleg" class="tab-content active">
+
+  <div class="uitleg-section">
+    <h2>§4.1 Kwadratische formules</h2>
+    <p>Een kwadratische formule heeft de vorm <strong>y = ax² + b</strong>. De grafiek is een <strong>parabool</strong>.</p>
+    <h3>Berg- of dalparabool?</h3>
+    <div class="rule-box">
+      <div class="formula">a &gt; 0 → dalparabool ∪ (laagste punt)</div>
+      <div class="formula">a &lt; 0 → bergparabool ∩ (hoogste punt)</div>
+    </div>
+    <p>Voorbeeld: y = 2x² + 3 → dalparabool (a = 2 &gt; 0)<br>
+    Voorbeeld: y = −3x² + 1 → bergparabool (a = −3 &lt; 0)</p>
+    <h3>y-coördinaat berekenen</h3>
+    <p>Vul x in de formule in. Bereken eerst x², dan vermenigvuldig met a, dan optellen met b.</p>
+    <div class="rule-box">
+      <p>y = −2x² + 5 voor x = 3:<br>
+      y = −2 · 3² + 5 = −2 · 9 + 5 = −18 + 5 = <strong>−13</strong></p>
+    </div>
+    <h3>Punt controleren op de grafiek</h3>
+    <p>Vul de x-coördinaat in de formule in. Klopt de uitkomst met de y-coördinaat? Dan ligt het punt op de grafiek.</p>
+    <div class="rule-box">
+      <p>Formule y = 3x² − 1, punt A(2, 11):<br>
+      y = 3 · 2² − 1 = 12 − 1 = 11 ✓ → A ligt op de grafiek.</p>
+    </div>
+  </div>
+
+  <div class="uitleg-section">
+    <h2>§4.2 Rekenen met wortels</h2>
+    <p>De wortel van een getal n is het getal dat je kwadrateert om n te krijgen. √25 = 5 want 5² = 25.</p>
+    <div class="warning-box">⚠️ <strong>De wortel van een negatief getal bestaat niet!</strong><br>
+    √−9 bestaat niet, want een getal maal zichzelf is nooit negatief.</div>
+    <h3>Worteltrekken zonder rekenmachine</h3>
+    <div class="rule-box">
+      <div class="formula">√(a · b) = √a · √b</div>
+      <p>Haakjes altijd eerst uitrekenen!<br>
+      √(64 + 36) = √100 = 10<br>
+      4·√9 + 3·√16 = 4·3 + 3·4 = 12 + 12 = 24<br>
+      √(9 · 16) = √9 · √16 = 3 · 4 = 12</p>
+    </div>
+    <h3>Kwadraten uit je hoofd</h3>
+    <div class="rule-box">
+      <p>1²=1 · 2²=4 · 3²=9 · 4²=16 · 5²=25<br>
+      6²=36 · 7²=49 · 8²=64 · 9²=81 · 10²=100<br>
+      11²=121 · 12²=144 · 13²=169 · 14²=196 · 15²=225</p>
+    </div>
+    <h3>(√a)² = a</h3>
+    <div class="rule-box">
+      <div class="formula">(√a)² = a</div>
+      <p>Voorbeeld: (√7)² = 7 &nbsp;&nbsp; (√5)² = 5</p>
+    </div>
+  </div>
+
+  <div class="uitleg-section">
+    <h2>§4.3 Wortelformules</h2>
+    <p>Een wortelformule heeft de vorm <strong>y = a · √x + b</strong>. De grafiek begint bij x = 0.</p>
+    <div class="warning-box">⚠️ <strong>x mag niet negatief zijn!</strong><br>
+    Bij y = √x mag je geen negatieve x invullen.</div>
+    <h3>y berekenen bij gegeven x</h3>
+    <div class="rule-box">
+      <p>y = 3·√x + 2 voor x = 16:<br>
+      y = 3·√16 + 2 = 3·4 + 2 = <strong>14</strong></p>
+    </div>
+    <h3>Handige x-waarden voor tabel</h3>
+    <div class="rule-box">
+      <p>Kies kwadraten: x = 0, 1, 4, 9, 16, 25<br>
+      Dan is √x altijd een geheel getal.</p>
+    </div>
+  </div>
+
 </div>
 
-<div class="tabs-wrap">
-  <div class="tabs">
-    <button class="tab-knop actief"        onclick="toonTab('theorie', this, '')">📚 Theorie</button>
-    <button class="tab-knop"               onclick="toonTab('h42',     this, '')">§4.2 Wortels</button>
-    <button class="tab-knop"               onclick="toonTab('h51',     this, 'b')">§5.1 Pythagoras</button>
-    <button class="tab-knop"               onclick="toonTab('h52',     this, 'b')">§5.2 Berekeningen</button>
-    <button class="tab-knop"               onclick="toonTab('h53',     this, 'b')">§5.3 Toepassingen</button>
-    <button class="tab-knop"               onclick="toonTab('h55',     this, 'p')">§5.5 Ruimte</button>
+<!-- §4.1 OEFENINGEN -->
+<div id="tab-par41" class="tab-content">
+
+  <div class="oefening-card">
+    <h2>Berg of dal? (§4.1)</h2>
+    <div class="score-bar"><span id="score41a">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog41a" style="width:0%"></div></div>
+    <div class="vraag-box"><div id="formule41a">–</div></div>
+    <div class="antwoord-btns">
+      <button class="antwoord-btn" onclick="checkBergDal('bergparabool', this)">Bergparabool ∩</button>
+      <button class="antwoord-btn" onclick="checkBergDal('dalparabool', this)">Dalparabool ∪</button>
+    </div>
+    <div class="feedback" id="fb41a"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="volgBergDal" onclick="nextBergDal()" style="display:none">Volgende →</button>
+    </div>
   </div>
+
+  <div class="oefening-card">
+    <h2>Bereken y (§4.1)</h2>
+    <div class="score-bar"><span id="score41b">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog41b" style="width:0%"></div></div>
+    <div class="vraag-box" id="vraag41b">–</div>
+    <input type="number" class="antwoord-input" id="inp41b" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkBerekenY()">
+    <div class="feedback" id="fb41b"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkBerekenY()">Controleer</button>
+      <button class="btn btn-secondary" onclick="nextBerekenY()">Overslaan</button>
+    </div>
+  </div>
+
+  <div class="oefening-card">
+    <h2>Ligt het punt op de grafiek? (§4.1)</h2>
+    <div class="score-bar"><span id="score41c">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog41c" style="width:0%"></div></div>
+    <div class="vraag-box" id="vraag41c">–</div>
+    <div class="antwoord-btns">
+      <button class="antwoord-btn" onclick="checkPuntOp('Ja', this)">Ja</button>
+      <button class="antwoord-btn" onclick="checkPuntOp('Nee', this)">Nee</button>
+    </div>
+    <div class="feedback" id="fb41c"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="volgPuntOp" onclick="nextPuntOp()" style="display:none">Volgende →</button>
+    </div>
+  </div>
+
 </div>
 
-<!-- ═══════════════════════════ THEORIE ═══════════════════════════ -->
-<section id="theorie" class="sectie zichtbaar">
+<!-- §4.2 OEFENINGEN -->
+<div id="tab-par42" class="tab-content">
 
-  <!-- H4.2 -->
-  <div class="kaart">
-    <h2>📗 H4.2 — Kwadraten en Wortels</h2>
-
-    <h3>Theorie A: Wortels op de rekenmachine</h3>
-    <p>√<em>n</em> is de zijde van een vierkant met oppervlakte <em>n</em>. De meeste wortels zijn irrationele getallen — de decimalen gaan eindeloos door.</p>
-
-    <div class="formule-box">
-      √2 ≈ 1,414 &nbsp;&nbsp; √3 ≈ 1,732 &nbsp;&nbsp; √5 ≈ 2,236 &nbsp;&nbsp; √10 ≈ 3,162
-    </div>
-
-    <div class="tip">
-      <strong>Tip:</strong> Gebruik het ≈-teken als je afrondt. Gebruik = alleen als het antwoord <em>precies</em> klopt (bijv. √25 = 5).
-    </div>
-
-    <h3>Theorie B: Worteltrekken en rekenvolgorde</h3>
-    <p>Worteltrekken staat gelijk aan vermenigvuldigen en delen in de rekenvolgorde — maar bewerkingen <em>onder</em> het wortelteken komen altijd eerst.</p>
-
-    <div class="voorbeeld">
-      <strong>Voorbeelden:</strong>
-      a)&nbsp; √9 + 16 = 3 + 16 = <strong>19</strong> &nbsp;&nbsp;(wortel alleen van 9)<br>
-      b)&nbsp; √(9 + 16) = √25 = <strong>5</strong> &nbsp;&nbsp;(alles onder de wortel)<br>
-      c)&nbsp; 4√9 = 4 · 3 = <strong>12</strong> &nbsp;&nbsp;(coëfficiënt × wortel)<br>
-      d)&nbsp; 4√9 + 3√16 = 4·3 + 3·4 = 12 + 12 = <strong>24</strong>
-    </div>
-
-    <div class="let-op">
-      <strong>Let op: wortel van negatief getal bestaat NIET!</strong>
-      √(−16) bestaat niet ✗ &nbsp;&nbsp; maar &nbsp;&nbsp; −√16 = −4 ✓<br>
-      Ook: √a + √b ≠ √(a+b) — wortels zomaar optellen mag <em>niet</em>!
-    </div>
-
-    <h3>Vaste wortels uit je hoofd</h3>
-    <table class="wortel-tabel">
-      <tr><th>n</th><th>1</th><th>4</th><th>9</th><th>16</th><th>25</th><th>36</th><th>49</th><th>64</th><th>81</th><th>100</th><th>121</th><th>144</th><th>169</th><th>196</th><th>225</th></tr>
-      <tr><td><strong>√n</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
-    </table>
-  </div>
-
-  <!-- H5 -->
-  <div class="kaart">
-    <h2>📘 H5 — Stelling van Pythagoras</h2>
-
-    <h3>§5.1 De stelling van Pythagoras</h3>
-    <p>In een <strong>rechthoekige driehoek</strong> zijn de twee korte zijden de <strong>rechthoekszijden</strong> (ook: benen). De langste zijde tegenover de rechte hoek heet de <strong>schuine zijde</strong> of <strong>hypotenusa</strong>.</p>
-
-    <div class="formule-box b">
-      📐 <strong>Stelling van Pythagoras:</strong><br>
-      (rechthoekszijde)² + (andere rechthoekszijde)² = (schuine zijde)²<br><br>
-      Kortweg: &nbsp; <strong>a² + b² = c²</strong> &nbsp; (c is de schuine zijde)
-    </div>
-
-    <div class="voorbeeld">
-      <strong>Schuine zijde berekenen — ∠C = 90°, a = 3 cm, b = 4 cm:</strong>
-      c² = a² + b² = 3² + 4² = 9 + 16 = 25<br>
-      c = √25 = <strong>5 cm</strong>
-    </div>
-
-    <h3>§5.2 — Rechthoekszijde berekenen</h3>
-    <div class="voorbeeld">
-      <strong>Rechthoekszijde berekenen — ∠Q = 90°, c = 5 cm, a = 3 cm:</strong>
-      a² + b² = c²  →  3² + b² = 5²  →  b² = 25 − 9 = 16  →  b = <strong>4 cm</strong>
-    </div>
-
-    <h3>§5.2 — Afstand in een assenstelsel</h3>
-    <div class="voorbeeld">
-      <strong>Afstand A(2, 1) en B(−3, −2):</strong>
-      Δx = |2−(−3)| = 5 &nbsp;|&nbsp; Δy = |1−(−2)| = 3<br>
-      AB = √(5² + 3²) = √34 ≈ <strong>5,83</strong> (geen eenheid bij roosterpunten)
-    </div>
-
-    <h3>§5.2 — Omgekeerde stelling van Pythagoras</h3>
-    <div class="formule-box b">
-      Als a² + b² = c² dan is de hoek tegenover de <em>langste</em> zijde een <strong>rechte hoek</strong>.
-    </div>
-
-    <div class="voorbeeld">
-      <strong>Controleer of driehoek met zijden 24, 7 en 25 rechthoekig is:</strong>
-      24² + 7² = 576 + 49 = 625 = 25² ✓ → Rechte hoek tegenover de 25!
-    </div>
-
-    <h3>§5.3 — Hulplijnen tekenen</h3>
-    <p>Je mag Pythagoras <strong>alleen</strong> gebruiken in rechthoekige driehoeken. Teken hulplijnen om een rechte hoek te maken:</p>
-    <ul style="margin: 0.5rem 0 0 1.5rem; line-height: 1.9;">
-      <li><strong>Gelijkbenige driehoek:</strong> teken de hoogte vanuit de top op de basis (halveert de basis)</li>
-      <li><strong>Rechthoekig trapezium:</strong> teken een loodlijn van de korte zijde</li>
-    </ul>
-    <div class="voorbeeld">
-      <strong>Hoogte gelijkbenige driehoek — benen = 10 cm, basis = 12 cm:</strong>
-      Halve basis = 6 cm<br>
-      h² = 10² − 6² = 100 − 36 = 64 → h = <strong>8 cm</strong>
-    </div>
-
-    <h3>§5.5 — Pythagoras in de ruimte</h3>
-    <p>Een <strong>diagonaalvlak</strong> van een balk is een rechthoekige doorsnede. De diagonaal van dat vlak heet een <strong>lichaamsdiagonaal</strong>.</p>
-
-    <div class="formule-box p">
-      <strong>Uitgebreide stelling van Pythagoras (balk):</strong><br>
-      lichaamsdiagonaal² = lengte² + breedte² + hoogte²
-    </div>
-
-    <div class="voorbeeld">
-      <strong>Balk 6 × 3 × 4 cm — bereken lichaamsdiagonaal CE:</strong>
-      Stap 1 (grondvlak): AC² = 6² + 3² = 36 + 9 = 45<br>
-      Stap 2 (ruimte): CE² = AC² + 4² = 45 + 16 = 61<br>
-      CE = √61 ≈ <strong>7,8 cm</strong><br>
-      Of direct: d = √(6² + 3² + 4²) = √61 ≈ 7,8 cm
-    </div>
-
-    <h3>Werkschema: Lengten berekenen</h3>
-    <ol style="margin-left: 1.5rem; line-height: 2; margin-top: 0.4rem;">
-      <li>Maak een <strong>schets</strong> van de situatie</li>
-      <li>Zoek de <strong>rechthoekige driehoeken</strong> — teken zo nodig hulplijnen</li>
-      <li>Verwerk de gegevens en zet letters bij de punten</li>
-      <li>Bereken de gevraagde lengte met de <strong>stelling van Pythagoras</strong></li>
-    </ol>
-    <div class="tip" style="margin-top:0.8rem;">
-      <strong>Tip:</strong> De schuine zijde is <em>altijd</em> de langste zijde. Gebruik dat als controle!
+  <div class="oefening-card">
+    <h2>Bereken de wortel (§4.2)</h2>
+    <div class="score-bar"><span id="score42a">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog42a" style="width:0%"></div></div>
+    <div class="vraag-box" id="vraag42a">–</div>
+    <input type="number" class="antwoord-input" id="inp42a" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkWortel()">
+    <div class="feedback" id="fb42a"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkWortel()">Controleer</button>
+      <button class="btn btn-secondary" onclick="nextWortel()">Overslaan</button>
     </div>
   </div>
 
-  <!-- Links / Video's -->
-  <div class="kaart">
-    <h2>🎥 Uitlegvideo's &amp; Handige links</h2>
-    <div class="link-grid">
-      <a href="https://www.wiskundeacademie.nl/havo-2-vwo-2/rekenen-met-wortels" target="_blank" class="link-kaart">
-        <span class="lk-titel">Wortels rekenen</span>
-        <span class="lk-sub">WiskundeAcademie — uitleg &amp; video's speciaal voor HAVO/VWO 2</span>
-        <span class="lk-badge web">Website + video</span>
-      </a>
-      <a href="https://www.youtube.com/results?search_query=worteltrekken+wiskunde+havo+vwo+2+uitleg" target="_blank" class="link-kaart r">
-        <span class="lk-titel">▶ YouTube: Wortels</span>
-        <span class="lk-sub">Zoek naar uitlegvideo's worteltrekken HAVO/VWO 2</span>
-        <span class="lk-badge yt">YouTube zoeken</span>
-      </a>
-      <a href="https://www.wiskundeacademie.nl/havo-2-vwo-2/wat-is-de-stelling-van-pythagoras" target="_blank" class="link-kaart b">
-        <span class="lk-titel">Stelling van Pythagoras</span>
-        <span class="lk-sub">WiskundeAcademie — wat is het, hoe gebruik je het?</span>
-        <span class="lk-badge web">Website + video</span>
-      </a>
-      <a href="https://www.youtube.com/results?search_query=stelling+van+pythagoras+uitleg+havo+vwo+2+getal+ruimte" target="_blank" class="link-kaart r">
-        <span class="lk-titel">▶ YouTube: Pythagoras</span>
-        <span class="lk-sub">Video's stelling van Pythagoras — HAVO 2 / VWO 2</span>
-        <span class="lk-badge yt">YouTube zoeken</span>
-      </a>
-      <a href="https://www.wiskundeacademie.nl/havo-2-vwo-2/pythagoras-in-de-praktijk-hulplijnen-tekenen" target="_blank" class="link-kaart b">
-        <span class="lk-titel">Hulplijnen tekenen</span>
-        <span class="lk-sub">Pythagoras toepassen in praktijkproblemen</span>
-        <span class="lk-badge web">Website + video</span>
-      </a>
-      <a href="https://www.youtube.com/results?search_query=pythagoras+ruimte+lichaamsdiagonaal+balk+uitleg+havo" target="_blank" class="link-kaart r">
-        <span class="lk-titel">▶ YouTube: Pythagoras 3D</span>
-        <span class="lk-sub">Diagonaalvlakken &amp; lichaamsdiagonalen in een balk</span>
-        <span class="lk-badge yt">YouTube zoeken</span>
-      </a>
+  <div class="oefening-card">
+    <h2>Bestaat de wortel? (§4.2)</h2>
+    <div class="score-bar"><span id="score42b">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog42b" style="width:0%"></div></div>
+    <div class="vraag-box" id="vraag42b">–</div>
+    <div class="antwoord-btns">
+      <button class="antwoord-btn" onclick="checkBestaatWortel('Ja', this)">Ja</button>
+      <button class="antwoord-btn" onclick="checkBestaatWortel('Nee', this)">Nee</button>
+    </div>
+    <div class="feedback" id="fb42b"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="volgBestaat" onclick="nextBestaat()" style="display:none">Volgende →</button>
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════ §4.2 WORTELS ═══════════════════════════ -->
-<section id="h42" class="sectie">
-  <div class="kaart">
-    <h2>§4.2 Oefeningen — Rekenen met Wortels</h2>
-
-    <div class="niveau-rij">
-      <button class="niveau-knop actief basis" onclick="setNiveau('h42','basis',this)">⭐ Niveau 1 — Basis</button>
-      <button class="niveau-knop gevorderd"    onclick="setNiveau('h42','gevorderd',this)">⭐⭐ Niveau 2 — Gevorderd</button>
-    </div>
-    <div class="onderwerp-rij" id="h42-ond">
-      <button class="ond-knop actief" onclick="setOnderwerp('h42','afronden',this)">Wortels afronden</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h42','worteltrekken',this)">Vaste wortels</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h42','bewerkingen',this)">Bewerkingen</button>
-    </div>
-
-    <div class="oef-box">
-      <div class="vraag-tekst" id="h42-vraag">Klik op "Nieuwe vraag" om te beginnen!</div>
-      <div class="input-rij">
-        <input type="text" class="ant-input" id="h42-inv" placeholder="Antwoord..." onkeydown="if(event.key==='Enter')controleer('h42')">
-        <button class="knop t" onclick="controleer('h42')">Controleer</button>
-      </div>
-      <div id="h42-fb"></div>
-      <div class="ant-box" id="h42-ant"></div>
-      <div class="knop-rij">
-        <button class="knop s" onclick="toonAnt('h42')">Toon antwoord</button>
-        <button class="knop t" onclick="nieuweVraag('h42')">Nieuwe vraag →</button>
-      </div>
-    </div>
-
-    <div class="kaart" style="background:#f0faf7;border:1px solid #b2dfdb;padding:1rem;">
-      <h3>💡 Handige feiten</h3>
-      <ul style="margin-left:1.5rem;line-height:2;font-size:0.88rem;">
-        <li>Vaste wortels: √1=1, √4=2, √9=3, √16=4, √25=5 ... √225=15</li>
-        <li>√a · √a = a &nbsp;(wortel kwadrateren geeft het getal terug)</li>
-        <li>4√9 = 4 · √9 = 4 · 3 = 12</li>
-        <li>√(a+b) ≠ √a + √b &nbsp;(MAG NIET — doe bewerkingen eerst!)</li>
-        <li>Negatief getal: −√16 = −4 ✓ maar √(−16) bestaat niet ✗</li>
-      </ul>
+  <div class="oefening-card">
+    <h2>Bereken zonder rekenmachine (§4.2)</h2>
+    <div class="score-bar"><span id="score42c">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog42c" style="width:0%"></div></div>
+    <div class="vraag-box" id="vraag42c">–</div>
+    <input type="number" class="antwoord-input" id="inp42c" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkWortelRek()">
+    <div class="feedback" id="fb42c"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkWortelRek()">Controleer</button>
+      <button class="btn btn-secondary" onclick="nextWortelRek()">Overslaan</button>
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════ §5.1 PYTHAGORAS ═══════════════════════════ -->
-<section id="h51" class="sectie">
-  <div class="kaart">
-    <h2>§5.1 Oefeningen — Stelling van Pythagoras</h2>
+</div>
 
-    <div class="niveau-rij">
-      <button class="niveau-knop actief basis" onclick="setNiveau('h51','basis',this)">⭐ Niveau 1 — Basis</button>
-      <button class="niveau-knop gevorderd"    onclick="setNiveau('h51','gevorderd',this)">⭐⭐ Niveau 2 — Gevorderd</button>
-    </div>
-    <div class="onderwerp-rij" id="h51-ond">
-      <button class="ond-knop actief" onclick="setOnderwerp('h51','schuine',this)">Schuine zijde</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h51','herkennen',this)">Rechthoekig of niet?</button>
-    </div>
+<!-- §4.3 OEFENINGEN -->
+<div id="tab-par43" class="tab-content">
 
-    <div class="oef-box">
-      <div class="vraag-tekst" id="h51-vraag">Klik op "Nieuwe vraag" om te beginnen!</div>
-      <div class="input-rij">
-        <input type="text" class="ant-input" id="h51-inv" placeholder="Antwoord..." onkeydown="if(event.key==='Enter')controleer('h51')">
-        <button class="knop b" onclick="controleer('h51')">Controleer</button>
-      </div>
-      <div id="h51-fb"></div>
-      <div class="ant-box b" id="h51-ant"></div>
-      <div class="knop-rij">
-        <button class="knop s" onclick="toonAnt('h51')">Toon antwoord</button>
-        <button class="knop b" onclick="nieuweVraag('h51')">Nieuwe vraag →</button>
-      </div>
-    </div>
-
-    <div class="kaart" style="background:#eaf4fb;border:1px solid #aed6f1;padding:1rem;">
-      <h3>💡 Aanpak schuine zijde</h3>
-      <ol style="margin-left:1.5rem;line-height:2;font-size:0.88rem;">
-        <li>Schrijf op: a² + b² = c²</li>
-        <li>Vul de twee benen in voor a en b</li>
-        <li>Bereken c² = a² + b²</li>
-        <li>Neem de wortel: c = √(a²+b²)</li>
-        <li>Controleer: is c de langste zijde? ✓</li>
-      </ol>
+  <div class="oefening-card">
+    <h2>Bereken y in een wortelformule (§4.3)</h2>
+    <div class="score-bar"><span id="score43a">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog43a" style="width:0%"></div></div>
+    <div class="vraag-box" id="vraag43a">–</div>
+    <input type="number" class="antwoord-input" id="inp43a" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkWortelFormule()">
+    <div class="feedback" id="fb43a"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkWortelFormule()">Controleer</button>
+      <button class="btn btn-secondary" onclick="nextWortelFormule()">Overslaan</button>
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════ §5.2 BEREKENINGEN ═══════════════════════════ -->
-<section id="h52" class="sectie">
-  <div class="kaart">
-    <h2>§5.2 Oefeningen — Berekeningen</h2>
-
-    <div class="niveau-rij">
-      <button class="niveau-knop actief basis" onclick="setNiveau('h52','basis',this)">⭐ Niveau 1 — Basis</button>
-      <button class="niveau-knop gevorderd"    onclick="setNiveau('h52','gevorderd',this)">⭐⭐ Niveau 2 — Gevorderd</button>
+  <div class="oefening-card">
+    <h2>Mag x worden ingevuld? (§4.3)</h2>
+    <div class="score-bar"><span id="score43b">Score: 0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog43b" style="width:0%"></div></div>
+    <div class="vraag-box" id="vraag43b">–</div>
+    <div class="antwoord-btns">
+      <button class="antwoord-btn" onclick="checkMagX('Ja', this)">Ja</button>
+      <button class="antwoord-btn" onclick="checkMagX('Nee', this)">Nee</button>
     </div>
-    <div class="onderwerp-rij" id="h52-ond">
-      <button class="ond-knop actief" onclick="setOnderwerp('h52','rechthoekszijde',this)">Rechthoekszijde</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h52','assenstelsel',this)">Afstand (assenstelsel)</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h52','omgekeerd',this)">Omgekeerde stelling</button>
-    </div>
-
-    <div class="oef-box">
-      <div class="vraag-tekst" id="h52-vraag">Klik op "Nieuwe vraag" om te beginnen!</div>
-      <div class="input-rij">
-        <input type="text" class="ant-input" id="h52-inv" placeholder="Antwoord..." onkeydown="if(event.key==='Enter')controleer('h52')">
-        <button class="knop b" onclick="controleer('h52')">Controleer</button>
-      </div>
-      <div id="h52-fb"></div>
-      <div class="ant-box b" id="h52-ant"></div>
-      <div class="knop-rij">
-        <button class="knop s" onclick="toonAnt('h52')">Toon antwoord</button>
-        <button class="knop b" onclick="nieuweVraag('h52')">Nieuwe vraag →</button>
-      </div>
-    </div>
-
-    <div class="kaart" style="background:#eaf4fb;border:1px solid #aed6f1;padding:1rem;">
-      <h3>💡 Aanpak rechthoekszijde</h3>
-      <p style="font-size:0.88rem;line-height:1.8;">
-        Schrijf op: a² + b² = c² &nbsp;→&nbsp; vul hypotenusa in voor c &nbsp;→&nbsp; los op voor de onbekende been.<br>
-        Voorbeeld: c=5, a=3 → 3² + b² = 5² → b² = 25−9 = 16 → b = 4
-      </p>
+    <div class="feedback" id="fb43b"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="volgMagX" onclick="nextMagX()" style="display:none">Volgende →</button>
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════ §5.3 TOEPASSINGEN ═══════════════════════════ -->
-<section id="h53" class="sectie">
-  <div class="kaart">
-    <h2>§5.3 Oefeningen — Pythagoras Toepassen</h2>
+</div>
 
-    <div class="niveau-rij">
-      <button class="niveau-knop actief basis" onclick="setNiveau('h53','basis',this)">⭐ Niveau 1 — Basis</button>
-      <button class="niveau-knop gevorderd"    onclick="setNiveau('h53','gevorderd',this)">⭐⭐ Niveau 2 — Gevorderd</button>
-    </div>
-    <div class="onderwerp-rij" id="h53-ond">
-      <button class="ond-knop actief" onclick="setOnderwerp('h53','hoogte',this)">Hoogte driehoek</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h53','toepassing',this)">Toepassingen</button>
-    </div>
-
-    <div class="oef-box">
-      <div class="vraag-tekst" id="h53-vraag">Klik op "Nieuwe vraag" om te beginnen!</div>
-      <div class="input-rij">
-        <input type="text" class="ant-input" id="h53-inv" placeholder="Antwoord..." onkeydown="if(event.key==='Enter')controleer('h53')">
-        <button class="knop b" onclick="controleer('h53')">Controleer</button>
-      </div>
-      <div id="h53-fb"></div>
-      <div class="ant-box b" id="h53-ant"></div>
-      <div class="knop-rij">
-        <button class="knop s" onclick="toonAnt('h53')">Toon antwoord</button>
-        <button class="knop b" onclick="nieuweVraag('h53')">Nieuwe vraag →</button>
-      </div>
-    </div>
-
-    <div class="kaart" style="background:#eaf4fb;border:1px solid #aed6f1;padding:1rem;">
-      <h3>💡 Gelijkbenige driehoek</h3>
-      <p style="font-size:0.88rem;line-height:1.8;">
-        Teken hoogte vanuit top → halveert de basis.<br>
-        h² = been² − (½·basis)² → h = √(been² − (½·basis)²)
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════ §5.5 RUIMTE ═══════════════════════════ -->
-<section id="h55" class="sectie">
-  <div class="kaart">
-    <h2>§5.5 Oefeningen — Pythagoras in de Ruimte</h2>
-
-    <div class="niveau-rij">
-      <button class="niveau-knop actief basis" onclick="setNiveau('h55','basis',this)">⭐ Niveau 1 — Basis</button>
-      <button class="niveau-knop gevorderd"    onclick="setNiveau('h55','gevorderd',this)">⭐⭐ Niveau 2 — Gevorderd</button>
-    </div>
-    <div class="onderwerp-rij" id="h55-ond">
-      <button class="ond-knop actief" onclick="setOnderwerp('h55','lichaamsdiag',this)">Lichaamsdiagonaal</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h55','diagonaalvlak',this)">Grondvlakdiagonaal</button>
-      <button class="ond-knop"        onclick="setOnderwerp('h55','kubus',this)">Kubus</button>
-    </div>
-
-    <div class="oef-box">
-      <div class="vraag-tekst" id="h55-vraag">Klik op "Nieuwe vraag" om te beginnen!</div>
-      <div class="input-rij">
-        <input type="text" class="ant-input" id="h55-inv" placeholder="Antwoord..." onkeydown="if(event.key==='Enter')controleer('h55')">
-        <button class="knop p" onclick="controleer('h55')">Controleer</button>
-      </div>
-      <div id="h55-fb"></div>
-      <div class="ant-box p" id="h55-ant"></div>
-      <div class="knop-rij">
-        <button class="knop s" onclick="toonAnt('h55')">Toon antwoord</button>
-        <button class="knop p" onclick="nieuweVraag('h55')">Nieuwe vraag →</button>
-      </div>
-    </div>
-
-    <div class="kaart" style="background:#f5eefb;border:1px solid #c39bd3;padding:1rem;">
-      <h3>💡 Methode: lichaamsdiagonaal</h3>
-      <p style="font-size:0.88rem;line-height:2;">
-        <strong>Stap 1:</strong> Bereken de grondvlakdiagonaal d₁² = l² + b²<br>
-        <strong>Stap 2:</strong> Bereken de lichaamsdiagonaal d² = d₁² + h²<br>
-        Of direct: <strong>d² = l² + b² + h²</strong>
-      </p>
-    </div>
-  </div>
-</section>
-
-<footer style="text-align:center;color:#a0aec0;padding:2rem 0;font-size:0.83rem;font-weight:600;">
-  Gemaakt voor Sam · 2 HAVO · Getal en Ruimte 12e editie · H4.2 &amp; H5
-</footer>
+<footer>Gemaakt voor Sam · 2 HAVO · Getal en Ruimte · H4.1, H4.2 & H4.3</footer>
 
 <script>
-// ═══════════════════════════ STAAT ═══════════════════════════
-const S = {
-  goed: 0, fout: 0,
-  niveau:    { h42:'basis', h51:'basis', h52:'basis', h53:'basis', h55:'basis' },
-  onderwerp: { h42:'afronden', h51:'schuine', h52:'rechthoekszijde', h53:'hoogte', h55:'lichaamsdiag' },
-  antwoord:  { h42:null, h51:null, h52:null, h53:null, h55:null },
-  uitleg:    { h42:'', h51:'', h52:'', h53:'', h55:'' },
-  numeriek:  { h42:true, h51:true, h52:true, h53:true, h55:true }
-};
+// ── Utility ──────────────────────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
 
-// ═══════════════════════════ HELPERS ═══════════════════════════
-function ri(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
-function kies(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-function afronden(n,d){ return Math.round(n*Math.pow(10,d))/Math.pow(10,d); }
-function komma(n){ return String(n).replace('.',','); }
+function fmtFormule(a, b) {
+  let f = 'y = ';
+  if (a === 1) f += 'x²';
+  else if (a === -1) f += '−x²';
+  else if (a < 0) f += '−' + Math.abs(a) + 'x²';
+  else f += a + 'x²';
+  if (b > 0) f += ' + ' + b;
+  else if (b < 0) f += ' − ' + Math.abs(b);
+  return f;
+}
 
-const KW  = [1,4,9,16,25,36,49,64,81,100,121,144,169,196,225];
-const KW2 = [400,625,900,1024,1225,1600,2025,2500,3600,6400,10000,16900];
+function fmtX(x) { return x < 0 ? '(' + x + ')' : '' + x; }
 
-// ═══════════════════════════ GENERATOREN §4.2 ═══════════════════════════
+function upd(scoreId, progId, s) {
+  document.getElementById(scoreId).textContent = 'Score: ' + s.c + ' / ' + s.t;
+  document.getElementById(progId).style.width = (s.t > 0 ? Math.round(s.c / s.t * 100) : 0) + '%';
+}
 
-function gen_h42_afronden(niv){
-  let n, d;
-  if(niv==='basis'){
-    n = kies([2,3,5,6,7,8,10,11,12,13,14,15,17,18,19,20,21,22,23,24,26,27,29,30]);
-    d = ri(1,3);
+// ── §4.1-A Berg of dal ───────────────────────────────────────
+let bd = {}, s41a = {c:0,t:0};
+function genBergDal() {
+  const av = [-5,-4,-3,-2,-1,1,2,3,4,5];
+  const a = av[Math.floor(Math.random()*av.length)];
+  const b = Math.floor(Math.random()*21)-10;
+  bd = { a, answer: a>0?'dalparabool':'bergparabool', f: fmtFormule(a,b) };
+  document.getElementById('formule41a').textContent = bd.f;
+  document.getElementById('fb41a').className = 'feedback';
+  document.getElementById('volgBergDal').style.display = 'none';
+  document.querySelectorAll('#tab-par41 .oefening-card:nth-child(1) .antwoord-btn')
+    .forEach(b => b.className = 'antwoord-btn');
+}
+function checkBergDal(ans, btn) {
+  s41a.t++; const ok = ans === bd.answer; if(ok) s41a.c++;
+  upd('score41a','prog41a',s41a);
+  btn.classList.add(ok ? 'correct' : 'fout');
+  const fb = document.getElementById('fb41a');
+  fb.className = 'feedback ' + (ok?'correct':'fout');
+  fb.textContent = (ok?'✓ Juist! ':'✗ Fout. ') + 'a = ' + bd.a + (bd.a>0?' > 0':' < 0') + ' → ' + bd.answer;
+  document.getElementById('volgBergDal').style.display = 'inline-block';
+}
+function nextBergDal() { genBergDal(); }
+
+// ── §4.1-B Bereken y ─────────────────────────────────────────
+let by = {}, s41b = {c:0,t:0};
+function genBerekenY() {
+  const av = [-4,-3,-2,-1,1,2,3,4];
+  const a = av[Math.floor(Math.random()*av.length)];
+  const b = Math.floor(Math.random()*11)-5;
+  const xv = [-4,-3,-2,-1,0,1,2,3,4];
+  const x = xv[Math.floor(Math.random()*xv.length)];
+  const y = a*x*x+b;
+  by = {a,b,x,y,f:fmtFormule(a,b)};
+  document.getElementById('vraag41b').innerHTML = by.f + '<br>Bereken y voor x = ' + x;
+  const inp = document.getElementById('inp41b');
+  inp.value=''; inp.className='antwoord-input';
+  document.getElementById('fb41b').className='feedback';
+  inp.focus();
+}
+function checkBerekenY() {
+  const v = parseFloat(document.getElementById('inp41b').value);
+  if(isNaN(v)) return;
+  s41b.t++; const ok = v===by.y; if(ok) s41b.c++;
+  upd('score41b','prog41b',s41b);
+  document.getElementById('inp41b').className='antwoord-input '+(ok?'correct':'fout');
+  const fb=document.getElementById('fb41b');
+  fb.className='feedback '+(ok?'correct':'fout');
+  const bSign = by.b<0?' − ':' + ';
+  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')
+    +'y = '+by.a+'·'+fmtX(by.x)+'²'+bSign+Math.abs(by.b)
+    +' = '+by.a+'·'+by.x*by.x+bSign+Math.abs(by.b)+' = '+by.y;
+  setTimeout(nextBerekenY,1800);
+}
+function nextBerekenY() { genBerekenY(); }
+
+// ── §4.1-C Punt op grafiek ───────────────────────────────────
+let po = {}, s41c = {c:0,t:0};
+function genPuntOp() {
+  const av = [-3,-2,-1,1,2,3];
+  const a = av[Math.floor(Math.random()*av.length)];
+  const b = Math.floor(Math.random()*11)-5;
+  const x = Math.floor(Math.random()*7)-3;
+  const yC = a*x*x+b;
+  const correct = Math.random()>0.5;
+  const offset = correct ? 0 : (Math.random()>0.5?1:-1)*(Math.floor(Math.random()*3)+1);
+  const y = yC+offset;
+  po = {a,b,x,y,yC,answer:correct?'Ja':'Nee',f:fmtFormule(a,b)};
+  document.getElementById('vraag41c').innerHTML = po.f+'<br>Ligt punt A('+x+', '+y+') op de grafiek?';
+  document.getElementById('fb41c').className='feedback';
+  document.getElementById('volgPuntOp').style.display='none';
+  document.querySelectorAll('#tab-par41 .oefening-card:nth-child(3) .antwoord-btn')
+    .forEach(b=>b.className='antwoord-btn');
+}
+function checkPuntOp(ans, btn) {
+  s41c.t++; const ok=ans===po.answer; if(ok) s41c.c++;
+  upd('score41c','prog41c',s41c);
+  btn.classList.add(ok?'correct':'fout');
+  const bSign = po.b<0?' − ':' + ';
+  const fb=document.getElementById('fb41c');
+  fb.className='feedback '+(ok?'correct':'fout');
+  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')
+    +po.a+'·'+fmtX(po.x)+'²'+bSign+Math.abs(po.b)+' = '+po.yC
+    +(po.answer==='Ja'?' = '+po.y+' ✓':' ≠ '+po.y);
+  document.getElementById('volgPuntOp').style.display='inline-block';
+}
+function nextPuntOp() { genPuntOp(); }
+
+// ── §4.2-A Bereken wortel ────────────────────────────────────
+let wr = {}, s42a = {c:0,t:0};
+function genWortel() {
+  const sq=[1,4,9,16,25,36,49,64,81,100,121,144,169,196,225];
+  const n2=sq[Math.floor(Math.random()*sq.length)];
+  wr={n2,answer:Math.sqrt(n2)};
+  document.getElementById('vraag42a').textContent='√'+n2+' = ?';
+  const inp=document.getElementById('inp42a');
+  inp.value=''; inp.className='antwoord-input';
+  document.getElementById('fb42a').className='feedback';
+  inp.focus();
+}
+function checkWortel() {
+  const v=parseFloat(document.getElementById('inp42a').value);
+  if(isNaN(v)) return;
+  s42a.t++; const ok=Math.abs(v-wr.answer)<0.01; if(ok) s42a.c++;
+  upd('score42a','prog42a',s42a);
+  document.getElementById('inp42a').className='antwoord-input '+(ok?'correct':'fout');
+  const fb=document.getElementById('fb42a');
+  fb.className='feedback '+(ok?'correct':'fout');
+  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')+'√'+wr.n2+' = '+wr.answer;
+  setTimeout(nextWortel,1800);
+}
+function nextWortel() { genWortel(); }
+
+// ── §4.2-B Bestaat de wortel ─────────────────────────────────
+let bw = {}, s42b = {c:0,t:0};
+function genBestaat() {
+  const pos=[1,2,3,4,5,7,9,10,16,25,36];
+  const neg=[-1,-2,-3,-4,-5,-7,-9,-10,-16,-25];
+  const isPos=Math.random()>0.5;
+  const pool=isPos?pos:neg;
+  const n=pool[Math.floor(Math.random()*pool.length)];
+  bw={n,answer:isPos?'Ja':'Nee'};
+  document.getElementById('vraag42b').textContent='Bestaat √'+n+'?';
+  document.getElementById('fb42b').className='feedback';
+  document.getElementById('volgBestaat').style.display='none';
+  document.querySelectorAll('#tab-par42 .oefening-card:nth-child(2) .antwoord-btn')
+    .forEach(b=>b.className='antwoord-btn');
+}
+function checkBestaatWortel(ans, btn) {
+  s42b.t++; const ok=ans===bw.answer; if(ok) s42b.c++;
+  upd('score42b','prog42b',s42b);
+  btn.classList.add(ok?'correct':'fout');
+  const fb=document.getElementById('fb42b');
+  fb.className='feedback '+(ok?'correct':'fout');
+  fb.textContent=ok
+    ?(bw.answer==='Ja'?'✓ Juist! '+bw.n+' is positief, √'+bw.n+' bestaat.'
+                      :'✓ Juist! '+bw.n+' is negatief, de wortel bestaat niet.')
+    :(bw.answer==='Ja'?'✗ Fout. '+bw.n+' is positief, √'+bw.n+' bestaat wel.'
+                      :'✗ Fout. '+bw.n+' is negatief, de wortel bestaat niet.');
+  document.getElementById('volgBestaat').style.display='inline-block';
+}
+function nextBestaat() { genBestaat(); }
+
+// ── §4.2-C Bereken zonder rekenmachine ───────────────────────
+let wb = {}, s42c = {c:0,t:0};
+function genWortelRek() {
+  const type=Math.floor(Math.random()*3);
+  if(type===0) {
+    const sc=Math.floor(Math.random()*5)+2;
+    const n=Math.floor(Math.random()*9)+2;
+    wb={q:sc+'·√'+n*n,answer:sc*n,uitleg:sc+'·√'+n*n+' = '+sc+'·'+n+' = '+sc*n};
+  } else if(type===1) {
+    const a=Math.floor(Math.random()*8)+2, b=Math.floor(Math.random()*8)+2;
+    wb={q:'√'+a*a+' + √'+b*b,answer:a+b,uitleg:'√'+a*a+' + √'+b*b+' = '+a+' + '+b+' = '+(a+b)};
   } else {
-    n = kies([30,35,40,50,60,70,75,80,90,110,150,200,250,279,300,500,750,1000,2000]);
-    d = ri(2,4);
+    const a=Math.floor(Math.random()*5)+2, b=Math.floor(Math.random()*5)+2;
+    wb={q:'√('+a*a+'·'+b*b+')',answer:a*b,uitleg:'√'+a*a+'·√'+b*b+' = '+a+'·'+b+' = '+a*b};
   }
-  const dec = ['','één decimaal','twee decimalen','drie decimalen','vier decimalen'];
-  const ant = afronden(Math.sqrt(n),d);
-  return {
-    vraag:`Rond √${n} af op ${dec[d]}.`,
-    antwoord: ant,
-    uitleg:`√${n} = ${Math.sqrt(n).toFixed(d+3)}...\nAfgerond op ${dec[d]}: ${komma(ant)}`
-  };
+  document.getElementById('vraag42c').textContent=wb.q+' = ?';
+  const inp=document.getElementById('inp42c');
+  inp.value=''; inp.className='antwoord-input';
+  document.getElementById('fb42c').className='feedback';
+  inp.focus();
 }
-
-function gen_h42_worteltrekken(niv){
-  if(niv==='basis'){
-    const k = kies(KW);
-    const r = Math.round(Math.sqrt(k));
-    return { vraag:`Bereken √${k}`, antwoord:r, uitleg:`√${k} = ${r}, want ${r}² = ${k}` };
-  } else {
-    const k = kies([...KW,...KW2]);
-    const r = Math.round(Math.sqrt(k));
-    return { vraag:`Bereken √${k}`, antwoord:r, uitleg:`√${k} = ${r}, want ${r}² = ${k}` };
-  }
+function checkWortelRek() {
+  const v=parseFloat(document.getElementById('inp42c').value);
+  if(isNaN(v)) return;
+  s42c.t++; const ok=v===wb.answer; if(ok) s42c.c++;
+  upd('score42c','prog42c',s42c);
+  document.getElementById('inp42c').className='antwoord-input '+(ok?'correct':'fout');
+  const fb=document.getElementById('fb42c');
+  fb.className='feedback '+(ok?'correct':'fout');
+  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')+wb.uitleg;
+  setTimeout(nextWortelRek,1800);
 }
+function nextWortelRek() { genWortelRek(); }
 
-function gen_h42_bewerkingen(niv){
-  const small = [4,9,16,25,36,49,64,81,100];
-  if(niv==='basis'){
-    const type = ri(0,2);
-    if(type===0){
-      // coefficient
-      const a=ri(2,9), k=kies(small), r=Math.round(Math.sqrt(k));
-      return { vraag:`Bereken ${a}√${k}`, antwoord:a*r, uitleg:`${a}√${k} = ${a} · ${r} = ${a*r}` };
-    } else if(type===1){
-      // optellen
-      const k1=kies(small), k2=kies(small);
-      const r1=Math.round(Math.sqrt(k1)), r2=Math.round(Math.sqrt(k2));
-      const a=ri(2,6), c=ri(2,6);
-      return { vraag:`Bereken ${a}√${k1} + ${c}√${k2}`,
-               antwoord: a*r1+c*r2,
-               uitleg:`${a}√${k1} + ${c}√${k2} = ${a}·${r1} + ${c}·${r2} = ${a*r1} + ${c*r2} = ${a*r1+c*r2}` };
-    } else {
-      // aftrekken
-      const k1=kies(small), k2=kies(small);
-      const r1=Math.round(Math.sqrt(k1)), r2=Math.round(Math.sqrt(k2));
-      const a=ri(3,8), c=ri(2,5);
-      return { vraag:`Bereken ${a}√${k1} − ${c}√${k2}`,
-               antwoord: a*r1-c*r2,
-               uitleg:`${a}√${k1} − ${c}√${k2} = ${a}·${r1} − ${c}·${r2} = ${a*r1} − ${c*r2} = ${a*r1-c*r2}` };
-    }
-  } else {
-    // gevorderd: combinatie 3 termen of met min-tekens
-    const groot = [16,25,36,49,64,81,100,121,144,169];
-    const k1=kies(groot), k2=kies(groot), k3=kies([4,9,16,25,36]);
-    const r1=Math.round(Math.sqrt(k1)), r2=Math.round(Math.sqrt(k2)), r3=Math.round(Math.sqrt(k3));
-    const a=ri(2,6), b=ri(2,6), c=ri(2,4);
-    const ant = a*r1 - b*r2 + c*r3;
-    return { vraag:`Bereken ${a}√${k1} − ${b}√${k2} + ${c}√${k3}`,
-             antwoord: ant,
-             uitleg:`= ${a}·${r1} − ${b}·${r2} + ${c}·${r3} = ${a*r1} − ${b*r2} + ${c*r3} = ${ant}` };
-  }
+// ── §4.3-A Bereken y in wortelformule ────────────────────────
+let wf = {}, s43a = {c:0,t:0};
+function genWortelFormule() {
+  const xv=[0,1,4,9,16,25];
+  const x=xv[Math.floor(Math.random()*xv.length)];
+  const a=Math.floor(Math.random()*4)+1;
+  const b=Math.floor(Math.random()*11)-5;
+  const sqX=Math.sqrt(x);
+  const y=a*sqX+b;
+  let f=a===1?'y = √x':'y = '+a+'·√x';
+  if(b>0) f+=' + '+b; else if(b<0) f+=' − '+Math.abs(b);
+  wf={a,b,x,sqX,y,f};
+  document.getElementById('vraag43a').innerHTML=f+'<br>Bereken y voor x = '+x;
+  const inp=document.getElementById('inp43a');
+  inp.value=''; inp.className='antwoord-input';
+  document.getElementById('fb43a').className='feedback';
+  inp.focus();
 }
-
-// ═══════════════════════════ GENERATOREN §5.1 ═══════════════════════════
-
-const triples = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[9,40,41],[20,21,29],[9,12,15],[6,8,10],[12,16,20]];
-
-function gen_h51_schuine(niv){
-  if(niv==='basis'){
-    const f = ri(1,3), t = kies(triples);
-    const [a,b,c] = t.map(x=>x*f);
-    return { vraag:`Bereken de schuine zijde van een rechthoekige driehoek\nmet rechthoekszijden ${a} cm en ${b} cm.`,
-             antwoord: c,
-             uitleg:`c² = ${a}² + ${b}² = ${a*a} + ${b*b} = ${a*a+b*b}\nc = √${a*a+b*b} = ${c} cm` };
-  } else {
-    const a=ri(3,18), b=ri(3,18);
-    const c2=a*a+b*b, c=afronden(Math.sqrt(c2),1);
-    return { vraag:`Bereken de schuine zijde. Rechthoekszijden: ${a} cm en ${b} cm.\nRond af op één decimaal.`,
-             antwoord: c,
-             uitleg:`c² = ${a}² + ${b}² = ${a*a} + ${b*b} = ${c2}\nc = √${c2} ≈ ${komma(c)} cm` };
-  }
+function checkWortelFormule() {
+  const v=parseFloat(document.getElementById('inp43a').value);
+  if(isNaN(v)) return;
+  s43a.t++; const ok=v===wf.y; if(ok) s43a.c++;
+  upd('score43a','prog43a',s43a);
+  document.getElementById('inp43a').className='antwoord-input '+(ok?'correct':'fout');
+  const fb=document.getElementById('fb43a');
+  fb.className='feedback '+(ok?'correct':'fout');
+  const bSign=wf.b<0?' − ':' + ';
+  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')
+    +'y = '+wf.a+'·√'+wf.x+bSign+Math.abs(wf.b)
+    +' = '+wf.a+'·'+wf.sqX+bSign+Math.abs(wf.b)+' = '+wf.y;
+  setTimeout(nextWortelFormule,1800);
 }
+function nextWortelFormule() { genWortelFormule(); }
 
-const nonRight = [[3,4,6],[5,6,7],[4,5,8],[6,7,9],[3,5,7],[4,6,9],[5,7,10],[6,8,11]];
-
-function gen_h51_herkennen(niv){
-  const isRecht = Math.random()<0.5;
-  let a,b,c;
-  if(isRecht){
-    const f = niv==='basis'?1:ri(1,3), t=kies(triples);
-    [a,b,c]=t.map(x=>x*f);
-  } else {
-    const nr = kies(nonRight);
-    const f = niv==='basis'?1:ri(1,2);
-    [a,b,c]=nr.map(x=>x*f);
-  }
-  const z=[a,b,c].sort((x,y)=>x-y);
-  const ant = isRecht?'ja':'nee';
-  const check = z[0]*z[0]+z[1]*z[1];
-  return { vraag:`Een driehoek heeft zijden ${z[0]}, ${z[1]} en ${z[2]} mm.\nIs deze driehoek rechthoekig? (typ "ja" of "nee")`,
-           antwoord: ant, numeriek: false,
-           uitleg: isRecht
-             ? `${z[0]}² + ${z[1]}² = ${check} = ${z[2]}² ✓ → Ja, rechthoekig.`
-             : `${z[0]}² + ${z[1]}² = ${check} ≠ ${z[2]*z[2]} → Nee, niet rechthoekig.` };
+// ── §4.3-B Mag x worden ingevuld ─────────────────────────────
+let mx = {}, s43b = {c:0,t:0};
+function genMagX() {
+  const pos=[0,1,2,3,4,5,7,9,10,16,25];
+  const neg=[-1,-2,-3,-4,-5,-7,-9,-10,-16];
+  const isPos=Math.random()>0.5;
+  const pool=isPos?pos:neg;
+  const x=pool[Math.floor(Math.random()*pool.length)];
+  const a=Math.floor(Math.random()*3)+1;
+  const b=Math.floor(Math.random()*7)-3;
+  let f=a===1?'y = √x':'y = '+a+'·√x';
+  if(b>0) f+=' + '+b; else if(b<0) f+=' − '+Math.abs(b);
+  mx={x,answer:isPos?'Ja':'Nee',f};
+  document.getElementById('vraag43b').innerHTML=f+'<br>Mag x = '+x+' worden ingevuld?';
+  document.getElementById('fb43b').className='feedback';
+  document.getElementById('volgMagX').style.display='none';
+  document.querySelectorAll('#tab-par43 .oefening-card:nth-child(2) .antwoord-btn')
+    .forEach(b=>b.className='antwoord-btn');
 }
-
-// ═══════════════════════════ GENERATOREN §5.2 ═══════════════════════════
-
-function gen_h52_rechthoekszijde(niv){
-  if(niv==='basis'){
-    const t=kies(triples), swap=Math.random()<0.5;
-    const [a,b,c]=t;
-    const leg1=swap?a:b, leg2=swap?b:a;
-    return { vraag:`Schuine zijde = ${c} cm, één rechthoekszijde = ${leg1} cm.\nBereken de andere rechthoekszijde.`,
-             antwoord: leg2,
-             uitleg:`b² = c² − a² = ${c}² − ${leg1}² = ${c*c} − ${leg1*leg1} = ${leg1*leg1+(leg2*leg2)}\nb = √${leg2*leg2} = ${leg2} cm` };
-  } else {
-    let a,c;
-    do { a=ri(3,15); c=ri(a+2,a+15); } while(c*c-a*a<=0);
-    const b=afronden(Math.sqrt(c*c-a*a),1);
-    return { vraag:`Schuine zijde = ${c} cm, één rechthoekszijde = ${a} cm.\nBereken de andere rechthoekszijde. Rond af op één decimaal.`,
-             antwoord: b,
-             uitleg:`b² = ${c}² − ${a}² = ${c*c} − ${a*a} = ${c*c-a*a}\nb = √${c*c-a*a} ≈ ${komma(b)} cm` };
-  }
+function checkMagX(ans, btn) {
+  s43b.t++; const ok=ans===mx.answer; if(ok) s43b.c++;
+  upd('score43b','prog43b',s43b);
+  btn.classList.add(ok?'correct':'fout');
+  const fb=document.getElementById('fb43b');
+  fb.className='feedback '+(ok?'correct':'fout');
+  fb.textContent=ok
+    ?(mx.answer==='Ja'?'✓ Juist! x = '+mx.x+' ≥ 0, mag worden ingevuld.'
+                      :'✓ Juist! x = '+mx.x+' < 0, mag niet worden ingevuld.')
+    :(mx.answer==='Ja'?'✗ Fout. x = '+mx.x+' ≥ 0, mag wel worden ingevuld.'
+                      :'✗ Fout. x = '+mx.x+' < 0, de wortel bestaat niet.');
+  document.getElementById('volgMagX').style.display='inline-block';
 }
+function nextMagX() { genMagX(); }
 
-function gen_h52_assenstelsel(niv){
-  const range=niv==='basis'?5:7;
-  let x1,y1,x2,y2;
-  do { x1=ri(-range,range);y1=ri(-range,range);x2=ri(-range,range);y2=ri(-range,range); }
-  while(x1===x2&&y1===y2);
-  const dx=Math.abs(x2-x1), dy=Math.abs(y2-y1);
-  const d=afronden(Math.sqrt(dx*dx+dy*dy),2);
-  const letters=niv==='basis'?['A','B']:['P','Q'];
-  return { vraag:`Bereken de afstand tussen ${letters[0]}(${x1}, ${y1}) en ${letters[1]}(${x2}, ${y2}).\nRond af op twee decimalen.`,
-           antwoord: d,
-           uitleg:`Δx = |${x2}−${x1}| = ${dx}, Δy = |${y2}−${y1}| = ${dy}\nd = √(${dx}²+${dy}²) = √${dx*dx+dy*dy} ≈ ${komma(d)}` };
-}
-
-function gen_h52_omgekeerd(niv){
-  const isRecht=Math.random()<0.55;
-  let a,b,c;
-  if(isRecht){
-    const f=niv==='basis'?1:ri(1,3), t=kies(triples);
-    [a,b,c]=t.map(x=>x*f);
-  } else {
-    const nr=kies(nonRight);
-    const f=niv==='basis'?1:ri(1,2);
-    [a,b,c]=nr.map(x=>x*f);
-  }
-  const z=[a,b,c].sort((x,y)=>x-y);
-  const check=z[0]*z[0]+z[1]*z[1];
-  const ant=isRecht?'ja':'nee';
-  return { vraag:`Driehoek met zijden ${z[0]}, ${z[1]} en ${z[2]} cm.\nGebruik de omgekeerde stelling — is dit een rechthoekige driehoek? (ja/nee)`,
-           antwoord: ant, numeriek: false,
-           uitleg: isRecht
-             ? `${z[0]}² + ${z[1]}² = ${check} = ${z[2]*z[2]} = ${z[2]}² ✓ Rechthoekig!`
-             : `${z[0]}² + ${z[1]}² = ${check} ≠ ${z[2]*z[2]} Niet rechthoekig.` };
-}
-
-// ═══════════════════════════ GENERATOREN §5.3 ═══════════════════════════
-
-// (been, basis, hoogte) combis — all valid Pythagorean combis
-const driehoekCombis = [[5,6,4],[5,8,3],[10,12,8],[13,10,12],[17,16,15],[13,24,5],[25,14,24],[15,18,12]];
-
-function gen_h53_hoogte(niv){
-  if(niv==='basis'){
-    const c=kies(driehoekCombis);
-    const [been,basis,h]=c;
-    return { vraag:`Gelijkbenige driehoek ABC: benen = ${been} cm, basis AB = ${basis} cm.\nBereken de hoogte vanuit C op AB.`,
-             antwoord: h,
-             uitleg:`½·basis = ${basis/2} cm\nh² = ${been}² − ${basis/2}² = ${been*been} − ${(basis/2)*(basis/2)} = ${been*been-(basis/2)*(basis/2)}\nh = √${been*been-(basis/2)*(basis/2)} = ${h} cm` };
-  } else {
-    let been,basis,h2;
-    do {
-      been=ri(6,20); basis=ri(4,2*been-2);
-      if(basis%2!==0)basis--;
-      h2=been*been-(basis/2)*(basis/2);
-    } while(h2<=0);
-    const h=afronden(Math.sqrt(h2),1);
-    return { vraag:`Gelijkbenige driehoek: benen = ${been} cm, basis = ${basis} cm.\nBereken de hoogte. Rond af op één decimaal.`,
-             antwoord: h,
-             uitleg:`½·basis = ${basis/2} cm\nh² = ${been}² − ${basis/2}² = ${been*been} − ${(basis/2)*(basis/2)} = ${h2}\nh = √${h2} ≈ ${komma(h)} cm` };
-  }
-}
-
-const toepassingBasis = [
-  () => {
-    const h=ri(3,10), af=ri(2,8);
-    const l=afronden(Math.sqrt(h*h+af*af),1);
-    return { vraag:`Een ladder staat ${af} m van een muur. De ladder reikt ${h} m hoog.\nHoe lang is de ladder? Rond af op één decimaal.`,
-             antwoord:l, uitleg:`l² = ${h}² + ${af}² = ${h*h+af*af}\nl = √${h*h+af*af} ≈ ${komma(l)} m` };
-  },
-  () => {
-    const breedte=ri(8,24)*2, been=ri(breedte/2+1,breedte+5);
-    const h2=been*been-(breedte/2)*(breedte/2);
-    const h=afronden(Math.sqrt(h2),1);
-    return { vraag:`Een gelijkbenig dak is ${breedte} m breed. Elke dakspar is ${been} m lang.\nBereken de hoogte van het dak. Rond af op één decimaal.`,
-             antwoord:h, uitleg:`½·${breedte} = ${breedte/2} m\nh² = ${been}² − ${breedte/2}² = ${h2}\nh ≈ ${komma(h)} m` };
-  },
-  () => {
-    const [a,b,c]=kies(triples);
-    const f=ri(1,3);
-    return { vraag:`Een rechthoekig speelveld is ${a*f} m × ${b*f} m.\nHoe lang is de diagonaal?`,
-             antwoord:c*f, uitleg:`d² = ${a*f}² + ${b*f}² = ${(a*f)**2+(b*f)**2}\nd = √${(a*f)**2+(b*f)**2} = ${c*f} m` };
-  }
-];
-
-const toepassingGevorderd = [
-  () => {
-    const h=ri(100,350)*10, hor=ri(100,450)*10;
-    const k=Math.sqrt(h*h+hor*hor);
-    const afr=Math.round(k/10)*10;
-    return { vraag:`Kabelbaan: hoogteverschil ${h} m, horizontale afstand ${hor} m.\nBereken de kabellengte. Rond af op tientallen meters.`,
-             antwoord:afr, uitleg:`kabel² = ${h}² + ${hor}² = ${h*h+hor*hor}\nkabel = √${h*h+hor*hor} ≈ ${afr} m` };
-  },
-  () => {
-    const d=ri(8,20)*2;
-    const s=afronden(d/Math.sqrt(2),1);
-    return { vraag:`Vierkant ABCD heeft een diagonaal van ${d} cm.\nBereken de zijde. Rond af op één decimaal.`,
-             antwoord:s, uitleg:`zijde² + zijde² = ${d}²\n2·zijde² = ${d*d}\nzijde = √${d*d/2} ≈ ${komma(s)} cm` };
-  },
-  () => {
-    const a=ri(3,10), b=ri(3,10);
-    const opp=afronden(0.5*a*b,2);
-    const schuin=afronden(Math.sqrt(a*a+b*b),1);
-    return { vraag:`Rechthoekige driehoek: rechthoekszijden ${a} cm en ${b} cm.\nBereken de omtrek. Rond af op één decimaal.`,
-             antwoord: afronden(a+b+Math.sqrt(a*a+b*b),1),
-             uitleg:`schuine zijde = √(${a}²+${b}²) = √${a*a+b*b} ≈ ${komma(schuin)}\nomtrek ≈ ${a} + ${b} + ${komma(schuin)} = ${komma(afronden(a+b+Math.sqrt(a*a+b*b),1))} cm` };
-  }
-];
-
-function gen_h53_toepassing(niv){
-  return kies(niv==='basis'?toepassingBasis:toepassingGevorderd)();
-}
-
-// ═══════════════════════════ GENERATOREN §5.5 ═══════════════════════════
-
-function gen_h55_lichaamsdiag(niv){
-  const l=ri(2,niv==='basis'?8:12), b=ri(2,niv==='basis'?8:12), h=ri(2,niv==='basis'?8:12);
-  const d=afronden(Math.sqrt(l*l+b*b+h*h),niv==='basis'?1:2);
-  const d2=l*l+b*b+h*h;
-  return { vraag:`Balk ABCD EFGH: lengte=${l} cm, breedte=${b} cm, hoogte=${h} cm.\nBereken de lichaamsdiagonaal AG. Rond af op ${niv==='basis'?'één':'twee'} decimal${niv==='basis'?'':'en'}.`,
-           antwoord:d,
-           uitleg:`Stap 1: AC² = ${l}²+${b}² = ${l*l+b*b} (grondvlakdiag²)\nStap 2: AG² = ${l*l+b*b}+${h}² = ${d2}\nAG = √${d2} ≈ ${komma(d)} cm` };
-}
-
-function gen_h55_diagonaalvlak(niv){
-  const l=ri(3,niv==='basis'?10:14), b=ri(3,niv==='basis'?10:14);
-  const d=afronden(Math.sqrt(l*l+b*b),1);
-  const d2=l*l+b*b;
-  return { vraag:`Balk met lengte=${l} cm, breedte=${b} cm.\nBereken de grondvlakdiagonaal AC. Rond af op één decimaal.`,
-           antwoord:d,
-           uitleg:`AC² = l² + b² = ${l}² + ${b}² = ${d2}\nAC = √${d2} ≈ ${komma(d)} cm` };
-}
-
-function gen_h55_kubus(niv){
-  const r=ri(2,niv==='basis'?8:12);
-  if(niv==='basis'){
-    const d=afronden(r*Math.sqrt(3),1);
-    return { vraag:`Kubus ABCD EFGH met ribbe ${r} cm.\nBereken de lichaamsdiagonaal. Rond af op één decimaal.`,
-             antwoord:d,
-             uitleg:`d² = ${r}²+${r}²+${r}² = 3×${r*r} = ${3*r*r}\nd = √${3*r*r} ≈ ${komma(d)} cm` };
-  } else {
-    // Given body diagonal, find edge
-    const diag=afronden(r*Math.sqrt(3),1);
-    const ribbe=afronden(diag/Math.sqrt(3),1);
-    return { vraag:`Kubus heeft een lichaamsdiagonaal van ${komma(diag)} cm.\nBereken de ribbe. Rond af op één decimaal.`,
-             antwoord:ribbe,
-             uitleg:`d² = 3·r² → r² = d²/3 = ${diag*diag}/3 ≈ ${afronden(diag*diag/3,2)}\nr ≈ ${komma(ribbe)} cm` };
-  }
-}
-
-// ═══════════════════════════ GENERATOREN MAP ═══════════════════════════
-const GEN = {
-  h42: { afronden:gen_h42_afronden, worteltrekken:gen_h42_worteltrekken, bewerkingen:gen_h42_bewerkingen },
-  h51: { schuine:gen_h51_schuine, herkennen:gen_h51_herkennen },
-  h52: { rechthoekszijde:gen_h52_rechthoekszijde, assenstelsel:gen_h52_assenstelsel, omgekeerd:gen_h52_omgekeerd },
-  h53: { hoogte:gen_h53_hoogte, toepassing:gen_h53_toepassing },
-  h55: { lichaamsdiag:gen_h55_lichaamsdiag, diagonaalvlak:gen_h55_diagonaalvlak, kubus:gen_h55_kubus }
-};
-
-// ═══════════════════════════ UI ═══════════════════════════
-function toonTab(id, knop, kleur){
-  document.querySelectorAll('.sectie').forEach(s=>s.classList.remove('zichtbaar'));
-  document.getElementById(id).classList.add('zichtbaar');
-  document.querySelectorAll('.tab-knop').forEach(k=>{k.classList.remove('actief','b','p');});
-  knop.classList.add('actief');
-  if(kleur) knop.classList.add(kleur);
-}
-
-function setNiveau(sec, niv, knop){
-  S.niveau[sec]=niv;
-  knop.closest('.niveau-rij').querySelectorAll('.niveau-knop').forEach(k=>k.classList.remove('actief'));
-  knop.classList.add('actief');
-  nieuweVraag(sec);
-}
-
-function setOnderwerp(sec, ond, knop){
-  S.onderwerp[sec]=ond;
-  knop.closest('.onderwerp-rij').querySelectorAll('.ond-knop').forEach(k=>k.classList.remove('actief'));
-  knop.classList.add('actief');
-  nieuweVraag(sec);
-}
-
-function nieuweVraag(sec){
-  const data = GEN[sec][S.onderwerp[sec]](S.niveau[sec]);
-  S.antwoord[sec] = data.antwoord;
-  S.uitleg[sec]   = data.uitleg||'';
-  S.numeriek[sec] = data.numeriek!==false;
-
-  document.getElementById(sec+'-vraag').innerHTML = data.vraag.replace(/\n/g,'<br>');
-
-  const antEl=document.getElementById(sec+'-ant');
-  antEl.textContent=''; antEl.classList.remove('zichtbaar');
-
-  const inv=document.getElementById(sec+'-inv');
-  inv.value=''; inv.classList.remove('juist','fout');
-
-  document.getElementById(sec+'-fb').innerHTML='';
-}
-
-function toonAnt(sec){
-  const a=S.antwoord[sec];
-  if(a===null) return;
-  const aStr=typeof a==='number'?komma(a):a;
-  const ant=document.getElementById(sec+'-ant');
-  ant.innerHTML=`<strong>Antwoord: ${aStr}</strong>`+(S.uitleg[sec]?`<br><br><small style="font-weight:600;white-space:pre-wrap">${S.uitleg[sec]}</small>`:'');
-  ant.classList.add('zichtbaar');
-}
-
-function controleer(sec){
-  const inv=document.getElementById(sec+'-inv');
-  const fbEl=document.getElementById(sec+'-fb');
-  const juist=S.antwoord[sec];
-  if(juist===null){ nieuweVraag(sec); return; }
-
-  const raw=inv.value.trim().replace(',','.');
-  let goed=false;
-
-  if(S.numeriek[sec]){
-    const n=parseFloat(raw);
-    if(!isNaN(n)){
-      // Tolerance = half of last decimal of answer
-      const d = (String(juist).split('.')[1]||'').length;
-      const tol = 0.5*Math.pow(10,-d)+1e-9;
-      goed = Math.abs(n-juist)<tol;
-    }
-  } else {
-    goed = raw.toLowerCase()===String(juist).toLowerCase();
-  }
-
-  if(goed){
-    S.goed++;
-    inv.classList.add('juist'); inv.classList.remove('fout');
-    fbEl.innerHTML='<span class="feedback-label ok">✓ Goed zo!</span>';
-    updateScore();
-    setTimeout(()=>nieuweVraag(sec),1100);
-  } else {
-    S.fout++;
-    inv.classList.add('fout'); inv.classList.remove('juist');
-    fbEl.innerHTML='<span class="feedback-label nee">✗ Probeer nog eens</span>';
-    updateScore();
-  }
-}
-
-function updateScore(){
-  document.getElementById('sGoed').textContent=S.goed;
-  document.getElementById('sFout').textContent=S.fout;
-}
-
-// Init
-window.addEventListener('load',()=>{
-  ['h42','h51','h52','h53','h55'].forEach(s=>nieuweVraag(s));
-});
+// ── Init ─────────────────────────────────────────────────────
+genBergDal(); genBerekenY(); genPuntOp();
+genWortel(); genBestaat(); genWortelRek();
+genWortelFormule(); genMagX();
 </script>
 </body>
 </html>
