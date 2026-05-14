@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NaSk – Geluid H8 | Sam Oefenen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--rood:#c0392b;--geel:#f39c12;--donker:#1a1a2e;--grijs:#6c757d;--bg:#f8f9fa;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg);color:#333;min-height:100vh;}
+
+    header{background:var(--donker);color:white;padding:.9rem 1.5rem;position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+    header a{color:#aaa;text-decoration:none;font-size:.9rem;}
+    header a:hover{color:white;}
+    header h1{font-size:1.15rem;font-weight:800;flex:1;}
+    .badge{background:linear-gradient(135deg,var(--rood),var(--geel));padding:.2rem .7rem;border-radius:20px;font-size:.8rem;font-weight:700;}
+
+    .tab-nav{display:flex;flex-wrap:wrap;gap:.3rem;padding:.8rem 1.2rem 0;background:white;border-bottom:2px solid #e9ecef;position:sticky;top:48px;z-index:90;}
+    .tab-btn{padding:.45rem .9rem;border:none;background:none;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--grijs);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .15s;}
+    .tab-btn:hover{color:var(--rood);}
+    .tab-btn.active{color:var(--rood);border-bottom-color:var(--rood);}
+    .tab-btn[disabled]{color:#ccc;cursor:not-allowed;}
+
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+    .container{max-width:780px;margin:0 auto;padding:1.4rem 1rem;}
+
+    .para-header{background:linear-gradient(135deg,var(--rood),var(--geel));color:white;padding:1.1rem 1.4rem;border-radius:12px;margin-bottom:1.3rem;}
+    .para-header h2{font-size:1.3rem;font-weight:800;margin-bottom:.2rem;}
+    .para-header p{opacity:.9;font-size:.9rem;}
+
+    .section-card{background:white;border-radius:12px;padding:1.4rem;margin-bottom:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+    .section-card h3{font-size:1rem;font-weight:800;margin-bottom:1rem;color:var(--donker);}
+
+    .theorie-list{list-style:none;}
+    .theorie-list li{padding:.45rem 0;border-bottom:1px solid #f2f2f2;font-size:.93rem;line-height:1.55;}
+    .theorie-list li:last-child{border-bottom:none;}
+    .theorie-list strong{color:var(--rood);}
+    .formule{background:#fff8f0;border-left:4px solid var(--geel);padding:.7rem 1rem;border-radius:0 8px 8px 0;margin:.8rem 0 .3rem;font-size:1rem;font-weight:800;color:var(--donker);}
+
+    .video-wrap{position:relative;padding-bottom:56.25%;border-radius:10px;overflow:hidden;}
+    .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+
+    .counter{font-size:.85rem;color:var(--grijs);margin-bottom:.8rem;}
+    .flashcard{background:#f8f9fa;border-radius:10px;padding:1.3rem;}
+    .vraag{font-size:1rem;font-weight:700;line-height:1.45;margin-bottom:.9rem;}
+    .ans-input{width:100%;padding:.55rem .8rem;border:2px solid #dee2e6;border-radius:8px;font-family:'Nunito',sans-serif;font-size:.93rem;margin-bottom:.55rem;transition:border-color .15s;}
+    .ans-input:focus{outline:none;border-color:var(--rood);}
+    .ans-input.goed{border-color:#28a745;background:#f0fff4;}
+    .ans-input.fout{border-color:var(--rood);background:#fff5f5;}
+    .feedback{font-size:.88rem;font-weight:700;min-height:1.1rem;margin-bottom:.4rem;}
+    .feedback.goed{color:#28a745;}
+    .feedback.fout{color:var(--rood);}
+    .btn-row{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.6rem;}
+    .btn{padding:.45rem 1rem;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:.87rem;font-weight:700;cursor:pointer;}
+    .btn:active{opacity:.8;}
+    .btn-check{background:var(--rood);color:white;}
+    .btn-next,.btn-reset{background:#e9ecef;color:#444;}
+    .btn-shuffle{background:var(--geel);color:white;}
+    .score-bar{display:flex;align-items:center;gap:.8rem;padding-top:.9rem;margin-top:.9rem;border-top:1px solid #f0f0f0;}
+    .score-badge{background:var(--donker);color:white;padding:.25rem .75rem;border-radius:20px;font-size:.83rem;font-weight:700;}
+
+    .reken-card{background:#f8f9fa;border-radius:10px;padding:1.3rem;}
+    .reken-vraag{font-size:.97rem;line-height:1.5;margin-bottom:.9rem;}
+    .gegeven{font-size:.88rem;color:var(--grijs);background:white;padding:.6rem .8rem;border-radius:8px;margin-bottom:.9rem;line-height:1.6;}
+    .gegeven b{color:var(--donker);}
+
+    .placeholder{background:white;border-radius:12px;padding:3rem 2rem;text-align:center;color:var(--grijs);box-shadow:0 2px 8px rgba(0,0,0,.06);}
+    .placeholder .ico{font-size:2.5rem;margin-bottom:1rem;}
+    .placeholder h3{font-size:1.05rem;font-weight:700;color:#555;margin-bottom:.4rem;}
+    .placeholder p{font-size:.9rem;}
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html">← Home</a>
+  <h1>NaSk &mdash; Geluid</h1>
+  <span class="badge">Hoofdstuk 8</span>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active"  onclick="toon(this,'tab81')">§8.1 Trilling</button>
+  <button class="tab-btn"         onclick="toon(this,'tab82')">§8.2 Snelheid</button>
+  <button class="tab-btn"         onclick="toon(this,'tab83')">§8.3 Grafiek</button>
+  <button class="tab-btn" disabled>§8.4 Toonhoogte</button>
+  <button class="tab-btn" disabled>§8.5 Schade</button>
+  <button class="tab-btn" disabled>§8.6 Niveau</button>
+</nav>
+
+<!-- ═══ §8.1 ═══ -->
+<div class="tab-content active" id="tab81">
+<div class="container">
+  <div class="para-header">
+    <h2>§8.1 Geluid als trilling</h2>
+    <p>Bron–medium–ontvanger &middot; amplitude &middot; frequentie &middot; versterking</p>
+  </div>
+  <div class="section-card">
+    <h3>📖 Theorie</h3>
+    <ul class="theorie-list">
+      <li><strong>Geluid</strong> is een trilling die door een stof beweegt.</li>
+      <li>Schema: <strong>bron &rarr; medium &rarr; ontvanger</strong>. De bron trilt, het medium (bijv. lucht) geeft de trilling door, de ontvanger (bijv. oor) vangt hem op.</li>
+      <li><strong>Geluidssterkte</strong> wordt bepaald door de <strong>amplitude</strong> (uitwijking): hoe groter, hoe harder het geluid.</li>
+      <li><strong>Toonhoogte</strong> wordt bepaald door de <strong>frequentie</strong>: hoe meer trillingen per seconde, hoe hoger de toon.</li>
+      <li>Geluid kan <strong>niet</strong> door <strong>vac&uuml;&uuml;m</strong> reizen &mdash; er is altijd een medium nodig.</li>
+      <li><strong>Klankkast</strong>: trilt mee en versterkt het geluid mechanisch.</li>
+      <li><strong>Microfoon</strong>: zet geluidstrillingen om in elektrische trillingen.</li>
+      <li><strong>Luidspreker</strong>: zet elektrische trillingen om in geluid.</li>
+    </ul>
+  </div>
+  <div class="section-card">
+    <h3>🎬 Uitlegvideo &mdash; §8.1</h3>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/Zy7UUngFS18" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+  <div class="section-card">
+    <h3>🧠 Begrippen oefenen</h3>
+    <div class="counter">Kaart <span id="cur81">1</span> van <span id="tot81">12</span></div>
+    <div class="flashcard">
+      <div class="vraag" id="vr81"></div>
+      <input class="ans-input" id="inp81" type="text" placeholder="Typ je antwoord…" onkeydown="if(event.key==='Enter')chk('81')">
+      <div class="feedback" id="fb81"></div>
+      <div class="btn-row">
+        <button class="btn btn-check"   onclick="chk('81')">Controleer</button>
+        <button class="btn btn-next"    onclick="nxt('81')">Volgende &rarr;</button>
+        <button class="btn btn-reset"   onclick="rst('81')">Opnieuw</button>
+        <button class="btn btn-shuffle" onclick="shf('81')">&#x1F500; Shuffle</button>
+      </div>
+    </div>
+    <div class="score-bar"><span class="score-badge" id="sc81">Score: 0 / 0</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ §8.2 ═══ -->
+<div class="tab-content" id="tab82">
+<div class="container">
+  <div class="para-header">
+    <h2>§8.2 Geluidssnelheid</h2>
+    <p>Formule s = v &times; t &middot; snelheid per medium &middot; echo &middot; echolocatie</p>
+  </div>
+  <div class="section-card">
+    <h3>📖 Theorie</h3>
+    <ul class="theorie-list">
+      <li>Geluid heeft tijd nodig om te reizen. De snelheid heet <strong>geluidssnelheid</strong>.</li>
+      <li>Geluidssnelheid in lucht bij 20 &deg;C &asymp; <strong>343 m/s</strong>.</li>
+      <li>Volgorde: <strong>vaste stoffen &gt; vloeistoffen &gt; gassen</strong>.</li>
+      <li><strong>Echo</strong>: geluid kaatst terug. Afstand = v &times; (t &divide; 2), want het geluid gaat heen &eacute;n terug.</li>
+      <li><strong>Echolocatie</strong>: dolfijnen en vleermuizen bepalen afstand met echo's.</li>
+    </ul>
+    <div class="formule">s = v &times; t &nbsp;&nbsp;(s in m &middot; v in m/s &middot; t in s)</div>
+    <div class="formule">Echo: afstand = v &times; (t &divide; 2)</div>
+  </div>
+  <div class="section-card">
+    <h3>🎬 Uitlegvideo &mdash; §8.2</h3>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/QrQ9VY4z3oc" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+  <div class="section-card">
+    <h3>🔢 Rekensommen oefenen</h3>
+    <p style="font-size:.87rem;color:var(--grijs);margin-bottom:1rem;">Elke keer willekeurige getallen &mdash; onbeperkt oefenen.</p>
+    <div class="reken-card">
+      <div class="reken-vraag" id="rvr82"></div>
+      <div class="gegeven" id="rgeg82"></div>
+      <input class="ans-input" id="rinp82" type="number" placeholder="Antwoord…" onkeydown="if(event.key==='Enter')rchk('82')">
+      <div class="feedback" id="rfb82"></div>
+      <div class="btn-row">
+        <button class="btn btn-check"   onclick="rchk('82')">Controleer</button>
+        <button class="btn btn-shuffle" onclick="rnieuw('82')">&#x1F500; Nieuwe som</button>
+      </div>
+    </div>
+    <div class="score-bar"><span class="score-badge" id="rsc82">Score: 0 / 0</span></div>
+  </div>
+  <div class="section-card">
+    <h3>🧠 Begrippen oefenen</h3>
+    <div class="counter">Kaart <span id="cur82b">1</span> van <span id="tot82b">5</span></div>
+    <div class="flashcard">
+      <div class="vraag" id="vr82b"></div>
+      <input class="ans-input" id="inp82b" type="text" placeholder="Typ je antwoord…" onkeydown="if(event.key==='Enter')chk('82b')">
+      <div class="feedback" id="fb82b"></div>
+      <div class="btn-row">
+        <button class="btn btn-check"   onclick="chk('82b')">Controleer</button>
+        <button class="btn btn-next"    onclick="nxt('82b')">Volgende &rarr;</button>
+        <button class="btn btn-reset"   onclick="rst('82b')">Opnieuw</button>
+        <button class="btn btn-shuffle" onclick="shf('82b')">&#x1F500; Shuffle</button>
+      </div>
+    </div>
+    <div class="score-bar"><span class="score-badge" id="sc82b">Score: 0 / 0</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ §8.3 ═══ -->
+<div class="tab-content" id="tab83">
+<div class="container">
+  <div class="para-header">
+    <h2>§8.3 Trilling in beeld</h2>
+    <p>Trillingsgrafiek &middot; trillingsduur T &middot; frequentie f &middot; amplitude &middot; oscilloscoop</p>
+  </div>
+  <div class="section-card">
+    <h3>📖 Theorie</h3>
+    <ul class="theorie-list">
+      <li>Een <strong>trillingsgrafiek</strong> toont de uitwijking van een trilling tegen de tijd.</li>
+      <li><strong>Trillingsduur T</strong>: de tijd voor &eacute;&eacute;n volledige trilling (eenheid: seconden s).</li>
+      <li><strong>Frequentie f</strong>: het aantal trillingen per seconde (eenheid: hertz Hz).</li>
+      <li><strong>Amplitude</strong>: de maximale uitwijking. Hoe groter, hoe harder het geluid.</li>
+      <li><strong>Oscilloscoop</strong>: apparaat dat elektrische trillingen zichtbaar maakt als grafiek.</li>
+      <li><strong>Toongenerator</strong>: maakt elektrische trillingen van instelbare frequentie.</li>
+    </ul>
+    <div class="formule">f = 1 &divide; T &nbsp;&nbsp; en &nbsp;&nbsp; T = 1 &divide; f</div>
+  </div>
+  <div class="section-card">
+    <h3>🎬 Uitlegvideo &mdash; §8.3</h3>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/RmvR3RBIhbw" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+  <div class="section-card">
+    <h3>🔢 Rekensommen oefenen</h3>
+    <p style="font-size:.87rem;color:var(--grijs);margin-bottom:1rem;">Elke keer willekeurige getallen &mdash; onbeperkt oefenen.</p>
+    <div class="reken-card">
+      <div class="reken-vraag" id="rvr83"></div>
+      <div class="gegeven" id="rgeg83"></div>
+      <input class="ans-input" id="rinp83" type="number" placeholder="Antwoord…" onkeydown="if(event.key==='Enter')rchk('83')">
+      <div class="feedback" id="rfb83"></div>
+      <div class="btn-row">
+        <button class="btn btn-check"   onclick="rchk('83')">Controleer</button>
+        <button class="btn btn-shuffle" onclick="rnieuw('83')">&#x1F500; Nieuwe som</button>
+      </div>
+    </div>
+    <div class="score-bar"><span class="score-badge" id="rsc83">Score: 0 / 0</span></div>
+  </div>
+  <div class="section-card">
+    <h3>🧠 Begrippen oefenen</h3>
+    <div class="counter">Kaart <span id="cur83b">1</span> van <span id="tot83b">6</span></div>
+    <div class="flashcard">
+      <div class="vraag" id="vr83b"></div>
+      <input class="ans-input" id="inp83b" type="text" placeholder="Typ je antwoord…" onkeydown="if(event.key==='Enter')chk('83b')">
+      <div class="feedback" id="fb83b"></div>
+      <div class="btn-row">
+        <button class="btn btn-check"   onclick="chk('83b')">Controleer</button>
+        <button class="btn btn-next"    onclick="nxt('83b')">Volgende &rarr;</button>
+        <button class="btn btn-reset"   onclick="rst('83b')">Opnieuw</button>
+        <button class="btn btn-shuffle" onclick="shf('83b')">&#x1F500; Shuffle</button>
+      </div>
+    </div>
+    <div class="score-bar"><span class="score-badge" id="sc83b">Score: 0 / 0</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ §8.4 ═══ -->
+<div class="tab-content" id="tab84">
+<div class="container">
+  <div class="placeholder"><div class="ico">🔧</div><h3>§8.4 Toonhoogte</h3><p>Wordt toegevoegd voor het volgende proefwerk.</p></div>
+</div>
+</div>
+
+<!-- ═══ §8.5 ═══ -->
+<div class="tab-content" id="tab85">
+<div class="container">
+  <div class="placeholder"><div class="ico">🔧</div><h3>§8.5 Geluidsschade</h3><p>Wordt toegevoegd voor het volgende proefwerk.</p></div>
+</div>
+</div>
+
+<!-- ═══ §8.6 ═══ -->
+<div class="tab-content" id="tab86">
+<div class="container">
+  <div class="placeholder"><div class="ico">🔧</div><h3>§8.6 Geluidsniveau</h3><p>Wordt toegevoegd voor het volgende proefwerk.</p></div>
+</div>
+</div>
+
+<script>
+function toon(btn,id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn:not([disabled])').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function fy(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const sets={
+  '81':{cards:fy([
+    {v:'Wat is geluid?',a:'een trilling'},
+    {v:'Wat is een geluidsbron?',a:'een voorwerp dat trilt en geluid maakt'},
+    {v:'Wat is een medium (bij geluid)?',a:'de stof waardoor het geluid gaat'},
+    {v:'Wat is een ontvanger?',a:'het voorwerp dat de trilling opvangt'},
+    {v:'Waardoor wordt de geluidssterkte bepaald?',a:'door de amplitude'},
+    {v:'Waardoor wordt de toonhoogte bepaald?',a:'door de frequentie'},
+    {v:'Hoe heet de maximale uitwijking van een trilling?',a:'amplitude'},
+    {v:'Kan geluid door vacüüm gaan?',a:'nee'},
+    {v:'Wat is vacüüm?',a:'een ruimte zonder stof'},
+    {v:'Wat doet een klankkast?',a:'versterkt het geluid door mee te trillen'},
+    {v:'Waarvoor gebruik je een microfoon?',a:'geluidstrillingen omzetten in elektrische trillingen'},
+    {v:'Waarvoor gebruik je een luidspreker?',a:'elektrische trillingen omzetten in geluid'},
+  ]),cur:0,goed:0,tot:0,beantwoord:false},
+  '82b':{cards:fy([
+    {v:'Wat is de geluidssnelheid in lucht bij 20 °C?',a:'343 m/s'},
+    {v:'Welke formule gebruik je voor geluidssnelheid?',a:'s = v × t'},
+    {v:'In welk soort materiaal is de geluidssnelheid het grootst?',a:'vaste stoffen'},
+    {v:'Wat is een echo?',a:'weerkaatst geluid'},
+    {v:"Wat is echolocatie?",a:"afstand bepalen met echo's"},
+  ]),cur:0,goed:0,tot:0,beantwoord:false},
+  '83b':{cards:fy([
+    {v:'Wat is de trillingsduur (T)?',a:'de tijd voor één volledige trilling (in s)'},
+    {v:'Wat is de frequentie (f)?',a:'het aantal trillingen per seconde (in Hz)'},
+    {v:'Wat is de formule voor frequentie?',a:'f = 1/T'},
+    {v:'Wat is de amplitude in een trillingsgrafiek?',a:'de maximale uitwijking'},
+    {v:'Wat is een oscilloscoop?',a:'apparaat dat trillingen zichtbaar maakt als grafiek'},
+    {v:'Wat doet een toongenerator?',a:'maakt elektrische trillingen van instelbare frequentie'},
+  ]),cur:0,goed:0,tot:0,beantwoord:false},
+};
+
+function render(k){
+  const s=sets[k],c=s.cards[s.cur];
+  document.getElementById('vr'+k).textContent=c.v;
+  document.getElementById('cur'+k).textContent=s.cur+1;
+  document.getElementById('tot'+k).textContent=s.cards.length;
+  const inp=document.getElementById('inp'+k);
+  inp.value='';inp.className='ans-input';inp.disabled=false;
+  document.getElementById('fb'+k).textContent='';
+  document.getElementById('fb'+k).className='feedback';
+  sc(k);
+}
+function norm(s){return s.toLowerCase().trim().replace(/\s+/g,' ');}
+function chk(k){
+  if(sets[k].beantwoord){nxt(k);return;}
+  const s=sets[k],inp=document.getElementById('inp'+k);
+  const u=norm(inp.value),a=norm(s.cards[s.cur].a);
+  const fb=document.getElementById('fb'+k);
+  s.beantwoord=true;s.tot++;
+  const ok=u.length>=2&&(u===a||a.includes(u)||u.includes(a));
+  if(ok){s.goed++;inp.className='ans-input goed';fb.className='feedback goed';fb.textContent='✓ Goed!';}
+  else{inp.className='ans-input fout';fb.className='feedback fout';fb.textContent='✗ Antwoord: '+s.cards[s.cur].a;}
+  inp.disabled=true;sc(k);
+}
+function nxt(k){
+  const s=sets[k];s.beantwoord=false;
+  if(s.cur<s.cards.length-1){s.cur++;render(k);}
+  else{const fb=document.getElementById('fb'+k);fb.className='feedback goed';fb.textContent='🎉 Set klaar! Druk op Opnieuw of Shuffle.';document.getElementById('inp'+k).disabled=true;}
+}
+function rst(k){const s=sets[k];s.cur=0;s.goed=0;s.tot=0;s.beantwoord=false;render(k);}
+function shf(k){const s=sets[k],klaar=s.cur>=s.cards.length-1&&s.beantwoord;fy(s.cards);s.cur=0;s.beantwoord=false;if(klaar){s.goed=0;s.tot=0;}render(k);}
+function sc(k){const s=sets[k];document.getElementById('sc'+k).textContent='Score: '+s.goed+' / '+s.tot;}
+
+Object.keys(sets).forEach(k=>render(k));
+
+const GS=[{stof:'lucht (20 °C)',v:343},{stof:'water',v:1510},{stof:'beton',v:3800},{stof:'staal',v:5950}];
+const TSEC=[2,3,4,5,6,8,10,15,20,30];
+const TOPS=[1,2,4,5,8,10,20,25,40,50,100];
+const FOPS=[10,20,25,40,50,100,125,200,250,500,1000];
+const reken={'82':{goed:0,tot:0,ans:null,klaar:false},'83':{goed:0,tot:0,ans:null,klaar:false}};
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+
+function rnieuw(k){
+  const r=reken[k];r.klaar=false;
+  const inp=document.getElementById('rinp'+k);
+  inp.value='';inp.className='ans-input';inp.disabled=false;
+  document.getElementById('rfb'+k).textContent='';
+  document.getElementById('rfb'+k).className='feedback';
+  if(k==='82'){
+    const gs=pick(GS),t=pick(TSEC),type=Math.floor(Math.random()*3);
+    if(type===0){
+      r.ans=gs.v*t;
+      document.getElementById('rvr82').textContent='Een geluidssignaal reist door '+gs.stof+'. Bereken de afstand. Geef je antwoord in m.';
+      document.getElementById('rgeg82').innerHTML='<b>v</b> = '+gs.v+' m/s &middot; <b>t</b> = '+t+' s &middot; Gevraagd: <b>s</b> = ? m';
+    }else if(type===1){
+      r.ans=t;
+      document.getElementById('rvr82').textContent='Een geluidssignaal reist door '+gs.stof+'. Bereken de reistijd. Geef je antwoord in s.';
+      document.getElementById('rgeg82').innerHTML='<b>v</b> = '+gs.v+' m/s &middot; <b>s</b> = '+(gs.v*t)+' m &middot; Gevraagd: <b>t</b> = ? s';
+    }else{
+      const tt=pick(TSEC)*2;r.ans=gs.v*(tt/2);
+      document.getElementById('rvr82').textContent='Een geluidspuls kaatst terug (echo) in '+gs.stof+'. Bereken de afstand tot het oppervlak. Geef je antwoord in m.';
+      document.getElementById('rgeg82').innerHTML='<b>v</b> = '+gs.v+' m/s &middot; Totale tijd (heen+terug): <b>t</b> = '+tt+' s &middot; Gevraagd: afstand = ? m';
+    }
+  }
+  if(k==='83'){
+    const type=Math.floor(Math.random()*2);
+    if(type===0){
+      const Tms=pick(TOPS);r.ans=1000/Tms;
+      document.getElementById('rvr83').textContent='Bereken de frequentie. Geef je antwoord in Hz.';
+      document.getElementById('rgeg83').innerHTML='<b>T</b> = '+Tms+' ms &middot; Gevraagd: <b>f</b> = ? Hz';
+    }else{
+      const f=pick(FOPS);r.ans=1000/f;
+      document.getElementById('rvr83').textContent='Bereken de trillingsduur. Geef je antwoord in ms.';
+      document.getElementById('rgeg83').innerHTML='<b>f</b> = '+f+' Hz &middot; Gevraagd: <b>T</b> = ? ms';
+    }
+  }
+  rsc(k);
+}
+function rchk(k){
+  if(reken[k].klaar){rnieuw(k);return;}
+  const r=reken[k],inp=document.getElementById('rinp'+k);
+  const u=parseFloat(inp.value),fb=document.getElementById('rfb'+k);
+  r.klaar=true;r.tot++;
+  const ok=!isNaN(u)&&Math.abs(u-r.ans)<0.5;
+  if(ok){r.goed++;inp.className='ans-input goed';fb.className='feedback goed';fb.textContent='✓ Goed! Antwoord: '+r.ans;}
+  else{inp.className='ans-input fout';fb.className='feedback fout';fb.textContent='✗ Fout. Juist: '+r.ans;}
+  inp.disabled=true;rsc(k);
+}
+function rsc(k){const r=reken[k];document.getElementById('rsc'+k).textContent='Score: '+r.goed+' / '+r.tot;}
+
+rnieuw('82');rnieuw('83');
+</script>
+</body>
+</html>
