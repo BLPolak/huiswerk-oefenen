@@ -564,6 +564,100 @@ body {
   .typen-wrapper { padding: 1.2rem 1rem 1.5rem; }
   .typen-prompt-tekst { font-size: 1rem; }
 }
+
+/* ── GRAMMAR UITLEG BLOCK ── */
+.gram-uitleg {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.14);
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+}
+.gram-uitleg-header {
+  width: 100%;
+  background: none;
+  border: none;
+  border-left: 5px solid var(--geel);
+  padding: 1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--donker);
+  text-align: left;
+  transition: background 0.15s;
+}
+.gram-uitleg-header:hover { background: #fffbeb; }
+.gram-uitleg-header .chevron {
+  font-size: 0.95rem;
+  color: var(--grijs);
+  transition: transform 0.25s;
+}
+.gram-uitleg-header.open .chevron { transform: rotate(180deg); }
+
+.gram-uitleg-body {
+  display: none;
+  padding: 0 1.3rem 1.3rem;
+  border-top: 1px solid #e2e8f0;
+}
+.gram-uitleg-body.open { display: block; }
+
+.gram-sectie { margin-bottom: 1.1rem; }
+.gram-sectie:last-child { margin-bottom: 0; }
+.gram-sectie-titel {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--geel);
+  margin: 1rem 0 0.5rem;
+}
+.gram-regel {
+  background: #fffbeb;
+  border-left: 4px solid var(--geel);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  color: #744210;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  line-height: 1.5;
+}
+.gram-regel code {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  color: var(--rood);
+}
+.gram-conj-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.gram-conj-table tr:nth-child(even) { background: #f7fafc; }
+.gram-conj-table td { padding: 0.38rem 0.6rem; border-bottom: 1px solid #e2e8f0; }
+.gram-conj-table tr:last-child td { border-bottom: none; }
+.gram-conj-table td:first-child { font-weight: 700; color: var(--grijs); width: 38%; }
+.gram-conj-table td:last-child { font-weight: 900; color: var(--rood); font-style: italic; }
+.gram-onregel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+.gram-onregel-pill {
+  background: #fff5f5;
+  border: 1.5px solid var(--rood-licht);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--donker);
+}
+.gram-onregel-pill span { color: var(--rood); font-style: italic; margin-left: 0.3rem; }
 </style>
 </head>
 <body>
@@ -965,12 +1059,123 @@ body {
 
   <!-- ══ TAB 6 — GRAMÁTICA VTT ══ -->
   <div class="tab-content" id="tab-6" style="display:none">
+
     <div class="so-banner">
-      <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 2 juni &nbsp;·&nbsp; Gramática VTT</div>
+      <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 2 juni &nbsp;·&nbsp; Gramática — VTT</div>
     </div>
-    <div class="placeholder-box">
-      📖 Gramática VTT
-      <p>Komt eraan…</p>
+
+    <!-- ── UITLEGBLOK ── -->
+    <div class="gram-uitleg">
+      <button class="gram-uitleg-header open" onclick="toggleGramUitleg(this)">
+        📖 Uitleg: Voltooid Tegenwoordige Tijd (VTT)
+        <span class="chevron">▼</span>
+      </button>
+      <div class="gram-uitleg-body open">
+
+        <div class="gram-sectie">
+          <div class="gram-sectie-titel">Structuur</div>
+          <div class="gram-regel">
+            VTT = <code>haber</code> (persoonsvorm) + voltooid deelwoord
+          </div>
+        </div>
+
+        <div class="gram-sectie">
+          <div class="gram-sectie-titel">Vervoeging van haber</div>
+          <table class="gram-conj-table">
+            <tr><td>yo</td><td>he</td></tr>
+            <tr><td>tú</td><td>has</td></tr>
+            <tr><td>él / ella</td><td>ha</td></tr>
+            <tr><td>nosotros</td><td>hemos</td></tr>
+            <tr><td>vosotros</td><td>habéis</td></tr>
+            <tr><td>ellos / ellas</td><td>han</td></tr>
+          </table>
+        </div>
+
+        <div class="gram-sectie">
+          <div class="gram-sectie-titel">Regelmatig deelwoord</div>
+          <div class="gram-regel">
+            <code>-ar</code> werkwoorden → stam + <code>-ado</code> &nbsp;(hablar → <em>hablado</em>)<br>
+            <code>-er / -ir</code> werkwoorden → stam + <code>-ido</code> &nbsp;(comer → <em>comido</em>)
+          </div>
+        </div>
+
+        <div class="gram-sectie">
+          <div class="gram-sectie-titel">Onregelmatige deelwoorden</div>
+          <div class="gram-onregel-grid">
+            <div class="gram-onregel-pill">decir <span>→ dicho</span></div>
+            <div class="gram-onregel-pill">hacer <span>→ hecho</span></div>
+            <div class="gram-onregel-pill">ver <span>→ visto</span></div>
+            <div class="gram-onregel-pill">escribir <span>→ escrito</span></div>
+            <div class="gram-onregel-pill">volver <span>→ vuelto</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── TYPING EXERCISE TAB 6 ── -->
+    <div class="typen-wrapper">
+
+      <div class="typen-topbar">
+        <div class="typen-titel">✏️ VTT – Typen</div>
+        <div class="typen-teller" id="t6-teller">1 / 14</div>
+      </div>
+
+      <div class="typen-score-bar">
+        <div class="typen-score-goed" id="t6-score-goed">✓ 0</div>
+        <div class="typen-score-fout" id="t6-score-fout">✗ 0</div>
+      </div>
+
+      <div class="fc-progress-bar">
+        <div class="fc-progress-fill" id="t6-fill" style="width:7%"></div>
+      </div>
+
+      <div>
+        <div class="typen-prompt-label">Nederlands — typ de Spaanse VTT-zin</div>
+        <div class="typen-prompt-tekst" id="t6-prompt"></div>
+      </div>
+
+      <div>
+        <div class="typen-antwoord-label">Jouw antwoord in het Spaans</div>
+        <textarea class="typen-input" id="t6-input" rows="2"
+          placeholder="Typ hier de Spaanse zin…"
+          onkeydown="t6EnterCheck(event)"></textarea>
+      </div>
+
+      <div class="typen-specials">
+        <button class="typen-special-btn" onclick="t6VoegIn('á')">á</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('é')">é</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('í')">í</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('ó')">ó</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('ú')">ú</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('ü')">ü</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('ñ')">ñ</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('¿')">¿</button>
+        <button class="typen-special-btn" onclick="t6VoegIn('¡')">¡</button>
+      </div>
+
+      <div class="typen-feedback" id="t6-feedback"></div>
+
+      <div class="typen-btns">
+        <button class="typen-btn controleer" id="t6-btn-controleer" onclick="t6Controleer()">Controleer</button>
+        <button class="typen-btn volgende" id="t6-btn-volgende" onclick="t6Volgende()">Volgende →</button>
+      </div>
+
+      <div class="typen-actions" id="t6-actions">
+        <button class="typen-action-btn" onclick="t6Opnieuw()">↺ Opnieuw</button>
+        <button class="typen-action-btn" onclick="t6Schud(false)">🔀 Shuffle</button>
+      </div>
+
+      <div class="fc-klaar" id="t6-klaar">
+        <div class="fc-klaar-emoji">🎉</div>
+        <div class="fc-klaar-titel">Alle zinnen gedaan!</div>
+        <div class="fc-klaar-score" id="t6-klaar-score"></div>
+        <div class="fc-klaar-btns">
+          <button class="fc-klaar-btn shuffle" onclick="t6Schud(true)">🔀 Opnieuw (geschud)</button>
+          <button class="fc-klaar-btn opnieuw" onclick="t6Opnieuw()">↺ Zelfde volgorde</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1885,12 +2090,206 @@ function t5Opnieuw() {
 }
 
 /* ── AUTO-START (alle tabs initialiseren bij laden) ── */
+/* ══════════════════════════════════════════════
+   TAB 6 — GRAMÁTICA VTT TYPING EXERCISE
+   ══════════════════════════════════════════════ */
+
+/* ── UITLEGBLOK TOGGLE ── */
+function toggleGramUitleg(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+/* ── TAB 6 DATA ── */
+const bronVragen6 = [
+  { nl: "Ik heb bezocht.",                           sp: "Yo he visitado." },
+  { nl: "Jij hebt bezocht.",                         sp: "Tú has visitado." },
+  { nl: "Hij heeft bezocht.",                        sp: "Él ha visitado." },
+  { nl: "Wij hebben bezocht.",                       sp: "Nosotros hemos visitado." },
+  { nl: "Jullie hebben bezocht.",                    sp: "Vosotros habéis visitado." },
+  { nl: "Zij hebben bezocht.",                       sp: "Ellos han visitado." },
+  { nl: "Ik heb gezegd.",                            sp: "Yo he dicho." },
+  { nl: "Jij hebt gedaan.",                          sp: "Tú has hecho." },
+  { nl: "Hij heeft gezien.",                         sp: "Él ha visto." },
+  { nl: "Wij hebben geschreven.",                    sp: "Nosotros hemos escrito." },
+  { nl: "Jullie hebben teruggegaan.",                sp: "Vosotros habéis vuelto." },
+  { nl: "Hebben jullie Cádiz bezocht?",              sp: "¿Habéis visitado Cádiz?" },
+  { nl: "Heb je het leuk gehad?",                    sp: "¿Lo has pasado bien?" },
+  { nl: "We hebben veel kleren gekocht.",            sp: "Hemos comprado mucha ropa." }
+];
+
+/* ── TAB 6 STATE ── */
+const t6 = {
+  vragen: [],
+  huidigIndex: 0,
+  scoreGoed: 0,
+  scoreFout: 0,
+  isVoltooid: false,
+  isGecontroleerd: false
+};
+
+/* ── TAB 6 INIT ── */
+function initTypen6() {
+  t6.vragen = fisherYates(bronVragen6);
+  t6.huidigIndex = 0;
+  t6.scoreGoed = 0;
+  t6.scoreFout = 0;
+  t6.isVoltooid = false;
+  t6.isGecontroleerd = false;
+  t6ToonVraag();
+  t6UpdateScore();
+  t6ToonVoltooiing(false);
+}
+
+/* ── TAB 6 DISPLAY ── */
+function t6ToonVraag() {
+  const vraag = t6.vragen[t6.huidigIndex];
+  const totaal = t6.vragen.length;
+  t6.isGecontroleerd = false;
+
+  document.getElementById('t6-prompt').textContent = vraag.nl;
+  document.getElementById('t6-teller').textContent = `${t6.huidigIndex + 1} / ${totaal}`;
+  document.getElementById('t6-fill').style.width = `${((t6.huidigIndex + 1) / totaal) * 100}%`;
+
+  const input = document.getElementById('t6-input');
+  input.value = '';
+  input.className = 'typen-input';
+  input.disabled = false;
+  input.focus();
+
+  const fb = document.getElementById('t6-feedback');
+  fb.className = 'typen-feedback';
+  fb.textContent = '';
+
+  document.getElementById('t6-btn-controleer').disabled = false;
+  document.getElementById('t6-btn-volgende').classList.remove('zichtbaar');
+}
+
+function t6UpdateScore() {
+  document.getElementById('t6-score-goed').textContent = `✓ ${t6.scoreGoed}`;
+  document.getElementById('t6-score-fout').textContent = `✗ ${t6.scoreFout}`;
+}
+
+function t6ToonVoltooiing(toon) {
+  t6.isVoltooid = toon;
+  const klaar  = document.getElementById('t6-klaar');
+  const acties = document.getElementById('t6-actions');
+  const input  = document.getElementById('t6-input');
+  const btnC   = document.getElementById('t6-btn-controleer');
+  const btnV   = document.getElementById('t6-btn-volgende');
+  if (toon) {
+    klaar.classList.add('zichtbaar');
+    acties.style.display = 'none';
+    input.disabled = true;
+    btnC.disabled = true;
+    btnV.classList.remove('zichtbaar');
+    const totaal = t6.scoreGoed + t6.scoreFout;
+    const pct = totaal > 0 ? Math.round((t6.scoreGoed / totaal) * 100) : 0;
+    document.getElementById('t6-klaar-score').innerHTML =
+      `<strong>${t6.scoreGoed}</strong> goed van ${totaal} &nbsp;(${pct}%)`;
+  } else {
+    klaar.classList.remove('zichtbaar');
+    acties.style.display = 'flex';
+  }
+}
+
+/* ── TAB 6 CONTROLEER ── */
+function t6Controleer() {
+  if (t6.isGecontroleerd || t6.isVoltooid) return;
+  const input   = document.getElementById('t6-input');
+  const gegeven = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+  const correct = t6.vragen[t6.huidigIndex].sp.trim().toLowerCase().replace(/\s+/g, ' ');
+  const isGoed  = gegeven === correct;
+
+  t6.isGecontroleerd = true;
+  if (isGoed) t6.scoreGoed++; else t6.scoreFout++;
+  t6UpdateScore();
+
+  input.disabled = true;
+  document.getElementById('t6-btn-controleer').disabled = true;
+  document.getElementById('t6-btn-volgende').classList.add('zichtbaar');
+
+  const fb = document.getElementById('t6-feedback');
+  if (isGoed) {
+    input.classList.add('goed');
+    fb.className = 'typen-feedback goed';
+    fb.textContent = '✓ Correct!';
+  } else {
+    input.classList.add('fout');
+    fb.className = 'typen-feedback fout';
+    fb.innerHTML = '✗ Niet helemaal — het juiste antwoord:'
+      + `<span class="correct-antwoord">${t6.vragen[t6.huidigIndex].sp}</span>`;
+  }
+}
+
+/* ── TAB 6 VOLGENDE ── */
+function t6Volgende() {
+  if (!t6.isGecontroleerd) return;
+  if (t6.huidigIndex < t6.vragen.length - 1) {
+    t6.huidigIndex++;
+    t6ToonVraag();
+  } else {
+    t6ToonVoltooiing(true);
+  }
+}
+
+/* ── TAB 6 ENTER ── */
+function t6EnterCheck(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (!t6.isGecontroleerd) {
+      t6Controleer();
+    } else {
+      t6Volgende();
+    }
+  }
+}
+
+/* ── TAB 6 SPECIALE TEKENS ── */
+function t6VoegIn(teken) {
+  const input = document.getElementById('t6-input');
+  if (input.disabled) return;
+  const start = input.selectionStart;
+  const end   = input.selectionEnd;
+  input.value = input.value.slice(0, start) + teken + input.value.slice(end);
+  input.selectionStart = input.selectionEnd = start + teken.length;
+  input.focus();
+}
+
+/* ── TAB 6 SHUFFLE ── */
+function t6Schud(vanVoltooiing) {
+  t6.vragen = fisherYates(bronVragen6);
+  t6.huidigIndex = 0;
+  t6.isGecontroleerd = false;
+  if (vanVoltooiing) {
+    t6.scoreGoed = 0;
+    t6.scoreFout = 0;
+    t6UpdateScore();
+  }
+  t6ToonVoltooiing(false);
+  t6ToonVraag();
+}
+
+/* ── TAB 6 OPNIEUW ── */
+function t6Opnieuw() {
+  t6.huidigIndex = 0;
+  t6.scoreGoed = 0;
+  t6.scoreFout = 0;
+  t6.isGecontroleerd = false;
+  t6UpdateScore();
+  t6ToonVoltooiing(false);
+  t6ToonVraag();
+}
+
+/* ── AUTO-START ── */
 document.addEventListener('DOMContentLoaded', () => {
   initFlashcards();
   initFlashcards2();
   initFlashcards3();
   initFlashcards4();
   initTypen5();
+  initTypen6();
 });
 </script>
 
