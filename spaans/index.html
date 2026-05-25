@@ -389,12 +389,180 @@ body {
 .fc-klaar-btn.opnieuw { background: #e2e8f0; color: #2d3748; }
 .fc-klaar-btn.opnieuw:hover { background: #cbd5e0; }
 
+/* ── TYPING EXERCISE ── */
+.typen-wrapper {
+  background: #fff;
+  border-radius: 24px;
+  padding: 1.6rem 1.5rem 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.typen-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.typen-titel { font-weight: 900; font-size: 1.05rem; color: var(--donker); }
+.typen-teller {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--grijs);
+  background: #f7fafc;
+  padding: 0.3rem 0.75rem;
+  border-radius: 8px;
+}
+
+.typen-score-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.typen-score-goed {
+  font-size: 0.82rem; font-weight: 800; color: #38a169;
+  background: #f0fff4; border: 1.5px solid #9ae6b4;
+  border-radius: 8px; padding: 0.25rem 0.6rem;
+}
+.typen-score-fout {
+  font-size: 0.82rem; font-weight: 800; color: var(--rood);
+  background: #fff5f5; border: 1.5px solid var(--rood-licht);
+  border-radius: 8px; padding: 0.25rem 0.6rem;
+}
+
+.typen-prompt-label {
+  font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--grijs); margin-bottom: 0.5rem;
+}
+.typen-prompt-tekst {
+  font-size: 1.2rem; font-weight: 900; color: var(--donker);
+  background: linear-gradient(135deg, #fff5f5, #fff);
+  border: 2px solid var(--rood-licht);
+  border-radius: 14px; padding: 1.2rem 1.4rem;
+  line-height: 1.4;
+}
+
+.typen-antwoord-label {
+  font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--grijs); margin-bottom: 0.4rem;
+}
+.typen-input {
+  width: 100%;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--donker);
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.4;
+  min-height: 70px;
+}
+.typen-input:focus { border-color: var(--rood); }
+.typen-input.goed { border-color: #38a169; background: #f0fff4; color: #276749; }
+.typen-input.fout { border-color: var(--rood); background: #fff5f5; }
+
+.typen-specials {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.typen-special-btn {
+  background: #f7fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--donker);
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1;
+}
+.typen-special-btn:hover { border-color: var(--rood); color: var(--rood); background: #fff5f5; }
+
+.typen-feedback {
+  display: none;
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.typen-feedback.goed {
+  display: block;
+  background: #f0fff4;
+  border: 2px solid #9ae6b4;
+  color: #276749;
+}
+.typen-feedback.fout {
+  display: block;
+  background: #fff5f5;
+  border: 2px solid var(--rood-licht);
+  color: #742a2a;
+}
+.typen-feedback .correct-antwoord {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--rood);
+}
+
+.typen-btns {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.typen-btn {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.typen-btn.controleer { background: var(--rood); color: #fff; flex: 2; }
+.typen-btn.controleer:hover { background: #9b2c2c; }
+.typen-btn.controleer:disabled { background: #e2e8f0; color: #a0aec0; cursor: default; }
+.typen-btn.volgende { background: var(--donker); color: #fff; flex: 1.5; display: none; }
+.typen-btn.volgende:hover { background: #2d3748; }
+.typen-btn.volgende.zichtbaar { display: block; }
+
+.typen-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+}
+.typen-action-btn {
+  background: none;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.5rem 1.1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--grijs);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.typen-action-btn:hover { border-color: var(--rood); color: var(--rood); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 520px) {
   .header-title { font-size: 1.1rem; }
   .flip-tekst { font-size: 1.25rem; }
   .tab-btn { font-size: 0.75rem; padding: 0.6rem 0.4rem; min-width: 90px; }
   .fc-wrapper { padding: 1.2rem 1rem 1.5rem; }
+  .typen-wrapper { padding: 1.2rem 1rem 1.5rem; }
+  .typen-prompt-tekst { font-size: 1rem; }
 }
 </style>
 </head>
@@ -715,12 +883,83 @@ body {
 
   <!-- ══ TAB 5 — FRASES CLAVE TYPEN ══ -->
   <div class="tab-content" id="tab-5" style="display:none">
+
     <div class="so-banner">
       <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 2 juni &nbsp;·&nbsp; Frases clave – Typen</div>
     </div>
-    <div class="placeholder-box">
-      ✏️ Frases clave – Typen
-      <p>Komt eraan…</p>
+
+    <div class="typen-wrapper">
+
+      <!-- Top bar -->
+      <div class="typen-topbar">
+        <div class="typen-titel">✏️ Frases clave – Typen</div>
+        <div class="typen-teller" id="t5-teller">1 / 12</div>
+      </div>
+
+      <!-- Score -->
+      <div class="typen-score-bar">
+        <div class="typen-score-goed" id="t5-score-goed">✓ 0</div>
+        <div class="typen-score-fout" id="t5-score-fout">✗ 0</div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="fc-progress-bar">
+        <div class="fc-progress-fill" id="t5-fill" style="width:8%"></div>
+      </div>
+
+      <!-- Prompt -->
+      <div>
+        <div class="typen-prompt-label">Nederlands — typ de Spaanse vertaling</div>
+        <div class="typen-prompt-tekst" id="t5-prompt"></div>
+      </div>
+
+      <!-- Answer input -->
+      <div>
+        <div class="typen-antwoord-label">Jouw antwoord in het Spaans</div>
+        <textarea class="typen-input" id="t5-input" rows="2"
+          placeholder="Typ hier de Spaanse zin…"
+          onkeydown="t5EnterCheck(event)"></textarea>
+      </div>
+
+      <!-- Special characters -->
+      <div class="typen-specials">
+        <button class="typen-special-btn" onclick="t5VoegIn('á')">á</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('é')">é</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('í')">í</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('ó')">ó</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('ú')">ú</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('ü')">ü</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('ñ')">ñ</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('¿')">¿</button>
+        <button class="typen-special-btn" onclick="t5VoegIn('¡')">¡</button>
+      </div>
+
+      <!-- Feedback -->
+      <div class="typen-feedback" id="t5-feedback"></div>
+
+      <!-- Action buttons -->
+      <div class="typen-btns">
+        <button class="typen-btn controleer" id="t5-btn-controleer" onclick="t5Controleer()">Controleer</button>
+        <button class="typen-btn volgende" id="t5-btn-volgende" onclick="t5Volgende()">Volgende →</button>
+      </div>
+
+      <!-- Opnieuw + Shuffle -->
+      <div class="typen-actions" id="t5-actions">
+        <button class="typen-action-btn" onclick="t5Opnieuw()">↺ Opnieuw</button>
+        <button class="typen-action-btn" onclick="t5Schud(false)">🔀 Shuffle</button>
+      </div>
+
+      <!-- Completion screen -->
+      <div class="fc-klaar" id="t5-klaar">
+        <div class="fc-klaar-emoji">🎉</div>
+        <div class="fc-klaar-titel">Alle zinnen gedaan!</div>
+        <div class="fc-klaar-score" id="t5-klaar-score"></div>
+        <div class="fc-klaar-btns">
+          <button class="fc-klaar-btn shuffle" onclick="t5Schud(true)">🔀 Opnieuw (geschud)</button>
+          <button class="fc-klaar-btn opnieuw" onclick="t5Opnieuw()">↺ Zelfde volgorde</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1460,12 +1699,198 @@ function opnieuwZelfdePlaats4() {
   toonKaart4();
 }
 
-/* ── AUTO-START (alle tabs shufflen bij laden) ── */
+/* ══════════════════════════════════════════════
+   TAB 5 — FRASES CLAVE TYPEN
+   ══════════════════════════════════════════════ */
+
+/* ── TAB 5 DATA (zelfde zinnen als Tab 4, eigen array) ── */
+const bronVragen5 = [
+  { nl: "Wat hebben jullie vanmorgen gedaan?",          sp: "¿Qué habéis hecho esta mañana?" },
+  { nl: "Heb je het leuk gehad?",                       sp: "¿Lo has pasado bien?" },
+  { nl: "En wat ga je nu doen?",                        sp: "¿Y qué vas a hacer ahora?" },
+  { nl: "Heb je zin om naar het zwembad te gaan?",      sp: "¿Tienes ganas de ir a la piscina?" },
+  { nl: "Hoe laat / Waar spreken we af?",               sp: "¿A qué hora / Dónde quedamos?" },
+  { nl: "Neem je een bal mee?",                         sp: "¿Traes un balón?" },
+  { nl: "We hebben Cádiz bezocht.",                     sp: "Hemos visitado Cádiz." },
+  { nl: "Ja, ik heb veel kleren gekocht.",              sp: "Sí, he comprado mucha ropa." },
+  { nl: "Ik weet het niet.",                            sp: "No lo sé." },
+  { nl: "Ja, daar heb ik heel veel zin in.",            sp: "Sí, tengo muchas ganas." },
+  { nl: "Laten we om drie uur / in het zwembad afspreken.", sp: "Quedamos a las tres / en la piscina." },
+  { nl: "Ja, en ik ga mijn zwembroek zoeken.",          sp: "Sí, y voy a buscar mi bañador." }
+];
+
+/* ── TAB 5 STATE ── */
+const t5 = {
+  vragen: [],
+  huidigIndex: 0,
+  scoreGoed: 0,
+  scoreFout: 0,
+  isVoltooid: false,
+  isGecontroleerd: false
+};
+
+/* ── TAB 5 INIT ── */
+function initTypen5() {
+  t5.vragen = fisherYates(bronVragen5);
+  t5.huidigIndex = 0;
+  t5.scoreGoed = 0;
+  t5.scoreFout = 0;
+  t5.isVoltooid = false;
+  t5.isGecontroleerd = false;
+  t5ToonVraag();
+  t5UpdateScore();
+  t5ToonVoltooiing(false);
+}
+
+/* ── TAB 5 DISPLAY ── */
+function t5ToonVraag() {
+  const vraag = t5.vragen[t5.huidigIndex];
+  const totaal = t5.vragen.length;
+  t5.isGecontroleerd = false;
+
+  document.getElementById('t5-prompt').textContent = vraag.nl;
+  document.getElementById('t5-teller').textContent = `${t5.huidigIndex + 1} / ${totaal}`;
+  document.getElementById('t5-fill').style.width = `${((t5.huidigIndex + 1) / totaal) * 100}%`;
+
+  // Reset input & feedback
+  const input = document.getElementById('t5-input');
+  input.value = '';
+  input.className = 'typen-input';
+  input.disabled = false;
+  input.focus();
+
+  const fb = document.getElementById('t5-feedback');
+  fb.className = 'typen-feedback';
+  fb.textContent = '';
+
+  // Reset buttons
+  document.getElementById('t5-btn-controleer').disabled = false;
+  document.getElementById('t5-btn-volgende').classList.remove('zichtbaar');
+}
+
+function t5UpdateScore() {
+  document.getElementById('t5-score-goed').textContent = `✓ ${t5.scoreGoed}`;
+  document.getElementById('t5-score-fout').textContent = `✗ ${t5.scoreFout}`;
+}
+
+function t5ToonVoltooiing(toon) {
+  t5.isVoltooid = toon;
+  const klaar   = document.getElementById('t5-klaar');
+  const acties  = document.getElementById('t5-actions');
+  const input   = document.getElementById('t5-input');
+  const btnC    = document.getElementById('t5-btn-controleer');
+  const btnV    = document.getElementById('t5-btn-volgende');
+  if (toon) {
+    klaar.classList.add('zichtbaar');
+    acties.style.display = 'none';
+    input.disabled = true;
+    btnC.disabled = true;
+    btnV.classList.remove('zichtbaar');
+    const totaal = t5.scoreGoed + t5.scoreFout;
+    const pct = totaal > 0 ? Math.round((t5.scoreGoed / totaal) * 100) : 0;
+    document.getElementById('t5-klaar-score').innerHTML =
+      `<strong>${t5.scoreGoed}</strong> goed van ${totaal} &nbsp;(${pct}%)`;
+  } else {
+    klaar.classList.remove('zichtbaar');
+    acties.style.display = 'flex';
+  }
+}
+
+/* ── TAB 5 CONTROLEER ── */
+function t5Controleer() {
+  if (t5.isGecontroleerd || t5.isVoltooid) return;
+  const input   = document.getElementById('t5-input');
+  const gegeven = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+  const correct = t5.vragen[t5.huidigIndex].sp.trim().toLowerCase().replace(/\s+/g, ' ');
+  const isGoed  = gegeven === correct;
+
+  t5.isGecontroleerd = true;
+  if (isGoed) t5.scoreGoed++; else t5.scoreFout++;
+  t5UpdateScore();
+
+  input.disabled = true;
+  document.getElementById('t5-btn-controleer').disabled = true;
+  document.getElementById('t5-btn-volgende').classList.add('zichtbaar');
+
+  const fb = document.getElementById('t5-feedback');
+  if (isGoed) {
+    input.classList.add('goed');
+    fb.className = 'typen-feedback goed';
+    fb.textContent = '✓ Correct!';
+  } else {
+    input.classList.add('fout');
+    fb.className = 'typen-feedback fout';
+    fb.innerHTML = '✗ Niet helemaal — het juiste antwoord:'
+      + `<span class="correct-antwoord">${t5.vragen[t5.huidigIndex].sp}</span>`;
+  }
+}
+
+/* ── TAB 5 VOLGENDE ── */
+function t5Volgende() {
+  if (!t5.isGecontroleerd) return;
+  if (t5.huidigIndex < t5.vragen.length - 1) {
+    t5.huidigIndex++;
+    t5ToonVraag();
+  } else {
+    t5ToonVoltooiing(true);
+  }
+}
+
+/* ── TAB 5 ENTER = Controleer, dan Volgende ── */
+function t5EnterCheck(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (!t5.isGecontroleerd) {
+      t5Controleer();
+    } else {
+      t5Volgende();
+    }
+  }
+}
+
+/* ── TAB 5 SPECIALE TEKENS ── */
+function t5VoegIn(teken) {
+  const input = document.getElementById('t5-input');
+  if (input.disabled) return;
+  const start = input.selectionStart;
+  const end   = input.selectionEnd;
+  input.value = input.value.slice(0, start) + teken + input.value.slice(end);
+  input.selectionStart = input.selectionEnd = start + teken.length;
+  input.focus();
+}
+
+/* ── TAB 5 SHUFFLE ── */
+function t5Schud(vanVoltooiing) {
+  t5.vragen = fisherYates(bronVragen5);
+  t5.huidigIndex = 0;
+  t5.isGecontroleerd = false;
+  if (vanVoltooiing) {
+    t5.scoreGoed = 0;
+    t5.scoreFout = 0;
+    t5UpdateScore();
+  }
+  t5ToonVoltooiing(false);
+  t5ToonVraag();
+}
+
+/* ── TAB 5 OPNIEUW ── */
+function t5Opnieuw() {
+  t5.huidigIndex = 0;
+  t5.scoreGoed = 0;
+  t5.scoreFout = 0;
+  t5.isGecontroleerd = false;
+  t5UpdateScore();
+  t5ToonVoltooiing(false);
+  t5ToonVraag();
+}
+
+/* ── AUTO-START (alle tabs initialiseren bij laden) ── */
 document.addEventListener('DOMContentLoaded', () => {
   initFlashcards();
   initFlashcards2();
   initFlashcards3();
   initFlashcards4();
+  initTypen5();
 });
 </script>
 
