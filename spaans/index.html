@@ -641,12 +641,75 @@ body {
 
   <!-- ══ TAB 4 — FRASES CLAVE KAARTJES ══ -->
   <div class="tab-content" id="tab-4" style="display:none">
+
     <div class="so-banner">
       <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 2 juni &nbsp;·&nbsp; Frases clave – Kaartjes</div>
     </div>
-    <div class="placeholder-box">
-      🃏 Frases clave – Kaartjes
-      <p>Komt eraan…</p>
+
+    <div class="fc-wrapper">
+
+      <!-- Top bar -->
+      <div class="fc-topbar">
+        <div class="fc-titel">Frases clave</div>
+        <div class="fc-teller" id="fc4-teller">1 / 12</div>
+      </div>
+
+      <!-- Score row -->
+      <div class="fc-score-bar">
+        <div class="fc-score-goed" id="fc4-score-goed">✓ 0</div>
+        <div class="fc-score-fout" id="fc4-score-fout">✗ 0</div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="fc-progress-bar">
+        <div class="fc-progress-fill" id="fc4-fill" style="width:8%"></div>
+      </div>
+
+      <!-- Flip card -->
+      <div class="flip-wrapper" onclick="flipKaart4()">
+        <div class="flip-card" id="fc4-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Nederlands</div>
+            <div class="flip-tekst" id="fc4-front-tekst"></div>
+            <div class="flip-hint">Klik om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Spaans</div>
+            <div class="flip-tekst" id="fc4-back-tekst"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="fc-buttons" id="fc4-nav-btns">
+        <button class="fc-btn fc-btn-prev" onclick="vorigeKaart4()">← Vorige</button>
+        <button class="fc-btn fc-btn-flip" onclick="flipKaart4()">Omdraaien</button>
+        <button class="fc-btn fc-btn-next" onclick="volgendeKaartNav4()">Volgende →</button>
+      </div>
+
+      <!-- Goed / Fout (zichtbaar na omdraaien) -->
+      <div class="fc-oordeel" id="fc4-oordeel">
+        <button class="fc-btn-fout" onclick="registreerOordeel4(false)">✗ Fout</button>
+        <button class="fc-btn-goed" onclick="registreerOordeel4(true)">✓ Goed</button>
+      </div>
+
+      <!-- Opnieuw + Shuffle -->
+      <div class="fc-actions" id="fc4-actions">
+        <button class="fc-action-btn" onclick="opnieuwZelfdePlaats4()">↺ Opnieuw</button>
+        <button class="fc-action-btn" onclick="schudKaarten4(false)">🔀 Shuffle</button>
+      </div>
+
+      <!-- Completion screen -->
+      <div class="fc-klaar" id="fc4-klaar">
+        <div class="fc-klaar-emoji">🎉</div>
+        <div class="fc-klaar-titel">Alle kaarten gedaan!</div>
+        <div class="fc-klaar-score" id="fc4-klaar-score"></div>
+        <div class="fc-klaar-btns">
+          <button class="fc-klaar-btn shuffle" onclick="schudKaarten4(true)">🔀 Opnieuw (geschud)</button>
+          <button class="fc-klaar-btn opnieuw" onclick="opnieuwZelfdePlaats4()">↺ Zelfde volgorde</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -918,6 +981,13 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipKaart3(); }
     if (e.key === 'g' || e.key === 'G') { if (t3.isOmgedraaid) registreerOordeel3(true); }
     if (e.key === 'f' || e.key === 'F') { if (t3.isOmgedraaid) registreerOordeel3(false); }
+  } else if (actieveTab === 'tab-4') {
+    if (t4.isVoltooid) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); volgendeKaartNav4(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); vorigeKaart4(); }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipKaart4(); }
+    if (e.key === 'g' || e.key === 'G') { if (t4.isOmgedraaid) registreerOordeel4(true); }
+    if (e.key === 'f' || e.key === 'F') { if (t4.isOmgedraaid) registreerOordeel4(false); }
   }
 });
 
@@ -1238,11 +1308,164 @@ function opnieuwZelfdePlaats3() {
   toonKaart3();
 }
 
+/* ══════════════════════════════════════════════
+   TAB 4 FLASHCARDS — frases clave NL → SP
+   ══════════════════════════════════════════════ */
+
+/* ── TAB 4 DATA ── */
+const bronKaarten4 = [
+  { front: "Wat hebben jullie vanmorgen gedaan?",          back: "¿Qué habéis hecho esta mañana?" },
+  { front: "Heb je het leuk gehad?",                       back: "¿Lo has pasado bien?" },
+  { front: "En wat ga je nu doen?",                        back: "¿Y qué vas a hacer ahora?" },
+  { front: "Heb je zin om naar het zwembad te gaan?",      back: "¿Tienes ganas de ir a la piscina?" },
+  { front: "Hoe laat / Waar spreken we af?",               back: "¿A qué hora / Dónde quedamos?" },
+  { front: "Neem je een bal mee?",                         back: "¿Traes un balón?" },
+  { front: "We hebben Cádiz bezocht.",                     back: "Hemos visitado Cádiz." },
+  { front: "Ja, ik heb veel kleren gekocht.",              back: "Sí, he comprado mucha ropa." },
+  { front: "Ik weet het niet.",                            back: "No lo sé." },
+  { front: "Ja, daar heb ik heel veel zin in.",            back: "Sí, tengo muchas ganas." },
+  { front: "Laten we om drie uur / in het zwembad afspreken.", back: "Quedamos a las tres / en la piscina." },
+  { front: "Ja, en ik ga mijn zwembroek zoeken.",          back: "Sí, y voy a buscar mi bañador." }
+];
+
+/* ── TAB 4 STATE ── */
+const t4 = {
+  kaarten: [],
+  huidigIndex: 0,
+  scoreGoed: 0,
+  scoreFout: 0,
+  isOmgedraaid: false,
+  isVoltooid: false
+};
+
+/* ── TAB 4 INIT ── */
+function initFlashcards4() {
+  t4.kaarten = fisherYates(bronKaarten4);
+  t4.huidigIndex = 0;
+  t4.scoreGoed = 0;
+  t4.scoreFout = 0;
+  t4.isOmgedraaid = false;
+  t4.isVoltooid = false;
+  toonKaart4();
+  updateScoreDisplay4();
+  toonVoltooiing4(false);
+}
+
+/* ── TAB 4 DISPLAY ── */
+function toonKaart4() {
+  const kaart = t4.kaarten[t4.huidigIndex];
+  const totaal = t4.kaarten.length;
+  document.getElementById('fc4-card').classList.remove('flipped');
+  t4.isOmgedraaid = false;
+  document.getElementById('fc4-front-tekst').textContent = kaart.front;
+  document.getElementById('fc4-back-tekst').textContent = kaart.back;
+  document.getElementById('fc4-teller').textContent = `${t4.huidigIndex + 1} / ${totaal}`;
+  document.getElementById('fc4-fill').style.width = `${((t4.huidigIndex + 1) / totaal) * 100}%`;
+  document.getElementById('fc4-oordeel').classList.remove('zichtbaar');
+}
+
+function updateScoreDisplay4() {
+  document.getElementById('fc4-score-goed').textContent = `✓ ${t4.scoreGoed}`;
+  document.getElementById('fc4-score-fout').textContent = `✗ ${t4.scoreFout}`;
+}
+
+function toonVoltooiing4(toon) {
+  t4.isVoltooid = toon;
+  const klaar   = document.getElementById('fc4-klaar');
+  const nav     = document.getElementById('fc4-nav-btns');
+  const acties  = document.getElementById('fc4-actions');
+  const oordeel = document.getElementById('fc4-oordeel');
+  if (toon) {
+    klaar.classList.add('zichtbaar');
+    nav.style.display = 'none';
+    oordeel.classList.remove('zichtbaar');
+    acties.style.display = 'none';
+    const totaal = t4.scoreGoed + t4.scoreFout;
+    const pct = totaal > 0 ? Math.round((t4.scoreGoed / totaal) * 100) : 0;
+    document.getElementById('fc4-klaar-score').innerHTML =
+      `<strong>${t4.scoreGoed}</strong> goed van ${totaal} &nbsp;(${pct}%)`;
+  } else {
+    klaar.classList.remove('zichtbaar');
+    nav.style.display = 'flex';
+    acties.style.display = 'flex';
+  }
+}
+
+/* ── TAB 4 FLIP ── */
+function flipKaart4() {
+  if (t4.isVoltooid) return;
+  const fcCard = document.getElementById('fc4-card');
+  fcCard.classList.toggle('flipped');
+  t4.isOmgedraaid = fcCard.classList.contains('flipped');
+  if (t4.isOmgedraaid) {
+    document.getElementById('fc4-oordeel').classList.add('zichtbaar');
+  } else {
+    document.getElementById('fc4-oordeel').classList.remove('zichtbaar');
+  }
+}
+
+/* ── TAB 4 OORDEEL ── */
+function registreerOordeel4(goed) {
+  if (goed) t4.scoreGoed++; else t4.scoreFout++;
+  updateScoreDisplay4();
+  if (t4.huidigIndex < t4.kaarten.length - 1) {
+    t4.huidigIndex++;
+    toonKaart4();
+  } else {
+    toonVoltooiing4(true);
+  }
+}
+
+/* ── TAB 4 NAVIGATIE ── */
+function volgendeKaartNav4() {
+  if (t4.isVoltooid) return;
+  if (t4.huidigIndex < t4.kaarten.length - 1) {
+    t4.huidigIndex++;
+    toonKaart4();
+  } else {
+    toonVoltooiing4(true);
+  }
+}
+
+function vorigeKaart4() {
+  if (t4.isVoltooid) return;
+  if (t4.huidigIndex > 0) {
+    t4.huidigIndex--;
+    toonKaart4();
+  }
+}
+
+/* ── TAB 4 SHUFFLE ── */
+function schudKaarten4(vanVoltooiing) {
+  t4.kaarten = fisherYates(bronKaarten4);
+  t4.huidigIndex = 0;
+  t4.isOmgedraaid = false;
+  if (vanVoltooiing) {
+    t4.scoreGoed = 0;
+    t4.scoreFout = 0;
+    updateScoreDisplay4();
+  }
+  toonVoltooiing4(false);
+  toonKaart4();
+}
+
+/* ── TAB 4 OPNIEUW ── */
+function opnieuwZelfdePlaats4() {
+  t4.huidigIndex = 0;
+  t4.scoreGoed = 0;
+  t4.scoreFout = 0;
+  t4.isOmgedraaid = false;
+  updateScoreDisplay4();
+  toonVoltooiing4(false);
+  toonKaart4();
+}
+
 /* ── AUTO-START (alle tabs shufflen bij laden) ── */
 document.addEventListener('DOMContentLoaded', () => {
   initFlashcards();
   initFlashcards2();
   initFlashcards3();
+  initFlashcards4();
 });
 </script>
 
