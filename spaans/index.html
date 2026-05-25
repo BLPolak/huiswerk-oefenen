@@ -567,12 +567,75 @@ body {
 
   <!-- ══ TAB 3 — §6.3 WOORDJES ══ -->
   <div class="tab-content" id="tab-3" style="display:none">
+
     <div class="so-banner">
       <div class="so-banner-tekst">SO Spaans &nbsp;·&nbsp; 2 juni &nbsp;·&nbsp; §6.3 Woordjes</div>
     </div>
-    <div class="placeholder-box">
-      📚 §6.3 Woordjes
-      <p>Komt eraan…</p>
+
+    <div class="fc-wrapper">
+
+      <!-- Top bar -->
+      <div class="fc-topbar">
+        <div class="fc-titel">§6.3 Woordjes</div>
+        <div class="fc-teller" id="fc3-teller">1 / 12</div>
+      </div>
+
+      <!-- Score row -->
+      <div class="fc-score-bar">
+        <div class="fc-score-goed" id="fc3-score-goed">✓ 0</div>
+        <div class="fc-score-fout" id="fc3-score-fout">✗ 0</div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="fc-progress-bar">
+        <div class="fc-progress-fill" id="fc3-fill" style="width:8%"></div>
+      </div>
+
+      <!-- Flip card -->
+      <div class="flip-wrapper" onclick="flipKaart3()">
+        <div class="flip-card" id="fc3-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Spaans</div>
+            <div class="flip-tekst" id="fc3-front-tekst"></div>
+            <div class="flip-hint">Klik om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Nederlands</div>
+            <div class="flip-tekst" id="fc3-back-tekst"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="fc-buttons" id="fc3-nav-btns">
+        <button class="fc-btn fc-btn-prev" onclick="vorigeKaart3()">← Vorige</button>
+        <button class="fc-btn fc-btn-flip" onclick="flipKaart3()">Omdraaien</button>
+        <button class="fc-btn fc-btn-next" onclick="volgendeKaartNav3()">Volgende →</button>
+      </div>
+
+      <!-- Goed / Fout (zichtbaar na omdraaien) -->
+      <div class="fc-oordeel" id="fc3-oordeel">
+        <button class="fc-btn-fout" onclick="registreerOordeel3(false)">✗ Fout</button>
+        <button class="fc-btn-goed" onclick="registreerOordeel3(true)">✓ Goed</button>
+      </div>
+
+      <!-- Opnieuw + Shuffle -->
+      <div class="fc-actions" id="fc3-actions">
+        <button class="fc-action-btn" onclick="opnieuwZelfdePlaats3()">↺ Opnieuw</button>
+        <button class="fc-action-btn" onclick="schudKaarten3(false)">🔀 Shuffle</button>
+      </div>
+
+      <!-- Completion screen -->
+      <div class="fc-klaar" id="fc3-klaar">
+        <div class="fc-klaar-emoji">🎉</div>
+        <div class="fc-klaar-titel">Alle kaarten gedaan!</div>
+        <div class="fc-klaar-score" id="fc3-klaar-score"></div>
+        <div class="fc-klaar-btns">
+          <button class="fc-klaar-btn shuffle" onclick="schudKaarten3(true)">🔀 Opnieuw (geschud)</button>
+          <button class="fc-klaar-btn opnieuw" onclick="opnieuwZelfdePlaats3()">↺ Zelfde volgorde</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -848,6 +911,13 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipKaart2(); }
     if (e.key === 'g' || e.key === 'G') { if (t2.isOmgedraaid) registreerOordeel2(true); }
     if (e.key === 'f' || e.key === 'F') { if (t2.isOmgedraaid) registreerOordeel2(false); }
+  } else if (actieveTab === 'tab-3') {
+    if (t3.isVoltooid) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); volgendeKaartNav3(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); vorigeKaart3(); }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipKaart3(); }
+    if (e.key === 'g' || e.key === 'G') { if (t3.isOmgedraaid) registreerOordeel3(true); }
+    if (e.key === 'f' || e.key === 'F') { if (t3.isOmgedraaid) registreerOordeel3(false); }
   }
 });
 
@@ -1016,10 +1086,163 @@ function opnieuwZelfdePlaats2() {
   toonKaart2();
 }
 
-/* ── AUTO-START (beide tabs shufflen bij laden) ── */
+/* ══════════════════════════════════════════════
+   §6.3 FLASHCARDS — volledig onafhankelijke staat
+   ══════════════════════════════════════════════ */
+
+/* ── §6.3 DATA ── */
+const bronKaarten3 = [
+  { front: "todo el mundo",      back: "iedereen" },
+  { front: "si te atreves",      back: "als je durft" },
+  { front: "el corazón",         back: "het hart" },
+  { front: "bailar",             back: "dansen" },
+  { front: "hace calor",         back: "het is warm" },
+  { front: "hace buen tiempo",   back: "het is mooi weer" },
+  { front: "hace sol",           back: "de zon schijnt" },
+  { front: "el viento",          back: "de wind" },
+  { front: "la ola",             back: "de golf (de wave)" },
+  { front: "las montañas",       back: "de bergen" },
+  { front: "cada uno/-a",        back: "elk / ieder" },
+  { front: "el perfil",          back: "het profiel" }
+];
+
+/* ── §6.3 STATE ── */
+const t3 = {
+  kaarten: [],
+  huidigIndex: 0,
+  scoreGoed: 0,
+  scoreFout: 0,
+  isOmgedraaid: false,
+  isVoltooid: false
+};
+
+/* ── §6.3 INIT ── */
+function initFlashcards3() {
+  t3.kaarten = fisherYates(bronKaarten3);
+  t3.huidigIndex = 0;
+  t3.scoreGoed = 0;
+  t3.scoreFout = 0;
+  t3.isOmgedraaid = false;
+  t3.isVoltooid = false;
+  toonKaart3();
+  updateScoreDisplay3();
+  toonVoltooiing3(false);
+}
+
+/* ── §6.3 DISPLAY ── */
+function toonKaart3() {
+  const kaart = t3.kaarten[t3.huidigIndex];
+  const totaal = t3.kaarten.length;
+  document.getElementById('fc3-card').classList.remove('flipped');
+  t3.isOmgedraaid = false;
+  document.getElementById('fc3-front-tekst').textContent = kaart.front;
+  document.getElementById('fc3-back-tekst').textContent = kaart.back;
+  document.getElementById('fc3-teller').textContent = `${t3.huidigIndex + 1} / ${totaal}`;
+  document.getElementById('fc3-fill').style.width = `${((t3.huidigIndex + 1) / totaal) * 100}%`;
+  document.getElementById('fc3-oordeel').classList.remove('zichtbaar');
+}
+
+function updateScoreDisplay3() {
+  document.getElementById('fc3-score-goed').textContent = `✓ ${t3.scoreGoed}`;
+  document.getElementById('fc3-score-fout').textContent = `✗ ${t3.scoreFout}`;
+}
+
+function toonVoltooiing3(toon) {
+  t3.isVoltooid = toon;
+  const klaar   = document.getElementById('fc3-klaar');
+  const nav     = document.getElementById('fc3-nav-btns');
+  const acties  = document.getElementById('fc3-actions');
+  const oordeel = document.getElementById('fc3-oordeel');
+  if (toon) {
+    klaar.classList.add('zichtbaar');
+    nav.style.display = 'none';
+    oordeel.classList.remove('zichtbaar');
+    acties.style.display = 'none';
+    const totaal = t3.scoreGoed + t3.scoreFout;
+    const pct = totaal > 0 ? Math.round((t3.scoreGoed / totaal) * 100) : 0;
+    document.getElementById('fc3-klaar-score').innerHTML =
+      `<strong>${t3.scoreGoed}</strong> goed van ${totaal} &nbsp;(${pct}%)`;
+  } else {
+    klaar.classList.remove('zichtbaar');
+    nav.style.display = 'flex';
+    acties.style.display = 'flex';
+  }
+}
+
+/* ── §6.3 FLIP ── */
+function flipKaart3() {
+  if (t3.isVoltooid) return;
+  const fcCard = document.getElementById('fc3-card');
+  fcCard.classList.toggle('flipped');
+  t3.isOmgedraaid = fcCard.classList.contains('flipped');
+  if (t3.isOmgedraaid) {
+    document.getElementById('fc3-oordeel').classList.add('zichtbaar');
+  } else {
+    document.getElementById('fc3-oordeel').classList.remove('zichtbaar');
+  }
+}
+
+/* ── §6.3 OORDEEL ── */
+function registreerOordeel3(goed) {
+  if (goed) t3.scoreGoed++; else t3.scoreFout++;
+  updateScoreDisplay3();
+  if (t3.huidigIndex < t3.kaarten.length - 1) {
+    t3.huidigIndex++;
+    toonKaart3();
+  } else {
+    toonVoltooiing3(true);
+  }
+}
+
+/* ── §6.3 NAVIGATIE ── */
+function volgendeKaartNav3() {
+  if (t3.isVoltooid) return;
+  if (t3.huidigIndex < t3.kaarten.length - 1) {
+    t3.huidigIndex++;
+    toonKaart3();
+  } else {
+    toonVoltooiing3(true);
+  }
+}
+
+function vorigeKaart3() {
+  if (t3.isVoltooid) return;
+  if (t3.huidigIndex > 0) {
+    t3.huidigIndex--;
+    toonKaart3();
+  }
+}
+
+/* ── §6.3 SHUFFLE ── */
+function schudKaarten3(vanVoltooiing) {
+  t3.kaarten = fisherYates(bronKaarten3);
+  t3.huidigIndex = 0;
+  t3.isOmgedraaid = false;
+  if (vanVoltooiing) {
+    t3.scoreGoed = 0;
+    t3.scoreFout = 0;
+    updateScoreDisplay3();
+  }
+  toonVoltooiing3(false);
+  toonKaart3();
+}
+
+/* ── §6.3 OPNIEUW ── */
+function opnieuwZelfdePlaats3() {
+  t3.huidigIndex = 0;
+  t3.scoreGoed = 0;
+  t3.scoreFout = 0;
+  t3.isOmgedraaid = false;
+  updateScoreDisplay3();
+  toonVoltooiing3(false);
+  toonKaart3();
+}
+
+/* ── AUTO-START (alle tabs shufflen bij laden) ── */
 document.addEventListener('DOMContentLoaded', () => {
   initFlashcards();
   initFlashcards2();
+  initFlashcards3();
 });
 </script>
 
