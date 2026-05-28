@@ -1,966 +1,524 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Geschiedenis — Regenten en vorsten · Huiswerk Oefenen</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geschiedenis – Pruiken en Revoluties</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rood: #c0392b;
+      --geel: #f39c12;
+      --donker: #1a1a2e;
+      --grijs: #7f8c8d;
+      --bg: #f8f9fa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: #333; }
 
-:root {
-  --bruin: #92400e;
-  --bruin-mid: #b45309;
-  --bruin-licht: #d97706;
-  --bruin-bg: #fffbeb;
-  --bruin-rand: #fde68a;
-  --tekst: #1a202c;
-  --tekst-licht: #4a5568;
-  --wit: #ffffff;
-  --goed: #276749;
-  --goed-bg: #f0fff4;
-  --fout: #c53030;
-  --fout-bg: #fff5f5;
-  --blauw: #2b6cb0;
-  --blauw-bg: #ebf8ff;
-  --oranje: #c05621;
-  --oranje-bg: #fffaf0;
-  --achtergrond: #faf5f0;
-}
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--donker); color: white;
+      padding: 0.9rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    header a { color: var(--geel); text-decoration: none; font-size: 0.9rem; font-weight: 700; }
+    header h1 { font-size: 1.1rem; font-weight: 800; }
 
-body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--achtergrond);
-  color: var(--tekst);
-  min-height: 100vh;
-}
+    .hero {
+      background: linear-gradient(135deg, var(--rood), var(--geel));
+      color: white; padding: 2rem 1.5rem; text-align: center;
+    }
+    .hero h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .hero p { opacity: 0.9; }
 
-.container { max-width: 860px; margin: 0 auto; padding: 24px 16px 64px; }
+    .tab-buttons {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: white; border-bottom: 2px solid #eee;
+      position: sticky; top: 52px; z-index: 90;
+    }
+    .tab-btn {
+      padding: 0.45rem 1rem;
+      border: 2px solid var(--rood); border-radius: 2rem;
+      background: white; color: var(--rood);
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.88rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover { background: var(--rood); color: white; }
 
-/* ── Terug-knop ── */
-.terug {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--wit); border: 2px solid var(--bruin-rand);
-  color: var(--bruin); font-weight: 800; font-size: 0.9rem;
-  text-decoration: none; padding: 8px 16px; border-radius: 20px;
-  margin-bottom: 20px; transition: background 0.15s;
-}
-.terug:hover { background: var(--bruin-bg); }
+    .tab-pane { display: none; padding: 1.5rem; max-width: 780px; margin: 0 auto; }
+    .tab-pane.active { display: block; }
 
-/* ── Header ── */
-.pagina-header { text-align: center; margin-bottom: 28px; }
-.pagina-header h1 { font-size: 2rem; font-weight: 900; color: var(--bruin); }
-.pagina-header p { color: var(--tekst-licht); margin-top: 6px; font-size: 0.95rem; font-weight: 600; }
+    .video-wrap {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      border-radius: 12px; overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-/* ── Tabs ── */
-.tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-.tab-knop {
-  flex: 1; min-width: 140px; padding: 12px 16px;
-  border: 2px solid var(--bruin-rand); border-radius: 12px;
-  background: var(--wit); font-family: 'Nunito', sans-serif;
-  font-size: 0.95rem; font-weight: 800; cursor: pointer;
-  color: var(--tekst-licht); transition: all 0.15s;
-}
-.tab-knop:hover { background: var(--bruin-bg); border-color: var(--bruin-licht); }
-.tab-knop.actief { background: var(--bruin); border-color: var(--bruin); color: var(--wit); }
-.tab-inhoud { display: none; }
-.tab-inhoud.zichtbaar { display: block; }
+    .sec-title {
+      font-size: 1rem; font-weight: 800; color: var(--donker);
+      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem;
+    }
 
-/* ── Kaart ── */
-.kaart {
-  background: var(--wit); border-radius: 16px;
-  border: 2px solid var(--bruin-rand); padding: 24px;
-  margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-.kaart-header {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 1.1rem; font-weight: 900; color: var(--bruin);
-  margin-bottom: 18px; padding-bottom: 12px;
-  border-bottom: 2px solid var(--bruin-bg);
-}
-.para-badge {
-  background: var(--bruin); color: var(--wit);
-  font-size: 0.72rem; font-weight: 800; padding: 3px 10px;
-  border-radius: 20px; white-space: nowrap; letter-spacing: 0.3px;
-}
+    .fc-box {
+      background: white; border-radius: 16px; padding: 1.2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 1.8rem;
+    }
+    .fc-prog { text-align: center; font-size: 0.82rem; color: var(--grijs); margin-bottom: 0.8rem; }
+    .fc-card {
+      background: linear-gradient(135deg, var(--rood), #e74c3c);
+      color: white; border-radius: 12px; padding: 1.8rem 1.2rem;
+      min-height: 130px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      cursor: pointer; transition: background 0.3s; margin-bottom: 0.9rem;
+    }
+    .fc-card.flipped { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+    .fc-label { font-size: 0.72rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .fc-text { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+    .fc-hint { font-size: 0.72rem; opacity: 0.7; margin-top: 0.7rem; }
+    .btn-row { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+    .btn { padding: 0.45rem 0.9rem; border: none; border-radius: 2rem; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.82rem; cursor: pointer; }
+    .btn-gray { background: #ecf0f1; color: #555; }
+    .btn-red { background: var(--rood); color: white; }
+    .btn-gold { background: var(--geel); color: white; }
 
-/* ── Theorie ── */
-.kaart h3 { font-size: 0.98rem; font-weight: 900; color: var(--bruin); margin: 16px 0 6px; }
-.kaart h3:first-of-type { margin-top: 0; }
-.kaart p { line-height: 1.75; color: var(--tekst); margin-bottom: 8px; font-size: 0.93rem; }
-.kaart ul, .kaart ol { padding-left: 20px; margin-bottom: 10px; }
-.kaart li { line-height: 1.75; margin-bottom: 3px; font-size: 0.93rem; }
-
-.info-blok {
-  background: var(--blauw-bg); border-left: 4px solid var(--blauw);
-  border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0;
-  font-size: 0.9rem; line-height: 1.65;
-}
-.info-blok strong { color: var(--blauw); }
-
-.voorbeeld-blok {
-  background: var(--bruin-bg); border-left: 4px solid var(--bruin-mid);
-  border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0;
-  font-size: 0.9rem; line-height: 1.65;
-}
-.voorbeeld-blok strong { color: var(--bruin); }
-
-.let-op {
-  background: var(--oranje-bg); border-left: 4px solid var(--oranje);
-  border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0;
-  font-size: 0.9rem; line-height: 1.65;
-}
-.let-op strong { color: var(--oranje); }
-
-.begrip-lijst { margin: 8px 0; }
-.begrip-rij {
-  display: flex; gap: 10px; padding: 8px 0;
-  border-bottom: 1px solid var(--bruin-bg); font-size: 0.9rem;
-}
-.begrip-rij:last-child { border-bottom: none; }
-.begrip-term { font-weight: 800; color: var(--bruin); min-width: 190px; flex-shrink: 0; }
-.begrip-def { color: var(--tekst); line-height: 1.5; }
-
-.vergelijk-tabel { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88rem; }
-.vergelijk-tabel th {
-  background: var(--bruin); color: var(--wit);
-  padding: 9px 12px; text-align: left; font-weight: 800;
-}
-.vergelijk-tabel td { padding: 8px 12px; border-bottom: 1px solid var(--bruin-rand); vertical-align: top; }
-.vergelijk-tabel tr:nth-child(even) td { background: var(--bruin-bg); }
-
-/* ── Video links ── */
-.video-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--bruin-bg); border: 2px solid var(--bruin-rand);
-  color: var(--bruin); font-weight: 800; font-size: 0.85rem;
-  text-decoration: none; padding: 6px 14px; border-radius: 20px;
-  margin: 4px 4px 4px 0; transition: background 0.15s;
-}
-.video-link:hover { background: #fef3c7; }
-.video-links { margin: 12px 0; }
-
-/* ── Flashcards ── */
-.fc-voortgang {
-  text-align: center; font-weight: 700; color: var(--tekst-licht);
-  margin-bottom: 10px; font-size: 0.88rem;
-}
-.fc-dot-rij {
-  display: flex; gap: 5px; justify-content: center;
-  flex-wrap: wrap; margin-bottom: 18px;
-}
-.fc-dot {
-  width: 11px; height: 11px; border-radius: 50%;
-  background: var(--bruin-rand); transition: all 0.2s; flex-shrink: 0;
-}
-.fc-dot.gezien { background: var(--bruin-licht); }
-.fc-dot.huidig { background: var(--bruin); transform: scale(1.4); }
-
-.fc-filter-rij {
-  display: flex; gap: 6px; flex-wrap: wrap;
-  justify-content: center; margin-bottom: 18px;
-}
-.fc-filter-knop {
-  padding: 5px 13px; border-radius: 20px; border: 2px solid var(--bruin-rand);
-  background: var(--wit); font-family: 'Nunito', sans-serif; font-size: 0.8rem;
-  font-weight: 800; cursor: pointer; color: var(--tekst-licht); transition: all 0.15s;
-}
-.fc-filter-knop.actief { background: var(--bruin); border-color: var(--bruin); color: var(--wit); }
-
-.fc-scene { perspective: 800px; width: 100%; max-width: 520px; margin: 0 auto 18px; height: 230px; }
-.fc-kaart {
-  width: 100%; height: 100%; position: relative;
-  transform-style: preserve-3d; transition: transform 0.45s ease;
-  cursor: pointer;
-}
-.fc-kaart.gedraaid { transform: rotateY(180deg); }
-.fc-voorkant, .fc-achterkant {
-  position: absolute; inset: 0; border-radius: 16px;
-  border: 2px solid var(--bruin-rand); padding: 24px;
-  backface-visibility: hidden; display: flex; flex-direction: column;
-  justify-content: center; align-items: center; text-align: center;
-}
-.fc-voorkant {
-  background: var(--wit);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-.fc-achterkant {
-  background: var(--bruin-bg);
-  transform: rotateY(180deg);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-.fc-tag {
-  font-size: 0.72rem; font-weight: 800; color: var(--bruin);
-  text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;
-  background: var(--bruin-bg); padding: 3px 10px; border-radius: 20px;
-}
-.fc-achterkant .fc-tag { background: var(--wit); }
-.fc-begrip { font-size: 1.2rem; font-weight: 900; color: var(--bruin); margin-bottom: 8px; }
-.fc-definitie { font-size: 0.9rem; line-height: 1.65; color: var(--tekst); }
-.fc-hint { font-size: 0.75rem; color: var(--tekst-licht); margin-top: 14px; }
-
-.fc-knoppen { display: flex; gap: 10px; justify-content: center; margin-bottom: 18px; flex-wrap: wrap; }
-.fc-btn {
-  padding: 10px 20px; border-radius: 10px; border: 2px solid var(--bruin-rand);
-  background: var(--wit); font-family: 'Nunito', sans-serif; font-size: 0.88rem;
-  font-weight: 800; cursor: pointer; color: var(--tekst-licht); transition: all 0.15s;
-}
-.fc-btn:hover { background: var(--bruin-bg); border-color: var(--bruin-licht); }
-.fc-btn.primair { background: var(--bruin); border-color: var(--bruin); color: var(--wit); }
-.fc-btn.primair:hover { background: #78350f; }
-
-.fc-klaar { text-align: center; padding: 32px 16px; display: none; }
-.fc-klaar.zichtbaar { display: block; }
-.fc-klaar-emoji { font-size: 3rem; margin-bottom: 12px; }
-.fc-klaar h3 { font-size: 1.25rem; font-weight: 900; color: var(--bruin); margin-bottom: 8px; }
-.fc-klaar p { color: var(--tekst-licht); margin-bottom: 20px; font-size: 0.92rem; }
-
-/* ── Toetsvragen ── */
-.score-balk { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-.score-item {
-  flex: 1; min-width: 90px; padding: 12px 8px;
-  border-radius: 12px; text-align: center; font-weight: 800;
-}
-.score-item span { display: block; font-size: 1.6rem; }
-.score-item small { font-size: 0.75rem; font-weight: 700; }
-.score-item.goed { background: var(--goed-bg); color: var(--goed); border: 2px solid #c6f6d5; }
-.score-item.fout { background: var(--fout-bg); color: var(--fout); border: 2px solid #fed7d7; }
-.score-item.totaal { background: var(--blauw-bg); color: var(--blauw); border: 2px solid #bee3f8; }
-
-.sectie-kop {
-  font-size: 0.95rem; font-weight: 900; color: var(--bruin);
-  padding: 10px 16px; background: var(--bruin-bg);
-  border-radius: 10px; margin: 24px 0 14px;
-  border-left: 4px solid var(--bruin);
-}
-
-.vraag-blok {
-  background: var(--wit); border-radius: 14px; border: 2px solid var(--bruin-rand);
-  padding: 20px; margin-bottom: 14px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-.vraag-nr {
-  display: inline-block; background: var(--bruin); color: var(--wit);
-  font-weight: 800; font-size: 0.75rem; padding: 3px 10px;
-  border-radius: 20px; margin-bottom: 10px;
-}
-.vraag-tekst { font-size: 0.93rem; line-height: 1.75; margin-bottom: 14px; color: var(--tekst); }
-.vraag-tekst strong { color: var(--bruin); }
-
-.mc-opties { display: flex; flex-direction: column; gap: 7px; }
-.mc-optie {
-  display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px;
-  border-radius: 10px; border: 2px solid var(--bruin-rand); background: var(--wit);
-  font-family: 'Nunito', sans-serif; font-size: 0.9rem; cursor: pointer;
-  text-align: left; transition: all 0.15s; font-weight: 600; line-height: 1.5;
-}
-.mc-optie:hover:not(:disabled) { background: var(--bruin-bg); border-color: var(--bruin-licht); }
-.optie-letter {
-  min-width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
-  background: var(--bruin-bg); color: var(--bruin);
-  font-weight: 800; font-size: 0.82rem;
-  display: flex; align-items: center; justify-content: center;
-}
-.mc-optie.goed { background: var(--goed-bg); border-color: var(--goed); }
-.mc-optie.goed .optie-letter { background: var(--goed); color: var(--wit); }
-.mc-optie.fout { background: var(--fout-bg); border-color: var(--fout); }
-.mc-optie.fout .optie-letter { background: var(--fout); color: var(--wit); }
-.mc-optie:disabled { cursor: not-allowed; opacity: 0.85; }
-
-.mc-feedback {
-  font-size: 0.86rem; padding: 9px 14px; border-radius: 8px;
-  margin-top: 8px; font-weight: 700; display: none;
-}
-.mc-feedback.zichtbaar { display: block; }
-.mc-feedback.goed { background: var(--goed-bg); color: var(--goed); border: 1.5px solid #c6f6d5; }
-.mc-feedback.fout { background: var(--fout-bg); color: var(--fout); border: 1.5px solid #fed7d7; }
-
-.open-textarea {
-  width: 100%; min-height: 80px; padding: 12px; border-radius: 10px;
-  border: 2px solid var(--bruin-rand); font-family: 'Nunito', sans-serif;
-  font-size: 0.9rem; resize: vertical; margin-bottom: 10px;
-  outline: none; transition: border-color 0.15s; color: var(--tekst);
-}
-.open-textarea:focus { border-color: var(--bruin-mid); }
-
-.btn-model {
-  padding: 8px 16px; border-radius: 10px; border: 2px solid var(--bruin);
-  background: var(--wit); font-family: 'Nunito', sans-serif; font-size: 0.85rem;
-  font-weight: 800; cursor: pointer; color: var(--bruin); transition: all 0.15s;
-}
-.btn-model:hover { background: var(--bruin-bg); }
-
-.model-antwoord {
-  background: var(--bruin-bg); border-radius: 10px; padding: 12px 16px;
-  margin-top: 10px; font-size: 0.88rem; line-height: 1.7; display: none;
-  border-left: 4px solid var(--bruin-mid);
-}
-.model-antwoord.zichtbaar { display: block; }
-.model-antwoord strong { color: var(--bruin); }
-
-/* ── Responsive ── */
-@media (max-width: 580px) {
-  .pagina-header h1 { font-size: 1.5rem; }
-  .begrip-rij { flex-direction: column; }
-  .begrip-term { min-width: unset; }
-  .fc-scene { height: 270px; }
-  .vergelijk-tabel { font-size: 0.8rem; }
-  .tab-knop { font-size: 0.85rem; padding: 10px 10px; }
-}
-</style>
+    .mcq-box {
+      background: white; border-radius: 16px; padding: 1.2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 2rem;
+    }
+    .mcq-prog { text-align: center; font-size: 0.82rem; color: var(--grijs); margin-bottom: 0.8rem; }
+    .mcq-q { font-size: 0.98rem; font-weight: 700; color: var(--donker); margin-bottom: 0.9rem; line-height: 1.5; min-height: 2rem; }
+    .mcq-opts { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 0.8rem; }
+    .mcq-opt {
+      padding: 0.65rem 1rem; border: 2px solid #ddd; border-radius: 10px;
+      background: white; font-family: 'Nunito', sans-serif; font-size: 0.9rem;
+      cursor: pointer; text-align: left; transition: border-color 0.15s, background 0.15s;
+    }
+    .mcq-opt:hover:not(:disabled) { border-color: var(--rood); background: #fff5f5; }
+    .mcq-opt.correct { background: #d5f5e3; border-color: #27ae60; color: #1e8449; font-weight: 700; }
+    .mcq-opt.wrong { background: #fde8e8; border-color: #e74c3c; color: #c0392b; font-weight: 700; }
+    .mcq-opt:disabled { cursor: default; }
+    .mcq-fb { font-size: 0.88rem; font-weight: 700; min-height: 1.3rem; margin-bottom: 0.5rem; }
+    .mcq-fb.goed { color: #27ae60; }
+    .mcq-fb.fout { color: #e74c3c; }
+    .mcq-sc { text-align: center; font-size: 0.82rem; color: var(--grijs); margin-top: 0.5rem; }
+    .done-banner {
+      margin-top: 1rem; padding: 1.2rem; border-radius: 12px;
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      color: white; text-align: center; font-weight: 700; font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
 
-  <a href="/huiswerk-oefenen/" class="terug">← Terug naar overzicht</a>
+<header>
+  <a href="../index.html">← Terug</a>
+  <h1>📜 Geschiedenis</h1>
+</header>
 
-  <header class="pagina-header">
-    <h1>🏰 Geschiedenis — Regenten en vorsten</h1>
-    <p>Hoofdstuk 3 · 1600–1700 · Uitleg, flashcards &amp; toetsvragen</p>
-  </header>
+<div class="hero">
+  <h2>Pruiken en Revoluties</h2>
+  <p>Hoofdstuk 4 — §4.1 t/m §4.4</p>
+</div>
 
-  <div class="tabs">
-    <button class="tab-knop actief" onclick="wisselTab('uitleg', this)">📖 Uitleg</button>
-    <button class="tab-knop" onclick="wisselTab('flashcards', this)">🃏 Flashcards</button>
-    <button class="tab-knop" onclick="wisselTab('toetsvragen', this)">✏️ Toetsvragen</button>
+<div class="tab-buttons">
+  <button class="tab-btn active" data-tab="t41" onclick="showTab('t41')">§4.1 Pruikentijd</button>
+  <button class="tab-btn" data-tab="t42" onclick="showTab('t42')">§4.2 Amerika</button>
+  <button class="tab-btn" data-tab="t43" onclick="showTab('t43')">§4.3 Frankrijk</button>
+  <button class="tab-btn" data-tab="t44" onclick="showTab('t44')">§4.4 Nederland</button>
+</div>
+
+<!-- §4.1 -->
+<div id="t41" class="tab-pane active">
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/2qjOotKzQUY" allowfullscreen></iframe>
   </div>
-
-  <!-- ═══════════════════════════════════════
-       TAB 1: UITLEG
-  ═══════════════════════════════════════ -->
-  <div id="tab-uitleg" class="tab-inhoud zichtbaar">
-
-    <!-- §3.1 -->
-    <div class="kaart">
-      <div class="kaart-header"><span class="para-badge">§3.1</span> De Republiek der Zeven Verenigde Nederlanden</div>
-
-      <h3>Wat was de Republiek?</h3>
-      <p>Na de Tachtigjarige Oorlog (1568–1648) ontstond er een unieke staatsvorm: de <strong>Republiek der Zeven Verenigde Nederlanden</strong>. Zeven gewesten (Holland, Zeeland, Utrecht, Gelderland, Overijssel, Friesland en Groningen) werkten samen, maar bleven elk grotendeels zelfstandig.</p>
-      <p>De Republiek had geen koning. In plaats daarvan bestuurden <strong>regenten</strong> — rijke kooplieden en edelen — de steden en gewesten. Dit maakte de Republiek uniek in een Europa vol monarchieën.</p>
-
-      <h3>De Staten-Generaal</h3>
-      <p>De <strong>Staten-Generaal</strong> was het overlegorgaan van alle zeven gewesten. Elk gewest had één stem, ongeacht de grootte. Alle gewesten moesten het eens zijn over buitenlandse politiek en oorlog (<strong>unanimiteit</strong>). Dit maakte besluitvorming soms traag, maar zorgde ervoor dat alle gewesten medezeggenschap hadden.</p>
-
-      <div class="info-blok">
-        <strong>💡 Holland domineerde</strong><br>
-        Holland was het rijkste gewest en betaalde meer dan de helft van de staatskosten. Daardoor had Holland in de praktijk de meeste invloed, ook al had elk gewest formeel één stem.
-      </div>
-
-      <h3>De positie van de stadhouder</h3>
-      <p>De <strong>stadhouder</strong> was oorspronkelijk de vertegenwoordiger van de Spaanse koning in een gewest. Na de onafhankelijkheid werd de stadhouder een militaire leider die door de gewesten werd aangesteld. De prins van Oranje bekleedde gewoonlijk de stadhoudersfunctie in meerdere gewesten tegelijk.</p>
-
-      <div class="let-op">
-        <strong>⚠️ Let op:</strong> De stadhouder was geen koning. Hij had geen erfelijk recht op zijn positie (al werd het in de praktijk steeds erfelijker). Hij was in dienst van de Staten-Generaal.
-      </div>
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/A2-dz0AxXYE" allowfullscreen></iframe>
+  </div>
+  <div class="sec-title">🃏 Begrippen — §4.1 De pruikentijd</div>
+  <div class="fc-box">
+    <div class="fc-prog" id="fp-41"></div>
+    <div class="fc-card" id="fc-41" onclick="flipCard('41')">
+      <div class="fc-label" id="fl-41">Begrip</div>
+      <div class="fc-text" id="ft-41"></div>
+      <div class="fc-hint" id="fh-41">Tik om de definitie te zien</div>
     </div>
-
-    <!-- §3.2 -->
-    <div class="kaart">
-      <div class="kaart-header"><span class="para-badge">§3.2</span> Regenten en stadhouders: strijd om de macht</div>
-
-      <h3>Wie waren de regenten?</h3>
-      <p><strong>Regenten</strong> waren een kleine groep rijke, invloedrijke families die de stadsbesturen (vroedschappen) en gewestelijke besturen (Staten) bezetten. Ze waren geen adel van geboorte, maar hadden hun macht verkregen via handel en geld. Ze bestuurden de Republiek en bepaalden het beleid.</p>
-      <p>De regenten waren voor rust en handel: ze wilden vrede om te kunnen handelen. Ze keken met wantrouwen naar de macht van de stadhouder.</p>
-
-      <h3>Oranjegezinden vs. staatsgezinden</h3>
-      <table class="vergelijk-tabel">
-        <tr><th>Staatsgezinden (regenten)</th><th>Oranjegezinden</th></tr>
-        <tr><td>Wilden een sterke rol voor de Staten; zwakke stadhouder</td><td>Wilden een sterke prins van Oranje als leider</td></tr>
-        <tr><td>Rijke kooplieden, bestuurlijke elite</td><td>Calvinistische predikanten, gewone burgers, militairen</td></tr>
-        <tr><td>Voorkeur voor vrede en handel</td><td>Meer bereid tot oorlog voor het geloof en de natie</td></tr>
-        <tr><td>Leider: Johan de Witt (Grand Pensionaris)</td><td>Leider: Willem III van Oranje</td></tr>
-      </table>
-
-      <h3>Johan de Witt en het Eerste Stadhouderloze Tijdperk</h3>
-      <p>Na de dood van stadhouder Willem II (1650) bleef de stadhoudersfunctie vacant in Holland. <strong>Johan de Witt</strong> werd als <strong>raadspensionaris</strong> (ook: Grand Pensionaris) de machtigste bestuurder van de Republiek. Hij voerde een staatsgezind beleid: sterke handelsbelangen, voorzichtige buitenlandse politiek.</p>
-
-      <div class="voorbeeld-blok">
-        <strong>Rampjaar 1672:</strong> In 1672 vielen Frankrijk, Engeland, Münster en Keulen tegelijk de Republiek aan. De Republiek stond op de rand van de afgrond. Het volk gaf de schuld aan Johan de Witt. Hij en zijn broer Cornelis werden door een menigte gelyncht in Den Haag. Willem III van Oranje werd aangesteld als stadhouder.
-      </div>
-
-      <h3>Willem III van Oranje</h3>
-      <p><strong>Willem III</strong> werd in 1672 stadhouder en leidde de verdediging van de Republiek. In 1688 landde hij met een vloot in Engeland en werd koning van Engeland — de <strong>Glorious Revolution</strong>. Hiermee werd de Republiek en Engeland bondgenoten tegen Frankrijk.</p>
+    <div class="btn-row">
+      <button class="btn btn-gray" onclick="prevCard('41')">◀ Vorige</button>
+      <button class="btn btn-red" onclick="nextCard('41')">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleCards('41')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetCards('41')">↺ Opnieuw</button>
     </div>
-
-    <!-- §3.3 -->
-    <div class="kaart">
-      <div class="kaart-header"><span class="para-badge">§3.3</span> Handel en de VOC</div>
-
-      <h3>De Gouden Eeuw van de handel</h3>
-      <p>In de 17e eeuw was de Republiek de grootste handelsnatie ter wereld. Amsterdam was het centrum van de wereldhandel. Dit was mogelijk doordat de Republiek:</p>
-      <ul>
-        <li>Goedkope en efficiënte schepen had (de <strong>fluit</strong>)</li>
-        <li>Een goed bankwezen had (de Amsterdamsche Wisselbank, 1609)</li>
-        <li>Relatief religieuze tolerantie bood, waardoor vluchtelingen en handelaren van overal kwamen</li>
-        <li>De eerste aandelenbeurs ter wereld had (Amsterdam, 1602)</li>
-      </ul>
-
-      <h3>De VOC</h3>
-      <p>De <strong>VOC (Vereenigde Oost-Indische Compagnie)</strong> werd in 1602 opgericht. Het was de eerste naamloze vennootschap ter wereld: gewone burgers konden aandelen kopen en zo mee-investeren in de handel met Azië.</p>
-      <p>De VOC had enorme macht: het mocht namens de Republiek oorlog voeren, verdragen sluiten en gebieden besturen. Het VOC-netwerk liep van de Kaap de Goede Hoop tot Japan.</p>
-
-      <div class="info-blok">
-        <strong>💡 WIC — West-Indische Compagnie</strong><br>
-        De <strong>WIC (1621)</strong> deed hetzelfde als de VOC, maar dan voor de handel met West-Afrika en Amerika. De WIC was betrokken bij de slavenhandel en de kolonie Nieuw-Amsterdam (later New York).
-      </div>
-
-      <h3>Stapelmarkt Amsterdam</h3>
-      <p>Amsterdam functioneerde als <strong>stapelmarkt</strong>: goederen uit de hele wereld kwamen er eerst naartoe, werden opgeslagen, verhandeld en daarna doorgestuurd. Zo verdiende Amsterdam aan elke transactie. Graan uit de Oostzee, specerijen uit Azië, suiker uit Amerika — alles passeerde Amsterdam.</p>
-
-      <div class="begrip-lijst">
-        <div class="begrip-rij"><span class="begrip-term">Fluit</span><span class="begrip-def">Efficiënt Nederlands vrachtschip met een grote laadruimte en kleine bemanning, waardoor goedkoop transport mogelijk was</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Aandeel</span><span class="begrip-def">Bewijs van deelneming in het kapitaal van een onderneming; je deelt mee in de winst (dividend)</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Dividend</span><span class="begrip-def">Winstuitkering aan aandeelhouders</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Stapelmarkt</span><span class="begrip-def">Handelscentrum waar goederen worden opgeslagen en verhandeld voordat ze verder worden gedistribueerd</span></div>
-      </div>
+  </div>
+  <div class="sec-title">❓ Meerkeuzevragen — §4.1</div>
+  <div class="mcq-box" id="mcq-41">
+    <div class="mcq-prog" id="mp-41"></div>
+    <div class="mcq-q" id="mq-41"></div>
+    <div class="mcq-opts" id="mo-41"></div>
+    <div class="mcq-fb" id="mf-41"></div>
+    <div class="btn-row">
+      <button class="btn btn-red" id="mn-41" onclick="nextMCQ('41')" style="display:none">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleMCQ('41')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetMCQ('41')">↺ Opnieuw</button>
     </div>
+    <div class="mcq-sc" id="ms-41">Score: 0/0</div>
+  </div>
+</div>
 
-    <!-- §3.4 -->
-    <div class="kaart">
-      <div class="kaart-header"><span class="para-badge">§3.4</span> Religie en samenleving</div>
-
-      <h3>Het calvinisme als staatsgodsdienst</h3>
-      <p>De <strong>Gereformeerde Kerk</strong> (calvinistisch) was de officiële kerk van de Republiek. Alleen leden konden openbare ambten bekleden. Toch waren niet alle inwoners gereformeerd: er waren ook lutheranen, doopsgezinden, joden en katholieken.</p>
-
-      <h3>Godsdienstvrijheid en tolerantie</h3>
-      <p>De Republiek stond bekend om haar relatieve <strong>godsdienstvrijheid</strong>. Andere geloofsgroepen mochten hun geloof privé uitoefenen, maar niet publiekelijk. Katholicisme was officieel verboden, maar in de praktijk werd het gedoogd (<strong>schuilkerken</strong>).</p>
-
-      <div class="voorbeeld-blok">
-        <strong>Ons' Lieve Heer op Solder:</strong> In Amsterdam staat nog steeds een schuilkerk op zolder — een voorbeeld van hoe katholieken in het geheim hun geloof beleden.
-      </div>
-
-      <h3>De Synode van Dordrecht (1618–1619)</h3>
-      <p>Binnen het calvinisme was er een groot conflict tussen <strong>remonstranten</strong> (volgeling van Arminius: mild, geen volledige predestinatie) en <strong>contraremonstranten</strong> (volgeling van Gomarus: streng, volledige predestinatie). Dit conflict had ook een politieke kant: Oldenbarnevelt steunde de remonstranten, Maurits de contraremonstranten.</p>
-      <p>Op de Synode van Dordrecht (1618–1619) wonnen de contraremonstranten. Johan van Oldenbarnevelt, de machtige landsadvocaat, werd terechtgesteld.</p>
-
-      <div class="info-blok">
-        <strong>💡 Predestinatie</strong><br>
-        Het calvinistische idee dat God van tevoren al heeft bepaald wie gered wordt (uitverkoren) en wie niet. De contraremonstranten geloofden hier sterk in; de remonstranten nuanceerden dit.
-      </div>
-
-      <h3>Joodse gemeenschap</h3>
-      <p>Amsterdam trok veel Sefardische joden aan die uit Spanje en Portugal waren gevlucht. Ze brachten handelsnetwerken, kapitaal en kennis mee en droegen bij aan de economische bloei. De Amsterdamse jodenbuurt was de grootste in West-Europa.
-      </p>
+<!-- §4.2 -->
+<div id="t42" class="tab-pane">
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/DqO3cnPwJVk" allowfullscreen></iframe>
+  </div>
+  <div class="sec-title">🃏 Begrippen — §4.2 Revolutie in Amerika</div>
+  <div class="fc-box">
+    <div class="fc-prog" id="fp-42"></div>
+    <div class="fc-card" id="fc-42" onclick="flipCard('42')">
+      <div class="fc-label" id="fl-42">Begrip</div>
+      <div class="fc-text" id="ft-42"></div>
+      <div class="fc-hint" id="fh-42">Tik om de definitie te zien</div>
     </div>
-
-    <!-- §3.5 -->
-    <div class="kaart">
-      <div class="kaart-header"><span class="para-badge">§3.5</span> Oorlogen en diplomatie</div>
-
-      <h3>De Tachtigjarige Oorlog (1568–1648)</h3>
-      <p>De Tachtigjarige Oorlog begon als opstand van de Nederlanden tegen Spanje onder leiding van Willem van Oranje. In 1609 werd de <strong>Twaalfjarig Bestand</strong> gesloten: een tijdelijke vrede van 12 jaar. In 1648 eindigde de oorlog definitief met de <strong>Vrede van Münster</strong>: Spanje erkende de Republiek als onafhankelijk land.</p>
-
-      <h3>Oorlogen met Engeland (Engelse Zeeoorlogen)</h3>
-      <p>De Republiek voerde drie <strong>Engelse Zeeoorlogen</strong> (1652–1654, 1665–1667, 1672–1674). De conflicten gingen over handelsrivaaliteit: wie domineerde de zeehandel? De tweede oorlog eindigde met de <strong>Vrede van Breda (1667)</strong>, waarbij de Republiek Nieuw-Amsterdam aan Engeland afstond (dat werd New York), maar Suriname verkreeg.</p>
-
-      <h3>Het Rampjaar 1672</h3>
-      <p>In 1672 vielen vier vijanden tegelijk aan: <strong>Frankrijk</strong> (Lodewijk XIV), <strong>Engeland</strong>, <strong>Münster</strong> en <strong>Keulen</strong>. Franse troepen bezetten grote delen van de Republiek. Dit dramatische jaar wordt het <strong>Rampjaar</strong> genoemd. Alleen Holland en Zeeland bleven gespaard doordat de <strong>Hollandse Waterlinie</strong> — een verdedigingsstelsel van ondergelopen polders — werd ingezet.</p>
-
-      <div class="let-op">
-        <strong>⚠️ Lodewijk XIV en de Zonnekoning:</strong> De Franse koning Lodewijk XIV streefde naar dominantie in Europa. Hij zag de Republiek als een lastige concurrent. Zijn absolute macht ("L'état, c'est moi") stond in contrast met het bestuur van de Republiek door regenten.
-      </div>
-
-      <h3>De Vrede van Utrecht (1713)</h3>
-      <p>Na de Spaanse Successieoorlog werd in de <strong>Vrede van Utrecht (1713)</strong> de machtsbalans in Europa opnieuw geregeld. De Republiek verloor veel van haar militaire en economische macht. De Gouden Eeuw was voorbij.</p>
+    <div class="btn-row">
+      <button class="btn btn-gray" onclick="prevCard('42')">◀ Vorige</button>
+      <button class="btn btn-red" onclick="nextCard('42')">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleCards('42')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetCards('42')">↺ Opnieuw</button>
     </div>
-
-    <!-- §3.6 -->
-    <div class="kaart">
-      <div class="kaart-header"><span class="para-badge">§3.6</span> De Gouden Eeuw: kunst, wetenschap en cultuur</div>
-
-      <h3>Bloei van kunst en wetenschap</h3>
-      <p>De 17e eeuw was voor de Republiek niet alleen economisch, maar ook cultureel een bloeiperiode. Door de welvaart konden rijke kooplieden kunst sponsoren. Schilderijen waren niet meer alleen voor kerken en vorsten, maar ook voor gewone burgers.</p>
-
-      <h3>Bekende schilders</h3>
-      <div class="begrip-lijst">
-        <div class="begrip-rij"><span class="begrip-term">Rembrandt van Rijn</span><span class="begrip-def">Beroemde schilder; De Nachtwacht (1642), portretten en religieuze taferelen</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Johannes Vermeer</span><span class="begrip-def">Meisje met de Parel; bekende om intieme, lichte interieurs uit Delft</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Frans Hals</span><span class="begrip-def">Groepsportretten van schutterijen; levendig en spontaan schilderstijl</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Jan Steen</span><span class="begrip-def">Genreschilderijen van het dagelijkse (dikwijls chaotische) burgerleven</span></div>
-      </div>
-
-      <h3>Wetenschap en filosofie</h3>
-      <ul>
-        <li><strong>Christiaan Huygens</strong> — uitvinder van het slingeruurwerk; deed onderzoek naar licht en sterrenkunde</li>
-        <li><strong>Antonie van Leeuwenhoek</strong> — pionier van de microscoop; ontdekte micro-organismen</li>
-        <li><strong>Baruch Spinoza</strong> — filosoof; schreef over rede, godsdienst en politieke vrijheid; werd door de joodse gemeenschap verbannen</li>
-        <li><strong>Hugo de Groot (Grotius)</strong> — grondlegger van het internationaal recht; schreef over vrijheid van de zee</li>
-      </ul>
-
-      <h3>De Nachtwacht</h3>
-      <p>De <strong>Nachtwacht</strong> (1642) van Rembrandt is het bekendste Nederlandse schilderij. Het toont een schutterij — een burgermilitie. Het was een groepsportret in opdracht, betaald door de afgebeelde heren. Het bijzondere is de beweging en het dramatische lichtgebruik (<strong>chiaroscuro</strong>).</p>
-
-      <div class="voorbeeld-blok">
-        <strong>Rijksmuseum Amsterdam</strong> herbergt de Nachtwacht en talloze andere Gouden Eeuwse meesterwerken.
-      </div>
-
-      <h3>Begrippen samengevat</h3>
-      <div class="begrip-lijst">
-        <div class="begrip-rij"><span class="begrip-term">Mecenas</span><span class="begrip-def">Rijke opdrachtgever die kunstenaars financieel steunt</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Genre schilderij</span><span class="begrip-def">Schilderij van alledaagse taferelen uit het dagelijkse leven (niet religieus of historisch)</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Chiaroscuro</span><span class="begrip-def">Schildertechniek waarbij sterk licht-donker contrast wordt gebruikt voor dramatisch effect</span></div>
-        <div class="begrip-rij"><span class="begrip-term">Schutterij</span><span class="begrip-def">Burgermilitie die instond voor de verdediging en orde van een stad</span></div>
-      </div>
+  </div>
+  <div class="sec-title">❓ Meerkeuzevragen — §4.2</div>
+  <div class="mcq-box" id="mcq-42">
+    <div class="mcq-prog" id="mp-42"></div>
+    <div class="mcq-q" id="mq-42"></div>
+    <div class="mcq-opts" id="mo-42"></div>
+    <div class="mcq-fb" id="mf-42"></div>
+    <div class="btn-row">
+      <button class="btn btn-red" id="mn-42" onclick="nextMCQ('42')" style="display:none">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleMCQ('42')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetMCQ('42')">↺ Opnieuw</button>
     </div>
+    <div class="mcq-sc" id="ms-42">Score: 0/0</div>
+  </div>
+</div>
 
-  </div><!-- /tab-uitleg -->
-
-  <!-- ═══════════════════════════════════════
-       TAB 2: FLASHCARDS
-  ═══════════════════════════════════════ -->
-  <div id="tab-flashcards" class="tab-inhoud">
-
-    <div id="fc-voortgang" class="fc-voortgang">Kaart 1 van 30</div>
-    <div id="fc-dot-rij" class="fc-dot-rij"></div>
-
-    <div class="fc-filter-rij">
-      <button class="fc-filter-knop actief" onclick="filterFC('alles', this)">Alle begrippen</button>
-      <button class="fc-filter-knop" onclick="filterFC('3.1', this)">§3.1</button>
-      <button class="fc-filter-knop" onclick="filterFC('3.2', this)">§3.2</button>
-      <button class="fc-filter-knop" onclick="filterFC('3.3', this)">§3.3</button>
-      <button class="fc-filter-knop" onclick="filterFC('3.4', this)">§3.4</button>
-      <button class="fc-filter-knop" onclick="filterFC('3.5', this)">§3.5</button>
-      <button class="fc-filter-knop" onclick="filterFC('3.6', this)">§3.6</button>
+<!-- §4.3 -->
+<div id="t43" class="tab-pane">
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/7uUWdQTxWx8" allowfullscreen></iframe>
+  </div>
+  <div class="sec-title">🃏 Begrippen — §4.3 Revolutie in Frankrijk</div>
+  <div class="fc-box">
+    <div class="fc-prog" id="fp-43"></div>
+    <div class="fc-card" id="fc-43" onclick="flipCard('43')">
+      <div class="fc-label" id="fl-43">Begrip</div>
+      <div class="fc-text" id="ft-43"></div>
+      <div class="fc-hint" id="fh-43">Tik om de definitie te zien</div>
     </div>
-
-    <div class="fc-scene">
-      <div id="fc-kaart" class="fc-kaart" onclick="draaiFC()">
-        <div class="fc-voorkant">
-          <div id="fc-tag-voor" class="fc-tag">§3.1</div>
-          <div id="fc-begrip" class="fc-begrip">regent</div>
-          <div class="fc-hint">Klik om de definitie te zien →</div>
-        </div>
-        <div class="fc-achterkant">
-          <div id="fc-tag-achter" class="fc-tag">§3.1</div>
-          <div id="fc-definitie" class="fc-definitie">Lid van de rijke bestuurlijke elite die de steden en gewesten in de Republiek bestuurde.</div>
-          <div class="fc-hint">← Klik om terug te draaien</div>
-        </div>
-      </div>
+    <div class="btn-row">
+      <button class="btn btn-gray" onclick="prevCard('43')">◀ Vorige</button>
+      <button class="btn btn-red" onclick="nextCard('43')">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleCards('43')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetCards('43')">↺ Opnieuw</button>
     </div>
-
-    <div id="fc-klaar" class="fc-klaar">
-      <div class="fc-klaar-emoji">🎉</div>
-      <h3>Alle begrippen gezien!</h3>
-      <p>Goed gedaan — je hebt alle flashcards doorlopen.</p>
-      <button class="fc-btn primair" onclick="herlaadFC()">Opnieuw beginnen</button>
+  </div>
+  <div class="sec-title">❓ Meerkeuzevragen — §4.3</div>
+  <div class="mcq-box" id="mcq-43">
+    <div class="mcq-prog" id="mp-43"></div>
+    <div class="mcq-q" id="mq-43"></div>
+    <div class="mcq-opts" id="mo-43"></div>
+    <div class="mcq-fb" id="mf-43"></div>
+    <div class="btn-row">
+      <button class="btn btn-red" id="mn-43" onclick="nextMCQ('43')" style="display:none">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleMCQ('43')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetMCQ('43')">↺ Opnieuw</button>
     </div>
+    <div class="mcq-sc" id="ms-43">Score: 0/0</div>
+  </div>
+</div>
 
-    <div class="fc-knoppen">
-      <button class="fc-btn" onclick="vorigeFC()">← Vorige</button>
-      <button class="fc-btn primair" onclick="draaiFC()">Draai om 🔄</button>
-      <button class="fc-btn" onclick="volgendeFC()">Volgende →</button>
-      <button class="fc-btn" onclick="shuffleFC()">Schudden 🔀</button>
+<!-- §4.4 -->
+<div id="t44" class="tab-pane">
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/k4-8qWneyk8" allowfullscreen></iframe>
+  </div>
+  <div class="sec-title">🃏 Begrippen — §4.4 Revolutie in Nederland</div>
+  <div class="fc-box">
+    <div class="fc-prog" id="fp-44"></div>
+    <div class="fc-card" id="fc-44" onclick="flipCard('44')">
+      <div class="fc-label" id="fl-44">Begrip</div>
+      <div class="fc-text" id="ft-44"></div>
+      <div class="fc-hint" id="fh-44">Tik om de definitie te zien</div>
     </div>
-
-  </div><!-- /tab-flashcards -->
-
-  <!-- ═══════════════════════════════════════
-       TAB 3: TOETSVRAGEN
-  ═══════════════════════════════════════ -->
-  <div id="tab-toetsvragen" class="tab-inhoud">
-
-    <div class="score-balk">
-      <div class="score-item goed"><span id="score-goed">0</span><small>Goed ✓</small></div>
-      <div class="score-item fout"><span id="score-fout">0</span><small>Fout ✗</small></div>
-      <div class="score-item totaal"><span id="score-totaal">0</span><small>Beantwoord</small></div>
+    <div class="btn-row">
+      <button class="btn btn-gray" onclick="prevCard('44')">◀ Vorige</button>
+      <button class="btn btn-red" onclick="nextCard('44')">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleCards('44')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetCards('44')">↺ Opnieuw</button>
     </div>
-
-    <!-- ── Sectie A: Meerkeuze ── -->
-    <div class="sectie-kop">📋 Sectie A — Meerkeuze vragen</div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 1</span>
-      <p class="vraag-tekst">Wie waren de <strong>regenten</strong> in de Republiek?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc1',false)"><span class="optie-letter">A</span>De prins van Oranje en zijn familieleden</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc1',true)"><span class="optie-letter">B</span>Rijke kooplieden en bestuurders die de steden en gewesten bestuurden</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc1',false)"><span class="optie-letter">C</span>Calvinistische predikanten die de kerk leidden</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc1',false)"><span class="optie-letter">D</span>Militaire aanvoerders van het Staatse leger</button>
-      </div>
-      <div id="mc1-feedback" class="mc-feedback"></div>
+  </div>
+  <div class="sec-title">❓ Meerkeuzevragen — §4.4</div>
+  <div class="mcq-box" id="mcq-44">
+    <div class="mcq-prog" id="mp-44"></div>
+    <div class="mcq-q" id="mq-44"></div>
+    <div class="mcq-opts" id="mo-44"></div>
+    <div class="mcq-fb" id="mf-44"></div>
+    <div class="btn-row">
+      <button class="btn btn-red" id="mn-44" onclick="nextMCQ('44')" style="display:none">Volgende ▶</button>
+      <button class="btn btn-gold" onclick="shuffleMCQ('44')">🔀 Shuffle</button>
+      <button class="btn btn-gray" onclick="resetMCQ('44')">↺ Opnieuw</button>
     </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 2</span>
-      <p class="vraag-tekst">Wat was de rol van de <strong>stadhouder</strong> in de Republiek?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc2',false)"><span class="optie-letter">A</span>Hij was de erfelijke koning van de Republiek</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc2',false)"><span class="optie-letter">B</span>Hij leidde de Staten-Generaal als voorzitter</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc2',true)"><span class="optie-letter">C</span>Hij was militaire leider, aangesteld door de gewesten, en vertegenwoordiger van de centrale macht</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc2',false)"><span class="optie-letter">D</span>Hij was de hoogste rechter van de Republiek</button>
-      </div>
-      <div id="mc2-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 3</span>
-      <p class="vraag-tekst">De <strong>VOC</strong> werd opgericht in:</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc3',false)"><span class="optie-letter">A</span>1568</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc3',true)"><span class="optie-letter">B</span>1602</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc3',false)"><span class="optie-letter">C</span>1648</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc3',false)"><span class="optie-letter">D</span>1672</button>
-      </div>
-      <div id="mc3-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 4</span>
-      <p class="vraag-tekst">Wat maakte de <strong>VOC</strong> bijzonder ten opzichte van eerdere handelsondernemingen?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc4',false)"><span class="optie-letter">A</span>Het was de eerste onderneming die handel dreef met Azië</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc4',true)"><span class="optie-letter">B</span>Het was de eerste naamloze vennootschap: gewone burgers konden aandelen kopen</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc4',false)"><span class="optie-letter">C</span>Het was volledig eigendom van de staat</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc4',false)"><span class="optie-letter">D</span>Het mocht als enige slavenhandel bedrijven</button>
-      </div>
-      <div id="mc4-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 5</span>
-      <p class="vraag-tekst">Wat was het <strong>Rampjaar</strong>?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc5',false)"><span class="optie-letter">A</span>1648 — het jaar van de Vrede van Münster</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc5',false)"><span class="optie-letter">B</span>1650 — het jaar dat stadhouder Willem II stierf</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc5',true)"><span class="optie-letter">C</span>1672 — het jaar dat vier vijanden tegelijk de Republiek aanvielen</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc5',false)"><span class="optie-letter">D</span>1713 — het jaar van de Vrede van Utrecht</button>
-      </div>
-      <div id="mc5-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 6</span>
-      <p class="vraag-tekst">Wat was het verschil tussen <strong>remonstranten</strong> en <strong>contraremonstranten</strong>?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc6',false)"><span class="optie-letter">A</span>Remonstranten waren katholiek, contraremonstranten calvinistisch</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc6',false)"><span class="optie-letter">B</span>Remonstranten wilden een sterke stadhouder, contraremonstranten niet</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc6',true)"><span class="optie-letter">C</span>Remonstranten nuanceerden de predestinatie; contraremonstranten hielden streng vast aan volledige predestinatie</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc6',false)"><span class="optie-letter">D</span>Remonstranten steunden Maurits, contraremonstranten steunden Oldenbarnevelt</button>
-      </div>
-      <div id="mc6-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 7</span>
-      <p class="vraag-tekst">Welk verdrag maakte definitief een einde aan de Tachtigjarige Oorlog en erkende de onafhankelijkheid van de Republiek?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc7',false)"><span class="optie-letter">A</span>Het Twaalfjarig Bestand (1609)</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc7',true)"><span class="optie-letter">B</span>De Vrede van Münster (1648)</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc7',false)"><span class="optie-letter">C</span>De Vrede van Breda (1667)</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc7',false)"><span class="optie-letter">D</span>De Vrede van Utrecht (1713)</button>
-      </div>
-      <div id="mc7-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 8</span>
-      <p class="vraag-tekst">Welk schilderij van Rembrandt van Rijn wordt beschouwd als het beroemdste Nederlandse schilderij?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc8',false)"><span class="optie-letter">A</span>Meisje met de parel</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc8',false)"><span class="optie-letter">B</span>De vrolijke drinker</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc8',true)"><span class="optie-letter">C</span>De Nachtwacht</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc8',false)"><span class="optie-letter">D</span>Het melkmeisje</button>
-      </div>
-      <div id="mc8-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 9</span>
-      <p class="vraag-tekst">Wat was een <strong>stapelmarkt</strong>?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc9',false)"><span class="optie-letter">A</span>Een weekmarkt voor lokale boeren</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc9',true)"><span class="optie-letter">B</span>Een handelscentrum waar goederen werden opgeslagen en verhandeld voordat ze verder gingen</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc9',false)"><span class="optie-letter">C</span>Een plek waar belasting werd geheven op importgoederen</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc9',false)"><span class="optie-letter">D</span>Een veiling voor kunstwerken en antiek</button>
-      </div>
-      <div id="mc9-feedback" class="mc-feedback"></div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 10</span>
-      <p class="vraag-tekst">Wat gebeurde er met <strong>Johan de Witt</strong> in 1672?</p>
-      <div class="mc-opties">
-        <button class="mc-optie" onclick="checkMC(this,'mc10',false)"><span class="optie-letter">A</span>Hij werd verbannen naar de Oost-Indische Compagnie</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc10',false)"><span class="optie-letter">B</span>Hij vluchtte naar Engeland</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc10',true)"><span class="optie-letter">C</span>Hij en zijn broer werden door een menigte gelyncht in Den Haag</button>
-        <button class="mc-optie" onclick="checkMC(this,'mc10',false)"><span class="optie-letter">D</span>Hij werd gevangengezet door Willem III</button>
-      </div>
-      <div id="mc10-feedback" class="mc-feedback"></div>
-    </div>
-
-    <!-- ── Sectie B: Open vragen ── -->
-    <div class="sectie-kop">📝 Sectie B — Open vragen</div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 11</span>
-      <p class="vraag-tekst">Leg uit waarom de Republiek der Zeven Verenigde Nederlanden <strong>uniek</strong> was in de 17e-eeuwse Europese context.</p>
-      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
-      <button class="btn-model" onclick="toonModel('open1')">Laat modelantwoord zien</button>
-      <div id="open1-model" class="model-antwoord">
-        <strong>Modelantwoord:</strong><br>
-        De Republiek was uniek omdat ze geen koning had, terwijl bijna alle andere Europese landen monarchieën waren. In plaats van een vorst bestuurden <strong>regenten</strong> — rijke kooplieden en edelen — de steden en gewesten. De macht lag bij de Staten-Generaal, een overlegorgaan van zeven gewesten. Dit maakte de Republiek een vroege vorm van oligarchie/republiek in een wereld van koninklijke absolutisme.
-      </div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 12</span>
-      <p class="vraag-tekst">Wat was het verschil tussen <strong>staatsgezinden</strong> en <strong>oranjegezinden</strong>? Noem voor elk groep een kenmerk en een bekende vertegenwoordiger.</p>
-      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
-      <button class="btn-model" onclick="toonModel('open2')">Laat modelantwoord zien</button>
-      <div id="open2-model" class="model-antwoord">
-        <strong>Modelantwoord:</strong><br>
-        <strong>Staatsgezinden:</strong> wilden een zwakke stadhouder en sterk bestuur door de Staten (regenten). Ze waren voor vrede en handel. Bekende vertegenwoordiger: <strong>Johan de Witt</strong> (raadspensionaris).<br><br>
-        <strong>Oranjegezinden:</strong> wilden een sterke prins van Oranje als leider. Ze steunden de stadhouder en waren meer bereid tot oorlog. Bekende vertegenwoordiger: <strong>Willem III van Oranje</strong>.
-      </div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 13</span>
-      <p class="vraag-tekst">Beschrijf de betekenis van de <strong>VOC</strong> voor de Nederlandse economie en geef twee kenmerken die de VOC bijzonder maakten.</p>
-      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
-      <button class="btn-model" onclick="toonModel('open3')">Laat modelantwoord zien</button>
-      <div id="open3-model" class="model-antwoord">
-        <strong>Modelantwoord:</strong><br>
-        De VOC was cruciaal voor de Nederlandse economie. Het zorgde voor enorme winsten uit de handel in specerijen, zijde en andere luxegoederen uit Azië.<br><br>
-        Twee bijzondere kenmerken:<br>
-        • <strong>Eerste naamloze vennootschap:</strong> gewone burgers konden aandelen kopen en zo mee-investeren. Dit verspreidde risico en vergaarde veel kapitaal.<br>
-        • <strong>Soevereine macht:</strong> de VOC mocht namens de Republiek oorlog voeren, verdragen sluiten en gebieden besturen — bijna als een staat binnen de staat.
-      </div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 14</span>
-      <p class="vraag-tekst">Wat was het <strong>Rampjaar 1672</strong> en welke gevolgen had het voor de binnenlandse politiek van de Republiek?</p>
-      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
-      <button class="btn-model" onclick="toonModel('open4')">Laat modelantwoord zien</button>
-      <div id="open4-model" class="model-antwoord">
-        <strong>Modelantwoord:</strong><br>
-        In het Rampjaar 1672 vielen vier vijanden tegelijk aan: <strong>Frankrijk</strong> (Lodewijk XIV), <strong>Engeland</strong>, en de bisdommen <strong>Münster en Keulen</strong>. Grote delen van de Republiek werden bezet.<br><br>
-        Gevolgen voor de binnenlandse politiek:<br>
-        • <strong>Johan de Witt</strong> en zijn broer werden door het volk gelyncht; de staatsgezinde periode was voorbij.<br>
-        • <strong>Willem III van Oranje</strong> werd aangesteld als stadhouder en nam de leiding.<br>
-        • De oranjegezinden kregen de overhand in de Republiek.
-      </div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 15</span>
-      <p class="vraag-tekst">Waarom was er relatieve <strong>godsdienstvrijheid</strong> in de Republiek, en wat waren de grenzen van die vrijheid?</p>
-      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
-      <button class="btn-model" onclick="toonModel('open5')">Laat modelantwoord zien</button>
-      <div id="open5-model" class="model-antwoord">
-        <strong>Modelantwoord:</strong><br>
-        De Republiek stond godsdienstvrijheid toe omdat:<br>
-        • Handel belangrijker was dan religieuze eenheid; kooplieden van allerlei gezindten waren welkom.<br>
-        • De regenten pragmatisch waren en geen onderlinge conflicten wilden.<br><br>
-        <strong>Grenzen:</strong> De Gereformeerde Kerk was de officiële staatskerk. Alleen gereformeerden mochten publieke ambten bekleden. Andere godsdiensten (katholicisme, jodendom) mochten alleen <em>privé</em> worden beoefend — niet in openbare gebouwen. Schuilkerken waren de uitweg voor katholieken.
-      </div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 16</span>
-      <p class="vraag-tekst">Noem twee wetenschappers of denkers uit de Gouden Eeuw en beschrijf waarvoor zij bekend staan.</p>
-      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
-      <button class="btn-model" onclick="toonModel('open6')">Laat modelantwoord zien</button>
-      <div id="open6-model" class="model-antwoord">
-        <strong>Modelantwoord (kies twee):</strong><br>
-        • <strong>Christiaan Huygens</strong> — uitvinder van het slingeruurwerk; deed onderzoek naar licht en planeten.<br>
-        • <strong>Antonie van Leeuwenhoek</strong> — pionier van de microscoop; ontdekte als eerste micro-organismen ("kleine diertjes").<br>
-        • <strong>Baruch Spinoza</strong> — filosoof die schreef over rede, god en politieke vrijheid; controversieel in zijn tijd.<br>
-        • <strong>Hugo de Groot</strong> — grondlegger van het internationaal recht; schreef over de vrijheid van de zee.
-      </div>
-    </div>
-
-    <div class="vraag-blok">
-      <span class="vraag-nr">Vraag 17</span>
-      <p class="vraag-tekst">Leg uit hoe de <strong>Hollandse Waterlinie</strong> werkte en waarom het effectief was als verdedigingsmiddel in het Rampjaar.</p>
-      <textarea class="open-textarea" placeholder="Schrijf hier je antwoord..."></textarea>
-      <button class="btn-model" onclick="toonModel('open7')">Laat modelantwoord zien</button>
-      <div id="open7-model" class="model-antwoord">
-        <strong>Modelantwoord:</strong><br>
-        De <strong>Hollandse Waterlinie</strong> was een verdedigingsstelsel waarbij polders tussen Utrecht en Amsterdam bewust onder water werden gezet (geïnundeerd). Het water was te ondiep om met boten door te varen, maar te diep om doorheen te lopen of rijden.<br><br>
-        Het was effectief omdat:<br>
-        • Holland en Zeeland er achter lagen en zo gespaard bleven van de Franse inval.<br>
-        • Het een natuurlijke barrière vormde die moeilijk te omzeilen was.<br>
-        • Het weinig troepen kostte — het water "vocht" voor de Republiek.
-      </div>
-    </div>
-
-  </div><!-- /tab-toetsvragen -->
-
-</div><!-- /container -->
+    <div class="mcq-sc" id="ms-44">Score: 0/0</div>
+  </div>
+</div>
 
 <script>
-// ─── Tab wisselen ────────────────────────────────────
-function wisselTab(naam, knop) {
-  document.querySelectorAll('.tab-inhoud').forEach(t => t.classList.remove('zichtbaar'));
-  document.querySelectorAll('.tab-knop').forEach(k => k.classList.remove('actief'));
-  document.getElementById('tab-' + naam).classList.add('zichtbaar');
-  knop.classList.add('actief');
-}
+const CARDS = {
+  '41': [
+    {t:'Pruikentijd', d:'De 18e eeuw (1700–1800), het tijdvak van pruiken en revoluties'},
+    {t:'De Verlichting', d:'Beweging waarbij mensen met hun verstand (rede) de wereld probeerden te begrijpen en te verbeteren'},
+    {t:'Rationeel denken', d:'Denken op basis van verstand en rede, niet op basis van geloof of traditie'},
+    {t:'Encyclopédie', d:'Groot naslagwerk met kennis over alle onderwerpen, gemaakt door Diderot en d\'Alembert (vanaf 1751)'},
+    {t:'Standenmaatschappij', d:'Samenleving verdeeld in drie standen: geestelijkheid (1e), adel (2e) en derde stand'},
+    {t:'Derde stand', d:'De grootste bevolkingsgroep: boeren, burgers en arbeiders, die bijna alle belasting betaalden'},
+    {t:'Indirecte belasting', d:'Belasting die mensen betalen bij de aankoop van producten, zoals voedsel'},
+    {t:'Voltaire', d:'Beroemde verlichte denker (1694–1778) die de kerk en het absolutisme bekritiseerde'},
+  ],
+  '42': [
+    {t:'Dekolonisatie', d:'Het zelfstandig worden van een kolonie — losmaking van het moederland'},
+    {t:'"No taxation without representation"', d:'Geen belasting zonder vertegenwoordiging in het parlement: de Amerikanen hadden geen stem in het Britse parlement'},
+    {t:'Onafhankelijkheidsverklaring', d:'Verklaring van 4 juli 1776 waarmee de dertien kolonies zich onafhankelijk verklaarden van Groot-Brittannië'},
+    {t:'Thomas Jefferson', d:'Amerikaanse politicus die de Onafhankelijkheidsverklaring schreef (1776)'},
+    {t:'George Washington', d:'Leider van het Amerikaanse leger en eerste president van de VS'},
+    {t:'Bondsstaat / federatie', d:'Samenwerkingsverband van deelstaten met een eigen centrale overheid'},
+    {t:'Grondwet', d:'De belangrijkste wet van een land, waarin staat hoe het land bestuurd wordt'},
+    {t:'Bill of Rights', d:'De eerste tien grondrechten van de VS (1791), vastgelegd in de grondwet'},
+    {t:'Democratische revolutie', d:'Omwenteling waarbij het volk meer zeggenschap krijgt over het bestuur van het land'},
+  ],
+  '43': [
+    {t:'Staten-Generaal', d:'Vergadering van vertegenwoordigers van de drie standen in Frankrijk, bijeengeroepen door Lodewijk XVI in 1789'},
+    {t:'Nationale Vergadering', d:'Het nieuwe parlement dat de derde stand in 1789 oprichtte en de grondwet schreef'},
+    {t:'Constitutionele monarchie', d:'Staatsvorm waarbij de koning regeert maar gebonden is aan een grondwet en een parlement'},
+    {t:'Terreur', d:'Periode (1793–1794) van massale executies onder leiding van Robespierre'},
+    {t:'Guillotine', d:'Instrument waarmee mensen tijdens de Terreur werden onthoofd'},
+    {t:'Referendum', d:'Volksraadpleging: het volk stemt direct over een vraag of beslissing'},
+    {t:'Staatsgreep', d:'Het met geweld grijpen van de macht — Napoleon deed dit in 1799'},
+    {t:'Code Napoleon', d:'Wetboek van Napoleon gebaseerd op verlichte principes: gelijkheid voor de wet, godsdienstvrijheid, scheiding kerk en staat'},
+    {t:'Dienstplicht', d:'Verplichting voor alle mannelijke burgers om in het leger te dienen'},
+    {t:'Coalitie', d:'Samenwerkingsverband van landen (Pruisen, Oostenrijk, Rusland) die samen streden tegen Napoleon'},
+  ],
+  '44': [
+    {t:'Patriotten', d:'Nederlandse burgers die kritiek hadden op de stadhouder en meer democratie en gelijkheid wilden'},
+    {t:'Prinsgezinden / Orangisten', d:'Aanhangers van stadhouder Willem V en het Oranjehuis'},
+    {t:'Joan Derk van der Capellen', d:'Leider van de patriotten; schreef in 1781 het pamflet "Aan het volk van Nederland"'},
+    {t:'Vrijkorpsen', d:'Gewapende groepen burgers die de patriottenbeweging steunden'},
+    {t:'Bataafse Revolutie', d:'Nederlandse revolutie in 1795, met hulp van het Franse leger, waarbij de stadhouder werd afgezet'},
+    {t:'Bataafse Republiek', d:'De nieuwe democratische staat die na de revolutie van 1795 in Nederland ontstond'},
+    {t:'Eenheidsstaat', d:'Staat met één centrale regering die voor het hele land beslist — geen aparte provincies meer'},
+    {t:'Vazalstaat', d:'Land dat formeel zelfstandig is maar in werkelijkheid gecontroleerd wordt door een ander, sterker land'},
+    {t:'Metriek stelsel', d:'Het decimale maatstelsel (meter, liter, gram) dat de Fransen in Nederland invoerden'},
+    {t:'Rijksoverheid', d:'De centrale nationale overheid die in heel Nederland dezelfde wetten en regels bepaalt'},
+  ],
+};
 
-// ─── Multiple choice ─────────────────────────────────
-let scoreGoed = 0, scoreFout = 0;
+const MCQS = {
+  '41': [
+    {q:'Wat is de Verlichting?', o:['Een periode waarin mensen op basis van geloof de wereld verklaarden','Een beweging waarbij mensen met hun verstand de wereld probeerden te begrijpen','Een opstand van boeren tegen de adel in de 18e eeuw','Een religieuze hervormingsbeweging'], c:1},
+    {q:'Wie maakten de Encyclopédie?', o:['Voltaire en Rousseau','Lodewijk XVI en Montesquieu','Diderot en d\'Alembert','Napoleon en Robespierre'], c:2},
+    {q:'Welke stand betaalde in Frankrijk de meeste belasting?', o:['De geestelijkheid (1e stand)','De adel (2e stand)','Alle standen betaalden evenveel','De derde stand'], c:3},
+    {q:'Wat betekent "rationeel denken"?', o:['Denken op basis van geloof','Denken op basis van gevoel en intuïtie','Denken op basis van verstand en rede','Denken op basis van traditie'], c:2},
+    {q:'Wat is een indirecte belasting?', o:['Belasting die je rechtstreeks aan de koning betaalt','Belasting die je betaalt bij de aankoop van producten','Belasting die alleen de adel betaalt','Belasting op je inkomen'], c:1},
+    {q:'Waarom ging het in de 18e eeuw economisch slechter in Nederland?', o:['Er was een grote oorlog in Nederland','Nederland was bezet door Frankrijk','Er was een grote natuurramp','De VOC maakte steeds minder winst en werkloosheid en armoede groeiden'], c:3},
+  ],
+  '42': [
+    {q:'Wat betekent "No taxation without representation"?', o:['De kolonisten wilden helemaal geen belasting betalen','Zonder vertegenwoordiging in het parlement mocht er geen belasting worden geheven','De Britten mochten geen belasting aan de adel opleggen','Alle burgers moesten evenveel belasting betalen'], c:1},
+    {q:'Wanneer tekenden de Amerikanen de Onafhankelijkheidsverklaring?', o:['4 juli 1775','4 juli 1776','4 juli 1783','4 juli 1787'], c:1},
+    {q:'Wie schreef de Onafhankelijkheidsverklaring?', o:['George Washington','Benjamin Franklin','John Adams','Thomas Jefferson'], c:3},
+    {q:'Wat is een bondsstaat (federatie)?', o:['Een land met één sterke centrale regering','Een samenwerkingsverband van deelstaten met een centrale overheid','Een land zonder grondwet','Een kolonie van een groter land'], c:1},
+    {q:'Waarom kwamen de Amerikanen in opstand tegen Groot-Brittannië?', o:['Ze wilden een eigen koning kiezen','Ze waren het niet eens met de Britse godsdienst','Ze wilden meer slaven invoeren','Ze moesten belasting betalen zonder inspraak in het Britse parlement'], c:3},
+    {q:'Wat is de Bill of Rights?', o:['De Onafhankelijkheidsverklaring van 1776','Het vredesverdrag met Groot-Brittannië (1783)','De eerste tien grondrechten van de VS, vastgelegd in de grondwet','De wet die de slavernij afschafte'], c:2},
+  ],
+  '43': [
+    {q:'Wanneer bestormde het volk de Bastille in Parijs?', o:['14 juli 1787','14 juli 1789','14 juli 1791','14 juli 1793'], c:1},
+    {q:'Wat is een constitutionele monarchie?', o:['Een land zonder koning','Een koning met absolute macht','Een staatsvorm waarbij de koning regeert maar gebonden is aan een grondwet','Een republiek met een grondwet'], c:2},
+    {q:'Wie leidde de Terreur (1793–1794)?', o:['Napoleon Bonaparte','Lodewijk XVI','Thomas Jefferson','Robespierre'], c:3},
+    {q:'Wat deed Napoleon in 1799?', o:['Hij werd democratisch verkozen tot president','Hij deed een staatsgreep en werd dictator','Hij versloeg de Pruisen bij Waterloo','Hij schreef de grondwet van 1791'], c:1},
+    {q:'Wat staat er in de Code Napoleon?', o:['Regels voor het leger en de dienstplicht','Verlichte principes zoals gelijkheid voor de wet en godsdienstvrijheid','Privileges van de adel en de geestelijkheid','De regels voor de guillotine'], c:1},
+    {q:'Wat is dienstplicht?', o:['De verplichting om belasting te betalen','De verplichting om voor de overheid te werken','De verplichting voor mannelijke burgers om in het leger te dienen','De verplichting om de grondwet te ondertekenen'], c:2},
+    {q:'Wanneer werd Napoleon definitief verslagen?', o:['1812 bij Moskou','1813 bij Leipzig','1815 bij Waterloo','1804 bij Austerlitz'], c:2},
+  ],
+  '44': [
+    {q:'Wie waren de patriotten?', o:['Aanhangers van stadhouder Willem V','Burgers die meer democratie wilden en kritiek hadden op de stadhouder','Franse soldaten die Nederland bezetten','Aanhangers van de adel en regenten'], c:1},
+    {q:'Wat schreef Joan Derk van der Capellen in 1781?', o:['De Onafhankelijkheidsverklaring','De grondwet van de Bataafse Republiek','Het pamflet "Aan het volk van Nederland"','De Code Napoleon'], c:2},
+    {q:'Wanneer begon de Bataafse Revolutie?', o:['1787','1789','1795','1806'], c:2},
+    {q:'Wat is een eenheidsstaat?', o:['Een land met zelfstandige provincies','Een staat met één centrale regering die voor het hele land beslist','Een land onder leiding van één absolute monarch','Een samenwerkingsverband van landen'], c:1},
+    {q:'Wat is een vazalstaat?', o:['Een land dat volledig deel uitmaakt van een ander land','Een land dat formeel zelfstandig is maar in werkelijkheid gecontroleerd wordt door een ander land','Een democratische staat met een grondwet','Een staat met een gekozen president'], c:1},
+    {q:'Welk maatstelsel voerden de Fransen in Nederland in?', o:['Het Engelse maatstelsel (miles, pounds)','Het Pruisische maatstelsel','Het metrieke stelsel (meter, liter, gram)','Het traditionele Nederlandse maatstelsel'], c:2},
+    {q:'Wat gebeurde er in 1810 met Nederland?', o:['Nederland werd een vazalstaat van Pruisen','Nederland werd een provincie van het Franse keizerrijk','Nederland werd volledig zelfstandig','Napoleon kroonde zijn broer Lodewijk tot koning'], c:1},
+  ],
+};
 
-function checkMC(knop, id, isGoed) {
-  const blok = knop.closest('.vraag-blok');
-  blok.querySelectorAll('.mc-optie').forEach(o => o.disabled = true);
-  const feedback = document.getElementById(id + '-feedback');
+const fcState = {};
+const mcqState = {};
 
-  if (isGoed) {
-    knop.classList.add('goed');
-    feedback.textContent = '✓ Correct!';
-    feedback.className = 'mc-feedback zichtbaar goed';
-    scoreGoed++;
-  } else {
-    knop.classList.add('fout');
-    feedback.textContent = '✗ Helaas, dat is niet juist. Bekijk de uitleg nog eens.';
-    feedback.className = 'mc-feedback zichtbaar fout';
-    blok.querySelectorAll('.mc-optie').forEach(o => {
-      if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) {
-        o.classList.add('goed');
-      }
-    });
-    scoreFout++;
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  document.getElementById('score-goed').textContent = scoreGoed;
-  document.getElementById('score-fout').textContent = scoreFout;
-  document.getElementById('score-totaal').textContent = scoreGoed + scoreFout;
+  return arr;
 }
 
-// ─── Open vragen ─────────────────────────────────────
-function toonModel(id) {
-  const el = document.getElementById(id + '-model');
-  el.classList.toggle('zichtbaar');
+function showTab(id) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+  document.getElementById(id).classList.add('active');
 }
 
-// ─── Flashcards ──────────────────────────────────────
-const alleKaarten = [
-  // §3.1
-  { tag:'§3.1', begrip:'Republiek der Zeven Verenigde Nederlanden', def:'Staatsvorm na de Tachtigjarige Oorlog: zeven gewesten werkten samen zonder koning, bestuurd door regenten.' },
-  { tag:'§3.1', begrip:'regent',               def:'Lid van de rijke bestuurlijke elite die de steden en gewesten in de Republiek bestuurde.' },
-  { tag:'§3.1', begrip:'Staten-Generaal',      def:'Overlegorgaan van alle zeven gewesten; elk gewest had één stem; unanimiteit vereist voor buitenlandse politiek.' },
-  { tag:'§3.1', begrip:'stadhouder',           def:'Militaire leider aangesteld door de gewesten; vertegenwoordiger van de centrale macht; geen koning.' },
-  { tag:'§3.1', begrip:'unanimiteit',          def:'Alle partijen moeten het eens zijn; vereist in de Staten-Generaal voor beslissingen over oorlog en buitenlandse politiek.' },
-  // §3.2
-  { tag:'§3.2', begrip:'staatsgezinden',       def:'Politieke groepering die een sterke rol voor de Staten wilde en een zwakke stadhouder; vertegenwoordigd door rijke regenten.' },
-  { tag:'§3.2', begrip:'oranjegezinden',       def:'Politieke groepering die een sterke prins van Oranje als leider wilde; gesteund door calvinistische burgers en militairen.' },
-  { tag:'§3.2', begrip:'Johan de Witt',        def:'Raadspensionaris (Grand Pensionaris) van Holland; staatsgezinde leider; gelyncht in het Rampjaar 1672.' },
-  { tag:'§3.2', begrip:'raadspensionaris',     def:'Hoogste bestuurder van Holland; leidde de vergaderingen van de Staten van Holland en vertegenwoordigde Holland naar buiten.' },
-  { tag:'§3.2', begrip:'Willem III van Oranje',def:'Stadhouder van de Republiek na 1672; later ook koning van Engeland (Glorious Revolution 1688).' },
-  { tag:'§3.2', begrip:'Glorious Revolution',  def:'Engelse revolutie van 1688 waarbij Willem III van Oranje zonder bloedvergieten koning van Engeland werd.' },
-  // §3.3
-  { tag:'§3.3', begrip:'VOC',                  def:'Vereenigde Oost-Indische Compagnie (1602); eerste naamloze vennootschap; handelde met Azië en had soevereine macht.' },
-  { tag:'§3.3', begrip:'WIC',                  def:'West-Indische Compagnie (1621); handelde met West-Afrika en Amerika; betrokken bij slavenhandel en Nieuw-Amsterdam.' },
-  { tag:'§3.3', begrip:'aandeel',              def:'Bewijs van deelneming in het kapitaal van een onderneming; je deelt mee in de winst (dividend).' },
-  { tag:'§3.3', begrip:'stapelmarkt',          def:'Handelscentrum (bijv. Amsterdam) waar goederen worden opgeslagen en verhandeld voordat ze verder worden gedistribueerd.' },
-  { tag:'§3.3', begrip:'fluit',                def:'Efficiënt Nederlands vrachtschip met grote laadruimte en kleine bemanning; maakte goedkoop transport mogelijk.' },
-  { tag:'§3.3', begrip:'Amsterdamsche Wisselbank', def:'Opgericht in 1609; moderne bank die financiële transacties faciliteerde en het vertrouwen in de Amsterdamse handel vergrootte.' },
-  // §3.4
-  { tag:'§3.4', begrip:'Gereformeerde Kerk',   def:'Calvinistische staatskerk van de Republiek; alleen leden mochten openbare ambten bekleden.' },
-  { tag:'§3.4', begrip:'schuilkerk',           def:'Verborgen kerkruimte, vaak op zolder, waar katholieken in het geheim hun geloof beleden.' },
-  { tag:'§3.4', begrip:'remonstranten',        def:'Calvinisten die de predestinatie nuanceerden (volgeling van Arminius); steunden de staatsgezinden.' },
-  { tag:'§3.4', begrip:'contraremonstranten',  def:'Calvinisten die streng vasthielden aan volledige predestinatie (volgeling van Gomarus); steunden Maurits.' },
-  { tag:'§3.4', begrip:'predestinatie',        def:'Calvinistisch idee dat God van tevoren al heeft bepaald wie gered wordt en wie niet.' },
-  { tag:'§3.4', begrip:'Synode van Dordrecht', def:'Kerkelijke vergadering (1618–1619) waarbij de contraremonstranten wonnen; Oldenbarnevelt werd terechtgesteld.' },
-  // §3.5
-  { tag:'§3.5', begrip:'Twaalfjarig Bestand',  def:'Tijdelijke vrede (1609–1621) tussen de Republiek en Spanje tijdens de Tachtigjarige Oorlog.' },
-  { tag:'§3.5', begrip:'Vrede van Münster',    def:'Verdrag (1648) dat definitief een einde maakte aan de Tachtigjarige Oorlog; Spanje erkende de Republiek.' },
-  { tag:'§3.5', begrip:'Rampjaar',             def:'1672: vier vijanden (Frankrijk, Engeland, Münster, Keulen) vielen tegelijk de Republiek aan.' },
-  { tag:'§3.5', begrip:'Hollandse Waterlinie', def:'Verdedigingsstelsel waarbij polders bewust werden geïnundeerd; te ondiep voor boten, te diep voor troepen.' },
-  // §3.6
-  { tag:'§3.6', begrip:'Nachtwacht',           def:'Beroemd schilderij (1642) van Rembrandt van Rijn; toont een schutterij in dramatisch licht.' },
-  { tag:'§3.6', begrip:'chiaroscuro',          def:'Schildertechniek met sterk licht-donker contrast voor dramatisch effect; kenmerkend voor Rembrandt.' },
-  { tag:'§3.6', begrip:'schutterij',           def:'Burgermilitie die instond voor de verdediging en orde van een stad; populair onderwerp voor groepsportretten.' },
-];
+function initFC(id) {
+  const data = shuffle([...CARDS[id]]);
+  fcState[id] = { data, idx: 0, flipped: false };
+  renderFC(id);
+}
 
-let huidigeLijst = [...alleKaarten];
-let huidigIndex  = 0;
-const gezien     = new Set();
+function renderFC(id) {
+  const s = fcState[id];
+  const card = s.data[s.idx];
+  s.flipped = false;
+  document.getElementById('fc-' + id).className = 'fc-card';
+  document.getElementById('fl-' + id).textContent = 'Begrip';
+  document.getElementById('ft-' + id).textContent = card.t;
+  document.getElementById('fh-' + id).textContent = 'Tik om de definitie te zien';
+  document.getElementById('fp-' + id).textContent = 'Kaart ' + (s.idx + 1) + ' van ' + s.data.length;
+}
 
-function bouwDots() {
-  const rij = document.getElementById('fc-dot-rij');
-  rij.innerHTML = '';
-  huidigeLijst.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'fc-dot' +
-      (i === huidigIndex ? ' huidig' : '') +
-      (gezien.has(i) ? ' gezien' : '');
-    rij.appendChild(d);
+function flipCard(id) {
+  const s = fcState[id];
+  const card = s.data[s.idx];
+  s.flipped = !s.flipped;
+  const el = document.getElementById('fc-' + id);
+  if (s.flipped) {
+    el.classList.add('flipped');
+    document.getElementById('fl-' + id).textContent = 'Definitie';
+    document.getElementById('ft-' + id).textContent = card.d;
+    document.getElementById('fh-' + id).textContent = 'Tik om het begrip te zien';
+  } else {
+    el.classList.remove('flipped');
+    document.getElementById('fl-' + id).textContent = 'Begrip';
+    document.getElementById('ft-' + id).textContent = card.t;
+    document.getElementById('fh-' + id).textContent = 'Tik om de definitie te zien';
+  }
+}
+
+function nextCard(id) {
+  const s = fcState[id];
+  if (s.idx < s.data.length - 1) { s.idx++; renderFC(id); }
+}
+
+function prevCard(id) {
+  const s = fcState[id];
+  if (s.idx > 0) { s.idx--; renderFC(id); }
+}
+
+function shuffleCards(id) {
+  const s = fcState[id];
+  shuffle(s.data);
+  s.idx = 0;
+  renderFC(id);
+}
+
+function resetCards(id) {
+  const s = fcState[id];
+  s.idx = 0;
+  renderFC(id);
+}
+
+function initMCQ(id) {
+  const data = shuffle([...MCQS[id]]);
+  mcqState[id] = { data, idx: 0, correct: 0, total: 0, answered: false, currentOpts: [] };
+  renderMCQ(id);
+}
+
+function renderMCQ(id) {
+  const s = mcqState[id];
+  const q = s.data[s.idx];
+  s.answered = false;
+  document.getElementById('mp-' + id).textContent = 'Vraag ' + (s.idx + 1) + ' van ' + s.data.length;
+  document.getElementById('mq-' + id).textContent = q.q;
+  document.getElementById('mf-' + id).textContent = '';
+  document.getElementById('mf-' + id).className = 'mcq-fb';
+  document.getElementById('mn-' + id).style.display = 'none';
+  document.getElementById('ms-' + id).textContent = 'Score: ' + s.correct + '/' + s.total;
+  const opts = q.o.map((text, i) => ({ text, isCorrect: i === q.c }));
+  shuffle(opts);
+  s.currentOpts = opts;
+  const container = document.getElementById('mo-' + id);
+  container.innerHTML = '';
+  opts.forEach(function(opt, i) {
+    const btn = document.createElement('button');
+    btn.className = 'mcq-opt';
+    btn.textContent = opt.text;
+    btn.onclick = (function(idx, b) { return function() { answerMCQ(id, idx, b); }; })(i, btn);
+    container.appendChild(btn);
   });
 }
 
-function toonFC(index) {
-  const kaart  = document.getElementById('fc-kaart');
-  const klaar  = document.getElementById('fc-klaar');
-  const voortg = document.getElementById('fc-voortgang');
-
-  if (index >= huidigeLijst.length) {
-    kaart.style.display = 'none';
-    klaar.classList.add('zichtbaar');
-    voortg.textContent = 'Alle kaarten gezien!';
-    return;
+function answerMCQ(id, clickedIdx, clickedBtn) {
+  const s = mcqState[id];
+  if (s.answered) return;
+  s.answered = true;
+  s.total++;
+  const isCorrect = s.currentOpts[clickedIdx].isCorrect;
+  if (isCorrect) s.correct++;
+  document.querySelectorAll('#mo-' + id + ' .mcq-opt').forEach(function(btn, i) {
+    btn.disabled = true;
+    if (s.currentOpts[i].isCorrect) btn.classList.add('correct');
+  });
+  if (!isCorrect) clickedBtn.classList.add('wrong');
+  const fb = document.getElementById('mf-' + id);
+  fb.textContent = isCorrect ? '✅ Goed!' : '❌ Fout — zie het groene antwoord';
+  fb.className = 'mcq-fb ' + (isCorrect ? 'goed' : 'fout');
+  document.getElementById('ms-' + id).textContent = 'Score: ' + s.correct + '/' + s.total;
+  if (s.idx < s.data.length - 1) {
+    document.getElementById('mn-' + id).style.display = 'inline-block';
+  } else {
+    const box = document.getElementById('mcq-' + id);
+    const old = box.querySelector('.done-banner');
+    if (old) old.remove();
+    const done = document.createElement('div');
+    done.className = 'done-banner';
+    done.textContent = '🎉 Klaar! Score: ' + s.correct + '/' + s.data.length;
+    box.appendChild(done);
   }
-
-  kaart.style.display = '';
-  klaar.classList.remove('zichtbaar');
-
-  const k = huidigeLijst[index];
-  document.getElementById('fc-tag-voor').textContent   = k.tag;
-  document.getElementById('fc-tag-achter').textContent = k.tag;
-  document.getElementById('fc-begrip').textContent     = k.begrip;
-  document.getElementById('fc-definitie').textContent  = k.def;
-  kaart.classList.remove('gedraaid');
-
-  voortg.textContent = `Kaart ${index + 1} van ${huidigeLijst.length}`;
-  gezien.add(index);
-  bouwDots();
 }
 
-function draaiFC()   { document.getElementById('fc-kaart').classList.toggle('gedraaid'); }
-
-function volgendeFC() {
-  huidigIndex = (huidigIndex < huidigeLijst.length - 1) ? huidigIndex + 1 : huidigeLijst.length;
-  toonFC(huidigIndex);
+function nextMCQ(id) {
+  const s = mcqState[id];
+  if (s.idx < s.data.length - 1) { s.idx++; renderMCQ(id); }
 }
 
-function vorigeFC() {
-  if (huidigIndex > 0) { huidigIndex--; toonFC(huidigIndex); }
+function shuffleMCQ(id) {
+  const s = mcqState[id];
+  const finished = s.idx >= s.data.length - 1 && s.answered;
+  shuffle(s.data);
+  s.idx = 0;
+  if (finished) { s.correct = 0; s.total = 0; }
+  const old = document.getElementById('mcq-' + id).querySelector('.done-banner');
+  if (old) old.remove();
+  renderMCQ(id);
 }
 
-function shuffleFC() {
-  for (let i = huidigeLijst.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [huidigeLijst[i], huidigeLijst[j]] = [huidigeLijst[j], huidigeLijst[i]];
-  }
-  huidigIndex = 0;
-  gezien.clear();
-  document.getElementById('fc-kaart').style.display = '';
-  toonFC(0);
+function resetMCQ(id) {
+  const s = mcqState[id];
+  s.idx = 0; s.correct = 0; s.total = 0;
+  const old = document.getElementById('mcq-' + id).querySelector('.done-banner');
+  if (old) old.remove();
+  renderMCQ(id);
 }
 
-function herlaadFC() {
-  huidigeLijst = [...alleKaarten];
-  huidigIndex  = 0;
-  gezien.clear();
-  toonFC(0);
-}
-
-function filterFC(para, knop) {
-  document.querySelectorAll('.fc-filter-knop').forEach(k => k.classList.remove('actief'));
-  knop.classList.add('actief');
-  huidigeLijst = para === 'alles'
-    ? [...alleKaarten]
-    : alleKaarten.filter(k => k.tag === '§' + para);
-  huidigIndex = 0;
-  gezien.clear();
-  document.getElementById('fc-kaart').style.display = '';
-  document.getElementById('fc-klaar').classList.remove('zichtbaar');
-  toonFC(0);
-}
-
-// Init
-toonFC(0);
+['41','42','43','44'].forEach(function(id) { initFC(id); initMCQ(id); });
 </script>
 </body>
 </html>
