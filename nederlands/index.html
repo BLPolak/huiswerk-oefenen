@@ -280,6 +280,43 @@ header p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-top: 0.25rem
   font-size: 1rem; font-weight: 800; cursor: pointer; transition: opacity 0.15s;
 }
 .opnieuw-knop:hover { opacity: 0.88; }
+
+/* ── ONTLEDEN (TAB 5) ── */
+.ont-zin-kaart {
+  background: #fff; border-radius: 16px;
+  padding: 1.5rem 1.8rem; margin-bottom: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-left: 5px solid var(--rood);
+}
+.ont-zin-tekst { font-size: 1rem; font-weight: 700; color: var(--donker); margin-bottom: 0.9rem; line-height: 1.5; }
+.ont-tabel-wrap { overflow-x: auto; margin-bottom: 0.7rem; }
+.ont-tabel { border-collapse: collapse; min-width: 100%; font-size: 0.85rem; }
+.ont-tabel th { background: var(--rood); color: #fff; padding: 0.4rem 0.6rem; font-weight: 800; text-align: center; white-space: nowrap; }
+.ont-tabel td { padding: 0.35rem 0.4rem; vertical-align: top; min-width: 80px; }
+.ont-input {
+  width: 100%; min-width: 70px;
+  border: 2px solid #e2e8f0; border-radius: 8px;
+  padding: 0.4rem 0.5rem;
+  font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--donker);
+  transition: border-color 0.15s;
+}
+.ont-input:focus { outline: none; border-color: var(--rood); }
+.ont-input.goed { border-color: var(--groen); background: #f0fff4; }
+.ont-input.fout { border-color: var(--rood); background: var(--rood-bg); }
+.ont-input:disabled { cursor: default; }
+.ont-fb { font-size: 0.75rem; font-weight: 700; min-height: 1.1em; margin-top: 0.15rem; line-height: 1.3; }
+.ont-noot {
+  background: var(--geel-bg); border: 1.5px solid var(--geel-rand);
+  border-radius: 8px; padding: 0.5rem 0.8rem;
+  font-size: 0.83rem; font-weight: 700; color: #744210; margin: 0.5rem 0;
+}
+.ont-controleer-knop {
+  background: var(--rood); color: #fff; border: none; border-radius: 10px;
+  padding: 0.5rem 1.2rem; font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem; font-weight: 800; cursor: pointer; transition: opacity 0.15s; margin-top: 0.4rem;
+}
+.ont-controleer-knop:hover:not(:disabled) { opacity: 0.88; }
+.ont-controleer-knop:disabled { opacity: 0.4; cursor: default; }
 </style>
 </head>
 <body>
@@ -295,6 +332,7 @@ header p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-top: 0.25rem
   <button class="tab-btn" onclick="toonTab('flashcards', this)">&#127183; Flashcards</button>
   <button class="tab-btn" onclick="toonTab('zinnen', this)">&#9999;&#65039; Zinnen hakken</button>
   <button class="tab-btn" onclick="toonTab('mc', this)">&#127919; Multiple choice</button>
+  <button class="tab-btn" onclick="showTab('ontleden')">&#128221; Volledig ontleden</button>
 </div>
 
 <!-- ══ TAB 1: THEORIE ══ -->
@@ -459,6 +497,30 @@ header p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-top: 0.25rem
       <div class="einde-label">Klaar! Klik op Opnieuw om opnieuw te oefenen.</div>
       <button class="opnieuw-knop" onclick="mcOpnieuw()">Opnieuw</button>
     </div>
+  </div>
+
+</div>
+
+<!-- ══ TAB 5: VOLLEDIG ONTLEDEN ══ -->
+<div id="tab-ontleden" class="tab-inhoud">
+
+  <div class="sub-tabs" id="ont-sub-tabs">
+    <button class="sub-tab actief" onclick="ontWisselSet(0, this)">Set 1 &mdash; Oefentoets basis</button>
+    <button class="sub-tab" onclick="ontWisselSet(1, this)">Set 2 &mdash; Oefentoets V2</button>
+    <button class="sub-tab" onclick="ontWisselSet(2, this)">Set 3 &mdash; Oefenset A</button>
+    <button class="sub-tab" onclick="ontWisselSet(3, this)">Set 4 &mdash; Oefenset B</button>
+  </div>
+
+  <div class="oef-header">
+    <span class="oef-score" id="ont-score">0 van 0 zinnen correct</span>
+    <button class="schud-knop" onclick="ontSchud()">&#128256; Shuffle</button>
+    <button class="schud-knop opnieuw-stijl" onclick="ontOpnieuw()">Opnieuw</button>
+  </div>
+
+  <div id="ont-zinnen"></div>
+
+  <div style="text-align:center;margin:1.2rem 0 0.5rem;">
+    <button class="controleer-knop" style="font-size:1rem;padding:0.85rem 2rem;" onclick="ontControleerAlles()">Controleer alles</button>
   </div>
 
 </div>
@@ -793,6 +855,319 @@ function mcVolgende() {
 }
 
 mcOpnieuw();
+
+// ══════════════════════════════════════════
+// TAB 5: VOLLEDIG ONTLEDEN
+// ══════════════════════════════════════════
+
+var ontData = [
+  { naam: 'Set 1 — Oefentoets basis', zinnen: [
+    { zin: 'Deze week zal een van ons de verzamelde handtekeningen aan de minister overhandigen.',
+      isHavo: false, noot: null,
+      velden: { pv:['zal'], ow:['een van ons'], wg:['zal overhandigen'], lv:['de verzamelde handtekeningen'], mv:['aan de minister'], bwb:['deze week'] }
+    },
+    { zin: 'Die kleine onderdelen raak ik altijd kwijt.',
+      isHavo: false, noot: "Let op: 'kwijt' hoort bij het werkwoordelijk gezegde (raakt kwijt), niet bij de BWB.",
+      velden: { pv:['raak'], ow:['ik'], wg:['raak kwijt'], lv:['die kleine onderdelen'], mv:['x'], bwb:['altijd'] }
+    },
+    { zin: 'Een stuk kauwgom bleef aan mijn schoen plakken.',
+      isHavo: false, noot: "BWB moet het voorzetsel 'aan' bevatten.",
+      velden: { pv:['bleef'], ow:['een stuk kauwgom'], wg:['bleef plakken'], lv:['x'], mv:['x'], bwb:['aan mijn schoen'] }
+    },
+    { zin: 'In zijn toespraak gaf de coach het hele team een compliment.',
+      isHavo: false, noot: null,
+      velden: { pv:['gaf'], ow:['de coach'], wg:['gaf'], lv:['een compliment'], mv:['het hele team'], bwb:['in zijn toespraak'] }
+    },
+    { zin: 'Wie wil je je tekening het liefst geven?',
+      isHavo: false, noot: null,
+      velden: { pv:['wil'], ow:['je'], wg:['wil geven'], lv:['je tekening'], mv:['wie'], bwb:['het liefst'] }
+    },
+    { zin: 'Na de onrust van de afgelopen dagen heeft de burgemeester extra politie ingezet.',
+      isHavo: false, noot: null,
+      velden: { pv:['heeft'], ow:['de burgemeester'], wg:['heeft ingezet'], lv:['extra politie'], mv:['x'], bwb:['na de onrust van de afgelopen dagen'] }
+    },
+    { zin: "De kattenbak maak ik meestal 's ochtends schoon.",
+      isHavo: false, noot: "'schoon' hoort bij het werkwoordelijk gezegde (schoonmaken), niet bij de BWB.",
+      velden: { pv:['maak'], ow:['ik'], wg:['maak schoon'], lv:['de kattenbak'], mv:['x'],
+        bwb:['meestal', "'s ochtends", "meestal / 's ochtends", "meestal 's ochtends"] }
+    },
+    { zin: 'Met je klacht kun je het best de klantenservice een mailtje sturen.',
+      isHavo: false, noot: null,
+      velden: { pv:['kun'], ow:['je'], wg:['kun sturen'], lv:['een mailtje'], mv:['de klantenservice'],
+        bwb:['met je klacht', 'het best', 'met je klacht / het best'] }
+    },
+    { zin: 'De gids kan de toeristen zeer snel door de Amsterdamse straatjes leiden.',
+      isHavo: false, noot: null,
+      velden: { pv:['kan'], ow:['de gids'], wg:['kan leiden'], lv:['de toeristen'], mv:['x'],
+        bwb:['door de amsterdamse straatjes', 'zeer snel', 'zeer snel door de amsterdamse straatjes'] }
+    },
+    { zin: 'Mijn beste vriendin stond grinnikend het misverstand uit te leggen.',
+      isHavo: false, noot: null,
+      velden: { pv:['stond'], ow:['mijn beste vriendin'], wg:['stond uit te leggen'], lv:['het misverstand'], mv:['x'], bwb:['grinnikend'] }
+    }
+  ]},
+
+  { naam: 'Set 2 — Oefentoets V2', zinnen: [
+    { zin: 'Wil jij vanavond tuinbonen of bietjes eten?',
+      isHavo: false, noot: null,
+      velden: { pv:['wil'], ow:['jij'], wg:['wil eten'], lv:['tuinbonen of bietjes'], mv:['x'], bwb:['vanavond'] }
+    },
+    { zin: 'Op de tweede verdieping van ons huis was de aannemer op tweede pinksterdag druk aan het boren.',
+      isHavo: false, noot: null,
+      velden: { pv:['was'], ow:['de aannemer'], wg:['was aan het boren'], lv:['x'], mv:['x'],
+        bwb:['op de tweede verdieping van ons huis', 'op tweede pinksterdag', 'druk',
+             'op de tweede verdieping van ons huis / op tweede pinksterdag / druk',
+             'op de tweede verdieping van ons huis / op tweede pinksterdag',
+             'op de tweede verdieping van ons huis / druk', 'op tweede pinksterdag / druk'] }
+    },
+    { zin: 'Jetta en Nina gaven elkaar gisteren een dikke knuffel.',
+      isHavo: false, noot: null,
+      velden: { pv:['gaven'], ow:['jetta en nina'], wg:['gaven'], lv:['een dikke knuffel'], mv:['elkaar'], bwb:['gisteren'] }
+    },
+    { zin: 'Het nieuwe rooster van V2 is heel erg fijn.',
+      isHavo: true, noot: null,
+      velden: { pv:['is'], ow:['het nieuwe rooster van v2'],
+        wg:['x'],
+        nwg:['is heel erg fijn', 'nwg', 'naamwoordelijk gezegde: is heel erg fijn'],
+        lv:['x'], mv:['x'], bwb:['x'] }
+    },
+    { zin: 'Jetta kwam haar essay bij mij printen.',
+      isHavo: true, noot: null,
+      velden: { pv:['kwam'], ow:['jetta'], wg:['kwam printen'], nwg:['x'], lv:['haar essay'], mv:['x'], bwb:['bij mij'] }
+    },
+    { zin: 'Die spijkerbroek met glitters bleek een enorme miskoop.',
+      isHavo: true, noot: null,
+      velden: { pv:['bleek'], ow:['die spijkerbroek met glitters'],
+        wg:['x'],
+        nwg:['bleek een enorme miskoop', 'nwg'],
+        lv:['x'], mv:['x'], bwb:['x'] }
+    }
+  ]},
+
+  { naam: 'Set 3 — Oefenset A', zinnen: [
+    { zin: 'Mijn vader heeft gisteren een nieuwe laptop gekocht.',
+      isHavo: false, noot: null,
+      velden: { pv:['heeft'], ow:['mijn vader'], wg:['heeft gekocht'], lv:['een nieuwe laptop'], mv:['x'], bwb:['gisteren'] }
+    },
+    { zin: 'De trainer gaf de spelers na de wedstrijd goede feedback.',
+      isHavo: false, noot: null,
+      velden: { pv:['gaf'], ow:['de trainer'], wg:['gaf'], lv:['goede feedback'], mv:['de spelers'], bwb:['na de wedstrijd'] }
+    },
+    { zin: 'Langzaam liep de oude man door het park.',
+      isHavo: false, noot: null,
+      velden: { pv:['liep'], ow:['de oude man'], wg:['liep'], lv:['x'], mv:['x'],
+        bwb:['langzaam', 'door het park', 'langzaam / door het park', 'langzaam door het park'] }
+    },
+    { zin: 'De studenten moeten morgen hun werkstuk inleveren.',
+      isHavo: false, noot: null,
+      velden: { pv:['moeten'], ow:['de studenten'], wg:['moeten inleveren'], lv:['hun werkstuk'], mv:['x'], bwb:['morgen'] }
+    },
+    { zin: 'Haar zusje stuurde haar elke dag een berichtje.',
+      isHavo: false, noot: null,
+      velden: { pv:['stuurde'], ow:['haar zusje'], wg:['stuurde'], lv:['een berichtje'], mv:['haar'], bwb:['elke dag'] }
+    },
+    { zin: 'De directeur heeft de medewerkers een bonus gegeven.',
+      isHavo: false, noot: null,
+      velden: { pv:['heeft'], ow:['de directeur'], wg:['heeft gegeven'], lv:['een bonus'], mv:['de medewerkers'], bwb:['x'] }
+    },
+    { zin: 'In de zomer fietsen wij altijd naar het strand.',
+      isHavo: false, noot: null,
+      velden: { pv:['fietsen'], ow:['wij'], wg:['fietsen'], lv:['x'], mv:['x'],
+        bwb:['in de zomer', 'altijd', 'naar het strand', 'in de zomer / altijd',
+             'in de zomer / naar het strand', 'altijd / naar het strand',
+             'in de zomer / altijd / naar het strand'] }
+    },
+    { zin: 'De kok bereidt elke ochtend vers brood voor de gasten.',
+      isHavo: false, noot: null,
+      velden: { pv:['bereidt'], ow:['de kok'], wg:['bereidt'], lv:['vers brood'], mv:['de gasten'], bwb:['elke ochtend'] }
+    },
+    { zin: 'Mijn broer kan heel goed gitaar spelen.',
+      isHavo: false, noot: null,
+      velden: { pv:['kan'], ow:['mijn broer'], wg:['kan spelen'], lv:['gitaar'], mv:['x'], bwb:['heel goed'] }
+    },
+    { zin: 'De burgemeester heeft de bewoners een brief gestuurd.',
+      isHavo: false, noot: null,
+      velden: { pv:['heeft'], ow:['de burgemeester'], wg:['heeft gestuurd'], lv:['een brief'], mv:['de bewoners'], bwb:['x'] }
+    }
+  ]},
+
+  { naam: 'Set 4 — Oefenset B', zinnen: [
+    { zin: 'Elke avond leest zij haar kinderen een verhaaltje voor.',
+      isHavo: false, noot: null,
+      velden: { pv:['leest'], ow:['zij'], wg:['leest voor'], lv:['een verhaaltje'], mv:['haar kinderen'], bwb:['elke avond'] }
+    },
+    { zin: 'De politie heeft de verdachte gisteren opgepakt.',
+      isHavo: false, noot: null,
+      velden: { pv:['heeft'], ow:['de politie'], wg:['heeft opgepakt'], lv:['de verdachte'], mv:['x'], bwb:['gisteren'] }
+    },
+    { zin: 'Op het schoolplein speelden de kinderen vrolijk met elkaar.',
+      isHavo: false, noot: null,
+      velden: { pv:['speelden'], ow:['de kinderen'], wg:['speelden'], lv:['x'], mv:['x'],
+        bwb:['op het schoolplein', 'vrolijk', 'met elkaar', 'op het schoolplein / vrolijk',
+             'op het schoolplein / met elkaar', 'vrolijk / met elkaar',
+             'op het schoolplein / vrolijk / met elkaar'] }
+    },
+    { zin: 'De muzikant speelde zijn publiek een prachtig lied.',
+      isHavo: false, noot: null,
+      velden: { pv:['speelde'], ow:['de muzikant'], wg:['speelde'], lv:['een prachtig lied'], mv:['zijn publiek'], bwb:['x'] }
+    },
+    { zin: 'Tijdens de vergadering heeft de voorzitter iedereen het woord gegeven.',
+      isHavo: false, noot: null,
+      velden: { pv:['heeft'], ow:['de voorzitter'], wg:['heeft gegeven'], lv:['het woord'], mv:['iedereen'], bwb:['tijdens de vergadering'] }
+    },
+    { zin: 'De hond rende blaffend achter de fietser aan.',
+      isHavo: false, noot: null,
+      velden: { pv:['rende'], ow:['de hond'], wg:['rende'], lv:['x'], mv:['x'],
+        bwb:['blaffend', 'achter de fietser aan', 'blaffend / achter de fietser aan',
+             'blaffend achter de fietser aan'] }
+    },
+    { zin: 'Sam heeft zijn zusje geholpen met haar huiswerk.',
+      isHavo: false, noot: null,
+      velden: { pv:['heeft'], ow:['sam'], wg:['heeft geholpen'], lv:['x'], mv:['zijn zusje'], bwb:['met haar huiswerk'] }
+    },
+    { zin: 'De wetenschapper presenteerde de onderzoekers zijn nieuwe ontdekking.',
+      isHavo: false, noot: null,
+      velden: { pv:['presenteerde'], ow:['de wetenschapper'], wg:['presenteerde'], lv:['zijn nieuwe ontdekking'], mv:['de onderzoekers'], bwb:['x'] }
+    },
+    { zin: 'Vorig jaar hebben wij een prachtige reis door Italië gemaakt.',
+      isHavo: false, noot: null,
+      velden: { pv:['hebben'], ow:['wij'], wg:['hebben gemaakt'], lv:['een prachtige reis'], mv:['x'],
+        bwb:['vorig jaar', 'door italië', 'vorig jaar / door italië', 'vorig jaar door italië'] }
+    },
+    { zin: 'De lerares legde haar leerlingen geduldig de stof uit.',
+      isHavo: false, noot: null,
+      velden: { pv:['legde'], ow:['de lerares'], wg:['legde uit'], lv:['de stof'], mv:['haar leerlingen'], bwb:['geduldig'] }
+    }
+  ]}
+];
+
+var ontHuidigeSet = 0;
+var ontGeschudde = [[], [], [], []];
+var ontResultaten = [[], [], [], []];
+
+function ontVeldenVan(zin) {
+  return zin.isHavo ? ['pv','ow','wg','nwg','lv','mv','bwb'] : ['pv','ow','wg','lv','mv','bwb'];
+}
+function ontLabelsVan(zin) {
+  return zin.isHavo ? ['PV','OW','WG','NWG','LV','MV','BWB'] : ['PV','OW','WG','LV','MV','BWB'];
+}
+function ontMaakArr(n) { var a = []; for (var i = 0; i < n; i++) a.push(null); return a; }
+
+function ontRender() {
+  var zinnen = ontGeschudde[ontHuidigeSet];
+  var html = '';
+  for (var pos = 0; pos < zinnen.length; pos++) {
+    var zin = zinnen[pos];
+    var velden = ontVeldenVan(zin);
+    var labels = ontLabelsVan(zin);
+    var s = ontHuidigeSet;
+    html += '<div class="ont-zin-kaart" id="ont-kaart-' + pos + '">';
+    html += '<div class="ont-zin-tekst"><strong>' + escHtml(zin.zin) + '</strong></div>';
+    html += '<div class="ont-tabel-wrap"><table class="ont-tabel"><thead><tr>';
+    for (var li = 0; li < labels.length; li++) html += '<th>' + labels[li] + '</th>';
+    html += '</tr></thead><tbody><tr>';
+    for (var vi = 0; vi < velden.length; vi++) {
+      var veld = velden[vi];
+      var id = 'ont-' + s + '-' + pos + '-' + veld;
+      html += '<td><input type="text" id="' + id + '" class="ont-input" placeholder="antwoord" autocomplete="off" spellcheck="false" />';
+      html += '<div class="ont-fb" id="' + id + '-fb"></div></td>';
+    }
+    html += '</tr></tbody></table></div>';
+    if (zin.noot) {
+      html += '<div class="ont-noot" id="ont-noot-' + pos + '" style="display:none">' + escHtml(zin.noot) + '</div>';
+    }
+    html += '<button class="ont-controleer-knop" id="ont-btn-' + pos + '" onclick="ontControleerZin(' + pos + ')">Controleer</button>';
+    html += '</div>';
+  }
+  document.getElementById('ont-zinnen').innerHTML = html;
+  ontUpdateScore();
+}
+
+function ontControleerZin(pos) {
+  var s = ontHuidigeSet;
+  var zin = ontGeschudde[s][pos];
+  var velden = ontVeldenVan(zin);
+  var allGoed = true;
+  for (var vi = 0; vi < velden.length; vi++) {
+    var veld = velden[vi];
+    var id = 'ont-' + s + '-' + pos + '-' + veld;
+    var inp = document.getElementById(id);
+    if (!inp) continue;
+    var waarde = inp.value.trim().toLowerCase();
+    var antwoorden = (zin.velden[veld] || ['x']).map(function(a) { return a.toLowerCase(); });
+    var isGoed = antwoorden.indexOf(waarde) !== -1;
+    if (!isGoed) allGoed = false;
+    inp.disabled = true;
+    inp.classList.remove('goed', 'fout');
+    inp.classList.add(isGoed ? 'goed' : 'fout');
+    var fb = document.getElementById(id + '-fb');
+    if (fb) {
+      fb.innerHTML = isGoed
+        ? '<span style="color:var(--groen)">&#10003;</span>'
+        : '<span style="color:var(--rood)">&#10007; ' + escHtml(zin.velden[veld][0]) + '</span>';
+    }
+  }
+  var btn = document.getElementById('ont-btn-' + pos);
+  if (btn) btn.disabled = true;
+  var nootEl = document.getElementById('ont-noot-' + pos);
+  if (nootEl) nootEl.style.display = '';
+  ontResultaten[s][pos] = allGoed;
+  ontUpdateScore();
+}
+
+function ontControleerAlles() {
+  var zinnen = ontGeschudde[ontHuidigeSet];
+  for (var pos = 0; pos < zinnen.length; pos++) {
+    var btn = document.getElementById('ont-btn-' + pos);
+    if (btn && !btn.disabled) ontControleerZin(pos);
+  }
+}
+
+function ontUpdateScore() {
+  var s = ontHuidigeSet;
+  var correct = 0;
+  for (var i = 0; i < ontResultaten[s].length; i++) { if (ontResultaten[s][i] === true) correct++; }
+  document.getElementById('ont-score').textContent = correct + ' van ' + ontGeschudde[s].length + ' zinnen correct';
+}
+
+function ontWisselSet(idx, knop) {
+  ontHuidigeSet = idx;
+  document.querySelectorAll('#ont-sub-tabs .sub-tab').forEach(function(k) { k.classList.remove('actief'); });
+  if (knop) knop.classList.add('actief');
+  ontRender();
+}
+
+function ontSchud() {
+  var s = ontHuidigeSet;
+  ontGeschudde[s] = schud(ontData[s].zinnen.slice());
+  ontResultaten[s] = ontMaakArr(ontGeschudde[s].length);
+  ontRender();
+}
+
+function ontOpnieuw() {
+  var s = ontHuidigeSet;
+  ontGeschudde[s] = schud(ontData[s].zinnen.slice());
+  ontResultaten[s] = ontMaakArr(ontGeschudde[s].length);
+  ontRender();
+}
+
+function showTab(naam) {
+  document.querySelectorAll('.tab-inhoud').forEach(function(t) { t.classList.remove('zichtbaar'); });
+  document.querySelectorAll('.tab-btn').forEach(function(k) { k.classList.remove('actief'); });
+  var el = document.getElementById('tab-' + naam);
+  if (el) el.classList.add('zichtbaar');
+  document.querySelectorAll('.tab-btn').forEach(function(k) {
+    if ((k.getAttribute('onclick') || '').indexOf("showTab('" + naam + "')") !== -1) k.classList.add('actief');
+  });
+}
+
+(function() {
+  for (var i = 0; i < ontData.length; i++) {
+    ontGeschudde[i] = schud(ontData[i].zinnen.slice());
+    ontResultaten[i] = ontMaakArr(ontGeschudde[i].length);
+  }
+  ontRender();
+})();
 </script>
 
 </body>
