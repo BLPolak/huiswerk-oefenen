@@ -461,6 +461,66 @@ body {
   .fc-wrapper, .typen-wrapper { padding: 1.2rem 1rem 1.5rem; }
   .typen-prompt-tekst { font-size: 1.5rem; }
 }
+
+/* ── LEAFLET KAART ── */
+#leaflet-map { height: 420px; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.22); }
+.kaart-modus-bar { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.kaart-modus-btn {
+  flex: 1; padding: 0.7rem 0.5rem; border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 12px; font-family: 'Nunito', sans-serif; font-weight: 800;
+  font-size: 0.85rem; cursor: pointer; background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85); transition: all 0.18s; text-align: center;
+}
+.kaart-modus-btn.actief {
+  background: #fff; color: var(--rood); border-color: #fff;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+}
+.kaart-modus-btn:hover:not(.actief) { background: rgba(255,255,255,0.22); color: #fff; }
+.kaart-vraag-box {
+  background: #fff; border-radius: 16px; padding: 1.2rem 1.4rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); margin-bottom: 1rem;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.kaart-vraag-label {
+  font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--grijs);
+}
+.kaart-vraag-tekst {
+  font-size: 1.6rem; font-weight: 900; color: var(--rood); line-height: 1.2;
+}
+.kaart-score-bar { display: flex; gap: 0.6rem; align-items: center; }
+.kaart-score-goed {
+  font-size: 0.82rem; font-weight: 800; color: #38a169;
+  background: #f0fff4; border: 1.5px solid #9ae6b4;
+  border-radius: 8px; padding: 0.25rem 0.6rem;
+}
+.kaart-score-fout {
+  font-size: 0.82rem; font-weight: 800; color: #e53e3e;
+  background: #fff5f5; border: 1.5px solid #feb2b2;
+  border-radius: 8px; padding: 0.25rem 0.6rem;
+}
+.kaart-feedback-box {
+  background: #fff; border-radius: 14px; padding: 1rem 1.2rem;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12); margin-top: 0.8rem;
+  font-size: 0.95rem; font-weight: 700; display: none;
+}
+.kaart-feedback-box.goed { border-left: 5px solid #38a169; color: #276749; display: block; }
+.kaart-feedback-box.fout { border-left: 5px solid #e53e3e; color: #742a2a; display: block; }
+.kaart-volgende-btn {
+  width: 100%; margin-top: 0.8rem; padding: 0.85rem; border: none;
+  border-radius: 12px; font-family: 'Nunito', sans-serif; font-weight: 800;
+  font-size: 0.95rem; cursor: pointer; background: var(--rood); color: #fff;
+  display: none; transition: background 0.15s;
+}
+.kaart-volgende-btn:hover { background: #1a4731; }
+.kaart-volgende-btn.zichtbaar { display: block; }
+.kaart-nieuw-btn {
+  width: 100%; margin-top: 0.6rem; padding: 0.75rem; border: none;
+  border-radius: 12px; font-family: 'Nunito', sans-serif; font-weight: 800;
+  font-size: 0.9rem; cursor: pointer; background: #e2e8f0; color: #2d3748;
+  transition: background 0.15s;
+}
+.kaart-nieuw-btn:hover { background: #cbd5e0; }
 </style>
 </head>
 <body>
@@ -478,6 +538,7 @@ body {
   <button class="tab-btn actief" onclick="toonHoofdTab('steden', this)">🏙️ Steden</button>
   <button class="tab-btn" onclick="toonHoofdTab('wateren', this)">🌊 Wateren</button>
   <button class="tab-btn" onclick="toonHoofdTab('gebergten', this)">⛰️ Gebergten</button>
+  <button class="tab-btn" onclick="toonHoofdTab('kaart', this)">🗺️ Kaart</button>
 </div>
 
 <div class="content">
@@ -809,8 +870,38 @@ body {
     </div>
   </div>
 
+  <!-- ══ KAART ══ -->
+  <div id="tab-kaart" style="display:none">
+    <div class="so-banner" style="margin-top:1.2rem">
+      <div class="so-banner-tekst">🗺️ Interactieve kaart — klik op de juiste plek!</div>
+    </div>
+
+    <div class="kaart-modus-bar">
+      <button class="kaart-modus-btn actief" onclick="setKaartModus('naam-naar-kaart', this)">📍 Naam → Kaart</button>
+      <button class="kaart-modus-btn" onclick="setKaartModus('kaart-naar-naam', this)">🔤 Kaart → Naam</button>
+    </div>
+
+    <div class="kaart-vraag-box">
+      <div class="kaart-score-bar">
+        <div class="kaart-score-goed" id="km-goed">✓ 0</div>
+        <div class="kaart-score-fout" id="km-fout">✗ 0</div>
+        <div style="flex:1"></div>
+        <div style="font-size:0.82rem;font-weight:800;color:var(--grijs)" id="km-teller">Vraag 1</div>
+      </div>
+      <div class="kaart-vraag-label" id="km-label">Klik op de kaart waar deze stad ligt:</div>
+      <div class="kaart-vraag-tekst" id="km-vraag">—</div>
+    </div>
+
+    <div id="leaflet-map"></div>
+    <div class="kaart-feedback-box" id="km-feedback"></div>
+    <button class="kaart-volgende-btn" id="km-volgende" onclick="kmVolgende()">Volgende vraag →</button>
+    <button class="kaart-nieuw-btn" onclick="kmNieuw()">🔀 Nieuwe volgorde</button>
+  </div>
+
 </div><!-- /content -->
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 /* ══════════════════════════════════════════
    DATA
@@ -1267,6 +1358,252 @@ document.addEventListener('DOMContentLoaded', () => {
   typInit(wtypS); typToon(wtypS, wtypIds); typUpdateScore(wtypS, wtypIds); typToonVoltooiing(wtypS, wtypIds, false);
   typInit(gtypS); typToon(gtypS, gtypIds); typUpdateScore(gtypS, gtypIds); typToonVoltooiing(gtypS, gtypIds, false);
 });
+
+/* ══════════════════════════════════════════
+   KAART ENGINE (Leaflet)
+   ══════════════════════════════════════════ */
+
+// All locations with lat/lng coordinates
+const KAART_DATA = [
+  // Steden
+  { key:'1',  naam:'Glasgow',               cat:'stad',     lat:55.86,  lng:-4.25  },
+  { key:'2',  naam:'Belfast',               cat:'stad',     lat:54.60,  lng:-5.93  },
+  { key:'3',  naam:'Gdańsk',               cat:'stad',     lat:54.35,  lng:18.65  },
+  { key:'4',  naam:'Liverpool',             cat:'stad',     lat:53.41,  lng:-2.98  },
+  { key:'5',  naam:'Hamburg',               cat:'stad',     lat:53.55,  lng:9.99   },
+  { key:'6',  naam:'Birmingham',            cat:'stad',     lat:52.48,  lng:-1.90  },
+  { key:'7',  naam:'Antwerpen',             cat:'stad',     lat:51.22,  lng:4.40   },
+  { key:'8',  naam:'Keulen',                cat:'stad',     lat:50.94,  lng:6.96   },
+  { key:'9',  naam:'Kraków',               cat:'stad',     lat:50.06,  lng:19.94  },
+  { key:'10', naam:'Frankfurt',             cat:'stad',     lat:50.11,  lng:8.68   },
+  { key:'11', naam:'Ostrava',               cat:'stad',     lat:49.83,  lng:18.29  },
+  { key:'12', naam:'Le Havre',              cat:'stad',     lat:49.49,  lng:0.11   },
+  { key:'13', naam:'Straatsburg',           cat:'stad',     lat:48.57,  lng:7.75   },
+  { key:'14', naam:'Debrecen',              cat:'stad',     lat:47.53,  lng:21.63  },
+  { key:'15', naam:'München',              cat:'stad',     lat:48.14,  lng:11.58  },
+  { key:'16', naam:'Salzburg',              cat:'stad',     lat:47.80,  lng:13.04  },
+  { key:'17', naam:'Timișoara',            cat:'stad',     lat:45.75,  lng:21.23  },
+  { key:'18', naam:'Constanța',            cat:'stad',     lat:44.18,  lng:28.65  },
+  { key:'19', naam:'Lyon',                  cat:'stad',     lat:45.75,  lng:4.83   },
+  { key:'20', naam:'Bordeaux',              cat:'stad',     lat:44.84,  lng:-0.58  },
+  { key:'21', naam:'Milaan',               cat:'stad',     lat:45.47,  lng:9.19   },
+  { key:'22', naam:'Venetië',             cat:'stad',     lat:45.44,  lng:12.32  },
+  { key:'23', naam:'Turijn',               cat:'stad',     lat:45.07,  lng:7.69   },
+  { key:'24', naam:'Genua',                cat:'stad',     lat:44.41,  lng:8.93   },
+  { key:'25', naam:'Marseille',             cat:'stad',     lat:43.30,  lng:5.37   },
+  { key:'26', naam:'Porto',                 cat:'stad',     lat:41.15,  lng:-8.61  },
+  { key:'27', naam:'Barcelona',             cat:'stad',     lat:41.39,  lng:2.15   },
+  { key:'28', naam:'Napels',               cat:'stad',     lat:40.85,  lng:14.27  },
+  { key:'29', naam:'València',            cat:'stad',     lat:39.47,  lng:-0.38  },
+  { key:'30', naam:'Málaga',              cat:'stad',     lat:36.72,  lng:-4.42  },
+  // Wateren (represented by a central point)
+  { key:'a',  naam:'Noordzee',              cat:'water',    lat:56.00,  lng:3.50   },
+  { key:'b',  naam:'Oostzee',               cat:'water',    lat:58.00,  lng:19.00  },
+  { key:'c',  naam:'Elbe',                  cat:'water',    lat:53.00,  lng:10.50  },
+  { key:'d',  naam:'Oder',                  cat:'water',    lat:52.00,  lng:14.60  },
+  { key:'e',  naam:'Wisła',               cat:'water',    lat:52.50,  lng:19.50  },
+  { key:'f',  naam:'Dnjepr',               cat:'water',    lat:49.50,  lng:32.00  },
+  { key:'g',  naam:'Rijn',                  cat:'water',    lat:51.50,  lng:6.50   },
+  { key:'h',  naam:'Seine',                 cat:'water',    lat:48.80,  lng:2.20   },
+  { key:'i',  naam:'Loire',                 cat:'water',    lat:47.50,  lng:1.00   },
+  { key:'j',  naam:'Donau',                 cat:'water',    lat:47.80,  lng:17.00  },
+  { key:'k',  naam:'Zwarte Zee',            cat:'water',    lat:43.00,  lng:34.00  },
+  { key:'l',  naam:'Po',                    cat:'water',    lat:45.00,  lng:11.00  },
+  { key:'m',  naam:'Rhône',               cat:'water',    lat:44.50,  lng:4.80   },
+  { key:'n',  naam:'Ebro',                  cat:'water',    lat:41.50,  lng:-0.50  },
+  { key:'o',  naam:'Taag',                  cat:'water',    lat:39.50,  lng:-7.50  },
+  { key:'p',  naam:'Middellandse Zee',      cat:'water',    lat:38.00,  lng:13.00  },
+  // Gebergten (central point of range)
+  { key:'A',  naam:'Scandinavisch Hoogland',cat:'gebergte', lat:65.00,  lng:14.00  },
+  { key:'B',  naam:'Schotse Hooglanden',    cat:'gebergte', lat:57.00,  lng:-4.50  },
+  { key:'C',  naam:'Karpaten',              cat:'gebergte', lat:49.00,  lng:22.00  },
+  { key:'D',  naam:'Alpen',                 cat:'gebergte', lat:46.50,  lng:9.00   },
+  { key:'E',  naam:'Transylvanische Alpen', cat:'gebergte', lat:45.50,  lng:24.50  },
+  { key:'F',  naam:'Dinarische Alpen',      cat:'gebergte', lat:43.50,  lng:17.50  },
+  { key:'G',  naam:'Balkan',                cat:'gebergte', lat:42.80,  lng:25.00  },
+  { key:'H',  naam:'Pyreneeën',           cat:'gebergte', lat:42.70,  lng:0.50   },
+  { key:'J',  naam:'Apennijnen',            cat:'gebergte', lat:42.00,  lng:13.50  },
+];
+
+const CAT_EMOJI = { stad: '🏙️', water: '🌊', gebergte: '⛰️' };
+const TOLERANTIE_KM = { stad: 80, water: 150, gebergte: 150 };
+
+let kmMap = null;
+let kmModus = 'naam-naar-kaart'; // or 'kaart-naar-naam'
+let kmVragen = [];
+let kmIdx = 0;
+let kmGoed = 0;
+let kmFout = 0;
+let kmGeantwoord = false;
+let kmMarkers = [];
+let kmVraagMarker = null;
+let kmKlikHandler = null;
+
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function kmInitMap() {
+  if (kmMap) return;
+  kmMap = L.map('leaflet-map', { center: [52, 13], zoom: 4, zoomControl: true });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap',
+    maxZoom: 10, minZoom: 3
+  }).addTo(kmMap);
+}
+
+function kmSchudVragen() {
+  kmVragen = fisherYates(KAART_DATA);
+  kmIdx = 0; kmGoed = 0; kmFout = 0; kmGeantwoord = false;
+  kmUpdateScore();
+}
+
+function kmUpdateScore() {
+  document.getElementById('km-goed').textContent = `✓ ${kmGoed}`;
+  document.getElementById('km-fout').textContent = `✗ ${kmFout}`;
+  document.getElementById('km-teller').textContent = `Vraag ${kmIdx + 1} / ${kmVragen.length}`;
+}
+
+function kmClearMarkers() {
+  kmMarkers.forEach(m => kmMap.removeLayer(m));
+  kmMarkers = [];
+  if (kmVraagMarker) { kmMap.removeLayer(kmVraagMarker); kmVraagMarker = null; }
+  if (kmKlikHandler) { kmMap.off('click', kmKlikHandler); kmKlikHandler = null; }
+}
+
+function kmToonVraag() {
+  kmClearMarkers();
+  kmGeantwoord = false;
+  const fb = document.getElementById('km-feedback');
+  fb.className = 'kaart-feedback-box';
+  fb.textContent = '';
+  document.getElementById('km-volgende').classList.remove('zichtbaar');
+
+  const v = kmVragen[kmIdx];
+  kmUpdateScore();
+
+  if (kmModus === 'naam-naar-kaart') {
+    document.getElementById('km-label').textContent =
+      `${CAT_EMOJI[v.cat]} Klik op de kaart waar dit ligt:`;
+    document.getElementById('km-vraag').textContent = v.naam;
+    // Enable click on map
+    kmKlikHandler = function(e) { kmBeantwoordKlik(e.latlng.lat, e.latlng.lng); };
+    kmMap.on('click', kmKlikHandler);
+  } else {
+    // kaart-naar-naam: toon marker, Sam typt naam
+    document.getElementById('km-label').textContent =
+      `${CAT_EMOJI[v.cat]} Wat heet dit op de kaart? (tik het nummer/de letter)`;
+    document.getElementById('km-vraag').textContent = v.key;
+    const icon = L.divIcon({
+      html: `<div style="background:var(--rood,#276749);color:#fff;font-weight:900;
+             font-size:1.1rem;border-radius:50%;width:36px;height:36px;
+             display:flex;align-items:center;justify-content:center;
+             box-shadow:0 2px 8px rgba(0,0,0,0.35);font-family:Nunito,sans-serif">
+             ${v.key}</div>`,
+      className: '', iconSize: [36, 36], iconAnchor: [18, 18]
+    });
+    kmVraagMarker = L.marker([v.lat, v.lng], { icon, interactive: false }).addTo(kmMap);
+    kmMarkers.push(kmVraagMarker);
+    kmMap.flyTo([v.lat, v.lng], 5, { duration: 0.8 });
+  }
+}
+
+function kmBeantwoordKlik(lat, lng) {
+  if (kmGeantwoord) return;
+  kmGeantwoord = true;
+  kmMap.off('click', kmKlikHandler);
+  kmKlikHandler = null;
+
+  const v = kmVragen[kmIdx];
+  const afstand = haversineKm(lat, lng, v.lat, v.lng);
+  const tolerantie = TOLERANTIE_KM[v.cat];
+  const isGoed = afstand <= tolerantie;
+
+  if (isGoed) kmGoed++; else kmFout++;
+  kmUpdateScore();
+
+  // Show correct location marker
+  const correctIcon = L.divIcon({
+    html: `<div style="background:#38a169;color:#fff;font-weight:900;font-size:0.85rem;
+           border-radius:50%;width:32px;height:32px;display:flex;align-items:center;
+           justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.35);font-family:Nunito,sans-serif">
+           ${v.key}</div>`,
+    className: '', iconSize: [32, 32], iconAnchor: [16, 16]
+  });
+  const correctMarker = L.marker([v.lat, v.lng], { icon: correctIcon, interactive: false }).addTo(kmMap);
+  kmMarkers.push(correctMarker);
+
+  // Show click location marker if wrong
+  if (!isGoed) {
+    const foutIcon = L.divIcon({
+      html: `<div style="background:#e53e3e;color:#fff;font-weight:900;font-size:1rem;
+             border-radius:50%;width:28px;height:28px;display:flex;align-items:center;
+             justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.3);font-family:Nunito,sans-serif">
+             ✗</div>`,
+      className: '', iconSize: [28, 28], iconAnchor: [14, 14]
+    });
+    const foutMarker = L.marker([lat, lng], { icon: foutIcon, interactive: false }).addTo(kmMap);
+    kmMarkers.push(foutMarker);
+  }
+
+  const fb = document.getElementById('km-feedback');
+  if (isGoed) {
+    fb.className = 'kaart-feedback-box goed';
+    fb.textContent = `✓ Goed! ${v.naam} — op ${Math.round(afstand)} km van je klik.`;
+  } else {
+    fb.className = 'kaart-feedback-box fout';
+    fb.textContent = `✗ Niet goed — je klikte ${Math.round(afstand)} km van ${v.naam}. De groene pin is de juiste plek.`;
+  }
+  document.getElementById('km-volgende').classList.add('zichtbaar');
+}
+
+function kmVolgende() {
+  if (kmIdx < kmVragen.length - 1) {
+    kmIdx++;
+    kmToonVraag();
+  } else {
+    // Finished all
+    const fb = document.getElementById('km-feedback');
+    const pct = Math.round((kmGoed / (kmGoed + kmFout)) * 100);
+    fb.className = 'kaart-feedback-box goed';
+    fb.textContent = `🎉 Klaar! ${kmGoed} van de ${kmVragen.length} goed (${pct}%). Klik op "Nieuwe volgorde" om opnieuw te beginnen.`;
+    document.getElementById('km-volgende').classList.remove('zichtbaar');
+  }
+}
+
+function kmNieuw() {
+  kmSchudVragen();
+  kmToonVraag();
+}
+
+function setKaartModus(modus, btn) {
+  kmModus = modus;
+  document.querySelectorAll('.kaart-modus-btn').forEach(b => b.classList.remove('actief'));
+  btn.classList.add('actief');
+  kmSchudVragen();
+  kmToonVraag();
+}
+
+// Override toonHoofdTab to init map when kaart tab is opened
+const _origToonHoofdTab = toonHoofdTab;
+function toonHoofdTab(id, btn) {
+  _origToonHoofdTab(id, btn);
+  if (id === 'kaart') {
+    setTimeout(() => {
+      kmInitMap();
+      if (kmVragen.length === 0) {
+        kmSchudVragen();
+        kmToonVraag();
+      } else {
+        kmMap.invalidateSize();
+      }
+    }, 50);
+  }
+}
 </script>
 
 </body>
