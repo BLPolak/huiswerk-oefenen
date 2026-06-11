@@ -3,619 +3,349 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wiskunde – §4.1, §4.2 & §4.3</title>
+  <title>Wiskunde – H7 Kwadratische vergelijkingen</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --teal: #0d9488;
-      --teal-dark: #0f766e;
-      --donker: #1e1e2e;
-      --grijs: #f1f5f9;
-      --bg: #f8fafc;
-      --groen: #22c55e;
-      --rood: #ef4444;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--donker); }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Nunito, sans-serif; background: #f8fafc; color: #1e293b; }
+    a { color: inherit; text-decoration: none; }
     header {
       background: linear-gradient(135deg, #0d9488, #0ea5e9);
       color: white; padding: 1.2rem 1.5rem;
       position: sticky; top: 0; z-index: 100;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    header h1 { font-size: 1.3rem; font-weight: 800; }
-    header p { font-size: 0.85rem; opacity: 0.85; margin-top: 0.2rem; }
-
-    .banner {
-      background: linear-gradient(135deg, #f59e0b, #ef4444);
-      color: white; text-align: center;
-      padding: 0.6rem; font-weight: 700; font-size: 0.95rem;
-    }
-
-    .tab-nav {
-      display: flex; overflow-x: auto; background: white;
-      border-bottom: 2px solid #e2e8f0; padding: 0 1rem; gap: 0.25rem;
-    }
-    .tab-btn {
-      padding: 0.75rem 1rem; border: none; background: none;
-      font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 600;
-      color: #64748b; cursor: pointer; border-bottom: 3px solid transparent;
-      white-space: nowrap; transition: all 0.2s;
-    }
-    .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
-
-    .tab-content { display: none; padding: 1.5rem; max-width: 700px; margin: 0 auto; }
+    header h1 { font-size: 1.4rem; font-weight: 800; }
+    header p  { font-size: .9rem; opacity: .85; margin-top: .2rem; }
+    header a  { font-size: .85rem; opacity: .8; display: inline-block; margin-top: .3rem; }
+    header a:hover { opacity: 1; }
+    .tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1rem 1.5rem; background: #fff; border-bottom: 2px solid #e2e8f0; }
+    .tab-btn { padding: .5rem 1rem; border: none; border-radius: 8px; background: #e5e7eb; cursor: pointer; font-family: Nunito, sans-serif; font-size: .9rem; font-weight: 700; transition: background .2s, color .2s; }
+    .tab-btn.active { background: linear-gradient(135deg, #0d9488, #0ea5e9); color: #fff; }
+    .tab-btn:hover:not(.active) { background: #d1d5db; }
+    .tab-content { display: none; padding: 1.5rem; max-width: 820px; margin: 0 auto; }
     .tab-content.active { display: block; }
-
-    .uitleg-section {
-      background: white; border-radius: 12px; padding: 1.5rem;
-      margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      border-left: 4px solid var(--teal);
+    .uitleg-card, .oefening-kaart {
+      background: #fff; border-radius: 12px; padding: 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.07);
     }
-    .uitleg-section h2 { color: var(--teal); font-size: 1.1rem; margin-bottom: 1rem; }
-    .uitleg-section h3 { font-size: 0.95rem; color: #374151; margin: 1rem 0 0.4rem; }
-    .uitleg-section p { font-size: 0.9rem; line-height: 1.6; color: #374151; margin-bottom: 0.4rem; }
-    .rule-box {
-      background: #f0fdfa; border: 1px solid #99f6e4;
-      border-radius: 8px; padding: 0.75rem 1rem; margin: 0.6rem 0; font-size: 0.9rem; color: #134e4a;
+    .uitleg-card h2 { color: #0d9488; margin-bottom: 1rem; font-size: 1.2rem; }
+    .uitleg-card h3 { color: #0369a1; margin: 1rem 0 .5rem; font-size: 1rem; }
+    .oefening-kaart h3 { color: #0d9488; margin-bottom: .5rem; font-size: 1.1rem; }
+    .regel-blok { border-radius: 8px; padding: .9rem 1.1rem; margin: .6rem 0; }
+    .regel-blok p { margin: .2rem 0; line-height: 1.5; }
+    .groen     { background: #d1fae5; border-left: 4px solid #10b981; }
+    .oranje    { background: #fef3c7; border-left: 4px solid #f59e0b; }
+    .rood-blok { background: #fee2e2; border-left: 4px solid #ef4444; }
+    .blauw     { background: #eff6ff; border-left: 4px solid #3b82f6; }
+    .stappen { display: flex; flex-direction: column; gap: .5rem; margin: .8rem 0; }
+    .stap { background: #eff6ff; border-left: 4px solid #3b82f6; padding: .6rem 1rem; border-radius: 6px; font-weight: 700; font-size: .95rem; }
+    .voorbeeld-blok { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin-top: .8rem; line-height: 1.7; }
+    .score-balk  { font-size: .88rem; color: #6b7280; margin-bottom: .7rem; }
+    .vraag-tekst { font-size: 1.15rem; font-weight: 700; min-height: 2rem; margin: .75rem 0; line-height: 1.4; }
+    .mc-grid { display: flex; flex-direction: column; gap: .5rem; margin: .6rem 0 .8rem; }
+    .mc-btn {
+      padding: .7rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      background: #fff; cursor: pointer; font-family: Nunito, sans-serif;
+      font-size: .98rem; font-weight: 600; text-align: left;
+      transition: border-color .15s, background .15s;
     }
-    .rule-box .formula { font-size: 1rem; font-weight: 700; color: var(--teal-dark); margin-bottom: 0.25rem; }
-    .warning-box {
-      background: #fff7ed; border: 1px solid #fed7aa;
-      border-radius: 8px; padding: 0.75rem 1rem; margin: 0.6rem 0;
-      font-size: 0.9rem; color: #92400e;
+    .mc-btn:hover { border-color: #0d9488; background: #f0fdfa; }
+    .feedback      { min-height: 1.5rem; font-weight: 700; margin: .4rem 0; font-size: .97rem; }
+    .feedback.goed { color: #059669; }
+    .feedback.fout { color: #dc2626; }
+    .knoppen-rij { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+    .knoppen-rij button {
+      padding: .5rem 1rem; border: none; border-radius: 8px;
+      background: #0d9488; color: #fff; font-family: Nunito, sans-serif;
+      font-weight: 700; cursor: pointer; font-size: .9rem;
     }
-
-    .oefening-card {
-      background: white; border-radius: 12px; padding: 1.5rem;
-      margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
-    .oefening-card h2 {
-      font-size: 1rem; color: var(--teal-dark); margin-bottom: 1rem;
-      padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0;
-    }
-    .score-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.85rem; color: #64748b; }
-    .progress-bar { height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-bottom: 1rem; }
-    .progress-fill { height: 100%; background: var(--teal); transition: width 0.3s; }
-    .vraag-box {
-      background: var(--grijs); border-radius: 8px; padding: 1rem;
-      margin-bottom: 1rem; font-size: 1rem; text-align: center;
-      min-height: 60px; display: flex; align-items: center; justify-content: center;
-      line-height: 1.5;
-    }
-    .antwoord-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1rem; }
-    .antwoord-btn {
-      padding: 0.6rem 1.5rem; border: 2px solid #e2e8f0; border-radius: 8px;
-      background: white; font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
-    }
-    .antwoord-btn:hover { border-color: var(--teal); background: #f0fdfa; }
-    .antwoord-btn.correct { background: #dcfce7; border-color: var(--groen); color: #166534; }
-    .antwoord-btn.fout { background: #fee2e2; border-color: var(--rood); color: #991b1b; }
-
-    .antwoord-input {
-      width: 100%; padding: 0.6rem 1rem; border: 2px solid #e2e8f0;
-      border-radius: 8px; font-family: 'Nunito', sans-serif;
-      font-size: 1rem; margin-bottom: 0.75rem; outline: none; transition: border-color 0.2s;
-    }
-    .antwoord-input:focus { border-color: var(--teal); }
-    .antwoord-input.correct { border-color: var(--groen); background: #dcfce7; }
-    .antwoord-input.fout { border-color: var(--rood); background: #fee2e2; }
-
-    .btn-row { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
-    .btn {
-      padding: 0.6rem 1.2rem; border: none; border-radius: 8px;
-      font-family: 'Nunito', sans-serif; font-size: 0.9rem;
-      font-weight: 700; cursor: pointer; transition: opacity 0.2s;
-    }
-    .btn:hover { opacity: 0.85; }
-    .btn-primary { background: var(--teal); color: white; }
-    .btn-secondary { background: #e2e8f0; color: var(--donker); }
-
-    .feedback {
-      padding: 0.75rem 1rem; border-radius: 8px;
-      font-size: 0.9rem; margin-top: 0.75rem; display: none; line-height: 1.5;
-    }
-    .feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; display: block; }
-    .feedback.fout { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block; }
-
-    footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.8rem; }
+    .knoppen-rij button:hover { background: #0b8073; }
+    footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>📐 Wiskunde</h1>
-  <p>Getal en Ruimte · 2 HAVO · Hoofdstuk 4</p>
+  <h1>&#128208; Wiskunde</h1>
+  <p>Getal en Ruimte &middot; 2 HAVO &middot; Hoofdstuk 7</p>
+  <a href="../">&larr; Terug naar overzicht</a>
 </header>
 
-<div class="banner">📅 Proefwerk Wiskunde · 12 mei</div>
-
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="showTab('uitleg', this)">📖 Uitleg</button>
-  <button class="tab-btn" onclick="showTab('par41', this)">§4.1 Oefeningen</button>
-  <button class="tab-btn" onclick="showTab('par42', this)">§4.2 Oefeningen</button>
-  <button class="tab-btn" onclick="showTab('par43', this)">§4.3 Oefeningen</button>
+  <button class="tab-btn active" onclick="showTab('71',this)">§7.1 x²=c</button>
+  <button class="tab-btn" onclick="showTab('72',this)">§7.2 Buiten haakjes</button>
+  <button class="tab-btn" onclick="showTab('73',this)">§7.3 Product-som</button>
+  <button class="tab-btn" onclick="showTab('74',this)">§7.4 Oplossen</button>
+  <button class="tab-btn" onclick="showTab('gem',this)">&#127381; Gemengd</button>
 </nav>
 
-<!-- UITLEG -->
-<div id="tab-uitleg" class="tab-content active">
-
-  <div class="uitleg-section">
-    <h2>§4.1 Kwadratische formules</h2>
-    <p>Een kwadratische formule heeft de vorm <strong>y = ax² + b</strong>. De grafiek is een <strong>parabool</strong>.</p>
-    <h3>Berg- of dalparabool?</h3>
-    <div class="rule-box">
-      <div class="formula">a &gt; 0 → dalparabool ∪ (laagste punt)</div>
-      <div class="formula">a &lt; 0 → bergparabool ∩ (hoogste punt)</div>
+<!-- §7.1 -->
+<div id="tab-71" class="tab-content active">
+  <div class="uitleg-card">
+    <h2>§7.1 De vergelijking x² = c</h2>
+    <div class="regel-blok groen"><p><strong>c &gt; 0</strong> &rarr; twee oplossingen: x = &radic;c &nbsp;of&nbsp; x = &minus;&radic;c &nbsp;<em>(x²=25 &rarr; x=5 of x=&minus;5)</em></p></div>
+    <div class="regel-blok oranje"><p><strong>c = 0</strong> &rarr; één oplossing: x = 0</p></div>
+    <div class="regel-blok rood-blok"><p><strong>c &lt; 0</strong> &rarr; geen oplossing</p></div>
+    <h3>Herleiden: ax² + b = c</h3>
+    <div class="stappen">
+      <div class="stap">&#9312; ax² = c &minus; b</div>
+      <div class="stap">&#9313; x² = (c &minus; b) &divide; a</div>
+      <div class="stap">&#9314; x = &radic;(...) of x = &minus;&radic;(...)</div>
     </div>
-    <p>Voorbeeld: y = 2x² + 3 → dalparabool (a = 2 &gt; 0)<br>
-    Voorbeeld: y = −3x² + 1 → bergparabool (a = −3 &lt; 0)</p>
-    <h3>y-coördinaat berekenen</h3>
-    <p>Vul x in de formule in. Bereken eerst x², dan vermenigvuldig met a, dan optellen met b.</p>
-    <div class="rule-box">
-      <p>y = −2x² + 5 voor x = 3:<br>
-      y = −2 · 3² + 5 = −2 · 9 + 5 = −18 + 5 = <strong>−13</strong></p>
-    </div>
-    <h3>Punt controleren op de grafiek</h3>
-    <p>Vul de x-coördinaat in de formule in. Klopt de uitkomst met de y-coördinaat? Dan ligt het punt op de grafiek.</p>
-    <div class="rule-box">
-      <p>Formule y = 3x² − 1, punt A(2, 11):<br>
-      y = 3 · 2² − 1 = 12 − 1 = 11 ✓ → A ligt op de grafiek.</p>
+    <div class="voorbeeld-blok"><strong>Voorbeeld:</strong> 3x² &minus; 7 = 20 &rarr; 3x² = 27 &rarr; x² = 9 &rarr; <strong>x = 3 of x = &minus;3</strong></div>
+  </div>
+  <div class="oefening-kaart">
+    <h3>Oefening A &mdash; Hoeveel oplossingen heeft x² = c?</h3>
+    <div class="score-balk">Score: <span id="cor71a">0</span> / <span id="tot71a">0</span></div>
+    <div id="vraag71a" class="vraag-tekst"></div>
+    <div id="opties71a" class="mc-grid"></div>
+    <div id="fb71a" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="reset71a()">&#128260; Opnieuw</button>
+      <button onclick="shuffle71a()">&#128256; Shuffle</button>
     </div>
   </div>
-
-  <div class="uitleg-section">
-    <h2>§4.2 Rekenen met wortels</h2>
-    <p>De wortel van een getal n is het getal dat je kwadrateert om n te krijgen. √25 = 5 want 5² = 25.</p>
-    <div class="warning-box">⚠️ <strong>De wortel van een negatief getal bestaat niet!</strong><br>
-    √−9 bestaat niet, want een getal maal zichzelf is nooit negatief.</div>
-    <h3>Worteltrekken zonder rekenmachine</h3>
-    <div class="rule-box">
-      <div class="formula">√(a · b) = √a · √b</div>
-      <p>Haakjes altijd eerst uitrekenen!<br>
-      √(64 + 36) = √100 = 10<br>
-      4·√9 + 3·√16 = 4·3 + 3·4 = 12 + 12 = 24<br>
-      √(9 · 16) = √9 · √16 = 3 · 4 = 12</p>
-    </div>
-    <h3>Kwadraten uit je hoofd</h3>
-    <div class="rule-box">
-      <p>1²=1 · 2²=4 · 3²=9 · 4²=16 · 5²=25<br>
-      6²=36 · 7²=49 · 8²=64 · 9²=81 · 10²=100<br>
-      11²=121 · 12²=144 · 13²=169 · 14²=196 · 15²=225</p>
-    </div>
-    <h3>(√a)² = a</h3>
-    <div class="rule-box">
-      <div class="formula">(√a)² = a</div>
-      <p>Voorbeeld: (√7)² = 7 &nbsp;&nbsp; (√5)² = 5</p>
+  <div class="oefening-kaart">
+    <h3>Oefening B &mdash; Los op: ax² + b = c</h3>
+    <div class="score-balk">Score: <span id="cor71b">0</span> / <span id="tot71b">0</span></div>
+    <div id="vraag71b" class="vraag-tekst"></div>
+    <div id="opties71b" class="mc-grid"></div>
+    <div id="fb71b" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="skip71b()">&#9197; Overslaan</button>
+      <button onclick="reset71b()">&#128260; Opnieuw</button>
+      <button onclick="shuffle71b()">&#128256; Shuffle</button>
     </div>
   </div>
-
-  <div class="uitleg-section">
-    <h2>§4.3 Wortelformules</h2>
-    <p>Een wortelformule heeft de vorm <strong>y = a · √x + b</strong>. De grafiek begint bij x = 0.</p>
-    <div class="warning-box">⚠️ <strong>x mag niet negatief zijn!</strong><br>
-    Bij y = √x mag je geen negatieve x invullen.</div>
-    <h3>y berekenen bij gegeven x</h3>
-    <div class="rule-box">
-      <p>y = 3·√x + 2 voor x = 16:<br>
-      y = 3·√16 + 2 = 3·4 + 2 = <strong>14</strong></p>
-    </div>
-    <h3>Handige x-waarden voor tabel</h3>
-    <div class="rule-box">
-      <p>Kies kwadraten: x = 0, 1, 4, 9, 16, 25<br>
-      Dan is √x altijd een geheel getal.</p>
-    </div>
-  </div>
-
 </div>
 
-<!-- §4.1 OEFENINGEN -->
-<div id="tab-par41" class="tab-content">
-
-  <div class="oefening-card">
-    <h2>Berg of dal? (§4.1)</h2>
-    <div class="score-bar"><span id="score41a">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog41a" style="width:0%"></div></div>
-    <div class="vraag-box"><div id="formule41a">–</div></div>
-    <div class="antwoord-btns">
-      <button class="antwoord-btn" onclick="checkBergDal('bergparabool', this)">Bergparabool ∩</button>
-      <button class="antwoord-btn" onclick="checkBergDal('dalparabool', this)">Dalparabool ∪</button>
+<!-- §7.2 -->
+<div id="tab-72" class="tab-content">
+  <div class="uitleg-card">
+    <h2>§7.2 Buiten haakjes brengen</h2>
+    <p>Omgekeerde van haakjes wegwerken: som &rarr; product.</p>
+    <div class="voorbeeld-blok" style="margin-top:.8rem"><strong>Regel:</strong> ab + ac = a(b + c)</div>
+    <h3>Aanpak</h3>
+    <div class="stappen">
+      <div class="stap">&#9312; Zoek de grootste gemeenschappelijke factor (ggf)</div>
+      <div class="stap">&#9313; Schrijf: ggf &times; ( ... )</div>
+      <div class="stap">&#9314; Deel elke term door de ggf</div>
     </div>
-    <div class="feedback" id="fb41a"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="volgBergDal" onclick="nextBergDal()" style="display:none">Volgende →</button>
+    <div class="voorbeeld-blok">6a + 10b &rarr; 2(3a+5b) &nbsp;&nbsp; x²+5x &rarr; x(x+5) &nbsp;&nbsp; 6pq&minus;30p &rarr; 6p(q&minus;5)</div>
+  </div>
+  <div class="oefening-kaart">
+    <h3>Oefening &mdash; Ontbind in factoren</h3>
+    <div class="score-balk">Score: <span id="cor72">0</span> / <span id="tot72">0</span></div>
+    <div id="vraag72" class="vraag-tekst"></div>
+    <div id="opties72" class="mc-grid"></div>
+    <div id="fb72" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="reset72()">&#128260; Opnieuw</button>
+      <button onclick="shuffle72()">&#128256; Shuffle</button>
     </div>
   </div>
-
-  <div class="oefening-card">
-    <h2>Bereken y (§4.1)</h2>
-    <div class="score-bar"><span id="score41b">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog41b" style="width:0%"></div></div>
-    <div class="vraag-box" id="vraag41b">–</div>
-    <input type="number" class="antwoord-input" id="inp41b" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkBerekenY()">
-    <div class="feedback" id="fb41b"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="checkBerekenY()">Controleer</button>
-      <button class="btn btn-secondary" onclick="nextBerekenY()">Overslaan</button>
-    </div>
-  </div>
-
-  <div class="oefening-card">
-    <h2>Ligt het punt op de grafiek? (§4.1)</h2>
-    <div class="score-bar"><span id="score41c">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog41c" style="width:0%"></div></div>
-    <div class="vraag-box" id="vraag41c">–</div>
-    <div class="antwoord-btns">
-      <button class="antwoord-btn" onclick="checkPuntOp('Ja', this)">Ja</button>
-      <button class="antwoord-btn" onclick="checkPuntOp('Nee', this)">Nee</button>
-    </div>
-    <div class="feedback" id="fb41c"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="volgPuntOp" onclick="nextPuntOp()" style="display:none">Volgende →</button>
-    </div>
-  </div>
-
 </div>
 
-<!-- §4.2 OEFENINGEN -->
-<div id="tab-par42" class="tab-content">
-
-  <div class="oefening-card">
-    <h2>Bereken de wortel (§4.2)</h2>
-    <div class="score-bar"><span id="score42a">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog42a" style="width:0%"></div></div>
-    <div class="vraag-box" id="vraag42a">–</div>
-    <input type="number" class="antwoord-input" id="inp42a" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkWortel()">
-    <div class="feedback" id="fb42a"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="checkWortel()">Controleer</button>
-      <button class="btn btn-secondary" onclick="nextWortel()">Overslaan</button>
+<!-- §7.3 -->
+<div id="tab-73" class="tab-content">
+  <div class="uitleg-card">
+    <h2>§7.3 De product-som-methode</h2>
+    <p>x² + bx + c: zoek p en q met <strong>p&times;q = c</strong> en <strong>p+q = b</strong>.</p>
+    <p style="margin-top:.5rem">Dan: x² + bx + c = <strong>(x+p)(x+q)</strong></p>
+    <div class="voorbeeld-blok" style="margin-top:.8rem">x²+7x+12: product=12, som=7 &rarr; 3&times;4 &rarr; <strong>(x+3)(x+4)</strong></div>
+    <h3>Tekens</h3>
+    <div class="regel-blok groen"><p>c&gt;0, b&gt;0 &rarr; beide + &nbsp; x²+5x+6=(x+2)(x+3)</p></div>
+    <div class="regel-blok oranje"><p>c&gt;0, b&lt;0 &rarr; beide &minus; &nbsp; x²&minus;5x+6=(x&minus;2)(x&minus;3)</p></div>
+    <div class="regel-blok rood-blok"><p>c&lt;0 &rarr; één +, één &minus; &nbsp; x²+x&minus;6=(x+3)(x&minus;2)</p></div>
+  </div>
+  <div class="oefening-kaart">
+    <h3>Oefening &mdash; Ontbind in factoren (product-som)</h3>
+    <div class="score-balk">Score: <span id="cor73">0</span> / <span id="tot73">0</span></div>
+    <div id="vraag73" class="vraag-tekst"></div>
+    <div id="opties73" class="mc-grid"></div>
+    <div id="fb73" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="reset73()">&#128260; Opnieuw</button>
+      <button onclick="shuffle73()">&#128256; Shuffle</button>
     </div>
   </div>
-
-  <div class="oefening-card">
-    <h2>Bestaat de wortel? (§4.2)</h2>
-    <div class="score-bar"><span id="score42b">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog42b" style="width:0%"></div></div>
-    <div class="vraag-box" id="vraag42b">–</div>
-    <div class="antwoord-btns">
-      <button class="antwoord-btn" onclick="checkBestaatWortel('Ja', this)">Ja</button>
-      <button class="antwoord-btn" onclick="checkBestaatWortel('Nee', this)">Nee</button>
-    </div>
-    <div class="feedback" id="fb42b"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="volgBestaat" onclick="nextBestaat()" style="display:none">Volgende →</button>
-    </div>
-  </div>
-
-  <div class="oefening-card">
-    <h2>Bereken zonder rekenmachine (§4.2)</h2>
-    <div class="score-bar"><span id="score42c">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog42c" style="width:0%"></div></div>
-    <div class="vraag-box" id="vraag42c">–</div>
-    <input type="number" class="antwoord-input" id="inp42c" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkWortelRek()">
-    <div class="feedback" id="fb42c"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="checkWortelRek()">Controleer</button>
-      <button class="btn btn-secondary" onclick="nextWortelRek()">Overslaan</button>
-    </div>
-  </div>
-
 </div>
 
-<!-- §4.3 OEFENINGEN -->
-<div id="tab-par43" class="tab-content">
-
-  <div class="oefening-card">
-    <h2>Bereken y in een wortelformule (§4.3)</h2>
-    <div class="score-bar"><span id="score43a">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog43a" style="width:0%"></div></div>
-    <div class="vraag-box" id="vraag43a">–</div>
-    <input type="number" class="antwoord-input" id="inp43a" placeholder="Jouw antwoord..." onkeypress="if(event.key==='Enter')checkWortelFormule()">
-    <div class="feedback" id="fb43a"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="checkWortelFormule()">Controleer</button>
-      <button class="btn btn-secondary" onclick="nextWortelFormule()">Overslaan</button>
+<!-- §7.4 -->
+<div id="tab-74" class="tab-content">
+  <div class="uitleg-card">
+    <h2>§7.4 Kwadratische vergelijkingen oplossen</h2>
+    <div class="regel-blok groen" style="margin:.4rem 0"><p><strong>A &middot; B = 0 &rarr; A = 0 of B = 0</strong></p></div>
+    <h3>Aanpak</h3>
+    <div class="stappen">
+      <div class="stap">&#9312; Zet alles naar links (rechterlid = 0)</div>
+      <div class="stap">&#9313; Ontbind links als product (§7.2 of §7.3)</div>
+      <div class="stap">&#9314; Stel elke factor gelijk aan nul</div>
+      <div class="stap">&#9315; Los elke vergelijking op</div>
+    </div>
+    <div class="voorbeeld-blok">x²+5x=0 &rarr; x(x+5)=0 &rarr; <strong>x=0 of x=&minus;5</strong></div>
+    <div class="voorbeeld-blok" style="margin-top:.6rem">x²+x&minus;6=0 &rarr; (x+3)(x&minus;2)=0 &rarr; <strong>x=&minus;3 of x=2</strong></div>
+    <div class="voorbeeld-blok" style="margin-top:.6rem">x²+3x=10 &rarr; &#9312; x²+3x&minus;10=0 &rarr; &#9313; (x+5)(x&minus;2)=0 &rarr; <strong>x=&minus;5 of x=2</strong></div>
+  </div>
+  <div class="oefening-kaart">
+    <h3>Oefening A &mdash; Los op: x² + bx = 0</h3>
+    <div class="score-balk">Score: <span id="cor74a">0</span> / <span id="tot74a">0</span></div>
+    <div id="vraag74a" class="vraag-tekst"></div>
+    <div id="opties74a" class="mc-grid"></div>
+    <div id="fb74a" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="skip74a()">&#9197; Overslaan</button>
+      <button onclick="reset74a()">&#128260; Opnieuw</button>
+      <button onclick="shuffle74a()">&#128256; Shuffle</button>
     </div>
   </div>
-
-  <div class="oefening-card">
-    <h2>Mag x worden ingevuld? (§4.3)</h2>
-    <div class="score-bar"><span id="score43b">Score: 0 / 0</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="prog43b" style="width:0%"></div></div>
-    <div class="vraag-box" id="vraag43b">–</div>
-    <div class="antwoord-btns">
-      <button class="antwoord-btn" onclick="checkMagX('Ja', this)">Ja</button>
-      <button class="antwoord-btn" onclick="checkMagX('Nee', this)">Nee</button>
-    </div>
-    <div class="feedback" id="fb43b"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="volgMagX" onclick="nextMagX()" style="display:none">Volgende →</button>
+  <div class="oefening-kaart">
+    <h3>Oefening B &mdash; Los op (product-som methode)</h3>
+    <div class="score-balk">Score: <span id="cor74b">0</span> / <span id="tot74b">0</span></div>
+    <div id="vraag74b" class="vraag-tekst"></div>
+    <div id="hint74b" style="font-size:.85rem;color:#92400e;min-height:1.2rem;margin-bottom:.4rem;font-weight:600;"></div>
+    <div id="opties74b" class="mc-grid"></div>
+    <div id="fb74b" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="reset74b()">&#128260; Opnieuw</button>
+      <button onclick="shuffle74b()">&#128256; Shuffle</button>
     </div>
   </div>
-
 </div>
 
-<footer>Gemaakt voor Sam · 2 HAVO · Getal en Ruimte · H4.1, H4.2 & H4.3</footer>
+<!-- Gemengd -->
+<div id="tab-gem" class="tab-content">
+  <div class="uitleg-card">
+    <h2>&#127381; Gemengd — welke methode gebruik je?</h2>
+    <div class="regel-blok groen">
+      <p><strong>x² = c</strong> &nbsp;(geen x-term, c rechts) &nbsp;&rarr;&nbsp; <strong>§7.1:</strong> worteltrekken</p>
+      <p><em>3x²&minus;7=20 &rarr; x²=9 &rarr; x=3 of x=&minus;3</em></p>
+    </div>
+    <div class="regel-blok oranje">
+      <p><strong>x² + bx = 0</strong> &nbsp;(geen c, rechterlid nul) &nbsp;&rarr;&nbsp; <strong>§7.2:</strong> buiten haakjes</p>
+      <p><em>x²+5x=0 &rarr; x(x+5)=0 &rarr; x=0 of x=&minus;5</em></p>
+    </div>
+    <div class="regel-blok rood-blok">
+      <p><strong>x² + bx + c = 0</strong> &nbsp;(drie termen, rechterlid nul) &nbsp;&rarr;&nbsp; <strong>§7.3+§7.4:</strong> product-som + product=nul</p>
+      <p><em>x²+x&minus;6=0 &rarr; (x+3)(x&minus;2)=0 &rarr; x=&minus;3 of x=2</em></p>
+    </div>
+    <div class="regel-blok blauw">
+      <p><strong>&#9888; Niet in standaardvorm?</strong> Zet eerst alles naar links (&hellip; = 0) en identificeer dan het type!</p>
+      <p><em>x²+3x=10 &rarr; x²+3x&minus;10=0 &rarr; type: §7.3+§7.4</em></p>
+    </div>
+  </div>
+  <div class="oefening-kaart">
+    <h3>Gemengde oefening &mdash; alle typen door elkaar</h3>
+    <div class="score-balk">Score: <span id="corGem">0</span> / <span id="totGem">0</span></div>
+    <div id="vraagGem" class="vraag-tekst"></div>
+    <div id="hintGem" style="font-size:.85rem;color:#92400e;min-height:1.2rem;margin-bottom:.4rem;font-weight:600;"></div>
+    <div id="optiesGem" class="mc-grid"></div>
+    <div id="fbGem" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="resetGem()">&#128260; Opnieuw</button>
+      <button onclick="shuffleGem()">&#128256; Shuffle</button>
+    </div>
+  </div>
+</div>
+
+<footer>Gemaakt voor Sam &middot; 2 HAVO &middot; Getal en Ruimte &middot; H7</footer>
 
 <script>
-// ── Utility ──────────────────────────────────────────────────
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  btn.classList.add('active');
-}
+  function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+  function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+  function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 
-function fmtFormule(a, b) {
-  let f = 'y = ';
-  if (a === 1) f += 'x²';
-  else if (a === -1) f += '−x²';
-  else if (a < 0) f += '−' + Math.abs(a) + 'x²';
-  else f += a + 'x²';
-  if (b > 0) f += ' + ' + b;
-  else if (b < 0) f += ' − ' + Math.abs(b);
-  return f;
-}
+  /* §7.1 A */
+  var bank71a=[];
+  function buildBank71a(){bank71a=[];[1,4,9,16,25,36,49,64,100,2,3,5,7,8,10,12,15,18,20,50].forEach(function(c){bank71a.push({q:'x² = '+c,a:'twee'});});bank71a.push({q:'x² = 0',a:'één'});[1,4,9,16,25,36,49].forEach(function(c){bank71a.push({q:'x² = −'+c,a:'geen'});});fisherYates(bank71a);}
+  var i71a=0,cor71a=0,tot71a=0,done71a=false;
+  function show71a(){if(i71a>=bank71a.length){document.getElementById('vraag71a').textContent='🎉 Klaar!';document.getElementById('opties71a').innerHTML='';document.getElementById('fb71a').textContent='';done71a=true;return;}done71a=false;document.getElementById('vraag71a').textContent='Hoeveel oplossingen heeft: '+bank71a[i71a].q+'?';document.getElementById('opties71a').innerHTML=[['twee','Twee oplossingen'],['één','Eén oplossing (x=0)'],['geen','Geen oplossing']].map(function(p){return '<button class="mc-btn" onclick="ans71a(\''+p[0]+'\')">'+p[1]+'</button>';}).join('');document.getElementById('fb71a').className='feedback';document.getElementById('fb71a').textContent='';upd71a();}
+  function ans71a(k){var it=bank71a[i71a];tot71a++;var ok=k===it.a;if(ok)cor71a++;var fb=document.getElementById('fb71a');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+it.a+' oplossing'+(it.a==='twee'?'en':'');fb.className='feedback '+(ok?'goed':'fout');upd71a();i71a++;setTimeout(show71a,1300);}
+  function upd71a(){document.getElementById('cor71a').textContent=cor71a;document.getElementById('tot71a').textContent=tot71a;}
+  function reset71a(){i71a=0;cor71a=0;tot71a=0;done71a=false;buildBank71a();show71a();}
+  function shuffle71a(){if(done71a){cor71a=0;tot71a=0;}i71a=0;fisherYates(bank71a);show71a();}
 
-function fmtX(x) { return x < 0 ? '(' + x + ')' : '' + x; }
+  /* §7.1 B */
+  var cur71b=null,cor71b=0,tot71b=0;
+  function gen71b(){var type=pick(['pos','pos','pos','nul','neg']);var a,r,b=0,rhs,correctAns,distractors;if(type==='pos'){a=pick([1,2,3,4,5]);r=pick([1,2,3,4,5,6,7]);b=pick([-8,-6,-4,-2,0,2,4,6,8]);rhs=a*r*r+b;var alt=r<7?r+1:r-1;correctAns='x = '+r+' of x = -'+r;distractors=['x = '+r,'geen oplossing','x = '+alt+' of x = -'+alt];}else if(type==='nul'){a=pick([1,2,3,4]);r=pick([2,3,4,5]);rhs=0;b=0;correctAns='x = 0';distractors=['x = '+r+' of x = -'+r,'geen oplossing','x = 1 of x = -1'];}else{a=1;r=pick([1,2,3,4,5]);rhs=pick([-1,-4,-9,-16,-25]);b=0;var alt2=r<5?r+1:r-1;correctAns='geen oplossing';distractors=['x = '+r+' of x = -'+r,'x = 0','x = '+alt2+' of x = -'+alt2];}var lhs=a===1?'x²':a+'x²';if(b>0)lhs+=' + '+b;else if(b<0)lhs+=' − '+Math.abs(b);var rhsStr=rhs<0?'−'+Math.abs(rhs):''+rhs;var opties=fisherYates([correctAns].concat(distractors));cur71b={correctAns:correctAns};document.getElementById('vraag71b').textContent='Los op: '+lhs+' = '+rhsStr;document.getElementById('opties71b').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans71b(this)">'+o.replace(/-/g,'−')+'</button>';}).join('');document.getElementById('fb71b').className='feedback';document.getElementById('fb71b').textContent='';upd71b();}
+  function ans71b(btn){if(!cur71b)return;var k=btn.getAttribute('data-ans');tot71b++;var ok=k===cur71b.correctAns;if(ok)cor71b++;var fb=document.getElementById('fb71b');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+cur71b.correctAns.replace(/-/g,'−');fb.className='feedback '+(ok?'goed':'fout');upd71b();setTimeout(gen71b,1500);}
+  function skip71b(){tot71b++;upd71b();gen71b();}
+  function upd71b(){document.getElementById('cor71b').textContent=cor71b;document.getElementById('tot71b').textContent=tot71b;}
+  function reset71b(){cor71b=0;tot71b=0;gen71b();}
+  function shuffle71b(){reset71b();}
 
-function upd(scoreId, progId, s) {
-  document.getElementById(scoreId).textContent = 'Score: ' + s.c + ' / ' + s.t;
-  document.getElementById(progId).style.width = (s.t > 0 ? Math.round(s.c / s.t * 100) : 0) + '%';
-}
+  /* §7.2 */
+  var bank72=[{q:'x² + 5x',a:'x(x + 5)',d:['5(x + 1)','x(x² + 5)','x(x − 5)']},{q:'3x² − 6x',a:'3x(x − 2)',d:['3(x² − 6x)','x(3x − 6)','3x(x + 2)']},{q:'2x² + 8x',a:'2x(x + 4)',d:['2(x² + 8x)','x(2x + 8)','2x(x − 4)']},{q:'y² − 7y',a:'y(y − 7)',d:['7(y − 1)','y(y + 7)','7y(y − 1)']},{q:'4a² + 12a',a:'4a(a + 3)',d:['4(a² + 12a)','2a(2a + 6)','4a(a − 3)']},{q:'5x² − 2x',a:'x(5x − 2)',d:['5x(x − 2)','x(5x + 2)','2x(5x − 1)']},{q:'6pq − 30p',a:'6p(q − 5)',d:['6(pq − 30p)','p(6q − 30)','6p(q + 5)']},{q:'6a + 10b',a:'2(3a + 5b)',d:['6(a + 10b)','2(6a + 10b)','5(a + 2b)']},{q:'9y − 12',a:'3(3y − 4)',d:['9(y − 12)','3(9y − 12)','3(3y + 4)']},{q:'2ab − b',a:'b(2a − 1)',d:['2b(a − 1)','b(2a + 1)','ab(2 − b)']},{q:'12x² − 8x',a:'4x(3x − 2)',d:['4(3x² − 8x)','2x(6x − 4)','4x(3x + 2)']},{q:'14p − 21',a:'7(2p − 3)',d:['14(p − 21)','7(2p + 3)','3(7p − 7)']},{q:'3a² + 9a',a:'3a(a + 3)',d:['3(a² + 9a)','a(3a + 9)','3a(a − 3)']},{q:'8ab + 12b',a:'4b(2a + 3)',d:['4(2ab + 3b)','8b(a + 12)','4b(2a − 3)']},{q:'15x + 25',a:'5(3x + 5)',d:['5(3x + 25)','15(x + 25)','5(3x − 5)']},{q:'10y² − 15y',a:'5y(2y − 3)',d:['5(2y² − 15y)','y(10y − 15)','5y(2y + 3)']},{q:'4ab − 2a',a:'2a(2b − 1)',d:['2(2ab − a)','a(4b − 2)','2a(2b + 1)']},{q:'6x² + 9x',a:'3x(2x + 3)',d:['3(2x² + 9x)','6x(x + 9)','3x(2x − 3)']},{q:'x³ + x²',a:'x²(x + 1)',d:['x(x² + x)','x²(x − 1)','x³(1 + x)']},{q:'4x + 6y',a:'2(2x + 3y)',d:['4(x + 6y)','2(4x + 6y)','2(2x − 3y)']}];
+  var i72=0,cor72=0,tot72=0,done72=false;
+  function buildBank72(){fisherYates(bank72);}
+  function show72(){if(i72>=bank72.length){document.getElementById('vraag72').textContent='🎉 Klaar!';document.getElementById('opties72').innerHTML='';document.getElementById('fb72').textContent='';done72=true;return;}done72=false;var item=bank72[i72];document.getElementById('vraag72').textContent='Ontbind in factoren: '+item.q;var opties=fisherYates([item.a].concat(item.d));document.getElementById('opties72').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans72(this)">'+o+'</button>';}).join('');document.getElementById('fb72').className='feedback';document.getElementById('fb72').textContent='';upd72();}
+  function ans72(btn){var k=btn.getAttribute('data-ans');var item=bank72[i72];tot72++;var ok=k===item.a;if(ok)cor72++;var fb=document.getElementById('fb72');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+item.a;fb.className='feedback '+(ok?'goed':'fout');upd72();i72++;setTimeout(show72,1300);}
+  function upd72(){document.getElementById('cor72').textContent=cor72;document.getElementById('tot72').textContent=tot72;}
+  function reset72(){i72=0;cor72=0;tot72=0;done72=false;buildBank72();show72();}
+  function shuffle72(){if(done72){cor72=0;tot72=0;}i72=0;fisherYates(bank72);show72();}
 
-// ── §4.1-A Berg of dal ───────────────────────────────────────
-let bd = {}, s41a = {c:0,t:0};
-function genBergDal() {
-  const av = [-5,-4,-3,-2,-1,1,2,3,4,5];
-  const a = av[Math.floor(Math.random()*av.length)];
-  const b = Math.floor(Math.random()*21)-10;
-  bd = { a, answer: a>0?'dalparabool':'bergparabool', f: fmtFormule(a,b) };
-  document.getElementById('formule41a').textContent = bd.f;
-  document.getElementById('fb41a').className = 'feedback';
-  document.getElementById('volgBergDal').style.display = 'none';
-  document.querySelectorAll('#tab-par41 .oefening-card:nth-child(1) .antwoord-btn')
-    .forEach(b => b.className = 'antwoord-btn');
-}
-function checkBergDal(ans, btn) {
-  s41a.t++; const ok = ans === bd.answer; if(ok) s41a.c++;
-  upd('score41a','prog41a',s41a);
-  btn.classList.add(ok ? 'correct' : 'fout');
-  const fb = document.getElementById('fb41a');
-  fb.className = 'feedback ' + (ok?'correct':'fout');
-  fb.textContent = (ok?'✓ Juist! ':'✗ Fout. ') + 'a = ' + bd.a + (bd.a>0?' > 0':' < 0') + ' → ' + bd.answer;
-  document.getElementById('volgBergDal').style.display = 'inline-block';
-}
-function nextBergDal() { genBergDal(); }
+  /* §7.3 */
+  var bank73=[{q:'x² + 7x + 12',a:'(x + 3)(x + 4)',d:['(x + 5)(x + 2)','(x + 1)(x + 12)','(x − 3)(x − 4)']},{q:'x² + 8x + 15',a:'(x + 3)(x + 5)',d:['(x + 4)(x + 4)','(x + 1)(x + 15)','(x − 3)(x − 5)']},{q:'x² + 9x + 14',a:'(x + 2)(x + 7)',d:['(x + 3)(x + 6)','(x + 1)(x + 14)','(x − 2)(x − 7)']},{q:'x² + 5x + 6',a:'(x + 2)(x + 3)',d:['(x + 1)(x + 5)','(x + 1)(x + 6)','(x − 2)(x − 3)']},{q:'x² + 6x + 8',a:'(x + 2)(x + 4)',d:['(x + 3)(x + 3)','(x + 1)(x + 8)','(x − 2)(x − 4)']},{q:'x² + 10x + 21',a:'(x + 3)(x + 7)',d:['(x + 4)(x + 6)','(x + 2)(x + 9)','(x − 3)(x − 7)']},{q:'x² − 5x + 6',a:'(x − 2)(x − 3)',d:['(x + 2)(x + 3)','(x − 1)(x − 6)','(x − 2)(x − 4)']},{q:'x² − 7x + 12',a:'(x − 3)(x − 4)',d:['(x + 3)(x + 4)','(x − 2)(x − 6)','(x − 1)(x − 12)']},{q:'x² − 9x + 20',a:'(x − 4)(x − 5)',d:['(x + 4)(x + 5)','(x − 2)(x − 10)','(x − 3)(x − 7)']},{q:'x² − 8x + 15',a:'(x − 3)(x − 5)',d:['(x + 3)(x + 5)','(x − 1)(x − 15)','(x − 4)(x − 4)']},{q:'x² − 6x + 8',a:'(x − 2)(x − 4)',d:['(x + 2)(x + 4)','(x − 1)(x − 8)','(x − 3)(x − 3)']},{q:'x² + x − 6',a:'(x + 3)(x − 2)',d:['(x + 6)(x − 1)','(x − 3)(x + 2)','(x + 2)(x − 3)']},{q:'x² + 5x − 6',a:'(x + 6)(x − 1)',d:['(x + 3)(x − 2)','(x − 6)(x + 1)','(x + 2)(x − 3)']},{q:'x² − 3x − 10',a:'(x + 2)(x − 5)',d:['(x − 2)(x + 5)','(x + 1)(x − 10)','(x + 2)(x + 5)']},{q:'x² − x − 12',a:'(x + 3)(x − 4)',d:['(x − 3)(x + 4)','(x + 2)(x − 6)','(x + 1)(x − 12)']},{q:'x² + 2x − 8',a:'(x + 4)(x − 2)',d:['(x − 4)(x + 2)','(x + 8)(x − 1)','(x + 1)(x − 8)']},{q:'x² + 3x − 10',a:'(x + 5)(x − 2)',d:['(x − 5)(x + 2)','(x + 10)(x − 1)','(x + 5)(x + 2)']},{q:'x² − 2x − 3',a:'(x + 1)(x − 3)',d:['(x − 1)(x + 3)','(x + 1)(x + 3)','(x + 1)(x − 4)']},{q:'x² − 4x − 12',a:'(x + 2)(x − 6)',d:['(x − 2)(x + 6)','(x + 4)(x − 3)','(x + 3)(x − 4)']},{q:'x² + 4x − 12',a:'(x + 6)(x − 2)',d:['(x − 6)(x + 2)','(x + 4)(x − 3)','(x + 3)(x − 4)']}];
+  var i73=0,cor73=0,tot73=0,done73=false;
+  function buildBank73(){fisherYates(bank73);}
+  function show73(){if(i73>=bank73.length){document.getElementById('vraag73').textContent='🎉 Klaar!';document.getElementById('opties73').innerHTML='';document.getElementById('fb73').textContent='';done73=true;return;}done73=false;var item=bank73[i73];document.getElementById('vraag73').textContent='Ontbind in factoren: '+item.q;var opties=fisherYates([item.a].concat(item.d));document.getElementById('opties73').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans73(this)">'+o+'</button>';}).join('');document.getElementById('fb73').className='feedback';document.getElementById('fb73').textContent='';upd73();}
+  function ans73(btn){var k=btn.getAttribute('data-ans');var item=bank73[i73];tot73++;var ok=k===item.a;if(ok)cor73++;var fb=document.getElementById('fb73');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+item.a;fb.className='feedback '+(ok?'goed':'fout');upd73();i73++;setTimeout(show73,1300);}
+  function upd73(){document.getElementById('cor73').textContent=cor73;document.getElementById('tot73').textContent=tot73;}
+  function reset73(){i73=0;cor73=0;tot73=0;done73=false;buildBank73();show73();}
+  function shuffle73(){if(done73){cor73=0;tot73=0;}i73=0;fisherYates(bank73);show73();}
 
-// ── §4.1-B Bereken y ─────────────────────────────────────────
-let by = {}, s41b = {c:0,t:0};
-function genBerekenY() {
-  const av = [-4,-3,-2,-1,1,2,3,4];
-  const a = av[Math.floor(Math.random()*av.length)];
-  const b = Math.floor(Math.random()*11)-5;
-  const xv = [-4,-3,-2,-1,0,1,2,3,4];
-  const x = xv[Math.floor(Math.random()*xv.length)];
-  const y = a*x*x+b;
-  by = {a,b,x,y,f:fmtFormule(a,b)};
-  document.getElementById('vraag41b').innerHTML = by.f + '<br>Bereken y voor x = ' + x;
-  const inp = document.getElementById('inp41b');
-  inp.value=''; inp.className='antwoord-input';
-  document.getElementById('fb41b').className='feedback';
-  inp.focus();
-}
-function checkBerekenY() {
-  const v = parseFloat(document.getElementById('inp41b').value);
-  if(isNaN(v)) return;
-  s41b.t++; const ok = v===by.y; if(ok) s41b.c++;
-  upd('score41b','prog41b',s41b);
-  document.getElementById('inp41b').className='antwoord-input '+(ok?'correct':'fout');
-  const fb=document.getElementById('fb41b');
-  fb.className='feedback '+(ok?'correct':'fout');
-  const bSign = by.b<0?' − ':' + ';
-  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')
-    +'y = '+by.a+'·'+fmtX(by.x)+'²'+bSign+Math.abs(by.b)
-    +' = '+by.a+'·'+by.x*by.x+bSign+Math.abs(by.b)+' = '+by.y;
-  setTimeout(nextBerekenY,1800);
-}
-function nextBerekenY() { genBerekenY(); }
+  /* §7.4 A */
+  var cur74a=null,cor74a=0,tot74a=0;
+  function gen74a(){var b=pick([-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8]);var s2=-b;var lhs=b>0?'x² + '+b+'x':'x² − '+Math.abs(b)+'x';var correctAns,d1,d2,d3;if(s2>0){correctAns='x = 0 of x = '+s2;d1='x = 0 of x = −'+s2;d2='x = '+s2;d3='x = −'+s2+' of x = '+s2;}else{var a2=Math.abs(s2);correctAns='x = −'+a2+' of x = 0';d1='x = '+a2+' of x = 0';d2='x = −'+a2;d3='x = −'+a2+' of x = '+a2;}var opties=fisherYates([correctAns,d1,d2,d3]);cur74a={correctAns:correctAns};document.getElementById('vraag74a').textContent='Los op: '+lhs+' = 0';document.getElementById('opties74a').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans74a(this)">'+o+'</button>';}).join('');document.getElementById('fb74a').className='feedback';document.getElementById('fb74a').textContent='';upd74a();}
+  function ans74a(btn){if(!cur74a)return;var k=btn.getAttribute('data-ans');tot74a++;var ok=k===cur74a.correctAns;if(ok)cor74a++;var fb=document.getElementById('fb74a');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+cur74a.correctAns;fb.className='feedback '+(ok?'goed':'fout');upd74a();setTimeout(gen74a,1500);}
+  function skip74a(){tot74a++;upd74a();gen74a();}
+  function upd74a(){document.getElementById('cor74a').textContent=cor74a;document.getElementById('tot74a').textContent=tot74a;}
+  function reset74a(){cor74a=0;tot74a=0;gen74a();}
+  function shuffle74a(){reset74a();}
 
-// ── §4.1-C Punt op grafiek ───────────────────────────────────
-let po = {}, s41c = {c:0,t:0};
-function genPuntOp() {
-  const av = [-3,-2,-1,1,2,3];
-  const a = av[Math.floor(Math.random()*av.length)];
-  const b = Math.floor(Math.random()*11)-5;
-  const x = Math.floor(Math.random()*7)-3;
-  const yC = a*x*x+b;
-  const correct = Math.random()>0.5;
-  const offset = correct ? 0 : (Math.random()>0.5?1:-1)*(Math.floor(Math.random()*3)+1);
-  const y = yC+offset;
-  po = {a,b,x,y,yC,answer:correct?'Ja':'Nee',f:fmtFormule(a,b)};
-  document.getElementById('vraag41c').innerHTML = po.f+'<br>Ligt punt A('+x+', '+y+') op de grafiek?';
-  document.getElementById('fb41c').className='feedback';
-  document.getElementById('volgPuntOp').style.display='none';
-  document.querySelectorAll('#tab-par41 .oefening-card:nth-child(3) .antwoord-btn')
-    .forEach(b=>b.className='antwoord-btn');
-}
-function checkPuntOp(ans, btn) {
-  s41c.t++; const ok=ans===po.answer; if(ok) s41c.c++;
-  upd('score41c','prog41c',s41c);
-  btn.classList.add(ok?'correct':'fout');
-  const bSign = po.b<0?' − ':' + ';
-  const fb=document.getElementById('fb41c');
-  fb.className='feedback '+(ok?'correct':'fout');
-  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')
-    +po.a+'·'+fmtX(po.x)+'²'+bSign+Math.abs(po.b)+' = '+po.yC
-    +(po.answer==='Ja'?' = '+po.y+' ✓':' ≠ '+po.y);
-  document.getElementById('volgPuntOp').style.display='inline-block';
-}
-function nextPuntOp() { genPuntOp(); }
+  /* §7.4 B */
+  var bank74b=[{q:'x² + 7x + 12 = 0',h:false,a:'x = −4 of x = −3',d:['x = 4 of x = 3','x = −7 of x = −12','x = −4 of x = 3']},{q:'x² − 5x + 6 = 0',h:false,a:'x = 2 of x = 3',d:['x = −2 of x = −3','x = −5 of x = 6','x = 1 of x = 6']},{q:'x² + x − 6 = 0',h:false,a:'x = −3 of x = 2',d:['x = 3 of x = −2','x = −3 of x = −2','x = 3 of x = 2']},{q:'x² − x − 12 = 0',h:false,a:'x = −3 of x = 4',d:['x = 3 of x = −4','x = −3 of x = −4','x = 1 of x = −12']},{q:'x² + 5x − 6 = 0',h:false,a:'x = −6 of x = 1',d:['x = 6 of x = −1','x = −5 of x = 6','x = −3 of x = 2']},{q:'x² − 9x + 20 = 0',h:false,a:'x = 4 of x = 5',d:['x = −4 of x = −5','x = 9 of x = 20','x = 2 of x = 10']},{q:'x² + 3x = 10',h:true,a:'x = −5 of x = 2',d:['x = 5 of x = −2','x = −5 of x = −2','x = −3 of x = 10']},{q:'x² = 5x + 6',h:true,a:'x = −1 of x = 6',d:['x = 1 of x = −6','x = 5 of x = 6','x = −1 of x = −6']},{q:'x² + 8x = −7',h:true,a:'x = −7 of x = −1',d:['x = 7 of x = 1','x = −8 of x = −7','x = −7 of x = 1']},{q:'x² − 4 = 3x',h:true,a:'x = −1 of x = 4',d:['x = 1 of x = −4','x = −4 of x = 3','x = −1 of x = −4']}];
+  var i74b=0,cor74b=0,tot74b=0,done74b=false;
+  function buildBank74b(){fisherYates(bank74b);}
+  function show74b(){if(i74b>=bank74b.length){document.getElementById('vraag74b').textContent='🎉 Klaar!';document.getElementById('hint74b').textContent='';document.getElementById('opties74b').innerHTML='';document.getElementById('fb74b').textContent='';done74b=true;return;}done74b=false;var item=bank74b[i74b];document.getElementById('vraag74b').textContent='Los op: '+item.q;document.getElementById('hint74b').textContent=item.h?'💡 Zet eerst alles naar links (… = 0), dan pas ontbinden!':'';var opties=fisherYates([item.a].concat(item.d));document.getElementById('opties74b').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans74b(this)">'+o+'</button>';}).join('');document.getElementById('fb74b').className='feedback';document.getElementById('fb74b').textContent='';upd74b();}
+  function ans74b(btn){var k=btn.getAttribute('data-ans');var item=bank74b[i74b];tot74b++;var ok=k===item.a;if(ok)cor74b++;var fb=document.getElementById('fb74b');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+item.a;fb.className='feedback '+(ok?'goed':'fout');upd74b();i74b++;setTimeout(show74b,1300);}
+  function upd74b(){document.getElementById('cor74b').textContent=cor74b;document.getElementById('tot74b').textContent=tot74b;}
+  function reset74b(){i74b=0;cor74b=0;tot74b=0;done74b=false;buildBank74b();show74b();}
+  function shuffle74b(){if(done74b){cor74b=0;tot74b=0;}i74b=0;fisherYates(bank74b);show74b();}
 
-// ── §4.2-A Bereken wortel ────────────────────────────────────
-let wr = {}, s42a = {c:0,t:0};
-function genWortel() {
-  const sq=[1,4,9,16,25,36,49,64,81,100,121,144,169,196,225];
-  const n2=sq[Math.floor(Math.random()*sq.length)];
-  wr={n2,answer:Math.sqrt(n2)};
-  document.getElementById('vraag42a').textContent='√'+n2+' = ?';
-  const inp=document.getElementById('inp42a');
-  inp.value=''; inp.className='antwoord-input';
-  document.getElementById('fb42a').className='feedback';
-  inp.focus();
-}
-function checkWortel() {
-  const v=parseFloat(document.getElementById('inp42a').value);
-  if(isNaN(v)) return;
-  s42a.t++; const ok=Math.abs(v-wr.answer)<0.01; if(ok) s42a.c++;
-  upd('score42a','prog42a',s42a);
-  document.getElementById('inp42a').className='antwoord-input '+(ok?'correct':'fout');
-  const fb=document.getElementById('fb42a');
-  fb.className='feedback '+(ok?'correct':'fout');
-  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')+'√'+wr.n2+' = '+wr.answer;
-  setTimeout(nextWortel,1800);
-}
-function nextWortel() { genWortel(); }
+  /* Gemengd */
+  var bankGem=[
+    {q:'x² = 9',h:false,a:'x = 3 of x = −3',d:['geen oplossing','x = 9','x = 3']},
+    {q:'x² = −16',h:false,a:'geen oplossing',d:['x = 4 of x = −4','x = 8 of x = −8','x = 0']},
+    {q:'x² = 0',h:false,a:'x = 0',d:['x = 1 of x = −1','geen oplossing','x = 0 of x = 1']},
+    {q:'2x² − 8 = 0',h:false,a:'x = 2 of x = −2',d:['x = 4 of x = −4','geen oplossing','x = 2']},
+    {q:'3x² − 27 = 0',h:false,a:'x = 3 of x = −3',d:['x = 9 of x = −9','geen oplossing','x = 3']},
+    {q:'x² + 4x = 0',h:false,a:'x = −4 of x = 0',d:['x = −4','x = 4 of x = 0','x = −4 of x = 4']},
+    {q:'x² − 6x = 0',h:false,a:'x = 0 of x = 6',d:['x = 6','x = −6 of x = 0','x = −6 of x = 6']},
+    {q:'x² + 3x = 0',h:false,a:'x = −3 of x = 0',d:['x = −3','x = 3 of x = 0','x = −3 of x = 3']},
+    {q:'x² + 7x + 12 = 0',h:false,a:'x = −4 of x = −3',d:['x = 4 of x = 3','x = −7 of x = −12','x = −4 of x = 3']},
+    {q:'x² − 5x + 6 = 0',h:false,a:'x = 2 of x = 3',d:['x = −2 of x = −3','x = −5 of x = 6','x = 1 of x = 6']},
+    {q:'x² + x − 6 = 0',h:false,a:'x = −3 of x = 2',d:['x = 3 of x = −2','x = −3 of x = −2','x = 3 of x = 2']},
+    {q:'x² − 9x + 20 = 0',h:false,a:'x = 4 of x = 5',d:['x = −4 of x = −5','x = 9 of x = 20','x = 2 of x = 10']},
+    {q:'x² + 3x = 10',h:true,a:'x = −5 of x = 2',d:['x = 5 of x = −2','x = −5 of x = −2','x = −3 of x = 10']},
+    {q:'x² = 5x + 6',h:true,a:'x = −1 of x = 6',d:['x = 1 of x = −6','x = 5 of x = 6','x = −1 of x = −6']},
+    {q:'x² − 4 = 3x',h:true,a:'x = −1 of x = 4',d:['x = 1 of x = −4','x = −4 of x = 3','x = −1 of x = −4']}
+  ];
+  var iGem=0,corGem=0,totGem=0,doneGem=false;
+  function buildBankGem(){fisherYates(bankGem);}
+  function showGem(){if(iGem>=bankGem.length){document.getElementById('vraagGem').textContent='🎉 Klaar! Alle gemengde opgaven gedaan.';document.getElementById('hintGem').textContent='';document.getElementById('optiesGem').innerHTML='';document.getElementById('fbGem').textContent='';doneGem=true;return;}doneGem=false;var item=bankGem[iGem];document.getElementById('vraagGem').textContent='Los op: '+item.q;document.getElementById('hintGem').textContent=item.h?'💡 Zet eerst alles naar links (… = 0)!':'';var opties=fisherYates([item.a].concat(item.d));document.getElementById('optiesGem').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ansGem(this)">'+o+'</button>';}).join('');document.getElementById('fbGem').className='feedback';document.getElementById('fbGem').textContent='';updGem();}
+  function ansGem(btn){var k=btn.getAttribute('data-ans');var item=bankGem[iGem];totGem++;var ok=k===item.a;if(ok)corGem++;var fb=document.getElementById('fbGem');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+item.a;fb.className='feedback '+(ok?'goed':'fout');updGem();iGem++;setTimeout(showGem,1300);}
+  function updGem(){document.getElementById('corGem').textContent=corGem;document.getElementById('totGem').textContent=totGem;}
+  function resetGem(){iGem=0;corGem=0;totGem=0;doneGem=false;buildBankGem();showGem();}
+  function shuffleGem(){if(doneGem){corGem=0;totGem=0;}iGem=0;fisherYates(bankGem);showGem();}
 
-// ── §4.2-B Bestaat de wortel ─────────────────────────────────
-let bw = {}, s42b = {c:0,t:0};
-function genBestaat() {
-  const pos=[1,2,3,4,5,7,9,10,16,25,36];
-  const neg=[-1,-2,-3,-4,-5,-7,-9,-10,-16,-25];
-  const isPos=Math.random()>0.5;
-  const pool=isPos?pos:neg;
-  const n=pool[Math.floor(Math.random()*pool.length)];
-  bw={n,answer:isPos?'Ja':'Nee'};
-  document.getElementById('vraag42b').textContent='Bestaat √'+n+'?';
-  document.getElementById('fb42b').className='feedback';
-  document.getElementById('volgBestaat').style.display='none';
-  document.querySelectorAll('#tab-par42 .oefening-card:nth-child(2) .antwoord-btn')
-    .forEach(b=>b.className='antwoord-btn');
-}
-function checkBestaatWortel(ans, btn) {
-  s42b.t++; const ok=ans===bw.answer; if(ok) s42b.c++;
-  upd('score42b','prog42b',s42b);
-  btn.classList.add(ok?'correct':'fout');
-  const fb=document.getElementById('fb42b');
-  fb.className='feedback '+(ok?'correct':'fout');
-  fb.textContent=ok
-    ?(bw.answer==='Ja'?'✓ Juist! '+bw.n+' is positief, √'+bw.n+' bestaat.'
-                      :'✓ Juist! '+bw.n+' is negatief, de wortel bestaat niet.')
-    :(bw.answer==='Ja'?'✗ Fout. '+bw.n+' is positief, √'+bw.n+' bestaat wel.'
-                      :'✗ Fout. '+bw.n+' is negatief, de wortel bestaat niet.');
-  document.getElementById('volgBestaat').style.display='inline-block';
-}
-function nextBestaat() { genBestaat(); }
-
-// ── §4.2-C Bereken zonder rekenmachine ───────────────────────
-let wb = {}, s42c = {c:0,t:0};
-function genWortelRek() {
-  const type=Math.floor(Math.random()*3);
-  if(type===0) {
-    const sc=Math.floor(Math.random()*5)+2;
-    const n=Math.floor(Math.random()*9)+2;
-    wb={q:sc+'·√'+n*n,answer:sc*n,uitleg:sc+'·√'+n*n+' = '+sc+'·'+n+' = '+sc*n};
-  } else if(type===1) {
-    const a=Math.floor(Math.random()*8)+2, b=Math.floor(Math.random()*8)+2;
-    wb={q:'√'+a*a+' + √'+b*b,answer:a+b,uitleg:'√'+a*a+' + √'+b*b+' = '+a+' + '+b+' = '+(a+b)};
-  } else {
-    const a=Math.floor(Math.random()*5)+2, b=Math.floor(Math.random()*5)+2;
-    wb={q:'√('+a*a+'·'+b*b+')',answer:a*b,uitleg:'√'+a*a+'·√'+b*b+' = '+a+'·'+b+' = '+a*b};
-  }
-  document.getElementById('vraag42c').textContent=wb.q+' = ?';
-  const inp=document.getElementById('inp42c');
-  inp.value=''; inp.className='antwoord-input';
-  document.getElementById('fb42c').className='feedback';
-  inp.focus();
-}
-function checkWortelRek() {
-  const v=parseFloat(document.getElementById('inp42c').value);
-  if(isNaN(v)) return;
-  s42c.t++; const ok=v===wb.answer; if(ok) s42c.c++;
-  upd('score42c','prog42c',s42c);
-  document.getElementById('inp42c').className='antwoord-input '+(ok?'correct':'fout');
-  const fb=document.getElementById('fb42c');
-  fb.className='feedback '+(ok?'correct':'fout');
-  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')+wb.uitleg;
-  setTimeout(nextWortelRek,1800);
-}
-function nextWortelRek() { genWortelRek(); }
-
-// ── §4.3-A Bereken y in wortelformule ────────────────────────
-let wf = {}, s43a = {c:0,t:0};
-function genWortelFormule() {
-  const xv=[0,1,4,9,16,25];
-  const x=xv[Math.floor(Math.random()*xv.length)];
-  const a=Math.floor(Math.random()*4)+1;
-  const b=Math.floor(Math.random()*11)-5;
-  const sqX=Math.sqrt(x);
-  const y=a*sqX+b;
-  let f=a===1?'y = √x':'y = '+a+'·√x';
-  if(b>0) f+=' + '+b; else if(b<0) f+=' − '+Math.abs(b);
-  wf={a,b,x,sqX,y,f};
-  document.getElementById('vraag43a').innerHTML=f+'<br>Bereken y voor x = '+x;
-  const inp=document.getElementById('inp43a');
-  inp.value=''; inp.className='antwoord-input';
-  document.getElementById('fb43a').className='feedback';
-  inp.focus();
-}
-function checkWortelFormule() {
-  const v=parseFloat(document.getElementById('inp43a').value);
-  if(isNaN(v)) return;
-  s43a.t++; const ok=v===wf.y; if(ok) s43a.c++;
-  upd('score43a','prog43a',s43a);
-  document.getElementById('inp43a').className='antwoord-input '+(ok?'correct':'fout');
-  const fb=document.getElementById('fb43a');
-  fb.className='feedback '+(ok?'correct':'fout');
-  const bSign=wf.b<0?' − ':' + ';
-  fb.textContent=(ok?'✓ Juist! ':'✗ Fout. ')
-    +'y = '+wf.a+'·√'+wf.x+bSign+Math.abs(wf.b)
-    +' = '+wf.a+'·'+wf.sqX+bSign+Math.abs(wf.b)+' = '+wf.y;
-  setTimeout(nextWortelFormule,1800);
-}
-function nextWortelFormule() { genWortelFormule(); }
-
-// ── §4.3-B Mag x worden ingevuld ─────────────────────────────
-let mx = {}, s43b = {c:0,t:0};
-function genMagX() {
-  const pos=[0,1,2,3,4,5,7,9,10,16,25];
-  const neg=[-1,-2,-3,-4,-5,-7,-9,-10,-16];
-  const isPos=Math.random()>0.5;
-  const pool=isPos?pos:neg;
-  const x=pool[Math.floor(Math.random()*pool.length)];
-  const a=Math.floor(Math.random()*3)+1;
-  const b=Math.floor(Math.random()*7)-3;
-  let f=a===1?'y = √x':'y = '+a+'·√x';
-  if(b>0) f+=' + '+b; else if(b<0) f+=' − '+Math.abs(b);
-  mx={x,answer:isPos?'Ja':'Nee',f};
-  document.getElementById('vraag43b').innerHTML=f+'<br>Mag x = '+x+' worden ingevuld?';
-  document.getElementById('fb43b').className='feedback';
-  document.getElementById('volgMagX').style.display='none';
-  document.querySelectorAll('#tab-par43 .oefening-card:nth-child(2) .antwoord-btn')
-    .forEach(b=>b.className='antwoord-btn');
-}
-function checkMagX(ans, btn) {
-  s43b.t++; const ok=ans===mx.answer; if(ok) s43b.c++;
-  upd('score43b','prog43b',s43b);
-  btn.classList.add(ok?'correct':'fout');
-  const fb=document.getElementById('fb43b');
-  fb.className='feedback '+(ok?'correct':'fout');
-  fb.textContent=ok
-    ?(mx.answer==='Ja'?'✓ Juist! x = '+mx.x+' ≥ 0, mag worden ingevuld.'
-                      :'✓ Juist! x = '+mx.x+' < 0, mag niet worden ingevuld.')
-    :(mx.answer==='Ja'?'✗ Fout. x = '+mx.x+' ≥ 0, mag wel worden ingevuld.'
-                      :'✗ Fout. x = '+mx.x+' < 0, de wortel bestaat niet.');
-  document.getElementById('volgMagX').style.display='inline-block';
-}
-function nextMagX() { genMagX(); }
-
-// ── Init ─────────────────────────────────────────────────────
-genBergDal(); genBerekenY(); genPuntOp();
-genWortel(); genBestaat(); genWortelRek();
-genWortelFormule(); genMagX();
+  /* INIT */
+  buildBank71a(); show71a(); gen71b();
+  buildBank72();  show72();
+  buildBank73();  show73();
+  gen74a(); buildBank74b(); show74b();
+  buildBankGem(); showGem();
 </script>
 </body>
 </html>
