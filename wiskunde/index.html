@@ -37,6 +37,7 @@
     .groen     { background: #d1fae5; border-left: 4px solid #10b981; }
     .oranje    { background: #fef3c7; border-left: 4px solid #f59e0b; }
     .rood-blok { background: #fee2e2; border-left: 4px solid #ef4444; }
+    .blauw     { background: #eff6ff; border-left: 4px solid #3b82f6; }
     .stappen { display: flex; flex-direction: column; gap: .5rem; margin: .8rem 0; }
     .stap { background: #eff6ff; border-left: 4px solid #3b82f6; padding: .6rem 1rem; border-radius: 6px; font-weight: 700; font-size: .95rem; }
     .voorbeeld-blok { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin-top: .8rem; line-height: 1.7; }
@@ -76,32 +77,23 @@
   <button class="tab-btn" onclick="showTab('72',this)">§7.2 Buiten haakjes</button>
   <button class="tab-btn" onclick="showTab('73',this)">§7.3 Product-som</button>
   <button class="tab-btn" onclick="showTab('74',this)">§7.4 Oplossen</button>
-  <button class="tab-btn" onclick="showTab('gem',this)">Gemengd</button>
+  <button class="tab-btn" onclick="showTab('gem',this)">&#127381; Gemengd</button>
 </nav>
 
 <!-- §7.1 -->
 <div id="tab-71" class="tab-content active">
   <div class="uitleg-card">
     <h2>§7.1 De vergelijking x² = c</h2>
-    <div class="regel-blok groen">
-      <p><strong>c &gt; 0</strong> &rarr; twee oplossingen: x = &radic;c &nbsp;of&nbsp; x = &minus;&radic;c</p>
-      <p><em>Voorbeeld: x² = 25 &rarr; x = 5 of x = &minus;5</em></p>
-    </div>
-    <div class="regel-blok oranje">
-      <p><strong>c = 0</strong> &rarr; één oplossing: x = 0</p>
-    </div>
-    <div class="regel-blok rood-blok">
-      <p><strong>c &lt; 0</strong> &rarr; geen oplossing</p>
-    </div>
+    <div class="regel-blok groen"><p><strong>c &gt; 0</strong> &rarr; twee oplossingen: x = &radic;c &nbsp;of&nbsp; x = &minus;&radic;c &nbsp;<em>(x²=25 &rarr; x=5 of x=&minus;5)</em></p></div>
+    <div class="regel-blok oranje"><p><strong>c = 0</strong> &rarr; één oplossing: x = 0</p></div>
+    <div class="regel-blok rood-blok"><p><strong>c &lt; 0</strong> &rarr; geen oplossing</p></div>
     <h3>Herleiden: ax² + b = c</h3>
     <div class="stappen">
       <div class="stap">&#9312; ax² = c &minus; b</div>
       <div class="stap">&#9313; x² = (c &minus; b) &divide; a</div>
       <div class="stap">&#9314; x = &radic;(...) of x = &minus;&radic;(...)</div>
     </div>
-    <div class="voorbeeld-blok">
-      <strong>Voorbeeld:</strong> 3x² &minus; 7 = 20 &rarr; 3x² = 27 &rarr; x² = 9 &rarr; <strong>x = 3 of x = &minus;3</strong>
-    </div>
+    <div class="voorbeeld-blok"><strong>Voorbeeld:</strong> 3x² &minus; 7 = 20 &rarr; 3x² = 27 &rarr; x² = 9 &rarr; <strong>x = 3 of x = &minus;3</strong></div>
   </div>
   <div class="oefening-kaart">
     <h3>Oefening A &mdash; Hoeveel oplossingen heeft x² = c?</h3>
@@ -132,7 +124,7 @@
 <div id="tab-72" class="tab-content">
   <div class="uitleg-card">
     <h2>§7.2 Buiten haakjes brengen</h2>
-    <p>Buiten haakjes brengen is het omgekeerde van haakjes wegwerken.</p>
+    <p>Omgekeerde van haakjes wegwerken: som &rarr; product.</p>
     <div class="voorbeeld-blok" style="margin-top:.8rem"><strong>Regel:</strong> ab + ac = a(b + c)</div>
     <h3>Aanpak</h3>
     <div class="stappen">
@@ -140,11 +132,7 @@
       <div class="stap">&#9313; Schrijf: ggf &times; ( ... )</div>
       <div class="stap">&#9314; Deel elke term door de ggf</div>
     </div>
-    <div class="voorbeeld-blok">
-      6a + 10b &rarr; ggf=2 &rarr; 2(3a+5b)<br>
-      x² + 5x &rarr; ggf=x &rarr; x(x+5)<br>
-      6pq &minus; 30p &rarr; ggf=6p &rarr; 6p(q&minus;5)
-    </div>
+    <div class="voorbeeld-blok">6a + 10b &rarr; 2(3a+5b) &nbsp;&nbsp; x²+5x &rarr; x(x+5) &nbsp;&nbsp; 6pq&minus;30p &rarr; 6p(q&minus;5)</div>
   </div>
   <div class="oefening-kaart">
     <h3>Oefening &mdash; Ontbind in factoren</h3>
@@ -163,19 +151,13 @@
 <div id="tab-73" class="tab-content">
   <div class="uitleg-card">
     <h2>§7.3 De product-som-methode</h2>
-    <p>Bij <strong>x² + bx + c</strong> zoek je twee getallen p en q met:</p>
-    <div class="stappen" style="margin:.8rem 0">
-      <div class="stap">product: p &times; q = c</div>
-      <div class="stap">som: p + q = b</div>
-    </div>
-    <p>Dan: <strong>x² + bx + c = (x + p)(x + q)</strong></p>
-    <div class="voorbeeld-blok" style="margin-top:.8rem">
-      <strong>x² + 7x + 12:</strong> product=12, som=7 &rarr; 3&times;4=12, 3+4=7 &rarr; <strong>(x+3)(x+4)</strong>
-    </div>
+    <p>x² + bx + c: zoek p en q met <strong>p&times;q = c</strong> en <strong>p+q = b</strong>.</p>
+    <p style="margin-top:.5rem">Dan: x² + bx + c = <strong>(x+p)(x+q)</strong></p>
+    <div class="voorbeeld-blok" style="margin-top:.8rem">x²+7x+12: product=12, som=7 &rarr; 3&times;4 &rarr; <strong>(x+3)(x+4)</strong></div>
     <h3>Tekens</h3>
-    <div class="regel-blok groen"><p><strong>c&gt;0, b&gt;0</strong> &rarr; beide positief &nbsp; x²+5x+6=(x+2)(x+3)</p></div>
-    <div class="regel-blok oranje"><p><strong>c&gt;0, b&lt;0</strong> &rarr; beide negatief &nbsp; x²&minus;5x+6=(x&minus;2)(x&minus;3)</p></div>
-    <div class="regel-blok rood-blok"><p><strong>c&lt;0</strong> &rarr; één pos., één neg. &nbsp; x²+x&minus;6=(x+3)(x&minus;2)</p></div>
+    <div class="regel-blok groen"><p>c&gt;0, b&gt;0 &rarr; beide + &nbsp; x²+5x+6=(x+2)(x+3)</p></div>
+    <div class="regel-blok oranje"><p>c&gt;0, b&lt;0 &rarr; beide &minus; &nbsp; x²&minus;5x+6=(x&minus;2)(x&minus;3)</p></div>
+    <div class="regel-blok rood-blok"><p>c&lt;0 &rarr; één +, één &minus; &nbsp; x²+x&minus;6=(x+3)(x&minus;2)</p></div>
   </div>
   <div class="oefening-kaart">
     <h3>Oefening &mdash; Ontbind in factoren (product-som)</h3>
@@ -194,31 +176,18 @@
 <div id="tab-74" class="tab-content">
   <div class="uitleg-card">
     <h2>§7.4 Kwadratische vergelijkingen oplossen</h2>
-    <p>Gebruik de <strong>product-is-nul regel</strong>:</p>
-    <div class="regel-blok groen" style="margin:.8rem 0">
-      <p><strong>A &middot; B = 0 &nbsp;&rarr;&nbsp; A = 0 &nbsp;of&nbsp; B = 0</strong></p>
-    </div>
-    <h3>Aanpak in 4 stappen</h3>
+    <div class="regel-blok groen" style="margin:.4rem 0"><p><strong>A &middot; B = 0 &rarr; A = 0 of B = 0</strong></p></div>
+    <h3>Aanpak</h3>
     <div class="stappen">
       <div class="stap">&#9312; Zet alles naar links (rechterlid = 0)</div>
       <div class="stap">&#9313; Ontbind links als product (§7.2 of §7.3)</div>
       <div class="stap">&#9314; Stel elke factor gelijk aan nul</div>
-      <div class="stap">&#9315; Los elke eenvoudige vergelijking op</div>
+      <div class="stap">&#9315; Los elke vergelijking op</div>
     </div>
-    <div class="voorbeeld-blok">
-      <strong>§7.2-type:</strong> x² + 5x = 0<br>
-      x(x+5) = 0 &rarr; x=0 &nbsp;of&nbsp; x+5=0 &rarr; <strong>x=0 of x=&minus;5</strong>
-    </div>
-    <div class="voorbeeld-blok" style="margin-top:.6rem">
-      <strong>§7.3-type:</strong> x² + x &minus; 6 = 0<br>
-      (x+3)(x&minus;2) = 0 &rarr; <strong>x=&minus;3 of x=2</strong>
-    </div>
-    <div class="voorbeeld-blok" style="margin-top:.6rem">
-      <strong>Niet in standaardvorm:</strong> x² + 3x = 10<br>
-      ① x²+3x&minus;10=0 &nbsp; ② (x+5)(x&minus;2)=0 &nbsp; ③④ <strong>x=&minus;5 of x=2</strong>
-    </div>
+    <div class="voorbeeld-blok">x²+5x=0 &rarr; x(x+5)=0 &rarr; <strong>x=0 of x=&minus;5</strong></div>
+    <div class="voorbeeld-blok" style="margin-top:.6rem">x²+x&minus;6=0 &rarr; (x+3)(x&minus;2)=0 &rarr; <strong>x=&minus;3 of x=2</strong></div>
+    <div class="voorbeeld-blok" style="margin-top:.6rem">x²+3x=10 &rarr; &#9312; x²+3x&minus;10=0 &rarr; &#9313; (x+5)(x&minus;2)=0 &rarr; <strong>x=&minus;5 of x=2</strong></div>
   </div>
-
   <div class="oefening-kaart">
     <h3>Oefening A &mdash; Los op: x² + bx = 0</h3>
     <div class="score-balk">Score: <span id="cor74a">0</span> / <span id="tot74a">0</span></div>
@@ -231,7 +200,6 @@
       <button onclick="shuffle74a()">&#128256; Shuffle</button>
     </div>
   </div>
-
   <div class="oefening-kaart">
     <h3>Oefening B &mdash; Los op (product-som methode)</h3>
     <div class="score-balk">Score: <span id="cor74b">0</span> / <span id="tot74b">0</span></div>
@@ -246,9 +214,39 @@
   </div>
 </div>
 
-<!-- Gemengd stub -->
+<!-- Gemengd -->
 <div id="tab-gem" class="tab-content">
-  <div class="uitleg-card"><p style="text-align:center;padding:2rem;color:#6b7280;">Gemengde oefeningen &mdash; wordt binnenkort toegevoegd.</p></div>
+  <div class="uitleg-card">
+    <h2>&#127381; Gemengd — welke methode gebruik je?</h2>
+    <div class="regel-blok groen">
+      <p><strong>x² = c</strong> &nbsp;(geen x-term, c rechts) &nbsp;&rarr;&nbsp; <strong>§7.1:</strong> worteltrekken</p>
+      <p><em>3x²&minus;7=20 &rarr; x²=9 &rarr; x=3 of x=&minus;3</em></p>
+    </div>
+    <div class="regel-blok oranje">
+      <p><strong>x² + bx = 0</strong> &nbsp;(geen c, rechterlid nul) &nbsp;&rarr;&nbsp; <strong>§7.2:</strong> buiten haakjes</p>
+      <p><em>x²+5x=0 &rarr; x(x+5)=0 &rarr; x=0 of x=&minus;5</em></p>
+    </div>
+    <div class="regel-blok rood-blok">
+      <p><strong>x² + bx + c = 0</strong> &nbsp;(drie termen, rechterlid nul) &nbsp;&rarr;&nbsp; <strong>§7.3+§7.4:</strong> product-som + product=nul</p>
+      <p><em>x²+x&minus;6=0 &rarr; (x+3)(x&minus;2)=0 &rarr; x=&minus;3 of x=2</em></p>
+    </div>
+    <div class="regel-blok blauw">
+      <p><strong>&#9888; Niet in standaardvorm?</strong> Zet eerst alles naar links (&hellip; = 0) en identificeer dan het type!</p>
+      <p><em>x²+3x=10 &rarr; x²+3x&minus;10=0 &rarr; type: §7.3+§7.4</em></p>
+    </div>
+  </div>
+  <div class="oefening-kaart">
+    <h3>Gemengde oefening &mdash; alle typen door elkaar</h3>
+    <div class="score-balk">Score: <span id="corGem">0</span> / <span id="totGem">0</span></div>
+    <div id="vraagGem" class="vraag-tekst"></div>
+    <div id="hintGem" style="font-size:.85rem;color:#92400e;min-height:1.2rem;margin-bottom:.4rem;font-weight:600;"></div>
+    <div id="optiesGem" class="mc-grid"></div>
+    <div id="fbGem" class="feedback"></div>
+    <div class="knoppen-rij">
+      <button onclick="resetGem()">&#128260; Opnieuw</button>
+      <button onclick="shuffleGem()">&#128256; Shuffle</button>
+    </div>
+  </div>
 </div>
 
 <footer>Gemaakt voor Sam &middot; 2 HAVO &middot; Getal en Ruimte &middot; H7</footer>
@@ -270,7 +268,7 @@
 
   /* §7.1 B */
   var cur71b=null,cor71b=0,tot71b=0;
-  function gen71b(){var type=pick(['pos','pos','pos','nul','neg']);var a,r,b=0,rhs,correctAns,distractors;if(type==='pos'){a=pick([1,2,3,4,5]);r=pick([1,2,3,4,5,6,7]);b=pick([-8,-6,-4,-2,0,2,4,6,8]);rhs=a*r*r+b;var alt=r<7?r+1:r-1;correctAns='x = '+r+' of x = -'+r;distractors=['x = '+r,'geen oplossing','x = '+alt+' of x = -'+alt];}else if(type==='nul'){a=pick([1,2,3,4]);r=pick([2,3,4,5]);rhs=0;b=0;correctAns='x = 0';distractors=['x = '+r+' of x = -'+r,'geen oplossing','x = 1 of x = -1'];}else{a=1;r=pick([1,2,3,4,5]);rhs=pick([-1,-4,-9,-16,-25]);b=0;var alt2=r<5?r+1:r-1;correctAns='geen oplossing';distractors=['x = '+r+' of x = -'+r,'x = 0','x = '+alt2+' of x = -'+alt2];}var lhs=a===1?'x²':a+'x²';if(b>0)lhs+=' + '+b;else if(b<0)lhs+=' − '+Math.abs(b);var rhsStr=rhs<0?'−'+Math.abs(rhs):''+rhs;var vraag=lhs+' = '+rhsStr;var opties=fisherYates([correctAns].concat(distractors));cur71b={vraag:vraag,correctAns:correctAns};document.getElementById('vraag71b').textContent='Los op: '+vraag;document.getElementById('opties71b').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans71b(this)">'+o.replace(/-/g,'−')+'</button>';}).join('');document.getElementById('fb71b').className='feedback';document.getElementById('fb71b').textContent='';upd71b();}
+  function gen71b(){var type=pick(['pos','pos','pos','nul','neg']);var a,r,b=0,rhs,correctAns,distractors;if(type==='pos'){a=pick([1,2,3,4,5]);r=pick([1,2,3,4,5,6,7]);b=pick([-8,-6,-4,-2,0,2,4,6,8]);rhs=a*r*r+b;var alt=r<7?r+1:r-1;correctAns='x = '+r+' of x = -'+r;distractors=['x = '+r,'geen oplossing','x = '+alt+' of x = -'+alt];}else if(type==='nul'){a=pick([1,2,3,4]);r=pick([2,3,4,5]);rhs=0;b=0;correctAns='x = 0';distractors=['x = '+r+' of x = -'+r,'geen oplossing','x = 1 of x = -1'];}else{a=1;r=pick([1,2,3,4,5]);rhs=pick([-1,-4,-9,-16,-25]);b=0;var alt2=r<5?r+1:r-1;correctAns='geen oplossing';distractors=['x = '+r+' of x = -'+r,'x = 0','x = '+alt2+' of x = -'+alt2];}var lhs=a===1?'x²':a+'x²';if(b>0)lhs+=' + '+b;else if(b<0)lhs+=' − '+Math.abs(b);var rhsStr=rhs<0?'−'+Math.abs(rhs):''+rhs;var opties=fisherYates([correctAns].concat(distractors));cur71b={correctAns:correctAns};document.getElementById('vraag71b').textContent='Los op: '+lhs+' = '+rhsStr;document.getElementById('opties71b').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans71b(this)">'+o.replace(/-/g,'−')+'</button>';}).join('');document.getElementById('fb71b').className='feedback';document.getElementById('fb71b').textContent='';upd71b();}
   function ans71b(btn){if(!cur71b)return;var k=btn.getAttribute('data-ans');tot71b++;var ok=k===cur71b.correctAns;if(ok)cor71b++;var fb=document.getElementById('fb71b');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+cur71b.correctAns.replace(/-/g,'−');fb.className='feedback '+(ok?'goed':'fout');upd71b();setTimeout(gen71b,1500);}
   function skip71b(){tot71b++;upd71b();gen71b();}
   function upd71b(){document.getElementById('cor71b').textContent=cor71b;document.getElementById('tot71b').textContent=tot71b;}
@@ -297,53 +295,57 @@
   function reset73(){i73=0;cor73=0;tot73=0;done73=false;buildBank73();show73();}
   function shuffle73(){if(done73){cor73=0;tot73=0;}i73=0;fisherYates(bank73);show73();}
 
-  /* §7.4 A - random x²+bx=0 */
+  /* §7.4 A */
   var cur74a=null,cor74a=0,tot74a=0;
-  function gen74a(){
-    var b=pick([-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8]);
-    var s2=-b;
-    var lhs=b>0?'x² + '+b+'x':'x² − '+Math.abs(b)+'x';
-    var correctAns,d1,d2,d3;
-    if(s2>0){correctAns='x = 0 of x = '+s2;d1='x = 0 of x = −'+s2;d2='x = '+s2;d3='x = −'+s2+' of x = '+s2;}
-    else{var a2=Math.abs(s2);correctAns='x = −'+a2+' of x = 0';d1='x = '+a2+' of x = 0';d2='x = −'+a2;d3='x = −'+a2+' of x = '+a2;}
-    var opties=fisherYates([correctAns,d1,d2,d3]);
-    cur74a={correctAns:correctAns};
-    document.getElementById('vraag74a').textContent='Los op: '+lhs+' = 0';
-    document.getElementById('opties74a').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans74a(this)">'+o+'</button>';}).join('');
-    document.getElementById('fb74a').className='feedback';document.getElementById('fb74a').textContent='';upd74a();
-  }
+  function gen74a(){var b=pick([-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8]);var s2=-b;var lhs=b>0?'x² + '+b+'x':'x² − '+Math.abs(b)+'x';var correctAns,d1,d2,d3;if(s2>0){correctAns='x = 0 of x = '+s2;d1='x = 0 of x = −'+s2;d2='x = '+s2;d3='x = −'+s2+' of x = '+s2;}else{var a2=Math.abs(s2);correctAns='x = −'+a2+' of x = 0';d1='x = '+a2+' of x = 0';d2='x = −'+a2;d3='x = −'+a2+' of x = '+a2;}var opties=fisherYates([correctAns,d1,d2,d3]);cur74a={correctAns:correctAns};document.getElementById('vraag74a').textContent='Los op: '+lhs+' = 0';document.getElementById('opties74a').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans74a(this)">'+o+'</button>';}).join('');document.getElementById('fb74a').className='feedback';document.getElementById('fb74a').textContent='';upd74a();}
   function ans74a(btn){if(!cur74a)return;var k=btn.getAttribute('data-ans');tot74a++;var ok=k===cur74a.correctAns;if(ok)cor74a++;var fb=document.getElementById('fb74a');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+cur74a.correctAns;fb.className='feedback '+(ok?'goed':'fout');upd74a();setTimeout(gen74a,1500);}
   function skip74a(){tot74a++;upd74a();gen74a();}
   function upd74a(){document.getElementById('cor74a').textContent=cor74a;document.getElementById('tot74a').textContent=tot74a;}
   function reset74a(){cor74a=0;tot74a=0;gen74a();}
   function shuffle74a(){reset74a();}
 
-  /* §7.4 B - bank x²+bx+c=0 */
-  var bank74b=[
-    {q:'x² + 7x + 12 = 0',h:false,a:'x = −4 of x = −3',d:['x = 4 of x = 3','x = −7 of x = −12','x = −4 of x = 3']},
-    {q:'x² − 5x + 6 = 0',h:false,a:'x = 2 of x = 3',d:['x = −2 of x = −3','x = −5 of x = 6','x = 1 of x = 6']},
-    {q:'x² + x − 6 = 0',h:false,a:'x = −3 of x = 2',d:['x = 3 of x = −2','x = −3 of x = −2','x = 3 of x = 2']},
-    {q:'x² − x − 12 = 0',h:false,a:'x = −3 of x = 4',d:['x = 3 of x = −4','x = −3 of x = −4','x = 1 of x = −12']},
-    {q:'x² + 5x − 6 = 0',h:false,a:'x = −6 of x = 1',d:['x = 6 of x = −1','x = −5 of x = 6','x = −3 of x = 2']},
-    {q:'x² − 9x + 20 = 0',h:false,a:'x = 4 of x = 5',d:['x = −4 of x = −5','x = 9 of x = 20','x = 2 of x = 10']},
-    {q:'x² + 3x = 10',h:true,a:'x = −5 of x = 2',d:['x = 5 of x = −2','x = −5 of x = −2','x = −3 of x = 10']},
-    {q:'x² = 5x + 6',h:true,a:'x = −1 of x = 6',d:['x = 1 of x = −6','x = 5 of x = 6','x = −1 of x = −6']},
-    {q:'x² + 8x = −7',h:true,a:'x = −7 of x = −1',d:['x = 7 of x = 1','x = −8 of x = −7','x = −7 of x = 1']},
-    {q:'x² − 4 = 3x',h:true,a:'x = −1 of x = 4',d:['x = 1 of x = −4','x = −4 of x = 3','x = −1 of x = −4']}
-  ];
+  /* §7.4 B */
+  var bank74b=[{q:'x² + 7x + 12 = 0',h:false,a:'x = −4 of x = −3',d:['x = 4 of x = 3','x = −7 of x = −12','x = −4 of x = 3']},{q:'x² − 5x + 6 = 0',h:false,a:'x = 2 of x = 3',d:['x = −2 of x = −3','x = −5 of x = 6','x = 1 of x = 6']},{q:'x² + x − 6 = 0',h:false,a:'x = −3 of x = 2',d:['x = 3 of x = −2','x = −3 of x = −2','x = 3 of x = 2']},{q:'x² − x − 12 = 0',h:false,a:'x = −3 of x = 4',d:['x = 3 of x = −4','x = −3 of x = −4','x = 1 of x = −12']},{q:'x² + 5x − 6 = 0',h:false,a:'x = −6 of x = 1',d:['x = 6 of x = −1','x = −5 of x = 6','x = −3 of x = 2']},{q:'x² − 9x + 20 = 0',h:false,a:'x = 4 of x = 5',d:['x = −4 of x = −5','x = 9 of x = 20','x = 2 of x = 10']},{q:'x² + 3x = 10',h:true,a:'x = −5 of x = 2',d:['x = 5 of x = −2','x = −5 of x = −2','x = −3 of x = 10']},{q:'x² = 5x + 6',h:true,a:'x = −1 of x = 6',d:['x = 1 of x = −6','x = 5 of x = 6','x = −1 of x = −6']},{q:'x² + 8x = −7',h:true,a:'x = −7 of x = −1',d:['x = 7 of x = 1','x = −8 of x = −7','x = −7 of x = 1']},{q:'x² − 4 = 3x',h:true,a:'x = −1 of x = 4',d:['x = 1 of x = −4','x = −4 of x = 3','x = −1 of x = −4']}];
   var i74b=0,cor74b=0,tot74b=0,done74b=false;
   function buildBank74b(){fisherYates(bank74b);}
-  function show74b(){if(i74b>=bank74b.length){document.getElementById('vraag74b').textContent='🎉 Klaar! Alle vergelijkingen opgelost.';document.getElementById('hint74b').textContent='';document.getElementById('opties74b').innerHTML='';document.getElementById('fb74b').textContent='';done74b=true;return;}done74b=false;var item=bank74b[i74b];document.getElementById('vraag74b').textContent='Los op: '+item.q;document.getElementById('hint74b').textContent=item.h?'💡 Zet eerst alles naar links (… = 0), dan pas ontbinden!':'';var opties=fisherYates([item.a].concat(item.d));document.getElementById('opties74b').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans74b(this)">'+o+'</button>';}).join('');document.getElementById('fb74b').className='feedback';document.getElementById('fb74b').textContent='';upd74b();}
+  function show74b(){if(i74b>=bank74b.length){document.getElementById('vraag74b').textContent='🎉 Klaar!';document.getElementById('hint74b').textContent='';document.getElementById('opties74b').innerHTML='';document.getElementById('fb74b').textContent='';done74b=true;return;}done74b=false;var item=bank74b[i74b];document.getElementById('vraag74b').textContent='Los op: '+item.q;document.getElementById('hint74b').textContent=item.h?'💡 Zet eerst alles naar links (… = 0), dan pas ontbinden!':'';var opties=fisherYates([item.a].concat(item.d));document.getElementById('opties74b').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ans74b(this)">'+o+'</button>';}).join('');document.getElementById('fb74b').className='feedback';document.getElementById('fb74b').textContent='';upd74b();}
   function ans74b(btn){var k=btn.getAttribute('data-ans');var item=bank74b[i74b];tot74b++;var ok=k===item.a;if(ok)cor74b++;var fb=document.getElementById('fb74b');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+item.a;fb.className='feedback '+(ok?'goed':'fout');upd74b();i74b++;setTimeout(show74b,1300);}
   function upd74b(){document.getElementById('cor74b').textContent=cor74b;document.getElementById('tot74b').textContent=tot74b;}
   function reset74b(){i74b=0;cor74b=0;tot74b=0;done74b=false;buildBank74b();show74b();}
   function shuffle74b(){if(done74b){cor74b=0;tot74b=0;}i74b=0;fisherYates(bank74b);show74b();}
+
+  /* Gemengd */
+  var bankGem=[
+    {q:'x² = 9',h:false,a:'x = 3 of x = −3',d:['geen oplossing','x = 9','x = 3']},
+    {q:'x² = −16',h:false,a:'geen oplossing',d:['x = 4 of x = −4','x = 8 of x = −8','x = 0']},
+    {q:'x² = 0',h:false,a:'x = 0',d:['x = 1 of x = −1','geen oplossing','x = 0 of x = 1']},
+    {q:'2x² − 8 = 0',h:false,a:'x = 2 of x = −2',d:['x = 4 of x = −4','geen oplossing','x = 2']},
+    {q:'3x² − 27 = 0',h:false,a:'x = 3 of x = −3',d:['x = 9 of x = −9','geen oplossing','x = 3']},
+    {q:'x² + 4x = 0',h:false,a:'x = −4 of x = 0',d:['x = −4','x = 4 of x = 0','x = −4 of x = 4']},
+    {q:'x² − 6x = 0',h:false,a:'x = 0 of x = 6',d:['x = 6','x = −6 of x = 0','x = −6 of x = 6']},
+    {q:'x² + 3x = 0',h:false,a:'x = −3 of x = 0',d:['x = −3','x = 3 of x = 0','x = −3 of x = 3']},
+    {q:'x² + 7x + 12 = 0',h:false,a:'x = −4 of x = −3',d:['x = 4 of x = 3','x = −7 of x = −12','x = −4 of x = 3']},
+    {q:'x² − 5x + 6 = 0',h:false,a:'x = 2 of x = 3',d:['x = −2 of x = −3','x = −5 of x = 6','x = 1 of x = 6']},
+    {q:'x² + x − 6 = 0',h:false,a:'x = −3 of x = 2',d:['x = 3 of x = −2','x = −3 of x = −2','x = 3 of x = 2']},
+    {q:'x² − 9x + 20 = 0',h:false,a:'x = 4 of x = 5',d:['x = −4 of x = −5','x = 9 of x = 20','x = 2 of x = 10']},
+    {q:'x² + 3x = 10',h:true,a:'x = −5 of x = 2',d:['x = 5 of x = −2','x = −5 of x = −2','x = −3 of x = 10']},
+    {q:'x² = 5x + 6',h:true,a:'x = −1 of x = 6',d:['x = 1 of x = −6','x = 5 of x = 6','x = −1 of x = −6']},
+    {q:'x² − 4 = 3x',h:true,a:'x = −1 of x = 4',d:['x = 1 of x = −4','x = −4 of x = 3','x = −1 of x = −4']}
+  ];
+  var iGem=0,corGem=0,totGem=0,doneGem=false;
+  function buildBankGem(){fisherYates(bankGem);}
+  function showGem(){if(iGem>=bankGem.length){document.getElementById('vraagGem').textContent='🎉 Klaar! Alle gemengde opgaven gedaan.';document.getElementById('hintGem').textContent='';document.getElementById('optiesGem').innerHTML='';document.getElementById('fbGem').textContent='';doneGem=true;return;}doneGem=false;var item=bankGem[iGem];document.getElementById('vraagGem').textContent='Los op: '+item.q;document.getElementById('hintGem').textContent=item.h?'💡 Zet eerst alles naar links (… = 0)!':'';var opties=fisherYates([item.a].concat(item.d));document.getElementById('optiesGem').innerHTML=opties.map(function(o){return '<button class="mc-btn" data-ans="'+o+'" onclick="ansGem(this)">'+o+'</button>';}).join('');document.getElementById('fbGem').className='feedback';document.getElementById('fbGem').textContent='';updGem();}
+  function ansGem(btn){var k=btn.getAttribute('data-ans');var item=bankGem[iGem];totGem++;var ok=k===item.a;if(ok)corGem++;var fb=document.getElementById('fbGem');fb.textContent=ok?'✅ Juist!':'❌ Fout — juist: '+item.a;fb.className='feedback '+(ok?'goed':'fout');updGem();iGem++;setTimeout(showGem,1300);}
+  function updGem(){document.getElementById('corGem').textContent=corGem;document.getElementById('totGem').textContent=totGem;}
+  function resetGem(){iGem=0;corGem=0;totGem=0;doneGem=false;buildBankGem();showGem();}
+  function shuffleGem(){if(doneGem){corGem=0;totGem=0;}iGem=0;fisherYates(bankGem);showGem();}
 
   /* INIT */
   buildBank71a(); show71a(); gen71b();
   buildBank72();  show72();
   buildBank73();  show73();
   gen74a(); buildBank74b(); show74b();
+  buildBankGem(); showGem();
 </script>
 </body>
 </html>
