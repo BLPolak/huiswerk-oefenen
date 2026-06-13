@@ -13,6 +13,8 @@
   --rood-licht: #feb2b2;
   --geel: #d69e2e;
   --geel-licht: #fefcbf;
+  --groen: #2d6a4f;
+  --groen-licht: #d8f3dc;
   --donker: #1a202c;
   --grijs: #718096;
   --bg: #f7fafc;
@@ -20,14 +22,13 @@
 
 body {
   font-family: 'Nunito', sans-serif;
-  background: linear-gradient(135deg, #c53030 0%, #9b2c2c 50%, #d69e2e 100%);
+  background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 50%, #52b788 100%);
   min-height: 100vh;
   padding: 0 0 4rem;
 }
 
-/* ── HEADER ── */
 .header {
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.25);
   backdrop-filter: blur(10px);
   padding: 1rem 1.5rem;
   display: flex;
@@ -37,7 +38,6 @@ body {
   top: 0;
   z-index: 100;
 }
-
 .terug {
   background: rgba(255,255,255,0.2);
   color: #fff;
@@ -55,7 +55,6 @@ body {
   transition: background 0.15s;
 }
 .terug:hover { background: rgba(255,255,255,0.3); }
-
 .header-title {
   color: #fff;
   font-size: 1.5rem;
@@ -65,46 +64,57 @@ body {
   text-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-/* ── TABS ── */
 .tabs {
   display: flex;
   gap: 0.5rem;
-  max-width: 800px;
+  max-width: 860px;
   margin: 1.5rem auto 0;
   padding: 0 1rem;
 }
-
 .tab-btn {
   flex: 1;
-  padding: 0.9rem 1rem;
+  padding: 0.9rem 0.5rem;
   border: none;
   border-radius: 14px;
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
   background: rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.85);
   transition: all 0.2s;
 }
 .tab-btn.actief {
   background: #fff;
-  color: var(--rood);
+  color: var(--groen);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 .tab-btn:hover:not(.actief) { background: rgba(255,255,255,0.3); color: #fff; }
 
-/* ── MAIN CONTENT ── */
 .content {
   max-width: 860px;
   margin: 1.5rem auto 0;
   padding: 0 1rem;
 }
-
 .sectie { display: none; }
 .sectie.actief { display: block; }
 
-/* ── ACCORDION ── */
+/* SCORE BAR */
+.score-bar {
+  background: rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.score-num { font-size: 1.3rem; font-weight: 900; }
+
+/* ACCORDION */
 .accordion {
   background: #fff;
   border-radius: 16px;
@@ -112,7 +122,6 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.12);
   margin-bottom: 1rem;
 }
-
 .accordion-header {
   width: 100%;
   background: none;
@@ -127,177 +136,55 @@ body {
   font-size: 1.05rem;
   color: var(--donker);
   text-align: left;
-  border-left: 5px solid var(--rood);
+  border-left: 5px solid var(--groen);
   transition: background 0.15s;
 }
-.accordion-header:hover { background: #fff5f5; }
-.accordion-header .chevron {
-  font-size: 1rem;
-  transition: transform 0.25s;
-  color: var(--grijs);
-}
+.accordion-header:hover { background: #f0fff4; }
+.accordion-header .chevron { font-size: 1rem; transition: transform 0.25s; color: var(--grijs); }
 .accordion-header.open .chevron { transform: rotate(180deg); }
-
-.accordion-body {
-  display: none;
-  padding: 0 1.4rem 1.4rem;
-  border-top: 1px solid #e2e8f0;
-}
+.accordion-body { display: none; padding: 1rem 1.4rem 1.4rem; border-top: 1px solid #e2e8f0; }
 .accordion-body.open { display: block; }
 
-/* ── VOCAB TABLE ── */
-.vocab-sectie { margin-bottom: 1.2rem; }
-.vocab-sectie h4 {
-  font-size: 0.82rem;
+/* THEORIE BLOK */
+.theorie-blok {
+  background: #f0fff4;
+  border-left: 4px solid var(--groen);
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.92rem;
+  color: var(--donker);
+  line-height: 1.6;
+}
+.theorie-blok-titel {
+  font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--rood);
-  margin: 1rem 0 0.5rem;
+  color: var(--groen);
+  margin-bottom: 0.5rem;
 }
-
-.vocab-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-.vocab-table tr:nth-child(even) { background: #f7fafc; }
-.vocab-table td {
-  padding: 0.4rem 0.6rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-.vocab-table td:first-child { font-weight: 700; color: var(--donker); width: 50%; }
-.vocab-table td:last-child { color: #e53e3e; font-weight: 700; }
-
-/* ── GRAMMAR BOX ── */
-.grammar-box {
+.theorie-blok p { margin-bottom: 0.4rem; }
+.theorie-blok p:last-child { margin-bottom: 0; }
+.theorie-blok ul { margin: 0.4rem 0 0 1.2rem; }
+.theorie-blok li { margin-bottom: 0.25rem; }
+.begrip { font-weight: 800; color: var(--groen); }
+.kader {
   background: #fffbeb;
   border-left: 4px solid var(--geel);
   border-radius: 8px;
-  padding: 1rem 1.2rem;
-  margin: 0.8rem 0;
-  font-size: 0.92rem;
-}
-.grammar-box strong { color: var(--donker); }
-
-.example-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0.8rem 0;
+  padding: 0.7rem 1rem;
+  margin: 0.6rem 0;
   font-size: 0.9rem;
 }
-.example-table tr { border-bottom: 1px solid #e2e8f0; }
-.example-table tr:last-child { border-bottom: none; }
-.example-table td { padding: 0.5rem 0.6rem; }
-.example-table td:first-child { font-style: italic; font-weight: 700; color: #c53030; width: 55%; }
-.example-table td:last-child { color: #2d3748; }
+.kader strong { color: #744210; }
 
-.neg-words {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin: 0.8rem 0;
-}
-.neg-pill {
-  background: #fff5f5;
-  border: 2px solid var(--rood-licht);
-  border-radius: 10px;
-  padding: 0.4rem 0.9rem;
-  font-weight: 800;
-  font-size: 0.9rem;
-  color: var(--rood);
-}
-.neg-pill span { color: var(--grijs); font-weight: 600; margin-left: 0.4rem; }
-
-/* ── CONJUGATION TABLE ── */
-.werkwoord-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 0.8rem;
-}
-
-.conj-card {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-}
-.conj-card-header {
-  background: var(--rood);
-  color: #fff;
-  font-weight: 900;
-  font-size: 1rem;
-  padding: 0.6rem 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.conj-card-header span { font-weight: 600; font-size: 0.82rem; opacity: 0.85; }
-.conj-table { width: 100%; font-size: 0.88rem; }
-.conj-table tr:nth-child(even) { background: #f7fafc; }
-.conj-table td { padding: 0.38rem 0.8rem; }
-.conj-table td:first-child { font-weight: 700; color: #c53030; width: 45%; }
-.conj-table td:last-child { color: #2d3748; }
-.conj-divider td { border-top: 2px solid #e2e8f0 !important; }
-
-/* ── KLOK TABLE ── */
-.klok-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-  margin-top: 0.8rem;
-}
-.klok-table tr:nth-child(even) { background: #f7fafc; }
-.klok-table td { padding: 0.45rem 0.7rem; border-bottom: 1px solid #e2e8f0; }
-.klok-table td:first-child { font-weight: 700; color: #c53030; width: 55%; font-style: italic; }
-.klok-table td:last-child { color: #2d3748; font-weight: 600; }
-
-/* ── GETALLEN GRID ── */
-.getallen-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.5rem;
-  margin-top: 0.8rem;
-}
-.getal-item {
-  background: #fff5f5;
-  border: 1px solid var(--rood-licht);
-  border-radius: 8px;
-  padding: 0.5rem 0.7rem;
-  text-align: center;
-}
-.getal-num { font-size: 1.2rem; font-weight: 900; color: var(--rood); }
-.getal-spa { font-size: 0.82rem; font-weight: 700; color: #2d3748; margin-top: 0.1rem; }
-
-/* ── FRASES TABLE ── */
-.frases-sectie { margin-bottom: 1.2rem; }
-.frases-sectie h4 {
-  font-size: 0.82rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--rood);
-  margin: 1rem 0 0.5rem;
-}
-.frases-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.88rem;
-}
-.frases-table tr { border-bottom: 1px solid #e2e8f0; }
-.frases-table tr:last-child { border-bottom: none; }
-.frases-table tr:nth-child(even) { background: #f7fafc; }
-.frases-table td { padding: 0.5rem 0.6rem; vertical-align: top; }
-.frases-table td:first-child { font-weight: 700; color: #c53030; font-style: italic; width: 50%; }
-.frases-table td:last-child { color: #2d3748; }
-
-/* ── FLASHCARD SETS ── */
+/* FLASHCARD SETS */
 .sets-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 1rem;
 }
-
 .set-kaart {
   background: #fff;
   border-radius: 16px;
@@ -311,25 +198,15 @@ body {
   gap: 0.4rem;
 }
 .set-kaart:hover {
-  border-color: var(--rood);
+  border-color: var(--groen);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(197,48,48,0.2);
+  box-shadow: 0 8px 24px rgba(45,106,79,0.2);
 }
 .set-emoji { font-size: 1.8rem; line-height: 1; }
 .set-naam { font-weight: 800; font-size: 1rem; color: var(--donker); }
 .set-info { font-size: 0.82rem; color: var(--grijs); font-weight: 600; }
-.set-richting {
-  background: #fff5f5;
-  color: var(--rood);
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  align-self: flex-start;
-  margin-top: 0.2rem;
-}
 
-/* ── FLASHCARD MODAL ── */
+/* FLASHCARD MODAL */
 #fc-modal {
   display: none;
   position: fixed;
@@ -341,7 +218,6 @@ body {
   padding: 1rem;
 }
 #fc-modal.open { display: flex; }
-
 #fc-container {
   background: #fff;
   border-radius: 24px;
@@ -355,273 +231,125 @@ body {
   max-height: 90vh;
   overflow-y: auto;
 }
-
-.fc-topbar {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+.fc-topbar { width: 100%; display: flex; align-items: center; justify-content: space-between; }
 .fc-set-naam { font-weight: 900; font-size: 1.05rem; color: var(--donker); }
 #fc-close {
-  background: #e2e8f0;
-  border: none;
-  border-radius: 8px;
-  width: 2rem;
-  height: 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 800;
-  color: #4a5568;
+  background: #e2e8f0; border: none; border-radius: 8px;
+  width: 2rem; height: 2rem; font-size: 1rem; cursor: pointer;
+  font-weight: 800; color: #4a5568;
   display: flex; align-items: center; justify-content: center;
 }
 #fc-close:hover { background: #cbd5e0; }
+.fc-progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+.fc-progress-fill { height: 100%; background: var(--groen); border-radius: 3px; transition: width 0.3s; }
+.fc-progress-text { font-size: 0.82rem; font-weight: 800; color: var(--grijs); align-self: flex-end; }
 
-.fc-progress-bar {
-  width: 100%;
-  height: 6px;
-  background: #e2e8f0;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.fc-progress-fill {
-  height: 100%;
-  background: var(--rood);
-  border-radius: 3px;
-  transition: width 0.3s;
-}
-.fc-progress-text {
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: var(--grijs);
-  align-self: flex-end;
-}
-
-/* Flip card */
-.flip-wrapper {
-  width: 100%;
-  perspective: 1000px;
-  cursor: pointer;
-}
+.flip-wrapper { width: 100%; perspective: 1000px; cursor: pointer; }
 .flip-card {
-  width: 100%;
-  min-height: 200px;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.45s;
+  width: 100%; min-height: 200px; position: relative;
+  transform-style: preserve-3d; transition: transform 0.45s;
 }
 .flip-card.flipped { transform: rotateY(180deg); }
 .flip-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  text-align: center;
-  min-height: 200px;
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 18px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 1.5rem; text-align: center; min-height: 200px;
 }
-.flip-front {
-  background: linear-gradient(135deg, #fff5f5, #fff);
-  border: 2px solid var(--rood-licht);
-}
-.flip-back {
-  background: linear-gradient(135deg, #fffbeb, #fff);
-  border: 2px solid #f6e05e;
-  transform: rotateY(180deg);
-}
-.flip-label {
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--grijs);
-  margin-bottom: 0.8rem;
-}
-.flip-tekst {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--donker);
-  line-height: 1.3;
-}
-.flip-hint {
-  font-size: 0.78rem;
-  color: var(--grijs);
-  font-weight: 600;
-  margin-top: 1rem;
-}
+.flip-front { background: linear-gradient(135deg, #f0fff4, #fff); border: 2px solid var(--groen-licht); }
+.flip-back { background: linear-gradient(135deg, #fffbeb, #fff); border: 2px solid #f6e05e; transform: rotateY(180deg); }
+.flip-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--grijs); margin-bottom: 0.8rem; }
+.flip-tekst { font-size: 1.4rem; font-weight: 900; color: var(--donker); line-height: 1.3; }
+.flip-hint { font-size: 0.78rem; color: var(--grijs); font-weight: 600; margin-top: 1rem; }
 
-.fc-buttons {
-  display: flex;
-  gap: 0.6rem;
-  width: 100%;
-}
+.fc-buttons { display: flex; gap: 0.6rem; width: 100%; }
 .fc-btn {
-  flex: 1;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.15s;
+  flex: 1; padding: 0.8rem; border: none; border-radius: 12px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.15s;
 }
 .fc-btn-prev { background: #e2e8f0; color: #2d3748; }
 .fc-btn-prev:hover { background: #cbd5e0; }
-.fc-btn-flip { background: var(--rood); color: #fff; flex: 1.4; }
-.fc-btn-flip:hover { background: #9b2c2c; }
+.fc-btn-flip { background: var(--groen); color: #fff; flex: 1.4; }
+.fc-btn-flip:hover { background: #1b4332; }
 .fc-btn-next { background: #e2e8f0; color: #2d3748; }
 .fc-btn-next:hover { background: #cbd5e0; }
-
 .fc-shuffle {
-  background: none;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--grijs);
-  cursor: pointer;
-  transition: all 0.15s;
+  background: none; border: 2px solid #e2e8f0; border-radius: 10px;
+  padding: 0.5rem 1rem; font-family: 'Nunito', sans-serif;
+  font-weight: 700; font-size: 0.85rem; color: var(--grijs); cursor: pointer; transition: all 0.15s;
 }
-.fc-shuffle:hover { border-color: var(--rood); color: var(--rood); }
+.fc-shuffle:hover { border-color: var(--groen); color: var(--groen); }
+.fc-opnieuw {
+  background: none; border: 2px solid #e2e8f0; border-radius: 10px;
+  padding: 0.5rem 1rem; font-family: 'Nunito', sans-serif;
+  font-weight: 700; font-size: 0.85rem; color: var(--grijs); cursor: pointer; transition: all 0.15s;
+}
+.fc-opnieuw:hover { border-color: var(--groen); color: var(--groen); }
+.fc-extra-btns { display: flex; gap: 0.5rem; }
 
-/* ── SET RICHTING TOGGLE ── */
-.set-toggle {
-  margin-top: 0.3rem;
-  background: none;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0.3rem 0.7rem;
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--grijs);
-  cursor: pointer;
-  transition: all 0.15s;
-  align-self: flex-start;
+/* MC OEFENINGEN */
+.oefenblok {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
-.set-toggle:hover { border-color: var(--rood); color: var(--rood); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 500px) {
-  .header-title { font-size: 1.2rem; }
-  .flip-tekst { font-size: 1.2rem; }
-  .werkwoord-grid { grid-template-columns: 1fr; }
+.oefenblok-titel {
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--groen);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--groen-licht);
 }
-
-/* ── OEFENEN: MULTIPLE CHOICE ── */
-.mc-vraag {
-  margin-bottom: 1.2rem;
-}
-.mc-vraag p {
-  font-weight: 700;
-  color: var(--donker);
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-}
-.mc-opties {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
+.mc-vraag { margin-bottom: 1.3rem; }
+.mc-vraag:last-child { margin-bottom: 0; }
+.mc-vraag p { font-weight: 700; color: var(--donker); margin-bottom: 0.5rem; font-size: 0.95rem; line-height: 1.5; }
+.mc-opties { display: flex; flex-direction: column; gap: 0.4rem; }
 .mc-optie {
-  background: #f7fafc;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 0.55rem 1rem;
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--donker);
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.15s;
+  background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 10px;
+  padding: 0.55rem 1rem; font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem; font-weight: 600; color: var(--donker);
+  cursor: pointer; text-align: left; transition: all 0.15s;
 }
-.mc-optie:hover:not(:disabled) { border-color: var(--rood); background: #fff5f5; }
-.mc-optie.goed { background: #f0fff4; border-color: #38a169; color: #276749; }
+.mc-optie:hover:not(:disabled) { border-color: var(--groen); background: #f0fff4; }
+.mc-optie.goed { background: #f0fff4; border-color: #38a169; color: #276749; font-weight: 800; }
 .mc-optie.fout { background: #fff5f5; border-color: var(--rood); color: var(--rood); }
 .mc-optie:disabled { cursor: default; }
 
-/* ── OEFENEN: OPEN VRAGEN ── */
-.open-vraag {
-  margin-bottom: 1rem;
-}
-.open-vraag p {
-  font-weight: 700;
-  color: var(--donker);
-  margin-bottom: 0.4rem;
-  font-size: 0.95rem;
-}
-.toon-antwoord-btn {
-  background: none;
-  border: 2px solid var(--rood);
-  border-radius: 10px;
-  padding: 0.45rem 1rem;
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--rood);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.toon-antwoord-btn:hover { background: #fff5f5; }
-.open-antwoord {
-  display: none;
+.oefenen-nav {
+  display: flex;
+  gap: 0.6rem;
   margin-top: 0.5rem;
-  background: #f0fff4;
-  border-left: 4px solid #38a169;
-  border-radius: 8px;
-  padding: 0.6rem 1rem;
-  font-size: 0.9rem;
-  color: #276749;
-  font-weight: 600;
+  align-items: center;
+  flex-wrap: wrap;
 }
-.open-antwoord.zichtbaar { display: block; }
+.nav-btn {
+  padding: 0.6rem 1.2rem; border: none; border-radius: 10px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.88rem;
+  cursor: pointer; transition: all 0.15s;
+}
+.nav-btn-primary { background: var(--groen); color: #fff; }
+.nav-btn-primary:hover { background: #1b4332; }
+.nav-btn-secondary { background: #e2e8f0; color: #2d3748; }
+.nav-btn-secondary:hover { background: #cbd5e0; }
+.score-display { font-weight: 800; color: #fff; font-size: 0.9rem; margin-left: auto; }
 
-.oefenen-sectie-titel {
-  font-size: 0.82rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--rood);
-  margin: 1rem 0 0.8rem;
+@media (max-width: 500px) {
+  .header-title { font-size: 1.2rem; }
+  .flip-tekst { font-size: 1.15rem; }
+  .tabs { gap: 0.3rem; }
+  .tab-btn { font-size: 0.82rem; padding: 0.8rem 0.3rem; }
 }
-
-/* ── THEORIE BLOKKEN ── */
-.theorie-blok {
-  background: #f7fafc;
-  border-left: 4px solid var(--rood);
-  border-radius: 8px;
-  padding: 0.8rem 1.1rem;
-  margin-bottom: 0.9rem;
-  font-size: 0.92rem;
-  color: var(--donker);
-}
-.theorie-blok-titel {
-  font-size: 0.78rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--rood);
-  margin-bottom: 0.5rem;
-}
-.theorie-blok p { margin-bottom: 0.4rem; line-height: 1.55; }
-.theorie-blok p:last-child { margin-bottom: 0; }
-.theorie-blok ul { margin: 0.3rem 0 0 1.1rem; }
-.theorie-blok li { margin-bottom: 0.2rem; line-height: 1.5; }
 </style>
 </head>
 <body>
 
 <div class="header">
   <a class="terug" href="/huiswerk-oefenen/">← Terug</a>
-  <div class="header-title">🧬 Biologie</div>
+  <div class="header-title">🌿 Biologie — Ecologie</div>
   <div style="width:80px"></div>
 </div>
 
@@ -633,1543 +361,327 @@ body {
 
 <div class="content">
 
-  <!-- ══ THEORIE ══ -->
-  <div id="tab-theorie" class="sectie actief">
+<!-- ══════════════════════════════════════════
+     TAB 1: THEORIE
+══════════════════════════════════════════ -->
+<div id="tab-theorie" class="sectie actief">
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📖 Paragraaf 1 — Je verandert
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Puberteit</p>
-          <p>Vanaf je 12e jaar vinden er veranderingen plaats. Hormoonklieren produceren hormonen die via het bloed door het lichaam stromen. De hypofyse in de hersenen speelt een centrale rol.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Primaire geslachtskenmerken</p>
-          <p>Kenmerken waarmee je het geslacht kunt herkennen, al aanwezig bij de geboorte.</p>
-          <ul>
-            <li>Jongens: penis en balzak</li>
-            <li>Meisjes: vagina en schaamlippen</li>
-          </ul>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Secundaire geslachtskenmerken</p>
-          <p>Ontstaan in de puberteit vanaf ongeveer je 10e levensjaar.</p>
-          <ul>
-            <li>Jongens: borsthaar, baardgroei, zwaardere stem, gespierde lichaamsbouw</li>
-            <li>Meisjes: borsten, brede heupen</li>
-            <li>Beiden: schaamhaar, okselhaar, groeispurt</li>
-          </ul>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Seksualiteit en identiteit</p>
-          <p>Je kunt je aangetrokken voelen tot personen van hetzelfde of het andere geslacht. Heteroseksueel: aangetrokken tot ander geslacht. Homoseksueel: aangetrokken tot zelfde geslacht. Transgender: voelt zich niet thuis in geboortegeslacht. Androgyn: uiterlijke kenmerken van beide geslachten.</p>
-        </div>
-
+  <!-- BS1 -->
+  <div class="accordion">
+    <button class="accordion-header" onclick="toggleAccordion(this)">
+      🌍 Basisstof 1 — Wat is ecologie?
+      <span class="chevron">▼</span>
+    </button>
+    <div class="accordion-body">
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Ecologie</div>
+        <p><span class="begrip">Ecologie</span> is de wetenschap die bestudeert hoe organismen omgaan met hun omgeving (<span class="begrip">milieu</span>) en met elkaar.</p>
+        <p>Het <span class="begrip">milieu</span> (leefomgeving) bestaat uit alles wat een organisme om zich heen heeft. Organismen passen zich aan hun milieu aan.</p>
+      </div>
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Invloeden uit het milieu</div>
+        <p>Invloeden op organismen zijn te verdelen in twee groepen:</p>
+        <ul>
+          <li><span class="begrip">Biotische factoren</span>: invloeden van andere levende organismen (bios = leven). Voorbeelden: roofdieren, ziekteverwekkers, voedsel, soortgenoten.</li>
+          <li><span class="begrip">Abiotische factoren</span>: invloeden van de niet-levende natuur (a = zonder). Voorbeelden: licht, temperatuur, water, wind, bodem, neerslag, lucht.</li>
+        </ul>
+      </div>
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">De niveaus van de ecologie</div>
+        <ul>
+          <li><span class="begrip">Individu</span>: één enkel organisme.</li>
+          <li><span class="begrip">Populatie</span>: een groep individuen van dezelfde soort in een bepaald gebied.</li>
+          <li><span class="begrip">Levensgemeenschap</span>: alle populaties van verschillende soorten in een gebied samen.</li>
+          <li><span class="begrip">Ecosysteem</span>: de levensgemeenschap + de abiotische factoren van het gebied.</li>
+        </ul>
+        <div class="kader"><strong>Ezelsbruggetje:</strong> Individu → Populatie → Levensgemeenschap → Ecosysteem (van klein naar groot)</div>
       </div>
     </div>
+  </div>
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📖 Paragraaf 2 — Voortplantingsstelsel van een man
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Onderdelen</p>
-          <p>Urineblaas, zaadleiders, zaadblaasjes, prostaat, bijbal, teelbal, balzak, urinebuis, penis (eikel + voorhuid).</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Functies</p>
-          <ul>
-            <li><strong>Teelballen:</strong> produceren zaadcellen. Productie begint op ~13 jaar, miljoenen per dag. Liggen in balzak vanwege lagere temperatuur.</li>
-            <li><strong>Bijballen:</strong> opslag van zaadcellen</li>
-            <li><strong>Zaadleiders:</strong> vervoeren zaadcellen naar zaadblaasjes</li>
-            <li><strong>Zaadblaasjes + prostaat:</strong> voegen vocht toe aan zaadcellen → sperma</li>
-            <li><strong>Urinebuis:</strong> vervoert sperma én urine naar buiten</li>
-            <li><strong>Penis:</strong> top = eikel. Voorhuid bedekt de eikel. Besnijdenis = voorhuid verwijderd.</li>
-          </ul>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Erectie</p>
-          <p>Zwellichamen in de penis lopen vol met bloed → penis wordt groter en stijf.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Zaadlozing</p>
-          <p>Bij geslachtsgemeenschap of zelfbevrediging krijgt de man een orgasme en zaadlozing. Sperma is kleverig en melkwit. Per zaadlozing ~1 theelepel. Eerste zaadlozing gemiddeld op 13 jaar. Kan ook tijdens slaap (natte droom).</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Zaadcel</p>
-          <p>Bestaat uit kop met kern en zweepstaart.</p>
-        </div>
-
+  <!-- BS2 -->
+  <div class="accordion">
+    <button class="accordion-header" onclick="toggleAccordion(this)">
+      🦊 Basisstof 2 — Voedselrelaties
+      <span class="chevron">▼</span>
+    </button>
+    <div class="accordion-body">
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Voedselketens</div>
+        <p>Een <span class="begrip">voedselketen</span> is een reeks soorten waarbij elke soort voedsel is voor de volgende soort. De pijl betekent: "wordt gegeten door".</p>
+        <p>Voorbeeld: <em>paardenbloem → konijn → wezel</em></p>
+        <div class="kader"><strong>Regel:</strong> Elke voedselketen begint met een plantensoort (de producent).</div>
+      </div>
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Voedselweb / voedselnet</div>
+        <p>In een echt ecosysteem eten dieren meerdere soorten. Het geheel van alle voedselrelaties heet een <span class="begrip">voedselweb</span> (of voedselnet).</p>
+      </div>
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Producenten, consumenten en afvaleters</div>
+        <ul>
+          <li><span class="begrip">Producenten</span>: planten — maken zelf voedsel via fotosynthese.</li>
+          <li><span class="begrip">Consumenten van de 1e orde</span>: planteneters (herbivoren). Eten van producenten.</li>
+          <li><span class="begrip">Consumenten van de 2e orde</span>: vleeseters (carnivoren) die planteneters eten.</li>
+          <li><span class="begrip">Alleseters</span> (omnivoren): eten zowel planten als dieren.</li>
+          <li><span class="begrip">Afvaleters / reducenten</span>: bacteriën en schimmels die dode resten afbreken.</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📖 Paragraaf 3 — Voortplantingsstelsel van een vrouw
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Inwendige organen</p>
-          <ul>
-            <li><strong>Eierstokken (2x):</strong> bevatten eicellen. Vanaf puberteit rijpen geleidelijk eicellen.</li>
-            <li><strong>Eileiders (2x):</strong> verbinden eierstokken met baarmoeder. Bevruchting vindt hier plaats. Eicel leeft 12–24 uur.</li>
-            <li><strong>Baarmoeder:</strong> spierlaag + baarmoederslijmvlies. Groeit mee tijdens zwangerschap.</li>
-            <li><strong>Vagina:</strong> rekbaar, reinigt zichzelf.</li>
-          </ul>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Uitwendige organen</p>
-          <ul>
-            <li><strong>Clitoris:</strong> voor seksueel gevoel en orgasme</li>
-            <li><strong>Kleine schaamlippen:</strong> rondom vaginaopening</li>
-            <li><strong>Grote schaamlippen:</strong> buitenste schaamlippen</li>
-            <li><strong>Maagdenvlies:</strong> randje weefsel aan begin vagina. Kan licht bloeden bij eerste gemeenschap.</li>
-          </ul>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Ovulatie</p>
-          <p>Gemiddeld eenmaal per vier weken komt een eicel vrij uit een eierstok.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Bevruchting</p>
-          <p>Kop van één zaadcel dringt eicel binnen → kernen versmelten. Buitenste laag eicel wordt ondoordringbaar.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Innesteling</p>
-          <p>Bevruchte eicel deelt zich → klompje cellen nestelt in baarmoederslijmvlies.</p>
-        </div>
-
+  <!-- BS3 -->
+  <div class="accordion">
+    <button class="accordion-header" onclick="toggleAccordion(this)">
+      💧 Basisstof 3 — Kringlopen
+      <span class="chevron">▼</span>
+    </button>
+    <div class="accordion-body">
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Waterkringloop</div>
+        <p>Water verdampt uit oceanen, zeeën en organismen (<span class="begrip">verdamping</span>). De waterdamp stijgt omhoog en koelt af → <span class="begrip">condensatie</span>: wolken ontstaan. Vervolgens valt het water als <span class="begrip">neerslag</span> (regen, sneeuw, hagel) terug op aarde. Zo herhaalt de kringloop zich steeds.</p>
+      </div>
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Koolstofkringloop</div>
+        <p>Koolstof zit als <span class="begrip">koolstofdioxide (CO₂)</span> in de lucht. Planten nemen CO₂ op via <span class="begrip">fotosynthese</span> en maken er glucose van. Bij <span class="begrip">verbranding</span> (ademhaling van mensen en dieren, verbrandingsprocessen) komt CO₂ weer vrij.</p>
+        <p><span class="begrip">Reducenten</span> (bacteriën en schimmels) breken dode resten af en geven daarbij ook CO₂ af. Zo circuleert koolstof steeds door het ecosysteem.</p>
+        <div class="kader"><strong>Samengevat:</strong> Fotosynthese neemt CO₂ op · Verbranding en reducenten geven CO₂ terug</div>
       </div>
     </div>
+  </div>
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📖 Paragraaf 4 — Menstruatie
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Menstruatie</p>
-          <p>Bij geen bevruchting trekt het baarmoederslijmvlies samen en wordt afgestoten samen met bloed. Kan gepaard gaan met buikpijn, rugpijn, hoofdpijn, kribbigheid.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Menstruatiecyclus (~28 dagen)</p>
-          <ul>
-            <li>Dag 1–5: menstruatie</li>
-            <li>Dag 5–13: slijmvlies wordt opnieuw opgebouwd</li>
-            <li>Dag ~14: ovulatie</li>
-            <li>Dag 14–28: slijmvlies wordt dikker</li>
-            <li>Dag 28: bij geen bevruchting → nieuwe menstruatie</li>
-          </ul>
-          <p>Eerste menstruatie gemiddeld op 13 jaar (range 10–16 jaar). Eerste jaren vaak onregelmatig.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Maandverband en tampons</p>
-          <ul>
-            <li><strong>Maandverband:</strong> vangt bloed op aan buitenkant vagina</li>
-            <li><strong>Tampon:</strong> wordt in de vagina geplaatst</li>
-          </ul>
-          <p>Regelmatig vervangen. Geen zeep in de vagina gebruiken.</p>
-        </div>
-
+  <!-- BS4 -->
+  <div class="accordion">
+    <button class="accordion-header" onclick="toggleAccordion(this)">
+      🐇 Basisstof 4 — Populaties
+      <span class="chevron">▼</span>
+    </button>
+    <div class="accordion-body">
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Populatiegrootte</div>
+        <p>De grootte van een populatie wordt bepaald door biotische én abiotische factoren: voedsel, ruimte, roofdieren, klimaat, temperatuur, neerslag, enz.</p>
+        <p>Als omstandigheden gunstig zijn → meer jongen, populatie groeit. Als omstandigheden ongunstig zijn → meer sterfte, populatie krimpt.</p>
+      </div>
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Biologisch evenwicht</div>
+        <p>In de meeste ecosystemen schommelt de populatiegrootte rond een evenwichtswaarde: het <span class="begrip">biologisch evenwicht</span>. Voorbeeld: als er veel konijnen zijn, krijgen vossen meer voedsel → meer vossen → minder konijnen → minder vossen → meer konijnen, enz.</p>
+      </div>
+      <div class="theorie-blok">
+        <div class="theorie-blok-titel">Aanpassingen en optimumkromme</div>
+        <p>Organismen zijn aangepast aan de abiotische factoren van hun milieu (bijv. cactus in de woestijn, guppy in tropisch water).</p>
+        <p>De <span class="begrip">optimumkromme</span> toont het verband tussen een abiotische factor (bijv. temperatuur) en de groei- of voortplantingskansen. Het <span class="begrip">optimum</span> is de waarde waarbij een organisme het beste gedijt. Buiten het minimum en maximum kan het organisme niet overleven.</p>
       </div>
     </div>
+  </div>
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📖 Paragraaf 6 — Geboorteregeling
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
+</div><!-- /tab-theorie -->
 
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Anticonceptie</p>
-          <p>Anticonceptie = zwangerschap voorkomen.</p>
-        </div>
 
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Onbetrouwbare methoden</p>
-          <ul>
-            <li><strong>Periodieke onthouding:</strong> niet vrijen rond ovulatie. Onbetrouwbaar want ovulatie niet precies te voorspellen.</li>
-            <li><strong>Coïtus interruptus:</strong> penis terugtrekken vóór zaadlozing. Onbetrouwbaar: voorvocht kan al zaadcellen bevatten.</li>
-          </ul>
-        </div>
+<!-- ══════════════════════════════════════════
+     TAB 2: FLASHCARDS
+══════════════════════════════════════════ -->
+<div id="tab-flashcards" class="sectie">
+  <div class="sets-grid">
 
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Het condoom</p>
-          <p>Dun rubberen hoesje over de penis. Beschermt tegen zwangerschap én soa's. Eenmalig gebruik. Alleen met CE-keurmerk. Vóór gemeenschap opdoen. Femicondom = condoom voor de vrouw.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">De pil</p>
-          <p>Dagelijks innemen op zelfde tijdstip. Remt ovulatie. Zeer betrouwbaar. Bijwerkingen mogelijk. Voorgeschreven door arts.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Morning-afterpil</p>
-          <p>Noodmaatregel binnen 72 uur na onbeschermde seks. Verkrijgbaar zonder recept bij apotheek of drogist.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Abortus</p>
-          <p>Tot 13e week wettelijk toegestaan in Nederland. Na 13e week (late abortus) tot 23e week onder strenge voorwaarden. Gratis en wettelijk geregeld. Verplicht gesprek met arts vooraf.</p>
-        </div>
-
-      </div>
+    <div class="set-kaart" onclick="startSet('bs1-begrippen')">
+      <div class="set-emoji">🌍</div>
+      <div class="set-naam">BS1 — Begrippen ecologie</div>
+      <div class="set-info">16 kaarten · begrip → definitie</div>
     </div>
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📖 Paragraaf 7 — Zwangerschap en geboorte
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Zwangerschap</p>
-          <p>Bevruchte eicel nestelt in baarmoederslijmvlies. Menstruatie blijft uit. Duur: ~38 weken.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Embryo</p>
-          <p>Ontwikkelt zich in de baarmoeder. Voedt zich via baarmoederslijmvlies.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Placenta (moederkoek)</p>
-          <p>Wisselt voedingsstoffen en zuurstof uit van moeder naar embryo, afvalstoffen andersom. Bloed van moeder en embryo blijft gescheiden via dunne vliezen.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Navelstreng</p>
-          <p>Verbindt embryo met placenta.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Vruchtvliezen en vruchtwater</p>
-          <p>Twee vliezen om het embryo. Vruchtwater beschermt embryo, houdt temperatuur stabiel, laat embryo bewegen.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Zwangerschapstest</p>
-          <p>Betrouwbaar, verkrijgbaar bij apotheek of drogist. Positieve uitslag: bezoek huisarts of consultatieburo.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">De bevalling</p>
-          <ol style="margin: 0.3rem 0 0 1.1rem;">
-            <li>Weeën beginnen: samentrekkingen van baarmoederwand</li>
-            <li>Vliezen breken → vruchtwater loopt af</li>
-            <li>Ontsluiting: baarmoedermond wordt wijder tot ~10 cm</li>
-            <li>Uitdrijving: baby wordt geboren (meestal hoofd eerst)</li>
-            <li>Nageboorte: placenta en vruchtvliezen komen eruit</li>
-          </ol>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Stuitligging</p>
-          <p>Baby ligt met billen naar beneden → vaak keizersnede (operatie via buikwand).</p>
-        </div>
-
-      </div>
+    <div class="set-kaart" onclick="startSet('bs2-voedsel')">
+      <div class="set-emoji">🦊</div>
+      <div class="set-naam">BS2 — Voedselrelaties</div>
+      <div class="set-info">14 kaarten · begrip → uitleg</div>
     </div>
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        📖 Paragraaf 8 — Seksueel overdraagbare aandoeningen
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Wat is een soa?</p>
-          <p>SOA = Seksueel Overdraagbare Aandoening. Besmetting via seksueel contact of bloed.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Meest voorkomend in Nederland</p>
-          <ol style="margin: 0.3rem 0 0 1.1rem;">
-            <li>Chlamydia: ~60.000/jaar (meest voorkomend)</li>
-            <li>Genitale wratten: ~25.000/jaar</li>
-            <li>Gonorroe: ~12.000/jaar</li>
-            <li>Syfilis: ~6.000/jaar</li>
-            <li>Hepatitis B: ~2.000/jaar</li>
-            <li>HIV/aids: ~750/jaar</li>
-          </ol>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Chlamydia</p>
-          <p>Veroorzaker: bacterie. Vaak geen klachten. Gevolg onbehandeld: onvruchtbaarheid of buitenbaarmoederse zwangerschap. Behandeling: antibiotica.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">HIV/aids</p>
-          <p>HIV tast het afweersysteem aan. Besmet persoon = seropositief. Hiv-remmers vertragen verspreiding (levenslang). Genezing nog niet mogelijk. Besmetting via: bloed, sperma, vaginaal vocht, moedermelk. NIET via gewoon contact.</p>
-        </div>
-
-        <div class="theorie-blok">
-          <p class="theorie-blok-titel">Bescherming</p>
-          <p>Condoom gebruiken. Soa-test laten doen bij nieuwe partner of klachten.</p>
-        </div>
-
-      </div>
+    <div class="set-kaart" onclick="startSet('bs3-kringlopen')">
+      <div class="set-emoji">💧</div>
+      <div class="set-naam">BS3 — Kringlopen</div>
+      <div class="set-info">12 kaarten · begrip → uitleg</div>
     </div>
 
-  </div><!-- /tab-theorie -->
-
-
-  <!-- ══ FLASHCARDS ══ -->
-  <div id="tab-flashcards" class="sectie">
-
-    <div class="sets-grid">
-
-      <div class="set-kaart" id="card-bio-p1" onclick="startSet(getBioSet('bio-p1'))">
-        <div class="set-emoji">🔬</div>
-        <div class="set-naam">Paragraaf 1 — Je verandert</div>
-        <div class="set-info">begrippen · 10 kaartjes</div>
-        <div class="set-richting" id="richting-bio-p1">BEGRIP → DEF</div>
-        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p1')">⇄ Wissel richting</button>
-      </div>
-
-      <div class="set-kaart" id="card-bio-p2" onclick="startSet(getBioSet('bio-p2'))">
-        <div class="set-emoji">🔬</div>
-        <div class="set-naam">Paragraaf 2 — Voortplantingsstelsel man</div>
-        <div class="set-info">begrippen · 11 kaartjes</div>
-        <div class="set-richting" id="richting-bio-p2">BEGRIP → DEF</div>
-        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p2')">⇄ Wissel richting</button>
-      </div>
-
-      <div class="set-kaart" id="card-bio-p3" onclick="startSet(getBioSet('bio-p3'))">
-        <div class="set-emoji">🔬</div>
-        <div class="set-naam">Paragraaf 3 — Voortplantingsstelsel vrouw</div>
-        <div class="set-info">begrippen · 11 kaartjes</div>
-        <div class="set-richting" id="richting-bio-p3">BEGRIP → DEF</div>
-        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p3')">⇄ Wissel richting</button>
-      </div>
-
-      <div class="set-kaart" id="card-bio-p4" onclick="startSet(getBioSet('bio-p4'))">
-        <div class="set-emoji">🔬</div>
-        <div class="set-naam">Paragraaf 4 — Menstruatie</div>
-        <div class="set-info">begrippen · 4 kaartjes</div>
-        <div class="set-richting" id="richting-bio-p4">BEGRIP → DEF</div>
-        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p4')">⇄ Wissel richting</button>
-      </div>
-
-      <div class="set-kaart" id="card-bio-p6" onclick="startSet(getBioSet('bio-p6'))">
-        <div class="set-emoji">🔬</div>
-        <div class="set-naam">Paragraaf 6 — Geboorteregeling</div>
-        <div class="set-info">begrippen · 7 kaartjes</div>
-        <div class="set-richting" id="richting-bio-p6">BEGRIP → DEF</div>
-        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p6')">⇄ Wissel richting</button>
-      </div>
-
-      <div class="set-kaart" id="card-bio-p7" onclick="startSet(getBioSet('bio-p7'))">
-        <div class="set-emoji">🔬</div>
-        <div class="set-naam">Paragraaf 7 — Zwangerschap en geboorte</div>
-        <div class="set-info">begrippen · 11 kaartjes</div>
-        <div class="set-richting" id="richting-bio-p7">BEGRIP → DEF</div>
-        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p7')">⇄ Wissel richting</button>
-      </div>
-
-      <div class="set-kaart" id="card-bio-p8" onclick="startSet(getBioSet('bio-p8'))">
-        <div class="set-emoji">🔬</div>
-        <div class="set-naam">Paragraaf 8 — Soa's</div>
-        <div class="set-info">begrippen · 6 kaartjes</div>
-        <div class="set-richting" id="richting-bio-p8">BEGRIP → DEF</div>
-        <button class="set-toggle" onclick="toggleRichting(event, 'bio-p8')">⇄ Wissel richting</button>
-      </div>
-
+    <div class="set-kaart" onclick="startSet('bs4-populaties')">
+      <div class="set-emoji">🐇</div>
+      <div class="set-naam">BS4 — Populaties</div>
+      <div class="set-info">10 kaarten · begrip → uitleg</div>
     </div>
 
-  </div><!-- /tab-flashcards -->
+  </div>
+</div><!-- /tab-flashcards -->
 
-  <!-- ══ OEFENEN ══ -->
-  <div id="tab-oefenen" class="sectie">
 
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        ✏️ Paragraaf 1 — Je verandert
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
+<!-- ══════════════════════════════════════════
+     TAB 3: OEFENEN
+══════════════════════════════════════════ -->
+<div id="tab-oefenen" class="sectie">
 
-        <!-- MULTIPLE CHOICE -->
-        <p class="oefenen-sectie-titel">Multiple choice</p>
+  <div class="score-bar">
+    <span>Score:</span>
+    <span class="score-num" id="score-display">0 / 0</span>
+    <button class="nav-btn nav-btn-secondary" onclick="resetOefenen()" style="margin-left:auto;padding:0.4rem 0.9rem;font-size:0.82rem;">🔄 Opnieuw</button>
+    <button class="nav-btn nav-btn-secondary" onclick="schudOefeningen()" style="padding:0.4rem 0.9rem;font-size:0.82rem;">🔀 Shuffle</button>
+  </div>
 
-        <div class="mc-vraag">
-          <p>1. Welke klier speelt de belangrijkste rol bij de puberteit?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) De alvleesklier</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) De hypofyse</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) De schildklier</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) De bijnier</button>
-          </div>
-        </div>
+  <div id="oefenen-container"></div>
 
-        <div class="mc-vraag">
-          <p>2. Wat zijn primaire geslachtskenmerken?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Kenmerken die ontstaan in de puberteit</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Kenmerken die je pas na de puberteit krijgt</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Kenmerken waarmee je het geslacht kunt herkennen, al aanwezig bij geboorte</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Kenmerken die bij jongens en meisjes hetzelfde zijn</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>3. Welke verandering is een secundair geslachtskenmerk bij jongens?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Penis</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Balzak</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Baardgroei</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Zaadcellen</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>4. Hoe worden hormonen door het lichaam vervoerd?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Via de zenuwen</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Via het bloed</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Via de lymfevaten</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Via de spijsvertering</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>5. Iemand aangetrokken tot hetzelfde geslacht noemen we:</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Transgender</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Androgyn</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Heteroseksueel</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">D) Homoseksueel</button>
-          </div>
-        </div>
-
-        <!-- OPEN VRAGEN -->
-        <p class="oefenen-sectie-titel">Open vragen</p>
-
-        <div class="open-vraag">
-          <p>1. Noem twee secundaire geslachtskenmerken bij meisjes.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Borsten; brede heupen (ook: okselhaar, schaamhaar)</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>2. Wat is het verschil tussen primaire en secundaire geslachtskenmerken?</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Primaire kenmerken zijn aanwezig bij geboorte. Secundaire kenmerken ontstaan pas in de puberteit.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>3. Leg uit wat hormonen zijn en hoe ze werken.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Hormonen zijn stoffen geproduceerd door hormoonklieren, vervoerd via het bloed, die opdrachten geven aan organen.</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        ✏️ Paragraaf 2 — Voortplantingsstelsel man
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <!-- MULTIPLE CHOICE -->
-        <p class="oefenen-sectie-titel">Multiple choice</p>
-
-        <div class="mc-vraag">
-          <p>1. Waar worden zaadcellen geproduceerd?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) In de bijballen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) In de zaadleiders</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) In de teelballen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) In de prostaat</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>2. Welke functie heeft de prostaat?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Zaadcellen produceren</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Zaadcellen opslaan</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Vocht toevoegen aan zaadcellen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Zaadcellen vervoeren</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>3. Wat is een erectie?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Het vrijkomen van sperma</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Het stijf worden van de penis doordat zwellichamen vollopen met bloed</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) De productie van zaadcellen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Een zaadlozing tijdens de slaap</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>4. Hoe lang leven zaadcellen in het lichaam van de vrouw?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) 1–2 uur</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) 12–24 uur</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Enkele dagen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Een week</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>5. Wat is sperma?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Alleen zaadcellen</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Een mengsel van zaadcellen en vocht van zaadblaasjes en prostaat</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Urine vermengd met zaadcellen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Vocht geproduceerd door de teelballen</button>
-          </div>
-        </div>
-
-        <!-- OPEN VRAGEN -->
-        <p class="oefenen-sectie-titel">Open vragen</p>
-
-        <div class="open-vraag">
-          <p>1. Beschrijf de weg die een zaadcel aflegt van productie tot buiten het lichaam.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Teelbal → bijbal → zaadleider → zaadblaasjes + prostaat (vocht toegevoegd = sperma) → urinebuis → buiten via de penis.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>2. Waarom liggen de teelballen buiten het lichaam in de balzak?</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Omdat de temperatuur daar iets lager is. Zaadcellen kunnen alleen goed worden geproduceerd bij een lagere temperatuur.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>3. Noem twee manieren waarop een zaadlozing kan plaatsvinden.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Bij geslachtsgemeenschap / bij masturbatie / tijdens de slaap (natte droom).</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        ✏️ Paragraaf 3 — Voortplantingsstelsel vrouw
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <!-- MULTIPLE CHOICE -->
-        <p class="oefenen-sectie-titel">Multiple choice</p>
-
-        <div class="mc-vraag">
-          <p>1. Waar vindt de bevruchting normaal gesproken plaats?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) In de baarmoeder</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) In de eierstok</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) In de eileider</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) In de vagina</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>2. Hoe lang leeft een eicel nadat ze vrijgekomen is?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Enkele minuten</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) 12 tot 24 uur</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) 3 tot 5 dagen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Een week</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>3. Wat is de functie van het baarmoederslijmvlies?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Eicellen produceren</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Eicellen vervoeren</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Voeding bieden aan een ingesteld embryo</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Hormonen produceren</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>4. Wat is innesteling?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Het vrijkomen van de eicel uit de eierstok</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Het versmelten van zaadcel en eicel</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Het nestelen van de bevruchte eicel in het baarmoederslijmvlies</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Het afstoten van het baarmoederslijmvlies</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>5. Wat is de functie van de clitoris?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Eicellen produceren</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Hormonen produceren</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Seksueel gevoel; orgasme</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Slijm produceren</button>
-          </div>
-        </div>
-
-        <!-- OPEN VRAGEN -->
-        <p class="oefenen-sectie-titel">Open vragen</p>
-
-        <div class="open-vraag">
-          <p>1. Leg uit wat ovulatie is en wanneer het plaatsvindt.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Ovulatie is het vrijkomen van een rijpe eicel uit de eierstok. Dit vindt gemiddeld plaats op dag 14 van de menstruatiecyclus.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>2. Wat gebeurt er als een zaadcel de eicel heeft bevrucht?</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">De kernen versmelten. De buitenste laag van de eicel wordt ondoordringbaar. De bevruchte eicel begint zich te delen en beweegt via de eileider naar de baarmoeder waar innesteling plaatsvindt.</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        ✏️ Paragraaf 4 — Menstruatie
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <!-- MULTIPLE CHOICE -->
-        <p class="oefenen-sectie-titel">Multiple choice</p>
-
-        <div class="mc-vraag">
-          <p>1. Wat is de gemiddelde duur van de menstruatiecyclus?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) 14 dagen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) 21 dagen</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) 28 dagen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) 35 dagen</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>2. Wat gebeurt er met het baarmoederslijmvlies als er GEEN bevruchting plaatsvindt?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Het wordt dikker</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Het wordt afgestoten — menstruatie</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Het blijft gelijk</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Het wordt dunner maar blijft aanwezig</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>3. Wanneer in de cyclus vindt ovulatie gemiddeld plaats?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Dag 1</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Dag 7</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Dag 14</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Dag 21</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>4. Op welke gemiddelde leeftijd begint de eerste menstruatie?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) 10 jaar</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) 13 jaar</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) 16 jaar</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) 11 jaar</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>5. Wat is het verschil tussen maandverband en tampon?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Er is geen verschil</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Maandverband wordt in de vagina geplaatst</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Tampon wordt in de vagina geplaatst, maandverband vangt bloed op aan de buitenkant</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Een tampon wordt alleen 's nachts gebruikt</button>
-          </div>
-        </div>
-
-        <!-- OPEN VRAGEN -->
-        <p class="oefenen-sectie-titel">Open vragen</p>
-
-        <div class="open-vraag">
-          <p>1. Beschrijf de menstruatiecyclus van dag 1 tot dag 28.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Dag 1–5: menstruatie. Dag 5–13: slijmvlies wordt opgebouwd. Dag ~14: ovulatie. Dag 14–28: slijmvlies wordt dikker. Dag 28: bij geen bevruchting begint nieuwe menstruatie.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>2. Wat zijn mogelijke klachten tijdens de menstruatie?</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Buikpijn, rugpijn, hoofdpijn, kribbigheid.</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        ✏️ Paragraaf 6 — Geboorteregeling
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <!-- MULTIPLE CHOICE -->
-        <p class="oefenen-sectie-titel">Multiple choice</p>
-
-        <div class="mc-vraag">
-          <p>1. Welke anticonceptiemethode beschermt ook tegen soa's?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) De pil</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Het condoom</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Periodieke onthouding</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Morning-afterpil</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>2. Waarom is de periodieke onthouding onbetrouwbaar?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Het is moeilijk uit te voeren</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Ovulatie is niet precies te voorspellen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Het is illegaal</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Het beschermt niet tegen soa's</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>3. Wanneer moet de morning-afterpil worden ingenomen?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Binnen 24 uur</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Binnen 48 uur</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Binnen 72 uur</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Binnen een week</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>4. Hoe werkt de pil?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Ze doodt zaadcellen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Ze vormt een barrière in de vagina</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Ze remt de ovulatie</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Ze verhindert innesteling altijd</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>5. Tot hoeveel weken is abortus in Nederland wettelijk toegestaan zonder extra voorwaarden?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) 6 weken</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) 10 weken</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) 13 weken</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) 20 weken</button>
-          </div>
-        </div>
-
-        <!-- OPEN VRAGEN -->
-        <p class="oefenen-sectie-titel">Open vragen</p>
-
-        <div class="open-vraag">
-          <p>1. Noem twee onbetrouwbare anticonceptiemethoden en leg uit waarom ze onbetrouwbaar zijn.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Periodieke onthouding: ovulatie is niet precies te voorspellen. Coïtus interruptus: voorvocht kan al zaadcellen bevatten.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>2. Leg uit hoe het condoom correct wordt gebruikt en waarom het effectief is.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Het condoom wordt over de stijve penis gerold vóór de gemeenschap. Het vangt sperma op zodat zaadcellen niet in de vagina komen. Het beschermt ook tegen soa's. Alleen met CE-keurmerk, eenmalig gebruik.</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        ✏️ Paragraaf 7 — Zwangerschap en geboorte
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <!-- MULTIPLE CHOICE -->
-        <p class="oefenen-sectie-titel">Multiple choice</p>
-
-        <div class="mc-vraag">
-          <p>1. Wat is de functie van de placenta?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Het beschermen van het embryo tegen schokken</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Het uitwisselen van voedingsstoffen en afvalstoffen tussen moeder en embryo</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Het produceren van vruchtwater</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Het verbinden van embryo met baarmoederwand door spieren</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>2. Hoe lang duurt een zwangerschap gemiddeld?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) 28 weken</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) 32 weken</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) 38 weken</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) 42 weken</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>3. Wat is vruchtwater?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Het bloed van de moeder dat naar het embryo stroomt</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Het vocht om het embryo dat het beschermt</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Het vocht in de placenta</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Het bloed van het embryo</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>4. Wat zijn weeën?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Het opengaan van de baarmoedermond</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Samentrekkingen van de baarmoederwand tijdens de bevalling</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Het afbreken van de vruchtvliezen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Het persen van de baby naar buiten</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>5. Wanneer spreek je van een keizersnede?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Als de baby te vroeg geboren wordt</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Als de bevalling te lang duurt</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Als er een operatie via de buikwand nodig is, bijv. bij stuitligging</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Als er tweelingen worden geboren</button>
-          </div>
-        </div>
-
-        <!-- OPEN VRAGEN -->
-        <p class="oefenen-sectie-titel">Open vragen</p>
-
-        <div class="open-vraag">
-          <p>1. Beschrijf de stappen van de bevalling in de juiste volgorde.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">1. Weeën beginnen. 2. Vliezen breken, vruchtwater loopt af. 3. Ontsluiting (tot ~10 cm). 4. Uitdrijving: baby wordt geboren. 5. Nageboorte: placenta en vruchtvliezen komen eruit.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>2. Leg uit hoe de placenta werkt en waarom het bloed van moeder en embryo gescheiden blijft.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">De placenta wisselt voedingsstoffen en zuurstof uit van moeder naar embryo, en afvalstoffen de andere kant op. Het bloed blijft gescheiden via dunne vliezen zodat de bloedgroepen niet mengen.</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-header" onclick="toggleAccordion(this)">
-        ✏️ Paragraaf 8 — Seksueel overdraagbare aandoeningen
-        <span class="chevron">▼</span>
-      </button>
-      <div class="accordion-body">
-
-        <!-- MULTIPLE CHOICE -->
-        <p class="oefenen-sectie-titel">Multiple choice</p>
-
-        <div class="mc-vraag">
-          <p>1. Wat is de meest voorkomende soa in Nederland?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) HIV</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Gonorroe</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Chlamydia</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Syfilis</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>2. Wat is een soa?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Een ziekte die alleen via bloed wordt overgedragen</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Een ziekte die via seksueel contact wordt overgedragen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Een ziekte die alleen bij onveilige seks wordt overgedragen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Een ziekte die alleen bij heteroseksueel contact wordt overgedragen</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>3. Hoe wordt chlamydia behandeld?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Met hiv-remmers</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Er is geen behandeling</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Met antibiotica</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Met een vaccin</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>4. Waardoor wordt HIV overgedragen?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Via hoesten en niezen</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">B) Via handdruk of knuffel</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">C) Via bloed, sperma, vaginaal vocht of moedermelk</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Via normaal sociaal contact</button>
-          </div>
-        </div>
-
-        <div class="mc-vraag">
-          <p>5. Wat is een seropositief persoon?</p>
-          <div class="mc-opties">
-            <button class="mc-optie" onclick="checkMC(this, false)">A) Iemand die aids heeft</button>
-            <button class="mc-optie" onclick="checkMC(this, true)">B) Iemand die besmet is met HIV</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">C) Iemand die immuun is voor HIV</button>
-            <button class="mc-optie" onclick="checkMC(this, false)">D) Iemand die hiv-remmers gebruikt</button>
-          </div>
-        </div>
-
-        <!-- OPEN VRAGEN -->
-        <p class="oefenen-sectie-titel">Open vragen</p>
-
-        <div class="open-vraag">
-          <p>1. Noem twee gevolgen van onbehandelde chlamydia.</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Onvruchtbaarheid bij vrouwen (door verstopping eileiders) / buitenbaarmoederse zwangerschap.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>2. Wat is het verschil tussen HIV en aids?</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">HIV is het virus dat het afweersysteem aantast. Aids is de ziekte die ontstaat als het afweersysteem zo ernstig is aangetast dat het lichaam infecties niet meer kan bestrijden.</div>
-        </div>
-
-        <div class="open-vraag">
-          <p>3. Hoe kun je jezelf beschermen tegen soa's?</p>
-          <button class="toon-antwoord-btn" onclick="toonAntwoord(this)">Toon antwoord</button>
-          <div class="open-antwoord">Condoom gebruiken bij elke vorm van seks. Regelmatig een soa-test laten doen bij een nieuwe partner. Bij klachten direct naar de huisarts.</div>
-        </div>
-
-      </div>
-    </div>
-
-  </div><!-- /tab-oefenen -->
+</div><!-- /tab-oefenen -->
 
 </div><!-- /content -->
-
 
 <!-- ══ FLASHCARD MODAL ══ -->
 <div id="fc-modal">
   <div id="fc-container">
     <div class="fc-topbar">
-      <span class="fc-set-naam" id="fc-titel"></span>
+      <div class="fc-set-naam" id="fc-naam"></div>
       <button id="fc-close" onclick="sluitModal()">✕</button>
     </div>
     <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-fill"></div></div>
-    <div class="fc-progress-text" id="fc-teller"></div>
+    <div class="fc-progress-text" id="fc-progress"></div>
     <div class="flip-wrapper" onclick="flipKaart()">
-      <div class="flip-card" id="fc-card">
+      <div class="flip-card" id="flip-card">
         <div class="flip-face flip-front">
-          <div class="flip-label" id="fc-front-label">NEDERLANDS</div>
-          <div class="flip-tekst" id="fc-front-tekst"></div>
-          <div class="flip-hint">Tik om om te draaien</div>
+          <div class="flip-label" id="fc-label-front">Begrip</div>
+          <div class="flip-tekst" id="fc-front"></div>
+          <div class="flip-hint">Tik om te omdraaien</div>
         </div>
         <div class="flip-face flip-back">
-          <div class="flip-label" id="fc-back-label">SPAANS</div>
-          <div class="flip-tekst" id="fc-back-tekst"></div>
+          <div class="flip-label">Definitie / uitleg</div>
+          <div class="flip-tekst" id="fc-back"></div>
         </div>
       </div>
     </div>
     <div class="fc-buttons">
       <button class="fc-btn fc-btn-prev" onclick="vorigeKaart()">← Vorige</button>
-      <button class="fc-btn fc-btn-flip" onclick="flipKaart()">Omdraaien</button>
+      <button class="fc-btn fc-btn-flip" onclick="flipKaart()">🔄 Omdraaien</button>
       <button class="fc-btn fc-btn-next" onclick="volgendeKaart()">Volgende →</button>
     </div>
-    <button class="fc-shuffle" onclick="schudKaarten()">🔀 Schudden</button>
+    <div class="fc-extra-btns">
+      <button class="fc-shuffle" onclick="schudKaarten()">🔀 Shuffle</button>
+      <button class="fc-opnieuw" onclick="opnieuwSet()">↩ Opnieuw</button>
+    </div>
   </div>
 </div>
 
-
 <script>
-/* ── TAB SWITCHING ── */
-function toonTab(naam, btn) {
-  document.querySelectorAll('.sectie').forEach(s => s.classList.remove('actief'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
-  document.getElementById('tab-' + naam).classList.add('actief');
-  btn.classList.add('actief');
-}
-
-/* ── ACCORDION ── */
-function toggleAccordion(header) {
-  const body = header.nextElementSibling;
-  const isOpen = body.classList.contains('open');
-  header.classList.toggle('open', !isOpen);
-  body.classList.toggle('open', !isOpen);
-}
-
-/* ── OEFENEN: MULTIPLE CHOICE ── */
-function checkMC(btn, correct) {
-  const groep = btn.closest('.mc-opties');
-  groep.querySelectorAll('.mc-optie').forEach(b => b.disabled = true);
-  btn.classList.add(correct ? 'goed' : 'fout');
-  if (!correct) {
-    groep.querySelectorAll('.mc-optie').forEach(b => {
-      if (b.getAttribute('onclick').includes('true')) b.classList.add('goed');
-    });
-  }
-}
-
-/* ── OEFENEN: OPEN VRAGEN ── */
-function toonAntwoord(btn) {
-  btn.nextElementSibling.classList.add('zichtbaar');
-  btn.style.display = 'none';
-}
-
-/* ── FLASHCARD DATA ── */
-const vocabBase = [
-  // 4.1
-  ["de leerling","el alumno / la alumna"],
-  ["de docent(e)","el/la profe / el/la profesor(a)"],
-  ["de school","la escuela"],
-  ["de middelbare school","el instituto"],
-  ["de les / de klas","la clase"],
-  ["het leerjaar / de klas","el curso"],
-  ["het cijfer","la nota"],
-  ["hoog","alto/-a"],
-  ["geschiedenis","la historia"],
-  ["aardrijkskunde","la geografía"],
-  ["Engels","el inglés"],
-  ["gym","la educación física"],
-  ["scheikunde","la química"],
-  ["natuurkunde","la física"],
-  ["biologie","la biología"],
-  ["Spaans","el castellano"],
-  ["het vak","la asignatura"],
-  ["muziek","la música"],
-  ["wiskunde","las matemáticas"],
-  ["het huiswerk","los deberes"],
-  ["huiswerk maken","hacer los deberes"],
-  ["doen / maken","hacer"],
-  ["ze ontmoeten elkaar","se encuentran"],
-  ["Waar ga je heen?","¿Adónde vas?"],
-  ["Hoe is het?","¿Qué tal?"],
-  ["de gang","el pasillo"],
-  ["de verdieping","la planta"],
-  ["de kantine","el comedor"],
-  ["daar","allí"],
-  ["hier","aquí"],
-  ["honger","hambre"],
-  ["dorst","sed"],
-  ["streng","duro/-a"],
-  ["aardig","amable"],
-  ["(daar)na","después"],
-  ["goed idee","buena idea"],
-  ["begint","empieza"],
-  ["nu","ahora"],
-  // 4.2
-  ["het leven","la vida"],
-  ["het ontbijt","el desayuno"],
-  ["het middageten / de lunch","la comida"],
-  ["het avondeten","la cena"],
-  ["het toetje","el postre"],
-  ["het glas","el vaso"],
-  ["de melk","la leche"],
-  ["het broodje","el bocadillo"],
-  ["het fruit","la fruta"],
-  ["beginnen met","empezar con"],
-  ["een uur","una hora"],
-  ["een half uur","una media hora"],
-  ["vroeg","temprano"],
-  ["laat","tarde"],
-  ["ik heb liever","prefiero"],
-  ["lievelings-","preferido/-a"],
-  ["leren","aprender"],
-  ["de (school)bus","el autobús (escolar)"],
-  ["met de bus","en autobús"],
-  ["lopend","a pie"],
-  ["de pauze","el recreo / la pausa"],
-  ["voetballen","jugar al fútbol"],
-  ["eindelijk","por fin"],
-  ["thuiskomen","llegar a casa"],
-  ["slapen","dormir"],
-  ["moe","cansado/-a"],
-  ["gitaar spelen","tocar la guitarra"],
-  ["lachen","reír"],
-  ["dragen","llevar"],
-  ["de kleren","la ropa"],
-  ["eigen","propio/-a"],
-  ["een heleboel","un montón"],
-  ["daarom","por eso"],
-  ["nooit","nunca"],
-  // 4.3
-  ["maandag","lunes"],
-  ["dinsdag","martes"],
-  ["woensdag","miércoles"],
-  ["donderdag","jueves"],
-  ["vrijdag","viernes"],
-  ["zaterdag","sábado"],
-  ["zondag","domingo"],
-  ["leuk","divertido/-a"],
-  ["saai","aburrido/-a"],
-  ["stom","estúpido/-a"],
-  ["grappig","gracioso/-a"],
-  ["lelijk","feo/-a"],
-  ["moeilijk","difícil"],
-  ["makkelijk","fácil"],
-  ["het mentoruur","la tutoría"],
-  ["economie","la economía"],
-  ["technisch tekenen","el dibujo técnico"],
-  ["tekstboek","el libro de texto"],
-  ["werkboek","el libro de trabajo"],
-  ["kleurpotlood","el lápiz de color"],
-  ["dankzij","gracias a"]
-];
-
+// ══════════════════════════════════════════
+// FLASHCARD DATA
+// ══════════════════════════════════════════
 const sets = {
-  "vocab-nl-spa": {
-    titel: "Vocabulaire — NL → SPA",
-    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
-    kaarten: vocabBase.map(([nl,spa]) => ({front:nl, back:spa}))
-  },
-  "vocab-spa-nl": {
-    titel: "Vocabulaire — SPA → NL",
-    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
-    kaarten: vocabBase.map(([nl,spa]) => ({front:spa, back:nl}))
-  },
-  "ontkenningen-nl-spa": {
-    titel: "Ontkenningen — NL → SPA",
-    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+  'bs1-begrippen': {
+    naam: 'BS1 — Begrippen ecologie',
     kaarten: [
-      {front:"niets",back:"nada"},
-      {front:"niemand",back:"nadie"},
-      {front:"nooit",back:"nunca"},
-      {front:"Ik wil niet dansen.",back:"No quiero bailar."},
-      {front:"Ik heb nu geen les.",back:"Ahora no tengo clase."},
-      {front:"Flor zegt niets.",back:"Flor no dice nada."},
-      {front:"Er is niemand thuis.",back:"No hay nadie en casa."},
-      {front:"Ik ga nooit naar de kantine.",back:"No voy nunca al comedor."},
-      {front:"Ik ga nooit naar de bioscoop.",back:"Nunca voy al cine."},
-      {front:"Niemand heeft honger.",back:"Nadie tiene hambre."}
+      { v: 'Ecologie', a: 'De wetenschap die bestudeert hoe organismen omgaan met hun omgeving en met elkaar.' },
+      { v: 'Milieu', a: 'De leefomgeving van een organisme — alles wat het organisme om zich heen heeft.' },
+      { v: 'Biotische factoren', a: 'Invloeden op een organisme die afkomstig zijn van andere levende organismen (bios = leven). Bijv. roofdieren, voedsel, ziekteverwekkers.' },
+      { v: 'Abiotische factoren', a: 'Invloeden op een organisme die afkomstig zijn van de niet-levende natuur (a = zonder). Bijv. licht, temperatuur, water, wind, bodem.' },
+      { v: 'Individu', a: 'Één enkel organisme van een bepaalde soort.' },
+      { v: 'Populatie', a: 'Een groep individuen van dezelfde soort die in hetzelfde gebied leven.' },
+      { v: 'Levensgemeenschap', a: 'Alle populaties van alle soorten bij elkaar in een bepaald gebied.' },
+      { v: 'Ecosysteem', a: 'De levensgemeenschap samen met de abiotische factoren van het gebied.' },
+      { v: 'Noem 3 biotische factoren', a: 'Roofdieren, voedsel (planten/dieren), ziekteverwekkers, soortgenoten, nestgelegenheid.' },
+      { v: 'Noem 3 abiotische factoren', a: 'Licht, temperatuur, water, wind, bodem, neerslag, lucht.' },
+      { v: 'Wat is het verschil tussen biotisch en abiotisch?', a: 'Biotisch = levende invloeden (dieren, planten, schimmels). Abiotisch = niet-levende invloeden (zon, regen, bodem).' },
+      { v: 'Volgorde niveaus (klein → groot)', a: 'Individu → Populatie → Levensgemeenschap → Ecosysteem.' },
+      { v: 'Voorbeeld van een ecosysteem', a: 'Een bos, een sloot, een duingebied — de levensgemeenschap + de abiotische omgeving samen.' },
+      { v: 'Waarom past een konijn zijn vacht aan per seizoen?', a: 'Aanpassing aan abiotische factoren: dikkere vacht in de winter houdt warm, dunnere zomervacht bij warmte.' },
+      { v: 'Wat bestudeert een ecoloog op populatieniveau?', a: 'Het aantal individuen van één soort in een gebied, en hoe dat aantal verandert.' },
+      { v: 'Wat bestudeert een ecoloog op ecosysteemniveau?', a: 'Alle relaties tussen alle soorten én met de omgeving: voedselweb, kringlopen, evenwicht.' },
     ]
   },
-  "frases-nl-spa": {
-    titel: "Frases clave — NL → SPA",
-    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+  'bs2-voedsel': {
+    naam: 'BS2 — Voedselrelaties',
     kaarten: [
-      {front:"Ga je naar de middelbare school?",back:"¿Vas al instituto?"},
-      {front:"In welk jaar zit jij?",back:"¿En qué curso estás?"},
-      {front:"Is het een grote school?",back:"¿Es una escuela grande?"},
-      {front:"Wie is jouw aardrijkskundeleraar?",back:"¿Quién es tu profe de geografía?"},
-      {front:"Is jouw muziekleraar/-lerares aardig?",back:"Tu profe de música, ¿es amable?"},
-      {front:"Ja, ik ga naar de middelbare school.",back:"Sí, voy al instituto."},
-      {front:"Ik zit in de tweede klas.",back:"Estoy en el segundo curso."},
-      {front:"Nee, het is een kleine school.",back:"No, es una escuela pequeña."},
-      {front:"Het is meneer / mevrouw Castillo.",back:"Es el señor / la señora Castillo."},
-      {front:"Nee, hij/zij is streng, maar mijn biologieleraar is heel aardig.",back:"No, es duro/-a, pero mi profe de biología es muy amable."},
-      {front:"Waar staat je school?",back:"¿Dónde está tu escuela?"},
-      {front:"Hoe laat beginnen je lessen?",back:"¿A qué hora empiezan tus clases?"},
-      {front:"Vind je geschiedenis leuk?",back:"¿Te gusta la historia?"},
-      {front:"En hebben jullie een kantine op school?",back:"Y ¿tenéis un comedor en el instituto?"},
-      {front:"Heb je huiswerk voor morgen?",back:"¿Tienes deberes para mañana?"},
-      {front:"Mijn school is ver weg / dichtbij, hij staat in Pamplona.",back:"Mi escuela está cerca / lejos, está en Pamplona."},
-      {front:"Mijn lessen beginnen om acht uur.",back:"Mis clases empiezan a las ocho."},
-      {front:"Nee, daar houd ik niet van, ik vind wiskunde leuker.",back:"No, no me gusta, prefiero las matemáticas."},
-      {front:"Ja, maar ik ga nooit naar de kantine.",back:"Sí, pero nunca voy al comedor."},
-      {front:"Ja, voor Engels en biologie.",back:"Sí, para inglés y biología."}
+      { v: 'Voedselketen', a: 'Een reeks soorten waarbij elke soort wordt gegeten door de volgende. Begint altijd met een plant.' },
+      { v: 'Voedselweb', a: 'Het geheel van alle voedselrelaties in een ecosysteem — meerdere ketens door elkaar.' },
+      { v: 'Producent', a: 'Een plant of alg die via fotosynthese zelf voedsel (glucose) maakt uit zonlicht, water en CO₂.' },
+      { v: 'Consument van de 1e orde', a: 'Een planteneter (herbivoor) die direct van de producent eet. Bijv. konijn, rups, koe.' },
+      { v: 'Consument van de 2e orde', a: 'Een vleeseter (carnivoor) die planteneters eet. Bijv. vos, havik, slang.' },
+      { v: 'Alleseter / omnivoor', a: 'Een dier dat zowel planten als dieren eet. Bijv. merel, mens, beer.' },
+      { v: 'Vleeseter / carnivoor', a: 'Een dier dat alleen andere dieren eet. Bijv. vos, havik, wezel.' },
+      { v: 'Planteneter / herbivoor', a: 'Een dier dat alleen planten eet. Bijv. konijn, koe, rups.' },
+      { v: 'Afvaleter / reducent', a: 'Bacteriën en schimmels die dode resten van planten en dieren afbreken tot voedingsstoffen.' },
+      { v: 'Waarom begint een voedselketen altijd met een plant?', a: 'Alleen planten kunnen via fotosynthese energie uit zonlicht omzetten in voedsel. Alle andere organismen eten die energie indirect.' },
+      { v: 'Wat betekent de pijl in een voedselketen?', a: 'De pijl geeft de richting van voedsel (energie) aan: A → B betekent "A wordt gegeten door B".' },
+      { v: 'Rol van reducenten in het ecosysteem', a: 'Ze breken dode resten af en maken voedingsstoffen weer vrij in de bodem, zodat planten ze opnieuw kunnen opnemen.' },
+      { v: 'Noem een voorbeeld van een voedselketen (3 schakels)', a: 'Gras → konijn → vos. Of: paardenbloem → rups → merel → havik.' },
+      { v: 'Verschil voedselketen vs. voedselweb', a: 'Voedselketen = één rechte lijn. Voedselweb = alle ketens samen, waarbij soorten meerdere proooien of vijanden hebben.' },
     ]
   },
-  "kloktijden-nl-spa": {
-    titel: "Kloktijden — NL → SPA",
-    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
+  'bs3-kringlopen': {
+    naam: 'BS3 — Kringlopen',
     kaarten: [
-      {front:"Het is zeven uur.",back:"Son las siete."},
-      {front:"Het is vijf over zeven.",back:"Son las siete y cinco."},
-      {front:"Het is tien over zeven.",back:"Son las siete y diez."},
-      {front:"Het is kwart over zeven.",back:"Son las siete y cuarto."},
-      {front:"Het is twintig over zeven.",back:"Son las siete y veinte."},
-      {front:"Het is vijf voor half acht.",back:"Son las siete y veinticinco."},
-      {front:"Het is half acht.",back:"Son las siete y media."},
-      {front:"Het is vijf over half acht.",back:"Son las ocho menos veinticinco."},
-      {front:"Het is twintig voor acht.",back:"Son las ocho menos veinte."},
-      {front:"Het is kwart voor acht.",back:"Son las ocho menos cuarto."},
-      {front:"Het is tien voor acht.",back:"Son las ocho menos diez."},
-      {front:"Het is vijf voor acht.",back:"Son las ocho menos cinco."},
-      {front:"Het is één uur.",back:"Es la una."},
-      {front:"Het is twaalf uur 's middags.",back:"Es mediodía."},
-      {front:"Het is twaalf uur 's nachts.",back:"Es medianoche."}
+      { v: 'Kringloop', a: 'Het steeds opnieuw doorlopen van een stof door het ecosysteem, zodat stoffen hergebruikt worden.' },
+      { v: 'Waterkringloop', a: 'Water verdampt → condenseert tot wolken → valt neer als regen/sneeuw → stroomt terug naar zee → verdampt opnieuw.' },
+      { v: 'Verdamping', a: 'Water dat van het oppervlak van oceanen, plassen en organismen als waterdamp de lucht ingaat.' },
+      { v: 'Condensatie', a: 'Waterdamp koelt af in de lucht en vormt kleine waterdruppeltjes → wolken of mist.' },
+      { v: 'Neerslag', a: 'Water dat vanuit wolken valt: regen, sneeuw, hagel.' },
+      { v: 'Koolstofkringloop', a: 'CO₂ uit lucht → opgenomen door planten (fotosynthese) → in organismen → vrijgegeven door verbranding en reducenten → terug in lucht.' },
+      { v: 'Fotosynthese (koolstofkringloop)', a: 'Planten nemen CO₂ op en zetten dit met zonlicht en water om in glucose. CO₂ verdwijnt uit de lucht.' },
+      { v: 'Verbranding (koolstofkringloop)', a: 'Mensen, dieren en planten ademen: glucose + zuurstof → CO₂ + water + energie. CO₂ komt terug in de lucht.' },
+      { v: 'Rol van reducenten in de koolstofkringloop', a: 'Bacteriën en schimmels breken dode resten af → geven CO₂ vrij → komt terug in de lucht.' },
+      { v: 'Reducenten', a: 'Bacteriën en schimmels. Zij ruimen dode resten op en zetten die om in voedingsstoffen en CO₂.' },
+      { v: 'Waarom zijn kringlopen belangrijk?', a: 'Stoffen raken nooit op: ze worden steeds opnieuw gebruikt. Zonder kringlopen zou het ecosysteem ophouden te bestaan.' },
+      { v: 'Wat heeft CO₂ te maken met klimaatverandering?', a: 'Meer verbranding (auto\'s, industrie) → meer CO₂ in de lucht → versterkt broeikaseffect → aarde warmt op.' },
     ]
   },
-  "kloktijden-spa-nl": {
-    titel: "Kloktijden — SPA → NL",
-    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
+  'bs4-populaties': {
+    naam: 'BS4 — Populaties',
     kaarten: [
-      {front:"Son las siete.",back:"Het is zeven uur."},
-      {front:"Son las siete y cinco.",back:"Het is vijf over zeven."},
-      {front:"Son las siete y diez.",back:"Het is tien over zeven."},
-      {front:"Son las siete y cuarto.",back:"Het is kwart over zeven."},
-      {front:"Son las siete y veinte.",back:"Het is twintig over zeven."},
-      {front:"Son las siete y veinticinco.",back:"Het is vijf voor half acht."},
-      {front:"Son las siete y media.",back:"Het is half acht."},
-      {front:"Son las ocho menos veinticinco.",back:"Het is vijf over half acht."},
-      {front:"Son las ocho menos veinte.",back:"Het is twintig voor acht."},
-      {front:"Son las ocho menos cuarto.",back:"Het is kwart voor acht."},
-      {front:"Son las ocho menos diez.",back:"Het is tien voor acht."},
-      {front:"Son las ocho menos cinco.",back:"Het is vijf voor acht."},
-      {front:"Es la una.",back:"Het is één uur."},
-      {front:"Es mediodía.",back:"Het is twaalf uur 's middags."},
-      {front:"Es medianoche.",back:"Het is twaalf uur 's nachts."}
-    ]
-  },
-  "getallen-nl-spa": {
-    titel: "Getallen 1–25 — NL → SPA",
-    frontLabel: "GETAL", backLabel: "SPAANS",
-    kaarten: [
-      {front:"1",back:"uno"},{front:"2",back:"dos"},{front:"3",back:"tres"},
-      {front:"4",back:"cuatro"},{front:"5",back:"cinco"},{front:"6",back:"seis"},
-      {front:"7",back:"siete"},{front:"8",back:"ocho"},{front:"9",back:"nueve"},
-      {front:"10",back:"diez"},{front:"11",back:"once"},{front:"12",back:"doce"},
-      {front:"13",back:"trece"},{front:"14",back:"catorce"},{front:"15",back:"quince"},
-      {front:"16",back:"dieciséis"},{front:"17",back:"diecisiete"},{front:"18",back:"dieciocho"},
-      {front:"19",back:"diecinueve"},{front:"20",back:"veinte"},{front:"21",back:"veintiuno"},
-      {front:"22",back:"veintidós"},{front:"23",back:"veintitrés"},{front:"24",back:"veinticuatro"},
-      {front:"25",back:"veinticinco"}
-    ]
-  },
-  "getallen-spa-nl": {
-    titel: "Getallen 1–25 — SPA → NL",
-    frontLabel: "SPAANS", backLabel: "GETAL",
-    kaarten: [
-      {front:"uno",back:"1"},{front:"dos",back:"2"},{front:"tres",back:"3"},
-      {front:"cuatro",back:"4"},{front:"cinco",back:"5"},{front:"seis",back:"6"},
-      {front:"siete",back:"7"},{front:"ocho",back:"8"},{front:"nueve",back:"9"},
-      {front:"diez",back:"10"},{front:"once",back:"11"},{front:"doce",back:"12"},
-      {front:"trece",back:"13"},{front:"catorce",back:"14"},{front:"quince",back:"15"},
-      {front:"dieciséis",back:"16"},{front:"diecisiete",back:"17"},{front:"dieciocho",back:"18"},
-      {front:"diecinueve",back:"19"},{front:"veinte",back:"20"},{front:"veintiuno",back:"21"},
-      {front:"veintidós",back:"22"},{front:"veintitrés",back:"23"},{front:"veinticuatro",back:"24"},
-      {front:"veinticinco",back:"25"}
-    ]
-  },
-  "werkwoorden-nl-spa": {
-    titel: "ir, ser & tener — NL → SPA",
-    frontLabel: "NEDERLANDS", backLabel: "SPAANS",
-    kaarten: [
-      {front:"ik ben (ser)",back:"soy"},
-      {front:"jij bent (ser)",back:"eres"},
-      {front:"hij/zij is, u bent (ser)",back:"es"},
-      {front:"wij zijn (ser)",back:"somos"},
-      {front:"jullie zijn (ser)",back:"sois"},
-      {front:"zij zijn / u bent mv (ser)",back:"son"},
-      {front:"ik heb (tener)",back:"tengo"},
-      {front:"jij hebt (tener)",back:"tienes"},
-      {front:"hij/zij/u heeft (tener)",back:"tiene"},
-      {front:"wij hebben (tener)",back:"tenemos"},
-      {front:"jullie hebben (tener)",back:"tenéis"},
-      {front:"zij hebben / u heeft mv (tener)",back:"tienen"},
-      {front:"ik ga (ir)",back:"voy"},
-      {front:"jij gaat (ir)",back:"vas"},
-      {front:"hij/zij/u gaat (ir)",back:"va"},
-      {front:"wij gaan (ir)",back:"vamos"},
-      {front:"jullie gaan (ir)",back:"vais"},
-      {front:"zij gaan / u gaat mv (ir)",back:"van"}
-    ]
-  },
-  "werkwoorden-spa-nl": {
-    titel: "ir, ser & tener — SPA → NL",
-    frontLabel: "SPAANS", backLabel: "NEDERLANDS",
-    kaarten: [
-      {front:"soy",back:"ik ben (ser)"},
-      {front:"eres",back:"jij bent (ser)"},
-      {front:"es",back:"hij/zij is, u bent (ser)"},
-      {front:"somos",back:"wij zijn (ser)"},
-      {front:"sois",back:"jullie zijn (ser)"},
-      {front:"son",back:"zij zijn / u bent mv (ser)"},
-      {front:"tengo",back:"ik heb (tener)"},
-      {front:"tienes",back:"jij hebt (tener)"},
-      {front:"tiene",back:"hij/zij/u heeft (tener)"},
-      {front:"tenemos",back:"wij hebben (tener)"},
-      {front:"tenéis",back:"jullie hebben (tener)"},
-      {front:"tienen",back:"zij hebben / u heeft mv (tener)"},
-      {front:"voy",back:"ik ga (ir)"},
-      {front:"vas",back:"jij gaat (ir)"},
-      {front:"va",back:"hij/zij/u gaat (ir)"},
-      {front:"vamos",back:"wij gaan (ir)"},
-      {front:"vais",back:"jullie gaan (ir)"},
-      {front:"van",back:"zij gaan / u gaat mv (ir)"}
-    ]
-  },
-
-  /* ── BIOLOGIE SETS ── */
-  "bio-p1-begrip-def": {
-    titel: "P1: Je verandert — BEGRIP → DEF",
-    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
-    kaarten: [
-      {front:"puberteit",back:"periode waarin je lichaam verandert van kind naar volwassene (vanaf ~12 jaar)"},
-      {front:"hormoon",back:"stof geproduceerd door hormoonklier, vervoerd via bloed, regelt lichaamsprocessen"},
-      {front:"hypofyse",back:"hormoonklier in de hersenen die andere klieren aanstuurt"},
-      {front:"primaire geslachtskenmerken",back:"geslachtskenmerken aanwezig bij geboorte"},
-      {front:"secundaire geslachtskenmerken",back:"geslachtskenmerken die ontstaan in de puberteit"},
-      {front:"groeispurt",back:"snelle lengtegroei in de puberteit"},
-      {front:"heteroseksueel",back:"aangetrokken tot personen van het andere geslacht"},
-      {front:"homoseksueel",back:"aangetrokken tot personen van hetzelfde geslacht"},
-      {front:"transgender",back:"persoon die zich niet thuis voelt in het geslacht waarmee geboren"},
-      {front:"androgyn",back:"persoon met uiterlijke kenmerken van beide geslachten"}
-    ]
-  },
-  "bio-p1-def-begrip": {
-    titel: "P1: Je verandert — DEF → BEGRIP",
-    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
-    kaarten: [
-      {front:"periode waarin je lichaam verandert van kind naar volwassene (vanaf ~12 jaar)",back:"puberteit"},
-      {front:"stof geproduceerd door hormoonklier, vervoerd via bloed, regelt lichaamsprocessen",back:"hormoon"},
-      {front:"hormoonklier in de hersenen die andere klieren aanstuurt",back:"hypofyse"},
-      {front:"geslachtskenmerken aanwezig bij geboorte",back:"primaire geslachtskenmerken"},
-      {front:"geslachtskenmerken die ontstaan in de puberteit",back:"secundaire geslachtskenmerken"},
-      {front:"snelle lengtegroei in de puberteit",back:"groeispurt"},
-      {front:"aangetrokken tot personen van het andere geslacht",back:"heteroseksueel"},
-      {front:"aangetrokken tot personen van hetzelfde geslacht",back:"homoseksueel"},
-      {front:"persoon die zich niet thuis voelt in het geslacht waarmee geboren",back:"transgender"},
-      {front:"persoon met uiterlijke kenmerken van beide geslachten",back:"androgyn"}
-    ]
-  },
-  "bio-p2-begrip-def": {
-    titel: "P2: Voortplantingsstelsel man — BEGRIP → DEF",
-    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
-    kaarten: [
-      {front:"teelbal",back:"orgaan in de balzak dat zaadcellen produceert"},
-      {front:"bijbal",back:"orgaan naast de teelbal waar zaadcellen worden opgeslagen"},
-      {front:"zaadleider",back:"buis die zaadcellen van bijbal naar zaadblaasje vervoert"},
-      {front:"zaadblaasje",back:"klier die vocht toevoegt aan zaadcellen"},
-      {front:"prostaat",back:"klier die vocht toevoegt aan zaadcellen; samen met zaadblaasjes vormt dit sperma"},
-      {front:"urinebuis",back:"buis die zowel urine als sperma naar buiten vervoert"},
-      {front:"erectie",back:"het stijf worden van de penis doordat zwellichamen vollopen met bloed"},
-      {front:"zaadlozing",back:"het vrijkomen van sperma uit de penis bij orgasme"},
-      {front:"sperma",back:"vloeistof met zaadcellen geproduceerd door zaadblaasjes en prostaat"},
-      {front:"masturbatie",back:"zelfbevrediging"},
-      {front:"orgasme",back:"hoogtepunt van seksuele opwinding"}
-    ]
-  },
-  "bio-p2-def-begrip": {
-    titel: "P2: Voortplantingsstelsel man — DEF → BEGRIP",
-    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
-    kaarten: [
-      {front:"orgaan in de balzak dat zaadcellen produceert",back:"teelbal"},
-      {front:"orgaan naast de teelbal waar zaadcellen worden opgeslagen",back:"bijbal"},
-      {front:"buis die zaadcellen van bijbal naar zaadblaasje vervoert",back:"zaadleider"},
-      {front:"klier die vocht toevoegt aan zaadcellen",back:"zaadblaasje"},
-      {front:"klier die vocht toevoegt aan zaadcellen; samen met zaadblaasjes vormt dit sperma",back:"prostaat"},
-      {front:"buis die zowel urine als sperma naar buiten vervoert",back:"urinebuis"},
-      {front:"het stijf worden van de penis doordat zwellichamen vollopen met bloed",back:"erectie"},
-      {front:"het vrijkomen van sperma uit de penis bij orgasme",back:"zaadlozing"},
-      {front:"vloeistof met zaadcellen geproduceerd door zaadblaasjes en prostaat",back:"sperma"},
-      {front:"zelfbevrediging",back:"masturbatie"},
-      {front:"hoogtepunt van seksuele opwinding",back:"orgasme"}
-    ]
-  },
-  "bio-p3-begrip-def": {
-    titel: "P3: Voortplantingsstelsel vrouw — BEGRIP → DEF",
-    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
-    kaarten: [
-      {front:"eierstok",back:"orgaan dat eicellen bevat"},
-      {front:"eileider",back:"buis die eierstok met baarmoeder verbindt; plaats van bevruchting"},
-      {front:"baarmoeder",back:"spierachtig hol orgaan waar embryo zich ontwikkelt"},
-      {front:"baarmoederslijmvlies",back:"binnenste laag van de baarmoeder"},
-      {front:"vagina",back:"rekbare buis tussen baarmoeder en buitenwereld"},
-      {front:"clitoris",back:"uitwendig orgaan bij de vrouw, gevoelig voor seksuele prikkeling"},
-      {front:"maagdenvlies",back:"randje weefsel aan het begin van de vagina"},
-      {front:"ovulatie",back:"het vrijkomen van een rijpe eicel uit de eierstok (~dag 14)"},
-      {front:"eicel",back:"vrouwelijke geslachtscel (leeft 12–24 uur na ovulatie)"},
-      {front:"bevruchting",back:"het versmelten van de kernen van zaadcel en eicel"},
-      {front:"innesteling",back:"het nestelen van de bevruchte eicel in het baarmoederslijmvlies"}
-    ]
-  },
-  "bio-p3-def-begrip": {
-    titel: "P3: Voortplantingsstelsel vrouw — DEF → BEGRIP",
-    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
-    kaarten: [
-      {front:"orgaan dat eicellen bevat",back:"eierstok"},
-      {front:"buis die eierstok met baarmoeder verbindt; plaats van bevruchting",back:"eileider"},
-      {front:"spierachtig hol orgaan waar embryo zich ontwikkelt",back:"baarmoeder"},
-      {front:"binnenste laag van de baarmoeder",back:"baarmoederslijmvlies"},
-      {front:"rekbare buis tussen baarmoeder en buitenwereld",back:"vagina"},
-      {front:"uitwendig orgaan bij de vrouw, gevoelig voor seksuele prikkeling",back:"clitoris"},
-      {front:"randje weefsel aan het begin van de vagina",back:"maagdenvlies"},
-      {front:"het vrijkomen van een rijpe eicel uit de eierstok (~dag 14)",back:"ovulatie"},
-      {front:"vrouwelijke geslachtscel (leeft 12–24 uur na ovulatie)",back:"eicel"},
-      {front:"het versmelten van de kernen van zaadcel en eicel",back:"bevruchting"},
-      {front:"het nestelen van de bevruchte eicel in het baarmoederslijmvlies",back:"innesteling"}
-    ]
-  },
-  "bio-p4-begrip-def": {
-    titel: "P4: Menstruatie — BEGRIP → DEF",
-    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
-    kaarten: [
-      {front:"menstruatie",back:"het afstoten van baarmoederslijmvlies en bloed bij geen bevruchting"},
-      {front:"menstruatiecyclus",back:"cyclus van ~28 dagen van opbouw en afstoting van baarmoederslijmvlies"},
-      {front:"maandverband",back:"absorberend materiaal dat bloed opvangt aan buitenkant vagina"},
-      {front:"tampon",back:"absorberend materiaal dat in de vagina wordt geplaatst"}
-    ]
-  },
-  "bio-p4-def-begrip": {
-    titel: "P4: Menstruatie — DEF → BEGRIP",
-    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
-    kaarten: [
-      {front:"het afstoten van baarmoederslijmvlies en bloed bij geen bevruchting",back:"menstruatie"},
-      {front:"cyclus van ~28 dagen van opbouw en afstoting van baarmoederslijmvlies",back:"menstruatiecyclus"},
-      {front:"absorberend materiaal dat bloed opvangt aan buitenkant vagina",back:"maandverband"},
-      {front:"absorberend materiaal dat in de vagina wordt geplaatst",back:"tampon"}
-    ]
-  },
-  "bio-p6-begrip-def": {
-    titel: "P6: Geboorteregeling — BEGRIP → DEF",
-    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
-    kaarten: [
-      {front:"anticonceptie",back:"het voorkomen van zwangerschap"},
-      {front:"condoom",back:"rubberen hoesje over de penis; beschermt ook tegen soa's"},
-      {front:"de pil",back:"dagelijks in te nemen anticonceptiemiddel dat ovulatie remt"},
-      {front:"morning-afterpil",back:"noodanticonceptie, in te nemen binnen 72 uur"},
-      {front:"periodieke onthouding",back:"onbetrouwbare methode: niet vrijen in vruchtbare periode"},
-      {front:"coïtus interruptus",back:"onbetrouwbare methode: penis terugtrekken voor zaadlozing"},
-      {front:"abortus",back:"beëindigen van zwangerschap (in NL tot 13 weken wettelijk toegestaan)"}
-    ]
-  },
-  "bio-p6-def-begrip": {
-    titel: "P6: Geboorteregeling — DEF → BEGRIP",
-    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
-    kaarten: [
-      {front:"het voorkomen van zwangerschap",back:"anticonceptie"},
-      {front:"rubberen hoesje over de penis; beschermt ook tegen soa's",back:"condoom"},
-      {front:"dagelijks in te nemen anticonceptiemiddel dat ovulatie remt",back:"de pil"},
-      {front:"noodanticonceptie, in te nemen binnen 72 uur",back:"morning-afterpil"},
-      {front:"onbetrouwbare methode: niet vrijen in vruchtbare periode",back:"periodieke onthouding"},
-      {front:"onbetrouwbare methode: penis terugtrekken voor zaadlozing",back:"coïtus interruptus"},
-      {front:"beëindigen van zwangerschap (in NL tot 13 weken wettelijk toegestaan)",back:"abortus"}
-    ]
-  },
-  "bio-p7-begrip-def": {
-    titel: "P7: Zwangerschap en geboorte — BEGRIP → DEF",
-    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
-    kaarten: [
-      {front:"zwangerschap",back:"periode van innesteling tot geboorte (~38 weken)"},
-      {front:"embryo",back:"de zich ontwikkelende vrucht in de baarmoeder"},
-      {front:"placenta",back:"orgaan dat moeder en embryo verbindt; wisselt voedingsstoffen uit"},
-      {front:"navelstreng",back:"verbinding tussen embryo en placenta"},
-      {front:"vruchtwater",back:"vocht om het embryo; beschermt en houdt temperatuur stabiel"},
-      {front:"weeën",back:"samentrekkingen van de baarmoeder bij de bevalling"},
-      {front:"ontsluiting",back:"het wijder worden van de baarmoedermond bij de bevalling"},
-      {front:"uitdrijving",back:"het daadwerkelijk geboren worden van de baby"},
-      {front:"nageboorte",back:"het uitkomen van placenta en vruchtvliezen na geboorte"},
-      {front:"keizersnede",back:"geboorte via operatie door de buikwand"},
-      {front:"stuitligging",back:"baby ligt met billen naar beneden in de baarmoeder"}
-    ]
-  },
-  "bio-p7-def-begrip": {
-    titel: "P7: Zwangerschap en geboorte — DEF → BEGRIP",
-    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
-    kaarten: [
-      {front:"periode van innesteling tot geboorte (~38 weken)",back:"zwangerschap"},
-      {front:"de zich ontwikkelende vrucht in de baarmoeder",back:"embryo"},
-      {front:"orgaan dat moeder en embryo verbindt; wisselt voedingsstoffen uit",back:"placenta"},
-      {front:"verbinding tussen embryo en placenta",back:"navelstreng"},
-      {front:"vocht om het embryo; beschermt en houdt temperatuur stabiel",back:"vruchtwater"},
-      {front:"samentrekkingen van de baarmoeder bij de bevalling",back:"weeën"},
-      {front:"het wijder worden van de baarmoedermond bij de bevalling",back:"ontsluiting"},
-      {front:"het daadwerkelijk geboren worden van de baby",back:"uitdrijving"},
-      {front:"het uitkomen van placenta en vruchtvliezen na geboorte",back:"nageboorte"},
-      {front:"geboorte via operatie door de buikwand",back:"keizersnede"},
-      {front:"baby ligt met billen naar beneden in de baarmoeder",back:"stuitligging"}
-    ]
-  },
-  "bio-p8-begrip-def": {
-    titel: "P8: Soa's — BEGRIP → DEF",
-    frontLabel: "BEGRIP", backLabel: "DEFINITIE",
-    kaarten: [
-      {front:"soa",back:"seksueel overdraagbare aandoening"},
-      {front:"chlamydia",back:"meest voorkomende soa in NL; bacterie; behandelbaar met antibiotica"},
-      {front:"HIV",back:"virus dat het afweersysteem aantast; veroorzaakt aids"},
-      {front:"aids",back:"ziekte waarbij afweersysteem ernstig is aangetast door HIV"},
-      {front:"seropositief",back:"besmet met HIV"},
-      {front:"hiv-remmers",back:"medicijnen die HIV-verspreiding vertragen (levenslang)"}
-    ]
-  },
-  "bio-p8-def-begrip": {
-    titel: "P8: Soa's — DEF → BEGRIP",
-    frontLabel: "DEFINITIE", backLabel: "BEGRIP",
-    kaarten: [
-      {front:"seksueel overdraagbare aandoening",back:"soa"},
-      {front:"meest voorkomende soa in NL; bacterie; behandelbaar met antibiotica",back:"chlamydia"},
-      {front:"virus dat het afweersysteem aantast; veroorzaakt aids",back:"HIV"},
-      {front:"ziekte waarbij afweersysteem ernstig is aangetast door HIV",back:"aids"},
-      {front:"besmet met HIV",back:"seropositief"},
-      {front:"medicijnen die HIV-verspreiding vertragen (levenslang)",back:"hiv-remmers"}
+      { v: 'Populatiegrootte', a: 'Het aantal individuen van een soort in een bepaald gebied op een bepaald moment.' },
+      { v: 'Wat bepaalt de populatiegrootte?', a: 'Biotische factoren (voedsel, roofdieren, ziekte) én abiotische factoren (temperatuur, neerslag, ruimte).' },
+      { v: 'Biologisch evenwicht', a: 'De toestand waarbij de populatiegrootte schommelt rond een evenwichtswaarde. Roofdier en prooi houden elkaar in balans.' },
+      { v: 'Geef een voorbeeld van biologisch evenwicht', a: 'Konijnen (prooi) en vossen (roofdier): meer konijnen → meer vossen → minder konijnen → minder vossen → meer konijnen...' },
+      { v: 'Aanpassing', a: 'Een eigenschap van een organisme waardoor het beter kan overleven in zijn milieu. Bijv. dikkere vacht in de kou.' },
+      { v: 'Optimumkromme', a: 'Een grafiek die laat zien bij welke waarde van een abiotische factor een organisme het beste groeit of zich voortplant.' },
+      { v: 'Optimum (optimumkromme)', a: 'De waarde van een factor waarbij het organisme het beste gedijt (hoogste groei- of voortplantingskansen).' },
+      { v: 'Minimum en maximum (optimumkromme)', a: 'Beneden het minimum of boven het maximum kan het organisme niet overleven.' },
+      { v: 'Voorbeeld optimumkromme', a: 'Guppy\'s groeien het best bij 22°C (optimum). Onder 5°C (minimum) of boven 38°C (maximum) overleven ze niet.' },
+      { v: 'Klimaat als abiotische factor', a: 'Temperatuur, neerslag en wind (samen het klimaat) bepalen mede de populatiegrootte en welke soorten in een gebied leven.' },
     ]
   }
 };
 
-/* ── BIO SET RICHTING TOGGLE ── */
-const bioRichtingen = {};
-
-function getBioSet(prefix) {
-  return bioRichtingen[prefix] || (prefix + '-begrip-def');
-}
-
-function toggleRichting(e, prefix) {
-  e.stopPropagation();
-  const current = getBioSet(prefix);
-  const next = current.endsWith('-begrip-def') ? prefix + '-def-begrip' : prefix + '-begrip-def';
-  bioRichtingen[prefix] = next;
-  document.getElementById('richting-' + prefix).textContent = next.endsWith('-begrip-def') ? 'BEGRIP → DEF' : 'DEF → BEGRIP';
-}
-
-/* ── FLASHCARD STATE ── */
+// ══════════════════════════════════════════
+// FLASHCARD STATE
+// ══════════════════════════════════════════
 let huidigSet = null;
 let kaarten = [];
 let huidigIndex = 0;
+let isFlipped = false;
 
-function startSet(setNaam) {
-  huidigSet = sets[setNaam];
-  kaarten = [...huidigSet.kaarten];
+function fisher_yates(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function startSet(setId) {
+  huidigSet = setId;
+  kaarten = fisher_yates([...sets[setId].kaarten]);
   huidigIndex = 0;
-  document.getElementById('fc-titel').textContent = huidigSet.titel;
-  document.getElementById('fc-front-label').textContent = huidigSet.frontLabel;
-  document.getElementById('fc-back-label').textContent = huidigSet.backLabel;
-  toonKaart();
+  isFlipped = false;
+  document.getElementById('fc-naam').textContent = sets[setId].naam;
   document.getElementById('fc-modal').classList.add('open');
+  toonKaart();
 }
 
 function toonKaart() {
-  const kaart = kaarten[huidigIndex];
-  document.getElementById('fc-card').classList.remove('flipped');
-  document.getElementById('fc-front-tekst').textContent = kaart.front;
-  document.getElementById('fc-back-tekst').textContent = kaart.back;
-  const totaal = kaarten.length;
-  document.getElementById('fc-teller').textContent = `${huidigIndex + 1} / ${totaal}`;
-  document.getElementById('fc-fill').style.width = `${((huidigIndex + 1) / totaal) * 100}%`;
+  const k = kaarten[huidigIndex];
+  document.getElementById('fc-front').textContent = k.v;
+  document.getElementById('fc-back').textContent = k.a;
+  const card = document.getElementById('flip-card');
+  card.classList.remove('flipped');
+  isFlipped = false;
+  const pct = ((huidigIndex + 1) / kaarten.length * 100).toFixed(0);
+  document.getElementById('fc-fill').style.width = pct + '%';
+  document.getElementById('fc-progress').textContent = (huidigIndex + 1) + ' / ' + kaarten.length;
 }
 
 function flipKaart() {
-  document.getElementById('fc-card').classList.toggle('flipped');
+  isFlipped = !isFlipped;
+  document.getElementById('flip-card').classList.toggle('flipped', isFlipped);
 }
 
 function volgendeKaart() {
@@ -2187,10 +699,12 @@ function vorigeKaart() {
 }
 
 function schudKaarten() {
-  for (let i = kaarten.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [kaarten[i], kaarten[j]] = [kaarten[j], kaarten[i]];
-  }
+  kaarten = fisher_yates([...kaarten]);
+  huidigIndex = 0;
+  toonKaart();
+}
+
+function opnieuwSet() {
   huidigIndex = 0;
   toonKaart();
 }
@@ -2199,15 +713,196 @@ function sluitModal() {
   document.getElementById('fc-modal').classList.remove('open');
 }
 
-/* Keyboard navigation */
+// ══════════════════════════════════════════
+// OEFENVRAGEN DATA
+// ══════════════════════════════════════════
+const alleVragen = [
+  // BS1
+  { bs: 'BS1', v: 'Wat is ecologie?', opties: ['De wetenschap die bestudeert hoe organismen omgaan met hun omgeving en met elkaar.', 'De wetenschap die alleen planten bestudeert.', 'Het bestuderen van niet-levende natuur.', 'De studie van het menselijk lichaam.'], correct: 0 },
+  { bs: 'BS1', v: 'Welke factoren zijn biotisch?', opties: ['Licht en temperatuur', 'Roofdieren en ziekteverwekkers', 'Wind en bodem', 'Neerslag en lucht'], correct: 1 },
+  { bs: 'BS1', v: 'Wat zijn abiotische factoren?', opties: ['Invloeden van levende organismen', 'Invloeden van andere dieren', 'Invloeden van de niet-levende natuur', 'Invloeden van schimmels en bacteriën'], correct: 2 },
+  { bs: 'BS1', v: 'Wat is een populatie?', opties: ['Één enkel organisme', 'Alle soorten in een gebied', 'Een groep individuen van dezelfde soort in een gebied', 'Een ecosysteem zonder abiotische factoren'], correct: 2 },
+  { bs: 'BS1', v: 'Wat is een ecosysteem?', opties: ['Alleen de levende organismen in een gebied', 'De levensgemeenschap samen met de abiotische factoren', 'Alleen de abiotische factoren van een gebied', 'Een voedselketen met drie schakels'], correct: 1 },
+  { bs: 'BS1', v: 'Wat is de juiste volgorde van klein naar groot?', opties: ['Ecosysteem → Populatie → Individu → Levensgemeenschap', 'Individu → Levensgemeenschap → Populatie → Ecosysteem', 'Individu → Populatie → Levensgemeenschap → Ecosysteem', 'Populatie → Individu → Ecosysteem → Levensgemeenschap'], correct: 2 },
+  { bs: 'BS1', v: 'Konijnen krijgen in de zomer een dunnere vacht. Dit is een aanpassing aan...', opties: ['Een biotische factor: roofdieren', 'Een abiotische factor: temperatuur', 'Een biotische factor: voedselgebrek', 'Een abiotische factor: neerslag'], correct: 1 },
+  { bs: 'BS1', v: 'Welke van de volgende is een abiotische factor?', opties: ['Roofdieren', 'Ziekteverwekkers', 'Soortgenoten', 'Temperatuur'], correct: 3 },
+
+  // BS2
+  { bs: 'BS2', v: 'Waarmee begint een voedselketen altijd?', opties: ['Een carnivoor', 'Een omnivoor', 'Een plantensoort (producent)', 'Een reducent'], correct: 2 },
+  { bs: 'BS2', v: 'Wat is een producent?', opties: ['Een dier dat planten eet', 'Een plant die via fotosynthese zelf voedsel maakt', 'Een bacterie die dode resten afbreekt', 'Een roofdier bovenaan de keten'], correct: 1 },
+  { bs: 'BS2', v: 'Welk dier is een consument van de 1e orde?', opties: ['Vos', 'Havik', 'Konijn', 'Slang'], correct: 2 },
+  { bs: 'BS2', v: 'Wat doen reducenten?', opties: ['Ze eten levende planten', 'Ze jagen op dieren', 'Ze breken dode resten af tot voedingsstoffen', 'Ze maken glucose via fotosynthese'], correct: 2 },
+  { bs: 'BS2', v: 'Wat betekent de pijl in een voedselketen (bijv. gras → konijn)?', opties: ['Gras eet het konijn op', 'Het konijn wordt gegeten door het gras', 'Het konijn eet het gras (energie gaat van gras naar konijn)', 'Gras en konijn hebben geen relatie'], correct: 2 },
+  { bs: 'BS2', v: 'Een merel eet zowel insecten als bessen. De merel is een...', opties: ['Producent', 'Carnivoor', 'Herbivoor', 'Omnivoor (alleseter)'], correct: 3 },
+  { bs: 'BS2', v: 'Wat is het verschil tussen een voedselketen en een voedselweb?', opties: ['Er is geen verschil', 'Een voedselketen heeft meer soorten dan een voedselweb', 'Een voedselweb is het geheel van alle voedselrelaties in een ecosysteem', 'Een voedselweb beschrijft alleen abiotische factoren'], correct: 2 },
+  { bs: 'BS2', v: 'Bacteriën en schimmels zijn...', opties: ['Consumenten van de 2e orde', 'Producenten', 'Reducenten / afvaleters', 'Alleseters'], correct: 2 },
+
+  // BS3
+  { bs: 'BS3', v: 'Wat is condensatie in de waterkringloop?', opties: ['Water dat verdampt uit de oceaan', 'Waterdamp die afkoelt en wolken of mist vormt', 'Regen die op de grond valt', 'Water dat door planten wordt opgenomen'], correct: 1 },
+  { bs: 'BS3', v: 'Welk proces neemt CO₂ op uit de lucht?', opties: ['Verbranding', 'Verdamping', 'Fotosynthese', 'Condensatie'], correct: 2 },
+  { bs: 'BS3', v: 'Bij welk proces komt CO₂ vrij?', opties: ['Fotosynthese', 'Verdamping', 'Neerslag', 'Verbranding (ademhaling)'], correct: 3 },
+  { bs: 'BS3', v: 'Wat is de rol van reducenten in de koolstofkringloop?', opties: ['Ze nemen CO₂ op via fotosynthese', 'Ze geven CO₂ af bij het afbreken van dode resten', 'Ze zetten koolstof om in water', 'Ze slaan CO₂ op in de bodem'], correct: 1 },
+  { bs: 'BS3', v: 'Waarom zijn kringlopen essentieel voor een ecosysteem?', opties: ['Zodat organismen sneller kunnen groeien', 'Zodat stoffen steeds opnieuw gebruikt worden en niet opraken', 'Zodat roofdieren genoeg proooien hebben', 'Zodat de temperatuur stabiel blijft'], correct: 1 },
+  { bs: 'BS3', v: 'Welke stap volgt op verdamping in de waterkringloop?', opties: ['Neerslag', 'Condensatie', 'Fotosynthese', 'Verbranding'], correct: 1 },
+
+  // BS4
+  { bs: 'BS4', v: 'Wat is het biologisch evenwicht?', opties: ['De situatie waarbij alle soorten even groot zijn', 'De toestand waarbij populaties schommelen rond een evenwichtswaarde', 'Een ecosysteem zonder roofdieren', 'De maximale populatiegrootte ooit bereikt'], correct: 1 },
+  { bs: 'BS4', v: 'Er zijn meer vossen in een bos. Wat gebeurt er daarna met de konijnenpopulatie?', opties: ['De konijnenpopulatie groeit ook', 'De konijnenpopulatie blijft gelijk', 'De konijnenpopulatie krimpt', 'De konijnenpopulatie verdwijnt volledig'], correct: 2 },
+  { bs: 'BS4', v: 'Wat toont een optimumkromme?', opties: ['De maximale levensduur van een organisme', 'Het verband tussen een abiotische factor en groei-/voortplantingskansen', 'Het aantal proooien dat een roofdier nodig heeft', 'De grootte van een populatie door de jaren heen'], correct: 1 },
+  { bs: 'BS4', v: 'Bij welke temperatuur gedijt een guppy het best (optimum)?', opties: ['5°C', '12°C', '22°C', '38°C'], correct: 2 },
+  { bs: 'BS4', v: 'Welke factoren bepalen de populatiegrootte?', opties: ['Alleen abiotische factoren', 'Alleen biotische factoren', 'Zowel biotische als abiotische factoren', 'Alleen het weer'], correct: 2 },
+  { bs: 'BS4', v: 'Wat is een aanpassing?', opties: ['Een verandering in het milieu door mensen', 'Een eigenschap van een organisme waardoor het beter overleeft in zijn milieu', 'Het biologisch evenwicht tussen roofdier en prooi', 'De maximumwaarde op een optimumkromme'], correct: 1 },
+];
+
+// ══════════════════════════════════════════
+// OEFENEN LOGICA
+// ══════════════════════════════════════════
+let vragen = [];
+let score = 0;
+let beantwoord = 0;
+
+function fisher_yates_vragen(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function initOefenen() {
+  vragen = fisher_yates_vragen([...alleVragen]);
+  score = 0;
+  beantwoord = 0;
+  renderOefenen();
+}
+
+function renderOefenen() {
+  const container = document.getElementById('oefenen-container');
+  container.innerHTML = '';
+
+  // Groepeer per BS
+  const groepen = {};
+  vragen.forEach((v, i) => {
+    if (!groepen[v.bs]) groepen[v.bs] = [];
+    groepen[v.bs].push({ ...v, origIndex: i });
+  });
+
+  const bsLabels = {
+    'BS1': '🌍 Basisstof 1 — Wat is ecologie?',
+    'BS2': '🦊 Basisstof 2 — Voedselrelaties',
+    'BS3': '💧 Basisstof 3 — Kringlopen',
+    'BS4': '🐇 Basisstof 4 — Populaties',
+  };
+
+  Object.entries(groepen).forEach(([bs, vrs]) => {
+    const blok = document.createElement('div');
+    blok.className = 'oefenblok';
+    blok.innerHTML = `<div class="oefenblok-titel">${bsLabels[bs] || bs}</div>`;
+
+    vrs.forEach((vObj) => {
+      const div = document.createElement('div');
+      div.className = 'mc-vraag';
+      div.id = 'vraag-' + vObj.origIndex;
+
+      // Shuffle opties maar onthoud correct antwoord
+      const opties = vObj.opties.map((o, i) => ({ tekst: o, isCorrect: i === vObj.correct }));
+      fisher_yates_vragen(opties);
+
+      div.innerHTML = `<p>${vObj.v}</p><div class="mc-opties" id="opties-${vObj.origIndex}"></div>`;
+      blok.appendChild(div);
+
+      const optiesDiv = div.querySelector('.mc-opties');
+      opties.forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.className = 'mc-optie';
+        btn.textContent = opt.tekst;
+        btn.onclick = () => checkAntwoord(btn, opt.isCorrect, vObj.origIndex);
+        optiesDiv.appendChild(btn);
+      });
+    });
+
+    container.appendChild(blok);
+  });
+
+  updateScore();
+}
+
+function checkAntwoord(btn, isCorrect, index) {
+  const optiesDiv = document.getElementById('opties-' + index);
+  if (optiesDiv.querySelector('.goed') || optiesDiv.querySelector('.fout')) return;
+
+  beantwoord++;
+  if (isCorrect) {
+    btn.classList.add('goed');
+    score++;
+  } else {
+    btn.classList.add('fout');
+    // Toon het goede antwoord
+    optiesDiv.querySelectorAll('.mc-optie').forEach(b => {
+      // We need to find the correct one — mark it
+    });
+  }
+  optiesDiv.querySelectorAll('.mc-optie').forEach(b => b.disabled = true);
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById('score-display').textContent = score + ' / ' + beantwoord;
+}
+
+function resetOefenen() {
+  score = 0;
+  beantwoord = 0;
+  renderOefenen();
+}
+
+function schudOefeningen() {
+  const prevScore = score;
+  const prevBeantwoord = beantwoord;
+  vragen = fisher_yates_vragen([...vragen]);
+  score = prevScore;
+  beantwoord = prevBeantwoord;
+  renderOefenen();
+  updateScore();
+}
+
+// ══════════════════════════════════════════
+// TAB & ACCORDION
+// ══════════════════════════════════════════
+function toonTab(id, btn) {
+  document.querySelectorAll('.sectie').forEach(s => s.classList.remove('actief'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById('tab-' + id).classList.add('actief');
+  btn.classList.add('actief');
+}
+
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  // Sluit alle andere
+  document.querySelectorAll('.accordion-body.open').forEach(b => {
+    b.classList.remove('open');
+    b.previousElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+}
+
+// ══════════════════════════════════════════
+// KEYBOARD SHORTCUTS (flashcards)
+// ══════════════════════════════════════════
 document.addEventListener('keydown', e => {
   if (!document.getElementById('fc-modal').classList.contains('open')) return;
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); volgendeKaart(); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); vorigeKaart(); }
-  if (e.key === 'Enter') flipKaart();
-  if (e.key === 'Escape') sluitModal();
+  if (e.key === 'ArrowRight') volgendeKaart();
+  else if (e.key === 'ArrowLeft') vorigeKaart();
+  else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipKaart(); }
+  else if (e.key === 'Escape') sluitModal();
 });
-</script>
 
+// Init
+initOefenen();
+</script>
 </body>
 </html>
