@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Biologie — Huiswerk Oefenen</title>
+<title>Biologie — 3 HAVO</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -349,306 +349,25 @@ body {
 
 <div class="header">
   <a class="terug" href="/huiswerk-oefenen/">← Terug</a>
-  <div class="header-title">🌿 Biologie — Ecologie</div>
+  <div class="header-title">🌿 Biologie — 3 HAVO</div>
   <div style="width:80px"></div>
 </div>
 
 <div class="tabs">
-  <button class="tab-btn actief" onclick="toonTab('theorie', this)">📖 Theorie</button>
-  <button class="tab-btn" onclick="toonTab('flashcards', this)">🃏 Flashcards</button>
-  <button class="tab-btn" onclick="toonTab('oefenen', this)">✏️ Oefenen</button>
+  <button class="tab-btn actief" onclick="toonTab('binnenkort', this)">🚧 Binnenkort</button>
 </div>
 
 <div class="content">
 
-<!-- ══════════════════════════════════════════
-     TAB 1: THEORIE
-══════════════════════════════════════════ -->
-<div id="tab-theorie" class="sectie actief">
-
-  <!-- BS1 -->
-  <div class="accordion">
-    <button class="accordion-header" onclick="toggleAccordion(this)">
-      🌍 Basisstof 1 — Wat is ecologie?
-      <span class="chevron">▼</span>
-    </button>
-    <div class="accordion-body">
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Ecologie</div>
-        <p><span class="begrip">Ecologie</span> is de wetenschap die bestudeert hoe organismen omgaan met hun omgeving (<span class="begrip">milieu</span>) en met elkaar.</p>
-        <p>Het <span class="begrip">milieu</span> (leefomgeving) bestaat uit alles wat een organisme om zich heen heeft. Organismen passen zich aan hun milieu aan.</p>
-      </div>
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Invloeden uit het milieu</div>
-        <p>Invloeden op organismen zijn te verdelen in twee groepen:</p>
-        <ul>
-          <li><span class="begrip">Biotische factoren</span>: invloeden van andere levende organismen (bios = leven). Voorbeelden: roofdieren, ziekteverwekkers, voedsel, soortgenoten.</li>
-          <li><span class="begrip">Abiotische factoren</span>: invloeden van de niet-levende natuur (a = zonder). Voorbeelden: licht, temperatuur, water, wind, bodem, neerslag, lucht.</li>
-        </ul>
-      </div>
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">De niveaus van de ecologie</div>
-        <ul>
-          <li><span class="begrip">Individu</span>: één enkel organisme.</li>
-          <li><span class="begrip">Populatie</span>: een groep individuen van dezelfde soort in een bepaald gebied.</li>
-          <li><span class="begrip">Levensgemeenschap</span>: alle populaties van verschillende soorten in een gebied samen.</li>
-          <li><span class="begrip">Ecosysteem</span>: de levensgemeenschap + de abiotische factoren van het gebied.</li>
-        </ul>
-        <div class="kader"><strong>Ezelsbruggetje:</strong> Individu → Populatie → Levensgemeenschap → Ecosysteem (van klein naar groot)</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BS2 -->
-  <div class="accordion">
-    <button class="accordion-header" onclick="toggleAccordion(this)">
-      🦊 Basisstof 2 — Voedselrelaties
-      <span class="chevron">▼</span>
-    </button>
-    <div class="accordion-body">
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Voedselketens</div>
-        <p>Een <span class="begrip">voedselketen</span> is een reeks soorten waarbij elke soort voedsel is voor de volgende soort. De pijl betekent: "wordt gegeten door".</p>
-        <p>Voorbeeld: <em>paardenbloem → konijn → wezel</em></p>
-        <div class="kader"><strong>Regel:</strong> Elke voedselketen begint met een plantensoort (de producent).</div>
-      </div>
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Voedselweb / voedselnet</div>
-        <p>In een echt ecosysteem eten dieren meerdere soorten. Het geheel van alle voedselrelaties heet een <span class="begrip">voedselweb</span> (of voedselnet).</p>
-      </div>
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Producenten, consumenten en afvaleters</div>
-        <ul>
-          <li><span class="begrip">Producenten</span>: planten — maken zelf voedsel via fotosynthese.</li>
-          <li><span class="begrip">Consumenten van de 1e orde</span>: planteneters (herbivoren). Eten van producenten.</li>
-          <li><span class="begrip">Consumenten van de 2e orde</span>: vleeseters (carnivoren) die planteneters eten.</li>
-          <li><span class="begrip">Alleseters</span> (omnivoren): eten zowel planten als dieren.</li>
-          <li><span class="begrip">Afvaleters / reducenten</span>: bacteriën en schimmels die dode resten afbreken.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- BS3 -->
-  <div class="accordion">
-    <button class="accordion-header" onclick="toggleAccordion(this)">
-      💧 Basisstof 3 — Kringlopen
-      <span class="chevron">▼</span>
-    </button>
-    <div class="accordion-body">
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Waterkringloop</div>
-        <p>Water verdampt uit oceanen, zeeën en organismen (<span class="begrip">verdamping</span>). De waterdamp stijgt omhoog en koelt af → <span class="begrip">condensatie</span>: wolken ontstaan. Vervolgens valt het water als <span class="begrip">neerslag</span> (regen, sneeuw, hagel) terug op aarde. Zo herhaalt de kringloop zich steeds.</p>
-      </div>
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Koolstofkringloop</div>
-        <p>Koolstof zit als <span class="begrip">koolstofdioxide (CO₂)</span> in de lucht. Planten nemen CO₂ op via <span class="begrip">fotosynthese</span> en maken er glucose van. Bij <span class="begrip">verbranding</span> (ademhaling van mensen en dieren, verbrandingsprocessen) komt CO₂ weer vrij.</p>
-        <p><span class="begrip">Reducenten</span> (bacteriën en schimmels) breken dode resten af en geven daarbij ook CO₂ af. Zo circuleert koolstof steeds door het ecosysteem.</p>
-        <div class="kader"><strong>Samengevat:</strong> Fotosynthese neemt CO₂ op · Verbranding en reducenten geven CO₂ terug</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BS4 -->
-  <div class="accordion">
-    <button class="accordion-header" onclick="toggleAccordion(this)">
-      🐇 Basisstof 4 — Populaties
-      <span class="chevron">▼</span>
-    </button>
-    <div class="accordion-body">
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Populatiegrootte</div>
-        <p>De grootte van een populatie wordt bepaald door biotische én abiotische factoren: voedsel, ruimte, roofdieren, klimaat, temperatuur, neerslag, enz.</p>
-        <p>Als omstandigheden gunstig zijn → meer jongen, populatie groeit. Als omstandigheden ongunstig zijn → meer sterfte, populatie krimpt.</p>
-      </div>
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Biologisch evenwicht</div>
-        <p>In de meeste ecosystemen schommelt de populatiegrootte rond een evenwichtswaarde: het <span class="begrip">biologisch evenwicht</span>. Voorbeeld: als er veel konijnen zijn, krijgen vossen meer voedsel → meer vossen → minder konijnen → minder vossen → meer konijnen, enz.</p>
-      </div>
-      <div class="theorie-blok">
-        <div class="theorie-blok-titel">Aanpassingen en optimumkromme</div>
-        <p>Organismen zijn aangepast aan de abiotische factoren van hun milieu (bijv. cactus in de woestijn, guppy in tropisch water).</p>
-        <p>De <span class="begrip">optimumkromme</span> toont het verband tussen een abiotische factor (bijv. temperatuur) en de groei- of voortplantingskansen. Het <span class="begrip">optimum</span> is de waarde waarbij een organisme het beste gedijt. Buiten het minimum en maximum kan het organisme niet overleven.</p>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /tab-theorie -->
-
-
-<!-- ══════════════════════════════════════════
-     TAB 2: FLASHCARDS
-══════════════════════════════════════════ -->
-<div id="tab-flashcards" class="sectie">
-  <div class="sets-grid">
-
-    <div class="set-kaart" onclick="startSet('bs1-begrippen')">
-      <div class="set-emoji">🌍</div>
-      <div class="set-naam">BS1 — Begrippen ecologie</div>
-      <div class="set-info">16 kaarten · begrip → definitie</div>
-    </div>
-
-    <div class="set-kaart" onclick="startSet('bs2-voedsel')">
-      <div class="set-emoji">🦊</div>
-      <div class="set-naam">BS2 — Voedselrelaties</div>
-      <div class="set-info">14 kaarten · begrip → uitleg</div>
-    </div>
-
-    <div class="set-kaart" onclick="startSet('bs3-kringlopen')">
-      <div class="set-emoji">💧</div>
-      <div class="set-naam">BS3 — Kringlopen</div>
-      <div class="set-info">12 kaarten · begrip → uitleg</div>
-    </div>
-
-    <div class="set-kaart" onclick="startSet('bs4-populaties')">
-      <div class="set-emoji">🐇</div>
-      <div class="set-naam">BS4 — Populaties</div>
-      <div class="set-info">10 kaarten · begrip → uitleg</div>
-    </div>
-
-  </div>
-</div><!-- /tab-flashcards -->
-
-
-<!-- ══════════════════════════════════════════
-     TAB 3: OEFENEN
-══════════════════════════════════════════ -->
-<div id="tab-oefenen" class="sectie">
-
-  <div class="score-bar">
-    <span>Score:</span>
-    <span class="score-num" id="score-display">0 / 0</span>
-    <button class="nav-btn nav-btn-secondary" onclick="resetOefenen()" style="margin-left:auto;padding:0.4rem 0.9rem;font-size:0.82rem;">🔄 Opnieuw</button>
-    <button class="nav-btn nav-btn-secondary" onclick="schudOefeningen()" style="padding:0.4rem 0.9rem;font-size:0.82rem;">🔀 Shuffle</button>
-  </div>
-
-  <div id="oefenen-container"></div>
-
-</div><!-- /tab-oefenen -->
-
-</div><!-- /content -->
-
-<!-- ══ FLASHCARD MODAL ══ -->
-<div id="fc-modal">
-  <div id="fc-container">
-    <div class="fc-topbar">
-      <div class="fc-set-naam" id="fc-naam"></div>
-      <button id="fc-close" onclick="sluitModal()">✕</button>
-    </div>
-    <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-fill"></div></div>
-    <div class="fc-progress-text" id="fc-progress"></div>
-    <div class="flip-wrapper" onclick="flipKaart()">
-      <div class="flip-card" id="flip-card">
-        <div class="flip-face flip-front">
-          <div class="flip-label" id="fc-label-front">Begrip</div>
-          <div class="flip-tekst" id="fc-front"></div>
-          <div class="flip-hint">Tik om te omdraaien</div>
-        </div>
-        <div class="flip-face flip-back">
-          <div class="flip-label">Definitie / uitleg</div>
-          <div class="flip-tekst" id="fc-back"></div>
-        </div>
-      </div>
-    </div>
-    <div class="fc-buttons">
-      <button class="fc-btn fc-btn-prev" onclick="vorigeKaart()">← Vorige</button>
-      <button class="fc-btn fc-btn-flip" onclick="flipKaart()">🔄 Omdraaien</button>
-      <button class="fc-btn fc-btn-next" onclick="volgendeKaart()">Volgende →</button>
-    </div>
-    <div class="fc-extra-btns">
-      <button class="fc-shuffle" onclick="schudKaarten()">🔀 Shuffle</button>
-      <button class="fc-opnieuw" onclick="opnieuwSet()">↩ Opnieuw</button>
-    </div>
+<div id="tab-binnenkort" class="sectie actief">
+  <div class="oefenblok">
+    <p>Hier komt de oefenstof voor Biologie zodra het eerste proefwerk bekend is.</p>
   </div>
 </div>
 
+</div><!-- /content -->
+
 <script>
-// ══════════════════════════════════════════
-// FLASHCARD DATA
-// ══════════════════════════════════════════
-const sets = {
-  'bs1-begrippen': {
-    naam: 'BS1 — Begrippen ecologie',
-    kaarten: [
-      { v: 'Ecologie', a: 'De wetenschap die bestudeert hoe organismen omgaan met hun omgeving en met elkaar.' },
-      { v: 'Milieu', a: 'De leefomgeving van een organisme — alles wat het organisme om zich heen heeft.' },
-      { v: 'Biotische factoren', a: 'Invloeden op een organisme die afkomstig zijn van andere levende organismen (bios = leven). Bijv. roofdieren, voedsel, ziekteverwekkers.' },
-      { v: 'Abiotische factoren', a: 'Invloeden op een organisme die afkomstig zijn van de niet-levende natuur (a = zonder). Bijv. licht, temperatuur, water, wind, bodem.' },
-      { v: 'Individu', a: 'Één enkel organisme van een bepaalde soort.' },
-      { v: 'Populatie', a: 'Een groep individuen van dezelfde soort die in hetzelfde gebied leven.' },
-      { v: 'Levensgemeenschap', a: 'Alle populaties van alle soorten bij elkaar in een bepaald gebied.' },
-      { v: 'Ecosysteem', a: 'De levensgemeenschap samen met de abiotische factoren van het gebied.' },
-      { v: 'Noem 3 biotische factoren', a: 'Roofdieren, voedsel (planten/dieren), ziekteverwekkers, soortgenoten, nestgelegenheid.' },
-      { v: 'Noem 3 abiotische factoren', a: 'Licht, temperatuur, water, wind, bodem, neerslag, lucht.' },
-      { v: 'Wat is het verschil tussen biotisch en abiotisch?', a: 'Biotisch = levende invloeden (dieren, planten, schimmels). Abiotisch = niet-levende invloeden (zon, regen, bodem).' },
-      { v: 'Volgorde niveaus (klein → groot)', a: 'Individu → Populatie → Levensgemeenschap → Ecosysteem.' },
-      { v: 'Voorbeeld van een ecosysteem', a: 'Een bos, een sloot, een duingebied — de levensgemeenschap + de abiotische omgeving samen.' },
-      { v: 'Waarom past een konijn zijn vacht aan per seizoen?', a: 'Aanpassing aan abiotische factoren: dikkere vacht in de winter houdt warm, dunnere zomervacht bij warmte.' },
-      { v: 'Wat bestudeert een ecoloog op populatieniveau?', a: 'Het aantal individuen van één soort in een gebied, en hoe dat aantal verandert.' },
-      { v: 'Wat bestudeert een ecoloog op ecosysteemniveau?', a: 'Alle relaties tussen alle soorten én met de omgeving: voedselweb, kringlopen, evenwicht.' },
-    ]
-  },
-  'bs2-voedsel': {
-    naam: 'BS2 — Voedselrelaties',
-    kaarten: [
-      { v: 'Voedselketen', a: 'Een reeks soorten waarbij elke soort wordt gegeten door de volgende. Begint altijd met een plant.' },
-      { v: 'Voedselweb', a: 'Het geheel van alle voedselrelaties in een ecosysteem — meerdere ketens door elkaar.' },
-      { v: 'Producent', a: 'Een plant of alg die via fotosynthese zelf voedsel (glucose) maakt uit zonlicht, water en CO₂.' },
-      { v: 'Consument van de 1e orde', a: 'Een planteneter (herbivoor) die direct van de producent eet. Bijv. konijn, rups, koe.' },
-      { v: 'Consument van de 2e orde', a: 'Een vleeseter (carnivoor) die planteneters eet. Bijv. vos, havik, slang.' },
-      { v: 'Alleseter / omnivoor', a: 'Een dier dat zowel planten als dieren eet. Bijv. merel, mens, beer.' },
-      { v: 'Vleeseter / carnivoor', a: 'Een dier dat alleen andere dieren eet. Bijv. vos, havik, wezel.' },
-      { v: 'Planteneter / herbivoor', a: 'Een dier dat alleen planten eet. Bijv. konijn, koe, rups.' },
-      { v: 'Afvaleter / reducent', a: 'Bacteriën en schimmels die dode resten van planten en dieren afbreken tot voedingsstoffen.' },
-      { v: 'Waarom begint een voedselketen altijd met een plant?', a: 'Alleen planten kunnen via fotosynthese energie uit zonlicht omzetten in voedsel. Alle andere organismen eten die energie indirect.' },
-      { v: 'Wat betekent de pijl in een voedselketen?', a: 'De pijl geeft de richting van voedsel (energie) aan: A → B betekent "A wordt gegeten door B".' },
-      { v: 'Rol van reducenten in het ecosysteem', a: 'Ze breken dode resten af en maken voedingsstoffen weer vrij in de bodem, zodat planten ze opnieuw kunnen opnemen.' },
-      { v: 'Noem een voorbeeld van een voedselketen (3 schakels)', a: 'Gras → konijn → vos. Of: paardenbloem → rups → merel → havik.' },
-      { v: 'Verschil voedselketen vs. voedselweb', a: 'Voedselketen = één rechte lijn. Voedselweb = alle ketens samen, waarbij soorten meerdere proooien of vijanden hebben.' },
-    ]
-  },
-  'bs3-kringlopen': {
-    naam: 'BS3 — Kringlopen',
-    kaarten: [
-      { v: 'Kringloop', a: 'Het steeds opnieuw doorlopen van een stof door het ecosysteem, zodat stoffen hergebruikt worden.' },
-      { v: 'Waterkringloop', a: 'Water verdampt → condenseert tot wolken → valt neer als regen/sneeuw → stroomt terug naar zee → verdampt opnieuw.' },
-      { v: 'Verdamping', a: 'Water dat van het oppervlak van oceanen, plassen en organismen als waterdamp de lucht ingaat.' },
-      { v: 'Condensatie', a: 'Waterdamp koelt af in de lucht en vormt kleine waterdruppeltjes → wolken of mist.' },
-      { v: 'Neerslag', a: 'Water dat vanuit wolken valt: regen, sneeuw, hagel.' },
-      { v: 'Koolstofkringloop', a: 'CO₂ uit lucht → opgenomen door planten (fotosynthese) → in organismen → vrijgegeven door verbranding en reducenten → terug in lucht.' },
-      { v: 'Fotosynthese (koolstofkringloop)', a: 'Planten nemen CO₂ op en zetten dit met zonlicht en water om in glucose. CO₂ verdwijnt uit de lucht.' },
-      { v: 'Verbranding (koolstofkringloop)', a: 'Mensen, dieren en planten ademen: glucose + zuurstof → CO₂ + water + energie. CO₂ komt terug in de lucht.' },
-      { v: 'Rol van reducenten in de koolstofkringloop', a: 'Bacteriën en schimmels breken dode resten af → geven CO₂ vrij → komt terug in de lucht.' },
-      { v: 'Reducenten', a: 'Bacteriën en schimmels. Zij ruimen dode resten op en zetten die om in voedingsstoffen en CO₂.' },
-      { v: 'Waarom zijn kringlopen belangrijk?', a: 'Stoffen raken nooit op: ze worden steeds opnieuw gebruikt. Zonder kringlopen zou het ecosysteem ophouden te bestaan.' },
-      { v: 'Wat heeft CO₂ te maken met klimaatverandering?', a: 'Meer verbranding (auto\'s, industrie) → meer CO₂ in de lucht → versterkt broeikaseffect → aarde warmt op.' },
-    ]
-  },
-  'bs4-populaties': {
-    naam: 'BS4 — Populaties',
-    kaarten: [
-      { v: 'Populatiegrootte', a: 'Het aantal individuen van een soort in een bepaald gebied op een bepaald moment.' },
-      { v: 'Wat bepaalt de populatiegrootte?', a: 'Biotische factoren (voedsel, roofdieren, ziekte) én abiotische factoren (temperatuur, neerslag, ruimte).' },
-      { v: 'Biologisch evenwicht', a: 'De toestand waarbij de populatiegrootte schommelt rond een evenwichtswaarde. Roofdier en prooi houden elkaar in balans.' },
-      { v: 'Geef een voorbeeld van biologisch evenwicht', a: 'Konijnen (prooi) en vossen (roofdier): meer konijnen → meer vossen → minder konijnen → minder vossen → meer konijnen...' },
-      { v: 'Aanpassing', a: 'Een eigenschap van een organisme waardoor het beter kan overleven in zijn milieu. Bijv. dikkere vacht in de kou.' },
-      { v: 'Optimumkromme', a: 'Een grafiek die laat zien bij welke waarde van een abiotische factor een organisme het beste groeit of zich voortplant.' },
-      { v: 'Optimum (optimumkromme)', a: 'De waarde van een factor waarbij het organisme het beste gedijt (hoogste groei- of voortplantingskansen).' },
-      { v: 'Minimum en maximum (optimumkromme)', a: 'Beneden het minimum of boven het maximum kan het organisme niet overleven.' },
-      { v: 'Voorbeeld optimumkromme', a: 'Guppy\'s groeien het best bij 22°C (optimum). Onder 5°C (minimum) of boven 38°C (maximum) overleven ze niet.' },
-      { v: 'Klimaat als abiotische factor', a: 'Temperatuur, neerslag en wind (samen het klimaat) bepalen mede de populatiegrootte en welke soorten in een gebied leven.' },
-    ]
-  }
-};
-
-// ══════════════════════════════════════════
-// FLASHCARD STATE
-// ══════════════════════════════════════════
-let huidigSet = null;
-let kaarten = [];
-let huidigIndex = 0;
-let isFlipped = false;
-
 function fisher_yates(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -656,110 +375,6 @@ function fisher_yates(arr) {
   }
   return arr;
 }
-
-function startSet(setId) {
-  huidigSet = setId;
-  kaarten = fisher_yates([...sets[setId].kaarten]);
-  huidigIndex = 0;
-  isFlipped = false;
-  document.getElementById('fc-naam').textContent = sets[setId].naam;
-  document.getElementById('fc-modal').classList.add('open');
-  toonKaart();
-}
-
-function toonKaart() {
-  const k = kaarten[huidigIndex];
-  document.getElementById('fc-front').textContent = k.v;
-  document.getElementById('fc-back').textContent = k.a;
-  const card = document.getElementById('flip-card');
-  card.classList.remove('flipped');
-  isFlipped = false;
-  const pct = ((huidigIndex + 1) / kaarten.length * 100).toFixed(0);
-  document.getElementById('fc-fill').style.width = pct + '%';
-  document.getElementById('fc-progress').textContent = (huidigIndex + 1) + ' / ' + kaarten.length;
-}
-
-function flipKaart() {
-  isFlipped = !isFlipped;
-  document.getElementById('flip-card').classList.toggle('flipped', isFlipped);
-}
-
-function volgendeKaart() {
-  if (huidigIndex < kaarten.length - 1) {
-    huidigIndex++;
-    toonKaart();
-  }
-}
-
-function vorigeKaart() {
-  if (huidigIndex > 0) {
-    huidigIndex--;
-    toonKaart();
-  }
-}
-
-function schudKaarten() {
-  kaarten = fisher_yates([...kaarten]);
-  huidigIndex = 0;
-  toonKaart();
-}
-
-function opnieuwSet() {
-  huidigIndex = 0;
-  toonKaart();
-}
-
-function sluitModal() {
-  document.getElementById('fc-modal').classList.remove('open');
-}
-
-// ══════════════════════════════════════════
-// OEFENVRAGEN DATA
-// ══════════════════════════════════════════
-const alleVragen = [
-  // BS1
-  { bs: 'BS1', v: 'Wat is ecologie?', opties: ['De wetenschap die bestudeert hoe organismen omgaan met hun omgeving en met elkaar.', 'De wetenschap die alleen planten bestudeert.', 'Het bestuderen van niet-levende natuur.', 'De studie van het menselijk lichaam.'], correct: 0 },
-  { bs: 'BS1', v: 'Welke factoren zijn biotisch?', opties: ['Licht en temperatuur', 'Roofdieren en ziekteverwekkers', 'Wind en bodem', 'Neerslag en lucht'], correct: 1 },
-  { bs: 'BS1', v: 'Wat zijn abiotische factoren?', opties: ['Invloeden van levende organismen', 'Invloeden van andere dieren', 'Invloeden van de niet-levende natuur', 'Invloeden van schimmels en bacteriën'], correct: 2 },
-  { bs: 'BS1', v: 'Wat is een populatie?', opties: ['Één enkel organisme', 'Alle soorten in een gebied', 'Een groep individuen van dezelfde soort in een gebied', 'Een ecosysteem zonder abiotische factoren'], correct: 2 },
-  { bs: 'BS1', v: 'Wat is een ecosysteem?', opties: ['Alleen de levende organismen in een gebied', 'De levensgemeenschap samen met de abiotische factoren', 'Alleen de abiotische factoren van een gebied', 'Een voedselketen met drie schakels'], correct: 1 },
-  { bs: 'BS1', v: 'Wat is de juiste volgorde van klein naar groot?', opties: ['Ecosysteem → Populatie → Individu → Levensgemeenschap', 'Individu → Levensgemeenschap → Populatie → Ecosysteem', 'Individu → Populatie → Levensgemeenschap → Ecosysteem', 'Populatie → Individu → Ecosysteem → Levensgemeenschap'], correct: 2 },
-  { bs: 'BS1', v: 'Konijnen krijgen in de zomer een dunnere vacht. Dit is een aanpassing aan...', opties: ['Een biotische factor: roofdieren', 'Een abiotische factor: temperatuur', 'Een biotische factor: voedselgebrek', 'Een abiotische factor: neerslag'], correct: 1 },
-  { bs: 'BS1', v: 'Welke van de volgende is een abiotische factor?', opties: ['Roofdieren', 'Ziekteverwekkers', 'Soortgenoten', 'Temperatuur'], correct: 3 },
-
-  // BS2
-  { bs: 'BS2', v: 'Waarmee begint een voedselketen altijd?', opties: ['Een carnivoor', 'Een omnivoor', 'Een plantensoort (producent)', 'Een reducent'], correct: 2 },
-  { bs: 'BS2', v: 'Wat is een producent?', opties: ['Een dier dat planten eet', 'Een plant die via fotosynthese zelf voedsel maakt', 'Een bacterie die dode resten afbreekt', 'Een roofdier bovenaan de keten'], correct: 1 },
-  { bs: 'BS2', v: 'Welk dier is een consument van de 1e orde?', opties: ['Vos', 'Havik', 'Konijn', 'Slang'], correct: 2 },
-  { bs: 'BS2', v: 'Wat doen reducenten?', opties: ['Ze eten levende planten', 'Ze jagen op dieren', 'Ze breken dode resten af tot voedingsstoffen', 'Ze maken glucose via fotosynthese'], correct: 2 },
-  { bs: 'BS2', v: 'Wat betekent de pijl in een voedselketen (bijv. gras → konijn)?', opties: ['Gras eet het konijn op', 'Het konijn wordt gegeten door het gras', 'Het konijn eet het gras (energie gaat van gras naar konijn)', 'Gras en konijn hebben geen relatie'], correct: 2 },
-  { bs: 'BS2', v: 'Een merel eet zowel insecten als bessen. De merel is een...', opties: ['Producent', 'Carnivoor', 'Herbivoor', 'Omnivoor (alleseter)'], correct: 3 },
-  { bs: 'BS2', v: 'Wat is het verschil tussen een voedselketen en een voedselweb?', opties: ['Er is geen verschil', 'Een voedselketen heeft meer soorten dan een voedselweb', 'Een voedselweb is het geheel van alle voedselrelaties in een ecosysteem', 'Een voedselweb beschrijft alleen abiotische factoren'], correct: 2 },
-  { bs: 'BS2', v: 'Bacteriën en schimmels zijn...', opties: ['Consumenten van de 2e orde', 'Producenten', 'Reducenten / afvaleters', 'Alleseters'], correct: 2 },
-
-  // BS3
-  { bs: 'BS3', v: 'Wat is condensatie in de waterkringloop?', opties: ['Water dat verdampt uit de oceaan', 'Waterdamp die afkoelt en wolken of mist vormt', 'Regen die op de grond valt', 'Water dat door planten wordt opgenomen'], correct: 1 },
-  { bs: 'BS3', v: 'Welk proces neemt CO₂ op uit de lucht?', opties: ['Verbranding', 'Verdamping', 'Fotosynthese', 'Condensatie'], correct: 2 },
-  { bs: 'BS3', v: 'Bij welk proces komt CO₂ vrij?', opties: ['Fotosynthese', 'Verdamping', 'Neerslag', 'Verbranding (ademhaling)'], correct: 3 },
-  { bs: 'BS3', v: 'Wat is de rol van reducenten in de koolstofkringloop?', opties: ['Ze nemen CO₂ op via fotosynthese', 'Ze geven CO₂ af bij het afbreken van dode resten', 'Ze zetten koolstof om in water', 'Ze slaan CO₂ op in de bodem'], correct: 1 },
-  { bs: 'BS3', v: 'Waarom zijn kringlopen essentieel voor een ecosysteem?', opties: ['Zodat organismen sneller kunnen groeien', 'Zodat stoffen steeds opnieuw gebruikt worden en niet opraken', 'Zodat roofdieren genoeg proooien hebben', 'Zodat de temperatuur stabiel blijft'], correct: 1 },
-  { bs: 'BS3', v: 'Welke stap volgt op verdamping in de waterkringloop?', opties: ['Neerslag', 'Condensatie', 'Fotosynthese', 'Verbranding'], correct: 1 },
-
-  // BS4
-  { bs: 'BS4', v: 'Wat is het biologisch evenwicht?', opties: ['De situatie waarbij alle soorten even groot zijn', 'De toestand waarbij populaties schommelen rond een evenwichtswaarde', 'Een ecosysteem zonder roofdieren', 'De maximale populatiegrootte ooit bereikt'], correct: 1 },
-  { bs: 'BS4', v: 'Er zijn meer vossen in een bos. Wat gebeurt er daarna met de konijnenpopulatie?', opties: ['De konijnenpopulatie groeit ook', 'De konijnenpopulatie blijft gelijk', 'De konijnenpopulatie krimpt', 'De konijnenpopulatie verdwijnt volledig'], correct: 2 },
-  { bs: 'BS4', v: 'Wat toont een optimumkromme?', opties: ['De maximale levensduur van een organisme', 'Het verband tussen een abiotische factor en groei-/voortplantingskansen', 'Het aantal proooien dat een roofdier nodig heeft', 'De grootte van een populatie door de jaren heen'], correct: 1 },
-  { bs: 'BS4', v: 'Bij welke temperatuur gedijt een guppy het best (optimum)?', opties: ['5°C', '12°C', '22°C', '38°C'], correct: 2 },
-  { bs: 'BS4', v: 'Welke factoren bepalen de populatiegrootte?', opties: ['Alleen abiotische factoren', 'Alleen biotische factoren', 'Zowel biotische als abiotische factoren', 'Alleen het weer'], correct: 2 },
-  { bs: 'BS4', v: 'Wat is een aanpassing?', opties: ['Een verandering in het milieu door mensen', 'Een eigenschap van een organisme waardoor het beter overleeft in zijn milieu', 'Het biologisch evenwicht tussen roofdier en prooi', 'De maximumwaarde op een optimumkromme'], correct: 1 },
-];
-
-// ══════════════════════════════════════════
-// OEFENEN LOGICA
-// ══════════════════════════════════════════
-let vragen = [];
-let score = 0;
-let beantwoord = 0;
 
 function fisher_yates_vragen(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -769,106 +384,6 @@ function fisher_yates_vragen(arr) {
   return arr;
 }
 
-function initOefenen() {
-  vragen = fisher_yates_vragen([...alleVragen]);
-  score = 0;
-  beantwoord = 0;
-  renderOefenen();
-}
-
-function renderOefenen() {
-  const container = document.getElementById('oefenen-container');
-  container.innerHTML = '';
-
-  // Groepeer per BS
-  const groepen = {};
-  vragen.forEach((v, i) => {
-    if (!groepen[v.bs]) groepen[v.bs] = [];
-    groepen[v.bs].push({ ...v, origIndex: i });
-  });
-
-  const bsLabels = {
-    'BS1': '🌍 Basisstof 1 — Wat is ecologie?',
-    'BS2': '🦊 Basisstof 2 — Voedselrelaties',
-    'BS3': '💧 Basisstof 3 — Kringlopen',
-    'BS4': '🐇 Basisstof 4 — Populaties',
-  };
-
-  Object.entries(groepen).forEach(([bs, vrs]) => {
-    const blok = document.createElement('div');
-    blok.className = 'oefenblok';
-    blok.innerHTML = `<div class="oefenblok-titel">${bsLabels[bs] || bs}</div>`;
-
-    vrs.forEach((vObj) => {
-      const div = document.createElement('div');
-      div.className = 'mc-vraag';
-      div.id = 'vraag-' + vObj.origIndex;
-
-      // Shuffle opties maar onthoud correct antwoord
-      const opties = vObj.opties.map((o, i) => ({ tekst: o, isCorrect: i === vObj.correct }));
-      fisher_yates_vragen(opties);
-
-      div.innerHTML = `<p>${vObj.v}</p><div class="mc-opties" id="opties-${vObj.origIndex}"></div>`;
-      blok.appendChild(div);
-
-      const optiesDiv = div.querySelector('.mc-opties');
-      opties.forEach((opt) => {
-        const btn = document.createElement('button');
-        btn.className = 'mc-optie';
-        btn.textContent = opt.tekst;
-        btn.onclick = () => checkAntwoord(btn, opt.isCorrect, vObj.origIndex);
-        optiesDiv.appendChild(btn);
-      });
-    });
-
-    container.appendChild(blok);
-  });
-
-  updateScore();
-}
-
-function checkAntwoord(btn, isCorrect, index) {
-  const optiesDiv = document.getElementById('opties-' + index);
-  if (optiesDiv.querySelector('.goed') || optiesDiv.querySelector('.fout')) return;
-
-  beantwoord++;
-  if (isCorrect) {
-    btn.classList.add('goed');
-    score++;
-  } else {
-    btn.classList.add('fout');
-    // Toon het goede antwoord
-    optiesDiv.querySelectorAll('.mc-optie').forEach(b => {
-      // We need to find the correct one — mark it
-    });
-  }
-  optiesDiv.querySelectorAll('.mc-optie').forEach(b => b.disabled = true);
-  updateScore();
-}
-
-function updateScore() {
-  document.getElementById('score-display').textContent = score + ' / ' + beantwoord;
-}
-
-function resetOefenen() {
-  score = 0;
-  beantwoord = 0;
-  renderOefenen();
-}
-
-function schudOefeningen() {
-  const prevScore = score;
-  const prevBeantwoord = beantwoord;
-  vragen = fisher_yates_vragen([...vragen]);
-  score = prevScore;
-  beantwoord = prevBeantwoord;
-  renderOefenen();
-  updateScore();
-}
-
-// ══════════════════════════════════════════
-// TAB & ACCORDION
-// ══════════════════════════════════════════
 function toonTab(id, btn) {
   document.querySelectorAll('.sectie').forEach(s => s.classList.remove('actief'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
@@ -890,19 +405,9 @@ function toggleAccordion(header) {
   }
 }
 
-// ══════════════════════════════════════════
-// KEYBOARD SHORTCUTS (flashcards)
-// ══════════════════════════════════════════
-document.addEventListener('keydown', e => {
-  if (!document.getElementById('fc-modal').classList.contains('open')) return;
-  if (e.key === 'ArrowRight') volgendeKaart();
-  else if (e.key === 'ArrowLeft') vorigeKaart();
-  else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipKaart(); }
-  else if (e.key === 'Escape') sluitModal();
-});
-
-// Init
-initOefenen();
+function sluitModal() {
+  document.getElementById('fc-modal').classList.remove('open');
+}
 </script>
 </body>
 </html>
