@@ -505,23 +505,90 @@
     <button class="sub-tab-btn" onclick="showSubTab('p4','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p4-uitleg" class="sub-tab-content active">
-    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+
+    <div class="uitleg-card">
+      <h2>Geluidssterkte</h2>
+      <p>De <strong>geluidssterkte</strong> (hoe hard geluid is) hangt af van de amplitude van de trilling. Geluidssterkte meet je in <strong>decibel (dB)</strong>.</p>
+      <div class="regel-blok blauw"><p><strong>3 dB toename</strong> = 2&times; zo hard geluid. <strong>3 dB afname</strong> = 2&times; zo zacht geluid.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Kwadratenwet (afstand)</h2>
+      <p>Hoe verder je van een geluidsbron af staat, hoe zachter het geluid.</p>
+      <div class="stappen">
+        <div class="stap">2&times; zo ver weg &rarr; 4&times; zo zacht &rarr; &minus;6 dB</div>
+        <div class="stap">3&times; zo ver weg &rarr; 9&times; zo zacht &rarr; &asymp; &minus;9,5 dB</div>
+      </div>
+      <div class="regel-blok oranje"><p><strong>Hoofdregel voor de oefeningen:</strong> 2&times; afstand &rarr; &minus;6 dB.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Meerdere geluidsbronnen samen</h2>
+      <p>Twee gelijke geluidsbronnen samen geven <strong>+3 dB</strong> ten opzichte van &eacute;&eacute;n bron (2&times; zoveel bronnen = 2&times; zo hard = +3 dB). Vier gelijke bronnen samen geven <strong>+6 dB</strong> (2&times; de verdubbeling), enzovoort.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <p style="font-size:.85rem;color:#6b7280;">Gehoorschade en de risicodrempel komen in &sect;1.5 aan bod &mdash; hier gaat het alleen om de rekenregels voor geluidssterkte.</p>
+    </div>
+
   </div>
   <div id="sub-p4-flashcards" class="sub-tab-content">
     <div class="uitleg-card">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p4fc-goed">0</span> / <span id="p4fc-totaal">0</span></div>
+        <div class="fc-teller" id="p4fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p4FcFlip()">
+        <div class="flip-card" id="p4fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p4fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p4fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p4fc-oordeel" style="display:none">
+        <button onclick="p4FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p4FcOordeel(true)">&#10003; Goed</button>
+      </div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button onclick="p4FcVorige()">&larr; Vorige</button>
+        <button onclick="p4FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p4FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p4FcOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
   <div id="sub-p4-oefenen" class="sub-tab-content">
     <div class="oefening-kaart">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <h3>Onderdeel 1 &mdash; dB-verschil &harr; factor hardheid</h3>
+      <div class="score-balk">Score: <span id="p4db-goed">0</span> / <span id="p4db-totaal">0</span></div>
+      <div id="p4db-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p4db-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p4DbControleer()">
+      <div id="p4db-feedback" class="feedback"></div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button id="p4db-controleer-btn" onclick="p4DbControleer()">Controleer</button>
+        <button id="p4db-volgende-btn" onclick="p4DbVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p4DbSchud()">&#128256; Shuffle</button>
+        <button onclick="p4DbOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Kwadratenwet (afstand)</h3>
+      <div class="score-balk">Score: <span id="p4kwad-goed">0</span> / <span id="p4kwad-totaal">0</span></div>
+      <div id="p4kwad-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p4kwad-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p4KwadControleer()">
+      <div id="p4kwad-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p4kwad-controleer-btn" onclick="p4KwadControleer()">Controleer</button>
+        <button id="p4kwad-volgende-btn" onclick="p4KwadVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p4KwadSchud()">&#128256; Shuffle</button>
+        <button onclick="p4KwadOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
@@ -1082,10 +1149,191 @@
   fisherYates(p2OscBank);
   p2OscToon();
 
+  /* §1.4 FLASHCARDS */
+  var p4FcData = [
+    {voor:'Hoeveel dB toename betekent 2× zo hard geluid?', achter:'3 dB'},
+    {voor:'Hoeveel dB afname betekent 2× zo zacht geluid?', achter:'3 dB (afname)'},
+    {voor:'Wat gebeurt er met de geluidssterkte als je 2× zo ver van de bron af gaat staan?', achter:'Het geluid wordt 4× zo zacht (6 dB minder)'},
+    {voor:'Hoeveel dB scheelt het als je 2× zo ver van de bron af staat?', achter:'6 dB (minder)'},
+    {voor:'Twee identieke geluidsbronnen staan naast elkaar. Hoeveel dB harder is dat dan één bron?', achter:'3 dB harder'},
+    {voor:'Vier identieke geluidsbronnen samen, hoeveel dB harder dan één bron?', achter:'6 dB harder (2× de verdubbeling)'},
+    {voor:'In welke eenheid meet je geluidssterkte?', achter:'Decibel (dB)'},
+    {voor:'Waarmee meet je geluidssterkte?', achter:'Een decibelmeter'}
+  ];
+  var p4FcKaarten = [], p4FcIndex = 0, p4FcGoed = 0, p4FcTotaal = 0, p4FcOmgedraaid = false;
+
+  function p4FcInit(){
+    p4FcKaarten = fisherYates(p4FcData);
+    p4FcIndex = 0; p4FcGoed = 0; p4FcTotaal = 0;
+    p4FcToonKaart();
+  }
+  function p4FcToonKaart(){
+    var k = p4FcKaarten[p4FcIndex];
+    document.getElementById('p4fc-voor').textContent = k.voor;
+    document.getElementById('p4fc-achter').textContent = k.achter;
+    document.getElementById('p4fc-card').classList.remove('flipped');
+    p4FcOmgedraaid = false;
+    document.getElementById('p4fc-oordeel').style.display = 'none';
+    document.getElementById('p4fc-teller').textContent = (p4FcIndex+1) + ' / ' + p4FcKaarten.length;
+    p4FcUpdateScore();
+  }
+  function p4FcFlip(){
+    p4FcOmgedraaid = !p4FcOmgedraaid;
+    document.getElementById('p4fc-card').classList.toggle('flipped', p4FcOmgedraaid);
+    document.getElementById('p4fc-oordeel').style.display = p4FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p4FcOordeel(goed){
+    p4FcTotaal++;
+    if (goed) p4FcGoed++;
+    p4FcUpdateScore();
+    p4FcVolgende();
+  }
+  function p4FcUpdateScore(){
+    document.getElementById('p4fc-goed').textContent = p4FcGoed;
+    document.getElementById('p4fc-totaal').textContent = p4FcTotaal;
+  }
+  function p4FcVorige(){
+    if (p4FcIndex > 0){ p4FcIndex--; p4FcToonKaart(); }
+  }
+  function p4FcVolgende(){
+    p4FcIndex = (p4FcIndex < p4FcKaarten.length - 1) ? p4FcIndex + 1 : 0;
+    p4FcToonKaart();
+  }
+  function p4FcSchud(){
+    p4FcKaarten = fisherYates(p4FcKaarten);
+    p4FcIndex = 0;
+    p4FcToonKaart();
+  }
+  function p4FcOpnieuw(){
+    p4FcGoed = 0; p4FcTotaal = 0;
+    p4FcKaarten = fisherYates(p4FcData);
+    p4FcIndex = 0;
+    p4FcToonKaart();
+  }
+
+  /* §1.4 OEFENEN — ONDERDEEL 1: gerandomiseerd dB-verschil ↔ factor hardheid */
+  var p4DbFactorParen = [
+    {db:3, factor:2}, {db:6, factor:4}, {db:9, factor:8},
+    {db:12, factor:16}, {db:15, factor:32}, {db:18, factor:64}
+  ];
+  function p4DbGenereer(){
+    var paar = pick(p4DbFactorParen);
+    var richting = pick(['harder','zachter']);
+    var vraagOm = pick(['factor','db']);
+    var vraag, antwoord;
+    if (vraagOm === 'factor'){
+      vraag = 'Het geluid is ' + paar.db + ' dB ' + richting + '. Hoeveel keer ' + richting + ' is dat?';
+      antwoord = paar.factor;
+    } else {
+      vraag = 'Het geluid is ' + paar.factor + '&times; zo ' + (richting === 'harder' ? 'hard' : 'zacht') + '. Hoeveel dB ' + richting + ' is dat?';
+      antwoord = paar.db;
+    }
+    return { vraag: vraag, antwoord: antwoord };
+  }
+  var p4DbGoed = 0, p4DbTotaal = 0, p4DbHuidige = null;
+  function p4DbNieuweVraag(){
+    p4DbHuidige = p4DbGenereer();
+    document.getElementById('p4db-vraag').innerHTML = p4DbHuidige.vraag;
+    var input = document.getElementById('p4db-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p4db-controleer-btn').disabled = false;
+    document.getElementById('p4db-controleer-btn').style.display = '';
+    document.getElementById('p4db-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p4db-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p4DbUpdateScore();
+  }
+  function p4DbControleer(){
+    var input = document.getElementById('p4db-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p4db-controleer-btn').disabled = true;
+    p4DbTotaal++;
+    var correct = p4DbHuidige.antwoord;
+    var ok = waarde === correct;
+    if (ok) p4DbGoed++;
+    var fb = document.getElementById('p4db-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Fout. ') + 'Juiste antwoord: ' + correct;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p4DbUpdateScore();
+    document.getElementById('p4db-volgende-btn').style.display = '';
+  }
+  function p4DbVolgende(){ p4DbNieuweVraag(); }
+  function p4DbSchud(){ p4DbNieuweVraag(); }
+  function p4DbOpnieuw(){
+    p4DbGoed = 0; p4DbTotaal = 0;
+    p4DbNieuweVraag();
+  }
+  function p4DbUpdateScore(){
+    document.getElementById('p4db-goed').textContent = p4DbGoed;
+    document.getElementById('p4db-totaal').textContent = p4DbTotaal;
+  }
+
+  /* §1.4 OEFENEN — ONDERDEEL 2: gerandomiseerd kwadratenwet (afstand) */
+  function p4KwadGenereer(){
+    var startAfstand = pick([1,2,4]);
+    var startSterkte = Math.round(60 + Math.random()*40);
+    var afstandsFactor = pick([2,4]);
+    var dbAfname = afstandsFactor === 2 ? 6 : 12;
+    var nieuweAfstand = startAfstand * afstandsFactor;
+    var nieuweSterkte = startSterkte - dbAfname;
+    var vraag = 'Op ' + startAfstand + ' m van een geluidsbron meet je ' + startSterkte + ' dB. Hoeveel dB meet je op ' + nieuweAfstand + ' m (dus ' + afstandsFactor + '&times; zo ver weg)?';
+    return { vraag: vraag, antwoord: nieuweSterkte };
+  }
+  var p4KwadGoed = 0, p4KwadTotaal = 0, p4KwadHuidige = null;
+  function p4KwadNieuweVraag(){
+    p4KwadHuidige = p4KwadGenereer();
+    document.getElementById('p4kwad-vraag').innerHTML = p4KwadHuidige.vraag;
+    var input = document.getElementById('p4kwad-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p4kwad-controleer-btn').disabled = false;
+    document.getElementById('p4kwad-controleer-btn').style.display = '';
+    document.getElementById('p4kwad-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p4kwad-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p4KwadUpdateScore();
+  }
+  function p4KwadControleer(){
+    var input = document.getElementById('p4kwad-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p4kwad-controleer-btn').disabled = true;
+    p4KwadTotaal++;
+    var correct = p4KwadHuidige.antwoord;
+    var ok = waarde === correct;
+    if (ok) p4KwadGoed++;
+    var fb = document.getElementById('p4kwad-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Fout. ') + 'Juiste antwoord: ' + correct + ' dB';
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p4KwadUpdateScore();
+    document.getElementById('p4kwad-volgende-btn').style.display = '';
+  }
+  function p4KwadVolgende(){ p4KwadNieuweVraag(); }
+  function p4KwadSchud(){ p4KwadNieuweVraag(); }
+  function p4KwadOpnieuw(){
+    p4KwadGoed = 0; p4KwadTotaal = 0;
+    p4KwadNieuweVraag();
+  }
+  function p4KwadUpdateScore(){
+    document.getElementById('p4kwad-goed').textContent = p4KwadGoed;
+    document.getElementById('p4kwad-totaal').textContent = p4KwadTotaal;
+  }
+
   /* INIT §1.3 */
   p3FcInit();
   p3VlNieuweVraag();
   p3OctNieuweVraag();
+
+  /* INIT §1.4 */
+  p4FcInit();
+  p4DbNieuweVraag();
+  p4KwadNieuweVraag();
 </script>
 </body>
 </html>
