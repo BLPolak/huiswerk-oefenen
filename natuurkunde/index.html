@@ -406,23 +406,93 @@
     <button class="sub-tab-btn" onclick="showSubTab('p3','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p3-uitleg" class="sub-tab-content active">
-    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+
+    <div class="uitleg-card">
+      <h2>Grondtoon</h2>
+      <p>De <strong>grondtoon</strong> is de laagste (basis)toon die een trillende snaar of luchtkolom voortbrengt. De grondtoon bepaalt welke toonhoogte je hoort.</p>
+      <div class="regel-blok blauw"><p>Hoe <strong>korter, dunner of strakker</strong> een snaar, hoe <strong>hoger</strong> de grondtoon (en omgekeerd).</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Boventonen</h2>
+      <p>Naast de grondtoon klinken vaak <strong>boventonen</strong> mee: extra tonen met een frequentie die een geheel veelvoud is van de grondtoon (2&times;, 3&times;, enz.).</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Blaasinstrumenten en resonantiefrequentie</h2>
+      <p>Bij blaasinstrumenten bepaalt de trillende <strong>luchtkolom</strong> in het instrument de grondtoon. Hoe langer de luchtkolom, hoe <strong>lager</strong> de grondtoon.</p>
+      <div class="voorbeeld-blok"><strong>f = v &divide; (4L)</strong><br>v = geluidssnelheid (m/s) &middot; L = lengte luchtkolom (m) &middot; f = resonantiefrequentie (Hz)<br><span style="font-size:.85rem;color:#6b7280;">(voor een luchtkolom met één kant open en één kant dicht)</span></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Octaaf</h2>
+      <p>Een toon die een <strong>octaaf</strong> hoger klinkt, heeft een <strong>2&times; zo hoge</strong> frequentie (dubbel). Een octaaf lager betekent een <strong>halve</strong> frequentie. Zo'n toon klinkt als &ldquo;dezelfde&rdquo; toon, maar dan hoger of lager.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Resonantie en klankkleur</h2>
+      <p><strong>Resonantie</strong> is het versterkt meetrillen van een voorwerp op dezelfde frequentie als de trillingsbron. Dit versterkt het geluid &mdash; bijvoorbeeld de klankkast van een gitaar.</p>
+      <p>De <strong>klankkleur</strong> is het eigen geluid van een instrument, bepaald door de sterkte-verhouding van de boventonen. Daardoor klinkt dezelfde toon anders op verschillende instrumenten.</p>
+    </div>
+
   </div>
   <div id="sub-p3-flashcards" class="sub-tab-content">
     <div class="uitleg-card">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p3fc-goed">0</span> / <span id="p3fc-totaal">0</span></div>
+        <div class="fc-teller" id="p3fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p3FcFlip()">
+        <div class="flip-card" id="p3fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p3fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p3fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p3fc-oordeel" style="display:none">
+        <button onclick="p3FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p3FcOordeel(true)">&#10003; Goed</button>
+      </div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button onclick="p3FcVorige()">&larr; Vorige</button>
+        <button onclick="p3FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p3FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p3FcOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
   <div id="sub-p3-oefenen" class="sub-tab-content">
     <div class="oefening-kaart">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <h3>Onderdeel 1 &mdash; Reken met f = v &divide; (4L)</h3>
+      <div class="score-balk">Score: <span id="p3vl-goed">0</span> / <span id="p3vl-totaal">0</span></div>
+      <div id="p3vl-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p3vl-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p3VlControleer()">
+      <div id="p3vl-feedback" class="feedback"></div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button id="p3vl-controleer-btn" onclick="p3VlControleer()">Controleer</button>
+        <button id="p3vl-volgende-btn" onclick="p3VlVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p3VlSchud()">&#128256; Shuffle</button>
+        <button onclick="p3VlOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Octaven rekenen</h3>
+      <div class="score-balk">Score: <span id="p3oct-goed">0</span> / <span id="p3oct-totaal">0</span></div>
+      <div id="p3oct-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p3oct-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p3OctControleer()">
+      <div id="p3oct-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p3oct-controleer-btn" onclick="p3OctControleer()">Controleer</button>
+        <button id="p3oct-volgende-btn" onclick="p3OctVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p3OctSchud()">&#128256; Shuffle</button>
+        <button onclick="p3OctOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
@@ -815,6 +885,193 @@
     p2OscToon();
   }
 
+  /* §1.3 FLASHCARDS */
+  var p3FcData = [
+    {voor:'Wat is de grondtoon?', achter:'De laagste toon die een snaar of luchtkolom voortbrengt, bepaalt de toonhoogte die je hoort'},
+    {voor:'Wat gebeurt er met de grondtoon als een snaar korter wordt?', achter:'De grondtoon wordt hoger'},
+    {voor:'Wat zijn boventonen?', achter:'Extra tonen die met de grondtoon meeklinken, met een frequentie die een geheel veelvoud is van de grondtoon'},
+    {voor:'Geef de formule voor de resonantiefrequentie van een luchtkolom', achter:'f = v / (4L)'},
+    {voor:'Wat betekent het als toon B een octaaf hoger is dan toon A?', achter:'De frequentie van B is 2× zo hoog als die van A'},
+    {voor:'Wat is resonantie?', achter:'Het versterkt meetrillen van een voorwerp op dezelfde frequentie als de trillingsbron'},
+    {voor:'Wat bepaalt de klankkleur van een instrument?', achter:'De onderlinge sterkte-verhouding van de boventonen'},
+    {voor:'Hoe verandert de grondtoon van een blaasinstrument als de luchtkolom langer wordt?', achter:'De grondtoon wordt lager'}
+  ];
+  var p3FcKaarten = [], p3FcIndex = 0, p3FcGoed = 0, p3FcTotaal = 0, p3FcOmgedraaid = false;
+
+  function p3FcInit(){
+    p3FcKaarten = fisherYates(p3FcData);
+    p3FcIndex = 0; p3FcGoed = 0; p3FcTotaal = 0;
+    p3FcToonKaart();
+  }
+  function p3FcToonKaart(){
+    var k = p3FcKaarten[p3FcIndex];
+    document.getElementById('p3fc-voor').textContent = k.voor;
+    document.getElementById('p3fc-achter').textContent = k.achter;
+    document.getElementById('p3fc-card').classList.remove('flipped');
+    p3FcOmgedraaid = false;
+    document.getElementById('p3fc-oordeel').style.display = 'none';
+    document.getElementById('p3fc-teller').textContent = (p3FcIndex+1) + ' / ' + p3FcKaarten.length;
+    p3FcUpdateScore();
+  }
+  function p3FcFlip(){
+    p3FcOmgedraaid = !p3FcOmgedraaid;
+    document.getElementById('p3fc-card').classList.toggle('flipped', p3FcOmgedraaid);
+    document.getElementById('p3fc-oordeel').style.display = p3FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p3FcOordeel(goed){
+    p3FcTotaal++;
+    if (goed) p3FcGoed++;
+    p3FcUpdateScore();
+    p3FcVolgende();
+  }
+  function p3FcUpdateScore(){
+    document.getElementById('p3fc-goed').textContent = p3FcGoed;
+    document.getElementById('p3fc-totaal').textContent = p3FcTotaal;
+  }
+  function p3FcVorige(){
+    if (p3FcIndex > 0){ p3FcIndex--; p3FcToonKaart(); }
+  }
+  function p3FcVolgende(){
+    p3FcIndex = (p3FcIndex < p3FcKaarten.length - 1) ? p3FcIndex + 1 : 0;
+    p3FcToonKaart();
+  }
+  function p3FcSchud(){
+    p3FcKaarten = fisherYates(p3FcKaarten);
+    p3FcIndex = 0;
+    p3FcToonKaart();
+  }
+  function p3FcOpnieuw(){
+    p3FcGoed = 0; p3FcTotaal = 0;
+    p3FcKaarten = fisherYates(p3FcData);
+    p3FcIndex = 0;
+    p3FcToonKaart();
+  }
+
+  /* §1.3 OEFENEN — ONDERDEEL 1: gerandomiseerd f = v/(4L) */
+  function p3VlGenereer(){
+    var onbekende = pick(['f','v','L']);
+    var v, L, f, vraag, antwoord, eenheid;
+    if (onbekende === 'f'){
+      v = Math.round((330 + Math.random()*15)*10)/10;
+      L = Math.round((0.1 + Math.random()*1.9)*1000)/1000;
+      f = v / (4*L);
+      vraag = 'Een luchtkolom (&eacute;&eacute;n kant open, &eacute;&eacute;n kant dicht) heeft een lengte L = ' + L + ' m en de geluidssnelheid is v = ' + v + ' m/s. Bereken de resonantiefrequentie f (in Hz).';
+      antwoord = f; eenheid = 'Hz';
+    } else if (onbekende === 'v'){
+      L = Math.round((0.1 + Math.random()*1.9)*1000)/1000;
+      var vTemp = 330 + Math.random()*15;
+      f = Math.round((vTemp/(4*L))*10)/10;
+      vraag = 'Een luchtkolom heeft een lengte L = ' + L + ' m en een resonantiefrequentie f = ' + f + ' Hz. Bereken de geluidssnelheid v (in m/s).';
+      antwoord = f * 4 * L; eenheid = 'm/s';
+    } else {
+      v = Math.round((330 + Math.random()*15)*10)/10;
+      var LTemp = 0.1 + Math.random()*1.9;
+      f = Math.round((v/(4*LTemp))*10)/10;
+      vraag = 'Een luchtkolom heeft een resonantiefrequentie f = ' + f + ' Hz bij een geluidssnelheid v = ' + v + ' m/s. Bereken de lengte L van de luchtkolom (in m).';
+      antwoord = v / (4*f); eenheid = 'm';
+    }
+    return { vraag: vraag, antwoord: antwoord, eenheid: eenheid };
+  }
+  var p3VlGoed = 0, p3VlTotaal = 0, p3VlHuidige = null;
+  function p3VlNieuweVraag(){
+    p3VlHuidige = p3VlGenereer();
+    document.getElementById('p3vl-vraag').textContent = p3VlHuidige.vraag;
+    var input = document.getElementById('p3vl-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p3vl-controleer-btn').disabled = false;
+    document.getElementById('p3vl-controleer-btn').style.display = '';
+    document.getElementById('p3vl-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p3vl-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p3VlUpdateScore();
+  }
+  function p3VlControleer(){
+    var input = document.getElementById('p3vl-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p3vl-controleer-btn').disabled = true;
+    p3VlTotaal++;
+    var correct = p3VlHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p3VlGoed++;
+    var decimalen = p3VlHuidige.eenheid === 'm' ? 3 : 1;
+    var fb = document.getElementById('p3vl-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(decimalen) + ' ' + p3VlHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p3VlUpdateScore();
+    document.getElementById('p3vl-volgende-btn').style.display = '';
+  }
+  function p3VlVolgende(){ p3VlNieuweVraag(); }
+  function p3VlSchud(){ p3VlNieuweVraag(); }
+  function p3VlOpnieuw(){
+    p3VlGoed = 0; p3VlTotaal = 0;
+    p3VlNieuweVraag();
+  }
+  function p3VlUpdateScore(){
+    document.getElementById('p3vl-goed').textContent = p3VlGoed;
+    document.getElementById('p3vl-totaal').textContent = p3VlTotaal;
+  }
+
+  /* §1.3 OEFENEN — ONDERDEEL 2: gerandomiseerd octaven rekenen */
+  function p3OctGenereer(){
+    var f0 = Math.round((50 + Math.random()*450)*10)/10;
+    var relaties = [
+      {tekst:'een octaaf hoger', factor:2},
+      {tekst:'een octaaf lager', factor:0.5},
+      {tekst:'twee octaven hoger', factor:4}
+    ];
+    var rel = pick(relaties);
+    var antwoord = f0 * rel.factor;
+    var vraag = 'De grondtoon van een instrument heeft een frequentie van ' + f0 + ' Hz. Wat is de frequentie van de toon die ' + rel.tekst + ' klinkt (in Hz)?';
+    return { vraag: vraag, antwoord: antwoord, eenheid: 'Hz' };
+  }
+  var p3OctGoed = 0, p3OctTotaal = 0, p3OctHuidige = null;
+  function p3OctNieuweVraag(){
+    p3OctHuidige = p3OctGenereer();
+    document.getElementById('p3oct-vraag').textContent = p3OctHuidige.vraag;
+    var input = document.getElementById('p3oct-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p3oct-controleer-btn').disabled = false;
+    document.getElementById('p3oct-controleer-btn').style.display = '';
+    document.getElementById('p3oct-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p3oct-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p3OctUpdateScore();
+  }
+  function p3OctControleer(){
+    var input = document.getElementById('p3oct-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p3oct-controleer-btn').disabled = true;
+    p3OctTotaal++;
+    var correct = p3OctHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p3OctGoed++;
+    var fb = document.getElementById('p3oct-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(1) + ' ' + p3OctHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p3OctUpdateScore();
+    document.getElementById('p3oct-volgende-btn').style.display = '';
+  }
+  function p3OctVolgende(){ p3OctNieuweVraag(); }
+  function p3OctSchud(){ p3OctNieuweVraag(); }
+  function p3OctOpnieuw(){
+    p3OctGoed = 0; p3OctTotaal = 0;
+    p3OctNieuweVraag();
+  }
+  function p3OctUpdateScore(){
+    document.getElementById('p3oct-goed').textContent = p3OctGoed;
+    document.getElementById('p3oct-totaal').textContent = p3OctTotaal;
+  }
+
   /* INIT §1.1 */
   p1FcInit();
   p1OefNieuweVraag();
@@ -824,6 +1081,11 @@
   p2TfNieuweVraag();
   fisherYates(p2OscBank);
   p2OscToon();
+
+  /* INIT §1.3 */
+  p3FcInit();
+  p3VlNieuweVraag();
+  p3OctNieuweVraag();
 </script>
 </body>
 </html>
