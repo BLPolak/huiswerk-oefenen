@@ -25,6 +25,17 @@
     .tab-btn:hover:not(.active) { background: #d1d5db; }
     .tab-content { display: none; padding: 1.5rem; max-width: 820px; margin: 0 auto; }
     .tab-content.active { display: block; }
+    .sub-tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+    .sub-tab-btn {
+      padding: .4rem .95rem; border: 2px solid #7c3aed; border-radius: 999px;
+      background: #fff; color: #7c3aed; cursor: pointer;
+      font-family: Nunito, sans-serif; font-size: .85rem; font-weight: 700;
+      transition: background .15s, color .15s;
+    }
+    .sub-tab-btn.active { background: #7c3aed; color: #fff; }
+    .sub-tab-btn:hover:not(.active) { background: #ede9fe; }
+    .sub-tab-content { display: none; }
+    .sub-tab-content.active { display: block; }
     .uitleg-card, .oefening-kaart {
       background: #fff; border-radius: 12px; padding: 1.5rem;
       margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.07);
@@ -73,12 +84,155 @@
 </header>
 
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="showTab('binnenkort',this)">&#128679; Binnenkort</button>
+  <button class="tab-btn active" onclick="showTab('p1',this)">&sect;1.1 Geluidstrillingen</button>
+  <button class="tab-btn" onclick="showTab('p2',this)">&sect;1.2 Eigenschappen</button>
+  <button class="tab-btn" onclick="showTab('p3',this)">&sect;1.3 Resonantie</button>
+  <button class="tab-btn" onclick="showTab('p4',this)">&sect;1.4 Geluidssterkte</button>
+  <button class="tab-btn" onclick="showTab('p5',this)">&sect;1.5 Het gehoor</button>
 </nav>
 
-<div id="tab-binnenkort" class="tab-content active">
-  <div class="uitleg-card">
-    <p>Hier komt de oefenstof voor Natuurkunde zodra het eerste proefwerk bekend is.</p>
+<div id="tab-p1" class="tab-content active">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p1','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p1-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+  </div>
+  <div id="sub-p1-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p1-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p2" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p2','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p2-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+  </div>
+  <div id="sub-p2-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p2-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p3" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p3','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p3-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+  </div>
+  <div id="sub-p3-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p3-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p4" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p4','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p4','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p4','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p4-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+  </div>
+  <div id="sub-p4-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p4-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p5" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p5','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p5-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+  </div>
+  <div id="sub-p5-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p5-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="knoppen-rij">
+        <button disabled>&#128256; Shuffle</button>
+        <button disabled>&#8635; Opnieuw</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -86,6 +240,7 @@
 
 <script>
   function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+  function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 </script>
