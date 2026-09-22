@@ -72,6 +72,32 @@
       font-weight: 700; cursor: pointer; font-size: .9rem;
     }
     .knoppen-rij button:hover { background: #5b21b6; }
+    .knoppen-rij button:disabled { background: #cbd5e1; cursor: default; }
+    .snelheden-tabel { width: 100%; border-collapse: collapse; margin: .6rem 0 1rem; font-size: .92rem; }
+    .snelheden-tabel th, .snelheden-tabel td { padding: .4rem .6rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .snelheden-tabel th { color: #7c3aed; font-weight: 800; }
+    .snelheden-tabel td:last-child, .snelheden-tabel th:last-child { text-align: right; }
+    .open-input {
+      width: 100%; padding: .7rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      font-family: Nunito, sans-serif; font-size: 1rem; font-weight: 600; color: #1e293b;
+      margin: .6rem 0;
+    }
+    .open-input:focus { outline: none; border-color: #7c3aed; }
+    .fc-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; gap: .6rem; }
+    .fc-teller { font-size: .85rem; font-weight: 800; color: #6b7280; background: #f1f5f9; padding: .25rem .6rem; border-radius: 6px; white-space: nowrap; }
+    .flip-wrapper { width: 100%; perspective: 1000px; cursor: pointer; margin-bottom: .8rem; }
+    .flip-card { width: 100%; min-height: 160px; position: relative; transform-style: preserve-3d; transition: transform .45s; }
+    .flip-card.flipped { transform: rotateY(180deg); }
+    .flip-face {
+      position: absolute; inset: 0; backface-visibility: hidden;
+      border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.2rem; text-align: center;
+    }
+    .flip-front { background: linear-gradient(135deg, #ede9fe, #fff); border: 2px solid #ddd6fe; }
+    .flip-back { background: linear-gradient(135deg, #f3e8ff, #fff); border: 2px solid #c4b5fd; transform: rotateY(180deg); }
+    .flip-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: #8b5cf6; margin-bottom: .6rem; }
+    .flip-tekst { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; }
+    .flip-hint { font-size: .72rem; color: #94a3b8; font-weight: 600; margin-top: .8rem; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -98,23 +124,104 @@
     <button class="sub-tab-btn" onclick="showSubTab('p1','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p1-uitleg" class="sub-tab-content active">
-    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+
+    <div class="uitleg-card">
+      <h2>Geluidsbron, medium en ontvanger</h2>
+      <p>Een <strong>geluidsbron</strong> is iets dat trilt. Die trilling brengt het <strong>medium</strong> om de bron heen (bijv. lucht, water of een vaste stof) in trilling. De trilling plant zich voort door het medium als <strong>geluidsgolf</strong>. Een <strong>ontvanger</strong> (bijv. het oor) neemt de trilling ten slotte weer waar.</p>
+      <div class="stappen">
+        <div class="stap">&#9312; Geluidsbron trilt</div>
+        <div class="stap">&#9313; Medium gaat meetrillen</div>
+        <div class="stap">&#9314; Trilling plant zich voort als geluidsgolf</div>
+        <div class="stap">&#9315; Ontvanger neemt de trilling waar</div>
+      </div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Geluidssnelheid</h2>
+      <div class="voorbeeld-blok"><strong>v = s &divide; t</strong><br>v = snelheid (m/s) &middot; s = afgelegde afstand (m) &middot; t = tijd (s)</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Tabel 1.4 &mdash; Geluidssnelheden</h2>
+
+      <h3>Vaste stoffen</h3>
+      <table class="snelheden-tabel">
+        <tr><th>Stof</th><th>v (km/s)</th></tr>
+        <tr><td>Been (massief)</td><td>3,0</td></tr>
+        <tr><td>Been (poreus)</td><td>2,6</td></tr>
+        <tr><td>Beton</td><td>4,3</td></tr>
+        <tr><td>Glas</td><td>4,0&ndash;4,5</td></tr>
+        <tr><td>IJs</td><td>3,3</td></tr>
+        <tr><td>Kurk</td><td>0,5</td></tr>
+        <tr><td>Rubber</td><td>0,05</td></tr>
+        <tr><td>Staal</td><td>5,1</td></tr>
+      </table>
+
+      <h3>Vloeistoffen</h3>
+      <table class="snelheden-tabel">
+        <tr><th>Stof</th><th>v (km/s)</th></tr>
+        <tr><td>Alcohol (0&deg;C)</td><td>1,40</td></tr>
+        <tr><td>Water (0&deg;C)</td><td>1,48</td></tr>
+        <tr><td>Water (20&deg;C)</td><td>1,51</td></tr>
+        <tr><td>Zeewater</td><td>1,52</td></tr>
+      </table>
+
+      <h3>Gassen</h3>
+      <table class="snelheden-tabel">
+        <tr><th>Stof</th><th>v (km/s)</th></tr>
+        <tr><td>Helium</td><td>0,965</td></tr>
+        <tr><td>Koolstofdioxide</td><td>0,259</td></tr>
+        <tr><td>Lucht (0&deg;C)</td><td>0,332</td></tr>
+        <tr><td>Lucht (20&deg;C)</td><td>0,343</td></tr>
+      </table>
+
+      <div class="regel-blok blauw"><p><strong>Kernpunt:</strong> Geluid heeft altijd een medium nodig &mdash; het gaat niet door vacu&uuml;m (het luchtledige). Geluid gaat sneller door vaste stoffen dan door vloeistoffen, en sneller door vloeistoffen dan door gassen.</p></div>
+    </div>
+
   </div>
   <div id="sub-p1-flashcards" class="sub-tab-content">
     <div class="uitleg-card">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p1fc-goed">0</span> / <span id="p1fc-totaal">0</span></div>
+        <div class="fc-teller" id="p1fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p1FcFlip()">
+        <div class="flip-card" id="p1fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p1fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p1fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p1fc-oordeel" style="display:none">
+        <button onclick="p1FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p1FcOordeel(true)">&#10003; Goed</button>
+      </div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button onclick="p1FcVorige()">&larr; Vorige</button>
+        <button onclick="p1FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p1FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p1FcOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
   <div id="sub-p1-oefenen" class="sub-tab-content">
     <div class="oefening-kaart">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <h3>Reken met v = s &divide; t</h3>
+      <div class="score-balk">Score: <span id="p1oef-goed">0</span> / <span id="p1oef-totaal">0</span></div>
+      <div id="p1oef-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p1oef-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p1OefControleer()">
+      <div id="p1oef-feedback" class="feedback"></div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button id="p1oef-controleer-btn" onclick="p1OefControleer()">Controleer</button>
+        <button id="p1oef-volgende-btn" onclick="p1OefVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p1OefSchud()">&#128256; Shuffle</button>
+        <button onclick="p1OefOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
@@ -243,6 +350,149 @@
   function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+  /* §1.1 FLASHCARDS */
+  var p1FcData = [
+    {voor:'Wat is een geluidsbron?', achter:'Iets dat trilt en zo geluid maakt'},
+    {voor:'Wat is een medium?', achter:'De stof waardoor de geluidsgolf zich voortplant (bijv. lucht, water)'},
+    {voor:'Wat is een ontvanger?', achter:'Datgene dat de trilling waarneemt (bijv. het oor)'},
+    {voor:'Geef de formule voor geluidssnelheid', achter:'v = s / t'},
+    {voor:'Wat betekent v, s en t in v=s/t?', achter:'v = snelheid (m/s), s = afgelegde afstand (m), t = tijd (s)'},
+    {voor:'Door welk medium gaat geluid het snelst: vast, vloeibaar of gas?', achter:'Vast (dan vloeibaar, dan gas)'},
+    {voor:'Kan geluid door vacuüm (het luchtledige) gaan?', achter:'Nee, geluid heeft altijd een medium nodig'},
+    {voor:'Wat is de geluidssnelheid in lucht bij 20°C?', achter:'343 m/s (0,343 km/s)'}
+  ];
+  var p1FcKaarten = [], p1FcIndex = 0, p1FcGoed = 0, p1FcTotaal = 0, p1FcOmgedraaid = false;
+
+  function p1FcInit(){
+    p1FcKaarten = fisherYates(p1FcData);
+    p1FcIndex = 0; p1FcGoed = 0; p1FcTotaal = 0;
+    p1FcToonKaart();
+  }
+  function p1FcToonKaart(){
+    var k = p1FcKaarten[p1FcIndex];
+    document.getElementById('p1fc-voor').textContent = k.voor;
+    document.getElementById('p1fc-achter').textContent = k.achter;
+    document.getElementById('p1fc-card').classList.remove('flipped');
+    p1FcOmgedraaid = false;
+    document.getElementById('p1fc-oordeel').style.display = 'none';
+    document.getElementById('p1fc-teller').textContent = (p1FcIndex+1) + ' / ' + p1FcKaarten.length;
+    p1FcUpdateScore();
+  }
+  function p1FcFlip(){
+    p1FcOmgedraaid = !p1FcOmgedraaid;
+    document.getElementById('p1fc-card').classList.toggle('flipped', p1FcOmgedraaid);
+    document.getElementById('p1fc-oordeel').style.display = p1FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p1FcOordeel(goed){
+    p1FcTotaal++;
+    if (goed) p1FcGoed++;
+    p1FcUpdateScore();
+    p1FcVolgende();
+  }
+  function p1FcUpdateScore(){
+    document.getElementById('p1fc-goed').textContent = p1FcGoed;
+    document.getElementById('p1fc-totaal').textContent = p1FcTotaal;
+  }
+  function p1FcVorige(){
+    if (p1FcIndex > 0){ p1FcIndex--; p1FcToonKaart(); }
+  }
+  function p1FcVolgende(){
+    p1FcIndex = (p1FcIndex < p1FcKaarten.length - 1) ? p1FcIndex + 1 : 0;
+    p1FcToonKaart();
+  }
+  function p1FcSchud(){
+    p1FcKaarten = fisherYates(p1FcKaarten);
+    p1FcIndex = 0;
+    p1FcToonKaart();
+  }
+  function p1FcOpnieuw(){
+    p1FcGoed = 0; p1FcTotaal = 0;
+    p1FcKaarten = fisherYates(p1FcData);
+    p1FcIndex = 0;
+    p1FcToonKaart();
+  }
+
+  /* §1.1 OEFENEN — gerandomiseerd v = s/t */
+  var p1Stoffen = [
+    {naam:'been (massief)', v:3000}, {naam:'been (poreus)', v:2600}, {naam:'beton', v:4300},
+    {naam:'glas', v:4250}, {naam:'ijs', v:3300}, {naam:'kurk', v:500}, {naam:'rubber', v:50}, {naam:'staal', v:5100},
+    {naam:'alcohol (0°C)', v:1400}, {naam:'water (0°C)', v:1480}, {naam:'water (20°C)', v:1510}, {naam:'zeewater', v:1520},
+    {naam:'helium', v:965}, {naam:'koolstofdioxide', v:259}, {naam:'lucht (0°C)', v:332}, {naam:'lucht (20°C)', v:343}
+  ];
+  var p1OefGoed = 0, p1OefTotaal = 0, p1OefHuidige = null;
+
+  function p1OefGenereer(){
+    var onbekende = pick(['v','s','t']);
+    var s, t, v, stof, vraag, antwoord, eenheid;
+    if (onbekende === 'v'){
+      s = Math.round(50 + Math.random()*1950);
+      t = Math.round((0.1 + Math.random()*9.9)*100)/100;
+      antwoord = s / t;
+      vraag = 'Een geluidsgolf legt ' + s + ' m af in ' + t + ' s. Bereken de geluidssnelheid v (in m/s).';
+      eenheid = 'm/s';
+    } else if (onbekende === 's'){
+      stof = pick(p1Stoffen);
+      v = stof.v;
+      t = Math.round((0.1 + Math.random()*9.9)*100)/100;
+      antwoord = v * t;
+      vraag = 'Geluid reist door ' + stof.naam + ' (v = ' + v + ' m/s) gedurende ' + t + ' s. Welke afstand s legt het geluid af (in m)?';
+      eenheid = 'm';
+    } else {
+      stof = pick(p1Stoffen);
+      v = stof.v;
+      s = Math.round(50 + Math.random()*1950);
+      antwoord = s / v;
+      vraag = 'Geluid legt door ' + stof.naam + ' (v = ' + v + ' m/s) een afstand van ' + s + ' m af. Hoeveel tijd t kost dat (in s)?';
+      eenheid = 's';
+    }
+    return { vraag: vraag, antwoord: antwoord, eenheid: eenheid };
+  }
+  function p1OefNieuweVraag(){
+    p1OefHuidige = p1OefGenereer();
+    document.getElementById('p1oef-vraag').textContent = p1OefHuidige.vraag;
+    var input = document.getElementById('p1oef-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p1oef-controleer-btn').disabled = false;
+    document.getElementById('p1oef-controleer-btn').style.display = '';
+    document.getElementById('p1oef-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p1oef-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p1OefUpdateScore();
+  }
+  function p1OefControleer(){
+    var input = document.getElementById('p1oef-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p1oef-controleer-btn').disabled = true;
+    p1OefTotaal++;
+    var correct = p1OefHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p1OefGoed++;
+    var fb = document.getElementById('p1oef-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(2) + ' ' + p1OefHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p1OefUpdateScore();
+    document.getElementById('p1oef-volgende-btn').style.display = '';
+  }
+  function p1OefVolgende(){ p1OefNieuweVraag(); }
+  function p1OefSchud(){ p1OefNieuweVraag(); }
+  function p1OefOpnieuw(){
+    p1OefGoed = 0; p1OefTotaal = 0;
+    p1OefNieuweVraag();
+  }
+  function p1OefUpdateScore(){
+    document.getElementById('p1oef-goed').textContent = p1OefGoed;
+    document.getElementById('p1oef-totaal').textContent = p1OefTotaal;
+  }
+
+  /* INIT §1.1 */
+  p1FcInit();
+  p1OefNieuweVraag();
 </script>
 </body>
 </html>
