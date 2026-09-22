@@ -25,6 +25,17 @@
     .tab-btn:hover:not(.active) { background: #d1d5db; }
     .tab-content { display: none; padding: 1.5rem; max-width: 820px; margin: 0 auto; }
     .tab-content.active { display: block; }
+    .sub-tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+    .sub-tab-btn {
+      padding: .4rem .95rem; border: 2px solid #7c3aed; border-radius: 999px;
+      background: #fff; color: #7c3aed; cursor: pointer;
+      font-family: Nunito, sans-serif; font-size: .85rem; font-weight: 700;
+      transition: background .15s, color .15s;
+    }
+    .sub-tab-btn.active { background: #7c3aed; color: #fff; }
+    .sub-tab-btn:hover:not(.active) { background: #ede9fe; }
+    .sub-tab-content { display: none; }
+    .sub-tab-content.active { display: block; }
     .uitleg-card, .oefening-kaart {
       background: #fff; border-radius: 12px; padding: 1.5rem;
       margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.07);
@@ -61,6 +72,39 @@
       font-weight: 700; cursor: pointer; font-size: .9rem;
     }
     .knoppen-rij button:hover { background: #5b21b6; }
+    .knoppen-rij button:disabled { background: #cbd5e1; cursor: default; }
+    .snelheden-tabel { width: 100%; border-collapse: collapse; margin: .6rem 0 1rem; font-size: .92rem; }
+    .snelheden-tabel th, .snelheden-tabel td { padding: .4rem .6rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .snelheden-tabel th { color: #7c3aed; font-weight: 800; }
+    .snelheden-tabel td:last-child, .snelheden-tabel th:last-child { text-align: right; }
+    .open-input {
+      width: 100%; padding: .7rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      font-family: Nunito, sans-serif; font-size: 1rem; font-weight: 600; color: #1e293b;
+      margin: .6rem 0;
+    }
+    .open-input:focus { outline: none; border-color: #7c3aed; }
+    .fc-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; gap: .6rem; }
+    .fc-teller { font-size: .85rem; font-weight: 800; color: #6b7280; background: #f1f5f9; padding: .25rem .6rem; border-radius: 6px; white-space: nowrap; }
+    .flip-wrapper { width: 100%; perspective: 1000px; cursor: pointer; margin-bottom: .8rem; }
+    .flip-card { width: 100%; min-height: 160px; position: relative; transform-style: preserve-3d; transition: transform .45s; }
+    .flip-card.flipped { transform: rotateY(180deg); }
+    .flip-face {
+      position: absolute; inset: 0; backface-visibility: hidden;
+      border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.2rem; text-align: center;
+    }
+    .flip-front { background: linear-gradient(135deg, #ede9fe, #fff); border: 2px solid #ddd6fe; }
+    .flip-back { background: linear-gradient(135deg, #f3e8ff, #fff); border: 2px solid #c4b5fd; transform: rotateY(180deg); }
+    .flip-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: #8b5cf6; margin-bottom: .6rem; }
+    .flip-tekst { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; }
+    .flip-hint { font-size: .72rem; color: #94a3b8; font-weight: 600; margin-top: .8rem; }
+    .osc-vergelijk-rij { display: flex; gap: .8rem; flex-wrap: wrap; margin: .8rem 0; }
+    .osc-vergelijk-item { flex: 1 1 140px; min-width: 120px; background: #faf5ff; border-radius: 8px; padding: .5rem; text-align: center; }
+    .osc-vergelijk-label { font-size: .78rem; font-weight: 700; color: #5b21b6; margin-top: .3rem; }
+    .osc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: .6rem; margin: .8rem 0 1.2rem; }
+    .osc-item { background: #faf5ff; border-radius: 8px; padding: .5rem; text-align: center; }
+    .osc-item-label { font-size: .95rem; font-weight: 900; color: #5b21b6; margin-top: .3rem; }
+    .audiogram-wrap { background: #faf5ff; border-radius: 8px; padding: .8rem .6rem .4rem; margin: .6rem 0 1rem; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -73,12 +117,625 @@
 </header>
 
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="showTab('binnenkort',this)">&#128679; Binnenkort</button>
+  <button class="tab-btn active" onclick="showTab('p1',this)">&sect;1.1 Geluidstrillingen</button>
+  <button class="tab-btn" onclick="showTab('p2',this)">&sect;1.2 Eigenschappen</button>
+  <button class="tab-btn" onclick="showTab('p3',this)">&sect;1.3 Resonantie</button>
+  <button class="tab-btn" onclick="showTab('p4',this)">&sect;1.4 Geluidssterkte</button>
+  <button class="tab-btn" onclick="showTab('p5',this)">&sect;1.5 Het gehoor</button>
 </nav>
 
-<div id="tab-binnenkort" class="tab-content active">
-  <div class="uitleg-card">
-    <p>Hier komt de oefenstof voor Natuurkunde zodra het eerste proefwerk bekend is.</p>
+<div id="tab-p1" class="tab-content active">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p1','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p1-uitleg" class="sub-tab-content active">
+
+    <div class="uitleg-card">
+      <h2>Geluidsbron, medium en ontvanger</h2>
+      <p>Een <strong>geluidsbron</strong> is iets dat trilt. Die trilling brengt het <strong>medium</strong> om de bron heen (bijv. lucht, water of een vaste stof) in trilling. De trilling plant zich voort door het medium als <strong>geluidsgolf</strong>. Een <strong>ontvanger</strong> (bijv. het oor) neemt de trilling ten slotte weer waar.</p>
+      <div class="stappen">
+        <div class="stap">&#9312; Geluidsbron trilt</div>
+        <div class="stap">&#9313; Medium gaat meetrillen</div>
+        <div class="stap">&#9314; Trilling plant zich voort als geluidsgolf</div>
+        <div class="stap">&#9315; Ontvanger neemt de trilling waar</div>
+      </div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Geluidssnelheid</h2>
+      <div class="voorbeeld-blok"><strong>v = s &divide; t</strong><br>v = snelheid (m/s) &middot; s = afgelegde afstand (m) &middot; t = tijd (s)</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Tabel 1.4 &mdash; Geluidssnelheden</h2>
+
+      <h3>Vaste stoffen</h3>
+      <table class="snelheden-tabel">
+        <tr><th>Stof</th><th>v (km/s)</th></tr>
+        <tr><td>Been (massief)</td><td>3,0</td></tr>
+        <tr><td>Been (poreus)</td><td>2,6</td></tr>
+        <tr><td>Beton</td><td>4,3</td></tr>
+        <tr><td>Glas</td><td>4,0&ndash;4,5</td></tr>
+        <tr><td>IJs</td><td>3,3</td></tr>
+        <tr><td>Kurk</td><td>0,5</td></tr>
+        <tr><td>Rubber</td><td>0,05</td></tr>
+        <tr><td>Staal</td><td>5,1</td></tr>
+      </table>
+
+      <h3>Vloeistoffen</h3>
+      <table class="snelheden-tabel">
+        <tr><th>Stof</th><th>v (km/s)</th></tr>
+        <tr><td>Alcohol (0&deg;C)</td><td>1,40</td></tr>
+        <tr><td>Water (0&deg;C)</td><td>1,48</td></tr>
+        <tr><td>Water (20&deg;C)</td><td>1,51</td></tr>
+        <tr><td>Zeewater</td><td>1,52</td></tr>
+      </table>
+
+      <h3>Gassen</h3>
+      <table class="snelheden-tabel">
+        <tr><th>Stof</th><th>v (km/s)</th></tr>
+        <tr><td>Helium</td><td>0,965</td></tr>
+        <tr><td>Koolstofdioxide</td><td>0,259</td></tr>
+        <tr><td>Lucht (0&deg;C)</td><td>0,332</td></tr>
+        <tr><td>Lucht (20&deg;C)</td><td>0,343</td></tr>
+      </table>
+
+      <div class="regel-blok blauw"><p><strong>Kernpunt:</strong> Geluid heeft altijd een medium nodig &mdash; het gaat niet door vacu&uuml;m (het luchtledige). Geluid gaat sneller door vaste stoffen dan door vloeistoffen, en sneller door vloeistoffen dan door gassen.</p></div>
+    </div>
+
+  </div>
+  <div id="sub-p1-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p1fc-goed">0</span> / <span id="p1fc-totaal">0</span></div>
+        <div class="fc-teller" id="p1fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p1FcFlip()">
+        <div class="flip-card" id="p1fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p1fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p1fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p1fc-oordeel" style="display:none">
+        <button onclick="p1FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p1FcOordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p1FcVorige()">&larr; Vorige</button>
+        <button onclick="p1FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p1FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p1FcOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p1-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Reken met v = s &divide; t</h3>
+      <div class="score-balk">Score: <span id="p1oef-goed">0</span> / <span id="p1oef-totaal">0</span></div>
+      <div id="p1oef-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p1oef-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p1OefControleer()">
+      <div id="p1oef-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p1oef-controleer-btn" onclick="p1OefControleer()">Controleer</button>
+        <button id="p1oef-volgende-btn" onclick="p1OefVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p1OefSchud()">&#128256; Shuffle</button>
+        <button onclick="p1OefOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p2" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p2','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p2-uitleg" class="sub-tab-content active">
+
+    <div class="uitleg-card">
+      <h2>Oscillogram</h2>
+      <p>Een <strong>oscillogram</strong> is een (u,t)-diagram van een trilling, bijvoorbeeld gemaakt met een microfoon. Op de <strong>horizontale as</strong> staat de tijd (t), op de <strong>verticale as</strong> staat de uitwijking (u).</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Trillingstijd en frequentie</h2>
+      <p>De <strong>trillingstijd (T)</strong> is de tijd die &eacute;&eacute;n volledige trilling duurt, in seconden (s) of milliseconden (ms).</p>
+      <p>De <strong>frequentie (f)</strong> is het aantal trillingen per seconde, in hertz (Hz).</p>
+      <div class="voorbeeld-blok"><strong>f = 1 &divide; T</strong> &nbsp;&nbsp;en&nbsp;&nbsp; <strong>T = 1 &divide; f</strong></div>
+      <div class="regel-blok blauw"><p><strong>Toonhoogte:</strong> hoe hoger de frequentie, hoe hoger de toon.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Amplitude</h2>
+      <p>De <strong>amplitude</strong> is de maximale uitwijking van de trilling. De amplitude hangt samen met het volume: hoe groter de amplitude, hoe harder het geluid.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Zuivere en samengestelde toon</h2>
+      <p>Een <strong>zuivere toon</strong> bestaat uit &eacute;&eacute;n frequentie. Een <strong>samengestelde toon</strong> ontstaat doordat meerdere frequenties bij elkaar worden opgeteld &mdash; deze klinkt minder &ldquo;schoon&rdquo; dan een zuivere toon.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Frequentie en amplitude in beeld</h2>
+      <p>Hieronder zie je hetzelfde soort signaal met een andere frequentie (boven), en met een andere amplitude (onder).</p>
+      <div class="osc-vergelijk-rij">
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,26.9 L4.7,23.9 L7.0,21.2 L9.3,18.9 L11.7,17.0 L14.0,15.7 L16.3,15.1 L18.7,15.1 L21.0,15.7 L23.3,17.0 L25.7,18.9 L28.0,21.2 L30.3,23.9 L32.7,26.9 L35.0,30.0 L37.3,33.1 L39.7,36.1 L42.0,38.8 L44.3,41.1 L46.7,43.0 L49.0,44.3 L51.3,44.9 L53.7,44.9 L56.0,44.3 L58.3,43.0 L60.7,41.1 L63.0,38.8 L65.3,36.1 L67.7,33.1 L70.0,30.0 L72.3,26.9 L74.7,23.9 L77.0,21.2 L79.3,18.9 L81.7,17.0 L84.0,15.7 L86.3,15.1 L88.7,15.1 L91.0,15.7 L93.3,17.0 L95.7,18.9 L98.0,21.2 L100.3,23.9 L102.7,26.9 L105.0,30.0 L107.3,33.1 L109.7,36.1 L112.0,38.8 L114.3,41.1 L116.7,43.0 L119.0,44.3 L121.3,44.9 L123.7,44.9 L126.0,44.3 L128.3,43.0 L130.7,41.1 L133.0,38.8 L135.3,36.1 L137.7,33.1 L140.0,30.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Lage frequentie (lage toon)</div>
+        </div>
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,21.2 L4.7,15.7 L7.0,15.7 L9.3,21.2 L11.7,30.0 L14.0,38.8 L16.3,44.3 L18.7,44.3 L21.0,38.8 L23.3,30.0 L25.7,21.2 L28.0,15.7 L30.3,15.7 L32.7,21.2 L35.0,30.0 L37.3,38.8 L39.7,44.3 L42.0,44.3 L44.3,38.8 L46.7,30.0 L49.0,21.2 L51.3,15.7 L53.7,15.7 L56.0,21.2 L58.3,30.0 L60.7,38.8 L63.0,44.3 L65.3,44.3 L67.7,38.8 L70.0,30.0 L72.3,21.2 L74.7,15.7 L77.0,15.7 L79.3,21.2 L81.7,30.0 L84.0,38.8 L86.3,44.3 L88.7,44.3 L91.0,38.8 L93.3,30.0 L95.7,21.2 L98.0,15.7 L100.3,15.7 L102.7,21.2 L105.0,30.0 L107.3,38.8 L109.7,44.3 L112.0,44.3 L114.3,38.8 L116.7,30.0 L119.0,21.2 L121.3,15.7 L123.7,15.7 L126.0,21.2 L128.3,30.0 L130.7,38.8 L133.0,44.3 L135.3,44.3 L137.7,38.8 L140.0,30.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Hoge frequentie (hoge toon)</div>
+        </div>
+      </div>
+      <div class="osc-vergelijk-rij">
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,27.5 L4.7,25.3 L7.0,23.5 L9.3,22.4 L11.7,22.0 L14.0,22.4 L16.3,23.5 L18.7,25.3 L21.0,27.5 L23.3,30.0 L25.7,32.5 L28.0,34.7 L30.3,36.5 L32.7,37.6 L35.0,38.0 L37.3,37.6 L39.7,36.5 L42.0,34.7 L44.3,32.5 L46.7,30.0 L49.0,27.5 L51.3,25.3 L53.7,23.5 L56.0,22.4 L58.3,22.0 L60.7,22.4 L63.0,23.5 L65.3,25.3 L67.7,27.5 L70.0,30.0 L72.3,32.5 L74.7,34.7 L77.0,36.5 L79.3,37.6 L81.7,38.0 L84.0,37.6 L86.3,36.5 L88.7,34.7 L91.0,32.5 L93.3,30.0 L95.7,27.5 L98.0,25.3 L100.3,23.5 L102.7,22.4 L105.0,22.0 L107.3,22.4 L109.7,23.5 L112.0,25.3 L114.3,27.5 L116.7,30.0 L119.0,32.5 L121.3,34.7 L123.7,36.5 L126.0,37.6 L128.3,38.0 L130.7,37.6 L133.0,36.5 L135.3,34.7 L137.7,32.5 L140.0,30.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Kleine amplitude (zacht geluid)</div>
+        </div>
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,23.2 L4.7,17.1 L7.0,12.2 L9.3,9.1 L11.7,8.0 L14.0,9.1 L16.3,12.2 L18.7,17.1 L21.0,23.2 L23.3,30.0 L25.7,36.8 L28.0,42.9 L30.3,47.8 L32.7,50.9 L35.0,52.0 L37.3,50.9 L39.7,47.8 L42.0,42.9 L44.3,36.8 L46.7,30.0 L49.0,23.2 L51.3,17.1 L53.7,12.2 L56.0,9.1 L58.3,8.0 L60.7,9.1 L63.0,12.2 L65.3,17.1 L67.7,23.2 L70.0,30.0 L72.3,36.8 L74.7,42.9 L77.0,47.8 L79.3,50.9 L81.7,52.0 L84.0,50.9 L86.3,47.8 L88.7,42.9 L91.0,36.8 L93.3,30.0 L95.7,23.2 L98.0,17.1 L100.3,12.2 L102.7,9.1 L105.0,8.0 L107.3,9.1 L109.7,12.2 L112.0,17.1 L114.3,23.2 L116.7,30.0 L119.0,36.8 L121.3,42.9 L123.7,47.8 L126.0,50.9 L128.3,52.0 L130.7,50.9 L133.0,47.8 L135.3,42.9 L137.7,36.8 L140.0,30.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Grote amplitude (hard geluid)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div id="sub-p2-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p2fc-goed">0</span> / <span id="p2fc-totaal">0</span></div>
+        <div class="fc-teller" id="p2fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p2FcFlip()">
+        <div class="flip-card" id="p2fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p2fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p2fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p2fc-oordeel" style="display:none">
+        <button onclick="p2FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p2FcOordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p2FcVorige()">&larr; Vorige</button>
+        <button onclick="p2FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p2FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p2FcOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p2-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 &mdash; Reken met f = 1 &divide; T</h3>
+      <div class="score-balk">Score: <span id="p2tf-goed">0</span> / <span id="p2tf-totaal">0</span></div>
+      <div id="p2tf-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p2tf-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p2TfControleer()">
+      <div id="p2tf-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p2tf-controleer-btn" onclick="p2TfControleer()">Controleer</button>
+        <button id="p2tf-volgende-btn" onclick="p2TfVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p2TfSchud()">&#128256; Shuffle</button>
+        <button onclick="p2TfOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Oscillogrammen vergelijken</h3>
+      <div class="osc-grid">
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,31.9 L5.3,28.9 L8.0,26.2 L10.7,23.9 L13.3,22.0 L16.0,20.7 L18.7,20.1 L21.3,20.1 L24.0,20.7 L26.7,22.0 L29.3,23.9 L32.0,26.2 L34.7,28.9 L37.3,31.9 L40.0,35.0 L42.7,38.1 L45.3,41.1 L48.0,43.8 L50.7,46.1 L53.3,48.0 L56.0,49.3 L58.7,49.9 L61.3,49.9 L64.0,49.3 L66.7,48.0 L69.3,46.1 L72.0,43.8 L74.7,41.1 L77.3,38.1 L80.0,35.0 L82.7,31.9 L85.3,28.9 L88.0,26.2 L90.7,23.9 L93.3,22.0 L96.0,20.7 L98.7,20.1 L101.3,20.1 L104.0,20.7 L106.7,22.0 L109.3,23.9 L112.0,26.2 L114.7,28.9 L117.3,31.9 L120.0,35.0 L122.7,38.1 L125.3,41.1 L128.0,43.8 L130.7,46.1 L133.3,48.0 L136.0,49.3 L138.7,49.9 L141.3,49.9 L144.0,49.3 L146.7,48.0 L149.3,46.1 L152.0,43.8 L154.7,41.1 L157.3,38.1 L160.0,35.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">A</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,27.5 L5.3,22.0 L8.0,20.0 L10.7,22.0 L13.3,27.5 L16.0,35.0 L18.7,42.5 L21.3,48.0 L24.0,50.0 L26.7,48.0 L29.3,42.5 L32.0,35.0 L34.7,27.5 L37.3,22.0 L40.0,20.0 L42.7,22.0 L45.3,27.5 L48.0,35.0 L50.7,42.5 L53.3,48.0 L56.0,50.0 L58.7,48.0 L61.3,42.5 L64.0,35.0 L66.7,27.5 L69.3,22.0 L72.0,20.0 L74.7,22.0 L77.3,27.5 L80.0,35.0 L82.7,42.5 L85.3,48.0 L88.0,50.0 L90.7,48.0 L93.3,42.5 L96.0,35.0 L98.7,27.5 L101.3,22.0 L104.0,20.0 L106.7,22.0 L109.3,27.5 L112.0,35.0 L114.7,42.5 L117.3,48.0 L120.0,50.0 L122.7,48.0 L125.3,42.5 L128.0,35.0 L130.7,27.5 L133.3,22.0 L136.0,20.0 L138.7,22.0 L141.3,27.5 L144.0,35.0 L146.7,42.5 L149.3,48.0 L152.0,50.0 L154.7,48.0 L157.3,42.5 L160.0,35.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">B</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,32.5 L5.3,30.3 L8.0,28.5 L10.7,27.4 L13.3,27.0 L16.0,27.4 L18.7,28.5 L21.3,30.3 L24.0,32.5 L26.7,35.0 L29.3,37.5 L32.0,39.7 L34.7,41.5 L37.3,42.6 L40.0,43.0 L42.7,42.6 L45.3,41.5 L48.0,39.7 L50.7,37.5 L53.3,35.0 L56.0,32.5 L58.7,30.3 L61.3,28.5 L64.0,27.4 L66.7,27.0 L69.3,27.4 L72.0,28.5 L74.7,30.3 L77.3,32.5 L80.0,35.0 L82.7,37.5 L85.3,39.7 L88.0,41.5 L90.7,42.6 L93.3,43.0 L96.0,42.6 L98.7,41.5 L101.3,39.7 L104.0,37.5 L106.7,35.0 L109.3,32.5 L112.0,30.3 L114.7,28.5 L117.3,27.4 L120.0,27.0 L122.7,27.4 L125.3,28.5 L128.0,30.3 L130.7,32.5 L133.3,35.0 L136.0,37.5 L138.7,39.7 L141.3,41.5 L144.0,42.6 L146.7,43.0 L149.3,42.6 L152.0,41.5 L154.7,39.7 L157.3,37.5 L160.0,35.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">C</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,26.3 L5.3,18.5 L8.0,12.3 L10.7,8.4 L13.3,7.0 L16.0,8.4 L18.7,12.3 L21.3,18.5 L24.0,26.3 L26.7,35.0 L29.3,43.7 L32.0,51.5 L34.7,57.7 L37.3,61.6 L40.0,63.0 L42.7,61.6 L45.3,57.7 L48.0,51.5 L50.7,43.7 L53.3,35.0 L56.0,26.3 L58.7,18.5 L61.3,12.3 L64.0,8.4 L66.7,7.0 L69.3,8.4 L72.0,12.3 L74.7,18.5 L77.3,26.3 L80.0,35.0 L82.7,43.7 L85.3,51.5 L88.0,57.7 L90.7,61.6 L93.3,63.0 L96.0,61.6 L98.7,57.7 L101.3,51.5 L104.0,43.7 L106.7,35.0 L109.3,26.3 L112.0,18.5 L114.7,12.3 L117.3,8.4 L120.0,7.0 L122.7,8.4 L125.3,12.3 L128.0,18.5 L130.7,26.3 L133.3,35.0 L136.0,43.7 L138.7,51.5 L141.3,57.7 L144.0,61.6 L146.7,63.0 L149.3,61.6 L152.0,57.7 L154.7,51.5 L157.3,43.7 L160.0,35.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">D</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.0,28.0 L4.0,22.9 L6.0,20.9 L8.0,22.2 L10.0,25.8 L12.0,29.8 L14.0,32.6 L16.0,33.1 L18.0,31.2 L20.0,27.9 L22.0,25.1 L24.0,24.3 L26.0,26.6 L28.0,31.9 L30.0,38.8 L32.0,45.6 L34.0,50.2 L36.0,51.5 L38.0,49.4 L40.0,45.0 L42.0,40.0 L44.0,36.3 L46.0,35.0 L48.0,36.2 L50.0,38.8 L52.0,41.3 L54.0,41.8 L56.0,39.5 L58.0,34.5 L60.0,27.9 L62.0,21.8 L64.0,17.9 L66.0,17.4 L68.0,20.4 L70.0,25.8 L72.0,31.6 L74.0,36.1 L76.0,38.1 L78.0,37.4 L80.0,35.0 L82.0,32.6 L84.0,31.9 L86.0,33.9 L88.0,38.4 L90.0,44.2 L92.0,49.6 L94.0,52.6 L96.0,52.1 L98.0,48.2 L100.0,42.1 L102.0,35.5 L104.0,30.5 L106.0,28.2 L108.0,28.7 L110.0,31.2 L112.0,33.8 L114.0,35.0 L116.0,33.7 L118.0,30.0 L120.0,25.0 L122.0,20.6 L124.0,18.5 L126.0,19.8 L128.0,24.4 L130.0,31.2 L132.0,38.1 L134.0,43.4 L136.0,45.7 L138.0,44.9 L140.0,42.1 L142.0,38.8 L144.0,36.9 L146.0,37.4 L148.0,40.2 L150.0,44.2 L152.0,47.8 L154.0,49.1 L156.0,47.1 L158.0,42.0 L160.0,35.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">E</div>
+        </div>
+      </div>
+      <div class="score-balk">Score: <span id="p2osc-goed">0</span> / <span id="p2osc-totaal">0</span></div>
+      <div id="p2osc-vraag" class="vraag-tekst"></div>
+      <div id="p2osc-opties" class="mc-grid"></div>
+      <div id="p2osc-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p2OscOpnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2OscSchud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p3" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p3','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p3-uitleg" class="sub-tab-content active">
+
+    <div class="uitleg-card">
+      <h2>Grondtoon</h2>
+      <p>De <strong>grondtoon</strong> is de laagste (basis)toon die een trillende snaar of luchtkolom voortbrengt. De grondtoon bepaalt welke toonhoogte je hoort.</p>
+      <div class="regel-blok blauw"><p>Hoe <strong>korter, dunner of strakker</strong> een snaar, hoe <strong>hoger</strong> de grondtoon (en omgekeerd).</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Boventonen</h2>
+      <p>Naast de grondtoon klinken vaak <strong>boventonen</strong> mee: extra tonen met een frequentie die een geheel veelvoud is van de grondtoon (2&times;, 3&times;, enz.).</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Blaasinstrumenten en resonantiefrequentie</h2>
+      <p>Bij blaasinstrumenten bepaalt de trillende <strong>luchtkolom</strong> in het instrument de grondtoon. Hoe langer de luchtkolom, hoe <strong>lager</strong> de grondtoon.</p>
+      <div class="voorbeeld-blok"><strong>f = v &divide; (4L)</strong><br>v = geluidssnelheid (m/s) &middot; L = lengte luchtkolom (m) &middot; f = resonantiefrequentie (Hz)<br><span style="font-size:.85rem;color:#6b7280;">(voor een luchtkolom met één kant open en één kant dicht)</span></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Octaaf</h2>
+      <p>Een toon die een <strong>octaaf</strong> hoger klinkt, heeft een <strong>2&times; zo hoge</strong> frequentie (dubbel). Een octaaf lager betekent een <strong>halve</strong> frequentie. Zo'n toon klinkt als &ldquo;dezelfde&rdquo; toon, maar dan hoger of lager.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Resonantie en klankkleur</h2>
+      <p><strong>Resonantie</strong> is het versterkt meetrillen van een voorwerp op dezelfde frequentie als de trillingsbron. Dit versterkt het geluid &mdash; bijvoorbeeld de klankkast van een gitaar.</p>
+      <p>De <strong>klankkleur</strong> is het eigen geluid van een instrument, bepaald door de sterkte-verhouding van de boventonen. Daardoor klinkt dezelfde toon anders op verschillende instrumenten.</p>
+    </div>
+
+  </div>
+  <div id="sub-p3-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p3fc-goed">0</span> / <span id="p3fc-totaal">0</span></div>
+        <div class="fc-teller" id="p3fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p3FcFlip()">
+        <div class="flip-card" id="p3fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p3fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p3fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p3fc-oordeel" style="display:none">
+        <button onclick="p3FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p3FcOordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p3FcVorige()">&larr; Vorige</button>
+        <button onclick="p3FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p3FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p3FcOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p3-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 &mdash; Reken met f = v &divide; (4L)</h3>
+      <div class="score-balk">Score: <span id="p3vl-goed">0</span> / <span id="p3vl-totaal">0</span></div>
+      <div id="p3vl-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p3vl-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p3VlControleer()">
+      <div id="p3vl-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p3vl-controleer-btn" onclick="p3VlControleer()">Controleer</button>
+        <button id="p3vl-volgende-btn" onclick="p3VlVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p3VlSchud()">&#128256; Shuffle</button>
+        <button onclick="p3VlOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Octaven rekenen</h3>
+      <div class="score-balk">Score: <span id="p3oct-goed">0</span> / <span id="p3oct-totaal">0</span></div>
+      <div id="p3oct-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p3oct-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p3OctControleer()">
+      <div id="p3oct-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p3oct-controleer-btn" onclick="p3OctControleer()">Controleer</button>
+        <button id="p3oct-volgende-btn" onclick="p3OctVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p3OctSchud()">&#128256; Shuffle</button>
+        <button onclick="p3OctOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p4" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p4','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p4','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p4','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p4-uitleg" class="sub-tab-content active">
+
+    <div class="uitleg-card">
+      <h2>Geluidssterkte</h2>
+      <p>De <strong>geluidssterkte</strong> (hoe hard geluid is) hangt af van de amplitude van de trilling. Geluidssterkte meet je in <strong>decibel (dB)</strong>.</p>
+      <div class="regel-blok blauw"><p><strong>3 dB toename</strong> = 2&times; zo hard geluid. <strong>3 dB afname</strong> = 2&times; zo zacht geluid.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Kwadratenwet (afstand)</h2>
+      <p>Hoe verder je van een geluidsbron af staat, hoe zachter het geluid.</p>
+      <div class="stappen">
+        <div class="stap">2&times; zo ver weg &rarr; 4&times; zo zacht &rarr; &minus;6 dB</div>
+        <div class="stap">3&times; zo ver weg &rarr; 9&times; zo zacht &rarr; &asymp; &minus;9,5 dB</div>
+      </div>
+      <div class="regel-blok oranje"><p><strong>Hoofdregel voor de oefeningen:</strong> 2&times; afstand &rarr; &minus;6 dB.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Meerdere geluidsbronnen samen</h2>
+      <p>Twee gelijke geluidsbronnen samen geven <strong>+3 dB</strong> ten opzichte van &eacute;&eacute;n bron (2&times; zoveel bronnen = 2&times; zo hard = +3 dB). Vier gelijke bronnen samen geven <strong>+6 dB</strong> (2&times; de verdubbeling), enzovoort.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <p style="font-size:.85rem;color:#6b7280;">Gehoorschade en de risicodrempel komen in &sect;1.5 aan bod &mdash; hier gaat het alleen om de rekenregels voor geluidssterkte.</p>
+    </div>
+
+  </div>
+  <div id="sub-p4-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p4fc-goed">0</span> / <span id="p4fc-totaal">0</span></div>
+        <div class="fc-teller" id="p4fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p4FcFlip()">
+        <div class="flip-card" id="p4fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p4fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p4fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p4fc-oordeel" style="display:none">
+        <button onclick="p4FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p4FcOordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p4FcVorige()">&larr; Vorige</button>
+        <button onclick="p4FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p4FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p4FcOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p4-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 &mdash; dB-verschil &harr; factor hardheid</h3>
+      <div class="score-balk">Score: <span id="p4db-goed">0</span> / <span id="p4db-totaal">0</span></div>
+      <div id="p4db-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p4db-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p4DbControleer()">
+      <div id="p4db-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p4db-controleer-btn" onclick="p4DbControleer()">Controleer</button>
+        <button id="p4db-volgende-btn" onclick="p4DbVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p4DbSchud()">&#128256; Shuffle</button>
+        <button onclick="p4DbOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Kwadratenwet (afstand)</h3>
+      <div class="score-balk">Score: <span id="p4kwad-goed">0</span> / <span id="p4kwad-totaal">0</span></div>
+      <div id="p4kwad-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p4kwad-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p4KwadControleer()">
+      <div id="p4kwad-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p4kwad-controleer-btn" onclick="p4KwadControleer()">Controleer</button>
+        <button id="p4kwad-volgende-btn" onclick="p4KwadVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p4KwadSchud()">&#128256; Shuffle</button>
+        <button onclick="p4KwadOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p5" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p5','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p5-uitleg" class="sub-tab-content active">
+
+    <div class="uitleg-card">
+      <h2>Gehoordrempel</h2>
+      <p>De <strong>gehoordrempel</strong> is de zachtste geluidssterkte (in dB) die je nog net kunt horen bij een bepaalde frequentie. Deze is het laagst (dus je gehoor is het gevoeligst) rond <strong>1000&ndash;4000 Hz</strong>, en hoger bij lage en hoge frequenties &mdash; daar moet een geluid harder zijn voordat je het hoort.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Pijngrens</h2>
+      <p>De <strong>pijngrens</strong> is de geluidssterkte waarbij geluid pijn gaat doen. Dit ligt rond <strong>120 dB</strong>, vrij onafhankelijk van de frequentie.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Gehoorschade en risicodrempel</h2>
+      <p><strong>Gehoorschade</strong> ontstaat door beschadiging van de trilhaartjes in het slakkenhuis. Deze schade is <strong>onomkeerbaar</strong>: trilhaartjes herstellen niet. Het risico neemt toe bij harder geluid &eacute;n bij langere blootstellingsduur.</p>
+      <div class="regel-blok rood-blok"><p>De <strong>risicodrempel</strong> is de grens (sterkte + blootstellingsduur) waarboven gehoorschade kan ontstaan.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Audiogram</h2>
+      <p>Een <strong>audiogram</strong> is een grafiek die per frequentie het gehoorverlies (in dB t.o.v. de norm) van een persoon weergeeft. Hiermee wordt gehoorschade of leeftijdsgebonden gehoorverlies in kaart gebracht: hoe verder de lijn naar beneden zakt, hoe groter het gehoorverlies bij die frequentie.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Fletcher-index</h2>
+      <p>De <strong>Fletcher-index</strong> is de gemiddelde mate van gehoorverlies. Je berekent hem als het gemiddelde van het gehoorverlies (in dB) bij <strong>1000, 2000 en 4000 Hz</strong>.</p>
+      <div class="regel-blok blauw"><p>Fletcher-index = (verlies bij 1000 Hz + verlies bij 2000 Hz + verlies bij 4000 Hz) &divide; 3</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Categorie&euml;n gehoorverlies</h2>
+      <table class="snelheden-tabel">
+        <tr><th>Categorie</th><th>Gehoorverlies</th></tr>
+        <tr><td>Normaal gehoor</td><td>&minus;10 tot 15 dB</td></tr>
+        <tr><td>Licht gehoorverlies</td><td>16 tot 40 dB</td></tr>
+        <tr><td>Matig gehoorverlies</td><td>41&ndash;55 dB</td></tr>
+        <tr><td>Ernstig gehoorverlies</td><td>56&ndash;70 dB</td></tr>
+        <tr><td>Zeer ernstig gehoorverlies</td><td>71&ndash;90 dB</td></tr>
+        <tr><td>Doofheid</td><td>&gt; 90 dB</td></tr>
+      </table>
+    </div>
+
+  </div>
+  <div id="sub-p5-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p5fc-goed">0</span> / <span id="p5fc-totaal">0</span></div>
+        <div class="fc-teller" id="p5fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p5FcFlip()">
+        <div class="flip-card" id="p5fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p5fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p5fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p5fc-oordeel" style="display:none">
+        <button onclick="p5FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p5FcOordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p5FcVorige()">&larr; Vorige</button>
+        <button onclick="p5FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p5FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p5FcOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p5-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 &mdash; Audiogram-interpretatie</h3>
+      <div class="audiogram-wrap">
+        <svg viewBox="0 0 330 220" style="width:100%;height:auto;display:block;">
+          <line x1="30" y1="10" x2="30" y2="170" stroke="#cbd5e1" stroke-width="1"/>
+          <line x1="30" y1="170" x2="310" y2="170" stroke="#cbd5e1" stroke-width="1"/>
+          <line x1="30" y1="10" x2="310" y2="10" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="45.6" x2="310" y2="45.6" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="81.1" x2="310" y2="81.1" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="116.7" x2="310" y2="116.7" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="152.2" x2="310" y2="152.2" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="4" y="13" font-size="9" fill="#6b7280">0</text>
+          <text x="0" y="49" font-size="9" fill="#6b7280">20</text>
+          <text x="0" y="84" font-size="9" fill="#6b7280">40</text>
+          <text x="0" y="120" font-size="9" fill="#6b7280">60</text>
+          <text x="0" y="155" font-size="9" fill="#6b7280">80</text>
+          <text x="2" y="200" font-size="9" fill="#6b7280">dB verlies</text>
+          <text x="20" y="184" font-size="8" fill="#6b7280">125</text>
+          <text x="64" y="184" font-size="8" fill="#6b7280">250</text>
+          <text x="110" y="184" font-size="8" fill="#6b7280">500</text>
+          <text x="155" y="184" font-size="8" fill="#6b7280">1000</text>
+          <text x="200" y="184" font-size="8" fill="#6b7280">2000</text>
+          <text x="246" y="184" font-size="8" fill="#6b7280">4000</text>
+          <text x="292" y="184" font-size="8" fill="#6b7280">8000</text>
+          <text x="105" y="212" font-size="9" fill="#6b7280">Frequentie in Hz (log-schaal)</text>
+          <polyline points="30.0,18.9 76.7,18.9 123.3,10.0 170.0,10.0 216.7,18.9 263.3,18.9 310.0,27.8" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+          <circle cx="30.0" cy="18.9" r="3" fill="#3b82f6"/><circle cx="76.7" cy="18.9" r="3" fill="#3b82f6"/><circle cx="123.3" cy="10.0" r="3" fill="#3b82f6"/><circle cx="170.0" cy="10.0" r="3" fill="#3b82f6"/><circle cx="216.7" cy="18.9" r="3" fill="#3b82f6"/><circle cx="263.3" cy="18.9" r="3" fill="#3b82f6"/><circle cx="310.0" cy="27.8" r="3" fill="#3b82f6"/>
+          <polyline points="30.0,18.9 76.7,27.8 123.3,36.7 170.0,45.6 216.7,72.2 263.3,116.7 310.0,90.0" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="6,3"/>
+          <circle cx="30.0" cy="18.9" r="3" fill="#ef4444"/><circle cx="76.7" cy="27.8" r="3" fill="#ef4444"/><circle cx="123.3" cy="36.7" r="3" fill="#ef4444"/><circle cx="170.0" cy="45.6" r="3" fill="#ef4444"/><circle cx="216.7" cy="72.2" r="3" fill="#ef4444"/><circle cx="263.3" cy="116.7" r="3" fill="#ef4444"/><circle cx="310.0" cy="90.0" r="3" fill="#ef4444"/>
+        </svg>
+        <div class="osc-vergelijk-rij">
+          <div class="osc-vergelijk-item"><div class="osc-vergelijk-label" style="color:#3b82f6;">&mdash; Persoon A</div></div>
+          <div class="osc-vergelijk-item"><div class="osc-vergelijk-label" style="color:#ef4444;">- - Persoon B</div></div>
+        </div>
+      </div>
+      <div class="score-balk">Score: <span id="p5aud-goed">0</span> / <span id="p5aud-totaal">0</span></div>
+      <div id="p5aud-vraag" class="vraag-tekst"></div>
+      <div id="p5aud-mc" class="mc-grid"></div>
+      <input type="number" step="any" id="p5aud-input" class="open-input" style="display:none" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p5AudControleer()">
+      <button id="p5aud-controleer-btn" style="display:none" onclick="p5AudControleer()">Controleer</button>
+      <div id="p5aud-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p5AudOpnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p5AudSchud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Bereken de Fletcher-index</h3>
+      <div class="score-balk">Score: <span id="p5fl-goed">0</span> / <span id="p5fl-totaal">0</span></div>
+      <div id="p5fl-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p5fl-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p5FlControleer()">
+      <div id="p5fl-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p5fl-controleer-btn" onclick="p5FlControleer()">Controleer</button>
+        <button id="p5fl-volgende-btn" onclick="p5FlVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p5FlSchud()">&#128256; Shuffle</button>
+        <button onclick="p5FlOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -86,8 +743,927 @@
 
 <script>
   function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+  function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+  /* §1.1 FLASHCARDS */
+  var p1FcData = [
+    {voor:'Wat is een geluidsbron?', achter:'Iets dat trilt en zo geluid maakt'},
+    {voor:'Wat is een medium?', achter:'De stof waardoor de geluidsgolf zich voortplant (bijv. lucht, water)'},
+    {voor:'Wat is een ontvanger?', achter:'Datgene dat de trilling waarneemt (bijv. het oor)'},
+    {voor:'Geef de formule voor geluidssnelheid', achter:'v = s / t'},
+    {voor:'Wat betekent v, s en t in v=s/t?', achter:'v = snelheid (m/s), s = afgelegde afstand (m), t = tijd (s)'},
+    {voor:'Door welk medium gaat geluid het snelst: vast, vloeibaar of gas?', achter:'Vast (dan vloeibaar, dan gas)'},
+    {voor:'Kan geluid door vacuüm (het luchtledige) gaan?', achter:'Nee, geluid heeft altijd een medium nodig'},
+    {voor:'Wat is de geluidssnelheid in lucht bij 20°C?', achter:'343 m/s (0,343 km/s)'}
+  ];
+  var p1FcKaarten = [], p1FcIndex = 0, p1FcGoed = 0, p1FcTotaal = 0, p1FcOmgedraaid = false;
+
+  function p1FcInit(){
+    p1FcKaarten = fisherYates(p1FcData);
+    p1FcIndex = 0; p1FcGoed = 0; p1FcTotaal = 0;
+    p1FcToonKaart();
+  }
+  function p1FcToonKaart(){
+    var k = p1FcKaarten[p1FcIndex];
+    document.getElementById('p1fc-voor').textContent = k.voor;
+    document.getElementById('p1fc-achter').textContent = k.achter;
+    document.getElementById('p1fc-card').classList.remove('flipped');
+    p1FcOmgedraaid = false;
+    document.getElementById('p1fc-oordeel').style.display = 'none';
+    document.getElementById('p1fc-teller').textContent = (p1FcIndex+1) + ' / ' + p1FcKaarten.length;
+    p1FcUpdateScore();
+  }
+  function p1FcFlip(){
+    p1FcOmgedraaid = !p1FcOmgedraaid;
+    document.getElementById('p1fc-card').classList.toggle('flipped', p1FcOmgedraaid);
+    document.getElementById('p1fc-oordeel').style.display = p1FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p1FcOordeel(goed){
+    p1FcTotaal++;
+    if (goed) p1FcGoed++;
+    p1FcUpdateScore();
+    p1FcVolgende();
+  }
+  function p1FcUpdateScore(){
+    document.getElementById('p1fc-goed').textContent = p1FcGoed;
+    document.getElementById('p1fc-totaal').textContent = p1FcTotaal;
+  }
+  function p1FcVorige(){
+    if (p1FcIndex > 0){ p1FcIndex--; p1FcToonKaart(); }
+  }
+  function p1FcVolgende(){
+    p1FcIndex = (p1FcIndex < p1FcKaarten.length - 1) ? p1FcIndex + 1 : 0;
+    p1FcToonKaart();
+  }
+  function p1FcSchud(){
+    p1FcKaarten = fisherYates(p1FcKaarten);
+    p1FcIndex = 0;
+    p1FcToonKaart();
+  }
+  function p1FcOpnieuw(){
+    p1FcGoed = 0; p1FcTotaal = 0;
+    p1FcKaarten = fisherYates(p1FcData);
+    p1FcIndex = 0;
+    p1FcToonKaart();
+  }
+
+  /* §1.1 OEFENEN — gerandomiseerd v = s/t */
+  var p1Stoffen = [
+    {naam:'been (massief)', v:3000}, {naam:'been (poreus)', v:2600}, {naam:'beton', v:4300},
+    {naam:'glas', v:4250}, {naam:'ijs', v:3300}, {naam:'kurk', v:500}, {naam:'rubber', v:50}, {naam:'staal', v:5100},
+    {naam:'alcohol (0°C)', v:1400}, {naam:'water (0°C)', v:1480}, {naam:'water (20°C)', v:1510}, {naam:'zeewater', v:1520},
+    {naam:'helium', v:965}, {naam:'koolstofdioxide', v:259}, {naam:'lucht (0°C)', v:332}, {naam:'lucht (20°C)', v:343}
+  ];
+  var p1OefGoed = 0, p1OefTotaal = 0, p1OefHuidige = null;
+
+  function p1OefGenereer(){
+    var onbekende = pick(['v','s','t']);
+    var s, t, v, stof, vraag, antwoord, eenheid;
+    if (onbekende === 'v'){
+      s = Math.round(50 + Math.random()*1950);
+      t = Math.round((0.1 + Math.random()*9.9)*100)/100;
+      antwoord = s / t;
+      vraag = 'Een geluidsgolf legt ' + s + ' m af in ' + t + ' s. Bereken de geluidssnelheid v (in m/s).';
+      eenheid = 'm/s';
+    } else if (onbekende === 's'){
+      stof = pick(p1Stoffen);
+      v = stof.v;
+      t = Math.round((0.1 + Math.random()*9.9)*100)/100;
+      antwoord = v * t;
+      vraag = 'Geluid reist door ' + stof.naam + ' (v = ' + v + ' m/s) gedurende ' + t + ' s. Welke afstand s legt het geluid af (in m)?';
+      eenheid = 'm';
+    } else {
+      stof = pick(p1Stoffen);
+      v = stof.v;
+      s = Math.round(50 + Math.random()*1950);
+      antwoord = s / v;
+      vraag = 'Geluid legt door ' + stof.naam + ' (v = ' + v + ' m/s) een afstand van ' + s + ' m af. Hoeveel tijd t kost dat (in s)?';
+      eenheid = 's';
+    }
+    return { vraag: vraag, antwoord: antwoord, eenheid: eenheid };
+  }
+  function p1OefNieuweVraag(){
+    p1OefHuidige = p1OefGenereer();
+    document.getElementById('p1oef-vraag').textContent = p1OefHuidige.vraag;
+    var input = document.getElementById('p1oef-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p1oef-controleer-btn').disabled = false;
+    document.getElementById('p1oef-controleer-btn').style.display = '';
+    document.getElementById('p1oef-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p1oef-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p1OefUpdateScore();
+  }
+  function p1OefControleer(){
+    var input = document.getElementById('p1oef-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p1oef-controleer-btn').disabled = true;
+    p1OefTotaal++;
+    var correct = p1OefHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p1OefGoed++;
+    var fb = document.getElementById('p1oef-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(2) + ' ' + p1OefHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p1OefUpdateScore();
+    document.getElementById('p1oef-volgende-btn').style.display = '';
+  }
+  function p1OefVolgende(){ p1OefNieuweVraag(); }
+  function p1OefSchud(){ p1OefNieuweVraag(); }
+  function p1OefOpnieuw(){
+    p1OefGoed = 0; p1OefTotaal = 0;
+    p1OefNieuweVraag();
+  }
+  function p1OefUpdateScore(){
+    document.getElementById('p1oef-goed').textContent = p1OefGoed;
+    document.getElementById('p1oef-totaal').textContent = p1OefTotaal;
+  }
+
+  /* §1.2 FLASHCARDS */
+  var p2FcData = [
+    {voor:'Wat zie je op de horizontale as van een oscillogram?', achter:'De tijd (t)'},
+    {voor:'Wat is de trillingstijd (T)?', achter:'De tijd die één volledige trilling duurt'},
+    {voor:'Geef de formule voor frequentie', achter:'f = 1/T'},
+    {voor:'In welke eenheid meet je frequentie?', achter:'Hertz (Hz)'},
+    {voor:'Wat bepaalt de toonhoogte?', achter:'De frequentie: hoe hoger de frequentie, hoe hoger de toon'},
+    {voor:'Wat bepaalt het volume/de hardheid van een toon?', achter:'De amplitude: hoe groter de amplitude, hoe harder de toon'},
+    {voor:'Wat is een zuivere toon?', achter:'Een toon die bestaat uit maar één frequentie'},
+    {voor:'Wat is een samengestelde toon?', achter:'Een toon die ontstaat doordat meerdere frequenties bij elkaar worden opgeteld'}
+  ];
+  var p2FcKaarten = [], p2FcIndex = 0, p2FcGoed = 0, p2FcTotaal = 0, p2FcOmgedraaid = false;
+
+  function p2FcInit(){
+    p2FcKaarten = fisherYates(p2FcData);
+    p2FcIndex = 0; p2FcGoed = 0; p2FcTotaal = 0;
+    p2FcToonKaart();
+  }
+  function p2FcToonKaart(){
+    var k = p2FcKaarten[p2FcIndex];
+    document.getElementById('p2fc-voor').textContent = k.voor;
+    document.getElementById('p2fc-achter').textContent = k.achter;
+    document.getElementById('p2fc-card').classList.remove('flipped');
+    p2FcOmgedraaid = false;
+    document.getElementById('p2fc-oordeel').style.display = 'none';
+    document.getElementById('p2fc-teller').textContent = (p2FcIndex+1) + ' / ' + p2FcKaarten.length;
+    p2FcUpdateScore();
+  }
+  function p2FcFlip(){
+    p2FcOmgedraaid = !p2FcOmgedraaid;
+    document.getElementById('p2fc-card').classList.toggle('flipped', p2FcOmgedraaid);
+    document.getElementById('p2fc-oordeel').style.display = p2FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p2FcOordeel(goed){
+    p2FcTotaal++;
+    if (goed) p2FcGoed++;
+    p2FcUpdateScore();
+    p2FcVolgende();
+  }
+  function p2FcUpdateScore(){
+    document.getElementById('p2fc-goed').textContent = p2FcGoed;
+    document.getElementById('p2fc-totaal').textContent = p2FcTotaal;
+  }
+  function p2FcVorige(){
+    if (p2FcIndex > 0){ p2FcIndex--; p2FcToonKaart(); }
+  }
+  function p2FcVolgende(){
+    p2FcIndex = (p2FcIndex < p2FcKaarten.length - 1) ? p2FcIndex + 1 : 0;
+    p2FcToonKaart();
+  }
+  function p2FcSchud(){
+    p2FcKaarten = fisherYates(p2FcKaarten);
+    p2FcIndex = 0;
+    p2FcToonKaart();
+  }
+  function p2FcOpnieuw(){
+    p2FcGoed = 0; p2FcTotaal = 0;
+    p2FcKaarten = fisherYates(p2FcData);
+    p2FcIndex = 0;
+    p2FcToonKaart();
+  }
+
+  /* §1.2 OEFENEN — ONDERDEEL 1: gerandomiseerd f = 1/T */
+  function p2TfGenereer(){
+    var eenheidT = pick(['ms','s']);
+    var T = eenheidT === 'ms' ? Math.round((0.5 + Math.random()*19.5)*10)/10 : Math.round((0.5 + Math.random()*9.5)*10)/10;
+    var T_s = eenheidT === 'ms' ? T/1000 : T;
+    var f = Math.round((1/T_s)*10)/10;
+    var vraagOm = pick(['f','T']);
+    var vraag, antwoord, eenheid;
+    if (vraagOm === 'f'){
+      vraag = 'Een trilling heeft een trillingstijd T = ' + T + ' ' + eenheidT + '. Bereken de frequentie f (in Hz).';
+      antwoord = 1 / T_s;
+      eenheid = 'Hz';
+    } else {
+      vraag = 'Een trilling heeft een frequentie f = ' + f + ' Hz. Bereken de trillingstijd T (in ' + eenheidT + ').';
+      var T_s_uit_f = 1 / f;
+      antwoord = eenheidT === 'ms' ? T_s_uit_f*1000 : T_s_uit_f;
+      eenheid = eenheidT;
+    }
+    return { vraag: vraag, antwoord: antwoord, eenheid: eenheid };
+  }
+  var p2TfGoed = 0, p2TfTotaal = 0, p2TfHuidige = null;
+  function p2TfNieuweVraag(){
+    p2TfHuidige = p2TfGenereer();
+    document.getElementById('p2tf-vraag').textContent = p2TfHuidige.vraag;
+    var input = document.getElementById('p2tf-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p2tf-controleer-btn').disabled = false;
+    document.getElementById('p2tf-controleer-btn').style.display = '';
+    document.getElementById('p2tf-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p2tf-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p2TfUpdateScore();
+  }
+  function p2TfControleer(){
+    var input = document.getElementById('p2tf-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p2tf-controleer-btn').disabled = true;
+    p2TfTotaal++;
+    var correct = p2TfHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p2TfGoed++;
+    var fb = document.getElementById('p2tf-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(1) + ' ' + p2TfHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p2TfUpdateScore();
+    document.getElementById('p2tf-volgende-btn').style.display = '';
+  }
+  function p2TfVolgende(){ p2TfNieuweVraag(); }
+  function p2TfSchud(){ p2TfNieuweVraag(); }
+  function p2TfOpnieuw(){
+    p2TfGoed = 0; p2TfTotaal = 0;
+    p2TfNieuweVraag();
+  }
+  function p2TfUpdateScore(){
+    document.getElementById('p2tf-goed').textContent = p2TfGoed;
+    document.getElementById('p2tf-totaal').textContent = p2TfTotaal;
+  }
+
+  /* §1.2 OEFENEN — ONDERDEEL 2: vaste set, oscillogrammen vergelijken */
+  var p2OscBank = [
+    {vraag:'Welk oscillogram toont de hoogste toon?', antwoord:'B'},
+    {vraag:'Welk oscillogram toont de laagste toon?', antwoord:'A'},
+    {vraag:'Welk oscillogram toont het hardste geluid?', antwoord:'D'},
+    {vraag:'Welk oscillogram toont het zachtste geluid?', antwoord:'C'},
+    {vraag:'Welk oscillogram toont een samengestelde toon?', antwoord:'E'}
+  ];
+  var p2OscI = 0, p2OscGoed = 0, p2OscTotaal = 0, p2OscKlaar = false;
+
+  function p2OscToon(){
+    if (p2OscI >= p2OscBank.length){
+      document.getElementById('p2osc-vraag').textContent = '🎉 Klaar!';
+      document.getElementById('p2osc-opties').innerHTML = '';
+      document.getElementById('p2osc-feedback').textContent = '';
+      p2OscKlaar = true;
+      return;
+    }
+    p2OscKlaar = false;
+    var item = p2OscBank[p2OscI];
+    document.getElementById('p2osc-vraag').textContent = item.vraag;
+    var letters = fisherYates(['A','B','C','D','E']);
+    document.getElementById('p2osc-opties').innerHTML = letters.map(function(l){
+      return '<button class="mc-btn" onclick="p2OscAntwoord(\'' + l + '\')">Oscillogram ' + l + '</button>';
+    }).join('');
+    var fb = document.getElementById('p2osc-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p2OscUpdateScore();
+  }
+  function p2OscAntwoord(letter){
+    var item = p2OscBank[p2OscI];
+    p2OscTotaal++;
+    var ok = letter === item.antwoord;
+    if (ok) p2OscGoed++;
+    var fb = document.getElementById('p2osc-feedback');
+    fb.textContent = ok ? '✓ Juist!' : '✗ Fout — juist: oscillogram ' + item.antwoord;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p2OscUpdateScore();
+    p2OscI++;
+    setTimeout(p2OscToon, 1300);
+  }
+  function p2OscUpdateScore(){
+    document.getElementById('p2osc-goed').textContent = p2OscGoed;
+    document.getElementById('p2osc-totaal').textContent = p2OscTotaal;
+  }
+  function p2OscOpnieuw(){
+    p2OscI = 0; p2OscGoed = 0; p2OscTotaal = 0; p2OscKlaar = false;
+    fisherYates(p2OscBank);
+    p2OscToon();
+  }
+  function p2OscSchud(){
+    if (p2OscKlaar){ p2OscGoed = 0; p2OscTotaal = 0; }
+    p2OscI = 0;
+    fisherYates(p2OscBank);
+    p2OscToon();
+  }
+
+  /* §1.3 FLASHCARDS */
+  var p3FcData = [
+    {voor:'Wat is de grondtoon?', achter:'De laagste toon die een snaar of luchtkolom voortbrengt, bepaalt de toonhoogte die je hoort'},
+    {voor:'Wat gebeurt er met de grondtoon als een snaar korter wordt?', achter:'De grondtoon wordt hoger'},
+    {voor:'Wat zijn boventonen?', achter:'Extra tonen die met de grondtoon meeklinken, met een frequentie die een geheel veelvoud is van de grondtoon'},
+    {voor:'Geef de formule voor de resonantiefrequentie van een luchtkolom', achter:'f = v / (4L)'},
+    {voor:'Wat betekent het als toon B een octaaf hoger is dan toon A?', achter:'De frequentie van B is 2× zo hoog als die van A'},
+    {voor:'Wat is resonantie?', achter:'Het versterkt meetrillen van een voorwerp op dezelfde frequentie als de trillingsbron'},
+    {voor:'Wat bepaalt de klankkleur van een instrument?', achter:'De onderlinge sterkte-verhouding van de boventonen'},
+    {voor:'Hoe verandert de grondtoon van een blaasinstrument als de luchtkolom langer wordt?', achter:'De grondtoon wordt lager'}
+  ];
+  var p3FcKaarten = [], p3FcIndex = 0, p3FcGoed = 0, p3FcTotaal = 0, p3FcOmgedraaid = false;
+
+  function p3FcInit(){
+    p3FcKaarten = fisherYates(p3FcData);
+    p3FcIndex = 0; p3FcGoed = 0; p3FcTotaal = 0;
+    p3FcToonKaart();
+  }
+  function p3FcToonKaart(){
+    var k = p3FcKaarten[p3FcIndex];
+    document.getElementById('p3fc-voor').textContent = k.voor;
+    document.getElementById('p3fc-achter').textContent = k.achter;
+    document.getElementById('p3fc-card').classList.remove('flipped');
+    p3FcOmgedraaid = false;
+    document.getElementById('p3fc-oordeel').style.display = 'none';
+    document.getElementById('p3fc-teller').textContent = (p3FcIndex+1) + ' / ' + p3FcKaarten.length;
+    p3FcUpdateScore();
+  }
+  function p3FcFlip(){
+    p3FcOmgedraaid = !p3FcOmgedraaid;
+    document.getElementById('p3fc-card').classList.toggle('flipped', p3FcOmgedraaid);
+    document.getElementById('p3fc-oordeel').style.display = p3FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p3FcOordeel(goed){
+    p3FcTotaal++;
+    if (goed) p3FcGoed++;
+    p3FcUpdateScore();
+    p3FcVolgende();
+  }
+  function p3FcUpdateScore(){
+    document.getElementById('p3fc-goed').textContent = p3FcGoed;
+    document.getElementById('p3fc-totaal').textContent = p3FcTotaal;
+  }
+  function p3FcVorige(){
+    if (p3FcIndex > 0){ p3FcIndex--; p3FcToonKaart(); }
+  }
+  function p3FcVolgende(){
+    p3FcIndex = (p3FcIndex < p3FcKaarten.length - 1) ? p3FcIndex + 1 : 0;
+    p3FcToonKaart();
+  }
+  function p3FcSchud(){
+    p3FcKaarten = fisherYates(p3FcKaarten);
+    p3FcIndex = 0;
+    p3FcToonKaart();
+  }
+  function p3FcOpnieuw(){
+    p3FcGoed = 0; p3FcTotaal = 0;
+    p3FcKaarten = fisherYates(p3FcData);
+    p3FcIndex = 0;
+    p3FcToonKaart();
+  }
+
+  /* §1.3 OEFENEN — ONDERDEEL 1: gerandomiseerd f = v/(4L) */
+  function p3VlGenereer(){
+    var onbekende = pick(['f','v','L']);
+    var v, L, f, vraag, antwoord, eenheid;
+    if (onbekende === 'f'){
+      v = Math.round((330 + Math.random()*15)*10)/10;
+      L = Math.round((0.1 + Math.random()*1.9)*1000)/1000;
+      f = v / (4*L);
+      vraag = 'Een luchtkolom (&eacute;&eacute;n kant open, &eacute;&eacute;n kant dicht) heeft een lengte L = ' + L + ' m en de geluidssnelheid is v = ' + v + ' m/s. Bereken de resonantiefrequentie f (in Hz).';
+      antwoord = f; eenheid = 'Hz';
+    } else if (onbekende === 'v'){
+      L = Math.round((0.1 + Math.random()*1.9)*1000)/1000;
+      var vTemp = 330 + Math.random()*15;
+      f = Math.round((vTemp/(4*L))*10)/10;
+      vraag = 'Een luchtkolom heeft een lengte L = ' + L + ' m en een resonantiefrequentie f = ' + f + ' Hz. Bereken de geluidssnelheid v (in m/s).';
+      antwoord = f * 4 * L; eenheid = 'm/s';
+    } else {
+      v = Math.round((330 + Math.random()*15)*10)/10;
+      var LTemp = 0.1 + Math.random()*1.9;
+      f = Math.round((v/(4*LTemp))*10)/10;
+      vraag = 'Een luchtkolom heeft een resonantiefrequentie f = ' + f + ' Hz bij een geluidssnelheid v = ' + v + ' m/s. Bereken de lengte L van de luchtkolom (in m).';
+      antwoord = v / (4*f); eenheid = 'm';
+    }
+    return { vraag: vraag, antwoord: antwoord, eenheid: eenheid };
+  }
+  var p3VlGoed = 0, p3VlTotaal = 0, p3VlHuidige = null;
+  function p3VlNieuweVraag(){
+    p3VlHuidige = p3VlGenereer();
+    document.getElementById('p3vl-vraag').textContent = p3VlHuidige.vraag;
+    var input = document.getElementById('p3vl-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p3vl-controleer-btn').disabled = false;
+    document.getElementById('p3vl-controleer-btn').style.display = '';
+    document.getElementById('p3vl-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p3vl-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p3VlUpdateScore();
+  }
+  function p3VlControleer(){
+    var input = document.getElementById('p3vl-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p3vl-controleer-btn').disabled = true;
+    p3VlTotaal++;
+    var correct = p3VlHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p3VlGoed++;
+    var decimalen = p3VlHuidige.eenheid === 'm' ? 3 : 1;
+    var fb = document.getElementById('p3vl-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(decimalen) + ' ' + p3VlHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p3VlUpdateScore();
+    document.getElementById('p3vl-volgende-btn').style.display = '';
+  }
+  function p3VlVolgende(){ p3VlNieuweVraag(); }
+  function p3VlSchud(){ p3VlNieuweVraag(); }
+  function p3VlOpnieuw(){
+    p3VlGoed = 0; p3VlTotaal = 0;
+    p3VlNieuweVraag();
+  }
+  function p3VlUpdateScore(){
+    document.getElementById('p3vl-goed').textContent = p3VlGoed;
+    document.getElementById('p3vl-totaal').textContent = p3VlTotaal;
+  }
+
+  /* §1.3 OEFENEN — ONDERDEEL 2: gerandomiseerd octaven rekenen */
+  function p3OctGenereer(){
+    var f0 = Math.round((50 + Math.random()*450)*10)/10;
+    var relaties = [
+      {tekst:'een octaaf hoger', factor:2},
+      {tekst:'een octaaf lager', factor:0.5},
+      {tekst:'twee octaven hoger', factor:4}
+    ];
+    var rel = pick(relaties);
+    var antwoord = f0 * rel.factor;
+    var vraag = 'De grondtoon van een instrument heeft een frequentie van ' + f0 + ' Hz. Wat is de frequentie van de toon die ' + rel.tekst + ' klinkt (in Hz)?';
+    return { vraag: vraag, antwoord: antwoord, eenheid: 'Hz' };
+  }
+  var p3OctGoed = 0, p3OctTotaal = 0, p3OctHuidige = null;
+  function p3OctNieuweVraag(){
+    p3OctHuidige = p3OctGenereer();
+    document.getElementById('p3oct-vraag').textContent = p3OctHuidige.vraag;
+    var input = document.getElementById('p3oct-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p3oct-controleer-btn').disabled = false;
+    document.getElementById('p3oct-controleer-btn').style.display = '';
+    document.getElementById('p3oct-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p3oct-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p3OctUpdateScore();
+  }
+  function p3OctControleer(){
+    var input = document.getElementById('p3oct-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p3oct-controleer-btn').disabled = true;
+    p3OctTotaal++;
+    var correct = p3OctHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p3OctGoed++;
+    var fb = document.getElementById('p3oct-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(1) + ' ' + p3OctHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p3OctUpdateScore();
+    document.getElementById('p3oct-volgende-btn').style.display = '';
+  }
+  function p3OctVolgende(){ p3OctNieuweVraag(); }
+  function p3OctSchud(){ p3OctNieuweVraag(); }
+  function p3OctOpnieuw(){
+    p3OctGoed = 0; p3OctTotaal = 0;
+    p3OctNieuweVraag();
+  }
+  function p3OctUpdateScore(){
+    document.getElementById('p3oct-goed').textContent = p3OctGoed;
+    document.getElementById('p3oct-totaal').textContent = p3OctTotaal;
+  }
+
+  /* INIT §1.1 */
+  p1FcInit();
+  p1OefNieuweVraag();
+
+  /* INIT §1.2 */
+  p2FcInit();
+  p2TfNieuweVraag();
+  fisherYates(p2OscBank);
+  p2OscToon();
+
+  /* §1.4 FLASHCARDS */
+  var p4FcData = [
+    {voor:'Hoeveel dB toename betekent 2× zo hard geluid?', achter:'3 dB'},
+    {voor:'Hoeveel dB afname betekent 2× zo zacht geluid?', achter:'3 dB (afname)'},
+    {voor:'Wat gebeurt er met de geluidssterkte als je 2× zo ver van de bron af gaat staan?', achter:'Het geluid wordt 4× zo zacht (6 dB minder)'},
+    {voor:'Hoeveel dB scheelt het als je 2× zo ver van de bron af staat?', achter:'6 dB (minder)'},
+    {voor:'Twee identieke geluidsbronnen staan naast elkaar. Hoeveel dB harder is dat dan één bron?', achter:'3 dB harder'},
+    {voor:'Vier identieke geluidsbronnen samen, hoeveel dB harder dan één bron?', achter:'6 dB harder (2× de verdubbeling)'},
+    {voor:'In welke eenheid meet je geluidssterkte?', achter:'Decibel (dB)'},
+    {voor:'Waarmee meet je geluidssterkte?', achter:'Een decibelmeter'}
+  ];
+  var p4FcKaarten = [], p4FcIndex = 0, p4FcGoed = 0, p4FcTotaal = 0, p4FcOmgedraaid = false;
+
+  function p4FcInit(){
+    p4FcKaarten = fisherYates(p4FcData);
+    p4FcIndex = 0; p4FcGoed = 0; p4FcTotaal = 0;
+    p4FcToonKaart();
+  }
+  function p4FcToonKaart(){
+    var k = p4FcKaarten[p4FcIndex];
+    document.getElementById('p4fc-voor').textContent = k.voor;
+    document.getElementById('p4fc-achter').textContent = k.achter;
+    document.getElementById('p4fc-card').classList.remove('flipped');
+    p4FcOmgedraaid = false;
+    document.getElementById('p4fc-oordeel').style.display = 'none';
+    document.getElementById('p4fc-teller').textContent = (p4FcIndex+1) + ' / ' + p4FcKaarten.length;
+    p4FcUpdateScore();
+  }
+  function p4FcFlip(){
+    p4FcOmgedraaid = !p4FcOmgedraaid;
+    document.getElementById('p4fc-card').classList.toggle('flipped', p4FcOmgedraaid);
+    document.getElementById('p4fc-oordeel').style.display = p4FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p4FcOordeel(goed){
+    p4FcTotaal++;
+    if (goed) p4FcGoed++;
+    p4FcUpdateScore();
+    p4FcVolgende();
+  }
+  function p4FcUpdateScore(){
+    document.getElementById('p4fc-goed').textContent = p4FcGoed;
+    document.getElementById('p4fc-totaal').textContent = p4FcTotaal;
+  }
+  function p4FcVorige(){
+    if (p4FcIndex > 0){ p4FcIndex--; p4FcToonKaart(); }
+  }
+  function p4FcVolgende(){
+    p4FcIndex = (p4FcIndex < p4FcKaarten.length - 1) ? p4FcIndex + 1 : 0;
+    p4FcToonKaart();
+  }
+  function p4FcSchud(){
+    p4FcKaarten = fisherYates(p4FcKaarten);
+    p4FcIndex = 0;
+    p4FcToonKaart();
+  }
+  function p4FcOpnieuw(){
+    p4FcGoed = 0; p4FcTotaal = 0;
+    p4FcKaarten = fisherYates(p4FcData);
+    p4FcIndex = 0;
+    p4FcToonKaart();
+  }
+
+  /* §1.4 OEFENEN — ONDERDEEL 1: gerandomiseerd dB-verschil ↔ factor hardheid */
+  var p4DbFactorParen = [
+    {db:3, factor:2}, {db:6, factor:4}, {db:9, factor:8},
+    {db:12, factor:16}, {db:15, factor:32}, {db:18, factor:64}
+  ];
+  function p4DbGenereer(){
+    var paar = pick(p4DbFactorParen);
+    var richting = pick(['harder','zachter']);
+    var vraagOm = pick(['factor','db']);
+    var vraag, antwoord;
+    if (vraagOm === 'factor'){
+      vraag = 'Het geluid is ' + paar.db + ' dB ' + richting + '. Hoeveel keer ' + richting + ' is dat?';
+      antwoord = paar.factor;
+    } else {
+      vraag = 'Het geluid is ' + paar.factor + '&times; zo ' + (richting === 'harder' ? 'hard' : 'zacht') + '. Hoeveel dB ' + richting + ' is dat?';
+      antwoord = paar.db;
+    }
+    return { vraag: vraag, antwoord: antwoord };
+  }
+  var p4DbGoed = 0, p4DbTotaal = 0, p4DbHuidige = null;
+  function p4DbNieuweVraag(){
+    p4DbHuidige = p4DbGenereer();
+    document.getElementById('p4db-vraag').innerHTML = p4DbHuidige.vraag;
+    var input = document.getElementById('p4db-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p4db-controleer-btn').disabled = false;
+    document.getElementById('p4db-controleer-btn').style.display = '';
+    document.getElementById('p4db-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p4db-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p4DbUpdateScore();
+  }
+  function p4DbControleer(){
+    var input = document.getElementById('p4db-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p4db-controleer-btn').disabled = true;
+    p4DbTotaal++;
+    var correct = p4DbHuidige.antwoord;
+    var ok = waarde === correct;
+    if (ok) p4DbGoed++;
+    var fb = document.getElementById('p4db-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Fout. ') + 'Juiste antwoord: ' + correct;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p4DbUpdateScore();
+    document.getElementById('p4db-volgende-btn').style.display = '';
+  }
+  function p4DbVolgende(){ p4DbNieuweVraag(); }
+  function p4DbSchud(){ p4DbNieuweVraag(); }
+  function p4DbOpnieuw(){
+    p4DbGoed = 0; p4DbTotaal = 0;
+    p4DbNieuweVraag();
+  }
+  function p4DbUpdateScore(){
+    document.getElementById('p4db-goed').textContent = p4DbGoed;
+    document.getElementById('p4db-totaal').textContent = p4DbTotaal;
+  }
+
+  /* §1.4 OEFENEN — ONDERDEEL 2: gerandomiseerd kwadratenwet (afstand) */
+  function p4KwadGenereer(){
+    var startAfstand = pick([1,2,4]);
+    var startSterkte = Math.round(60 + Math.random()*40);
+    var afstandsFactor = pick([2,4]);
+    var dbAfname = afstandsFactor === 2 ? 6 : 12;
+    var nieuweAfstand = startAfstand * afstandsFactor;
+    var nieuweSterkte = startSterkte - dbAfname;
+    var vraag = 'Op ' + startAfstand + ' m van een geluidsbron meet je ' + startSterkte + ' dB. Hoeveel dB meet je op ' + nieuweAfstand + ' m (dus ' + afstandsFactor + '&times; zo ver weg)?';
+    return { vraag: vraag, antwoord: nieuweSterkte };
+  }
+  var p4KwadGoed = 0, p4KwadTotaal = 0, p4KwadHuidige = null;
+  function p4KwadNieuweVraag(){
+    p4KwadHuidige = p4KwadGenereer();
+    document.getElementById('p4kwad-vraag').innerHTML = p4KwadHuidige.vraag;
+    var input = document.getElementById('p4kwad-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p4kwad-controleer-btn').disabled = false;
+    document.getElementById('p4kwad-controleer-btn').style.display = '';
+    document.getElementById('p4kwad-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p4kwad-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p4KwadUpdateScore();
+  }
+  function p4KwadControleer(){
+    var input = document.getElementById('p4kwad-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p4kwad-controleer-btn').disabled = true;
+    p4KwadTotaal++;
+    var correct = p4KwadHuidige.antwoord;
+    var ok = waarde === correct;
+    if (ok) p4KwadGoed++;
+    var fb = document.getElementById('p4kwad-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Fout. ') + 'Juiste antwoord: ' + correct + ' dB';
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p4KwadUpdateScore();
+    document.getElementById('p4kwad-volgende-btn').style.display = '';
+  }
+  function p4KwadVolgende(){ p4KwadNieuweVraag(); }
+  function p4KwadSchud(){ p4KwadNieuweVraag(); }
+  function p4KwadOpnieuw(){
+    p4KwadGoed = 0; p4KwadTotaal = 0;
+    p4KwadNieuweVraag();
+  }
+  function p4KwadUpdateScore(){
+    document.getElementById('p4kwad-goed').textContent = p4KwadGoed;
+    document.getElementById('p4kwad-totaal').textContent = p4KwadTotaal;
+  }
+
+  /* §1.5 FLASHCARDS */
+  var p5FcData = [
+    {voor:'Wat is de gehoordrempel?', achter:'De zachtste geluidssterkte die je nog net kunt horen bij een bepaalde frequentie'},
+    {voor:'Wat is de pijngrens (ongeveer)?', achter:'Ongeveer 120 dB'},
+    {voor:'Bij welke frequenties is de gehoordrempel het laagst (dus het gevoeligst)?', achter:'Rond 1000-4000 Hz'},
+    {voor:'Wat veroorzaakt gehoorschade?', achter:'Beschadiging van de trilhaartjes in het slakkenhuis, dit is onomkeerbaar'},
+    {voor:'Wat is een audiogram?', achter:'Een grafiek die per frequentie het gehoorverlies van een persoon weergeeft'},
+    {voor:'Hoe bereken je de Fletcher-index?', achter:'Het gemiddelde gehoorverlies bij 1000, 2000 en 4000 Hz'},
+    {voor:'Vanaf hoeveel dB gehoorverlies spreek je van doofheid?', achter:'Vanaf 90 dB (of hoger)'},
+    {voor:'Waarom is gehoorbescherming (bijv. oordopjes) belangrijk bij harde muziek?', achter:'Om blijvende gehoorschade aan de trilhaartjes te voorkomen'}
+  ];
+  var p5FcKaarten = [], p5FcIndex = 0, p5FcGoed = 0, p5FcTotaal = 0, p5FcOmgedraaid = false;
+
+  function p5FcInit(){
+    p5FcKaarten = fisherYates(p5FcData);
+    p5FcIndex = 0; p5FcGoed = 0; p5FcTotaal = 0;
+    p5FcToonKaart();
+  }
+  function p5FcToonKaart(){
+    var k = p5FcKaarten[p5FcIndex];
+    document.getElementById('p5fc-voor').textContent = k.voor;
+    document.getElementById('p5fc-achter').textContent = k.achter;
+    document.getElementById('p5fc-card').classList.remove('flipped');
+    p5FcOmgedraaid = false;
+    document.getElementById('p5fc-oordeel').style.display = 'none';
+    document.getElementById('p5fc-teller').textContent = (p5FcIndex+1) + ' / ' + p5FcKaarten.length;
+    p5FcUpdateScore();
+  }
+  function p5FcFlip(){
+    p5FcOmgedraaid = !p5FcOmgedraaid;
+    document.getElementById('p5fc-card').classList.toggle('flipped', p5FcOmgedraaid);
+    document.getElementById('p5fc-oordeel').style.display = p5FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p5FcOordeel(goed){
+    p5FcTotaal++;
+    if (goed) p5FcGoed++;
+    p5FcUpdateScore();
+    p5FcVolgende();
+  }
+  function p5FcUpdateScore(){
+    document.getElementById('p5fc-goed').textContent = p5FcGoed;
+    document.getElementById('p5fc-totaal').textContent = p5FcTotaal;
+  }
+  function p5FcVorige(){
+    if (p5FcIndex > 0){ p5FcIndex--; p5FcToonKaart(); }
+  }
+  function p5FcVolgende(){
+    p5FcIndex = (p5FcIndex < p5FcKaarten.length - 1) ? p5FcIndex + 1 : 0;
+    p5FcToonKaart();
+  }
+  function p5FcSchud(){
+    p5FcKaarten = fisherYates(p5FcKaarten);
+    p5FcIndex = 0;
+    p5FcToonKaart();
+  }
+  function p5FcOpnieuw(){
+    p5FcGoed = 0; p5FcTotaal = 0;
+    p5FcKaarten = fisherYates(p5FcData);
+    p5FcIndex = 0;
+    p5FcToonKaart();
+  }
+
+  /* §1.5 OEFENEN — ONDERDEEL 1: vaste set, audiogram-interpretatie */
+  var p5AudBank = [
+    {type:'mc', vraag:'Bij welke frequentie heeft persoon B het meeste gehoorverlies?', opties:['125 Hz','250 Hz','500 Hz','1000 Hz','2000 Hz','4000 Hz','8000 Hz'], antwoord:'4000 Hz'},
+    {type:'mc', vraag:'Welke persoon heeft (ongeveer) een normaal gehoor?', opties:['Persoon A','Persoon B'], antwoord:'Persoon A'},
+    {type:'mc', vraag:'In welke categorie valt het gehoorverlies van persoon B bij 4000 Hz (60 dB)?', opties:['Normaal gehoor','Licht gehoorverlies','Matig gehoorverlies','Ernstig gehoorverlies','Zeer ernstig gehoorverlies','Doofheid'], antwoord:'Ernstig gehoorverlies'},
+    {type:'fill', vraag:'Bereken de Fletcher-index van persoon A (afleeswaarden bij 1000, 2000 en 4000 Hz: 0, 5 en 5 dB).', antwoord:3.3, eenheid:'dB'},
+    {type:'fill', vraag:'Bereken de Fletcher-index van persoon B (afleeswaarden bij 1000, 2000 en 4000 Hz: 20, 35 en 60 dB).', antwoord:38.3, eenheid:'dB'}
+  ];
+  var p5AudI = 0, p5AudGoed = 0, p5AudTotaal = 0, p5AudKlaar = false;
+
+  function p5AudToon(){
+    if (p5AudI >= p5AudBank.length){
+      document.getElementById('p5aud-vraag').textContent = '🎉 Klaar!';
+      document.getElementById('p5aud-mc').innerHTML = '';
+      document.getElementById('p5aud-input').style.display = 'none';
+      document.getElementById('p5aud-controleer-btn').style.display = 'none';
+      document.getElementById('p5aud-feedback').textContent = '';
+      p5AudKlaar = true;
+      return;
+    }
+    p5AudKlaar = false;
+    var item = p5AudBank[p5AudI];
+    document.getElementById('p5aud-vraag').textContent = item.vraag;
+    var fb = document.getElementById('p5aud-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    var mcDiv = document.getElementById('p5aud-mc');
+    var input = document.getElementById('p5aud-input');
+    var btn = document.getElementById('p5aud-controleer-btn');
+    if (item.type === 'mc'){
+      mcDiv.style.display = '';
+      mcDiv.innerHTML = fisherYates(item.opties.slice()).map(function(o){
+        return '<button class="mc-btn" onclick="p5AudMcAntwoord(\'' + o.replace(/'/g, "\\'") + '\')">' + o + '</button>';
+      }).join('');
+      input.style.display = 'none';
+      btn.style.display = 'none';
+    } else {
+      mcDiv.style.display = 'none';
+      mcDiv.innerHTML = '';
+      input.style.display = '';
+      input.value = '';
+      input.disabled = false;
+      btn.style.display = '';
+      btn.disabled = false;
+    }
+    p5AudUpdateScore();
+  }
+  function p5AudMcAntwoord(optie){
+    var item = p5AudBank[p5AudI];
+    p5AudTotaal++;
+    var ok = optie === item.antwoord;
+    if (ok) p5AudGoed++;
+    var fb = document.getElementById('p5aud-feedback');
+    fb.textContent = ok ? '✓ Juist!' : '✗ Fout — juist: ' + item.antwoord;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p5AudUpdateScore();
+    p5AudI++;
+    setTimeout(p5AudToon, 1300);
+  }
+  function p5AudControleer(){
+    var item = p5AudBank[p5AudI];
+    var input = document.getElementById('p5aud-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p5aud-controleer-btn').disabled = true;
+    p5AudTotaal++;
+    var correct = item.antwoord;
+    var marge = Math.max(Math.abs(correct) * 0.02, 0.05);
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p5AudGoed++;
+    var fb = document.getElementById('p5aud-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Fout. ') + 'Juiste antwoord: ' + correct + ' ' + item.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p5AudUpdateScore();
+    p5AudI++;
+    setTimeout(p5AudToon, 1300);
+  }
+  function p5AudUpdateScore(){
+    document.getElementById('p5aud-goed').textContent = p5AudGoed;
+    document.getElementById('p5aud-totaal').textContent = p5AudTotaal;
+  }
+  function p5AudOpnieuw(){
+    p5AudI = 0; p5AudGoed = 0; p5AudTotaal = 0; p5AudKlaar = false;
+    fisherYates(p5AudBank);
+    p5AudToon();
+  }
+  function p5AudSchud(){
+    if (p5AudKlaar){ p5AudGoed = 0; p5AudTotaal = 0; }
+    p5AudI = 0;
+    fisherYates(p5AudBank);
+    p5AudToon();
+  }
+
+  /* §1.5 OEFENEN — ONDERDEEL 2: gerandomiseerd, Fletcher-index */
+  function p5FlGenereer(){
+    var v1000 = Math.round(Math.random()*14)*5;
+    var v2000 = Math.round(Math.random()*14)*5;
+    var v4000 = Math.round(Math.random()*14)*5;
+    var fletcher = Math.round(((v1000+v2000+v4000)/3)*10)/10;
+    var vraag = 'Bij een gehoortest meet je een gehoorverlies van ' + v1000 + ' dB bij 1000 Hz, ' + v2000 + ' dB bij 2000 Hz en ' + v4000 + ' dB bij 4000 Hz. Bereken de Fletcher-index (in dB).';
+    return { vraag: vraag, antwoord: fletcher };
+  }
+  var p5FlGoed = 0, p5FlTotaal = 0, p5FlHuidige = null;
+  function p5FlNieuweVraag(){
+    p5FlHuidige = p5FlGenereer();
+    document.getElementById('p5fl-vraag').textContent = p5FlHuidige.vraag;
+    var input = document.getElementById('p5fl-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p5fl-controleer-btn').disabled = false;
+    document.getElementById('p5fl-controleer-btn').style.display = '';
+    document.getElementById('p5fl-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p5fl-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p5FlUpdateScore();
+  }
+  function p5FlControleer(){
+    var input = document.getElementById('p5fl-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p5fl-controleer-btn').disabled = true;
+    p5FlTotaal++;
+    var correct = p5FlHuidige.antwoord;
+    var marge = Math.max(Math.abs(correct) * 0.02, 0.05);
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p5FlGoed++;
+    var fb = document.getElementById('p5fl-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(1) + ' dB';
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p5FlUpdateScore();
+    document.getElementById('p5fl-volgende-btn').style.display = '';
+  }
+  function p5FlVolgende(){ p5FlNieuweVraag(); }
+  function p5FlSchud(){ p5FlNieuweVraag(); }
+  function p5FlOpnieuw(){
+    p5FlGoed = 0; p5FlTotaal = 0;
+    p5FlNieuweVraag();
+  }
+  function p5FlUpdateScore(){
+    document.getElementById('p5fl-goed').textContent = p5FlGoed;
+    document.getElementById('p5fl-totaal').textContent = p5FlTotaal;
+  }
+
+  /* INIT §1.3 */
+  p3FcInit();
+  p3VlNieuweVraag();
+  p3OctNieuweVraag();
+
+  /* INIT §1.4 */
+  p4FcInit();
+  p4DbNieuweVraag();
+  p4KwadNieuweVraag();
+
+  /* INIT §1.5 */
+  p5FcInit();
+  fisherYates(p5AudBank);
+  p5AudToon();
+  p5FlNieuweVraag();
 </script>
 </body>
 </html>
