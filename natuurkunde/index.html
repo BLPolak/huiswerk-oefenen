@@ -104,6 +104,7 @@
     .osc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: .6rem; margin: .8rem 0 1.2rem; }
     .osc-item { background: #faf5ff; border-radius: 8px; padding: .5rem; text-align: center; }
     .osc-item-label { font-size: .95rem; font-weight: 900; color: #5b21b6; margin-top: .3rem; }
+    .audiogram-wrap { background: #faf5ff; border-radius: 8px; padding: .8rem .6rem .4rem; margin: .6rem 0 1rem; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -601,23 +602,138 @@
     <button class="sub-tab-btn" onclick="showSubTab('p5','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p5-uitleg" class="sub-tab-content active">
-    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+
+    <div class="uitleg-card">
+      <h2>Gehoordrempel</h2>
+      <p>De <strong>gehoordrempel</strong> is de zachtste geluidssterkte (in dB) die je nog net kunt horen bij een bepaalde frequentie. Deze is het laagst (dus je gehoor is het gevoeligst) rond <strong>1000&ndash;4000 Hz</strong>, en hoger bij lage en hoge frequenties &mdash; daar moet een geluid harder zijn voordat je het hoort.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Pijngrens</h2>
+      <p>De <strong>pijngrens</strong> is de geluidssterkte waarbij geluid pijn gaat doen. Dit ligt rond <strong>120 dB</strong>, vrij onafhankelijk van de frequentie.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Gehoorschade en risicodrempel</h2>
+      <p><strong>Gehoorschade</strong> ontstaat door beschadiging van de trilhaartjes in het slakkenhuis. Deze schade is <strong>onomkeerbaar</strong>: trilhaartjes herstellen niet. Het risico neemt toe bij harder geluid &eacute;n bij langere blootstellingsduur.</p>
+      <div class="regel-blok rood-blok"><p>De <strong>risicodrempel</strong> is de grens (sterkte + blootstellingsduur) waarboven gehoorschade kan ontstaan.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Audiogram</h2>
+      <p>Een <strong>audiogram</strong> is een grafiek die per frequentie het gehoorverlies (in dB t.o.v. de norm) van een persoon weergeeft. Hiermee wordt gehoorschade of leeftijdsgebonden gehoorverlies in kaart gebracht: hoe verder de lijn naar beneden zakt, hoe groter het gehoorverlies bij die frequentie.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Fletcher-index</h2>
+      <p>De <strong>Fletcher-index</strong> is de gemiddelde mate van gehoorverlies. Je berekent hem als het gemiddelde van het gehoorverlies (in dB) bij <strong>1000, 2000 en 4000 Hz</strong>.</p>
+      <div class="regel-blok blauw"><p>Fletcher-index = (verlies bij 1000 Hz + verlies bij 2000 Hz + verlies bij 4000 Hz) &divide; 3</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Categorie&euml;n gehoorverlies</h2>
+      <table class="snelheden-tabel">
+        <tr><th>Categorie</th><th>Gehoorverlies</th></tr>
+        <tr><td>Normaal gehoor</td><td>&minus;10 tot 15 dB</td></tr>
+        <tr><td>Licht gehoorverlies</td><td>16 tot 40 dB</td></tr>
+        <tr><td>Matig gehoorverlies</td><td>41&ndash;55 dB</td></tr>
+        <tr><td>Ernstig gehoorverlies</td><td>56&ndash;70 dB</td></tr>
+        <tr><td>Zeer ernstig gehoorverlies</td><td>71&ndash;90 dB</td></tr>
+        <tr><td>Doofheid</td><td>&gt; 90 dB</td></tr>
+      </table>
+    </div>
+
   </div>
   <div id="sub-p5-flashcards" class="sub-tab-content">
     <div class="uitleg-card">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p5fc-goed">0</span> / <span id="p5fc-totaal">0</span></div>
+        <div class="fc-teller" id="p5fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p5FcFlip()">
+        <div class="flip-card" id="p5fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p5fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p5fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p5fc-oordeel" style="display:none">
+        <button onclick="p5FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p5FcOordeel(true)">&#10003; Goed</button>
+      </div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button onclick="p5FcVorige()">&larr; Vorige</button>
+        <button onclick="p5FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p5FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p5FcOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
   <div id="sub-p5-oefenen" class="sub-tab-content">
     <div class="oefening-kaart">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <h3>Onderdeel 1 &mdash; Audiogram-interpretatie</h3>
+      <div class="audiogram-wrap">
+        <svg viewBox="0 0 330 220" style="width:100%;height:auto;display:block;">
+          <line x1="30" y1="10" x2="30" y2="170" stroke="#cbd5e1" stroke-width="1"/>
+          <line x1="30" y1="170" x2="310" y2="170" stroke="#cbd5e1" stroke-width="1"/>
+          <line x1="30" y1="10" x2="310" y2="10" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="45.6" x2="310" y2="45.6" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="81.1" x2="310" y2="81.1" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="116.7" x2="310" y2="116.7" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="30" y1="152.2" x2="310" y2="152.2" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="4" y="13" font-size="9" fill="#6b7280">0</text>
+          <text x="0" y="49" font-size="9" fill="#6b7280">20</text>
+          <text x="0" y="84" font-size="9" fill="#6b7280">40</text>
+          <text x="0" y="120" font-size="9" fill="#6b7280">60</text>
+          <text x="0" y="155" font-size="9" fill="#6b7280">80</text>
+          <text x="2" y="200" font-size="9" fill="#6b7280">dB verlies</text>
+          <text x="20" y="184" font-size="8" fill="#6b7280">125</text>
+          <text x="64" y="184" font-size="8" fill="#6b7280">250</text>
+          <text x="110" y="184" font-size="8" fill="#6b7280">500</text>
+          <text x="155" y="184" font-size="8" fill="#6b7280">1000</text>
+          <text x="200" y="184" font-size="8" fill="#6b7280">2000</text>
+          <text x="246" y="184" font-size="8" fill="#6b7280">4000</text>
+          <text x="292" y="184" font-size="8" fill="#6b7280">8000</text>
+          <text x="105" y="212" font-size="9" fill="#6b7280">Frequentie in Hz (log-schaal)</text>
+          <polyline points="30.0,18.9 76.7,18.9 123.3,10.0 170.0,10.0 216.7,18.9 263.3,18.9 310.0,27.8" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+          <circle cx="30.0" cy="18.9" r="3" fill="#3b82f6"/><circle cx="76.7" cy="18.9" r="3" fill="#3b82f6"/><circle cx="123.3" cy="10.0" r="3" fill="#3b82f6"/><circle cx="170.0" cy="10.0" r="3" fill="#3b82f6"/><circle cx="216.7" cy="18.9" r="3" fill="#3b82f6"/><circle cx="263.3" cy="18.9" r="3" fill="#3b82f6"/><circle cx="310.0" cy="27.8" r="3" fill="#3b82f6"/>
+          <polyline points="30.0,18.9 76.7,27.8 123.3,36.7 170.0,45.6 216.7,72.2 263.3,116.7 310.0,90.0" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="6,3"/>
+          <circle cx="30.0" cy="18.9" r="3" fill="#ef4444"/><circle cx="76.7" cy="27.8" r="3" fill="#ef4444"/><circle cx="123.3" cy="36.7" r="3" fill="#ef4444"/><circle cx="170.0" cy="45.6" r="3" fill="#ef4444"/><circle cx="216.7" cy="72.2" r="3" fill="#ef4444"/><circle cx="263.3" cy="116.7" r="3" fill="#ef4444"/><circle cx="310.0" cy="90.0" r="3" fill="#ef4444"/>
+        </svg>
+        <div class="osc-vergelijk-rij">
+          <div class="osc-vergelijk-item"><div class="osc-vergelijk-label" style="color:#3b82f6;">&mdash; Persoon A</div></div>
+          <div class="osc-vergelijk-item"><div class="osc-vergelijk-label" style="color:#ef4444;">- - Persoon B</div></div>
+        </div>
+      </div>
+      <div class="score-balk">Score: <span id="p5aud-goed">0</span> / <span id="p5aud-totaal">0</span></div>
+      <div id="p5aud-vraag" class="vraag-tekst"></div>
+      <div id="p5aud-mc" class="mc-grid"></div>
+      <input type="number" step="any" id="p5aud-input" class="open-input" style="display:none" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p5AudControleer()">
+      <button id="p5aud-controleer-btn" style="display:none" onclick="p5AudControleer()">Controleer</button>
+      <div id="p5aud-feedback" class="feedback"></div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button onclick="p5AudOpnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p5AudSchud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Bereken de Fletcher-index</h3>
+      <div class="score-balk">Score: <span id="p5fl-goed">0</span> / <span id="p5fl-totaal">0</span></div>
+      <div id="p5fl-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p5fl-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p5FlControleer()">
+      <div id="p5fl-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p5fl-controleer-btn" onclick="p5FlControleer()">Controleer</button>
+        <button id="p5fl-volgende-btn" onclick="p5FlVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p5FlSchud()">&#128256; Shuffle</button>
+        <button onclick="p5FlOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
@@ -1325,6 +1441,214 @@
     document.getElementById('p4kwad-totaal').textContent = p4KwadTotaal;
   }
 
+  /* §1.5 FLASHCARDS */
+  var p5FcData = [
+    {voor:'Wat is de gehoordrempel?', achter:'De zachtste geluidssterkte die je nog net kunt horen bij een bepaalde frequentie'},
+    {voor:'Wat is de pijngrens (ongeveer)?', achter:'Ongeveer 120 dB'},
+    {voor:'Bij welke frequenties is de gehoordrempel het laagst (dus het gevoeligst)?', achter:'Rond 1000-4000 Hz'},
+    {voor:'Wat veroorzaakt gehoorschade?', achter:'Beschadiging van de trilhaartjes in het slakkenhuis, dit is onomkeerbaar'},
+    {voor:'Wat is een audiogram?', achter:'Een grafiek die per frequentie het gehoorverlies van een persoon weergeeft'},
+    {voor:'Hoe bereken je de Fletcher-index?', achter:'Het gemiddelde gehoorverlies bij 1000, 2000 en 4000 Hz'},
+    {voor:'Vanaf hoeveel dB gehoorverlies spreek je van doofheid?', achter:'Vanaf 90 dB (of hoger)'},
+    {voor:'Waarom is gehoorbescherming (bijv. oordopjes) belangrijk bij harde muziek?', achter:'Om blijvende gehoorschade aan de trilhaartjes te voorkomen'}
+  ];
+  var p5FcKaarten = [], p5FcIndex = 0, p5FcGoed = 0, p5FcTotaal = 0, p5FcOmgedraaid = false;
+
+  function p5FcInit(){
+    p5FcKaarten = fisherYates(p5FcData);
+    p5FcIndex = 0; p5FcGoed = 0; p5FcTotaal = 0;
+    p5FcToonKaart();
+  }
+  function p5FcToonKaart(){
+    var k = p5FcKaarten[p5FcIndex];
+    document.getElementById('p5fc-voor').textContent = k.voor;
+    document.getElementById('p5fc-achter').textContent = k.achter;
+    document.getElementById('p5fc-card').classList.remove('flipped');
+    p5FcOmgedraaid = false;
+    document.getElementById('p5fc-oordeel').style.display = 'none';
+    document.getElementById('p5fc-teller').textContent = (p5FcIndex+1) + ' / ' + p5FcKaarten.length;
+    p5FcUpdateScore();
+  }
+  function p5FcFlip(){
+    p5FcOmgedraaid = !p5FcOmgedraaid;
+    document.getElementById('p5fc-card').classList.toggle('flipped', p5FcOmgedraaid);
+    document.getElementById('p5fc-oordeel').style.display = p5FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p5FcOordeel(goed){
+    p5FcTotaal++;
+    if (goed) p5FcGoed++;
+    p5FcUpdateScore();
+    p5FcVolgende();
+  }
+  function p5FcUpdateScore(){
+    document.getElementById('p5fc-goed').textContent = p5FcGoed;
+    document.getElementById('p5fc-totaal').textContent = p5FcTotaal;
+  }
+  function p5FcVorige(){
+    if (p5FcIndex > 0){ p5FcIndex--; p5FcToonKaart(); }
+  }
+  function p5FcVolgende(){
+    p5FcIndex = (p5FcIndex < p5FcKaarten.length - 1) ? p5FcIndex + 1 : 0;
+    p5FcToonKaart();
+  }
+  function p5FcSchud(){
+    p5FcKaarten = fisherYates(p5FcKaarten);
+    p5FcIndex = 0;
+    p5FcToonKaart();
+  }
+  function p5FcOpnieuw(){
+    p5FcGoed = 0; p5FcTotaal = 0;
+    p5FcKaarten = fisherYates(p5FcData);
+    p5FcIndex = 0;
+    p5FcToonKaart();
+  }
+
+  /* §1.5 OEFENEN — ONDERDEEL 1: vaste set, audiogram-interpretatie */
+  var p5AudBank = [
+    {type:'mc', vraag:'Bij welke frequentie heeft persoon B het meeste gehoorverlies?', opties:['125 Hz','250 Hz','500 Hz','1000 Hz','2000 Hz','4000 Hz','8000 Hz'], antwoord:'4000 Hz'},
+    {type:'mc', vraag:'Welke persoon heeft (ongeveer) een normaal gehoor?', opties:['Persoon A','Persoon B'], antwoord:'Persoon A'},
+    {type:'mc', vraag:'In welke categorie valt het gehoorverlies van persoon B bij 4000 Hz (60 dB)?', opties:['Normaal gehoor','Licht gehoorverlies','Matig gehoorverlies','Ernstig gehoorverlies','Zeer ernstig gehoorverlies','Doofheid'], antwoord:'Ernstig gehoorverlies'},
+    {type:'fill', vraag:'Bereken de Fletcher-index van persoon A (afleeswaarden bij 1000, 2000 en 4000 Hz: 0, 5 en 5 dB).', antwoord:3.3, eenheid:'dB'},
+    {type:'fill', vraag:'Bereken de Fletcher-index van persoon B (afleeswaarden bij 1000, 2000 en 4000 Hz: 20, 35 en 60 dB).', antwoord:38.3, eenheid:'dB'}
+  ];
+  var p5AudI = 0, p5AudGoed = 0, p5AudTotaal = 0, p5AudKlaar = false;
+
+  function p5AudToon(){
+    if (p5AudI >= p5AudBank.length){
+      document.getElementById('p5aud-vraag').textContent = '🎉 Klaar!';
+      document.getElementById('p5aud-mc').innerHTML = '';
+      document.getElementById('p5aud-input').style.display = 'none';
+      document.getElementById('p5aud-controleer-btn').style.display = 'none';
+      document.getElementById('p5aud-feedback').textContent = '';
+      p5AudKlaar = true;
+      return;
+    }
+    p5AudKlaar = false;
+    var item = p5AudBank[p5AudI];
+    document.getElementById('p5aud-vraag').textContent = item.vraag;
+    var fb = document.getElementById('p5aud-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    var mcDiv = document.getElementById('p5aud-mc');
+    var input = document.getElementById('p5aud-input');
+    var btn = document.getElementById('p5aud-controleer-btn');
+    if (item.type === 'mc'){
+      mcDiv.style.display = '';
+      mcDiv.innerHTML = fisherYates(item.opties.slice()).map(function(o){
+        return '<button class="mc-btn" onclick="p5AudMcAntwoord(\'' + o.replace(/'/g, "\\'") + '\')">' + o + '</button>';
+      }).join('');
+      input.style.display = 'none';
+      btn.style.display = 'none';
+    } else {
+      mcDiv.style.display = 'none';
+      mcDiv.innerHTML = '';
+      input.style.display = '';
+      input.value = '';
+      input.disabled = false;
+      btn.style.display = '';
+      btn.disabled = false;
+    }
+    p5AudUpdateScore();
+  }
+  function p5AudMcAntwoord(optie){
+    var item = p5AudBank[p5AudI];
+    p5AudTotaal++;
+    var ok = optie === item.antwoord;
+    if (ok) p5AudGoed++;
+    var fb = document.getElementById('p5aud-feedback');
+    fb.textContent = ok ? '✓ Juist!' : '✗ Fout — juist: ' + item.antwoord;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p5AudUpdateScore();
+    p5AudI++;
+    setTimeout(p5AudToon, 1300);
+  }
+  function p5AudControleer(){
+    var item = p5AudBank[p5AudI];
+    var input = document.getElementById('p5aud-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p5aud-controleer-btn').disabled = true;
+    p5AudTotaal++;
+    var correct = item.antwoord;
+    var marge = Math.max(Math.abs(correct) * 0.02, 0.05);
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p5AudGoed++;
+    var fb = document.getElementById('p5aud-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Fout. ') + 'Juiste antwoord: ' + correct + ' ' + item.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p5AudUpdateScore();
+    p5AudI++;
+    setTimeout(p5AudToon, 1300);
+  }
+  function p5AudUpdateScore(){
+    document.getElementById('p5aud-goed').textContent = p5AudGoed;
+    document.getElementById('p5aud-totaal').textContent = p5AudTotaal;
+  }
+  function p5AudOpnieuw(){
+    p5AudI = 0; p5AudGoed = 0; p5AudTotaal = 0; p5AudKlaar = false;
+    fisherYates(p5AudBank);
+    p5AudToon();
+  }
+  function p5AudSchud(){
+    if (p5AudKlaar){ p5AudGoed = 0; p5AudTotaal = 0; }
+    p5AudI = 0;
+    fisherYates(p5AudBank);
+    p5AudToon();
+  }
+
+  /* §1.5 OEFENEN — ONDERDEEL 2: gerandomiseerd, Fletcher-index */
+  function p5FlGenereer(){
+    var v1000 = Math.round(Math.random()*14)*5;
+    var v2000 = Math.round(Math.random()*14)*5;
+    var v4000 = Math.round(Math.random()*14)*5;
+    var fletcher = Math.round(((v1000+v2000+v4000)/3)*10)/10;
+    var vraag = 'Bij een gehoortest meet je een gehoorverlies van ' + v1000 + ' dB bij 1000 Hz, ' + v2000 + ' dB bij 2000 Hz en ' + v4000 + ' dB bij 4000 Hz. Bereken de Fletcher-index (in dB).';
+    return { vraag: vraag, antwoord: fletcher };
+  }
+  var p5FlGoed = 0, p5FlTotaal = 0, p5FlHuidige = null;
+  function p5FlNieuweVraag(){
+    p5FlHuidige = p5FlGenereer();
+    document.getElementById('p5fl-vraag').textContent = p5FlHuidige.vraag;
+    var input = document.getElementById('p5fl-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p5fl-controleer-btn').disabled = false;
+    document.getElementById('p5fl-controleer-btn').style.display = '';
+    document.getElementById('p5fl-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p5fl-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p5FlUpdateScore();
+  }
+  function p5FlControleer(){
+    var input = document.getElementById('p5fl-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p5fl-controleer-btn').disabled = true;
+    p5FlTotaal++;
+    var correct = p5FlHuidige.antwoord;
+    var marge = Math.max(Math.abs(correct) * 0.02, 0.05);
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p5FlGoed++;
+    var fb = document.getElementById('p5fl-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(1) + ' dB';
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p5FlUpdateScore();
+    document.getElementById('p5fl-volgende-btn').style.display = '';
+  }
+  function p5FlVolgende(){ p5FlNieuweVraag(); }
+  function p5FlSchud(){ p5FlNieuweVraag(); }
+  function p5FlOpnieuw(){
+    p5FlGoed = 0; p5FlTotaal = 0;
+    p5FlNieuweVraag();
+  }
+  function p5FlUpdateScore(){
+    document.getElementById('p5fl-goed').textContent = p5FlGoed;
+    document.getElementById('p5fl-totaal').textContent = p5FlTotaal;
+  }
+
   /* INIT §1.3 */
   p3FcInit();
   p3VlNieuweVraag();
@@ -1334,6 +1658,12 @@
   p4FcInit();
   p4DbNieuweVraag();
   p4KwadNieuweVraag();
+
+  /* INIT §1.5 */
+  p5FcInit();
+  fisherYates(p5AudBank);
+  p5AudToon();
+  p5FlNieuweVraag();
 </script>
 </body>
 </html>
