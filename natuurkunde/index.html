@@ -98,6 +98,12 @@
     .flip-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: #8b5cf6; margin-bottom: .6rem; }
     .flip-tekst { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; }
     .flip-hint { font-size: .72rem; color: #94a3b8; font-weight: 600; margin-top: .8rem; }
+    .osc-vergelijk-rij { display: flex; gap: .8rem; flex-wrap: wrap; margin: .8rem 0; }
+    .osc-vergelijk-item { flex: 1 1 140px; min-width: 120px; background: #faf5ff; border-radius: 8px; padding: .5rem; text-align: center; }
+    .osc-vergelijk-label { font-size: .78rem; font-weight: 700; color: #5b21b6; margin-top: .3rem; }
+    .osc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: .6rem; margin: .8rem 0 1.2rem; }
+    .osc-item { background: #faf5ff; border-radius: 8px; padding: .5rem; text-align: center; }
+    .osc-item-label { font-size: .95rem; font-weight: 900; color: #5b21b6; margin-top: .3rem; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -234,23 +240,160 @@
     <button class="sub-tab-btn" onclick="showSubTab('p2','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p2-uitleg" class="sub-tab-content active">
-    <div class="uitleg-card"><p>Inhoud volgt in de volgende stap.</p></div>
+
+    <div class="uitleg-card">
+      <h2>Oscillogram</h2>
+      <p>Een <strong>oscillogram</strong> is een (u,t)-diagram van een trilling, bijvoorbeeld gemaakt met een microfoon. Op de <strong>horizontale as</strong> staat de tijd (t), op de <strong>verticale as</strong> staat de uitwijking (u).</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Trillingstijd en frequentie</h2>
+      <p>De <strong>trillingstijd (T)</strong> is de tijd die &eacute;&eacute;n volledige trilling duurt, in seconden (s) of milliseconden (ms).</p>
+      <p>De <strong>frequentie (f)</strong> is het aantal trillingen per seconde, in hertz (Hz).</p>
+      <div class="voorbeeld-blok"><strong>f = 1 &divide; T</strong> &nbsp;&nbsp;en&nbsp;&nbsp; <strong>T = 1 &divide; f</strong></div>
+      <div class="regel-blok blauw"><p><strong>Toonhoogte:</strong> hoe hoger de frequentie, hoe hoger de toon.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Amplitude</h2>
+      <p>De <strong>amplitude</strong> is de maximale uitwijking van de trilling. De amplitude hangt samen met het volume: hoe groter de amplitude, hoe harder het geluid.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Zuivere en samengestelde toon</h2>
+      <p>Een <strong>zuivere toon</strong> bestaat uit &eacute;&eacute;n frequentie. Een <strong>samengestelde toon</strong> ontstaat doordat meerdere frequenties bij elkaar worden opgeteld &mdash; deze klinkt minder &ldquo;schoon&rdquo; dan een zuivere toon.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Frequentie en amplitude in beeld</h2>
+      <p>Hieronder zie je hetzelfde soort signaal met een andere frequentie (boven), en met een andere amplitude (onder).</p>
+      <div class="osc-vergelijk-rij">
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,26.9 L4.7,23.9 L7.0,21.2 L9.3,18.9 L11.7,17.0 L14.0,15.7 L16.3,15.1 L18.7,15.1 L21.0,15.7 L23.3,17.0 L25.7,18.9 L28.0,21.2 L30.3,23.9 L32.7,26.9 L35.0,30.0 L37.3,33.1 L39.7,36.1 L42.0,38.8 L44.3,41.1 L46.7,43.0 L49.0,44.3 L51.3,44.9 L53.7,44.9 L56.0,44.3 L58.3,43.0 L60.7,41.1 L63.0,38.8 L65.3,36.1 L67.7,33.1 L70.0,30.0 L72.3,26.9 L74.7,23.9 L77.0,21.2 L79.3,18.9 L81.7,17.0 L84.0,15.7 L86.3,15.1 L88.7,15.1 L91.0,15.7 L93.3,17.0 L95.7,18.9 L98.0,21.2 L100.3,23.9 L102.7,26.9 L105.0,30.0 L107.3,33.1 L109.7,36.1 L112.0,38.8 L114.3,41.1 L116.7,43.0 L119.0,44.3 L121.3,44.9 L123.7,44.9 L126.0,44.3 L128.3,43.0 L130.7,41.1 L133.0,38.8 L135.3,36.1 L137.7,33.1 L140.0,30.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Lage frequentie (lage toon)</div>
+        </div>
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,21.2 L4.7,15.7 L7.0,15.7 L9.3,21.2 L11.7,30.0 L14.0,38.8 L16.3,44.3 L18.7,44.3 L21.0,38.8 L23.3,30.0 L25.7,21.2 L28.0,15.7 L30.3,15.7 L32.7,21.2 L35.0,30.0 L37.3,38.8 L39.7,44.3 L42.0,44.3 L44.3,38.8 L46.7,30.0 L49.0,21.2 L51.3,15.7 L53.7,15.7 L56.0,21.2 L58.3,30.0 L60.7,38.8 L63.0,44.3 L65.3,44.3 L67.7,38.8 L70.0,30.0 L72.3,21.2 L74.7,15.7 L77.0,15.7 L79.3,21.2 L81.7,30.0 L84.0,38.8 L86.3,44.3 L88.7,44.3 L91.0,38.8 L93.3,30.0 L95.7,21.2 L98.0,15.7 L100.3,15.7 L102.7,21.2 L105.0,30.0 L107.3,38.8 L109.7,44.3 L112.0,44.3 L114.3,38.8 L116.7,30.0 L119.0,21.2 L121.3,15.7 L123.7,15.7 L126.0,21.2 L128.3,30.0 L130.7,38.8 L133.0,44.3 L135.3,44.3 L137.7,38.8 L140.0,30.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Hoge frequentie (hoge toon)</div>
+        </div>
+      </div>
+      <div class="osc-vergelijk-rij">
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,27.5 L4.7,25.3 L7.0,23.5 L9.3,22.4 L11.7,22.0 L14.0,22.4 L16.3,23.5 L18.7,25.3 L21.0,27.5 L23.3,30.0 L25.7,32.5 L28.0,34.7 L30.3,36.5 L32.7,37.6 L35.0,38.0 L37.3,37.6 L39.7,36.5 L42.0,34.7 L44.3,32.5 L46.7,30.0 L49.0,27.5 L51.3,25.3 L53.7,23.5 L56.0,22.4 L58.3,22.0 L60.7,22.4 L63.0,23.5 L65.3,25.3 L67.7,27.5 L70.0,30.0 L72.3,32.5 L74.7,34.7 L77.0,36.5 L79.3,37.6 L81.7,38.0 L84.0,37.6 L86.3,36.5 L88.7,34.7 L91.0,32.5 L93.3,30.0 L95.7,27.5 L98.0,25.3 L100.3,23.5 L102.7,22.4 L105.0,22.0 L107.3,22.4 L109.7,23.5 L112.0,25.3 L114.3,27.5 L116.7,30.0 L119.0,32.5 L121.3,34.7 L123.7,36.5 L126.0,37.6 L128.3,38.0 L130.7,37.6 L133.0,36.5 L135.3,34.7 L137.7,32.5 L140.0,30.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Kleine amplitude (zacht geluid)</div>
+        </div>
+        <div class="osc-vergelijk-item">
+          <svg viewBox="0 0 140 60" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="30" x2="140" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,30.0 L2.3,23.2 L4.7,17.1 L7.0,12.2 L9.3,9.1 L11.7,8.0 L14.0,9.1 L16.3,12.2 L18.7,17.1 L21.0,23.2 L23.3,30.0 L25.7,36.8 L28.0,42.9 L30.3,47.8 L32.7,50.9 L35.0,52.0 L37.3,50.9 L39.7,47.8 L42.0,42.9 L44.3,36.8 L46.7,30.0 L49.0,23.2 L51.3,17.1 L53.7,12.2 L56.0,9.1 L58.3,8.0 L60.7,9.1 L63.0,12.2 L65.3,17.1 L67.7,23.2 L70.0,30.0 L72.3,36.8 L74.7,42.9 L77.0,47.8 L79.3,50.9 L81.7,52.0 L84.0,50.9 L86.3,47.8 L88.7,42.9 L91.0,36.8 L93.3,30.0 L95.7,23.2 L98.0,17.1 L100.3,12.2 L102.7,9.1 L105.0,8.0 L107.3,9.1 L109.7,12.2 L112.0,17.1 L114.3,23.2 L116.7,30.0 L119.0,36.8 L121.3,42.9 L123.7,47.8 L126.0,50.9 L128.3,52.0 L130.7,50.9 L133.0,47.8 L135.3,42.9 L137.7,36.8 L140.0,30.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-vergelijk-label">Grote amplitude (hard geluid)</div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div id="sub-p2-flashcards" class="sub-tab-content">
     <div class="uitleg-card">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p2fc-goed">0</span> / <span id="p2fc-totaal">0</span></div>
+        <div class="fc-teller" id="p2fc-teller">1 / 8</div>
+      </div>
+      <div class="flip-wrapper" onclick="p2FcFlip()">
+        <div class="flip-card" id="p2fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p2fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p2fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p2fc-oordeel" style="display:none">
+        <button onclick="p2FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p2FcOordeel(true)">&#10003; Goed</button>
+      </div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button onclick="p2FcVorige()">&larr; Vorige</button>
+        <button onclick="p2FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p2FcSchud()">&#128256; Shuffle</button>
+        <button onclick="p2FcOpnieuw()">&#8635; Opnieuw</button>
       </div>
     </div>
   </div>
   <div id="sub-p2-oefenen" class="sub-tab-content">
     <div class="oefening-kaart">
-      <p>Inhoud volgt in de volgende stap.</p>
+      <h3>Onderdeel 1 &mdash; Reken met f = 1 &divide; T</h3>
+      <div class="score-balk">Score: <span id="p2tf-goed">0</span> / <span id="p2tf-totaal">0</span></div>
+      <div id="p2tf-vraag" class="vraag-tekst"></div>
+      <input type="number" step="any" id="p2tf-input" class="open-input" placeholder="Jouw antwoord&hellip;" onkeydown="if(event.key==='Enter') p2TfControleer()">
+      <div id="p2tf-feedback" class="feedback"></div>
       <div class="knoppen-rij">
-        <button disabled>&#128256; Shuffle</button>
-        <button disabled>&#8635; Opnieuw</button>
+        <button id="p2tf-controleer-btn" onclick="p2TfControleer()">Controleer</button>
+        <button id="p2tf-volgende-btn" onclick="p2TfVolgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p2TfSchud()">&#128256; Shuffle</button>
+        <button onclick="p2TfOpnieuw()">&#8635; Opnieuw</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 &mdash; Oscillogrammen vergelijken</h3>
+      <div class="osc-grid">
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,31.9 L5.3,28.9 L8.0,26.2 L10.7,23.9 L13.3,22.0 L16.0,20.7 L18.7,20.1 L21.3,20.1 L24.0,20.7 L26.7,22.0 L29.3,23.9 L32.0,26.2 L34.7,28.9 L37.3,31.9 L40.0,35.0 L42.7,38.1 L45.3,41.1 L48.0,43.8 L50.7,46.1 L53.3,48.0 L56.0,49.3 L58.7,49.9 L61.3,49.9 L64.0,49.3 L66.7,48.0 L69.3,46.1 L72.0,43.8 L74.7,41.1 L77.3,38.1 L80.0,35.0 L82.7,31.9 L85.3,28.9 L88.0,26.2 L90.7,23.9 L93.3,22.0 L96.0,20.7 L98.7,20.1 L101.3,20.1 L104.0,20.7 L106.7,22.0 L109.3,23.9 L112.0,26.2 L114.7,28.9 L117.3,31.9 L120.0,35.0 L122.7,38.1 L125.3,41.1 L128.0,43.8 L130.7,46.1 L133.3,48.0 L136.0,49.3 L138.7,49.9 L141.3,49.9 L144.0,49.3 L146.7,48.0 L149.3,46.1 L152.0,43.8 L154.7,41.1 L157.3,38.1 L160.0,35.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">A</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,27.5 L5.3,22.0 L8.0,20.0 L10.7,22.0 L13.3,27.5 L16.0,35.0 L18.7,42.5 L21.3,48.0 L24.0,50.0 L26.7,48.0 L29.3,42.5 L32.0,35.0 L34.7,27.5 L37.3,22.0 L40.0,20.0 L42.7,22.0 L45.3,27.5 L48.0,35.0 L50.7,42.5 L53.3,48.0 L56.0,50.0 L58.7,48.0 L61.3,42.5 L64.0,35.0 L66.7,27.5 L69.3,22.0 L72.0,20.0 L74.7,22.0 L77.3,27.5 L80.0,35.0 L82.7,42.5 L85.3,48.0 L88.0,50.0 L90.7,48.0 L93.3,42.5 L96.0,35.0 L98.7,27.5 L101.3,22.0 L104.0,20.0 L106.7,22.0 L109.3,27.5 L112.0,35.0 L114.7,42.5 L117.3,48.0 L120.0,50.0 L122.7,48.0 L125.3,42.5 L128.0,35.0 L130.7,27.5 L133.3,22.0 L136.0,20.0 L138.7,22.0 L141.3,27.5 L144.0,35.0 L146.7,42.5 L149.3,48.0 L152.0,50.0 L154.7,48.0 L157.3,42.5 L160.0,35.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">B</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,32.5 L5.3,30.3 L8.0,28.5 L10.7,27.4 L13.3,27.0 L16.0,27.4 L18.7,28.5 L21.3,30.3 L24.0,32.5 L26.7,35.0 L29.3,37.5 L32.0,39.7 L34.7,41.5 L37.3,42.6 L40.0,43.0 L42.7,42.6 L45.3,41.5 L48.0,39.7 L50.7,37.5 L53.3,35.0 L56.0,32.5 L58.7,30.3 L61.3,28.5 L64.0,27.4 L66.7,27.0 L69.3,27.4 L72.0,28.5 L74.7,30.3 L77.3,32.5 L80.0,35.0 L82.7,37.5 L85.3,39.7 L88.0,41.5 L90.7,42.6 L93.3,43.0 L96.0,42.6 L98.7,41.5 L101.3,39.7 L104.0,37.5 L106.7,35.0 L109.3,32.5 L112.0,30.3 L114.7,28.5 L117.3,27.4 L120.0,27.0 L122.7,27.4 L125.3,28.5 L128.0,30.3 L130.7,32.5 L133.3,35.0 L136.0,37.5 L138.7,39.7 L141.3,41.5 L144.0,42.6 L146.7,43.0 L149.3,42.6 L152.0,41.5 L154.7,39.7 L157.3,37.5 L160.0,35.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">C</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.7,26.3 L5.3,18.5 L8.0,12.3 L10.7,8.4 L13.3,7.0 L16.0,8.4 L18.7,12.3 L21.3,18.5 L24.0,26.3 L26.7,35.0 L29.3,43.7 L32.0,51.5 L34.7,57.7 L37.3,61.6 L40.0,63.0 L42.7,61.6 L45.3,57.7 L48.0,51.5 L50.7,43.7 L53.3,35.0 L56.0,26.3 L58.7,18.5 L61.3,12.3 L64.0,8.4 L66.7,7.0 L69.3,8.4 L72.0,12.3 L74.7,18.5 L77.3,26.3 L80.0,35.0 L82.7,43.7 L85.3,51.5 L88.0,57.7 L90.7,61.6 L93.3,63.0 L96.0,61.6 L98.7,57.7 L101.3,51.5 L104.0,43.7 L106.7,35.0 L109.3,26.3 L112.0,18.5 L114.7,12.3 L117.3,8.4 L120.0,7.0 L122.7,8.4 L125.3,12.3 L128.0,18.5 L130.7,26.3 L133.3,35.0 L136.0,43.7 L138.7,51.5 L141.3,57.7 L144.0,61.6 L146.7,63.0 L149.3,61.6 L152.0,57.7 L154.7,51.5 L157.3,43.7 L160.0,35.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">D</div>
+        </div>
+        <div class="osc-item">
+          <svg viewBox="0 0 160 70" style="width:100%;height:auto;display:block;">
+            <line x1="0" y1="35" x2="160" y2="35" stroke="#e2e8f0" stroke-width="1"/>
+            <path d="M0.0,35.0 L2.0,28.0 L4.0,22.9 L6.0,20.9 L8.0,22.2 L10.0,25.8 L12.0,29.8 L14.0,32.6 L16.0,33.1 L18.0,31.2 L20.0,27.9 L22.0,25.1 L24.0,24.3 L26.0,26.6 L28.0,31.9 L30.0,38.8 L32.0,45.6 L34.0,50.2 L36.0,51.5 L38.0,49.4 L40.0,45.0 L42.0,40.0 L44.0,36.3 L46.0,35.0 L48.0,36.2 L50.0,38.8 L52.0,41.3 L54.0,41.8 L56.0,39.5 L58.0,34.5 L60.0,27.9 L62.0,21.8 L64.0,17.9 L66.0,17.4 L68.0,20.4 L70.0,25.8 L72.0,31.6 L74.0,36.1 L76.0,38.1 L78.0,37.4 L80.0,35.0 L82.0,32.6 L84.0,31.9 L86.0,33.9 L88.0,38.4 L90.0,44.2 L92.0,49.6 L94.0,52.6 L96.0,52.1 L98.0,48.2 L100.0,42.1 L102.0,35.5 L104.0,30.5 L106.0,28.2 L108.0,28.7 L110.0,31.2 L112.0,33.8 L114.0,35.0 L116.0,33.7 L118.0,30.0 L120.0,25.0 L122.0,20.6 L124.0,18.5 L126.0,19.8 L128.0,24.4 L130.0,31.2 L132.0,38.1 L134.0,43.4 L136.0,45.7 L138.0,44.9 L140.0,42.1 L142.0,38.8 L144.0,36.9 L146.0,37.4 L148.0,40.2 L150.0,44.2 L152.0,47.8 L154.0,49.1 L156.0,47.1 L158.0,42.0 L160.0,35.0" fill="none" stroke="#5b21b6" stroke-width="2.5"/>
+          </svg>
+          <div class="osc-item-label">E</div>
+        </div>
+      </div>
+      <div class="score-balk">Score: <span id="p2osc-goed">0</span> / <span id="p2osc-totaal">0</span></div>
+      <div id="p2osc-vraag" class="vraag-tekst"></div>
+      <div id="p2osc-opties" class="mc-grid"></div>
+      <div id="p2osc-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p2OscOpnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2OscSchud()">&#128256; Shuffle</button>
       </div>
     </div>
   </div>
@@ -490,9 +633,197 @@
     document.getElementById('p1oef-totaal').textContent = p1OefTotaal;
   }
 
+  /* §1.2 FLASHCARDS */
+  var p2FcData = [
+    {voor:'Wat zie je op de horizontale as van een oscillogram?', achter:'De tijd (t)'},
+    {voor:'Wat is de trillingstijd (T)?', achter:'De tijd die één volledige trilling duurt'},
+    {voor:'Geef de formule voor frequentie', achter:'f = 1/T'},
+    {voor:'In welke eenheid meet je frequentie?', achter:'Hertz (Hz)'},
+    {voor:'Wat bepaalt de toonhoogte?', achter:'De frequentie: hoe hoger de frequentie, hoe hoger de toon'},
+    {voor:'Wat bepaalt het volume/de hardheid van een toon?', achter:'De amplitude: hoe groter de amplitude, hoe harder de toon'},
+    {voor:'Wat is een zuivere toon?', achter:'Een toon die bestaat uit maar één frequentie'},
+    {voor:'Wat is een samengestelde toon?', achter:'Een toon die ontstaat doordat meerdere frequenties bij elkaar worden opgeteld'}
+  ];
+  var p2FcKaarten = [], p2FcIndex = 0, p2FcGoed = 0, p2FcTotaal = 0, p2FcOmgedraaid = false;
+
+  function p2FcInit(){
+    p2FcKaarten = fisherYates(p2FcData);
+    p2FcIndex = 0; p2FcGoed = 0; p2FcTotaal = 0;
+    p2FcToonKaart();
+  }
+  function p2FcToonKaart(){
+    var k = p2FcKaarten[p2FcIndex];
+    document.getElementById('p2fc-voor').textContent = k.voor;
+    document.getElementById('p2fc-achter').textContent = k.achter;
+    document.getElementById('p2fc-card').classList.remove('flipped');
+    p2FcOmgedraaid = false;
+    document.getElementById('p2fc-oordeel').style.display = 'none';
+    document.getElementById('p2fc-teller').textContent = (p2FcIndex+1) + ' / ' + p2FcKaarten.length;
+    p2FcUpdateScore();
+  }
+  function p2FcFlip(){
+    p2FcOmgedraaid = !p2FcOmgedraaid;
+    document.getElementById('p2fc-card').classList.toggle('flipped', p2FcOmgedraaid);
+    document.getElementById('p2fc-oordeel').style.display = p2FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p2FcOordeel(goed){
+    p2FcTotaal++;
+    if (goed) p2FcGoed++;
+    p2FcUpdateScore();
+    p2FcVolgende();
+  }
+  function p2FcUpdateScore(){
+    document.getElementById('p2fc-goed').textContent = p2FcGoed;
+    document.getElementById('p2fc-totaal').textContent = p2FcTotaal;
+  }
+  function p2FcVorige(){
+    if (p2FcIndex > 0){ p2FcIndex--; p2FcToonKaart(); }
+  }
+  function p2FcVolgende(){
+    p2FcIndex = (p2FcIndex < p2FcKaarten.length - 1) ? p2FcIndex + 1 : 0;
+    p2FcToonKaart();
+  }
+  function p2FcSchud(){
+    p2FcKaarten = fisherYates(p2FcKaarten);
+    p2FcIndex = 0;
+    p2FcToonKaart();
+  }
+  function p2FcOpnieuw(){
+    p2FcGoed = 0; p2FcTotaal = 0;
+    p2FcKaarten = fisherYates(p2FcData);
+    p2FcIndex = 0;
+    p2FcToonKaart();
+  }
+
+  /* §1.2 OEFENEN — ONDERDEEL 1: gerandomiseerd f = 1/T */
+  function p2TfGenereer(){
+    var eenheidT = pick(['ms','s']);
+    var T = eenheidT === 'ms' ? Math.round((0.5 + Math.random()*19.5)*10)/10 : Math.round((0.5 + Math.random()*9.5)*10)/10;
+    var T_s = eenheidT === 'ms' ? T/1000 : T;
+    var f = Math.round((1/T_s)*10)/10;
+    var vraagOm = pick(['f','T']);
+    var vraag, antwoord, eenheid;
+    if (vraagOm === 'f'){
+      vraag = 'Een trilling heeft een trillingstijd T = ' + T + ' ' + eenheidT + '. Bereken de frequentie f (in Hz).';
+      antwoord = 1 / T_s;
+      eenheid = 'Hz';
+    } else {
+      vraag = 'Een trilling heeft een frequentie f = ' + f + ' Hz. Bereken de trillingstijd T (in ' + eenheidT + ').';
+      var T_s_uit_f = 1 / f;
+      antwoord = eenheidT === 'ms' ? T_s_uit_f*1000 : T_s_uit_f;
+      eenheid = eenheidT;
+    }
+    return { vraag: vraag, antwoord: antwoord, eenheid: eenheid };
+  }
+  var p2TfGoed = 0, p2TfTotaal = 0, p2TfHuidige = null;
+  function p2TfNieuweVraag(){
+    p2TfHuidige = p2TfGenereer();
+    document.getElementById('p2tf-vraag').textContent = p2TfHuidige.vraag;
+    var input = document.getElementById('p2tf-input');
+    input.value = '';
+    input.disabled = false;
+    document.getElementById('p2tf-controleer-btn').disabled = false;
+    document.getElementById('p2tf-controleer-btn').style.display = '';
+    document.getElementById('p2tf-volgende-btn').style.display = 'none';
+    var fb = document.getElementById('p2tf-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p2TfUpdateScore();
+  }
+  function p2TfControleer(){
+    var input = document.getElementById('p2tf-input');
+    if (input.value.trim() === '') return;
+    var waarde = parseFloat(String(input.value).replace(',', '.'));
+    if (isNaN(waarde)) return;
+    input.disabled = true;
+    document.getElementById('p2tf-controleer-btn').disabled = true;
+    p2TfTotaal++;
+    var correct = p2TfHuidige.antwoord;
+    var marge = Math.abs(correct) * 0.02;
+    var ok = Math.abs(waarde - correct) <= marge;
+    if (ok) p2TfGoed++;
+    var fb = document.getElementById('p2tf-feedback');
+    fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Juiste antwoord: ' + correct.toFixed(1) + ' ' + p2TfHuidige.eenheid;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p2TfUpdateScore();
+    document.getElementById('p2tf-volgende-btn').style.display = '';
+  }
+  function p2TfVolgende(){ p2TfNieuweVraag(); }
+  function p2TfSchud(){ p2TfNieuweVraag(); }
+  function p2TfOpnieuw(){
+    p2TfGoed = 0; p2TfTotaal = 0;
+    p2TfNieuweVraag();
+  }
+  function p2TfUpdateScore(){
+    document.getElementById('p2tf-goed').textContent = p2TfGoed;
+    document.getElementById('p2tf-totaal').textContent = p2TfTotaal;
+  }
+
+  /* §1.2 OEFENEN — ONDERDEEL 2: vaste set, oscillogrammen vergelijken */
+  var p2OscBank = [
+    {vraag:'Welk oscillogram toont de hoogste toon?', antwoord:'B'},
+    {vraag:'Welk oscillogram toont de laagste toon?', antwoord:'A'},
+    {vraag:'Welk oscillogram toont het hardste geluid?', antwoord:'D'},
+    {vraag:'Welk oscillogram toont het zachtste geluid?', antwoord:'C'},
+    {vraag:'Welk oscillogram toont een samengestelde toon?', antwoord:'E'}
+  ];
+  var p2OscI = 0, p2OscGoed = 0, p2OscTotaal = 0, p2OscKlaar = false;
+
+  function p2OscToon(){
+    if (p2OscI >= p2OscBank.length){
+      document.getElementById('p2osc-vraag').textContent = '🎉 Klaar!';
+      document.getElementById('p2osc-opties').innerHTML = '';
+      document.getElementById('p2osc-feedback').textContent = '';
+      p2OscKlaar = true;
+      return;
+    }
+    p2OscKlaar = false;
+    var item = p2OscBank[p2OscI];
+    document.getElementById('p2osc-vraag').textContent = item.vraag;
+    var letters = fisherYates(['A','B','C','D','E']);
+    document.getElementById('p2osc-opties').innerHTML = letters.map(function(l){
+      return '<button class="mc-btn" onclick="p2OscAntwoord(\'' + l + '\')">Oscillogram ' + l + '</button>';
+    }).join('');
+    var fb = document.getElementById('p2osc-feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+    p2OscUpdateScore();
+  }
+  function p2OscAntwoord(letter){
+    var item = p2OscBank[p2OscI];
+    p2OscTotaal++;
+    var ok = letter === item.antwoord;
+    if (ok) p2OscGoed++;
+    var fb = document.getElementById('p2osc-feedback');
+    fb.textContent = ok ? '✓ Juist!' : '✗ Fout — juist: oscillogram ' + item.antwoord;
+    fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+    p2OscUpdateScore();
+    p2OscI++;
+    setTimeout(p2OscToon, 1300);
+  }
+  function p2OscUpdateScore(){
+    document.getElementById('p2osc-goed').textContent = p2OscGoed;
+    document.getElementById('p2osc-totaal').textContent = p2OscTotaal;
+  }
+  function p2OscOpnieuw(){
+    p2OscI = 0; p2OscGoed = 0; p2OscTotaal = 0; p2OscKlaar = false;
+    fisherYates(p2OscBank);
+    p2OscToon();
+  }
+  function p2OscSchud(){
+    if (p2OscKlaar){ p2OscGoed = 0; p2OscTotaal = 0; }
+    p2OscI = 0;
+    fisherYates(p2OscBank);
+    p2OscToon();
+  }
+
   /* INIT §1.1 */
   p1FcInit();
   p1OefNieuweVraag();
+
+  /* INIT §1.2 */
+  p2FcInit();
+  p2TfNieuweVraag();
+  fisherYates(p2OscBank);
+  p2OscToon();
 </script>
 </body>
 </html>
