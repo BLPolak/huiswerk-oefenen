@@ -121,6 +121,9 @@
     details.uitleg-card > summary { cursor: pointer; color: #0d9488; font-size: 1.15rem; font-weight: 800; }
     details.uitleg-card[open] > summary { margin-bottom: 1rem; }
     .oefening-kaart .oefening-kaart { box-shadow: none; padding: 0; margin-bottom: 0; }
+    .waarde-tabel { border-collapse: collapse; margin: .6rem 0; font-weight: 700; }
+    .waarde-tabel th, .waarde-tabel td { border: 1px solid #cbd5e1; padding: .3rem .9rem; text-align: center; }
+    .waarde-tabel th { background: #f0fdfa; color: #0d9488; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -238,16 +241,82 @@
     <button class="sub-tab-btn" onclick="showSubTab('p1','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p1-uitleg" class="sub-tab-content active">
-    <!-- P1-UITLEG -->
-    <p class="binnenkort">Binnenkort</p>
+    <details class="uitleg-card" open>
+      <summary>A. De grafiek van een lineaire formule</summary>
+      <p>y = &minus;2x + 5 is een <strong>lineaire formule</strong>: er is een lineair verband tussen x en y. De grafiek is een <strong>rechte lijn</strong>.</p>
+      <p style="margin-top:.6rem">Om de grafiek te tekenen maak je een tabel met twee punten:</p>
+      <table class="waarde-tabel">
+        <tr><th>x</th><td>0</td><td>1</td></tr>
+        <tr><th>y</th><td>5</td><td>3</td></tr>
+      </table>
+      <div id="p1-uitleg-grafiek"></div>
+      <div class="regel-blok blauw">
+        <p><strong>Afspraak:</strong> &ldquo;de lijn l met formule y = &minus;2x + 5&rdquo; noteer je als <strong>l: y = &minus;2x + 5</strong>.</p>
+      </div>
+      <p>Bij l ga je 1 naar rechts en 2 omlaag, dus de <strong>richtingsco&euml;ffici&euml;nt</strong> is &minus;2 (notatie rc&#8343; = &minus;2). Een ander woord voor richtingsco&euml;ffici&euml;nt is <strong>helling</strong>.</p>
+      <h3>Ligt een punt op de lijn?</h3>
+      <p>Vul de x-co&ouml;rdinaat in en controleer de y-co&ouml;rdinaat.</p>
+      <div class="voorbeeld-blok">
+        Ligt P(5, 27) op l: y = 8x &minus; 13?<br>
+        8 &middot; 5 &minus; 13 = 27, dat klopt, dus P ligt op l.
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. De formule y = ax + b</summary>
+      <div class="regel-blok groen">
+        <p>Bij de lijn <strong>y = ax + b</strong> is</p>
+        <p>&bull; het snijpunt met de y-as het punt <strong>(0, b)</strong></p>
+        <p>&bull; <strong>rc = a</strong>: ga je 1 naar rechts, dan ga je a omhoog</p>
+      </div>
+      <p><strong>a = 0</strong> geeft y = b: een horizontale lijn, een <strong>constant verband</strong>.</p>
+      <p><strong>b = 0</strong> geeft y = ax: een lijn door de oorsprong, een <strong>recht evenredig verband</strong>.</p>
+      <h3>Werkschema: formule van een lijn opstellen</h3>
+      <div class="stappen">
+        <div class="stap">1. Stel y = ax + b.</div>
+        <div class="stap">2. Zoek het snijpunt met de y-as; daaruit volgt b.</div>
+        <div class="stap">3. Kies twee roosterpunten op de lijn; a = verticaal / horizontaal.</div>
+        <div class="stap">4. Schrijf de formule op.</div>
+      </div>
+      <div class="voorbeeld-blok">
+        Lijn k gaat door (0, 4) en (5, 2), dus b = 4 en a = &minus;2/5.<br>
+        Dus k: y = &minus;2/5 x + 4.
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Evenwijdige lijnen</summary>
+      <div class="regel-blok groen">
+        <p>Evenwijdige lijnen hebben <strong>dezelfde rc</strong>.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>a.</strong> A(4, &minus;5) ligt op k: y = &minus;3x + b.<br>
+        Vul x = 4 en y = &minus;5 in: &minus;12 + b = &minus;5, dus b = 7.
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>b.</strong> Lijn l is evenwijdig met m: y = 5x &minus; 1 en gaat door B(3, 8).<br>
+        a = rc&#8344; = 5. Invullen: 15 + b = 8, dus b = &minus;7, en l: y = 5x &minus; 7.
+      </div>
+    </details>
   </div>
   <div id="sub-p1-flashcards" class="sub-tab-content">
-    <!-- P1-FLASHCARDS -->
-    <p class="binnenkort">Binnenkort</p>
+    <div id="p1-fc"></div>
   </div>
   <div id="sub-p1-oefenen" class="sub-tab-content">
-    <!-- P1-OEFENEN -->
-    <p class="binnenkort">Binnenkort</p>
+    <div class="oefening-kaart">
+      <h3>A. rc en snijpunt aflezen</h3>
+      <div id="p1-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Punten berekenen</h3>
+      <div id="p1-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Formule bij een grafiek</h3>
+      <div id="p1-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Evenwijdig en door twee punten</h3>
+      <div id="p1-oef-d"></div>
+    </div>
   </div>
 </div>
 
@@ -1011,12 +1080,222 @@
     };
   }
 
+  // --- P1 FORMULES ---
+  var p1FcData = [
+    {voor:'Wat is de algemene vorm van een lineaire formule?', achter:'y = ax + b'},
+    {voor:'Wat betekent a in y = ax + b?', achter:'De richtingscoëfficiënt (rc): 1 naar rechts, a omhoog.'},
+    {voor:'Wat betekent b in y = ax + b?', achter:'Het snijpunt met de y-as is (0, b).'},
+    {voor:'Ander woord voor richtingscoëfficiënt?', achter:'Helling'},
+    {voor:'Wat betekent rcₗ = −2?', achter:'Bij lijn l ga je 1 naar rechts en 2 omlaag.'},
+    {voor:'Hoe bereken je a uit twee roosterpunten?', achter:'a = verticaal / horizontaal'},
+    {voor:'Wat voor verband is y = 4?', achter:'Een constant verband (horizontale lijn, a = 0).'},
+    {voor:'Wat voor verband is y = 3x?', achter:'Een recht evenredig verband (lijn door de oorsprong, b = 0).'},
+    {voor:'Wat weet je van de rc van evenwijdige lijnen?', achter:'Die zijn gelijk.'},
+    {voor:'Hoe controleer je of P(5, 27) op y = 8x − 13 ligt?', achter:'Vul x = 5 in: 8·5 − 13 = 27. Klopt het, dan ligt P op de lijn.'},
+    {voor:'Hoe bereken je b als A(4, −5) op y = −3x + b ligt?', achter:'Vul x = 4 en y = −5 in: −12 + b = −5, dus b = 7.'},
+    {voor:'Wat zijn de 4 stappen van het werkschema "formule opstellen"?', achter:'1 Stel y = ax + b.<br>2 b uit het snijpunt met de y-as.<br>3 a = verticaal/horizontaal.<br>4 Formule opschrijven.'}
+  ];
+
+  var P1_NAMEN = ['k','l','m','n','p'];
+  var P1_SUB = {k:'ₖ', l:'ₗ', m:'ₘ', n:'ₙ', p:'ₚ'};
+  var P1_BREUKEN = [1/2, -1/2, 3/2, -3/2, 1/3, -2/3, 1/4, -3/4];
+  var P1_GRAFIEK_A = [-3, -2, -1, -1/2, 1/2, 1, 2, 3, -2/3, 1/3];
+  var P1_HINT_BREUK = '<br><small style="color:#64748b;font-weight:600">(breuk mag, bv. -3/4 of -0,75)</small>';
+
+  // a: geheel −5..5 (niet 0) of een van de breuken
+  function p1KiesA(){ return Math.random() < 0.6 ? pick([-1, 1]) * rnd(1, 5) : pick(P1_BREUKEN); }
+  function p1Noemer(a){ for (var d = 1; d <= 12; d++) if (Math.abs(a * d - Math.round(a * d)) < 1e-9) return d; return 1; }
+  // geheel x in [min, max] waarvoor a·x geheel is
+  function p1XGeheel(a, min, max){
+    var d = p1Noemer(a), opties = [];
+    for (var x = min; x <= max; x++) if (x % d === 0) opties.push(x);
+    return pick(opties);
+  }
+  function p1Formule(naam, a, b){ return '<b>' + (naam ? naam + ': ' : '') + 'y = ' + lin(a, b, 'x') + '</b>'; }
+  // "−2 · 3 + 5 = −6 + 5 = −1"
+  function p1Invul(a, x, b){
+    var s = fmt(a) + ' · ' + p0H(x) + term(b, '', false) + ' = ';
+    if (b !== 0) s += fmt(a * x) + term(b, '', false) + ' = ';
+    return s + fmt(a * x + b);
+  }
+  // b uit een punt als a bekend is
+  function p1BUitPunt(a, x, y){
+    var ax = a * x;
+    return 'Invullen x = ' + fmt(x) + ' en y = ' + fmt(y) + ':<br>' +
+           fmt(a) + ' · ' + p0H(x) + ' + b = ' + fmt(y) + '<br>' +
+           fmt(ax) + ' + b = ' + fmt(y) + '<br>' +
+           'b = ' + fmt(y) + ' − ' + p0H(ax) + ' = ' + fmt(y - ax);
+  }
+  // roosterpunten van y = ax + b binnen −6..6
+  function p1Roosterpunten(a, b){
+    var pts = [];
+    for (var x = -6; x <= 6; x++){
+      var y = a * x + b;
+      if (Math.abs(y - Math.round(y)) < 1e-9 && Math.round(y) >= -6 && Math.round(y) <= 6) pts.push({x:x, y:Math.round(y)});
+    }
+    return pts;
+  }
+  function p1GrafiekLijn(){
+    var a, b, pts;
+    do { a = pick(P1_GRAFIEK_A); b = rnd(-4, 4); pts = p1Roosterpunten(a, b); } while (pts.length < 2);
+    return {a:a, b:b};
+  }
+  // uitwerking volgens het werkschema
+  function p1Werkschema(naam, a, b){
+    var pts = p1Roosterpunten(a, b), rechts = pts.filter(function(p){ return p.x > 0; });
+    var van = {x:0, y:b}, naar;
+    if (rechts.length) naar = rechts[0];
+    else { var links = pts.filter(function(p){ return p.x < 0; }); van = links[links.length - 1]; naar = {x:0, y:b}; }
+    var v = naar.y - van.y, h = naar.x - van.x;
+    return 'Snijpunt y-as (0, ' + fmt(b) + '), dus b = ' + fmt(b) +
+           '<br>Van (' + fmt(van.x) + ', ' + fmt(van.y) + ') naar (' + fmt(naar.x) + ', ' + fmt(naar.y) + '): verticaal ' + fmt(v) + ', horizontaal ' + fmt(h) +
+           '<br>dus a = ' + fmt(v) + '/' + fmt(h) + ' = ' + fmt(a) +
+           '<br>dus ' + naam + ': y = ' + lin(a, b, 'x');
+  }
+  function p1VeldenAB(a, b){ return [{voor:'a =', na:'', antwoord:a}, {voor:'b =', na:'', antwoord:b}]; }
+
+  /* A. rc en snijpunt aflezen */
+  function p1AUitleg(a, b){
+    return 'y = ax + b met a = ' + fmt(a) + ' en b = ' + fmt(b) +
+           '<br>rc = a = ' + fmt(a) + '<br>snijpunt y-as: (0, b) = (0, ' + fmt(b) + ')';
+  }
+  function p1A1(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9);
+    return {
+      vraag: 'Gegeven ' + p1Formule(naam, a, b) + '.' + P0_HINT + P1_HINT_BREUK,
+      velden: [{voor:'rc =', na:'', antwoord:a}, {voor:'snijpunt y-as: (0,', na:')', antwoord:b}],
+      uitwerking: p1AUitleg(a, b)
+    };
+  }
+  function p1A2(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9, true);
+    return {
+      vraag: 'Gegeven <b>' + naam + ': y = ' + fmt(b) + term(a, 'x', false) + '</b>.' + P0_HINT + P1_HINT_BREUK,
+      velden: [{voor:'rc =', na:'', antwoord:a}, {voor:'snijpunt y-as: (0,', na:')', antwoord:b}],
+      uitwerking: 'Andere volgorde: y = ' + fmt(b) + term(a, 'x', false) + ' is hetzelfde als y = ' + lin(a, b, 'x') + '<br>' + p1AUitleg(a, b)
+    };
+  }
+  function p1A3(){
+    var soort = pick(['constant', 'recht evenredig', 'geen van beide']), a, b, uitleg;
+    if (soort === 'constant'){
+      a = 0; b = rnd(-9, 9, true);
+      uitleg = 'a = 0 en b = ' + fmt(b) + ': y = ' + fmt(b) + ' is een horizontale lijn, dus een constant verband.';
+    } else if (soort === 'recht evenredig'){
+      a = p1KiesA(); b = 0;
+      uitleg = 'a = ' + fmt(a) + ' en b = 0: de lijn gaat door de oorsprong, dus een recht evenredig verband.';
+    } else {
+      a = p1KiesA(); b = rnd(-9, 9, true);
+      uitleg = 'a = ' + fmt(a) + ' en b = ' + fmt(b) + ': a is niet 0 (niet constant) en b is niet 0 (niet door de oorsprong), dus geen van beide.';
+    }
+    return {
+      vraag: 'Wat voor verband is ' + p1Formule('', a, b) + '?',
+      velden: [{keuze:['constant', 'recht evenredig', 'geen van beide'], antwoord:soort, voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* B. Punten berekenen */
+  function p1B1(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9), x = p1XGeheel(a, -10, 10), y = a * x + b;
+    return {
+      vraag: 'Bereken de y-coördinaat van het punt op ' + p1Formule(naam, a, b) + ' met x-coördinaat ' + fmt(x) + '.' + P0_HINT,
+      velden: [{voor:'y =', na:'', antwoord:y}],
+      uitwerking: 'Vul x = ' + fmt(x) + ' in:<br>y = ' + p1Invul(a, x, b)
+    };
+  }
+  function p1B2(){
+    var naam = pick(P1_NAMEN), a = pick([-1, 1]) * rnd(2, 5), b = rnd(-9, 9, true), x = rnd(-10, 10), y = a * x + b;
+    return {
+      vraag: 'Het punt A op ' + p1Formule(naam, a, b) + ' heeft y-coördinaat ' + fmt(y) + '. Bereken x.' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: lin(a, b, 'x') + ' = ' + fmt(y) +
+                  '<br>' + p0Weg(b) + ' aan beide kanten → ' + term(a, 'x', true) + ' = ' + fmt(y - b) +
+                  '<br>' + p0Deel(a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+  function p1B3(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9), x = p1XGeheel(a, -6, 6), echt = a * x + b;
+    var ligtErop = Math.random() < 0.5, y = ligtErop ? echt : echt + pick([-1, 1]) * rnd(1, 5);
+    return {
+      vraag: 'Ligt P(' + fmt(x) + ', ' + fmt(y) + ') op ' + p1Formule(naam, a, b) + '?',
+      velden: [{keuze:['ja', 'nee'], antwoord:ligtErop ? 'ja' : 'nee', voor:'', na:''}],
+      uitwerking: 'Vul x = ' + fmt(x) + ' in: ' + p1Invul(a, x, b) +
+                  '<br>' + (ligtErop ? 'Dat is gelijk aan de y-coördinaat ' + fmt(y) + ', dus P ligt op ' + naam + '.'
+                                     : 'Dat is niet gelijk aan de y-coördinaat ' + fmt(y) + ', dus P ligt niet op ' + naam + '.')
+    };
+  }
+
+  /* C. Formule bij een grafiek */
+  function p1C1(){
+    var naam = pick(P1_NAMEN), l = p1GrafiekLijn();
+    return {
+      vraag: 'Stel de formule op van lijn ' + naam + '.' + tekenGrafiek([{a:l.a, b:l.b, kleur:'#0d9488', naam:naam}]) + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(l.a, l.b),
+      uitwerking: p1Werkschema(naam, l.a, l.b)
+    };
+  }
+  function p1C2(){
+    var namen = fisherYates(P1_NAMEN.slice()), l1 = p1GrafiekLijn(), l2;
+    do { l2 = p1GrafiekLijn(); } while (l2.a === l1.a && l2.b === l1.b);
+    var lijnen = [{a:l1.a, b:l1.b, kleur:'#0d9488', naam:namen[0]}, {a:l2.a, b:l2.b, kleur:'#f59e0b', naam:namen[1]}];
+    var gevraagd = pick(lijnen);
+    return {
+      vraag: 'Stel de formule op van lijn ' + gevraagd.naam + '.' + tekenGrafiek(lijnen) + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(gevraagd.a, gevraagd.b),
+      uitwerking: p1Werkschema(gevraagd.naam, gevraagd.a, gevraagd.b)
+    };
+  }
+
+  /* D. Evenwijdig en door twee punten */
+  function p1D1(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9), x = p1XGeheel(a, -6, 6), y = a * x + b;
+    return {
+      vraag: 'A(' + fmt(x) + ', ' + fmt(y) + ') ligt op <b>' + naam + ': y = ' + term(a, 'x', true) + ' + b</b>. Bereken b.' + P0_HINT,
+      velden: [{voor:'b =', na:'', antwoord:b}],
+      uitwerking: p1BUitPunt(a, x, y)
+    };
+  }
+  function p1D2(){
+    var namen = fisherYates(['l','m','k','n']), l = namen[0], m = namen[1];
+    var a = p1KiesA(), bm = rnd(-9, 9), b, x = p1XGeheel(a, -6, 6);
+    do { b = rnd(-9, 9); } while (b === bm);
+    var y = a * x + b;
+    return {
+      vraag: 'Lijn ' + l + ' is evenwijdig met ' + p1Formule(m, a, bm) + ' en gaat door B(' + fmt(x) + ', ' + fmt(y) + '). Stel de formule van ' + l + ' op.' + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(a, b),
+      uitwerking: 'Evenwijdig, dus a = rc' + P1_SUB[m] + ' = ' + fmt(a) + '<br>' + p1BUitPunt(a, x, y) + '<br>dus ' + l + ': y = ' + lin(a, b, 'x')
+    };
+  }
+  function p1D3(){
+    var x1, x2, y1, y2, a, b;
+    do {
+      x1 = rnd(-6, 6); x2 = rnd(-6, 6); y1 = rnd(-9, 9); y2 = rnd(-9, 9);
+      if (x1 === x2 || y1 === y2) continue;
+      a = (y2 - y1) / (x2 - x1); b = y1 - a * x1;
+    // geen gemengde getallen als rc (zoals 1 1/4x): alleen geheel, gewone breuk of ±1½
+    } while (x1 === x2 || y1 === y2 || Math.abs(b - Math.round(b)) > 1e-9 || Math.abs(b) > 12 || fmt(a).indexOf(' ') !== -1 || p1Noemer(a) > 6);
+    b = Math.round(b);
+    return {
+      vraag: 'Lijn q gaat door C(' + fmt(x1) + ', ' + fmt(y1) + ') en D(' + fmt(x2) + ', ' + fmt(y2) + '). Stel de formule op.' + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(a, b),
+      uitwerking: 'a = (y₂ − y₁) / (x₂ − x₁) = (' + fmt(y2) + ' − ' + p0H(y1) + ') / (' + fmt(x2) + ' − ' + p0H(x1) + ') = ' +
+                  fmt(y2 - y1) + '/' + fmt(x2 - x1) + ' = ' + fmt(a) +
+                  '<br>' + p1BUitPunt(a, x1, y1) + '<br>dus q: y = ' + lin(a, b, 'x')
+    };
+  }
+
   // === INIT ===
   maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
   maakOefening('p0-oef-a', [p0A1, p0A2, p0A3]);
   maakOefening('p0-oef-b', [p0B1, p0B2]);
   maakOefening('p0-oef-c', [p0C1, p0C2, p0C3, p0C4, p0C5, p0C6]);
   maakOefening('p0-oef-d', [p0D1, p0D2, p0D3]);
+  document.getElementById('p1-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-2,b:5,kleur:'#0d9488',naam:'l'}],{punten:[{x:0,y:5,naam:'(0, 5)'},{x:1,y:3,naam:''}]});
+  maakFlashcards('p1-fc', p1FcData, '§1.1 — begrip → uitleg');
+  maakOefening('p1-oef-a', [p1A1, p1A2, p1A3]);
+  maakOefening('p1-oef-b', [p1B1, p1B2, p1B3]);
+  maakOefening('p1-oef-c', [p1C1, p1C2]);
+  maakOefening('p1-oef-d', [p1D1, p1D2, p1D3]);
 </script>
 </body>
 </html>
