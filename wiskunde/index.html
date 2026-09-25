@@ -6,6 +6,7 @@
   <title>Wiskunde — 3 HAVO</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root { --teal:#0d9488; --sky:#0ea5e9; --donker:#1e293b; --grijs:#64748b; --bg:#f8fafc; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: Nunito, sans-serif; background: #f8fafc; color: #1e293b; }
     a { color: inherit; text-decoration: none; }
@@ -25,6 +26,17 @@
     .tab-btn:hover:not(.active) { background: #d1d5db; }
     .tab-content { display: none; padding: 1.5rem; max-width: 820px; margin: 0 auto; }
     .tab-content.active { display: block; }
+    .sub-tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+    .sub-tab-btn {
+      padding: .4rem .95rem; border: 2px solid #0d9488; border-radius: 999px;
+      background: #fff; color: #0d9488; cursor: pointer;
+      font-family: Nunito, sans-serif; font-size: .85rem; font-weight: 700;
+      transition: background .15s, color .15s;
+    }
+    .sub-tab-btn.active { background: #0d9488; color: #fff; }
+    .sub-tab-btn:hover:not(.active) { background: #f0fdfa; }
+    .sub-tab-content { display: none; }
+    .sub-tab-content.active { display: block; }
     .uitleg-card, .oefening-kaart {
       background: #fff; border-radius: 12px; padding: 1.5rem;
       margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.07);
@@ -61,6 +73,63 @@
       font-weight: 700; cursor: pointer; font-size: .9rem;
     }
     .knoppen-rij button:hover { background: #0b8073; }
+    .fc-titel { color: var(--teal); font-size: 1.05rem; font-weight: 800; margin-bottom: .8rem; }
+    .fc-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; gap: .6rem; }
+    .fc-teller { font-size: .85rem; font-weight: 800; color: #6b7280; background: #f1f5f9; padding: .25rem .6rem; border-radius: 6px; white-space: nowrap; }
+    .flip-wrapper { width: 100%; perspective: 1000px; cursor: pointer; margin-bottom: .8rem; }
+    .flip-card { width: 100%; min-height: 160px; position: relative; transform-style: preserve-3d; transition: transform .45s; }
+    .flip-card.flipped { transform: rotateY(180deg); }
+    .flip-face {
+      position: absolute; inset: 0; backface-visibility: hidden;
+      border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.2rem; text-align: center;
+    }
+    .flip-front { background: linear-gradient(135deg, #f0fdfa, #fff); border: 2px solid #99f6e4; }
+    .flip-back { background: linear-gradient(135deg, #ccfbf1, #fff); border: 2px solid #5eead4; transform: rotateY(180deg); }
+    .flip-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: #0d9488; margin-bottom: .6rem; }
+    .flip-tekst { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; }
+    .flip-hint { font-size: .72rem; color: #94a3b8; font-weight: 600; margin-top: .8rem; }
+    .veld-rij { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; margin: .6rem 0; font-size: 1.05rem; font-weight: 700; }
+    .veld-rij .veld { display: inline-flex; align-items: center; gap: .35rem; }
+    .veld-rij input {
+      width: 80px; text-align: center; padding: .45rem .4rem;
+      border: 2px solid #e2e8f0; border-radius: 8px;
+      font-family: Nunito, sans-serif; font-size: 1rem; font-weight: 700; color: var(--donker);
+    }
+    .veld-rij input:focus { outline: none; border-color: var(--teal); }
+    .veld-rij input.goed { border-color: #10b981; background: #ecfdf5; }
+    .veld-rij input.fout { border-color: #ef4444; background: #fef2f2; }
+    .keuze-btn {
+      min-width: 2.6rem; padding: .4rem .8rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      background: #fff; cursor: pointer; font-family: Nunito, sans-serif; font-size: 1.05rem; font-weight: 800;
+    }
+    .keuze-btn:hover:not(:disabled) { border-color: var(--teal); background: #f0fdfa; }
+    .keuze-btn.gekozen { border-color: var(--teal); background: var(--teal); color: #fff; }
+    .uitwerking {
+      background: #f1f5f9; border: 1px solid #e2e8f0; border-left: 4px solid var(--grijs); border-radius: 8px;
+      padding: .8rem 1rem; margin: .6rem 0; line-height: 1.7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92rem; color: var(--donker);
+    }
+    .grafiek-svg { max-width: 100%; height: auto; display: block; margin: .6rem auto; }
+    .klaar-scherm {
+      text-align: center; padding: 1.5rem 1rem; margin: .6rem 0;
+      background: linear-gradient(135deg, #f0fdfa, #e0f2fe); border: 2px solid #99f6e4; border-radius: 12px;
+    }
+    .klaar-scherm .klaar-titel { font-size: 1.4rem; font-weight: 800; color: var(--teal); }
+    .klaar-scherm .klaar-sub { color: var(--grijs); font-weight: 600; margin-top: .3rem; }
+    .vraag-tag { color: var(--teal); font-size: .75rem; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; margin-top: .4rem; }
+    .tag-lijst { margin: 1rem auto .4rem; max-width: 360px; display: flex; flex-direction: column; gap: .35rem; text-align: left; }
+    .tag-titel { font-weight: 800; color: var(--donker); margin-bottom: .1rem; }
+    .tag-regel { font-family: Nunito, sans-serif; font-size: .95rem; font-weight: 700; color: var(--donker); background: #fff; border: 1px solid #99f6e4; border-radius: 8px; padding: .4rem .7rem; text-align: left; }
+    button.tag-regel { cursor: pointer; }
+    button.tag-regel:hover { background: #f0fdfa; border-color: var(--teal); }
+    .binnenkort { color: var(--grijs); font-style: italic; padding: 1rem 0; }
+    details.uitleg-card > summary { cursor: pointer; color: #0d9488; font-size: 1.15rem; font-weight: 800; }
+    details.uitleg-card[open] > summary { margin-bottom: 1rem; }
+    .oefening-kaart .oefening-kaart { box-shadow: none; padding: 0; margin-bottom: 0; }
+    .waarde-tabel { border-collapse: collapse; margin: .6rem 0; font-weight: 700; }
+    .waarde-tabel th, .waarde-tabel td { border: 1px solid #cbd5e1; padding: .3rem .9rem; text-align: center; }
+    .waarde-tabel th { background: #f0fdfa; color: #0d9488; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -68,17 +137,583 @@
 
 <header>
   <h1>&#128208; Wiskunde</h1>
-  <p>3 HAVO</p>
+  <p>3 HAVO &middot; H1 Lineaire problemen</p>
   <a href="../">&larr; Terug naar overzicht</a>
 </header>
 
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="showTab('binnenkort',this)">&#128679; Binnenkort</button>
+  <button class="tab-btn active" onclick="showTab('p0',this)">Voorkennis</button>
+  <button class="tab-btn" onclick="showTab('p1',this)">&sect;1.1 Formules</button>
+  <button class="tab-btn" onclick="showTab('p2',this)">&sect;1.2 Verbanden</button>
+  <button class="tab-btn" onclick="showTab('p3',this)">&sect;1.3 Vergelijkingen</button>
+  <button class="tab-btn" onclick="showTab('p4',this)">&sect;1.4 Ongelijkheden</button>
+  <button class="tab-btn" onclick="showTab('p5',this)">&sect;1.5 Functies</button>
+  <button class="tab-btn" onclick="showTab('mix',this)">&#127919; Toetsmix</button>
 </nav>
 
-<div id="tab-binnenkort" class="tab-content active">
-  <div class="uitleg-card">
-    <p>Hier komt de oefenstof voor Wiskunde zodra het eerste proefwerk bekend is.</p>
+<div id="tab-p0" class="tab-content active">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p0','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p0','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p0','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p0-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Herleiden</summary>
+      <p><strong>Herleiden</strong> = een formule eenvoudiger schrijven.</p>
+      <h3>Vermenigvuldigen</h3>
+      <p>Vermenigvuldig de getallen met elkaar en de letters met elkaar.</p>
+      <div class="voorbeeld-blok">
+        5 &middot; 2x = 10x<br>
+        2x &middot; 3y = 6xy<br>
+        6x &middot; 4x = 24x&sup2;
+      </div>
+      <h3>Optellen en aftrekken</h3>
+      <p>Optellen kan alleen bij <strong>gelijksoortige termen</strong>.</p>
+      <div class="voorbeeld-blok">
+        3x + 2x = 5x<br>
+        2z &minus; 5z = &minus;3z
+      </div>
+      <p style="margin-top:.8rem">3x + 5y en 2a &minus; 5 kun je <strong>niet</strong> herleiden.</p>
+      <div class="regel-blok oranje">
+        <p><strong>Vermenigvuldigen:</strong> 2x &middot; 5y = 10xy (kan altijd)</p>
+        <p><strong>Optellen:</strong> 2x + 5y kan niet korter</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Gelijksoortige termen</summary>
+      <div class="regel-blok groen">
+        <p>Neem de gelijksoortige termen samen, en let op het teken dat <strong>v&oacute;&oacute;r</strong> de term staat.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        3x + 8 &minus; 2x &minus; 6 = x + 2<br>
+        7a &minus; 5 &minus; a &minus; 11 = 6a &minus; 16
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Haakjes wegwerken</summary>
+      <div class="regel-blok blauw">
+        <p>a(b + c) = ab + ac</p>
+        <p>(a + b)(c + d) = ac + ad + bc + bd</p>
+      </div>
+      <div class="voorbeeld-blok">
+        3(x &minus; 2) = 3x &minus; 6<br>
+        &minus;3(2a &minus; 7) = &minus;6a + 21<br>
+        (a + 3)(a &minus; 4) = a&sup2; &minus; 4a + 3a &minus; 12 = a&sup2; &minus; a &minus; 12
+      </div>
+      <div class="regel-blok rood-blok">
+        <p><strong>Let op het minteken!</strong></p>
+        <p>8 &minus; 3(2a &minus; 6) = 8 &minus; 6a + 18 = 26 &minus; 6a, want &minus;3 &middot; &minus;6 = +18</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Eenvoudige vergelijkingen (balansmethode)</summary>
+      <p>In 3x + 5 = 17 heet 3x + 5 het <strong>linkerlid</strong> en 17 het <strong>rechterlid</strong>.</p>
+      <p>De <strong>oplossing</strong> is het getal dat je voor x moet invullen zodat de vergelijking klopt.</p>
+      <div class="stappen">
+        <div class="stap">3x + 5 = 17</div>
+        <div class="stap">&minus;5 aan beide kanten &rarr; 3x = 12</div>
+        <div class="stap">:3 aan beide kanten &rarr; x = 4</div>
+      </div>
+    </details>
+  </div>
+  <div id="sub-p0-flashcards" class="sub-tab-content">
+    <div id="p0-fc"></div>
+  </div>
+  <div id="sub-p0-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>A. Herleiden</h3>
+      <div id="p0-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Gelijksoortige termen</h3>
+      <div id="p0-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Haakjes wegwerken</h3>
+      <div id="p0-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Eenvoudige vergelijkingen</h3>
+      <div id="p0-oef-d"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p1" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p1','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p1-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. De grafiek van een lineaire formule</summary>
+      <p>y = &minus;2x + 5 is een <strong>lineaire formule</strong>: er is een lineair verband tussen x en y. De grafiek is een <strong>rechte lijn</strong>.</p>
+      <p style="margin-top:.6rem">Om de grafiek te tekenen maak je een tabel met twee punten:</p>
+      <table class="waarde-tabel">
+        <tr><th>x</th><td>0</td><td>1</td></tr>
+        <tr><th>y</th><td>5</td><td>3</td></tr>
+      </table>
+      <div id="p1-uitleg-grafiek"></div>
+      <div class="regel-blok blauw">
+        <p><strong>Afspraak:</strong> &ldquo;de lijn l met formule y = &minus;2x + 5&rdquo; noteer je als <strong>l: y = &minus;2x + 5</strong>.</p>
+      </div>
+      <p>Bij l ga je 1 naar rechts en 2 omlaag, dus de <strong>richtingsco&euml;ffici&euml;nt</strong> is &minus;2 (notatie rc&#8343; = &minus;2). Een ander woord voor richtingsco&euml;ffici&euml;nt is <strong>helling</strong>.</p>
+      <h3>Ligt een punt op de lijn?</h3>
+      <p>Vul de x-co&ouml;rdinaat in en controleer de y-co&ouml;rdinaat.</p>
+      <div class="voorbeeld-blok">
+        Ligt P(5, 27) op l: y = 8x &minus; 13?<br>
+        8 &middot; 5 &minus; 13 = 27, dat klopt, dus P ligt op l.
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. De formule y = ax + b</summary>
+      <div class="regel-blok groen">
+        <p>Bij de lijn <strong>y = ax + b</strong> is</p>
+        <p>&bull; het snijpunt met de y-as het punt <strong>(0, b)</strong></p>
+        <p>&bull; <strong>rc = a</strong>: ga je 1 naar rechts, dan ga je a omhoog</p>
+      </div>
+      <p><strong>a = 0</strong> geeft y = b: een horizontale lijn, een <strong>constant verband</strong>.</p>
+      <p><strong>b = 0</strong> geeft y = ax: een lijn door de oorsprong, een <strong>recht evenredig verband</strong>.</p>
+      <h3>Werkschema: formule van een lijn opstellen</h3>
+      <div class="stappen">
+        <div class="stap">1. Stel y = ax + b.</div>
+        <div class="stap">2. Zoek het snijpunt met de y-as; daaruit volgt b.</div>
+        <div class="stap">3. Kies twee roosterpunten op de lijn; a = verticaal / horizontaal.</div>
+        <div class="stap">4. Schrijf de formule op.</div>
+      </div>
+      <div class="voorbeeld-blok">
+        Lijn k gaat door (0, 4) en (5, 2), dus b = 4 en a = &minus;2/5.<br>
+        Dus k: y = &minus;2/5 x + 4.
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Evenwijdige lijnen</summary>
+      <div class="regel-blok groen">
+        <p>Evenwijdige lijnen hebben <strong>dezelfde rc</strong>.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>a.</strong> A(4, &minus;5) ligt op k: y = &minus;3x + b.<br>
+        Vul x = 4 en y = &minus;5 in: &minus;12 + b = &minus;5, dus b = 7.
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>b.</strong> Lijn l is evenwijdig met m: y = 5x &minus; 1 en gaat door B(3, 8).<br>
+        a = rc&#8344; = 5. Invullen: 15 + b = 8, dus b = &minus;7, en l: y = 5x &minus; 7.
+      </div>
+    </details>
+  </div>
+  <div id="sub-p1-flashcards" class="sub-tab-content">
+    <div id="p1-fc"></div>
+  </div>
+  <div id="sub-p1-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>A. rc en snijpunt aflezen</h3>
+      <div id="p1-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Punten berekenen</h3>
+      <div id="p1-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Formule bij een grafiek</h3>
+      <div id="p1-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Evenwijdig en door twee punten</h3>
+      <div id="p1-oef-d"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p2" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p2','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p2-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Formules met andere letters</summary>
+      <p>De formule <strong>N = &frac34;t &minus; 2</strong> hoort bij een lineair verband tussen t en N.</p>
+      <div class="regel-blok groen">
+        <p>De letter <strong>achter</strong> het =-teken (hier t) hoort bij de <strong>horizontale</strong> as.</p>
+        <p>De letter <strong>voor</strong> het =-teken (hier N) hoort bij de <strong>verticale</strong> as.</p>
+      </div>
+      <table class="waarde-tabel">
+        <tr><th>t</th><td>0</td><td>4</td></tr>
+        <tr><th>N</th><td>&minus;2</td><td>1</td></tr>
+      </table>
+      <div id="p2-uitleg-grafiek1"></div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Let op de stapgrootte van de assen</summary>
+      <div class="voorbeeld-blok">
+        De lijn gaat door (0, 225) en (45, 75). Stel G = an + b.<br>
+        Door (0, 225), dus b = 225.<br>
+        a = verticaal / horizontaal = &minus;150/45 = &minus;3&#8531;.<br>
+        Dus G = &minus;3&#8531;n + 225.
+      </div>
+      <div class="regel-blok rood-blok">
+        <p><strong>Tel geen hokjes</strong>, maar lees de waarden op de assen af.</p>
+      </div>
+      <div id="p2-uitleg-grafiek2"></div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Formules uit een tekst</summary>
+      <p>Sommige lineaire formules volgen direct uit de tekst.</p>
+      <div class="voorbeeld-blok">
+        <strong>Voorbeeld 1.</strong> Een klusbedrijf rekent 15 euro per uur en 30 euro voorrijkosten.<br>
+        De kosten zijn <strong>K = 15t + 30</strong>.<br>
+        &ldquo;per uur&rdquo; &rarr; het getal v&oacute;&oacute;r t; &ldquo;voorrijkosten&rdquo; &rarr; het losse getal.
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>Voorbeeld 2.</strong> Het water in een vat staat 60 cm hoog en daalt 10 cm per minuut.<br>
+        Dan <strong>h = 60 &minus; 10t</strong>.<br>
+        &ldquo;beginhoogte&rdquo; &rarr; het losse getal; &ldquo;per minuut lager&rdquo; &rarr; negatief getal v&oacute;&oacute;r t.
+      </div>
+      <div class="regel-blok groen">
+        <p>&ldquo;per &hellip; (uur, km, jaar)&rdquo; = de richtingsco&euml;ffici&euml;nt</p>
+        <p>beginwaarde / vaste kosten = het getal bij t = 0</p>
+      </div>
+      <h3>Tabel met jaartallen</h3>
+      <p>Neem t = 0 bij het eerste jaar. Is de toename per stap steeds gelijk, dan is het verband lineair.</p>
+      <table class="waarde-tabel">
+        <tr><th>jaar</th><td>2013</td><td>2014</td><td>2015</td><td>2016</td></tr>
+        <tr><th>t</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><th>N</th><td>1850</td><td>1700</td><td>1550</td><td>1400</td></tr>
+      </table>
+      <div class="voorbeeld-blok">
+        Elk jaar &minus;150, dus lineair: N = &minus;150t + 1850 (t = 0 in 2013).
+      </div>
+    </details>
+  </div>
+  <div id="sub-p2-flashcards" class="sub-tab-content">
+    <div id="p2-fc"></div>
+  </div>
+  <div id="sub-p2-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>A. Formule bij een tekst</h3>
+      <div id="p2-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Formule bij een tabel</h3>
+      <div id="p2-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Formule bij een grafiek</h3>
+      <div id="p2-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Rekenen met de formule</h3>
+      <div id="p2-oef-d"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p3" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p3','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p3-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Termen overbrengen</summary>
+      <p>10x &minus; 4 = 7x + 20 is een <strong>lineaire vergelijking</strong>. Je lost hem stap voor stap op, tot x alleen in het linkerlid staat.</p>
+      <div class="stappen">
+        <div class="stap">10x &minus; 4 = 7x + 20</div>
+        <div class="stap">links en rechts 7x aftrekken &rarr; 3x &minus; 4 = 20</div>
+        <div class="stap">links en rechts 4 optellen &rarr; 3x = 24</div>
+        <div class="stap">:3 &rarr; x = 8</div>
+      </div>
+      <p>Sneller: in &eacute;&eacute;n keer 7x en &minus;4 naar het andere lid brengen: 10x &minus; 7x = 20 + 4. Dat heet <strong>overbrengen</strong>.</p>
+      <div class="regel-blok groen">
+        <p>In een vergelijking mag je termen van het ene naar het andere lid <strong>overbrengen</strong>, maar dan moet je <strong>+ vervangen door &minus;</strong> en <strong>&minus; door +</strong>.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Lineaire vergelijkingen oplossen</summary>
+      <div class="voorbeeld-blok">
+        5x + 8 = &minus;3x + 24<br>
+        breng &minus;3x naar links en 8 naar rechts &rarr; 5x + 3x = 24 &minus; 8<br>
+        herleid &rarr; 8x = 16<br>
+        deel door 8 &rarr; x = 2
+      </div>
+      <div class="voorbeeld-blok">
+        6x &minus; 12 = 8x + 3<br>
+        6x &minus; 8x = 3 + 12<br>
+        &minus;2x = 15<br>
+        x = &minus;7&frac12;
+      </div>
+      <div class="regel-blok rood-blok">
+        <p>Deel door het getal dat v&oacute;&oacute;r x staat, <strong>inclusief het minteken</strong>.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Vergelijkingen met haakjes</summary>
+      <div class="stappen">
+        <div class="stap">1. Werk de haakjes weg.</div>
+        <div class="stap">2. Breng alle termen met x naar het linkerlid en de rest naar het rechterlid.</div>
+        <div class="stap">3. Herleid beide leden.</div>
+        <div class="stap">4. Deel beide leden door het getal dat v&oacute;&oacute;r x staat.</div>
+      </div>
+      <div class="voorbeeld-blok">
+        4(x &minus; 2) + 3 = 8 &minus; 7(x &minus; 6)<br>
+        4x &minus; 8 + 3 = 8 &minus; 7x + 42 (bedenk: &minus;7 &middot; &minus;6 = +42)<br>
+        4x + 7x = 8 + 42 + 8 &minus; 3<br>
+        11x = 55<br>
+        x = 5
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Vergelijkingen met breuken</summary>
+      <p>Werk eerst de breuken weg: vermenigvuldig beide leden met een getal waar alle noemers in passen.</p>
+      <div class="voorbeeld-blok">
+        &#8531;x + 2 = &frac12;x<br>
+        &times;6 &rarr; 2x + 12 = 3x<br>
+        2x &minus; 3x = &minus;12<br>
+        &minus;x = &minus;12<br>
+        x = 12
+      </div>
+      <div class="regel-blok rood-blok">
+        <p>Vermenigvuldig <strong>&Aacute;LLE</strong> termen, dus ook de getallen zonder breuk.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>E. Lineaire formules vergelijken (snijpunt berekenen)</summary>
+      <div class="regel-blok groen">
+        <p>De x-co&ouml;rdinaat van het snijpunt van y = 3x + 5 en y = &minus;2x + 15 is de oplossing van <strong>3x + 5 = &minus;2x + 15</strong>.</p>
+        <p>De y-co&ouml;rdinaat vind je door x in &eacute;&eacute;n van de formules in te vullen.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        l: y = 0,6x &minus; 0,4 en m: y = &minus;1,2x + 4,1<br>
+        0,6x &minus; 0,4 = &minus;1,2x + 4,1<br>
+        1,8x = 4,5<br>
+        x = 2,5<br>
+        y = 0,6 &middot; 2,5 &minus; 0,4 = 1,1<br>
+        dus S(2,5; 1,1)
+      </div>
+      <div id="p3-uitleg-grafiek"></div>
+      <p>Let op de notatie: bij kommagetallen scheid je de co&ouml;rdinaten met een <strong>puntkomma</strong>, S(2,5; 1,1).</p>
+    </details>
+  </div>
+  <div id="sub-p3-flashcards" class="sub-tab-content">
+    <div id="p3-fc"></div>
+  </div>
+  <div id="sub-p3-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>A. Termen overbrengen</h3>
+      <div id="p3-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Vergelijkingen met haakjes</h3>
+      <div id="p3-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Vergelijkingen met breuken</h3>
+      <div id="p3-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Snijpunt van twee lijnen</h3>
+      <div id="p3-oef-d"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>E. Vergelijkingen in een context</h3>
+      <div id="p3-oef-e"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p4" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p4','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p4','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p4','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p4-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Ongelijkheden oplossen met grafieken</summary>
+      <p>7 &minus; x &lt; 2x &minus; 5 is een <strong>lineaire ongelijkheid</strong>. De oplossing is geen &eacute;&eacute;n getal, maar een hele reeks getallen.</p>
+      <p>Je kijkt voor welke x de grafiek van y = 7 &minus; x <strong>onder</strong> de grafiek van y = 2x &minus; 5 ligt. Dat is zo rechts van het snijpunt (x = 4), dus de oplossing is <strong>x &gt; 4</strong>.</p>
+      <div id="p4-uitleg-grafiek"></div>
+      <div class="regel-blok groen">
+        <p><strong>&lt;</strong> betekent: de grafiek ligt <strong>onder</strong> de andere.</p>
+        <p><strong>&gt;</strong> betekent: de grafiek ligt <strong>boven</strong> de andere.</p>
+        <p>Eerst het snijpunt, dan kijken aan welke kant het klopt.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Ongelijkheden oplossen zonder grafieken</summary>
+      <p>Je lost stap voor stap op, net als een vergelijking.</p>
+      <div class="voorbeeld-blok">
+        4(a &minus; 3) &gt; 4 &minus; 3(5 &minus; a)<br>
+        haakjes weg &rarr; 4a &minus; 12 &gt; 4 &minus; 15 + 3a<br>
+        termen met a naar links, de rest naar rechts &rarr; 4a &minus; 3a &gt; 4 &minus; 15 + 12<br>
+        herleid &rarr; a &gt; 1
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Het omklappen van het ongelijkheidsteken</summary>
+      <p>&minus;35 &lt; 30 klopt. Deel je links en rechts door &minus;5, dan krijg je 7 en &minus;6. Nu klopt 7 &gt; &minus;6: het teken is <strong>omgeklapt</strong>.</p>
+      <div class="regel-blok rood-blok">
+        <p>Deel of vermenigvuldig je beide leden met een <strong>NEGATIEF</strong> getal, dan klapt het ongelijkheidsteken om.</p>
+      </div>
+      <div class="stappen">
+        <div class="stap">&minus;4x &gt; &minus;12 &rarr; x &lt; 3 (je deelt door &minus;4, dus &gt; klapt om)</div>
+        <div class="stap">&minus;&frac12;x &lt; 20 &rarr; x &gt; &minus;40 (je vermenigvuldigt met &minus;2, dus &lt; klapt om)</div>
+        <div class="stap">2x &lt; &minus;20 &rarr; x &lt; &minus;10 (je deelt door 2, dus &lt; klapt NIET om)</div>
+      </div>
+      <p><strong>Let op:</strong> een negatief getal rechts is geen reden om om te klappen; het gaat om het getal waardoor je deelt.</p>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Werkschema: lineaire ongelijkheden oplossen</summary>
+      <div class="stappen">
+        <div class="stap">1. Staan er haakjes? Werk ze weg.</div>
+        <div class="stap">2. Breng alle termen met x naar het linkerlid en de rest naar het rechterlid.</div>
+        <div class="stap">3. Herleid beide leden.</div>
+        <div class="stap">4. Deel beide leden door het getal dat v&oacute;&oacute;r x staat. Is dat getal negatief, dan klap je het ongelijkheidsteken om.</div>
+      </div>
+      <div class="voorbeeld-blok">
+        2x &lt; 5x + 6 &rarr; 2x &minus; 5x &lt; 6 &rarr; &minus;3x &lt; 6 &rarr; x &gt; &minus;2
+      </div>
+      <div class="voorbeeld-blok">
+        3(x &minus; 2) &gt; 5(2 + x) &minus; 16 &rarr; 3x &minus; 6 &gt; 10 + 5x &minus; 16 &rarr; &minus;2x &gt; 0 &rarr; x &lt; 0
+      </div>
+    </details>
+  </div>
+  <div id="sub-p4-flashcards" class="sub-tab-content">
+    <div id="p4-fc"></div>
+  </div>
+  <div id="sub-p4-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>A. Ongelijkheden met grafieken</h3>
+      <div id="p4-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Omklappen</h3>
+      <div id="p4-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Ongelijkheden oplossen</h3>
+      <div id="p4-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Ongelijkheden in een context</h3>
+      <div id="p4-oef-d"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p5" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p5','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p5-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Functies</summary>
+      <p>Een taximeter rekent met een vast voorschrift: &ldquo;eerst keer 2, dan plus 3&rdquo;. Het aantal km is de <strong>invoer</strong>, de ritprijs de <strong>uitvoer</strong>.</p>
+      <div class="regel-blok groen">
+        <p>Een <strong>functie</strong> maakt volgens een vast voorschrift van een getal, de invoer, een ander getal, de uitvoer.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>Terugrekenen:</strong> hoort bij de uitvoer 17 de invoer? Doe de stappen omgekeerd: eerst &minus;3, dan :2, dus invoer 7.
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Het functievoorschrift</summary>
+      <p>Functie f: &ldquo;eerst &times;2, dan +5&rdquo;. Bij invoer 4 hoort uitvoer 13. We schrijven <strong>f(4) = 13</strong>: de functiewaarde van 4 is 13.</p>
+      <p><strong>f(x) = 2x + 5</strong> heet het <strong>functievoorschrift</strong> van f.</p>
+      <div class="regel-blok groen">
+        <p>Bij een functie f hoort bij invoer x de uitvoer f(x), de <strong>functiewaarde</strong> van x.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        f(x) = &minus;5x + 2 en g(x) = 3x &minus; 20.<br>
+        f(4) = &minus;5 &middot; 4 + 2 = &minus;18<br>
+        g(4) = 3 &middot; 4 &minus; 20 = &minus;8<br>
+        h(x) = f(x) + g(x) = &minus;5x + 2 + 3x &minus; 20 = &minus;2x &minus; 18
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. De functie f(x) = ax + b</summary>
+      <p>Een functie van de vorm <strong>f(x) = ax + b</strong> is een <strong>lineaire functie</strong>. De grafiek is een lijn met rc = a en snijpunt met de y-as (0, b).</p>
+      <p>Uit f(4) = 13 volgt dat het punt (4, 13) op de grafiek van f ligt.</p>
+      <p><strong>Notatie:</strong> x<sub>P</sub> is de x-co&ouml;rdinaat van punt P, y<sub>P</sub> de y-co&ouml;rdinaat.</p>
+      <div class="voorbeeld-blok">
+        f(x) = &frac12;x &minus; 1<br>
+        Ligt A(48, 25) op de grafiek? f(48) = 24 &minus; 1 = 23 &ne; 25, dus nee.<br>
+        Het punt B op de grafiek heeft y<sub>B</sub> = &minus;17: &frac12;x &minus; 1 = &minus;17 &rarr; &frac12;x = &minus;16 &rarr; x<sub>B</sub> = &minus;32.
+      </div>
+      <div id="p5-uitleg-grafiek"></div>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Snijpunten met de x-as en de y-as</summary>
+      <table class="waarde-tabel">
+        <tr><th>snijpunt met de x-as</th><td>de y-co&ouml;rdinaat is 0, x volgt uit f(x) = 0</td></tr>
+        <tr><th>snijpunt met de y-as</th><td>de x-co&ouml;rdinaat is 0, de y-co&ouml;rdinaat is f(0)</td></tr>
+      </table>
+      <div class="voorbeeld-blok">
+        f(x) = &minus;4x + 6<br>
+        Snijpunt met de y-as: f(0) = 6, dus B(0, 6).<br>
+        Snijpunt met de x-as: &minus;4x + 6 = 0 &rarr; &minus;4x = &minus;6 &rarr; x = 1&frac12;, dus A(1&frac12;, 0).
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>E. Snijpunten van grafieken van functies</summary>
+      <div class="regel-blok groen">
+        <p>x<sub>S</sub> volgt uit de vergelijking <strong>f(x) = g(x)</strong></p>
+        <p>y<sub>S</sub> krijg je door f(x<sub>S</sub>) of g(x<sub>S</sub>) te berekenen</p>
+      </div>
+      <div class="voorbeeld-blok">
+        f(x) = 2x &minus; 3 en g(x) = &minus;x + 3<br>
+        2x &minus; 3 = &minus;x + 3 &rarr; 3x = 6 &rarr; x = 2<br>
+        y = g(2) = 1<br>
+        dus S(2, 1)
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>Een onbekende a berekenen:</strong> de grafiek van f(x) = ax + 8 gaat door (&minus;2, 40).<br>
+        Dan is f(&minus;2) = 40, dus &minus;2a + 8 = 40, dus a = &minus;16.
+      </div>
+    </details>
+  </div>
+  <div id="sub-p5-flashcards" class="sub-tab-content">
+    <div id="p5-fc"></div>
+  </div>
+  <div id="sub-p5-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>A. Invoer en uitvoer</h3>
+      <div id="p5-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Functiewaarden en h = f + g</h3>
+      <div id="p5-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Punten op de grafiek</h3>
+      <div id="p5-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Snijpunten met de assen</h3>
+      <div id="p5-oef-d"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>E. Snijpunt van grafieken en onbekenden</h3>
+      <div id="p5-oef-e"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-mix" class="tab-content">
+  <div id="mix-oefenen">
+    <div class="uitleg-card">
+      <p>&#127919; <strong>Toetsmix:</strong> 15 gemengde opgaven, 3 per paragraaf (&sect;1.1 t/m &sect;1.5), in willekeurige volgorde, zoals op de toets. Aan het eind zie je per paragraaf hoe het ging.</p>
+      <p style="margin-top:.5rem"><strong>Tip:</strong> werk op papier mee en schrijf je tussenstappen op, net als op de toets.</p>
+    </div>
+    <div class="oefening-kaart">
+      <div id="mix-oef"></div>
+    </div>
   </div>
 </div>
 
@@ -86,8 +721,1895 @@
 
 <script>
   function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+  function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+  /* === GETALLEN: invoer lezen en netjes tonen === */
+  var UNI_BREUK = {'½':1/2, '¼':1/4, '¾':3/4, '⅓':1/3, '⅔':2/3};
+
+  // "5", "-5", "3.5", "-7,5", "-15/2", "-7 1/2", "7½" → getal; anders NaN
+  function parseGetal(str){
+    if (str === null || str === undefined) return NaN;
+    var s = String(str).trim()
+      .replace(/[−–]/g, '-')
+      .replace(/,/g, '.')
+      .replace(/\s*\/\s*/g, '/');
+    var neg = false;
+    if (s.charAt(0) === '-' || s.charAt(0) === '+'){ neg = s.charAt(0) === '-'; s = s.slice(1).trim(); }
+    if (s === '') return NaN;
+    var m, v;
+    if ((m = s.match(/^(\d*)\s*([½¼¾⅓⅔])$/))){
+      v = (m[1] ? parseInt(m[1], 10) : 0) + UNI_BREUK[m[2]];
+    } else if ((m = s.match(/^(\d+)\s+(\d+)\/(\d+)$/))){
+      v = parseInt(m[1], 10) + parseInt(m[2], 10) / parseInt(m[3], 10);
+    } else if ((m = s.match(/^(\d+(?:\.\d+)?|\.\d+)\/(\d+(?:\.\d+)?|\.\d+)$/))){
+      v = parseFloat(m[1]) / parseFloat(m[2]);
+    } else if (/^(\d+(?:\.\d*)?|\.\d+)$/.test(s)){
+      v = parseFloat(s);
+    } else {
+      return NaN;
+    }
+    if (!isFinite(v)) return NaN;
+    return neg ? -v : v;
+  }
+
+  // ruime marge zodat 0,33 goed is voor 1/3
+  function isGelijk(invoer, antwoord){
+    var a = typeof invoer === 'number' ? invoer : parseGetal(invoer);
+    if (isNaN(a) || isNaN(antwoord)) return false;
+    return Math.abs(a - antwoord) < 0.011;
+  }
+
+  // 3 → "3", −7.5 → "−7½", 1/3 → "1/3", 8/3 → "2 2/3", anders 2 decimalen met komma
+  function fmt(n){
+    if (typeof n !== 'number' || !isFinite(n)) return String(n);
+    var neg = n < 0, a = Math.abs(n), tekst;
+    if (Math.abs(a - Math.round(a)) < 1e-9){
+      tekst = String(Math.round(a));
+    } else {
+      var teller = 0, noemer = 0;
+      for (var d = 2; d <= 12; d++){
+        var t = Math.round(a * d);
+        if (Math.abs(a - t / d) < 1e-9){ teller = t; noemer = d; break; }
+      }
+      if (noemer){
+        var hele = Math.floor(teller / noemer), rest = teller % noemer;
+        if (rest === 1 && noemer === 2) tekst = (hele ? hele : '') + '½';
+        else tekst = (hele ? hele + ' ' : '') + rest + '/' + noemer;
+      } else {
+        tekst = a.toFixed(2).replace('.', ',');
+      }
+    }
+    if (/^0(,00)?$/.test(tekst)) neg = false;
+    return (neg ? '−' : '') + tekst;
+  }
+
+  // willekeurig geheel getal in [min, max]
+  function rnd(min, max, zonderNul){
+    var n;
+    do { n = Math.floor(Math.random() * (max - min + 1)) + min; } while (zonderNul && n === 0 && (min !== 0 || max !== 0));
+    return n;
+  }
+
+  // term(-1,'x',true) → "−x", term(3,'',false) → " + 3", term(-2,'x',false) → " − 2x"
+  function term(coef, letter, eerste){
+    letter = letter || '';
+    if (!coef || Math.abs(coef) < 1e-12) return '';
+    var neg = coef < 0, a = Math.abs(coef);
+    var kern = (letter && Math.abs(a - 1) < 1e-9 ? '' : fmt(a)) + letter;
+    if (eerste) return (neg ? '−' : '') + kern;
+    return (neg ? ' − ' : ' + ') + kern;
+  }
+
+  // lin(2,-3) → "2x − 3"
+  function lin(a, b, letter){
+    letter = letter || 'x';
+    var s = term(a, letter, true);
+    s += term(b, '', s === '');
+    return s || '0';
+  }
+
+  /* === GRAFIEK: assenstelsel met lijnen y = ax + b === */
+  function tekenGrafiek(lijnen, opties){
+    opties = opties || {};
+    var xmin = opties.xmin !== undefined ? opties.xmin : -6, xmax = opties.xmax !== undefined ? opties.xmax : 6;
+    var ymin = opties.ymin !== undefined ? opties.ymin : -6, ymax = opties.ymax !== undefined ? opties.ymax : 6;
+    var punten = opties.punten || [];
+    var W = 320, H = 320, pad = 24, w = W - 2 * pad, h = H - 2 * pad;
+    var standaardKleuren = ['#0d9488', '#0ea5e9', '#f59e0b', '#ef4444', '#8b5cf6'];
+    function sx(x){ return pad + (x - xmin) / (xmax - xmin) * w; }
+    function sy(y){ return pad + (ymax - y) / (ymax - ymin) * h; }
+    function r(v){ return Math.round(v * 10) / 10; }
+    function stap(bereik){ return bereik <= 16 ? 1 : Math.ceil(bereik / 12); }
+    // optioneel: xstap/ystap = afstand tussen roosterlijnen en aslabels, xnaam/ynaam = asnamen
+    var gx = opties.xstap || 1, gy = opties.ystap || 1;
+    var xnaam = opties.xnaam || 'x', ynaam = opties.ynaam || 'y';
+    // labelafstand: zonder xstap/ystap zoals voorheen; met xstap/ystap elke stap, of elke 2e (3e …) als ze anders overlappen
+    function labelStap(g, bereik, pix, minPix){ var f = 1; while (pix * g * f / bereik < minPix) f++; return g * f; }
+    function maxLabelBreedte(min, max, g){ var m = 0; for (var i = Math.ceil(min / g - 1e-9); i * g <= max + 1e-9; i++) m = Math.max(m, fmt(i * g).length); return m * 5.5 + 6; }
+    var sxStap = opties.xstap ? labelStap(gx, xmax - xmin, w, maxLabelBreedte(xmin, xmax, gx)) : stap(xmax - xmin);
+    var syStap = opties.ystap ? labelStap(gy, ymax - ymin, h, 13) : stap(ymax - ymin);
+    var s = '<svg class="grafiek-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg" font-family="Nunito, sans-serif">';
+    s += '<rect x="' + pad + '" y="' + pad + '" width="' + w + '" height="' + h + '" fill="#fff" stroke="#cbd5e1"/>';
+
+    // rooster
+    var x, y, i;
+    for (i = Math.ceil(xmin / gx - 1e-9); i * gx <= xmax + 1e-9; i++){ x = i * gx; s += '<line x1="' + r(sx(x)) + '" y1="' + pad + '" x2="' + r(sx(x)) + '" y2="' + (pad + h) + '" stroke="#e2e8f0" stroke-width="1"/>'; }
+    for (i = Math.ceil(ymin / gy - 1e-9); i * gy <= ymax + 1e-9; i++){ y = i * gy; s += '<line x1="' + pad + '" y1="' + r(sy(y)) + '" x2="' + (pad + w) + '" y2="' + r(sy(y)) + '" stroke="#e2e8f0" stroke-width="1"/>'; }
+
+    // assen (aan de rand als 0 buiten beeld valt)
+    var asY = r(Math.min(Math.max(sy(0), pad), pad + h));
+    var asX = r(Math.min(Math.max(sx(0), pad), pad + w));
+    s += '<line x1="' + pad + '" y1="' + asY + '" x2="' + (pad + w) + '" y2="' + asY + '" stroke="#475569" stroke-width="1.5"/>';
+    s += '<line x1="' + asX + '" y1="' + pad + '" x2="' + asX + '" y2="' + (pad + h) + '" stroke="#475569" stroke-width="1.5"/>';
+    s += '<text x="' + (pad + w - 4) + '" y="' + (asY - 5) + '" font-size="12" font-weight="700" text-anchor="end" fill="#475569">' + xnaam + '</text>';
+    s += '<text x="' + (asX + 5) + '" y="' + (pad + 11) + '" font-size="12" font-weight="700" fill="#475569">' + ynaam + '</text>';
+
+    // getallen langs de assen
+    for (x = Math.ceil(xmin / sxStap) * sxStap; x <= xmax; x += sxStap){
+      if (x === 0) continue;
+      s += '<text x="' + r(sx(x)) + '" y="' + r(Math.min(asY + 13, pad + h + 13)) + '" font-size="9" text-anchor="middle" fill="#64748b">' + fmt(x) + '</text>';
+    }
+    for (y = Math.ceil(ymin / syStap) * syStap; y <= ymax; y += syStap){
+      if (y === 0) continue;
+      s += '<text x="' + r(Math.max(asX - 4, pad - 4)) + '" y="' + r(sy(y) + 3) + '" font-size="9" text-anchor="end" fill="#64748b">' + fmt(y) + '</text>';
+    }
+    if (xmin <= 0 && xmax >= 0 && ymin <= 0 && ymax >= 0){
+      s += '<text x="' + r(sx(0) - 4) + '" y="' + r(sy(0) + 12) + '" font-size="10" font-weight="700" text-anchor="end" fill="#475569">O</text>';
+    }
+
+    // lijnen, geclipt binnen het venster
+    (lijnen || []).forEach(function(l, i){
+      var a = l.a, b = l.b, eps = 1e-9, kandidaten = [];
+      kandidaten.push({x: xmin, y: a * xmin + b}, {x: xmax, y: a * xmax + b});
+      if (Math.abs(a) > eps){ kandidaten.push({x: (ymin - b) / a, y: ymin}, {x: (ymax - b) / a, y: ymax}); }
+      var binnen = kandidaten.filter(function(p){ return p.x >= xmin - eps && p.x <= xmax + eps && p.y >= ymin - eps && p.y <= ymax + eps; });
+      binnen.sort(function(p, q){ return p.x - q.x; });
+      if (binnen.length < 2) return;
+      var p1 = binnen[0], p2 = binnen[binnen.length - 1];
+      if (Math.abs(p1.x - p2.x) < eps && Math.abs(p1.y - p2.y) < eps) return;
+      var kleur = l.kleur || standaardKleuren[i % standaardKleuren.length];
+      s += '<line x1="' + r(sx(p1.x)) + '" y1="' + r(sy(p1.y)) + '" x2="' + r(sx(p2.x)) + '" y2="' + r(sy(p2.y)) + '" stroke="' + kleur + '" stroke-width="2.5" stroke-linecap="round"/>';
+      if (l.naam){
+        var lx = sx(p2.x), ly = sy(p2.y);
+        var anker = lx > pad + w - 40 ? 'end' : 'start';
+        var dx = anker === 'end' ? -5 : 5, dy = ly < pad + 16 ? 15 : -7;
+        s += '<text x="' + r(lx + dx) + '" y="' + r(ly + dy) + '" font-size="12" font-weight="800" text-anchor="' + anker + '" fill="' + kleur + '">' + l.naam + '</text>';
+      }
+    });
+
+    // punten
+    punten.forEach(function(p){
+      if (p.x < xmin || p.x > xmax || p.y < ymin || p.y > ymax) return;
+      s += '<circle cx="' + r(sx(p.x)) + '" cy="' + r(sy(p.y)) + '" r="4" fill="#1e293b"/>';
+      if (p.naam) s += '<text x="' + r(sx(p.x) + 6) + '" y="' + r(sy(p.y) - 6) + '" font-size="11" font-weight="700" fill="#1e293b">' + p.naam + '</text>';
+    });
+
+    s += '</svg>';
+    return s;
+  }
+
+  /* De juiste antwoordzin voor de feedback, bv. "x > 5", "a = −2, b = 5", "x² + 2x − 3", "A(3, 0)". */
+  function antwoordZin(velden){
+    var EENHEDEN = {km:1, cm:1, m:1};
+    function getal(n){
+      var s = fmt(n);
+      // kommagetallen (hooguit 2 decimalen) niet als breuk: 2,25 in plaats van 2 1/4; ½-glyph en 1/3 blijven
+      if (s.indexOf('/') !== -1 && Math.abs(n * 100 - Math.round(n * 100)) < 1e-9)
+        s = (n < 0 ? '−' : '') + String(Math.abs(Math.round(n * 100) / 100)).replace('.', ',');
+      return s;
+    }
+    function esc(t){ return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    var zin = '';
+    velden.forEach(function(vd, i){
+      var waarde = vd.keuze ? esc(vd.antwoord) : getal(vd.antwoord), na = vd.na || '';
+      // getal direct gevolgd door een variabele (x, xy, x²) → geen spatie: "3x"
+      var letter = na.match(/^([a-z]{1,2}²?)(\s|$)/);
+      var deel = (vd.voor ? vd.voor + ' ' : '') + waarde + (na ? (letter && !vd.keuze && !EENHEDEN[letter[1]] ? '' : ' ') + na : '');
+      if (i > 0) zin += /[=:]/.test(vd.voor || '') ? ', ' : ' ';
+      zin += deel;
+    });
+    return zin
+      .replace(/(^|[\s(])(−?)1([a-z])/g, '$1$2$3')          // 1x → x, −1x → −x
+      .replace(/(^|= )0[a-z]{1,2}²? \+ /g, '$1')             // 0x + 5 → 5
+      .replace(/(^|= )0[a-z]{1,2}²? − /g, '$1−')              // 0x − 5 → −5
+      .replace(/ [+−] 0[a-z]{1,2}²?(?=\s|,|$)/g, '')          // x² + 0x − 4 → x² − 4
+      .replace(/ \+ 0(?=,|$)/g, '')                          // 3x + 0 → 3x
+      .replace(/\+ −/g, '− ')                                // + −5 → − 5
+      .replace(/\s+/g, ' ').replace(/\( /g, '(').replace(/ \)/g, ')').replace(/ ,/g, ',')
+      .trim();
+  }
+
+  /* === OEFEN-ENGINE ===
+     generator() → { vraag: HTML,
+                     velden: [{voor, na, antwoord: getal}] of [{keuze: ['<','>'], antwoord: '<', voor, na}],
+                     uitwerking: HTML,
+                     tag: optioneel, bv. '§1.3' → label boven de vraag en score per tag op het eindscherm }
+     opties.tagKlik(tag): optioneel, maakt de regels 'Per paragraaf' klikbaar */
+  function maakOefening(containerId, generatoren, opties){
+    opties = opties || {};
+    var container = document.getElementById(containerId);
+    if (!container) return null;
+    var st = { aantal: opties.aantal || 10, vragen: [], index: 0, goed: 0, totaal: 0, setGoed: 0,
+               beantwoord: false, klaar: false, keuzes: [], tags: {} };
+
+    container.innerHTML =
+      '<div class="oefening-kaart">' +
+        (opties.titel ? '<h3>' + opties.titel + '</h3>' : '') +
+        '<div class="score-balk" data-rol="score"></div>' +
+        '<div data-rol="vraagblok">' +
+          '<div class="vraag-tag" data-rol="tag" style="display:none"></div>' +
+          '<div class="vraag-tekst" data-rol="vraag"></div>' +
+          '<div class="veld-rij" data-rol="velden"></div>' +
+          '<div class="feedback" data-rol="feedback"></div>' +
+          '<div data-rol="uitwerking"></div>' +
+          '<div class="knoppen-rij">' +
+            '<button type="button" data-rol="controleer">Controleer</button>' +
+            '<button type="button" data-rol="volgende" style="display:none">Volgende &rarr;</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="klaar-scherm" data-rol="klaar" style="display:none"></div>' +
+        '<div class="knoppen-rij">' +
+          '<button type="button" data-rol="shuffle">&#128256; Shuffle</button>' +
+          '<button type="button" data-rol="opnieuw">&#8635; Opnieuw</button>' +
+        '</div>' +
+      '</div>';
+    function el(rol){ return container.querySelector('[data-rol="' + rol + '"]'); }
+    function esc(t){ return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    function maakSet(focus){
+      var reeks = [];
+      while (reeks.length < st.aantal) reeks = reeks.concat(fisherYates(generatoren.slice()));
+      reeks = fisherYates(reeks.slice(0, st.aantal));
+      var gezien = {};
+      st.vragen = reeks.map(function(gen){
+        var v, pogingen = 0;
+        do { v = gen(); pogingen++; } while (gezien[v.vraag + JSON.stringify(v.velden)] && pogingen < 6);
+        gezien[v.vraag + JSON.stringify(v.velden)] = true;
+        return v;
+      });
+      st.index = 0; st.setGoed = 0; st.klaar = false;
+      toonVraag(focus);
+    }
+
+    function updateScore(){
+      var nr = Math.min(st.index + 1, st.vragen.length);
+      el('score').textContent = 'Vraag ' + nr + '/' + st.vragen.length + ' · Goed: ' + st.goed + '/' + st.totaal;
+    }
+
+    function toonVraag(focus){
+      var v = st.vragen[st.index];
+      st.beantwoord = false;
+      st.keuzes = [];
+      el('vraagblok').style.display = '';
+      el('klaar').style.display = 'none';
+      el('tag').textContent = v.tag || '';
+      el('tag').style.display = v.tag ? '' : 'none';
+      el('vraag').innerHTML = v.vraag;
+      var rij = el('velden');
+      rij.innerHTML = '';
+      v.velden.forEach(function(veld, i){
+        var span = document.createElement('span');
+        span.className = 'veld';
+        var html = veld.voor ? '<span>' + veld.voor + '</span>' : '';
+        if (veld.keuze){
+          veld.keuze.forEach(function(k){
+            html += '<button type="button" class="keuze-btn" data-veld="' + i + '">' + esc(k) + '</button>';
+          });
+        } else {
+          html += '<input type="text" inputmode="decimal" autocomplete="off" data-veld="' + i + '">';
+        }
+        if (veld.na) html += '<span>' + veld.na + '</span>';
+        span.innerHTML = html;
+        rij.appendChild(span);
+      });
+      rij.querySelectorAll('.keuze-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if (st.beantwoord) return;
+          var i = +btn.getAttribute('data-veld');
+          st.keuzes[i] = v.velden[i].keuze[[].indexOf.call(rij.querySelectorAll('.keuze-btn[data-veld="' + i + '"]'), btn)];
+          rij.querySelectorAll('.keuze-btn[data-veld="' + i + '"]').forEach(function(b){ b.classList.toggle('gekozen', b === btn); });
+        });
+      });
+      var fb = el('feedback');
+      fb.className = 'feedback'; fb.innerHTML = '';
+      el('uitwerking').innerHTML = '';
+      el('controleer').style.display = '';
+      el('volgende').style.display = 'none';
+      updateScore();
+      if (focus){
+        var eerste = rij.querySelector('input, .keuze-btn');
+        if (eerste) eerste.focus({preventScroll: true});
+      }
+    }
+
+    function controleer(){
+      if (st.beantwoord || st.klaar) return;
+      var v = st.vragen[st.index], rij = el('velden'), fb = el('feedback');
+      var inputs = {}, alleGoed = true, i;
+      rij.querySelectorAll('input[data-veld]').forEach(function(inp){ inputs[inp.getAttribute('data-veld')] = inp; });
+      for (i = 0; i < v.velden.length; i++){
+        var veld = v.velden[i];
+        if (veld.keuze){
+          if (st.keuzes[i] === undefined){ fb.className = 'feedback fout'; fb.textContent = 'Kies eerst een antwoord.'; return; }
+        } else {
+          var raw = inputs[i].value;
+          if (raw.trim() === '' || isNaN(parseGetal(raw))){
+            fb.className = 'feedback fout';
+            fb.textContent = raw.trim() === '' ? 'Vul eerst een antwoord in.' : 'Dat getal begrijp ik niet. Gebruik bv. 3, -2,5 of 7/2.';
+            inputs[i].focus({preventScroll: true});
+            return;
+          }
+        }
+      }
+      for (i = 0; i < v.velden.length; i++){
+        var vd = v.velden[i], ok;
+        if (vd.keuze){
+          ok = st.keuzes[i] === vd.antwoord;
+        } else {
+          ok = isGelijk(parseGetal(inputs[i].value), vd.antwoord);
+          inputs[i].classList.add(ok ? 'goed' : 'fout');
+        }
+        if (!ok) alleGoed = false;
+      }
+      rij.querySelectorAll('input, .keuze-btn').forEach(function(e){ e.disabled = true; });
+      st.beantwoord = true;
+      st.totaal++;
+      if (alleGoed){ st.goed++; st.setGoed++; }
+      if (v.tag){
+        var ts = st.tags[v.tag] || (st.tags[v.tag] = {goed: 0, totaal: 0});
+        ts.totaal++;
+        if (alleGoed) ts.goed++;
+      }
+      if (alleGoed){
+        fb.className = 'feedback goed';
+        fb.innerHTML = '&#10003; Goed zo!';
+      } else {
+        var juist = antwoordZin(v.velden);
+        fb.className = 'feedback fout';
+        fb.innerHTML = '&#10007; Helaas. Het juiste antwoord is: ' + juist;
+        if (v.uitwerking) el('uitwerking').innerHTML = '<div class="uitwerking">' + v.uitwerking + '</div>';
+      }
+      el('controleer').style.display = 'none';
+      el('volgende').style.display = '';
+      el('volgende').focus({preventScroll: true});
+      updateScore();
+    }
+
+    function volgende(){
+      if (!st.beantwoord || st.klaar) return;
+      st.index++;
+      if (st.index >= st.vragen.length){
+        st.klaar = true;
+        el('vraagblok').style.display = 'none';
+        var k = el('klaar');
+        k.innerHTML = '<div class="klaar-titel">&#127881; Klaar! ' + st.setGoed + ' van ' + st.vragen.length + ' goed</div>' +
+                      tagOverzicht() +
+                      '<div class="klaar-sub">Kies &#128256; Shuffle of &#8635; Opnieuw voor een nieuwe set.</div>';
+        k.querySelectorAll('[data-tag]').forEach(function(b){
+          b.addEventListener('click', function(){ opties.tagKlik(b.getAttribute('data-tag')); });
+        });
+        k.style.display = '';
+        updateScore();
+        return;
+      }
+      toonVraag(true);
+    }
+
+    // 'Per paragraaf' op het eindscherm (alleen als de vragen tags hebben)
+    function tagOverzicht(){
+      var tags = Object.keys(st.tags).sort();
+      if (!tags.length) return '';
+      return '<div class="tag-lijst"><div class="tag-titel">Per paragraaf</div>' + tags.map(function(tag){
+        var ts = st.tags[tag], tekst = esc(tag) + ': ' + ts.goed + '/' + ts.totaal;
+        if (ts.goed === ts.totaal) tekst += ' &#9989;';
+        else if (ts.goed < ts.totaal / 2) tekst += ' &#9888;&#65039; oefen dit nog in tab ' + esc(tag);
+        return opties.tagKlik ? '<button type="button" class="tag-regel" data-tag="' + esc(tag) + '">' + tekst + '</button>'
+                              : '<div class="tag-regel">' + tekst + '</div>';
+      }).join('') + '</div>';
+    }
+
+    function shuffle(){
+      if (st.klaar){ st.goed = 0; st.totaal = 0; st.tags = {}; }
+      maakSet(true);
+    }
+    function opnieuw(){
+      st.goed = 0; st.totaal = 0; st.tags = {};
+      maakSet(true);
+    }
+
+    el('controleer').addEventListener('click', controleer);
+    el('volgende').addEventListener('click', volgende);
+    el('shuffle').addEventListener('click', shuffle);
+    el('opnieuw').addEventListener('click', opnieuw);
+    container.addEventListener('keydown', function(e){
+      if (e.key !== 'Enter') return;
+      var doel = e.target;
+      if (doel && doel.getAttribute && (doel.getAttribute('data-rol') === 'shuffle' || doel.getAttribute('data-rol') === 'opnieuw')) return;
+      if (doel && doel.classList && doel.classList.contains('keuze-btn') && !st.beantwoord) return;
+      e.preventDefault();
+      if (st.klaar) return;
+      if (st.beantwoord) volgende(); else controleer();
+    });
+
+    maakSet(false);
+    return { shuffle: shuffle, opnieuw: opnieuw,
+             status: function(){ return {vragen: st.vragen, index: st.index, goed: st.goed, totaal: st.totaal, klaar: st.klaar, tags: st.tags}; } };
+  }
+
+  /* === FLASHCARD-ENGINE (eigen state per instantie) === */
+  function maakFlashcards(containerId, data, titel){
+    var container = document.getElementById(containerId);
+    if (!container) return null;
+    var st = { kaarten: [], index: 0, goed: 0, totaal: 0, omgedraaid: false, beoordeeld: {} };
+
+    container.innerHTML =
+      '<div class="uitleg-card">' +
+        (titel ? '<div class="fc-titel">' + titel + '</div>' : '') +
+        '<div class="fc-topbar">' +
+          '<div class="score-balk" style="margin-bottom:0">Score: <span data-rol="goed">0</span> / <span data-rol="totaal">0</span></div>' +
+          '<div class="fc-teller" data-rol="teller"></div>' +
+        '</div>' +
+        '<div class="flip-wrapper" data-rol="wrapper">' +
+          '<div class="flip-card" data-rol="card">' +
+            '<div class="flip-face flip-front">' +
+              '<div class="flip-label">Vraag</div>' +
+              '<div class="flip-tekst" data-rol="voor"></div>' +
+              '<div class="flip-hint">Klik om om te draaien</div>' +
+            '</div>' +
+            '<div class="flip-face flip-back">' +
+              '<div class="flip-label">Antwoord</div>' +
+              '<div class="flip-tekst" data-rol="achter"></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="knoppen-rij" data-rol="oordeel" style="display:none">' +
+          '<button type="button" data-rol="fout">&#10007; Fout</button>' +
+          '<button type="button" data-rol="goedknop">&#10003; Goed</button>' +
+        '</div>' +
+        '<div class="knoppen-rij">' +
+          '<button type="button" data-rol="vorige">&larr; Vorige</button>' +
+          '<button type="button" data-rol="volgende">Volgende &rarr;</button>' +
+          '<button type="button" data-rol="shuffle">&#128256; Shuffle</button>' +
+          '<button type="button" data-rol="opnieuw">&#8635; Opnieuw</button>' +
+        '</div>' +
+      '</div>';
+    function el(rol){ return container.querySelector('[data-rol="' + rol + '"]'); }
+
+    function setAf(){ return Object.keys(st.beoordeeld).length >= st.kaarten.length; }
+    function nieuweStapel(){
+      st.kaarten = fisherYates(data.slice());
+      st.index = 0; st.beoordeeld = {};
+      toonKaart();
+    }
+    function updateScore(){
+      el('goed').textContent = st.goed;
+      el('totaal').textContent = st.totaal;
+    }
+    function toonKaart(){
+      var k = st.kaarten[st.index];
+      el('voor').innerHTML = k.voor;
+      el('achter').innerHTML = k.achter;
+      el('card').classList.remove('flipped');
+      st.omgedraaid = false;
+      el('oordeel').style.display = 'none';
+      el('teller').textContent = (st.index + 1) + ' / ' + st.kaarten.length;
+      updateScore();
+    }
+    function flip(){
+      st.omgedraaid = !st.omgedraaid;
+      el('card').classList.toggle('flipped', st.omgedraaid);
+      el('oordeel').style.display = st.omgedraaid ? 'flex' : 'none';
+    }
+    function oordeel(goed){
+      st.totaal++;
+      if (goed) st.goed++;
+      st.beoordeeld[st.index] = true;
+      updateScore();
+      volgende();
+    }
+    function vorige(){ if (st.index > 0){ st.index--; toonKaart(); } }
+    function volgende(){
+      st.index = (st.index < st.kaarten.length - 1) ? st.index + 1 : 0;
+      toonKaart();
+    }
+    function shuffle(){
+      if (setAf()){ st.goed = 0; st.totaal = 0; }
+      nieuweStapel();
+    }
+    function opnieuw(){
+      st.goed = 0; st.totaal = 0;
+      nieuweStapel();
+    }
+
+    el('wrapper').addEventListener('click', flip);
+    el('fout').addEventListener('click', function(){ oordeel(false); });
+    el('goedknop').addEventListener('click', function(){ oordeel(true); });
+    el('vorige').addEventListener('click', vorige);
+    el('volgende').addEventListener('click', volgende);
+    el('shuffle').addEventListener('click', shuffle);
+    el('opnieuw').addEventListener('click', opnieuw);
+
+    nieuweStapel();
+    return { shuffle: shuffle, opnieuw: opnieuw };
+  }
+
+  // --- P0 VOORKENNIS ---
+  var p0FcData = [
+    {voor:'Wat betekent herleiden?', achter:'Een formule eenvoudiger (korter) schrijven.'},
+    {voor:'2x · 3y = ?', achter:'6xy'},
+    {voor:'6x · 4x = ?', achter:'24x²'},
+    {voor:'Wat zijn gelijksoortige termen?', achter:'Termen met precies dezelfde letter(s), bv. 3x en 2x. Die mag je optellen.'},
+    {voor:'Kun je 3x + 5y herleiden?', achter:'Nee, 3x en 5y zijn niet gelijksoortig.'},
+    {voor:'a(b + c) = ?', achter:'ab + ac'},
+    {voor:'(a + b)(c + d) = ?', achter:'ac + ad + bc + bd'},
+    {voor:'−3(2a − 7) = ?', achter:'−6a + 21 (min × min = plus)'},
+    {voor:'Wat is het linkerlid van 3x + 5 = 17?', achter:'3x + 5'},
+    {voor:'Wat is de oplossing van een vergelijking?', achter:'Het getal dat je voor de variabele invult zodat de vergelijking klopt.'},
+    {voor:'Hoe heet de methode om 3x + 5 = 17 op te lossen?', achter:'De balansmethode: links en rechts steeds hetzelfde doen.'}
+  ];
+
+  var P0_LETTERS = ['x','a','p','y'];
+  var P0_HINT = '<br><small style="color:#64748b;font-weight:600">(een negatief getal vul je in met −)</small>';
+  // negatief getal tussen haakjes, bv. 3 · (−2)
+  function p0H(n){ return n < 0 ? '(' + fmt(n) + ')' : fmt(n); }
+  function p0HT(c, l){ return c < 0 ? '(' + term(c, l, true) + ')' : term(c, l, true); }
+  // som van termen als tekst, eerste term zonder plusteken
+  function p0Som(termen){
+    var s = '';
+    termen.forEach(function(t){ s += term(t.c, t.l, s === ''); });
+    return s || '0';
+  }
+  function p0Totaal(termen){ return termen.reduce(function(som, t){ return som + t.c; }, 0); }
+  // velden voor de antwoordvorm [..]x + [..]
+  function p0VeldenLin(X, C, L){
+    return [{voor:'', na:L + ' +', antwoord:X}, {voor:'', na:'', antwoord:C}];
+  }
+
+  /* A. Herleiden */
+  function p0A1(){
+    var l = fisherYates(P0_LETTERS.slice()).slice(0, 2), L1 = l[0], L2 = l[1];
+    var p = rnd(-9, 9, true), q = rnd(-9, 9, true), K = p * q;
+    var letters = [L1, L2].sort().join('');
+    var q2 = term(q, L2, true);
+    return {
+      vraag: 'Herleid: <b>' + term(p, L1, true) + ' · ' + (q < 0 ? '(' + q2 + ')' : q2) + '</b>' + P0_HINT,
+      velden: [{voor:'', na:letters, antwoord:K}],
+      uitwerking: 'getallen: ' + p0H(p) + ' · ' + p0H(q) + ' = ' + fmt(K) + '<br>letters: ' + L1 + ' · ' + L2 + ' = ' + letters + '<br>dus: ' + term(K, letters, true)
+    };
+  }
+  function p0A2(){
+    var L = pick(P0_LETTERS), p = rnd(-9, 9, true), q = rnd(-9, 9, true), K = p * q;
+    var q2 = term(q, L, true);
+    return {
+      vraag: 'Herleid: <b>' + term(p, L, true) + ' · ' + (q < 0 ? '(' + q2 + ')' : q2) + '</b>' + P0_HINT,
+      velden: [{voor:'', na:L + '²', antwoord:K}],
+      uitwerking: 'getallen: ' + p0H(p) + ' · ' + p0H(q) + ' = ' + fmt(K) + '<br>letters: ' + L + ' · ' + L + ' = ' + L + '²<br>dus: ' + term(K, L + '²', true)
+    };
+  }
+  function p0A3(){
+    var l = fisherYates(P0_LETTERS.slice()).slice(0, 2), L = l[0], M = l[1];
+    var a = rnd(-9, 9, true), b, expr, antwoord, uitleg;
+    if (Math.random() < 0.5){
+      do { b = rnd(-9, 9, true); } while (a + b === 0);
+      expr = term(a, L, true) + term(b, L, false);
+      antwoord = 'ja';
+      uitleg = expr + ' zijn gelijksoortige termen (allebei met ' + L + '), dus je mag ze samennemen:<br>' + expr + ' = ' + term(a + b, L, true);
+    } else {
+      b = rnd(-9, 9, true);
+      var soort = pick(['getal', 'letter', 'kwadraat']);
+      if (soort === 'getal'){
+        expr = term(a, L, true) + term(b, '', false);
+        uitleg = term(a, L, true) + ' heeft een letter en ' + fmt(Math.abs(b)) + ' is een los getal: niet gelijksoortig, dus niet korter te schrijven.';
+      } else if (soort === 'letter'){
+        expr = term(a, L, true) + term(b, M, false);
+        uitleg = 'De letters ' + L + ' en ' + M + ' zijn verschillend: niet gelijksoortig, dus niet korter te schrijven.';
+      } else {
+        expr = term(a, L + '²', true) + term(b, L, false);
+        uitleg = L + '² en ' + L + ' zijn niet gelijksoortig, dus niet korter te schrijven.';
+      }
+      antwoord = 'nee';
+    }
+    return {
+      vraag: 'Kan dit korter? <b>' + expr + '</b>',
+      velden: [{keuze:['ja','nee'], antwoord:antwoord, voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* B. Gelijksoortige termen */
+  function p0BMaak(aantalX, aantalGetal){
+    var L = pick(P0_LETTERS), xT, gT;
+    do {
+      xT = []; gT = [];
+      for (var i = 0; i < aantalX; i++) xT.push({c:rnd(-9, 9, true), l:L});
+      for (var j = 0; j < aantalGetal; j++) gT.push({c:rnd(-9, 9, true), l:''});
+    } while (p0Totaal(xT) === 0);
+    var X = p0Totaal(xT), C = p0Totaal(gT);
+    return {
+      vraag: 'Herleid: <b>' + p0Som(fisherYates(xT.concat(gT))) + '</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: L + '-termen: ' + p0Som(xT) + ' = ' + term(X, L, true) +
+                  '<br>getallen: ' + p0Som(gT) + ' = ' + fmt(C) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0B1(){ return p0BMaak(2, 2); }
+  function p0B2(){ return p0BMaak(3, 2); }
+
+  /* C. Haakjes wegwerken */
+  function p0C1(){
+    var L = pick(P0_LETTERS), p = rnd(2, 9), q = rnd(-9, 9, true), r = rnd(-9, 9, true);
+    var X = p * q, C = p * r;
+    return {
+      vraag: 'Herleid: <b>' + p + '(' + lin(q, r, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: p + ' · ' + p0HT(q, L) + ' = ' + term(X, L, true) +
+                  '<br>' + p + ' · ' + p0H(r) + ' = ' + fmt(C) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C2(){
+    var L = pick(P0_LETTERS), p = rnd(2, 9), q = rnd(1, 9), r = rnd(1, 9);
+    var X = -p * q, C = p * r;
+    return {
+      vraag: 'Herleid: <b>−' + p + '(' + lin(q, -r, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: '−' + p + ' · ' + term(q, L, true) + ' = ' + term(X, L, true) +
+                  '<br>−' + p + ' · −' + r + ' = +' + C + ' (min × min = plus)' +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C3(){
+    var L = pick(P0_LETTERS), s = rnd(1, 9), p = rnd(2, 9), q = rnd(-9, 9, true), r = rnd(-9, 9, true);
+    var X = -p * q, R = -p * r, C = s + R;
+    return {
+      vraag: 'Herleid: <b>' + s + ' − ' + p + '(' + lin(q, r, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: '−' + p + ' · ' + p0HT(q, L) + ' = ' + term(X, L, true) +
+                  '<br>−' + p + ' · ' + p0H(r) + ' = ' + fmt(R) + (r < 0 ? ' (min × min = plus)' : '') +
+                  '<br>' + s + ' − ' + p + '(' + lin(q, r, L) + ') = ' + s + term(X, L, false) + term(R, '', false) +
+                  '<br>getallen samen: ' + s + term(R, '', false) + ' = ' + fmt(C) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C4(){
+    var L = pick(P0_LETTERS), p = rnd(2, 9), r, q = rnd(-9, 9, true), s = rnd(-9, 9, true);
+    do { r = rnd(2, 9); } while (r === p);
+    var X = p - r, C = p * q - r * s;
+    var deel1 = term(p, L, true) + term(p * q, '', false);
+    var deel2 = term(-r, L, true) + term(-r * s, '', false);
+    return {
+      vraag: 'Herleid: <b>' + p + '(' + lin(1, q, L) + ') − ' + r + '(' + lin(1, s, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: p + '(' + lin(1, q, L) + ') = ' + deel1 +
+                  '<br>−' + r + '(' + lin(1, s, L) + ') = ' + deel2 +
+                  '<br>samen: ' + term(p, L, true) + term(-r, L, false) + term(p * q, '', false) + term(-r * s, '', false) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C5(){
+    var L = pick(P0_LETTERS), p = rnd(-9, 9, true), q = rnd(-9, 9, true);
+    var X = p + q, C = p * q;
+    return {
+      vraag: 'Herleid: <b>(' + lin(1, p, L) + ')(' + lin(1, q, L) + ')</b>' + P0_HINT,
+      velden: [{voor:L + '² +', na:L + ' +', antwoord:X}, {voor:'', na:'', antwoord:C}],
+      uitwerking: L + ' · ' + L + ' = ' + L + '²' +
+                  '<br>' + L + ' · ' + p0H(q) + ' = ' + term(q, L, true) +
+                  '<br>' + p0H(p) + ' · ' + L + ' = ' + term(p, L, true) +
+                  '<br>' + p0H(p) + ' · ' + p0H(q) + ' = ' + fmt(C) +
+                  '<br>samen: ' + L + '²' + term(q, L, false) + term(p, L, false) + term(C, '', false) +
+                  '<br>dus: ' + L + '²' + term(X, L, false) + term(C, '', false)
+    };
+  }
+  function p0C6(){
+    var L = pick(P0_LETTERS), p = rnd(-5, 5, true), q = rnd(-9, 9, true), r = rnd(-5, 5, true), s = rnd(-9, 9, true);
+    var A = p * r, B = p * s + q * r, C = q * s;
+    var L2 = L + '²';
+    return {
+      vraag: 'Herleid: <b>(' + lin(p, q, L) + ')(' + lin(r, s, L) + ')</b>' + P0_HINT,
+      velden: [{voor:'', na:L2 + ' +', antwoord:A}, {voor:'', na:L + ' +', antwoord:B}, {voor:'', na:'', antwoord:C}],
+      uitwerking: p0HT(p, L) + ' · ' + p0HT(r, L) + ' = ' + term(A, L2, true) +
+                  '<br>' + p0HT(p, L) + ' · ' + p0H(s) + ' = ' + term(p * s, L, true) +
+                  '<br>' + p0H(q) + ' · ' + p0HT(r, L) + ' = ' + term(q * r, L, true) +
+                  '<br>' + p0H(q) + ' · ' + p0H(s) + ' = ' + fmt(C) +
+                  '<br>samen: ' + term(A, L2, true) + term(p * s, L, false) + term(q * r, L, false) + term(C, '', false) +
+                  '<br>dus: ' + p0Som([{c:A, l:L2}, {c:B, l:L}, {c:C, l:''}])
+    };
+  }
+
+  /* D. Eenvoudige vergelijkingen (balansmethode) */
+  // stap-tekst om b weg te halen: "−5" of "+5"
+  function p0Weg(b){ return b > 0 ? '−' + b : '+' + Math.abs(b); }
+  function p0Deel(a){ return ':' + p0H(a); }
+  function p0D1(){
+    var x = rnd(-9, 9), a = pick([-1, 1]) * rnd(2, 9), b = rnd(-9, 9, true), c = a * x + b;
+    return {
+      vraag: 'Los op: <b>' + lin(a, b, 'x') + ' = ' + fmt(c) + '</b>' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: lin(a, b, 'x') + ' = ' + fmt(c) +
+                  '<br>' + p0Weg(b) + ' aan beide kanten → ' + term(a, 'x', true) + ' = ' + fmt(c - b) +
+                  '<br>' + p0Deel(a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+  function p0D2(){
+    var x = rnd(-9, 9), a = rnd(2, 9), b = rnd(-9, 9, true), c = b - a * x;
+    var links = fmt(b) + term(-a, 'x', false);
+    return {
+      vraag: 'Los op: <b>' + links + ' = ' + fmt(c) + '</b>' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: links + ' = ' + fmt(c) +
+                  '<br>' + p0Weg(b) + ' aan beide kanten → ' + term(-a, 'x', true) + ' = ' + fmt(c - b) +
+                  '<br>' + p0Deel(-a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+  function p0D3(){
+    var x = rnd(-9, 9), a = pick([-1, 1]) * rnd(2, 9), c = a * x;
+    return {
+      vraag: 'Los op: <b>' + term(a, 'x', true) + ' = ' + fmt(c) + '</b>' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: term(a, 'x', true) + ' = ' + fmt(c) +
+                  '<br>' + p0Deel(a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+
+  // generatoren per oefenblok
+  var p0Gens = {a:[p0A1, p0A2, p0A3], b:[p0B1, p0B2], c:[p0C1, p0C2, p0C3, p0C4, p0C5, p0C6], d:[p0D1, p0D2, p0D3]};
+
+  // --- P1 FORMULES ---
+  var p1FcData = [
+    {voor:'Wat is de algemene vorm van een lineaire formule?', achter:'y = ax + b'},
+    {voor:'Wat betekent a in y = ax + b?', achter:'De richtingscoëfficiënt (rc): 1 naar rechts, a omhoog.'},
+    {voor:'Wat betekent b in y = ax + b?', achter:'Het snijpunt met de y-as is (0, b).'},
+    {voor:'Ander woord voor richtingscoëfficiënt?', achter:'Helling'},
+    {voor:'Wat betekent rcₗ = −2?', achter:'Bij lijn l ga je 1 naar rechts en 2 omlaag.'},
+    {voor:'Hoe bereken je a uit twee roosterpunten?', achter:'a = verticaal / horizontaal'},
+    {voor:'Wat voor verband is y = 4?', achter:'Een constant verband (horizontale lijn, a = 0).'},
+    {voor:'Wat voor verband is y = 3x?', achter:'Een recht evenredig verband (lijn door de oorsprong, b = 0).'},
+    {voor:'Wat weet je van de rc van evenwijdige lijnen?', achter:'Die zijn gelijk.'},
+    {voor:'Hoe controleer je of P(5, 27) op y = 8x − 13 ligt?', achter:'Vul x = 5 in: 8·5 − 13 = 27. Klopt het, dan ligt P op de lijn.'},
+    {voor:'Hoe bereken je b als A(4, −5) op y = −3x + b ligt?', achter:'Vul x = 4 en y = −5 in: −12 + b = −5, dus b = 7.'},
+    {voor:'Wat zijn de 4 stappen van het werkschema "formule opstellen"?', achter:'1 Stel y = ax + b.<br>2 b uit het snijpunt met de y-as.<br>3 a = verticaal/horizontaal.<br>4 Formule opschrijven.'}
+  ];
+
+  var P1_NAMEN = ['k','l','m','n','p'];
+  var P1_SUB = {k:'ₖ', l:'ₗ', m:'ₘ', n:'ₙ', p:'ₚ'};
+  var P1_BREUKEN = [1/2, -1/2, 3/2, -3/2, 1/3, -2/3, 1/4, -3/4];
+  var P1_GRAFIEK_A = [-3, -2, -1, -1/2, 1/2, 1, 2, 3, -2/3, 1/3];
+  var P1_HINT_BREUK = '<br><small style="color:#64748b;font-weight:600">(breuk mag, bv. -3/4 of -0,75)</small>';
+
+  // a: geheel −5..5 (niet 0) of een van de breuken
+  function p1KiesA(){ return Math.random() < 0.6 ? pick([-1, 1]) * rnd(1, 5) : pick(P1_BREUKEN); }
+  function p1Noemer(a){ for (var d = 1; d <= 12; d++) if (Math.abs(a * d - Math.round(a * d)) < 1e-9) return d; return 1; }
+  // geheel x in [min, max] waarvoor a·x geheel is
+  function p1XGeheel(a, min, max){
+    var d = p1Noemer(a), opties = [];
+    for (var x = min; x <= max; x++) if (x % d === 0) opties.push(x);
+    return pick(opties);
+  }
+  function p1Formule(naam, a, b){ return '<b>' + (naam ? naam + ': ' : '') + 'y = ' + lin(a, b, 'x') + '</b>'; }
+  // "−2 · 3 + 5 = −6 + 5 = −1"
+  function p1Invul(a, x, b){
+    var s = fmt(a) + ' · ' + p0H(x) + term(b, '', false) + ' = ';
+    if (b !== 0) s += fmt(a * x) + term(b, '', false) + ' = ';
+    return s + fmt(a * x + b);
+  }
+  // b uit een punt als a bekend is
+  function p1BUitPunt(a, x, y){
+    var ax = a * x;
+    return 'Invullen x = ' + fmt(x) + ' en y = ' + fmt(y) + ':<br>' +
+           fmt(a) + ' · ' + p0H(x) + ' + b = ' + fmt(y) + '<br>' +
+           fmt(ax) + ' + b = ' + fmt(y) + '<br>' +
+           'b = ' + fmt(y) + ' − ' + p0H(ax) + ' = ' + fmt(y - ax);
+  }
+  // roosterpunten van y = ax + b binnen −6..6
+  function p1Roosterpunten(a, b){
+    var pts = [];
+    for (var x = -6; x <= 6; x++){
+      var y = a * x + b;
+      if (Math.abs(y - Math.round(y)) < 1e-9 && Math.round(y) >= -6 && Math.round(y) <= 6) pts.push({x:x, y:Math.round(y)});
+    }
+    return pts;
+  }
+  function p1GrafiekLijn(){
+    var a, b, pts;
+    do { a = pick(P1_GRAFIEK_A); b = rnd(-4, 4); pts = p1Roosterpunten(a, b); } while (pts.length < 2);
+    return {a:a, b:b};
+  }
+  // uitwerking volgens het werkschema
+  function p1Werkschema(naam, a, b){
+    var pts = p1Roosterpunten(a, b), rechts = pts.filter(function(p){ return p.x > 0; });
+    var van = {x:0, y:b}, naar;
+    if (rechts.length) naar = rechts[0];
+    else { var links = pts.filter(function(p){ return p.x < 0; }); van = links[links.length - 1]; naar = {x:0, y:b}; }
+    var v = naar.y - van.y, h = naar.x - van.x;
+    return 'Snijpunt y-as (0, ' + fmt(b) + '), dus b = ' + fmt(b) +
+           '<br>Van (' + fmt(van.x) + ', ' + fmt(van.y) + ') naar (' + fmt(naar.x) + ', ' + fmt(naar.y) + '): verticaal ' + fmt(v) + ', horizontaal ' + fmt(h) +
+           '<br>dus a = ' + fmt(v) + '/' + fmt(h) + ' = ' + fmt(a) +
+           '<br>dus ' + naam + ': y = ' + lin(a, b, 'x');
+  }
+  function p1VeldenAB(a, b){ return [{voor:'a =', na:'', antwoord:a}, {voor:'b =', na:'', antwoord:b}]; }
+
+  /* A. rc en snijpunt aflezen */
+  function p1AUitleg(a, b){
+    return 'y = ax + b met a = ' + fmt(a) + ' en b = ' + fmt(b) +
+           '<br>rc = a = ' + fmt(a) + '<br>snijpunt y-as: (0, b) = (0, ' + fmt(b) + ')';
+  }
+  function p1A1(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9);
+    return {
+      vraag: 'Gegeven ' + p1Formule(naam, a, b) + '.' + P0_HINT + P1_HINT_BREUK,
+      velden: [{voor:'rc =', na:'', antwoord:a}, {voor:'snijpunt y-as: (0,', na:')', antwoord:b}],
+      uitwerking: p1AUitleg(a, b)
+    };
+  }
+  function p1A2(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9, true);
+    return {
+      vraag: 'Gegeven <b>' + naam + ': y = ' + fmt(b) + term(a, 'x', false) + '</b>.' + P0_HINT + P1_HINT_BREUK,
+      velden: [{voor:'rc =', na:'', antwoord:a}, {voor:'snijpunt y-as: (0,', na:')', antwoord:b}],
+      uitwerking: 'Andere volgorde: y = ' + fmt(b) + term(a, 'x', false) + ' is hetzelfde als y = ' + lin(a, b, 'x') + '<br>' + p1AUitleg(a, b)
+    };
+  }
+  function p1A3(){
+    var soort = pick(['constant', 'recht evenredig', 'geen van beide']), a, b, uitleg;
+    if (soort === 'constant'){
+      a = 0; b = rnd(-9, 9, true);
+      uitleg = 'a = 0 en b = ' + fmt(b) + ': y = ' + fmt(b) + ' is een horizontale lijn, dus een constant verband.';
+    } else if (soort === 'recht evenredig'){
+      a = p1KiesA(); b = 0;
+      uitleg = 'a = ' + fmt(a) + ' en b = 0: de lijn gaat door de oorsprong, dus een recht evenredig verband.';
+    } else {
+      a = p1KiesA(); b = rnd(-9, 9, true);
+      uitleg = 'a = ' + fmt(a) + ' en b = ' + fmt(b) + ': a is niet 0 (niet constant) en b is niet 0 (niet door de oorsprong), dus geen van beide.';
+    }
+    return {
+      vraag: 'Wat voor verband is ' + p1Formule('', a, b) + '?',
+      velden: [{keuze:['constant', 'recht evenredig', 'geen van beide'], antwoord:soort, voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* B. Punten berekenen */
+  function p1B1(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9), x = p1XGeheel(a, -10, 10), y = a * x + b;
+    return {
+      vraag: 'Bereken de y-coördinaat van het punt op ' + p1Formule(naam, a, b) + ' met x-coördinaat ' + fmt(x) + '.' + P0_HINT,
+      velden: [{voor:'y =', na:'', antwoord:y}],
+      uitwerking: 'Vul x = ' + fmt(x) + ' in:<br>y = ' + p1Invul(a, x, b)
+    };
+  }
+  function p1B2(){
+    var naam = pick(P1_NAMEN), a = pick([-1, 1]) * rnd(2, 5), b = rnd(-9, 9, true), x = rnd(-10, 10), y = a * x + b;
+    return {
+      vraag: 'Het punt A op ' + p1Formule(naam, a, b) + ' heeft y-coördinaat ' + fmt(y) + '. Bereken x.' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: lin(a, b, 'x') + ' = ' + fmt(y) +
+                  '<br>' + p0Weg(b) + ' aan beide kanten → ' + term(a, 'x', true) + ' = ' + fmt(y - b) +
+                  '<br>' + p0Deel(a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+  function p1B3(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9), x = p1XGeheel(a, -6, 6), echt = a * x + b;
+    var ligtErop = Math.random() < 0.5, y = ligtErop ? echt : echt + pick([-1, 1]) * rnd(1, 5);
+    return {
+      vraag: 'Ligt P(' + fmt(x) + ', ' + fmt(y) + ') op ' + p1Formule(naam, a, b) + '?',
+      velden: [{keuze:['ja', 'nee'], antwoord:ligtErop ? 'ja' : 'nee', voor:'', na:''}],
+      uitwerking: 'Vul x = ' + fmt(x) + ' in: ' + p1Invul(a, x, b) +
+                  '<br>' + (ligtErop ? 'Dat is gelijk aan de y-coördinaat ' + fmt(y) + ', dus P ligt op ' + naam + '.'
+                                     : 'Dat is niet gelijk aan de y-coördinaat ' + fmt(y) + ', dus P ligt niet op ' + naam + '.')
+    };
+  }
+
+  /* C. Formule bij een grafiek */
+  function p1C1(){
+    var naam = pick(P1_NAMEN), l = p1GrafiekLijn();
+    return {
+      vraag: 'Stel de formule op van lijn ' + naam + '.' + tekenGrafiek([{a:l.a, b:l.b, kleur:'#0d9488', naam:naam}]) + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(l.a, l.b),
+      uitwerking: p1Werkschema(naam, l.a, l.b)
+    };
+  }
+  function p1C2(){
+    var namen = fisherYates(P1_NAMEN.slice()), l1 = p1GrafiekLijn(), l2;
+    do { l2 = p1GrafiekLijn(); } while (l2.a === l1.a && l2.b === l1.b);
+    var lijnen = [{a:l1.a, b:l1.b, kleur:'#0d9488', naam:namen[0]}, {a:l2.a, b:l2.b, kleur:'#f59e0b', naam:namen[1]}];
+    var gevraagd = pick(lijnen);
+    return {
+      vraag: 'Stel de formule op van lijn ' + gevraagd.naam + '.' + tekenGrafiek(lijnen) + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(gevraagd.a, gevraagd.b),
+      uitwerking: p1Werkschema(gevraagd.naam, gevraagd.a, gevraagd.b)
+    };
+  }
+
+  /* D. Evenwijdig en door twee punten */
+  function p1D1(){
+    var naam = pick(P1_NAMEN), a = p1KiesA(), b = rnd(-9, 9), x = p1XGeheel(a, -6, 6), y = a * x + b;
+    return {
+      vraag: 'A(' + fmt(x) + ', ' + fmt(y) + ') ligt op <b>' + naam + ': y = ' + term(a, 'x', true) + ' + b</b>. Bereken b.' + P0_HINT,
+      velden: [{voor:'b =', na:'', antwoord:b}],
+      uitwerking: p1BUitPunt(a, x, y)
+    };
+  }
+  function p1D2(){
+    var namen = fisherYates(['l','m','k','n']), l = namen[0], m = namen[1];
+    var a = p1KiesA(), bm = rnd(-9, 9), b, x = p1XGeheel(a, -6, 6);
+    do { b = rnd(-9, 9); } while (b === bm);
+    var y = a * x + b;
+    return {
+      vraag: 'Lijn ' + l + ' is evenwijdig met ' + p1Formule(m, a, bm) + ' en gaat door B(' + fmt(x) + ', ' + fmt(y) + '). Stel de formule van ' + l + ' op.' + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(a, b),
+      uitwerking: 'Evenwijdig, dus a = rc' + P1_SUB[m] + ' = ' + fmt(a) + '<br>' + p1BUitPunt(a, x, y) + '<br>dus ' + l + ': y = ' + lin(a, b, 'x')
+    };
+  }
+  function p1D3(){
+    var x1, x2, y1, y2, a, b;
+    do {
+      x1 = rnd(-6, 6); x2 = rnd(-6, 6); y1 = rnd(-9, 9); y2 = rnd(-9, 9);
+      if (x1 === x2 || y1 === y2) continue;
+      a = (y2 - y1) / (x2 - x1); b = y1 - a * x1;
+    // geen gemengde getallen als rc (zoals 1 1/4x): alleen geheel, gewone breuk of ±1½
+    } while (x1 === x2 || y1 === y2 || Math.abs(b - Math.round(b)) > 1e-9 || Math.abs(b) > 12 || fmt(a).indexOf(' ') !== -1 || p1Noemer(a) > 6);
+    b = Math.round(b);
+    return {
+      vraag: 'Lijn q gaat door C(' + fmt(x1) + ', ' + fmt(y1) + ') en D(' + fmt(x2) + ', ' + fmt(y2) + '). Stel de formule op.' + P0_HINT + P1_HINT_BREUK,
+      velden: p1VeldenAB(a, b),
+      uitwerking: 'a = (y₂ − y₁) / (x₂ − x₁) = (' + fmt(y2) + ' − ' + p0H(y1) + ') / (' + fmt(x2) + ' − ' + p0H(x1) + ') = ' +
+                  fmt(y2 - y1) + '/' + fmt(x2 - x1) + ' = ' + fmt(a) +
+                  '<br>' + p1BUitPunt(a, x1, y1) + '<br>dus q: y = ' + lin(a, b, 'x')
+    };
+  }
+
+  // generatoren per oefenblok
+  var p1Gens = {a:[p1A1, p1A2, p1A3], b:[p1B1, p1B2, p1B3], c:[p1C1, p1C2], d:[p1D1, p1D2, p1D3]};
+
+  // --- P2 VERBANDEN ---
+  var p2FcData = [
+    {voor:'Bij N = ¾t − 2: welke letter hoort bij de horizontale as?', achter:'t (de variabele achter het =-teken)'},
+    {voor:'Bij N = ¾t − 2: welke letter hoort bij de verticale as?', achter:'N'},
+    {voor:'Waar moet je op letten bij het aflezen van a uit een grafiek?', achter:'Op de stapgrootte van de assen: gebruik de waarden, niet het aantal hokjes.'},
+    {voor:'"15 euro per uur" in een formule is…', achter:'de richtingscoëfficiënt: K = 15t + …'},
+    {voor:'"30 euro voorrijkosten" in een formule is…', achter:'het getal bij t = 0: K = … + 30'},
+    {voor:'Water daalt 10 cm per minuut vanaf 60 cm. Formule?', achter:'h = 60 − 10t'},
+    {voor:'Hoe zie je aan een tabel dat een verband lineair is?', achter:'De toename (of afname) per gelijke stap is steeds hetzelfde.'},
+    {voor:'Tabel begint in 2013. Wat kies je als t = 0?', achter:'1 januari 2013 (het eerste jaar)'},
+    {voor:'Grafiek door (0, 225) en (45, 75). Wat is a?', achter:'−150/45 = −3⅓'},
+    {voor:'Een dorp heeft 1850 inwoners en neemt jaarlijks met 150 af. Formule?', achter:'N = 1850 − 150t (of N = −150t + 1850)'}
+  ];
+
+  var P2_HINT_KOMMA = '<br><small style="color:#64748b;font-weight:600">(kommagetal mag, bv. 2,25)</small>';
+  var P2_PLAATSEN = ['Achtlo', 'Bovenzand', 'Dijkum', 'Eemrode', 'Holtwijk', 'Lindeloo', 'Oosterveen', 'Zandhoven'];
+  // decimaal met komma: 2.25 → "2,25", 2.5 → "2,5"
+  function p2Dec(n){ return Number.isInteger(n) ? fmt(n) : (n < 0 ? '−' : '') + String(Math.abs(Math.round(n * 100) / 100)).replace('.', ','); }
+  function p2Euro(n){ return '€ ' + (typeof n === 'string' || Number.isInteger(n) ? String(n) : n.toFixed(2).replace('.', ',')); }
+  // grote getallen met spatie: 35000 → "35 000"
+  function p2Groot(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  // gemengde breuk mooi: −3 1/3 → −3⅓
+  function p2Mooi(n){
+    var s = fmt(n), uni = {'1/3':'⅓', '2/3':'⅔', '1/4':'¼', '3/4':'¾'};
+    return s.replace(/(\d) (\d\/\d)$/, function(m, h, br){ return uni[br] ? h + uni[br] : m; });
+  }
+  // noemer 1..4 als n een nette breuk is, anders 0
+  function p2NetteNoemer(n){ for (var d = 1; d <= 4; d++) if (Math.abs(n * d - Math.round(n * d)) < 1e-9) return d; return 0; }
+  function p2EenDecimaal(n){ return Math.abs(n * 10 - Math.round(n * 10)) < 1e-9; }
+  // coëfficiënt uit een grafiek: nette breuk (noemer ≤ 4) via fmt, anders één decimaal
+  function p2Coef(n){ return p2NetteNoemer(n) ? p2Mooi(n) : p2Dec(n); }
+  function p2Term(c, L, eerste, f){
+    if (!c) return '';
+    var neg = c < 0, a = Math.abs(c), kern = (L && a === 1 ? '' : f(a)) + L;
+    return eerste ? (neg ? '−' : '') + kern : (neg ? ' − ' : ' + ') + kern;
+  }
+  function p2Lin(a, b, L, f){ var s = p2Term(a, L, true, f); s += p2Term(b, '', s === '', f); return s || '0'; }
+  function p2VeldenAB(Y, X, a, b){ return [{voor:Y + ' =', na:'· ' + X + ' +', antwoord:a}, {voor:'', na:'', antwoord:b}]; }
+  function p2Tabel(rijen){
+    return '<table class="waarde-tabel">' + rijen.map(function(r){
+      return '<tr><th>' + r[0] + '</th>' + r[1].map(function(v){ return '<td>' + v + '</td>'; }).join('') + '</tr>';
+    }).join('') + '</table>';
+  }
+
+  /* A. Formule bij een tekst */
+  function p2AContext(c){
+    return {
+      vraag: c.tekst + '<br>Gebruik ' + c.Y + ' (' + c.Yuitleg + ') en ' + c.X + ' (' + c.Xuitleg + '). Stel de formule op.' + P0_HINT + (Number.isInteger(c.a) ? '' : P2_HINT_KOMMA),
+      velden: p2VeldenAB(c.Y, c.X, c.a, c.b),
+      uitwerking: c.perTekst + ' → a = ' + p2Dec(c.a) +
+                  '<br>' + c.beginTekst + ' → b = ' + p2Dec(c.b) +
+                  '<br>dus ' + c.Y + ' = ' + p2Lin(c.a, c.b, c.X, p2Dec)
+    };
+  }
+  function p2A1(){
+    var a = rnd(4, 15) * 5, b = rnd(3, 12) * 5, wie = pick(['Een klusbedrijf', 'Een loodgieter', 'Een elektricien']);
+    return p2AContext({tekst: wie + ' rekent ' + p2Euro(a) + ' per uur en ' + p2Euro(b) + ' voorrijkosten.',
+      Y:'K', Yuitleg:'kosten in euro\'s', X:'t', Xuitleg:'tijd in uren', a:a, b:b, perTekst:'per uur ' + p2Euro(a), beginTekst:'voorrijkosten ' + p2Euro(b)});
+  }
+  function p2A2(){
+    var a = rnd(6, 14) * 0.25, b = rnd(3, 10);
+    return p2AContext({tekst: 'Een taxi rekent een starttarief van ' + p2Euro(b) + ' en daarna ' + p2Euro(a) + ' per km.',
+      Y:'P', Yuitleg:'prijs in euro\'s', X:'a', Xuitleg:'afstand in km', a:a, b:b, perTekst:'per km ' + p2Euro(a), beginTekst:'starttarief ' + p2Euro(b)});
+  }
+  function p2A3(){
+    if (Math.random() < 0.5){
+      var a = rnd(6, 12) * 5, b = rnd(5, 20) * 5;
+      return p2AContext({tekst: 'Een hovenier rekent ' + p2Euro(a) + ' per uur. Voor het materiaal betaal je eenmalig ' + p2Euro(b) + '.',
+        Y:'K', Yuitleg:'kosten in euro\'s', X:'t', Xuitleg:'tijd in uren', a:a, b:b, perTekst:'per uur ' + p2Euro(a), beginTekst:'vaste kosten ' + p2Euro(b)});
+    }
+    var a2 = rnd(8, 20), b2 = rnd(1, 5) * 5;
+    return p2AContext({tekst: 'Bij een fietsverhuur huur je een fiets voor ' + p2Euro(a2) + ' per dag. Daarnaast betaal je eenmalig ' + p2Euro(b2) + ' administratiekosten.',
+      Y:'K', Yuitleg:'kosten in euro\'s', X:'d', Xuitleg:'aantal dagen', a:a2, b:b2, perTekst:'per dag ' + p2Euro(a2), beginTekst:'vaste kosten ' + p2Euro(b2)});
+  }
+  function p2A4(){
+    var b = rnd(4, 20) * 10, d = rnd(2, 15), wat = pick(['een vat', 'een zwembad', 'een regenton']);
+    return p2AContext({tekst: 'Het water in ' + wat + ' staat ' + b + ' cm hoog. Het water loopt weg: de hoogte daalt ' + d + ' cm per minuut.',
+      Y:'h', Yuitleg:'hoogte in cm', X:'t', Xuitleg:'tijd in minuten', a:-d, b:b, perTekst:'per minuut ' + d + ' cm lager', beginTekst:'beginhoogte ' + b + ' cm'});
+  }
+  function p2A5(){
+    var b = rnd(20, 100) * 50, d = rnd(1, 6) * 50, toe = Math.random() < 0.5, plaats = pick(P2_PLAATSEN), jaar = rnd(2010, 2022);
+    return p2AContext({tekst: 'Op 1 januari ' + jaar + ' had ' + plaats + ' ' + b + ' inwoners. Elk jaar ' + (toe ? 'komen er ' + d + ' inwoners bij' : 'neemt het aantal inwoners met ' + d + ' af') + '.',
+      Y:'N', Yuitleg:'aantal inwoners', X:'t', Xuitleg:'tijd in jaren met t = 0 op 1 januari ' + jaar, a: toe ? d : -d, b:b,
+      perTekst:'per jaar ' + (toe ? d + ' erbij' : d + ' eraf'), beginTekst:'beginaantal ' + b});
+  }
+  function p2A6(){
+    var km = rnd(6, 10), d = rnd(4, 10) * 50;
+    return p2AContext({tekst: 'Een vliegtuig vliegt op ' + km + ' km hoogte en begint aan de landing. Het daalt ' + d + ' meter per minuut.',
+      Y:'h', Yuitleg:'hoogte in meters', X:'t', Xuitleg:'tijd in minuten', a:-d, b:km * 1000,
+      perTekst:'per minuut ' + d + ' m lager', beginTekst:'beginhoogte ' + km + ' km = ' + (km * 1000) + ' m'});
+  }
+  function p2A7(){
+    var b = rnd(20, 70) * 1000, a = rnd(10, 40) * 100;
+    return p2AContext({tekst: 'De aanleg van een tennisbaan kost ' + p2Euro(p2Groot(b)) + '. Daarna kost het onderhoud ' + p2Euro(a) + ' per jaar.',
+      Y:'K', Yuitleg:'totale kosten in euro\'s', X:'t', Xuitleg:'tijd in jaren', a:a, b:b, perTekst:'per jaar ' + p2Euro(a), beginTekst:'aanleg ' + p2Euro(p2Groot(b))});
+  }
+
+  /* B. Formule bij een tabel */
+  function p2TabelData(stap){
+    var start = rnd(2005, 2020), b = rnd(10, 90) * 10, a, jaren = [], waarden = [];
+    do { a = pick([-1, 1]) * rnd(2, 25); } while (b + a * 3 * stap <= 0);
+    for (var i = 0; i < 4; i++){ jaren.push(start + i * stap); waarden.push(b + a * i * stap); }
+    return {start:start, stap:stap, a:a, b:b, jaren:jaren, waarden:waarden};
+  }
+  function p2B1(){
+    var d = p2TabelData(pick([1, 5])), perStap = d.a * d.stap;
+    var uitA = d.stap === 1 ? 'toename per jaar: ' + fmt(perStap) + ', dus a = ' + fmt(d.a)
+                            : 'toename per 5 jaar: ' + fmt(perStap) + ', dus per jaar ' + fmt(perStap) + ' : 5 = ' + fmt(d.a) + ', dus a = ' + fmt(d.a);
+    return {
+      vraag: p2Tabel([['jaar', d.jaren], ['N', d.waarden]]) + 'Neem t = 0 in ' + d.start + '. Stel de formule op.' + P0_HINT,
+      velden: p2VeldenAB('N', 't', d.a, d.b),
+      uitwerking: uitA + '<br>t = 0 in ' + d.start + ': N = ' + d.b + ', dus b = ' + d.b + '<br>dus N = ' + lin(d.a, d.b, 't')
+    };
+  }
+  function p2B2(){
+    var d = p2TabelData(pick([1, 5])), lineair = Math.random() < 0.5, w = d.waarden.slice();
+    if (!lineair){
+      var i = rnd(1, 3), pct = rnd(1, 20) / 100;
+      w[i] += pick([-1, 1]) * Math.max(1, Math.round(w[i] * pct));
+    }
+    var verschil = [w[1] - w[0], w[2] - w[1], w[3] - w[2]];
+    var gelijk = verschil[0] === verschil[1] && verschil[1] === verschil[2];
+    var vt = verschil.map(function(v){ return (v > 0 ? '+' : '') + fmt(v); }).join(', ');
+    return {
+      vraag: p2Tabel([['jaar', d.jaren], ['N', w]]) + 'Is er sprake van een lineair verband?',
+      velden: [{keuze:['ja', 'nee'], antwoord: gelijk ? 'ja' : 'nee', voor:'', na:''}],
+      uitwerking: 'Verschillen per stap van ' + d.stap + ' jaar: ' + vt +
+                  '<br>' + (gelijk ? 'Steeds gelijk, dus een lineair verband.' : 'Niet steeds gelijk, dus geen lineair verband.')
+    };
+  }
+  function p2B3(){
+    var d = p2TabelData(pick([1, 2, 5])), perStap = d.a * d.stap;
+    return {
+      vraag: p2Tabel([['jaar', d.jaren], ['N', d.waarden]]) + 'Met hoeveel neemt N per jaar toe of af? (afname = negatief getal)' + P0_HINT,
+      velden: [{voor:'per jaar:', na:'', antwoord:d.a}],
+      uitwerking: 'Per stap van ' + d.stap + ' jaar: ' + (perStap > 0 ? '+' : '') + fmt(perStap) +
+                  (d.stap === 1 ? '' : '<br>per jaar: ' + fmt(perStap) + ' : ' + d.stap + ' = ' + fmt(d.a)) +
+                  '<br>' + (d.a > 0 ? 'N neemt per jaar met ' + fmt(d.a) + ' toe.' : 'N neemt per jaar met ' + fmt(-d.a) + ' af, dus ' + fmt(d.a) + '.')
+    };
+  }
+
+  /* C. Formule bij een grafiek (andere letters en schaal) */
+  function p2GrafiekOpgave(){
+    var paar = pick([['t','N'], ['n','G'], ['q','W'], ['s','V'], ['t','h']]), X = paar[0], Y = paar[1];
+    var gx, gy, kb, k, m, a, b;
+    do {
+      gx = pick([1, 2, 5, 10, 15, 25]); gy = pick([1, 2, 5, 10, 25, 50, 75, 100]);
+      kb = rnd(0, 6); m = rnd(1, 6);
+      do { k = rnd(-1 - kb, 6 - kb); } while (k === 0);
+      a = (k * gy) / (m * gx); b = kb * gy;
+    } while (!(p2EenDecimaal(a) || p2NetteNoemer(a)));
+    var opt = {xmin:-gx, xmax:6 * gx, ymin:-gy, ymax:6 * gy, xstap:gx, ystap:gy, xnaam:X, ynaam:Y};
+    return {X:X, Y:Y, gx:gx, gy:gy, a:a, b:b, van:{x:0, y:b}, naar:{x:m * gx, y:b + k * gy}, opt:opt,
+            svg: tekenGrafiek([{a:a, b:b, kleur:'#0d9488'}], opt)};
+  }
+  function p2C1(){
+    var g = p2GrafiekOpgave(), v = g.naar.y - g.van.y, h = g.naar.x - g.van.x;
+    return {
+      vraag: 'Stel de formule van ' + g.Y + ' op. Gebruik ' + g.Y + ' = a · ' + g.X + ' + b.' + g.svg + P0_HINT + P1_HINT_BREUK,
+      velden: [{voor:'a =', na:'', antwoord:g.a}, {voor:'b =', na:'', antwoord:g.b}],
+      uitwerking: 'Door (0, ' + fmt(g.b) + '), dus b = ' + fmt(g.b) +
+                  '<br>Van (' + fmt(g.van.x) + ', ' + fmt(g.van.y) + ') naar (' + fmt(g.naar.x) + ', ' + fmt(g.naar.y) + '): verticaal ' + fmt(v) + ', horizontaal ' + fmt(h) +
+                  '<br>a = ' + fmt(v) + '/' + fmt(h) + ' = ' + p2Coef(g.a) +
+                  '<br>dus ' + g.Y + ' = ' + p2Lin(g.a, g.b, g.X, p2Coef)
+    };
+  }
+
+  /* D. Rekenen met de formule */
+  function p2Plaats(){
+    var a = pick([-1, 1]) * rnd(1, 8) * 25, b = rnd(30, 100) * 50;
+    return {naam:pick(P2_PLAATSEN), a:a, b:b, jaar:rnd(2000, 2020)};
+  }
+  function p2D1(){
+    var p, k, N;
+    do { p = p2Plaats(); k = rnd(2, 20); N = p.a * k + p.b; } while (N < 200);
+    return {
+      vraag: 'Voor het aantal inwoners van ' + p.naam + ' geldt <b>N = ' + lin(p.a, p.b, 't') + '</b> met t in jaren en t = 0 op 1 januari ' + p.jaar + '. Bereken N op 1 januari ' + (p.jaar + k) + '.',
+      velden: [{voor:'N =', na:'', antwoord:N}],
+      uitwerking: 't = ' + (p.jaar + k) + ' − ' + p.jaar + ' = ' + k +
+                  '<br>N = ' + fmt(p.a) + ' · ' + k + ' + ' + p.b + ' = ' + fmt(p.a * k) + ' + ' + p.b + ' = ' + fmt(N)
+    };
+  }
+  function p2D2(){
+    var p, t, N;
+    do { p = p2Plaats(); t = rnd(2, 25); N = p.a * t + p.b; } while (N < 200);
+    return {
+      vraag: 'Voor het aantal inwoners van ' + p.naam + ' geldt <b>N = ' + lin(p.a, p.b, 't') + '</b> met t in jaren en t = 0 op 1 januari ' + p.jaar + '. Op 1 januari van welk jaar is N = ' + N + '?',
+      velden: [{voor:'jaar =', na:'', antwoord:p.jaar + t}],
+      uitwerking: lin(p.a, p.b, 't') + ' = ' + N +
+                  '<br>' + p0Weg(p.b) + ' aan beide kanten → ' + term(p.a, 't', true) + ' = ' + fmt(N - p.b) +
+                  '<br>' + p0Deel(p.a) + ' aan beide kanten → t = ' + t +
+                  '<br>jaar = ' + p.jaar + ' + ' + t + ' = ' + (p.jaar + t)
+    };
+  }
+  function p2D3(){
+    var namen = fisherYates(P2_PLAATSEN.slice()), t = rnd(5, 30), jaar = rnd(2000, 2020), a1, a2, b1, b2;
+    do {
+      a1 = pick([-1, 1]) * rnd(1, 8) * 10; a2 = pick([-1, 1]) * rnd(1, 8) * 10;
+      b1 = rnd(20, 80) * 50; b2 = b1 + (a1 - a2) * t;
+    } while (a1 === a2 || b2 < 500 || a1 * t + b1 < 200);
+    var da = a1 - a2, db = b2 - b1;
+    return {
+      vraag: 'Voor het aantal inwoners geldt (t in jaren, t = 0 op 1 januari ' + jaar + '):<br>' +
+             namen[0] + ': <b>N = ' + lin(a1, b1, 't') + '</b><br>' + namen[1] + ': <b>N = ' + lin(a2, b2, 't') + '</b><br>' +
+             'Op 1 januari van welk jaar hebben beide plaatsen evenveel inwoners?',
+      velden: [{voor:'jaar =', na:'', antwoord:jaar + t}],
+      uitwerking: 'Stel gelijk: ' + lin(a1, b1, 't') + ' = ' + lin(a2, b2, 't') +
+                  '<br>' + (a2 > 0 ? '−' + fmt(a2) : '+' + fmt(-a2)) + 't aan beide kanten → ' + lin(da, b1, 't') + ' = ' + fmt(b2) +
+                  '<br>' + p0Weg(b1) + ' aan beide kanten → ' + term(da, 't', true) + ' = ' + fmt(db) +
+                  '<br>' + p0Deel(da) + ' aan beide kanten → t = ' + t +
+                  '<br>jaar = ' + jaar + ' + ' + t + ' = ' + (jaar + t)
+    };
+  }
+
+  // generatoren per oefenblok
+  var p2Gens = {a:[p2A1, p2A2, p2A3, p2A4, p2A5, p2A6, p2A7], b:[p2B1, p2B2, p2B3], c:[p2C1], d:[p2D1, p2D2, p2D3]};
+
+  // --- P3 VERGELIJKINGEN ---
+  var p3FcData = [
+    {voor:'Wat is overbrengen?', achter:'Een term naar het andere lid brengen. Daarbij wordt + dan − en − dan +.'},
+    {voor:'Breng 7x over in 10x − 4 = 7x + 20.', achter:'10x − 7x − 4 = 20'},
+    {voor:'Wat zijn de 4 stappen van het werkschema met haakjes?', achter:'1 Haakjes weg.<br>2 Termen met x naar links, de rest naar rechts.<br>3 Herleiden.<br>4 Delen door het getal vóór x.'},
+    {voor:'−2x = 15. Wat is x?', achter:'x = −7½ (deel door −2)'},
+    {voor:'Hoe werk je breuken weg in ⅓x + 2 = ½x?', achter:'Vermenigvuldig beide leden met 6: 2x + 12 = 3x.'},
+    {voor:'Welke fout maak je makkelijk bij breuken wegwerken?', achter:'Vergeten de getallen zonder breuk ook te vermenigvuldigen.'},
+    {voor:'−7(x − 6) = ?', achter:'−7x + 42'},
+    {voor:'Hoe bereken je de x-coördinaat van het snijpunt van twee lijnen?', achter:'Stel de formules aan elkaar gelijk en los de vergelijking op.'},
+    {voor:'Hoe bereken je daarna de y-coördinaat van het snijpunt?', achter:'Vul de gevonden x in één van de formules in.'},
+    {voor:'−x = −12. Wat is x?', achter:'x = 12'},
+    {voor:'Hoe schrijf je een punt met kommagetallen?', achter:'Met een puntkomma: S(2,5; 1,1)'}
+  ];
+
+  var P3_LETTERS = ['x','a','p','t'];
+  var P3_HINT = '<br><small style="color:#64748b;font-weight:600">(een negatief getal vul je in met −; breuk mag, bv. -15/2 of -7,5)</small>';
+  var P3_GLYPH = {'1/2':'½', '1/3':'⅓', '2/3':'⅔', '1/4':'¼', '3/4':'¾', '1/5':'⅕', '2/5':'⅖', '3/5':'⅗', '4/5':'⅘', '1/6':'⅙', '5/6':'⅚'};
+  function p3Ggd(a, b){ a = Math.abs(a); b = Math.abs(b); while (b){ var t = a % b; a = b; b = t; } return a; }
+  function p3Kgv(a, b){ return a / p3Ggd(a, b) * b; }
+  function p3R(n){ return Math.round(n * 1e6) / 1e6; }
+  // oplossing: geheel −10..10, of in 25% van de gevallen een halve
+  function p3Oplossing(){ return Math.random() < 0.25 ? rnd(-10, 9) + 0.5 : rnd(-10, 10); }
+  // "4 · −2 = −8", "−7 · −6 = +42"
+  function p3Keer(p, q){ var r = p * q; return fmt(p) + ' · ' + fmt(q) + ' = ' + (r > 0 ? '+' : '') + fmt(r); }
+  function p3Haak(n, f){ f = f || fmt; return n < 0 ? '(' + f(n) + ')' : f(n); }
+  // term met breuk-coëfficiënt k/n als nette breuk: ⅓x, −⅖x, 2x
+  function p3BTerm(k, n, L, eerste){
+    var g = p3Ggd(k, n); k /= g; n /= g;
+    if (n === 1) return term(k, L, eerste);
+    var br = P3_GLYPH[Math.abs(k) + '/' + n] || (Math.abs(k) + '/' + n);
+    return (k < 0 ? (eerste ? '−' : ' − ') : (eerste ? '' : ' + ')) + br + L;
+  }
+  function p3Br(k, n){ return P3_GLYPH[k + '/' + n] || (k + '/' + n); }
+  // aL·L + bL = aR·L + bR oplossen: overbrengen, herleiden, delen (f = fmt of p2Dec)
+  function p3Oplos(L, aL, bL, aR, bR, s, f){
+    f = f || fmt;
+    var delen = [], regels = [];
+    if (aR) delen.push(p2Term(aR, L, true, f) + ' naar links');
+    if (bL) delen.push(f(bL) + ' naar rechts');
+    var links = p2Term(aL, L, true, f) + p2Term(-aR, L, false, f);
+    var rechts = (bR ? f(bR) : '') + p2Term(-bL, '', !bR, f);
+    if (delen.length) regels.push('breng ' + delen.join(' en ') + ' → ' + links + ' = ' + (rechts || '0'));
+    var A = p3R(aL - aR), B = p3R(bR - bL);
+    regels.push('herleid → ' + p2Term(A, L, true, f) + ' = ' + f(B));
+    if (A !== 1){
+      var uitkomst = f === fmt ? fmt(s) : f(B) + ' : ' + p3Haak(A, f) + ' = ' + p2Dec(s);
+      regels.push('deel door ' + p3Haak(A, f) + ' → ' + L + ' = ' + uitkomst);
+    }
+    return regels;
+  }
+  function p3Veld(L, s){ return [{voor:L + ' =', na:'', antwoord:s}]; }
+
+  /* A. Termen overbrengen */
+  function p3A1(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), a, b, c, d;
+    do { a = rnd(-9, 9, true); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (a - c) * s + b; }
+    while (a === c || !Number.isInteger(d) || d === 0 || Math.abs(d) > 80);
+    var vgl = lin(a, b, L) + ' = ' + lin(c, d, L);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+            uitwerking: [vgl].concat(p3Oplos(L, a, b, c, d, s)).join('<br>')};
+  }
+  function p3A2(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), a, b, c, d;
+    do { a = rnd(1, 9); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (-a - c) * s + b; }
+    while (-a === c || !Number.isInteger(d) || d === 0 || Math.abs(d) > 80);
+    var vgl = fmt(b) + term(-a, L, false) + ' = ' + lin(c, d, L);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+            uitwerking: [vgl].concat(p3Oplos(L, -a, b, c, d, s)).join('<br>')};
+  }
+  function p3A3(){
+    var L = pick(P3_LETTERS), s, a, b, c, d;
+    do { s = rnd(-10, 10, true); a = rnd(-9, 9, true); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (a - c) * s + b; }
+    while (a === c || d === 0 || Math.abs(d) > 80);
+    var vgl = lin(a, b, L) + ' = ' + lin(c, d, L);
+    var juist = term(a, L, true) + term(-c, L, false) + ' = ' + fmt(d) + term(-b, '', false);
+    var klopt = Math.random() < 0.5, foutTerm = pick(['letter', 'getal']), stap = juist, uitleg;
+    if (klopt){
+      uitleg = 'Klopt: ' + term(c, L, true) + ' wordt ' + term(-c, L, true) + ' en ' + fmt(b) + ' wordt ' + fmt(-b) + '.';
+    } else if (foutTerm === 'letter'){
+      stap = term(a, L, true) + term(c, L, false) + ' = ' + fmt(d) + term(-b, '', false);
+      uitleg = 'Klopt niet: de term ' + term(c, L, true) + ' is overgebracht zonder het teken om te draaien; dat moet ' + term(-c, L, true) + ' worden.<br>Juiste stap: ' + juist;
+    } else {
+      stap = term(a, L, true) + term(-c, L, false) + ' = ' + fmt(d) + term(b, '', false);
+      uitleg = 'Klopt niet: de term ' + fmt(b) + ' is overgebracht zonder het teken om te draaien; dat moet ' + fmt(-b) + ' worden.<br>Juiste stap: ' + juist;
+    }
+    return {
+      vraag: 'Vergelijking: <b>' + vgl + '</b><br>Eerste stap: <b>' + stap + '</b><br>Klopt deze stap?',
+      velden: [{keuze:['klopt', 'klopt niet'], antwoord: klopt ? 'klopt' : 'klopt niet', voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* B. Vergelijkingen met haakjes */
+  function p3B1(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), p, q, r, c;
+    do { p = pick([-1, 1]) * rnd(2, 9); q = rnd(-9, 9, true); r = rnd(-9, 9, true); c = (p - r) * s + p * q; }
+    while (r === p || !Number.isInteger(c) || c === 0 || Math.abs(c) > 100);
+    var vgl = fmt(p) + '(' + lin(1, q, L) + ') = ' + lin(r, c, L);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl, 'haakjes weg: ' + p3Keer(p, q) + ' → ' + term(p, L, true) + term(p * q, '', false) + ' = ' + lin(r, c, L)]
+        .concat(p3Oplos(L, p, p * q, r, c, s)).join('<br>')};
+  }
+  function p3B2(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), p, q, r, t, u, c;
+    do { p = rnd(2, 9); t = rnd(2, 9); q = rnd(-9, 9, true); u = rnd(-9, 9, true); r = rnd(-9, 9, true); c = (p + t) * s + t * u + p * q + r; }
+    while (!Number.isInteger(c) || c === 0 || Math.abs(c) > 120);
+    var vgl = p + '(' + lin(1, q, L) + ')' + term(r, '', false) + ' = ' + fmt(c) + ' − ' + t + '(' + lin(1, u, L) + ')';
+    var weg = term(p, L, true) + term(p * q, '', false) + term(r, '', false) + ' = ' + fmt(c) + term(-t, L, false) + term(-t * u, '', false);
+    var over = term(p, L, true) + term(t, L, false) + ' = ' + fmt(c) + term(-t * u, '', false) + term(-p * q, '', false) + term(-r, '', false);
+    var A = p + t, B = c - t * u - p * q - r;
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl,
+        'haakjes weg: ' + p3Keer(p, q) + ' en ' + p3Keer(-t, u) + ' → ' + weg,
+        'breng ' + term(-t, L, true) + ' naar links en ' + fmt(p * q) + ' en ' + fmt(r) + ' naar rechts → ' + over,
+        'herleid → ' + term(A, L, true) + ' = ' + fmt(B),
+        'deel door ' + A + ' → ' + L + ' = ' + fmt(s)].join('<br>')};
+  }
+  function p3B3(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), p, q, r, v, t, u, A;
+    do { q = rnd(2, 9); r = rnd(1, 5); v = rnd(1, 9); t = pick([-1, 1]) * rnd(2, 9); u = rnd(-9, 9, true); A = -q * r - t; p = t * u - q * v - A * s; }
+    while (A === 0 || !Number.isInteger(p) || p === 0 || Math.abs(p) > 60);
+    var vgl = fmt(p) + ' − ' + q + '(' + lin(r, -v, L) + ') = ' + fmt(t) + '(' + lin(1, u, L) + ')';
+    var weg = fmt(p) + term(-q * r, L, false) + term(q * v, '', false) + ' = ' + term(t, L, true) + term(t * u, '', false);
+    var over = term(-q * r, L, true) + term(-t, L, false) + ' = ' + fmt(t * u) + term(-p, '', false) + term(-q * v, '', false);
+    var B = t * u - p - q * v;
+    var regels = [vgl,
+      'haakjes weg: ' + fmt(-q) + ' · ' + term(r, L, true) + ' = ' + term(-q * r, L, true) + ', ' + p3Keer(-q, -v) + ' en ' + p3Keer(t, u) + ' → ' + weg,
+      'breng ' + term(t, L, true) + ' naar links en ' + fmt(p) + ' en ' + fmt(q * v) + ' naar rechts → ' + over,
+      'herleid → ' + term(A, L, true) + ' = ' + fmt(B)];
+    if (A !== 1) regels.push('deel door ' + p3Haak(A) + ' → ' + L + ' = ' + fmt(s));
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s), uitwerking: regels.join('<br>')};
+  }
+
+  /* C. Vergelijkingen met breuken */
+  var P3_NOEMERS = [2, 3, 4, 5, 6];
+  function p3C1(){
+    var L = pick(P3_LETTERS), n, m, s, b;
+    do { n = pick(P3_NOEMERS); m = pick(P3_NOEMERS); s = rnd(-30, 30, true); b = s * (n - m) / (n * m); }
+    while (n === m || !Number.isInteger(b) || b === 0 || Math.abs(b) > 12);
+    var K = p3Kgv(n, m);
+    var vgl = p3BTerm(1, n, L, true) + term(b, '', false) + ' = ' + p3BTerm(1, m, L, true);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl, '×' + K + ' (kgv van ' + n + ' en ' + m + ') → ' + term(K / n, L, true) + term(K * b, '', false) + ' = ' + term(K / m, L, true)]
+        .concat(p3Oplos(L, K / n, K * b, K / m, 0, s)).join('<br>')};
+  }
+  function p3C2(){
+    var L = pick(P3_LETTERS), n, m, k, s, b, c, K, A;
+    do {
+      n = pick(P3_NOEMERS); m = pick(P3_NOEMERS); k = rnd(1, n - 1); K = p3Kgv(n, m);
+      A = K * k / n - K / m; s = rnd(-30, 30, true); b = rnd(-9, 9, true); c = b + s * A / K;
+    } while (p3Ggd(k, n) !== 1 || A === 0 || !Number.isInteger(c) || c === 0 || Math.abs(c) > 30);
+    var vgl = p3BTerm(k, n, L, true) + term(b, '', false) + ' = ' + p3BTerm(1, m, L, true) + term(c, '', false);
+    var noemers = n === m ? 'noemer ' + n : 'kgv van ' + n + ' en ' + m;
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl, '×' + K + ' (' + noemers + ') → ' + term(K * k / n, L, true) + term(K * b, '', false) + ' = ' + term(K / m, L, true) + term(K * c, '', false)]
+        .concat(p3Oplos(L, K * k / n, K * b, K / m, K * c, s)).join('<br>')};
+  }
+  function p3C3(){
+    var L = pick(P3_LETTERS), n, m, s, q, r;
+    do { n = pick(P3_NOEMERS); m = pick(P3_NOEMERS); s = rnd(-30, 30, true); q = rnd(-9, 9, true); r = m * (s + q) / n - s; }
+    while (n === m || !Number.isInteger(r) || r === 0 || Math.abs(r) > 20);
+    var K = p3Kgv(n, m), pn = K / n, pm = K / m;
+    function haak(f, c){ return (f === 1 ? '' : f) + '(' + lin(1, c, L) + ')'; }
+    var vgl = p3Br(1, n) + '(' + lin(1, q, L) + ') = ' + p3Br(1, m) + '(' + lin(1, r, L) + ')';
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl,
+        '×' + K + ' (kgv van ' + n + ' en ' + m + ') → ' + haak(pn, q) + ' = ' + haak(pm, r),
+        'haakjes weg → ' + term(pn, L, true) + term(pn * q, '', false) + ' = ' + term(pm, L, true) + term(pm * r, '', false)]
+        .concat(p3Oplos(L, pn, pn * q, pm, pm * r, s)).join('<br>')};
+  }
+
+  /* D. Snijpunt van twee lijnen */
+  function p3Punt(x, y, f){ var sep = Number.isInteger(x) && Number.isInteger(y) ? ', ' : '; '; return 'S(' + f(x) + sep + f(y) + ')'; }
+  function p3Snijpunt(a1, b1, a2, b2, xs, ys, f){
+    return ['gelijkstellen: ' + p2Lin(a1, b1, 'x', f) + ' = ' + p2Lin(a2, b2, 'x', f)]
+      .concat(p3Oplos('x', a1, b1, a2, b2, xs, f))
+      .concat(['invullen in l: y = ' + f(a1) + ' · ' + p3Haak(xs, f) + p2Term(b1, '', false, f) + ' = ' + f(ys),
+               'dus ' + p3Punt(xs, ys, f)]).join('<br>');
+  }
+  function p3VeldenS(xs, ys){ return [{voor:'x<sub>S</sub> =', na:'', antwoord:xs}, {voor:'y<sub>S</sub> =', na:'', antwoord:ys}]; }
+  function p3LijnenGeheel(xmax, amax, bmax){
+    var xs, ys, a1, a2, b1, b2;
+    do { xs = rnd(-xmax, xmax); ys = rnd(-xmax, xmax); a1 = rnd(-amax, amax, true); a2 = rnd(-amax, amax, true); b1 = ys - a1 * xs; b2 = ys - a2 * xs; }
+    while (a1 === a2 || Math.abs(b1) > bmax || Math.abs(b2) > bmax);
+    return {xs:xs, ys:ys, a1:a1, b1:b1, a2:a2, b2:b2};
+  }
+  function p3D1(){
+    var g = p3LijnenGeheel(6, 5, 20);
+    return {vraag: 'Bereken het snijpunt S van <b>l: y = ' + lin(g.a1, g.b1) + '</b> en <b>m: y = ' + lin(g.a2, g.b2) + '</b>.' + P0_HINT,
+            velden: p3VeldenS(g.xs, g.ys), uitwerking: p3Snijpunt(g.a1, g.b1, g.a2, g.b2, g.xs, g.ys, fmt)};
+  }
+  function p3D2(){
+    var A1, A2, B1, xs, a1, a2, b1, b2, ys;
+    do {
+      A1 = pick([-1, 1]) * rnd(1, 20); A2 = pick([-1, 1]) * rnd(1, 20); B1 = rnd(-50, 50);
+      xs = Math.random() < 0.5 ? rnd(-6, 6) : rnd(-6, 5) + 0.5;
+      a1 = A1 / 10; a2 = A2 / 10; b1 = B1 / 10;
+      ys = p3R(a1 * xs + b1); b2 = p3R(ys - a2 * xs);
+    } while (A1 === A2 || Math.abs(b2 * 10 - Math.round(b2 * 10)) > 1e-6 || Math.abs(b2) > 10);
+    return {vraag: 'Bereken het snijpunt S van <b>l: y = ' + p2Lin(a1, b1, 'x', p2Dec) + '</b> en <b>m: y = ' + p2Lin(a2, b2, 'x', p2Dec) + '</b>.' + P0_HINT + P2_HINT_KOMMA,
+            velden: p3VeldenS(xs, ys), uitwerking: p3Snijpunt(a1, b1, a2, b2, xs, ys, p2Dec)};
+  }
+  function p3D3(){
+    var g = p3LijnenGeheel(4, 3, 12);
+    var svg = tekenGrafiek([{a:g.a1, b:g.b1, kleur:'#0d9488', naam:'l'}, {a:g.a2, b:g.b2, kleur:'#f59e0b', naam:'m'}]);
+    return {vraag: 'Bereken het snijpunt S van <b>l: y = ' + lin(g.a1, g.b1) + '</b> en <b>m: y = ' + lin(g.a2, g.b2) + '</b>.' + svg + P0_HINT,
+            velden: p3VeldenS(g.xs, g.ys), uitwerking: p3Snijpunt(g.a1, g.b1, g.a2, g.b2, g.xs, g.ys, fmt)};
+  }
+
+  /* E. Vergelijkingen in een context */
+  var P3_BEDRIJVEN = [
+    {namen:['AutoShare', 'GreenCar'], wat:'Twee autodeelbedrijven', per:'per km', eenheid:'km', vast:'vaste kosten'},
+    {namen:['FietsenMaar', 'CheapBikes'], wat:'Twee verhuurders van e-bikes', per:'per km', eenheid:'km', vast:'huurprijs per dag'},
+    {namen:['BelBel', 'PraatVeel'], wat:'Twee telefoonaanbieders', per:'per belminuut', eenheid:'minuten', vast:'abonnement per maand'}
+  ];
+  function p3KostenOpgave(){
+    var c = pick(P3_BEDRIJVEN), A1, A2, b1, b2, x, diff;
+    do { A1 = rnd(15, 45); A2 = rnd(15, 45); b1 = rnd(30, 80); x = rnd(20, 300); diff = (A1 - A2) * x; b2 = b1 + diff / 100; }
+    while (A1 === A2 || diff % 100 !== 0 || b2 < 30 || b2 > 80);
+    var i1 = c.namen[0].charAt(0), i2 = c.namen[1].charAt(0);
+    var f1 = 'K<sub>' + i1 + '</sub> = ' + p2Lin(A1 / 100, b1, 'x', p2Dec), f2 = 'K<sub>' + i2 + '</sub> = ' + p2Lin(A2 / 100, b2, 'x', p2Dec);
+    var tekst = c.wat + ': ' + c.namen[0] + ' rekent ' + p2Euro(b1) + ' ' + c.vast + ' en ' + p2Euro(A1 / 100) + ' ' + c.per + '; ' +
+                c.namen[1] + ' rekent ' + p2Euro(b2) + ' ' + c.vast + ' en ' + p2Euro(A2 / 100) + ' ' + c.per + '.<br>' +
+                'Met x ' + c.eenheid + ' gelden de formules <b>' + f1 + '</b> en <b>' + f2 + '</b>.';
+    return {c:c, a1:A1 / 100, a2:A2 / 100, b1:b1, b2:b2, x:x, f1:f1, f2:f2, tekst:tekst, i1:i1, i2:i2};
+  }
+  function p3E1(){
+    var o = p3KostenOpgave();
+    return {vraag: o.tekst + '<br>Bij hoeveel ' + o.c.eenheid + ' zijn de kosten gelijk?' + P2_HINT_KOMMA,
+      velden: [{voor:'x =', na:o.c.eenheid, antwoord:o.x}],
+      uitwerking: ['gelijkstellen: ' + p2Lin(o.a1, o.b1, 'x', p2Dec) + ' = ' + p2Lin(o.a2, o.b2, 'x', p2Dec)]
+        .concat(p3Oplos('x', o.a1, o.b1, o.a2, o.b2, o.x, p2Dec))
+        .concat(['bij ' + o.x + ' ' + o.c.eenheid + ' zijn de kosten gelijk']).join('<br>')};
+  }
+  function p3E2(){
+    // X duidelijk voorbij het omslagpunt: minstens € 2 verschil in kosten
+    var o, X, k1, k2, pogingen = 0;
+    do {
+      if (pogingen++ % 20 === 0) o = p3KostenOpgave();
+      X = o.x + pick([-1, 1]) * rnd(40, 150); k1 = p3R(o.a1 * X + o.b1); k2 = p3R(o.a2 * X + o.b2);
+    } while (X < 10 || X > 450 || Math.abs(k1 - k2) < 2);
+    var goedkoper = k1 < k2 ? o.c.namen[0] : o.c.namen[1];
+    return {vraag: o.tekst + '<br>Welk bedrijf is voordeliger bij ' + X + ' ' + o.c.eenheid + '?',
+      velden: [{keuze:o.c.namen.slice(), antwoord:goedkoper, voor:'', na:''}],
+      uitwerking: 'K<sub>' + o.i1 + '</sub> = ' + p2Dec(o.a1) + ' · ' + X + ' + ' + o.b1 + ' = ' + p2Euro(k1) +
+                  '<br>K<sub>' + o.i2 + '</sub> = ' + p2Dec(o.a2) + ' · ' + X + ' + ' + o.b2 + ' = ' + p2Euro(k2) +
+                  '<br>dus ' + goedkoper + ' is voordeliger bij ' + X + ' ' + o.c.eenheid + '.'};
+  }
+  function p3E3(){
+    var plant = pick(['bamboeplant', 'klimplant', 'zonnebloem']), H1, H2, a1, a2, b1, b2, t;
+    do { H1 = rnd(2, 16); H2 = rnd(2, 16); a1 = H1 / 2; a2 = H2 / 2; t = rnd(5, 60); b1 = rnd(10, 80); b2 = b1 + (a1 - a2) * t; }
+    while (a1 <= a2 || !Number.isInteger(b2) || b2 > 300);
+    var f1 = p2Lin(a1, b1, 't', p2Dec), f2 = p2Lin(a2, b2, 't', p2Dec);
+    return {
+      vraag: 'Een ' + plant + ' heeft twee stengels. Stengel I is ' + b1 + ' cm en groeit ' + p2Dec(a1) + ' cm per dag. Stengel II is ' + b2 + ' cm en groeit ' + p2Dec(a2) + ' cm per dag.<br>Na hoeveel dagen zijn ze even lang?' + P2_HINT_KOMMA,
+      velden: [{voor:'t =', na:'dagen', antwoord:t}],
+      uitwerking: ['L<sub>I</sub> = ' + f1 + ' en L<sub>II</sub> = ' + f2 + ' (L in cm, t in dagen)', 'gelijkstellen: ' + f1 + ' = ' + f2]
+        .concat(p3Oplos('t', a1, b1, a2, b2, t, p2Dec))
+        .concat(['na ' + t + ' dagen zijn ze even lang']).join('<br>')
+    };
+  }
+
+  // generatoren per oefenblok
+  var p3Gens = {a:[p3A1, p3A2, p3A3], b:[p3B1, p3B2, p3B3], c:[p3C1, p3C2, p3C3], d:[p3D1, p3D2, p3D3], e:[p3E1, p3E2, p3E3]};
+
+  // --- P4 ONGELIJKHEDEN ---
+  var p4FcData = [
+    {voor:'Wat is de oplossing van een ongelijkheid?', achter:'Geen één getal, maar alle getallen die eraan voldoen, bv. x &gt; 4.'},
+    {voor:'Wanneer klapt het ongelijkheidsteken om?', achter:'Als je beide leden deelt door (of vermenigvuldigt met) een negatief getal.'},
+    {voor:'−4x &gt; −12 geeft…', achter:'x &lt; 3 (omklappen, want je deelt door −4)'},
+    {voor:'2x &lt; −20 geeft…', achter:'x &lt; −10 (niet omklappen, want je deelt door +2)'},
+    {voor:'−x &gt; −4 geeft…', achter:'x &lt; 4'},
+    {voor:'−½x &lt; 20 geeft…', achter:'x &gt; −40 (vermenigvuldigen met −2, dus omklappen)'},
+    {voor:'Grafiek f ligt onder grafiek g. Bij welk teken hoort dat?', achter:'f(x) &lt; g(x): kleiner-dan'},
+    {voor:'Hoe los je 7 − x &lt; 2x − 5 op met een grafiek?', achter:'Zoek de x van het snijpunt en kijk waar 7 − x onder 2x − 5 ligt.'},
+    {voor:'Wat zijn de 4 stappen van het werkschema?', achter:'1 Haakjes weg.<br>2 x naar links, de rest naar rechts.<br>3 Herleiden.<br>4 Delen door het getal vóór x; is dat negatief, dan omklappen.'},
+    {voor:'3x &gt; −3 geeft…', achter:'x &gt; −1 (niet omklappen)'},
+    {voor:'Klopt: uit −12 &lt; 18 volgt na delen door −6 dat 2 &lt; −3?', achter:'Nee: het teken moet omklappen, dus 2 &gt; −3.'}
+  ];
+
+  var P4_LETTERS = ['x','a','p','q'];
+  var P4_HINT = '<br><small style="color:#64748b;font-weight:600">(kies het teken en vul het getal in; breuk mag, bv. -15/2 of -7,5)</small>';
+  function p4Om(t){ return t === '<' ? '>' : '<'; }
+  function p4T(t){ return t === '<' ? '&lt;' : '&gt;'; }
+  // grensgetal: geheel −10..10, of in 20% van de gevallen een halve
+  function p4Grens(){ return Math.random() < 0.2 ? rnd(-10, 9) + 0.5 : rnd(-10, 10); }
+  // antwoordvorm "x [<|>] [..]"
+  function p4Velden(L, t, g){ return [{keuze:['<', '>'], antwoord:t, voor:L, na:''}, {voor:'', na:'', antwoord:g}]; }
+  // stap 4 van het werkschema: delen door A, met expliciet wel/niet omklappen
+  function p4Deel(A, L, t, g){
+    var neg = A < 0, t2 = neg ? p4Om(t) : t;
+    return {regel: 'deel door ' + p3Haak(A) + (neg ? ' (negatief → omklappen)' : ' (positief → niet omklappen)') + ' → ' + L + ' ' + p4T(t2) + ' ' + fmt(g), teken: t2};
+  }
+  // aL·L + bL t aR·L + bR oplossen volgens het werkschema
+  function p4Oplos(L, aL, bL, aR, bR, t, g){
+    var delen = [], regels = [];
+    if (aR) delen.push(term(aR, L, true) + ' naar links');
+    if (bL) delen.push(fmt(bL) + ' naar rechts');
+    var links = term(aL, L, true) + term(-aR, L, false);
+    var rechts = (bR ? fmt(bR) : '') + term(-bL, '', !bR);
+    if (delen.length) regels.push('breng ' + delen.join(' en ') + ' → ' + links + ' ' + p4T(t) + ' ' + (rechts || '0'));
+    var A = aL - aR, B = bR - bL;
+    regels.push('herleid → ' + term(A, L, true) + ' ' + p4T(t) + ' ' + fmt(B));
+    var teken = t;
+    if (A !== 1){ var d = p4Deel(A, L, t, g); regels.push(d.regel); teken = d.teken; }
+    return {regels: regels, teken: teken};
+  }
+  function p4Vraag(ongelijkheid){ return 'Los op: <b>' + ongelijkheid + '</b>' + P4_HINT; }
+
+  /* A. Ongelijkheden met grafieken */
+  function p4Grafiek(omgekeerd){
+    var xs, ys, a1, a2, b1, b2;
+    do { xs = rnd(-5, 5); ys = rnd(-5, 5); a1 = rnd(-3, 3, true); a2 = rnd(-3, 3, true); b1 = ys - a1 * xs; b2 = ys - a2 * xs; }
+    while (a1 === a2 || Math.abs(b1) > 8 || Math.abs(b2) > 8);
+    var f1 = lin(a1, b1), f2 = lin(a2, b2), t = pick(['<', '>']);
+    var svg = tekenGrafiek([{a:a1, b:b1, kleur:'#0d9488', naam:'y = ' + f1}, {a:a2, b:b2, kleur:'#f59e0b', naam:'y = ' + f2}]);
+    // links en rechts in de vraag
+    var aL = omgekeerd ? a2 : a1, fL = omgekeerd ? f2 : f1, aR = omgekeerd ? a1 : a2, fR = omgekeerd ? f1 : f2;
+    // fL t fR ⇔ (aL − aR)·x t (…): rechts van het snijpunt als aL − aR > 0 en t = '>'
+    var ans = (aL - aR > 0) ? t : p4Om(t);
+    return {
+      vraag: 'Los op: <b>' + fL + ' ' + p4T(t) + ' ' + fR + '</b>' + svg + P4_HINT,
+      velden: p4Velden('x', ans, xs),
+      uitwerking: 'Snijpunt bij x = ' + fmt(xs) + ' (y = ' + fmt(ys) + ')' +
+                  '<br>De grafiek van y = ' + fL + ' ligt ' + (t === '<' ? 'onder' : 'boven') + ' die van y = ' + fR + ' voor x ' + p4T(ans) + ' ' + fmt(xs) +
+                  ' (' + (ans === '>' ? 'rechts' : 'links') + ' van het snijpunt)' +
+                  '<br>dus x ' + p4T(ans) + ' ' + fmt(xs)
+    };
+  }
+  function p4A1(){ return p4Grafiek(false); }
+  function p4A2(){ return p4Grafiek(true); }
+
+  /* B. Omklappen */
+  function p4B1(){
+    var L = pick(P4_LETTERS), a, g, c, t = pick(['<', '>']);
+    do { a = Math.random() < 0.6 ? pick([-1, -2, -3, -4, -5, -6, -7, -8, -9]) : rnd(2, 9); g = p4Grens(); c = a * g; } while (!Number.isInteger(c));
+    var d = p4Deel(a, L, t, g);
+    return {vraag: p4Vraag(term(a, L, true) + ' ' + p4T(t) + ' ' + fmt(c)), velden: p4Velden(L, d.teken, g),
+            uitwerking: term(a, L, true) + ' ' + p4T(t) + ' ' + fmt(c) + '<br>' + d.regel};
+  }
+  function p4B2(){
+    var L = pick(P4_LETTERS), n = pick([2, 3, 4]), teken = pick([1, -1]), t = pick(['<', '>']), c, g;
+    do { c = rnd(-5, 5); g = teken * n * c; } while (Math.abs(g) > 20);
+    var factor = teken * n, t2 = factor < 0 ? p4Om(t) : t;
+    var ong = p3BTerm(teken, n, L, true) + ' ' + p4T(t) + ' ' + fmt(c);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, t2, g),
+            uitwerking: ong + '<br>vermenigvuldig met ' + p3Haak(factor) + (factor < 0 ? ' (negatief → omklappen)' : ' (positief → niet omklappen)') +
+                        ' → ' + L + ' ' + p4T(t2) + ' ' + fmt(g)};
+  }
+  function p4B3(){
+    var d, r, s;
+    do { d = pick([-1, 1]) * rnd(2, 6); r = rnd(-9, 9); s = rnd(-9, 9); } while (r === s);
+    var p = r * d, q = s * d, t0 = p < q ? '<' : '>', juist = d < 0 ? p4Om(t0) : t0;
+    var klopt = Math.random() < 0.5, getoond = klopt ? juist : p4Om(juist);
+    var uitleg = 'Je deelt door ' + fmt(d) + (d < 0 ? ', een negatief getal, dus het teken klapt om: ' : ', een positief getal, dus het teken klapt niet om: ') +
+                 fmt(r) + ' ' + p4T(juist) + ' ' + fmt(s) + '.<br>' +
+                 (klopt ? 'Dat is wat er staat, dus het klopt.' :
+                  (d < 0 ? 'Er staat ' + p4T(getoond) + ': het omklappen is vergeten, dus het klopt niet.' : 'Er staat ' + p4T(getoond) + ': er is onterecht omgeklapt, dus het klopt niet.'));
+    return {
+      vraag: 'Je weet dat <b>' + fmt(p) + ' ' + p4T(t0) + ' ' + fmt(q) + '</b>. Je deelt links en rechts door ' + fmt(d) + '. Je krijgt <b>' + fmt(r) + ' ' + p4T(getoond) + ' ' + fmt(s) + '</b>. Klopt dat?',
+      velden: [{keuze:['klopt', 'klopt niet'], antwoord: klopt ? 'klopt' : 'klopt niet', voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* C. Ongelijkheden oplossen */
+  function p4C1(){
+    var L = pick(P4_LETTERS), g = p4Grens(), t = pick(['<', '>']), negatief = Math.random() < 0.5, a, b, c, d;
+    do { a = rnd(-9, 9, true); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (a - c) * g + b; }
+    while (a - c === 0 || a - c === 1 || (a - c < 0) !== negatief || !Number.isInteger(d) || d === 0 || Math.abs(d) > 80);
+    var ong = lin(a, b, L) + ' ' + p4T(t) + ' ' + lin(c, d, L), o = p4Oplos(L, a, b, c, d, t, g);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, o.teken, g), uitwerking: [ong].concat(o.regels).join('<br>')};
+  }
+  function p4C2(){
+    var L = pick(P4_LETTERS), g = p4Grens(), t = pick(['<', '>']), p, q, s, u, sigma, r, A;
+    do { p = rnd(2, 9); s = rnd(2, 9); q = rnd(-9, 9, true); u = rnd(-9, 9, true); sigma = pick([1, -1]); A = p + s * sigma; r = A * g + p * q + s * u; }
+    while (A === 0 || A === 1 || !Number.isInteger(r) || r === 0 || Math.abs(r) > 60);
+    // rechterlid: r − s(x + u) of r − s(u − x)
+    var haak = sigma === 1 ? lin(1, u, L) : fmt(u) + term(-1, L, false);
+    var ong = p + '(' + lin(1, q, L) + ') ' + p4T(t) + ' ' + fmt(r) + ' − ' + s + '(' + haak + ')';
+    var xterm = sigma === 1 ? L : '−' + L;
+    var weg = term(p, L, true) + term(p * q, '', false) + ' ' + p4T(t) + ' ' + fmt(r) + term(-s * u, '', false) + term(-s * sigma, L, false);
+    var over = term(p, L, true) + term(s * sigma, L, false) + ' ' + p4T(t) + ' ' + fmt(r) + term(-s * u, '', false) + term(-p * q, '', false);
+    var B = r - s * u - p * q, d = p4Deel(A, L, t, g);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, d.teken, g),
+      uitwerking: [ong,
+        'haakjes weg: ' + p3Keer(p, q) + ', ' + p3Keer(-s, u) + ' en ' + fmt(-s) + ' · ' + xterm + ' = ' + term(-s * sigma, L, true) + ' → ' + weg,
+        'breng ' + term(-s * sigma, L, true) + ' naar links en ' + fmt(p * q) + ' naar rechts → ' + over,
+        'herleid → ' + term(A, L, true) + ' ' + p4T(t) + ' ' + fmt(B),
+        d.regel].join('<br>')};
+  }
+  function p4C3(){
+    var L = pick(P4_LETTERS), t = pick(['<', '>']), n, m, g, b, c;
+    do { n = pick([2, 3, 4]); m = pick([2, 3, 4]); g = rnd(-24, 24); b = rnd(-9, 9, true); c = b + g * (m - n) / (n * m); }
+    while (n === m || !Number.isInteger(c) || c === 0 || Math.abs(c) > 20);
+    var K = p3Kgv(n, m);
+    var ong = p3BTerm(1, n, L, true) + term(b, '', false) + ' ' + p4T(t) + ' ' + p3BTerm(1, m, L, true) + term(c, '', false);
+    var o = p4Oplos(L, K / n, K * b, K / m, K * c, t, g);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, o.teken, g),
+      uitwerking: [ong, '×' + K + ' (kgv van ' + n + ' en ' + m + '; positief → niet omklappen) → ' +
+                   term(K / n, L, true) + term(K * b, '', false) + ' ' + p4T(t) + ' ' + term(K / m, L, true) + term(K * c, '', false)]
+                   .concat(o.regels).join('<br>')};
+  }
+
+  /* D. Ongelijkheden in een context */
+  var P4_CONTEXTEN = [
+    {namen:['FietsenMaar', 'CheapBikes'], wat:'Twee fietsverhuurders', per:'per dag', vast:'vaste kosten', x:'het aantal dagen', aMin:8, aMax:25, bMin:5, bMax:60, gMin:2, gMax:20},
+    {namen:['De Schouwburg', 'Zaal Zuid'], wat:'Voor een schoolfeest kun je kiezen uit twee zalen', per:'per persoon', vast:'zaalhuur', x:'het aantal personen', aMin:4, aMax:15, bMin:100, bMax:800, gMin:20, gMax:150}
+  ];
+  function p4D1(){
+    var c = pick(P4_CONTEXTEN), aA, aB, bA, bB, g;
+    do { aA = rnd(c.aMin, c.aMax); aB = rnd(c.aMin, c.aMax); bA = rnd(c.bMin, c.bMax); g = rnd(c.gMin, c.gMax); bB = bA + (aA - aB) * g; }
+    while (aA === aB || bB < c.bMin || bB > c.bMax * 1.5);
+    var A = c.namen[0], B = c.namen[1], iA = A.charAt(A.indexOf(' ') + 1), iB = B.charAt(B.indexOf(' ') + 1);
+    var fA = lin(aA, bA), fB = lin(aB, bB), o = p4Oplos('x', aA, bA, aB, bB, '<', g);
+    return {
+      vraag: c.wat + '. ' + A + ' rekent ' + p2Euro(bA) + ' ' + c.vast + ' en ' + p2Euro(aA) + ' ' + c.per + '; ' + B + ' rekent ' + p2Euro(bB) + ' ' + c.vast + ' en ' + p2Euro(aB) + ' ' + c.per + '.<br>' +
+             'Met x = ' + c.x + ' gelden <b>K<sub>' + iA + '</sub> = ' + fA + '</b> en <b>K<sub>' + iB + '</sub> = ' + fB + '</b>.<br>' +
+             'Voor welke waarden van x is ' + A + ' voordeliger dan ' + B + '?' + P4_HINT,
+      velden: p4Velden('x', o.teken, g),
+      uitwerking: ['K<sub>' + iA + '</sub> &lt; K<sub>' + iB + '</sub> → ' + fA + ' &lt; ' + fB].concat(o.regels)
+                  .concat(['dus ' + A + ' is voordeliger als x ' + p4T(o.teken) + ' ' + g]).join('<br>')
+    };
+  }
+  function p4D2(){
+    var pp, e, d, g, vast;
+    do { pp = rnd(3, 10); d = rnd(2, 10); e = pp + d; g = rnd(20, 150); vast = d * g; } while (vast < 150 || vast > 1500);
+    var fK = lin(pp, vast), fR = term(e, 'x', true), o = p4Oplos('x', e, 0, pp, vast, '>', g);
+    return {
+      vraag: 'Voor een schoolfeest betaalt de school ' + p2Euro(vast) + ' zaalhuur en ' + p2Euro(pp) + ' per bezoeker voor eten en drinken. De entree is ' + p2Euro(e) + ' per persoon.<br>' +
+             'Met x bezoekers zijn de kosten <b>K = ' + fK + '</b> en de opbrengst <b>R = ' + fR + '</b>.<br>' +
+             'Bij hoeveel bezoekers is er winst (R &gt; K)?' + P4_HINT,
+      velden: p4Velden('x', o.teken, g),
+      uitwerking: ['R &gt; K → ' + fR + ' &gt; ' + fK].concat(o.regels).concat(['dus winst bij meer dan ' + g + ' bezoekers']).join('<br>')
+    };
+  }
+
+  // generatoren per oefenblok
+  var p4Gens = {a:[p4A1, p4A2], b:[p4B1, p4B2, p4B3], c:[p4C1, p4C2, p4C3], d:[p4D1, p4D2]};
+
+  // --- P5 FUNCTIES ---
+  var p5FcData = [
+    {voor:'Wat is een functie?', achter:'Een vast voorschrift dat van een getal (invoer) een ander getal (uitvoer) maakt.'},
+    {voor:'Wat betekent f(4) = 13?', achter:'De functiewaarde van 4 is 13; het punt (4, 13) ligt op de grafiek van f.'},
+    {voor:'Wat is een functievoorschrift?', achter:'De formule van de functie, bv. f(x) = 2x + 5.'},
+    {voor:'Wat is een lineaire functie?', achter:'Een functie van de vorm f(x) = ax + b; de grafiek is een lijn.'},
+    {voor:'Wat betekent x<sub>P</sub>?', achter:'De x-coördinaat van punt P.'},
+    {voor:'Hoe vind je het snijpunt met de y-as?', achter:'Bereken f(0); het punt is (0, f(0)).'},
+    {voor:'Hoe vind je het snijpunt met de x-as?', achter:'Los f(x) = 0 op; het punt is (x, 0).'},
+    {voor:'Hoe vind je het snijpunt van de grafieken van f en g?', achter:'Los f(x) = g(x) op voor x<sub>S</sub>, en bereken dan f(x<sub>S</sub>) of g(x<sub>S</sub>).'},
+    {voor:'f(x) = −5x + 2 en g(x) = 3x − 20. Wat is h(x) = f(x) + g(x)?', achter:'−2x − 18'},
+    {voor:'Hoe controleer je of A(48, 25) op de grafiek van f ligt?', achter:'Bereken f(48). Is dat 25, dan ligt A erop.'},
+    {voor:'De grafiek van f(x) = ax + 8 gaat door (−2, 40). Hoe vind je a?', achter:'f(−2) = 40, dus −2a + 8 = 40, dus a = −16.'},
+    {voor:'Uitvoer 17 bij "×2, dan +3". Wat is de invoer?', achter:'Terugrekenen: 17 − 3 = 14, 14 : 2 = 7.'}
+  ];
+
+  var P5_NAMEN = ['f','g','h'];
+  var P5_HINT = P3_HINT;
+  // a: geheel −6..6 (niet 0), soms ½, −½ of 1½
+  function p5KiesA(){ return Math.random() < 0.8 ? pick([-1, 1]) * rnd(1, 6) : pick([0.5, -0.5, 1.5]); }
+  function p5F(naam, a, b){ return '<b>' + naam + '(x) = ' + lin(a, b) + '</b>'; }
+  function p5Punt(n, x, y){ return n + '(' + fmt(x) + ', ' + fmt(y) + ')'; }
+
+  /* A. Invoer en uitvoer */
+  function p5Voorschrift(){
+    var p = rnd(2, 9), q = rnd(1, 20), plus = Math.random() < 0.5;
+    return {p:p, q:q, plus:plus, tekst:'eerst ×' + p + ', dan ' + (plus ? '+' : '−') + q, f:function(n){ return p * n + (plus ? q : -q); }};
+  }
+  function p5A1(){
+    var v = p5Voorschrift(), n = rnd(-10, 10), u = v.f(n);
+    return {
+      vraag: 'Een functie heeft het voorschrift: <b>' + v.tekst + '</b>. Welke uitvoer hoort bij invoer ' + fmt(n) + '?' + P0_HINT,
+      velden: [{voor:'uitvoer =', na:'', antwoord:u}],
+      uitwerking: fmt(n) + ' × ' + v.p + ' = ' + fmt(v.p * n) + '<br>' + fmt(v.p * n) + (v.plus ? ' + ' : ' − ') + v.q + ' = ' + fmt(u)
+    };
+  }
+  function p5A2(){
+    var v = p5Voorschrift(), n = rnd(-10, 10), u = v.f(n), tussen = v.plus ? u - v.q : u + v.q;
+    return {
+      vraag: 'Een functie heeft het voorschrift: <b>' + v.tekst + '</b>. Welke invoer hoort bij uitvoer ' + fmt(u) + '?' + P0_HINT,
+      velden: [{voor:'invoer =', na:'', antwoord:n}],
+      uitwerking: 'Terugrekenen: doe de stappen omgekeerd.<br>' +
+                  'eerst ' + (v.plus ? '−' : '+') + v.q + ': ' + fmt(u) + (v.plus ? ' − ' : ' + ') + v.q + ' = ' + fmt(tussen) +
+                  '<br>dan :' + v.p + ': ' + fmt(tussen) + ' : ' + v.p + ' = ' + fmt(n)
+    };
+  }
+  function p5A3(){
+    var k = pick([2, 3, 4]), q = rnd(1, 15), plus = Math.random() < 0.5, n = k * rnd(-8, 8), keer = n / k, u = keer + (plus ? q : -q);
+    return {
+      vraag: 'Het voorschrift van een functie is: <b>vermenigvuldig met ' + p3Br(1, k) + ' en ' + (plus ? 'tel er ' + q + ' bij op' : 'trek er ' + q + ' van af') + '</b>. Welke uitvoer hoort bij invoer ' + fmt(n) + '?' + P0_HINT,
+      velden: [{voor:'uitvoer =', na:'', antwoord:u}],
+      uitwerking: p3Br(1, k) + ' × ' + p3Haak(n) + ' = ' + fmt(keer) + '<br>' + fmt(keer) + (plus ? ' + ' : ' − ') + q + ' = ' + fmt(u)
+    };
+  }
+
+  /* B. Functiewaarden en h = f + g */
+  function p5B1(){
+    var n = pick(P5_NAMEN), a = p5KiesA(), b = rnd(-20, 20), k = rnd(-10, 10), y = a * k + b;
+    return {
+      vraag: 'Gegeven ' + p5F(n, a, b) + '. Bereken ' + n + '(' + fmt(k) + ').' + P5_HINT,
+      velden: [{voor:n + '(' + fmt(k) + ') =', na:'', antwoord:y}],
+      uitwerking: n + '(' + fmt(k) + ') = ' + p1Invul(a, k, b)
+    };
+  }
+  function p5B2(){
+    var a1 = p5KiesA(), b1 = rnd(-20, 20), a2 = p5KiesA(), b2 = rnd(-20, 20), k = rnd(-10, 10), m = rnd(-10, 10);
+    var fk = a1 * k + b1, gm = a2 * m + b2;
+    return {
+      vraag: 'Gegeven ' + p5F('f', a1, b1) + ' en ' + p5F('g', a2, b2) + '. Bereken f(' + fmt(k) + ') + g(' + fmt(m) + ').' + P5_HINT,
+      velden: [{voor:'f(' + fmt(k) + ') + g(' + fmt(m) + ') =', na:'', antwoord:fk + gm}],
+      uitwerking: 'f(' + fmt(k) + ') = ' + p1Invul(a1, k, b1) + '<br>g(' + fmt(m) + ') = ' + p1Invul(a2, m, b2) +
+                  '<br>f(' + fmt(k) + ') + g(' + fmt(m) + ') = ' + fmt(fk) + ' + ' + p3Haak(gm) + ' = ' + fmt(fk + gm)
+    };
+  }
+  function p5B3(){
+    var a1, a2, b1 = rnd(-20, 20, true), b2 = rnd(-20, 20, true);
+    do { a1 = rnd(-6, 6, true); a2 = rnd(-6, 6, true); } while (a1 + a2 === 0);
+    var A = a1 + a2, B = b1 + b2;
+    return {
+      vraag: 'Gegeven ' + p5F('f', a1, b1) + ' en ' + p5F('g', a2, b2) + '. h(x) = f(x) + g(x). Stel het functievoorschrift van h op en herleid.' + P0_HINT,
+      velden: [{voor:'h(x) =', na:'x +', antwoord:A}, {voor:'', na:'', antwoord:B}],
+      uitwerking: 'h(x) = ' + lin(a1, b1) + term(a2, 'x', false) + term(b2, '', false) +
+                  '<br>x-termen: ' + term(a1, 'x', true) + term(a2, 'x', false) + ' = ' + term(A, 'x', true) +
+                  '; getallen: ' + fmt(b1) + term(b2, '', false) + ' = ' + fmt(B) +
+                  '<br>dus h(x) = ' + lin(A, B)
+    };
+  }
+  function p5B4(){
+    var n = pick(P5_NAMEN), a = pick([-1, 1]) * rnd(2, 6), b = rnd(-20, 20, true), x = rnd(-10, 10), c = a * x + b;
+    return {
+      vraag: 'Gegeven ' + p5F(n, a, b) + '. Bij welke x is de functiewaarde van ' + n + ' gelijk aan ' + fmt(c) + '?' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: [n + '(x) = ' + fmt(c) + ' → ' + lin(a, b) + ' = ' + fmt(c)].concat(p3Oplos('x', a, b, 0, c, x)).join('<br>')
+    };
+  }
+
+  /* C. Punten op de grafiek */
+  function p5C1(){
+    var n = pick(P5_NAMEN), a = p5KiesA(), b = rnd(-20, 20), x = p1XGeheel(a, -10, 10), echt = a * x + b;
+    var ja = Math.random() < 0.5, y = ja ? echt : echt + pick([-1, 1]) * rnd(1, 5);
+    return {
+      vraag: 'Ligt ' + p5Punt('A', x, y) + ' op de grafiek van ' + p5F(n, a, b) + '?',
+      velden: [{keuze:['ja', 'nee'], antwoord: ja ? 'ja' : 'nee', voor:'', na:''}],
+      uitwerking: n + '(' + fmt(x) + ') = ' + p1Invul(a, x, b) + '<br>' +
+                  (ja ? 'Dat is gelijk aan y<sub>A</sub> = ' + fmt(y) + ', dus A ligt op de grafiek.' : fmt(echt) + ' ≠ ' + fmt(y) + ', dus A ligt niet op de grafiek.')
+    };
+  }
+  function p5C2(){
+    var n = pick(P5_NAMEN), a, b = rnd(-20, 20, true), x, y;
+    do { a = p5KiesA(); x = Math.random() < 0.25 ? rnd(-10, 9) + 0.5 : rnd(-10, 10); y = a * x + b; } while (!Number.isInteger(y) || a === 1);
+    return {
+      vraag: 'Het punt B op de grafiek van ' + p5F(n, a, b) + ' heeft y<sub>B</sub> = ' + fmt(y) + '. Bereken x<sub>B</sub>.' + P5_HINT,
+      velden: [{voor:'x<sub>B</sub> =', na:'', antwoord:x}],
+      uitwerking: [lin(a, b) + ' = ' + fmt(y)].concat(p3Oplos('x', a, b, 0, y, x)).join('<br>') + '<br>dus x<sub>B</sub> = ' + fmt(x)
+    };
+  }
+  function p5C3(){
+    var n = pick(P5_NAMEN), a = p5KiesA(), b = rnd(-20, 20), x = rnd(-10, 10), y = a * x + b;
+    return {
+      vraag: 'Het punt C op de grafiek van ' + p5F(n, a, b) + ' heeft x<sub>C</sub> = ' + fmt(x) + '. Bereken y<sub>C</sub>.' + P5_HINT,
+      velden: [{voor:'y<sub>C</sub> =', na:'', antwoord:y}],
+      uitwerking: 'y<sub>C</sub> = ' + n + '(' + fmt(x) + ') = ' + p1Invul(a, x, b)
+    };
+  }
+
+  /* D. Snijpunten met de assen */
+  function p5D1(){
+    var n = pick(P5_NAMEN), a, b, xA;
+    do { a = p5KiesA(); b = rnd(-20, 20, true); xA = p3R(-b / a); } while (!p2NetteNoemer(xA) || Math.abs(xA) > 20 || a === 1);
+    return {
+      vraag: 'De grafiek van ' + p5F(n, a, b) + ' snijdt de x-as in A en de y-as in B. Bereken de coördinaten.' + P5_HINT,
+      velden: [{voor:'x<sub>A</sub> =', na:'', antwoord:xA}, {voor:'y<sub>B</sub> =', na:'', antwoord:b}],
+      uitwerking: 'snijpunt y-as: ' + n + '(0) = ' + fmt(b) + ', dus B(0, ' + fmt(b) + ')' +
+                  '<br>snijpunt x-as: ' + lin(a, b) + ' = 0<br>' + p3Oplos('x', a, b, 0, 0, xA).join('<br>') + '<br>dus A(' + fmt(xA) + ', 0)'
+    };
+  }
+  function p5D2(){
+    var n = pick(P5_NAMEN), x0 = rnd(-10, 10), p, q, c, voorschrift, regels;
+    if (Math.random() < 0.5){
+      // f(x) = p(x + q): nulpunt x = −q
+      if (x0 === 0) x0 = rnd(1, 10);
+      p = pick([-1, 1]) * rnd(2, 6); q = -x0;
+      voorschrift = fmt(p) + '(' + lin(1, q) + ')';
+      regels = [voorschrift + ' = 0', 'haakjes weg: ' + p3Keer(p, q) + ' → ' + lin(p, p * q) + ' = 0'].concat(p3Oplos('x', p, p * q, 0, 0, x0));
+    } else {
+      // f(x) = c − p(x + q): nulpunt uit c − px − pq = 0
+      do { p = rnd(2, 6); q = rnd(-9, 9, true); c = p * (x0 + q); } while (c === 0 || Math.abs(c) > 60);
+      voorschrift = fmt(c) + ' − ' + p + '(' + lin(1, q) + ')';
+      regels = [voorschrift + ' = 0', 'haakjes weg: ' + p3Keer(-p, q) + ' → ' + fmt(c) + term(-p, 'x', false) + term(-p * q, '', false) + ' = 0']
+               .concat(p3Oplos('x', -p, c - p * q, 0, 0, x0));
+    }
+    return {
+      vraag: 'Gegeven <b>' + n + '(x) = ' + voorschrift + '</b>. Bereken de coördinaten van het snijpunt A van de grafiek van ' + n + ' met de x-as.' + P0_HINT,
+      velden: [{voor:'A(', na:', 0)', antwoord:x0}],
+      uitwerking: regels.join('<br>') + '<br>dus A(' + fmt(x0) + ', 0)'
+    };
+  }
+  function p5D3(){
+    var xA, xB, xS, yS, af, ag;
+    do { xA = rnd(-8, 8); xB = rnd(-8, 8); xS = rnd(-8, 8); yS = pick([-1, 1]) * rnd(1, 12); af = yS / (xS - xA); ag = yS / (xS - xB); }
+    while (xA === xB || xS === xA || xS === xB || !Number.isInteger(af) || !Number.isInteger(ag) || af === ag || Math.abs(af) > 6 || Math.abs(ag) > 6);
+    var bf = -af * xA, bg = -ag * xB, basis = Math.abs(xB - xA), hoogte = Math.abs(yS), opp = basis * hoogte / 2;
+    function nul(n, a, b, x0){ return n + '(x) = 0: ' + lin(a, b) + ' = 0 → ' + term(a, 'x', true) + ' = ' + fmt(-b) + ' → x = ' + fmt(x0); }
+    return {
+      vraag: 'De grafieken van ' + p5F('f', af, bf) + ' en ' + p5F('g', ag, bg) + ' snijden elkaar in S. De grafiek van f snijdt de x-as in A en die van g snijdt de x-as in B. Bereken de oppervlakte van driehoek ABS.' + P5_HINT,
+      velden: [{voor:'oppervlakte =', na:'', antwoord:opp}],
+      uitwerking: nul('f', af, bf, xA) + ', dus A(' + fmt(xA) + ', 0)' +
+                  '<br>' + nul('g', ag, bg, xB) + ', dus B(' + fmt(xB) + ', 0)' +
+                  '<br>f(x) = g(x): ' + lin(af, bf) + ' = ' + lin(ag, bg) + ' → ' + term(af - ag, 'x', true) + ' = ' + fmt(bg - bf) + ' → x = ' + fmt(xS) +
+                  '; y = f(' + fmt(xS) + ') = ' + fmt(yS) + ', dus S(' + fmt(xS) + ', ' + fmt(yS) + ')' +
+                  '<br>basis AB = |' + fmt(xB) + ' − ' + p3Haak(xA) + '| = ' + basis + ', hoogte = |y<sub>S</sub>| = ' + hoogte +
+                  '<br>oppervlakte = ½ · ' + basis + ' · ' + hoogte + ' = ' + fmt(opp)
+    };
+  }
+
+  /* E. Snijpunt van grafieken en onbekenden */
+  function p5E1(){
+    var g = p3LijnenGeheel(6, 6, 20);
+    return {
+      vraag: 'Bereken de coördinaten van het snijpunt S van de grafieken van ' + p5F('f', g.a1, g.b1) + ' en ' + p5F('g', g.a2, g.b2) + '.' + P0_HINT,
+      velden: [{voor:'x<sub>S</sub> =', na:'', antwoord:g.xs}, {voor:'y<sub>S</sub> =', na:'', antwoord:g.ys}],
+      uitwerking: ['f(x) = g(x) → ' + lin(g.a1, g.b1) + ' = ' + lin(g.a2, g.b2)].concat(p3Oplos('x', g.a1, g.b1, g.a2, g.b2, g.xs))
+                  .concat(['y<sub>S</sub> = f(' + fmt(g.xs) + ') = ' + p1Invul(g.a1, g.xs, g.b1), 'dus S(' + fmt(g.xs) + ', ' + fmt(g.ys) + ')']).join('<br>')
+    };
+  }
+  function p5E2(){
+    var a = pick([-1, 1]) * rnd(1, 9), b = rnd(-20, 20, true), xp, yp;
+    do { xp = rnd(-6, 6, true); yp = a * xp + b; } while (xp === 1);
+    return {
+      vraag: 'De grafiek van <b>f(x) = ax' + term(b, '', false) + '</b> gaat door het punt ' + p5Punt('P', xp, yp) + '. Bereken a.' + P0_HINT,
+      velden: [{voor:'a =', na:'', antwoord:a}],
+      uitwerking: ['f(' + fmt(xp) + ') = ' + fmt(yp) + ' → ' + term(xp, 'a', true) + term(b, '', false) + ' = ' + fmt(yp)].concat(p3Oplos('a', xp, b, 0, yp, a)).join('<br>')
+    };
+  }
+  function p5E3(){
+    var a = p5KiesA(), bk = rnd(-20, 20), b, xp = p1XGeheel(a, -6, 6);
+    do { b = rnd(-20, 20); } while (b === bk);
+    var yp = a * xp + b;
+    return {
+      vraag: 'De grafiek van f(x) = ax + b is evenwijdig met de lijn <b>k: y = ' + lin(a, bk) + '</b> en gaat door ' + p5Punt('P', xp, yp) + '. Bereken a en b.' + P5_HINT,
+      velden: [{voor:'a =', na:'', antwoord:a}, {voor:'b =', na:'', antwoord:b}],
+      uitwerking: 'Evenwijdig, dus a = rc<sub>k</sub> = ' + fmt(a) + '<br>' + p1BUitPunt(a, xp, yp) + '<br>dus f(x) = ' + lin(a, b)
+    };
+  }
+  function p5E4(){
+    var xs, q, r, p, ys;
+    do { xs = rnd(-6, 6, true); q = rnd(-9, 9, true); r = rnd(-15, 15, true); ys = q * xs + r; p = (ys - q) / xs; }
+    while (!Number.isInteger(p) || p === 0 || Math.abs(p) > 12 || xs === 1);
+    return {
+      vraag: 'De grafieken van <b>f(x) = px + q</b> en <b>g(x) = qx' + term(r, '', false) + '</b> snijden elkaar in ' + p5Punt('S', xs, ys) + '. Bereken p en q.' + P0_HINT,
+      velden: [{voor:'p =', na:'', antwoord:p}, {voor:'q =', na:'', antwoord:q}],
+      uitwerking: ['S ligt op g: g(' + fmt(xs) + ') = ' + fmt(ys) + ' → ' + term(xs, 'q', true) + term(r, '', false) + ' = ' + fmt(ys)]
+                  .concat(p3Oplos('q', xs, r, 0, ys, q))
+                  .concat(['S ligt op f: f(' + fmt(xs) + ') = ' + fmt(ys) + ' → ' + term(xs, 'p', true) + term(q, '', false) + ' = ' + fmt(ys)])
+                  .concat(p3Oplos('p', xs, q, 0, ys, p)).join('<br>')
+    };
+  }
+
+  // generatoren per oefenblok
+  var p5Gens = {a:[p5A1, p5A2, p5A3], b:[p5B1, p5B2, p5B3, p5B4], c:[p5C1, p5C2, p5C3], d:[p5D1, p5D2, p5D3], e:[p5E1, p5E2, p5E3, p5E4]};
+
+  // --- MIX TOETSMIX ---
+  // wrapper: kiest bij elke aanroep één generator uit de lijst en zet er een tag op
+  function mixGen(tag, lijst){
+    return function(){
+      var v = pick(lijst)(), kopie = {};
+      for (var k in v) kopie[k] = v[k];
+      kopie.tag = tag;
+      return kopie;
+    };
+  }
+  function mixAlle(gens){ return Object.keys(gens).reduce(function(l, k){ return l.concat(gens[k]); }, []); }
+  // 5 wrappers en 15 vragen: de engine trekt per ronde elke generator één keer, dus precies 3 per paragraaf
+  var mixGens = [
+    mixGen('§1.1', mixAlle(p1Gens)),
+    mixGen('§1.2', mixAlle(p2Gens)),
+    mixGen('§1.3', mixAlle(p3Gens)),
+    mixGen('§1.4', mixAlle(p4Gens)),
+    mixGen('§1.5', mixAlle(p5Gens))
+  ];
+  // klik op een regel van 'Per paragraaf' → naar het oefenen van die paragraaf
+  function mixNaarParagraaf(tag){
+    var id = 'p' + tag.match(/§1\.(\d)/)[1];
+    showTab(id, document.querySelector('.tab-btn[onclick*="\'' + id + '\'"]'));
+    showSubTab(id, 'oefenen', document.querySelector('#tab-' + id + ' .sub-tab-btn[onclick*="\'oefenen\'"]'));
+    window.scrollTo(0, 0);
+  }
+
+  // === INIT ===
+  maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
+  maakOefening('p0-oef-a', p0Gens.a);
+  maakOefening('p0-oef-b', p0Gens.b);
+  maakOefening('p0-oef-c', p0Gens.c);
+  maakOefening('p0-oef-d', p0Gens.d);
+  document.getElementById('p1-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-2,b:5,kleur:'#0d9488',naam:'l'}],{punten:[{x:0,y:5,naam:'(0, 5)'},{x:1,y:3,naam:''}]});
+  maakFlashcards('p1-fc', p1FcData, '§1.1 — begrip → uitleg');
+  maakOefening('p1-oef-a', p1Gens.a);
+  maakOefening('p1-oef-b', p1Gens.b);
+  maakOefening('p1-oef-c', p1Gens.c);
+  maakOefening('p1-oef-d', p1Gens.d);
+  document.getElementById('p2-uitleg-grafiek1').innerHTML = tekenGrafiek([{a:0.75, b:-2, kleur:'#0d9488'}], {xnaam:'t', ynaam:'N', punten:[{x:0, y:-2, naam:''}, {x:4, y:1, naam:''}]});
+  document.getElementById('p2-uitleg-grafiek2').innerHTML = tekenGrafiek([{a:-10/3, b:225, kleur:'#0d9488'}], {xmin:-15, xmax:75, xstap:15, ymin:-75, ymax:300, ystap:75, xnaam:'n', ynaam:'G', punten:[{x:0, y:225, naam:'(0, 225)'}, {x:45, y:75, naam:'(45, 75)'}]});
+  maakFlashcards('p2-fc', p2FcData, '§1.2 — begrip → uitleg');
+  maakOefening('p2-oef-a', p2Gens.a);
+  maakOefening('p2-oef-b', p2Gens.b);
+  maakOefening('p2-oef-c', p2Gens.c);
+  maakOefening('p2-oef-d', p2Gens.d);
+  document.getElementById('p3-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-0.5, b:1, kleur:'#0d9488', naam:'l'}, {a:1.5, b:-1, kleur:'#f59e0b', naam:'m'}], {punten:[{x:1, y:0.5, naam:'S(1; 0,5)'}]});
+  maakFlashcards('p3-fc', p3FcData, '§1.3 — begrip → uitleg');
+  maakOefening('p3-oef-a', p3Gens.a);
+  maakOefening('p3-oef-b', p3Gens.b);
+  maakOefening('p3-oef-c', p3Gens.c);
+  maakOefening('p3-oef-d', p3Gens.d);
+  maakOefening('p3-oef-e', p3Gens.e);
+  document.getElementById('p4-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-1, b:7, kleur:'#0d9488', naam:'y = 7 − x'}, {a:2, b:-5, kleur:'#f59e0b', naam:'y = 2x − 5'}], {xmin:-2, xmax:8, ymin:-6, ymax:8, punten:[{x:4, y:3, naam:'S'}]});
+  maakFlashcards('p4-fc', p4FcData, '§1.4 — begrip → uitleg');
+  maakOefening('p4-oef-a', p4Gens.a);
+  maakOefening('p4-oef-b', p4Gens.b);
+  maakOefening('p4-oef-c', p4Gens.c);
+  maakOefening('p4-oef-d', p4Gens.d);
+  document.getElementById('p5-uitleg-grafiek').innerHTML = tekenGrafiek([{a:0.5, b:-1, kleur:'#0d9488', naam:'f'}]);
+  maakFlashcards('p5-fc', p5FcData, '§1.5 — begrip → uitleg');
+  maakOefening('p5-oef-a', p5Gens.a);
+  maakOefening('p5-oef-b', p5Gens.b);
+  maakOefening('p5-oef-c', p5Gens.c);
+  maakOefening('p5-oef-d', p5Gens.d);
+  maakOefening('p5-oef-e', p5Gens.e);
+  maakOefening('mix-oef', mixGens, {aantal: 15, tagKlik: mixNaarParagraaf});
 </script>
 </body>
 </html>
