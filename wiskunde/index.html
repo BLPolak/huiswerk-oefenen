@@ -327,16 +327,81 @@
     <button class="sub-tab-btn" onclick="showSubTab('p2','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p2-uitleg" class="sub-tab-content active">
-    <!-- P2-UITLEG -->
-    <p class="binnenkort">Binnenkort</p>
+    <details class="uitleg-card" open>
+      <summary>A. Formules met andere letters</summary>
+      <p>De formule <strong>N = &frac34;t &minus; 2</strong> hoort bij een lineair verband tussen t en N.</p>
+      <div class="regel-blok groen">
+        <p>De letter <strong>achter</strong> het =-teken (hier t) hoort bij de <strong>horizontale</strong> as.</p>
+        <p>De letter <strong>voor</strong> het =-teken (hier N) hoort bij de <strong>verticale</strong> as.</p>
+      </div>
+      <table class="waarde-tabel">
+        <tr><th>t</th><td>0</td><td>4</td></tr>
+        <tr><th>N</th><td>&minus;2</td><td>1</td></tr>
+      </table>
+      <div id="p2-uitleg-grafiek1"></div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Let op de stapgrootte van de assen</summary>
+      <div class="voorbeeld-blok">
+        De lijn gaat door (0, 225) en (45, 75). Stel G = an + b.<br>
+        Door (0, 225), dus b = 225.<br>
+        a = verticaal / horizontaal = &minus;150/45 = &minus;3&#8531;.<br>
+        Dus G = &minus;3&#8531;n + 225.
+      </div>
+      <div class="regel-blok rood-blok">
+        <p><strong>Tel geen hokjes</strong>, maar lees de waarden op de assen af.</p>
+      </div>
+      <div id="p2-uitleg-grafiek2"></div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Formules uit een tekst</summary>
+      <p>Sommige lineaire formules volgen direct uit de tekst.</p>
+      <div class="voorbeeld-blok">
+        <strong>Voorbeeld 1.</strong> Een klusbedrijf rekent 15 euro per uur en 30 euro voorrijkosten.<br>
+        De kosten zijn <strong>K = 15t + 30</strong>.<br>
+        &ldquo;per uur&rdquo; &rarr; het getal v&oacute;&oacute;r t; &ldquo;voorrijkosten&rdquo; &rarr; het losse getal.
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>Voorbeeld 2.</strong> Het water in een vat staat 60 cm hoog en daalt 10 cm per minuut.<br>
+        Dan <strong>h = 60 &minus; 10t</strong>.<br>
+        &ldquo;beginhoogte&rdquo; &rarr; het losse getal; &ldquo;per minuut lager&rdquo; &rarr; negatief getal v&oacute;&oacute;r t.
+      </div>
+      <div class="regel-blok groen">
+        <p>&ldquo;per &hellip; (uur, km, jaar)&rdquo; = de richtingsco&euml;ffici&euml;nt</p>
+        <p>beginwaarde / vaste kosten = het getal bij t = 0</p>
+      </div>
+      <h3>Tabel met jaartallen</h3>
+      <p>Neem t = 0 bij het eerste jaar. Is de toename per stap steeds gelijk, dan is het verband lineair.</p>
+      <table class="waarde-tabel">
+        <tr><th>jaar</th><td>2013</td><td>2014</td><td>2015</td><td>2016</td></tr>
+        <tr><th>t</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><th>N</th><td>1850</td><td>1700</td><td>1550</td><td>1400</td></tr>
+      </table>
+      <div class="voorbeeld-blok">
+        Elk jaar &minus;150, dus lineair: N = &minus;150t + 1850 (t = 0 in 2013).
+      </div>
+    </details>
   </div>
   <div id="sub-p2-flashcards" class="sub-tab-content">
-    <!-- P2-FLASHCARDS -->
-    <p class="binnenkort">Binnenkort</p>
+    <div id="p2-fc"></div>
   </div>
   <div id="sub-p2-oefenen" class="sub-tab-content">
-    <!-- P2-OEFENEN -->
-    <p class="binnenkort">Binnenkort</p>
+    <div class="oefening-kaart">
+      <h3>A. Formule bij een tekst</h3>
+      <div id="p2-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Formule bij een tabel</h3>
+      <div id="p2-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Formule bij een grafiek</h3>
+      <div id="p2-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Rekenen met de formule</h3>
+      <div id="p2-oef-d"></div>
+    </div>
   </div>
 </div>
 
@@ -512,22 +577,29 @@
     function sy(y){ return pad + (ymax - y) / (ymax - ymin) * h; }
     function r(v){ return Math.round(v * 10) / 10; }
     function stap(bereik){ return bereik <= 16 ? 1 : Math.ceil(bereik / 12); }
-    var sxStap = stap(xmax - xmin), syStap = stap(ymax - ymin);
+    // optioneel: xstap/ystap = afstand tussen roosterlijnen en aslabels, xnaam/ynaam = asnamen
+    var gx = opties.xstap || 1, gy = opties.ystap || 1;
+    var xnaam = opties.xnaam || 'x', ynaam = opties.ynaam || 'y';
+    // labelafstand: zonder xstap/ystap zoals voorheen; met xstap/ystap elke stap, of elke 2e (3e …) als ze anders overlappen
+    function labelStap(g, bereik, pix, minPix){ var f = 1; while (pix * g * f / bereik < minPix) f++; return g * f; }
+    function maxLabelBreedte(min, max, g){ var m = 0; for (var i = Math.ceil(min / g - 1e-9); i * g <= max + 1e-9; i++) m = Math.max(m, fmt(i * g).length); return m * 5.5 + 6; }
+    var sxStap = opties.xstap ? labelStap(gx, xmax - xmin, w, maxLabelBreedte(xmin, xmax, gx)) : stap(xmax - xmin);
+    var syStap = opties.ystap ? labelStap(gy, ymax - ymin, h, 13) : stap(ymax - ymin);
     var s = '<svg class="grafiek-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg" font-family="Nunito, sans-serif">';
     s += '<rect x="' + pad + '" y="' + pad + '" width="' + w + '" height="' + h + '" fill="#fff" stroke="#cbd5e1"/>';
 
     // rooster
-    var x, y;
-    for (x = Math.ceil(xmin); x <= xmax; x++) s += '<line x1="' + r(sx(x)) + '" y1="' + pad + '" x2="' + r(sx(x)) + '" y2="' + (pad + h) + '" stroke="#e2e8f0" stroke-width="1"/>';
-    for (y = Math.ceil(ymin); y <= ymax; y++) s += '<line x1="' + pad + '" y1="' + r(sy(y)) + '" x2="' + (pad + w) + '" y2="' + r(sy(y)) + '" stroke="#e2e8f0" stroke-width="1"/>';
+    var x, y, i;
+    for (i = Math.ceil(xmin / gx - 1e-9); i * gx <= xmax + 1e-9; i++){ x = i * gx; s += '<line x1="' + r(sx(x)) + '" y1="' + pad + '" x2="' + r(sx(x)) + '" y2="' + (pad + h) + '" stroke="#e2e8f0" stroke-width="1"/>'; }
+    for (i = Math.ceil(ymin / gy - 1e-9); i * gy <= ymax + 1e-9; i++){ y = i * gy; s += '<line x1="' + pad + '" y1="' + r(sy(y)) + '" x2="' + (pad + w) + '" y2="' + r(sy(y)) + '" stroke="#e2e8f0" stroke-width="1"/>'; }
 
     // assen (aan de rand als 0 buiten beeld valt)
     var asY = r(Math.min(Math.max(sy(0), pad), pad + h));
     var asX = r(Math.min(Math.max(sx(0), pad), pad + w));
     s += '<line x1="' + pad + '" y1="' + asY + '" x2="' + (pad + w) + '" y2="' + asY + '" stroke="#475569" stroke-width="1.5"/>';
     s += '<line x1="' + asX + '" y1="' + pad + '" x2="' + asX + '" y2="' + (pad + h) + '" stroke="#475569" stroke-width="1.5"/>';
-    s += '<text x="' + (pad + w - 4) + '" y="' + (asY - 5) + '" font-size="12" font-weight="700" text-anchor="end" fill="#475569">x</text>';
-    s += '<text x="' + (asX + 5) + '" y="' + (pad + 11) + '" font-size="12" font-weight="700" fill="#475569">y</text>';
+    s += '<text x="' + (pad + w - 4) + '" y="' + (asY - 5) + '" font-size="12" font-weight="700" text-anchor="end" fill="#475569">' + xnaam + '</text>';
+    s += '<text x="' + (asX + 5) + '" y="' + (pad + 11) + '" font-size="12" font-weight="700" fill="#475569">' + ynaam + '</text>';
 
     // getallen langs de assen
     for (x = Math.ceil(xmin / sxStap) * sxStap; x <= xmax; x += sxStap){
@@ -1284,6 +1356,220 @@
     };
   }
 
+  // --- P2 VERBANDEN ---
+  var p2FcData = [
+    {voor:'Bij N = ¾t − 2: welke letter hoort bij de horizontale as?', achter:'t (de variabele achter het =-teken)'},
+    {voor:'Bij N = ¾t − 2: welke letter hoort bij de verticale as?', achter:'N'},
+    {voor:'Waar moet je op letten bij het aflezen van a uit een grafiek?', achter:'Op de stapgrootte van de assen: gebruik de waarden, niet het aantal hokjes.'},
+    {voor:'"15 euro per uur" in een formule is…', achter:'de richtingscoëfficiënt: K = 15t + …'},
+    {voor:'"30 euro voorrijkosten" in een formule is…', achter:'het getal bij t = 0: K = … + 30'},
+    {voor:'Water daalt 10 cm per minuut vanaf 60 cm. Formule?', achter:'h = 60 − 10t'},
+    {voor:'Hoe zie je aan een tabel dat een verband lineair is?', achter:'De toename (of afname) per gelijke stap is steeds hetzelfde.'},
+    {voor:'Tabel begint in 2013. Wat kies je als t = 0?', achter:'1 januari 2013 (het eerste jaar)'},
+    {voor:'Grafiek door (0, 225) en (45, 75). Wat is a?', achter:'−150/45 = −3⅓'},
+    {voor:'Een dorp heeft 1850 inwoners en neemt jaarlijks met 150 af. Formule?', achter:'N = 1850 − 150t (of N = −150t + 1850)'}
+  ];
+
+  var P2_HINT_KOMMA = '<br><small style="color:#64748b;font-weight:600">(kommagetal mag, bv. 2,25)</small>';
+  var P2_PLAATSEN = ['Achtlo', 'Bovenzand', 'Dijkum', 'Eemrode', 'Holtwijk', 'Lindeloo', 'Oosterveen', 'Zandhoven'];
+  // decimaal met komma: 2.25 → "2,25", 2.5 → "2,5"
+  function p2Dec(n){ return Number.isInteger(n) ? fmt(n) : (n < 0 ? '−' : '') + String(Math.abs(Math.round(n * 100) / 100)).replace('.', ','); }
+  function p2Euro(n){ return '€ ' + (typeof n === 'string' || Number.isInteger(n) ? String(n) : n.toFixed(2).replace('.', ',')); }
+  // grote getallen met spatie: 35000 → "35 000"
+  function p2Groot(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  // gemengde breuk mooi: −3 1/3 → −3⅓
+  function p2Mooi(n){
+    var s = fmt(n), uni = {'1/3':'⅓', '2/3':'⅔', '1/4':'¼', '3/4':'¾'};
+    return s.replace(/(\d) (\d\/\d)$/, function(m, h, br){ return uni[br] ? h + uni[br] : m; });
+  }
+  // noemer 1..4 als n een nette breuk is, anders 0
+  function p2NetteNoemer(n){ for (var d = 1; d <= 4; d++) if (Math.abs(n * d - Math.round(n * d)) < 1e-9) return d; return 0; }
+  function p2EenDecimaal(n){ return Math.abs(n * 10 - Math.round(n * 10)) < 1e-9; }
+  // coëfficiënt uit een grafiek: nette breuk (noemer ≤ 4) via fmt, anders één decimaal
+  function p2Coef(n){ return p2NetteNoemer(n) ? p2Mooi(n) : p2Dec(n); }
+  function p2Term(c, L, eerste, f){
+    if (!c) return '';
+    var neg = c < 0, a = Math.abs(c), kern = (L && a === 1 ? '' : f(a)) + L;
+    return eerste ? (neg ? '−' : '') + kern : (neg ? ' − ' : ' + ') + kern;
+  }
+  function p2Lin(a, b, L, f){ var s = p2Term(a, L, true, f); s += p2Term(b, '', s === '', f); return s || '0'; }
+  function p2VeldenAB(Y, X, a, b){ return [{voor:Y + ' =', na:'· ' + X + ' +', antwoord:a}, {voor:'', na:'', antwoord:b}]; }
+  function p2Tabel(rijen){
+    return '<table class="waarde-tabel">' + rijen.map(function(r){
+      return '<tr><th>' + r[0] + '</th>' + r[1].map(function(v){ return '<td>' + v + '</td>'; }).join('') + '</tr>';
+    }).join('') + '</table>';
+  }
+
+  /* A. Formule bij een tekst */
+  function p2AContext(c){
+    return {
+      vraag: c.tekst + '<br>Gebruik ' + c.Y + ' (' + c.Yuitleg + ') en ' + c.X + ' (' + c.Xuitleg + '). Stel de formule op.' + P0_HINT + (Number.isInteger(c.a) ? '' : P2_HINT_KOMMA),
+      velden: p2VeldenAB(c.Y, c.X, c.a, c.b),
+      uitwerking: c.perTekst + ' → a = ' + p2Dec(c.a) +
+                  '<br>' + c.beginTekst + ' → b = ' + p2Dec(c.b) +
+                  '<br>dus ' + c.Y + ' = ' + p2Lin(c.a, c.b, c.X, p2Dec)
+    };
+  }
+  function p2A1(){
+    var a = rnd(4, 15) * 5, b = rnd(3, 12) * 5, wie = pick(['Een klusbedrijf', 'Een loodgieter', 'Een elektricien']);
+    return p2AContext({tekst: wie + ' rekent ' + p2Euro(a) + ' per uur en ' + p2Euro(b) + ' voorrijkosten.',
+      Y:'K', Yuitleg:'kosten in euro\'s', X:'t', Xuitleg:'tijd in uren', a:a, b:b, perTekst:'per uur ' + p2Euro(a), beginTekst:'voorrijkosten ' + p2Euro(b)});
+  }
+  function p2A2(){
+    var a = rnd(6, 14) * 0.25, b = rnd(3, 10);
+    return p2AContext({tekst: 'Een taxi rekent een starttarief van ' + p2Euro(b) + ' en daarna ' + p2Euro(a) + ' per km.',
+      Y:'P', Yuitleg:'prijs in euro\'s', X:'a', Xuitleg:'afstand in km', a:a, b:b, perTekst:'per km ' + p2Euro(a), beginTekst:'starttarief ' + p2Euro(b)});
+  }
+  function p2A3(){
+    if (Math.random() < 0.5){
+      var a = rnd(6, 12) * 5, b = rnd(5, 20) * 5;
+      return p2AContext({tekst: 'Een hovenier rekent ' + p2Euro(a) + ' per uur. Voor het materiaal betaal je eenmalig ' + p2Euro(b) + '.',
+        Y:'K', Yuitleg:'kosten in euro\'s', X:'t', Xuitleg:'tijd in uren', a:a, b:b, perTekst:'per uur ' + p2Euro(a), beginTekst:'vaste kosten ' + p2Euro(b)});
+    }
+    var a2 = rnd(8, 20), b2 = rnd(1, 5) * 5;
+    return p2AContext({tekst: 'Bij een fietsverhuur huur je een fiets voor ' + p2Euro(a2) + ' per dag. Daarnaast betaal je eenmalig ' + p2Euro(b2) + ' administratiekosten.',
+      Y:'K', Yuitleg:'kosten in euro\'s', X:'d', Xuitleg:'aantal dagen', a:a2, b:b2, perTekst:'per dag ' + p2Euro(a2), beginTekst:'vaste kosten ' + p2Euro(b2)});
+  }
+  function p2A4(){
+    var b = rnd(4, 20) * 10, d = rnd(2, 15), wat = pick(['een vat', 'een zwembad', 'een regenton']);
+    return p2AContext({tekst: 'Het water in ' + wat + ' staat ' + b + ' cm hoog. Het water loopt weg: de hoogte daalt ' + d + ' cm per minuut.',
+      Y:'h', Yuitleg:'hoogte in cm', X:'t', Xuitleg:'tijd in minuten', a:-d, b:b, perTekst:'per minuut ' + d + ' cm lager', beginTekst:'beginhoogte ' + b + ' cm'});
+  }
+  function p2A5(){
+    var b = rnd(20, 100) * 50, d = rnd(1, 6) * 50, toe = Math.random() < 0.5, plaats = pick(P2_PLAATSEN), jaar = rnd(2010, 2022);
+    return p2AContext({tekst: 'Op 1 januari ' + jaar + ' had ' + plaats + ' ' + b + ' inwoners. Elk jaar ' + (toe ? 'komen er ' + d + ' inwoners bij' : 'neemt het aantal inwoners met ' + d + ' af') + '.',
+      Y:'N', Yuitleg:'aantal inwoners', X:'t', Xuitleg:'tijd in jaren met t = 0 op 1 januari ' + jaar, a: toe ? d : -d, b:b,
+      perTekst:'per jaar ' + (toe ? d + ' erbij' : d + ' eraf'), beginTekst:'beginaantal ' + b});
+  }
+  function p2A6(){
+    var km = rnd(6, 10), d = rnd(4, 10) * 50;
+    return p2AContext({tekst: 'Een vliegtuig vliegt op ' + km + ' km hoogte en begint aan de landing. Het daalt ' + d + ' meter per minuut.',
+      Y:'h', Yuitleg:'hoogte in meters', X:'t', Xuitleg:'tijd in minuten', a:-d, b:km * 1000,
+      perTekst:'per minuut ' + d + ' m lager', beginTekst:'beginhoogte ' + km + ' km = ' + (km * 1000) + ' m'});
+  }
+  function p2A7(){
+    var b = rnd(20, 70) * 1000, a = rnd(10, 40) * 100;
+    return p2AContext({tekst: 'De aanleg van een tennisbaan kost ' + p2Euro(p2Groot(b)) + '. Daarna kost het onderhoud ' + p2Euro(a) + ' per jaar.',
+      Y:'K', Yuitleg:'totale kosten in euro\'s', X:'t', Xuitleg:'tijd in jaren', a:a, b:b, perTekst:'per jaar ' + p2Euro(a), beginTekst:'aanleg ' + p2Euro(p2Groot(b))});
+  }
+
+  /* B. Formule bij een tabel */
+  function p2TabelData(stap){
+    var start = rnd(2005, 2020), b = rnd(10, 90) * 10, a, jaren = [], waarden = [];
+    do { a = pick([-1, 1]) * rnd(2, 25); } while (b + a * 3 * stap <= 0);
+    for (var i = 0; i < 4; i++){ jaren.push(start + i * stap); waarden.push(b + a * i * stap); }
+    return {start:start, stap:stap, a:a, b:b, jaren:jaren, waarden:waarden};
+  }
+  function p2B1(){
+    var d = p2TabelData(pick([1, 5])), perStap = d.a * d.stap;
+    var uitA = d.stap === 1 ? 'toename per jaar: ' + fmt(perStap) + ', dus a = ' + fmt(d.a)
+                            : 'toename per 5 jaar: ' + fmt(perStap) + ', dus per jaar ' + fmt(perStap) + ' : 5 = ' + fmt(d.a) + ', dus a = ' + fmt(d.a);
+    return {
+      vraag: p2Tabel([['jaar', d.jaren], ['N', d.waarden]]) + 'Neem t = 0 in ' + d.start + '. Stel de formule op.' + P0_HINT,
+      velden: p2VeldenAB('N', 't', d.a, d.b),
+      uitwerking: uitA + '<br>t = 0 in ' + d.start + ': N = ' + d.b + ', dus b = ' + d.b + '<br>dus N = ' + lin(d.a, d.b, 't')
+    };
+  }
+  function p2B2(){
+    var d = p2TabelData(pick([1, 5])), lineair = Math.random() < 0.5, w = d.waarden.slice();
+    if (!lineair){
+      var i = rnd(1, 3), pct = rnd(1, 20) / 100;
+      w[i] += pick([-1, 1]) * Math.max(1, Math.round(w[i] * pct));
+    }
+    var verschil = [w[1] - w[0], w[2] - w[1], w[3] - w[2]];
+    var gelijk = verschil[0] === verschil[1] && verschil[1] === verschil[2];
+    var vt = verschil.map(function(v){ return (v > 0 ? '+' : '') + fmt(v); }).join(', ');
+    return {
+      vraag: p2Tabel([['jaar', d.jaren], ['N', w]]) + 'Is er sprake van een lineair verband?',
+      velden: [{keuze:['ja', 'nee'], antwoord: gelijk ? 'ja' : 'nee', voor:'', na:''}],
+      uitwerking: 'Verschillen per stap van ' + d.stap + ' jaar: ' + vt +
+                  '<br>' + (gelijk ? 'Steeds gelijk, dus een lineair verband.' : 'Niet steeds gelijk, dus geen lineair verband.')
+    };
+  }
+  function p2B3(){
+    var d = p2TabelData(pick([1, 2, 5])), perStap = d.a * d.stap;
+    return {
+      vraag: p2Tabel([['jaar', d.jaren], ['N', d.waarden]]) + 'Met hoeveel neemt N per jaar toe of af? (afname = negatief getal)' + P0_HINT,
+      velden: [{voor:'per jaar:', na:'', antwoord:d.a}],
+      uitwerking: 'Per stap van ' + d.stap + ' jaar: ' + (perStap > 0 ? '+' : '') + fmt(perStap) +
+                  (d.stap === 1 ? '' : '<br>per jaar: ' + fmt(perStap) + ' : ' + d.stap + ' = ' + fmt(d.a)) +
+                  '<br>' + (d.a > 0 ? 'N neemt per jaar met ' + fmt(d.a) + ' toe.' : 'N neemt per jaar met ' + fmt(-d.a) + ' af, dus ' + fmt(d.a) + '.')
+    };
+  }
+
+  /* C. Formule bij een grafiek (andere letters en schaal) */
+  function p2GrafiekOpgave(){
+    var paar = pick([['t','N'], ['n','G'], ['q','W'], ['s','V'], ['t','h']]), X = paar[0], Y = paar[1];
+    var gx, gy, kb, k, m, a, b;
+    do {
+      gx = pick([1, 2, 5, 10, 15, 25]); gy = pick([1, 2, 5, 10, 25, 50, 75, 100]);
+      kb = rnd(0, 6); m = rnd(1, 6);
+      do { k = rnd(-1 - kb, 6 - kb); } while (k === 0);
+      a = (k * gy) / (m * gx); b = kb * gy;
+    } while (!(p2EenDecimaal(a) || p2NetteNoemer(a)));
+    var opt = {xmin:-gx, xmax:6 * gx, ymin:-gy, ymax:6 * gy, xstap:gx, ystap:gy, xnaam:X, ynaam:Y};
+    return {X:X, Y:Y, gx:gx, gy:gy, a:a, b:b, van:{x:0, y:b}, naar:{x:m * gx, y:b + k * gy}, opt:opt,
+            svg: tekenGrafiek([{a:a, b:b, kleur:'#0d9488'}], opt)};
+  }
+  function p2C1(){
+    var g = p2GrafiekOpgave(), v = g.naar.y - g.van.y, h = g.naar.x - g.van.x;
+    return {
+      vraag: 'Stel de formule van ' + g.Y + ' op. Gebruik ' + g.Y + ' = a · ' + g.X + ' + b.' + g.svg + P0_HINT + P1_HINT_BREUK,
+      velden: [{voor:'a =', na:'', antwoord:g.a}, {voor:'b =', na:'', antwoord:g.b}],
+      uitwerking: 'Door (0, ' + fmt(g.b) + '), dus b = ' + fmt(g.b) +
+                  '<br>Van (' + fmt(g.van.x) + ', ' + fmt(g.van.y) + ') naar (' + fmt(g.naar.x) + ', ' + fmt(g.naar.y) + '): verticaal ' + fmt(v) + ', horizontaal ' + fmt(h) +
+                  '<br>a = ' + fmt(v) + '/' + fmt(h) + ' = ' + p2Coef(g.a) +
+                  '<br>dus ' + g.Y + ' = ' + p2Lin(g.a, g.b, g.X, p2Coef)
+    };
+  }
+
+  /* D. Rekenen met de formule */
+  function p2Plaats(){
+    var a = pick([-1, 1]) * rnd(1, 8) * 25, b = rnd(30, 100) * 50;
+    return {naam:pick(P2_PLAATSEN), a:a, b:b, jaar:rnd(2000, 2020)};
+  }
+  function p2D1(){
+    var p, k, N;
+    do { p = p2Plaats(); k = rnd(2, 20); N = p.a * k + p.b; } while (N < 200);
+    return {
+      vraag: 'Voor het aantal inwoners van ' + p.naam + ' geldt <b>N = ' + lin(p.a, p.b, 't') + '</b> met t in jaren en t = 0 op 1 januari ' + p.jaar + '. Bereken N op 1 januari ' + (p.jaar + k) + '.',
+      velden: [{voor:'N =', na:'', antwoord:N}],
+      uitwerking: 't = ' + (p.jaar + k) + ' − ' + p.jaar + ' = ' + k +
+                  '<br>N = ' + fmt(p.a) + ' · ' + k + ' + ' + p.b + ' = ' + fmt(p.a * k) + ' + ' + p.b + ' = ' + fmt(N)
+    };
+  }
+  function p2D2(){
+    var p, t, N;
+    do { p = p2Plaats(); t = rnd(2, 25); N = p.a * t + p.b; } while (N < 200);
+    return {
+      vraag: 'Voor het aantal inwoners van ' + p.naam + ' geldt <b>N = ' + lin(p.a, p.b, 't') + '</b> met t in jaren en t = 0 op 1 januari ' + p.jaar + '. Op 1 januari van welk jaar is N = ' + N + '?',
+      velden: [{voor:'jaar =', na:'', antwoord:p.jaar + t}],
+      uitwerking: lin(p.a, p.b, 't') + ' = ' + N +
+                  '<br>' + p0Weg(p.b) + ' aan beide kanten → ' + term(p.a, 't', true) + ' = ' + fmt(N - p.b) +
+                  '<br>' + p0Deel(p.a) + ' aan beide kanten → t = ' + t +
+                  '<br>jaar = ' + p.jaar + ' + ' + t + ' = ' + (p.jaar + t)
+    };
+  }
+  function p2D3(){
+    var namen = fisherYates(P2_PLAATSEN.slice()), t = rnd(5, 30), jaar = rnd(2000, 2020), a1, a2, b1, b2;
+    do {
+      a1 = pick([-1, 1]) * rnd(1, 8) * 10; a2 = pick([-1, 1]) * rnd(1, 8) * 10;
+      b1 = rnd(20, 80) * 50; b2 = b1 + (a1 - a2) * t;
+    } while (a1 === a2 || b2 < 500 || a1 * t + b1 < 200);
+    var da = a1 - a2, db = b2 - b1;
+    return {
+      vraag: 'Voor het aantal inwoners geldt (t in jaren, t = 0 op 1 januari ' + jaar + '):<br>' +
+             namen[0] + ': <b>N = ' + lin(a1, b1, 't') + '</b><br>' + namen[1] + ': <b>N = ' + lin(a2, b2, 't') + '</b><br>' +
+             'Op 1 januari van welk jaar hebben beide plaatsen evenveel inwoners?',
+      velden: [{voor:'jaar =', na:'', antwoord:jaar + t}],
+      uitwerking: 'Stel gelijk: ' + lin(a1, b1, 't') + ' = ' + lin(a2, b2, 't') +
+                  '<br>' + (a2 > 0 ? '−' + fmt(a2) : '+' + fmt(-a2)) + 't aan beide kanten → ' + lin(da, b1, 't') + ' = ' + fmt(b2) +
+                  '<br>' + p0Weg(b1) + ' aan beide kanten → ' + term(da, 't', true) + ' = ' + fmt(db) +
+                  '<br>' + p0Deel(da) + ' aan beide kanten → t = ' + t +
+                  '<br>jaar = ' + jaar + ' + ' + t + ' = ' + (jaar + t)
+    };
+  }
+
   // === INIT ===
   maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
   maakOefening('p0-oef-a', [p0A1, p0A2, p0A3]);
@@ -1296,6 +1582,13 @@
   maakOefening('p1-oef-b', [p1B1, p1B2, p1B3]);
   maakOefening('p1-oef-c', [p1C1, p1C2]);
   maakOefening('p1-oef-d', [p1D1, p1D2, p1D3]);
+  document.getElementById('p2-uitleg-grafiek1').innerHTML = tekenGrafiek([{a:0.75, b:-2, kleur:'#0d9488'}], {xnaam:'t', ynaam:'N', punten:[{x:0, y:-2, naam:''}, {x:4, y:1, naam:''}]});
+  document.getElementById('p2-uitleg-grafiek2').innerHTML = tekenGrafiek([{a:-10/3, b:225, kleur:'#0d9488'}], {xmin:-15, xmax:75, xstap:15, ymin:-75, ymax:300, ystap:75, xnaam:'n', ynaam:'G', punten:[{x:0, y:225, naam:'(0, 225)'}, {x:45, y:75, naam:'(45, 75)'}]});
+  maakFlashcards('p2-fc', p2FcData, '§1.2 — begrip → uitleg');
+  maakOefening('p2-oef-a', [p2A1, p2A2, p2A3, p2A4, p2A5, p2A6, p2A7]);
+  maakOefening('p2-oef-b', [p2B1, p2B2, p2B3]);
+  maakOefening('p2-oef-c', [p2C1]);
+  maakOefening('p2-oef-d', [p2D1, p2D2, p2D3]);
 </script>
 </body>
 </html>
