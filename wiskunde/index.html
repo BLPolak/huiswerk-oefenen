@@ -117,6 +117,12 @@
     }
     .klaar-scherm .klaar-titel { font-size: 1.4rem; font-weight: 800; color: var(--teal); }
     .klaar-scherm .klaar-sub { color: var(--grijs); font-weight: 600; margin-top: .3rem; }
+    .vraag-tag { color: var(--teal); font-size: .75rem; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; margin-top: .4rem; }
+    .tag-lijst { margin: 1rem auto .4rem; max-width: 360px; display: flex; flex-direction: column; gap: .35rem; text-align: left; }
+    .tag-titel { font-weight: 800; color: var(--donker); margin-bottom: .1rem; }
+    .tag-regel { font-family: Nunito, sans-serif; font-size: .95rem; font-weight: 700; color: var(--donker); background: #fff; border: 1px solid #99f6e4; border-radius: 8px; padding: .4rem .7rem; text-align: left; }
+    button.tag-regel { cursor: pointer; }
+    button.tag-regel:hover { background: #f0fdfa; border-color: var(--teal); }
     .binnenkort { color: var(--grijs); font-style: italic; padding: 1rem 0; }
     details.uitleg-card > summary { cursor: pointer; color: #0d9488; font-size: 1.15rem; font-weight: 800; }
     details.uitleg-card[open] > summary { margin-bottom: 1rem; }
@@ -701,8 +707,13 @@
 
 <div id="tab-mix" class="tab-content">
   <div id="mix-oefenen">
-    <!-- MIX-OEFENEN -->
-    <p class="binnenkort">Binnenkort</p>
+    <div class="uitleg-card">
+      <p>&#127919; <strong>Toetsmix:</strong> 15 gemengde opgaven, 3 per paragraaf (&sect;1.1 t/m &sect;1.5), in willekeurige volgorde, zoals op de toets. Aan het eind zie je per paragraaf hoe het ging.</p>
+      <p style="margin-top:.5rem"><strong>Tip:</strong> werk op papier mee en schrijf je tussenstappen op, net als op de toets.</p>
+    </div>
+    <div class="oefening-kaart">
+      <div id="mix-oef"></div>
+    </div>
   </div>
 </div>
 
@@ -913,19 +924,22 @@
   /* === OEFEN-ENGINE ===
      generator() → { vraag: HTML,
                      velden: [{voor, na, antwoord: getal}] of [{keuze: ['<','>'], antwoord: '<', voor, na}],
-                     uitwerking: HTML } */
+                     uitwerking: HTML,
+                     tag: optioneel, bv. '§1.3' → label boven de vraag en score per tag op het eindscherm }
+     opties.tagKlik(tag): optioneel, maakt de regels 'Per paragraaf' klikbaar */
   function maakOefening(containerId, generatoren, opties){
     opties = opties || {};
     var container = document.getElementById(containerId);
     if (!container) return null;
     var st = { aantal: opties.aantal || 10, vragen: [], index: 0, goed: 0, totaal: 0, setGoed: 0,
-               beantwoord: false, klaar: false, keuzes: [] };
+               beantwoord: false, klaar: false, keuzes: [], tags: {} };
 
     container.innerHTML =
       '<div class="oefening-kaart">' +
         (opties.titel ? '<h3>' + opties.titel + '</h3>' : '') +
         '<div class="score-balk" data-rol="score"></div>' +
         '<div data-rol="vraagblok">' +
+          '<div class="vraag-tag" data-rol="tag" style="display:none"></div>' +
           '<div class="vraag-tekst" data-rol="vraag"></div>' +
           '<div class="veld-rij" data-rol="velden"></div>' +
           '<div class="feedback" data-rol="feedback"></div>' +
@@ -970,6 +984,8 @@
       st.keuzes = [];
       el('vraagblok').style.display = '';
       el('klaar').style.display = 'none';
+      el('tag').textContent = v.tag || '';
+      el('tag').style.display = v.tag ? '' : 'none';
       el('vraag').innerHTML = v.vraag;
       var rij = el('velden');
       rij.innerHTML = '';
@@ -1041,6 +1057,11 @@
       st.beantwoord = true;
       st.totaal++;
       if (alleGoed){ st.goed++; st.setGoed++; }
+      if (v.tag){
+        var ts = st.tags[v.tag] || (st.tags[v.tag] = {goed: 0, totaal: 0});
+        ts.totaal++;
+        if (alleGoed) ts.goed++;
+      }
       if (alleGoed){
         fb.className = 'feedback goed';
         fb.innerHTML = '&#10003; Goed zo!';
@@ -1064,7 +1085,11 @@
         el('vraagblok').style.display = 'none';
         var k = el('klaar');
         k.innerHTML = '<div class="klaar-titel">&#127881; Klaar! ' + st.setGoed + ' van ' + st.vragen.length + ' goed</div>' +
+                      tagOverzicht() +
                       '<div class="klaar-sub">Kies &#128256; Shuffle of &#8635; Opnieuw voor een nieuwe set.</div>';
+        k.querySelectorAll('[data-tag]').forEach(function(b){
+          b.addEventListener('click', function(){ opties.tagKlik(b.getAttribute('data-tag')); });
+        });
         k.style.display = '';
         updateScore();
         return;
@@ -1072,12 +1097,25 @@
       toonVraag(true);
     }
 
+    // 'Per paragraaf' op het eindscherm (alleen als de vragen tags hebben)
+    function tagOverzicht(){
+      var tags = Object.keys(st.tags).sort();
+      if (!tags.length) return '';
+      return '<div class="tag-lijst"><div class="tag-titel">Per paragraaf</div>' + tags.map(function(tag){
+        var ts = st.tags[tag], tekst = esc(tag) + ': ' + ts.goed + '/' + ts.totaal;
+        if (ts.goed === ts.totaal) tekst += ' &#9989;';
+        else if (ts.goed < ts.totaal / 2) tekst += ' &#9888;&#65039; oefen dit nog in tab ' + esc(tag);
+        return opties.tagKlik ? '<button type="button" class="tag-regel" data-tag="' + esc(tag) + '">' + tekst + '</button>'
+                              : '<div class="tag-regel">' + tekst + '</div>';
+      }).join('') + '</div>';
+    }
+
     function shuffle(){
-      if (st.klaar){ st.goed = 0; st.totaal = 0; }
+      if (st.klaar){ st.goed = 0; st.totaal = 0; st.tags = {}; }
       maakSet(true);
     }
     function opnieuw(){
-      st.goed = 0; st.totaal = 0;
+      st.goed = 0; st.totaal = 0; st.tags = {};
       maakSet(true);
     }
 
@@ -1096,7 +1134,8 @@
     });
 
     maakSet(false);
-    return { shuffle: shuffle, opnieuw: opnieuw };
+    return { shuffle: shuffle, opnieuw: opnieuw,
+             status: function(){ return {vragen: st.vragen, index: st.index, goed: st.goed, totaal: st.totaal, klaar: st.klaar, tags: st.tags}; } };
   }
 
   /* === FLASHCARD-ENGINE (eigen state per instantie) === */
@@ -1415,6 +1454,9 @@
     };
   }
 
+  // generatoren per oefenblok
+  var p0Gens = {a:[p0A1, p0A2, p0A3], b:[p0B1, p0B2], c:[p0C1, p0C2, p0C3, p0C4, p0C5, p0C6], d:[p0D1, p0D2, p0D3]};
+
   // --- P1 FORMULES ---
   var p1FcData = [
     {voor:'Wat is de algemene vorm van een lineaire formule?', achter:'y = ax + b'},
@@ -1618,6 +1660,9 @@
                   '<br>' + p1BUitPunt(a, x1, y1) + '<br>dus q: y = ' + lin(a, b, 'x')
     };
   }
+
+  // generatoren per oefenblok
+  var p1Gens = {a:[p1A1, p1A2, p1A3], b:[p1B1, p1B2, p1B3], c:[p1C1, p1C2], d:[p1D1, p1D2, p1D3]};
 
   // --- P2 VERBANDEN ---
   var p2FcData = [
@@ -1832,6 +1877,9 @@
                   '<br>jaar = ' + jaar + ' + ' + t + ' = ' + (jaar + t)
     };
   }
+
+  // generatoren per oefenblok
+  var p2Gens = {a:[p2A1, p2A2, p2A3, p2A4, p2A5, p2A6, p2A7], b:[p2B1, p2B2, p2B3], c:[p2C1], d:[p2D1, p2D2, p2D3]};
 
   // --- P3 VERGELIJKINGEN ---
   var p3FcData = [
@@ -2096,6 +2144,9 @@
     };
   }
 
+  // generatoren per oefenblok
+  var p3Gens = {a:[p3A1, p3A2, p3A3], b:[p3B1, p3B2, p3B3], c:[p3C1, p3C2, p3C3], d:[p3D1, p3D2, p3D3], e:[p3E1, p3E2, p3E3]};
+
   // --- P4 ONGELIJKHEDEN ---
   var p4FcData = [
     {voor:'Wat is de oplossing van een ongelijkheid?', achter:'Geen één getal, maar alle getallen die eraan voldoen, bv. x &gt; 4.'},
@@ -2267,6 +2318,9 @@
       uitwerking: ['R &gt; K → ' + fR + ' &gt; ' + fK].concat(o.regels).concat(['dus winst bij meer dan ' + g + ' bezoekers']).join('<br>')
     };
   }
+
+  // generatoren per oefenblok
+  var p4Gens = {a:[p4A1, p4A2], b:[p4B1, p4B2, p4B3], c:[p4C1, p4C2, p4C3], d:[p4D1, p4D2]};
 
   // --- P5 FUNCTIES ---
   var p5FcData = [
@@ -2486,45 +2540,76 @@
     };
   }
 
+  // generatoren per oefenblok
+  var p5Gens = {a:[p5A1, p5A2, p5A3], b:[p5B1, p5B2, p5B3, p5B4], c:[p5C1, p5C2, p5C3], d:[p5D1, p5D2, p5D3], e:[p5E1, p5E2, p5E3, p5E4]};
+
+  // --- MIX TOETSMIX ---
+  // wrapper: kiest bij elke aanroep één generator uit de lijst en zet er een tag op
+  function mixGen(tag, lijst){
+    return function(){
+      var v = pick(lijst)(), kopie = {};
+      for (var k in v) kopie[k] = v[k];
+      kopie.tag = tag;
+      return kopie;
+    };
+  }
+  function mixAlle(gens){ return Object.keys(gens).reduce(function(l, k){ return l.concat(gens[k]); }, []); }
+  // 5 wrappers en 15 vragen: de engine trekt per ronde elke generator één keer, dus precies 3 per paragraaf
+  var mixGens = [
+    mixGen('§1.1', mixAlle(p1Gens)),
+    mixGen('§1.2', mixAlle(p2Gens)),
+    mixGen('§1.3', mixAlle(p3Gens)),
+    mixGen('§1.4', mixAlle(p4Gens)),
+    mixGen('§1.5', mixAlle(p5Gens))
+  ];
+  // klik op een regel van 'Per paragraaf' → naar het oefenen van die paragraaf
+  function mixNaarParagraaf(tag){
+    var id = 'p' + tag.match(/§1\.(\d)/)[1];
+    showTab(id, document.querySelector('.tab-btn[onclick*="\'' + id + '\'"]'));
+    showSubTab(id, 'oefenen', document.querySelector('#tab-' + id + ' .sub-tab-btn[onclick*="\'oefenen\'"]'));
+    window.scrollTo(0, 0);
+  }
+
   // === INIT ===
   maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
-  maakOefening('p0-oef-a', [p0A1, p0A2, p0A3]);
-  maakOefening('p0-oef-b', [p0B1, p0B2]);
-  maakOefening('p0-oef-c', [p0C1, p0C2, p0C3, p0C4, p0C5, p0C6]);
-  maakOefening('p0-oef-d', [p0D1, p0D2, p0D3]);
+  maakOefening('p0-oef-a', p0Gens.a);
+  maakOefening('p0-oef-b', p0Gens.b);
+  maakOefening('p0-oef-c', p0Gens.c);
+  maakOefening('p0-oef-d', p0Gens.d);
   document.getElementById('p1-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-2,b:5,kleur:'#0d9488',naam:'l'}],{punten:[{x:0,y:5,naam:'(0, 5)'},{x:1,y:3,naam:''}]});
   maakFlashcards('p1-fc', p1FcData, '§1.1 — begrip → uitleg');
-  maakOefening('p1-oef-a', [p1A1, p1A2, p1A3]);
-  maakOefening('p1-oef-b', [p1B1, p1B2, p1B3]);
-  maakOefening('p1-oef-c', [p1C1, p1C2]);
-  maakOefening('p1-oef-d', [p1D1, p1D2, p1D3]);
+  maakOefening('p1-oef-a', p1Gens.a);
+  maakOefening('p1-oef-b', p1Gens.b);
+  maakOefening('p1-oef-c', p1Gens.c);
+  maakOefening('p1-oef-d', p1Gens.d);
   document.getElementById('p2-uitleg-grafiek1').innerHTML = tekenGrafiek([{a:0.75, b:-2, kleur:'#0d9488'}], {xnaam:'t', ynaam:'N', punten:[{x:0, y:-2, naam:''}, {x:4, y:1, naam:''}]});
   document.getElementById('p2-uitleg-grafiek2').innerHTML = tekenGrafiek([{a:-10/3, b:225, kleur:'#0d9488'}], {xmin:-15, xmax:75, xstap:15, ymin:-75, ymax:300, ystap:75, xnaam:'n', ynaam:'G', punten:[{x:0, y:225, naam:'(0, 225)'}, {x:45, y:75, naam:'(45, 75)'}]});
   maakFlashcards('p2-fc', p2FcData, '§1.2 — begrip → uitleg');
-  maakOefening('p2-oef-a', [p2A1, p2A2, p2A3, p2A4, p2A5, p2A6, p2A7]);
-  maakOefening('p2-oef-b', [p2B1, p2B2, p2B3]);
-  maakOefening('p2-oef-c', [p2C1]);
-  maakOefening('p2-oef-d', [p2D1, p2D2, p2D3]);
+  maakOefening('p2-oef-a', p2Gens.a);
+  maakOefening('p2-oef-b', p2Gens.b);
+  maakOefening('p2-oef-c', p2Gens.c);
+  maakOefening('p2-oef-d', p2Gens.d);
   document.getElementById('p3-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-0.5, b:1, kleur:'#0d9488', naam:'l'}, {a:1.5, b:-1, kleur:'#f59e0b', naam:'m'}], {punten:[{x:1, y:0.5, naam:'S(1; 0,5)'}]});
   maakFlashcards('p3-fc', p3FcData, '§1.3 — begrip → uitleg');
-  maakOefening('p3-oef-a', [p3A1, p3A2, p3A3]);
-  maakOefening('p3-oef-b', [p3B1, p3B2, p3B3]);
-  maakOefening('p3-oef-c', [p3C1, p3C2, p3C3]);
-  maakOefening('p3-oef-d', [p3D1, p3D2, p3D3]);
-  maakOefening('p3-oef-e', [p3E1, p3E2, p3E3]);
+  maakOefening('p3-oef-a', p3Gens.a);
+  maakOefening('p3-oef-b', p3Gens.b);
+  maakOefening('p3-oef-c', p3Gens.c);
+  maakOefening('p3-oef-d', p3Gens.d);
+  maakOefening('p3-oef-e', p3Gens.e);
   document.getElementById('p4-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-1, b:7, kleur:'#0d9488', naam:'y = 7 − x'}, {a:2, b:-5, kleur:'#f59e0b', naam:'y = 2x − 5'}], {xmin:-2, xmax:8, ymin:-6, ymax:8, punten:[{x:4, y:3, naam:'S'}]});
   maakFlashcards('p4-fc', p4FcData, '§1.4 — begrip → uitleg');
-  maakOefening('p4-oef-a', [p4A1, p4A2]);
-  maakOefening('p4-oef-b', [p4B1, p4B2, p4B3]);
-  maakOefening('p4-oef-c', [p4C1, p4C2, p4C3]);
-  maakOefening('p4-oef-d', [p4D1, p4D2]);
+  maakOefening('p4-oef-a', p4Gens.a);
+  maakOefening('p4-oef-b', p4Gens.b);
+  maakOefening('p4-oef-c', p4Gens.c);
+  maakOefening('p4-oef-d', p4Gens.d);
   document.getElementById('p5-uitleg-grafiek').innerHTML = tekenGrafiek([{a:0.5, b:-1, kleur:'#0d9488', naam:'f'}]);
   maakFlashcards('p5-fc', p5FcData, '§1.5 — begrip → uitleg');
-  maakOefening('p5-oef-a', [p5A1, p5A2, p5A3]);
-  maakOefening('p5-oef-b', [p5B1, p5B2, p5B3, p5B4]);
-  maakOefening('p5-oef-c', [p5C1, p5C2, p5C3]);
-  maakOefening('p5-oef-d', [p5D1, p5D2, p5D3]);
-  maakOefening('p5-oef-e', [p5E1, p5E2, p5E3, p5E4]);
+  maakOefening('p5-oef-a', p5Gens.a);
+  maakOefening('p5-oef-b', p5Gens.b);
+  maakOefening('p5-oef-c', p5Gens.c);
+  maakOefening('p5-oef-d', p5Gens.d);
+  maakOefening('p5-oef-e', p5Gens.e);
+  maakOefening('mix-oef', mixGens, {aantal: 15, tagKlik: mixNaarParagraaf});
 </script>
 </body>
 </html>
