@@ -606,16 +606,96 @@
     <button class="sub-tab-btn" onclick="showSubTab('p5','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p5-uitleg" class="sub-tab-content active">
-    <!-- P5-UITLEG -->
-    <p class="binnenkort">Binnenkort</p>
+    <details class="uitleg-card" open>
+      <summary>A. Functies</summary>
+      <p>Een taximeter rekent met een vast voorschrift: &ldquo;eerst keer 2, dan plus 3&rdquo;. Het aantal km is de <strong>invoer</strong>, de ritprijs de <strong>uitvoer</strong>.</p>
+      <div class="regel-blok groen">
+        <p>Een <strong>functie</strong> maakt volgens een vast voorschrift van een getal, de invoer, een ander getal, de uitvoer.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>Terugrekenen:</strong> hoort bij de uitvoer 17 de invoer? Doe de stappen omgekeerd: eerst &minus;3, dan :2, dus invoer 7.
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Het functievoorschrift</summary>
+      <p>Functie f: &ldquo;eerst &times;2, dan +5&rdquo;. Bij invoer 4 hoort uitvoer 13. We schrijven <strong>f(4) = 13</strong>: de functiewaarde van 4 is 13.</p>
+      <p><strong>f(x) = 2x + 5</strong> heet het <strong>functievoorschrift</strong> van f.</p>
+      <div class="regel-blok groen">
+        <p>Bij een functie f hoort bij invoer x de uitvoer f(x), de <strong>functiewaarde</strong> van x.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        f(x) = &minus;5x + 2 en g(x) = 3x &minus; 20.<br>
+        f(4) = &minus;5 &middot; 4 + 2 = &minus;18<br>
+        g(4) = 3 &middot; 4 &minus; 20 = &minus;8<br>
+        h(x) = f(x) + g(x) = &minus;5x + 2 + 3x &minus; 20 = &minus;2x &minus; 18
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. De functie f(x) = ax + b</summary>
+      <p>Een functie van de vorm <strong>f(x) = ax + b</strong> is een <strong>lineaire functie</strong>. De grafiek is een lijn met rc = a en snijpunt met de y-as (0, b).</p>
+      <p>Uit f(4) = 13 volgt dat het punt (4, 13) op de grafiek van f ligt.</p>
+      <p><strong>Notatie:</strong> x<sub>P</sub> is de x-co&ouml;rdinaat van punt P, y<sub>P</sub> de y-co&ouml;rdinaat.</p>
+      <div class="voorbeeld-blok">
+        f(x) = &frac12;x &minus; 1<br>
+        Ligt A(48, 25) op de grafiek? f(48) = 24 &minus; 1 = 23 &ne; 25, dus nee.<br>
+        Het punt B op de grafiek heeft y<sub>B</sub> = &minus;17: &frac12;x &minus; 1 = &minus;17 &rarr; &frac12;x = &minus;16 &rarr; x<sub>B</sub> = &minus;32.
+      </div>
+      <div id="p5-uitleg-grafiek"></div>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Snijpunten met de x-as en de y-as</summary>
+      <table class="waarde-tabel">
+        <tr><th>snijpunt met de x-as</th><td>de y-co&ouml;rdinaat is 0, x volgt uit f(x) = 0</td></tr>
+        <tr><th>snijpunt met de y-as</th><td>de x-co&ouml;rdinaat is 0, de y-co&ouml;rdinaat is f(0)</td></tr>
+      </table>
+      <div class="voorbeeld-blok">
+        f(x) = &minus;4x + 6<br>
+        Snijpunt met de y-as: f(0) = 6, dus B(0, 6).<br>
+        Snijpunt met de x-as: &minus;4x + 6 = 0 &rarr; &minus;4x = &minus;6 &rarr; x = 1&frac12;, dus A(1&frac12;, 0).
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>E. Snijpunten van grafieken van functies</summary>
+      <div class="regel-blok groen">
+        <p>x<sub>S</sub> volgt uit de vergelijking <strong>f(x) = g(x)</strong></p>
+        <p>y<sub>S</sub> krijg je door f(x<sub>S</sub>) of g(x<sub>S</sub>) te berekenen</p>
+      </div>
+      <div class="voorbeeld-blok">
+        f(x) = 2x &minus; 3 en g(x) = &minus;x + 3<br>
+        2x &minus; 3 = &minus;x + 3 &rarr; 3x = 6 &rarr; x = 2<br>
+        y = g(2) = 1<br>
+        dus S(2, 1)
+      </div>
+      <div class="voorbeeld-blok">
+        <strong>Een onbekende a berekenen:</strong> de grafiek van f(x) = ax + 8 gaat door (&minus;2, 40).<br>
+        Dan is f(&minus;2) = 40, dus &minus;2a + 8 = 40, dus a = &minus;16.
+      </div>
+    </details>
   </div>
   <div id="sub-p5-flashcards" class="sub-tab-content">
-    <!-- P5-FLASHCARDS -->
-    <p class="binnenkort">Binnenkort</p>
+    <div id="p5-fc"></div>
   </div>
   <div id="sub-p5-oefenen" class="sub-tab-content">
-    <!-- P5-OEFENEN -->
-    <p class="binnenkort">Binnenkort</p>
+    <div class="oefening-kaart">
+      <h3>A. Invoer en uitvoer</h3>
+      <div id="p5-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Functiewaarden en h = f + g</h3>
+      <div id="p5-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Punten op de grafiek</h3>
+      <div id="p5-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Snijpunten met de assen</h3>
+      <div id="p5-oef-d"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>E. Snijpunt van grafieken en onbekenden</h3>
+      <div id="p5-oef-e"></div>
+    </div>
   </div>
 </div>
 
@@ -799,6 +879,37 @@
     return s;
   }
 
+  /* De juiste antwoordzin voor de feedback, bv. "x > 5", "a = −2, b = 5", "x² + 2x − 3", "A(3, 0)". */
+  function antwoordZin(velden){
+    var EENHEDEN = {km:1, cm:1, m:1};
+    function getal(n){
+      var s = fmt(n);
+      // kommagetallen (hooguit 2 decimalen) niet als breuk: 2,25 in plaats van 2 1/4; ½-glyph en 1/3 blijven
+      if (s.indexOf('/') !== -1 && Math.abs(n * 100 - Math.round(n * 100)) < 1e-9)
+        s = (n < 0 ? '−' : '') + String(Math.abs(Math.round(n * 100) / 100)).replace('.', ',');
+      return s;
+    }
+    function esc(t){ return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    var zin = '';
+    velden.forEach(function(vd, i){
+      var waarde = vd.keuze ? esc(vd.antwoord) : getal(vd.antwoord), na = vd.na || '';
+      // getal direct gevolgd door een variabele (x, xy, x²) → geen spatie: "3x"
+      var letter = na.match(/^([a-z]{1,2}²?)(\s|$)/);
+      var deel = (vd.voor ? vd.voor + ' ' : '') + waarde + (na ? (letter && !vd.keuze && !EENHEDEN[letter[1]] ? '' : ' ') + na : '');
+      if (i > 0) zin += /[=:]/.test(vd.voor || '') ? ', ' : ' ';
+      zin += deel;
+    });
+    return zin
+      .replace(/(^|[\s(])(−?)1([a-z])/g, '$1$2$3')          // 1x → x, −1x → −x
+      .replace(/(^|= )0[a-z]{1,2}²? \+ /g, '$1')             // 0x + 5 → 5
+      .replace(/(^|= )0[a-z]{1,2}²? − /g, '$1−')              // 0x − 5 → −5
+      .replace(/ [+−] 0[a-z]{1,2}²?(?=\s|,|$)/g, '')          // x² + 0x − 4 → x² − 4
+      .replace(/ \+ 0(?=,|$)/g, '')                          // 3x + 0 → 3x
+      .replace(/\+ −/g, '− ')                                // + −5 → − 5
+      .replace(/\s+/g, ' ').replace(/\( /g, '(').replace(/ \)/g, ')').replace(/ ,/g, ',')
+      .trim();
+  }
+
   /* === OEFEN-ENGINE ===
      generator() → { vraag: HTML,
                      velden: [{voor, na, antwoord: getal}] of [{keuze: ['<','>'], antwoord: '<', voor, na}],
@@ -934,9 +1045,7 @@
         fb.className = 'feedback goed';
         fb.innerHTML = '&#10003; Goed zo!';
       } else {
-        var juist = v.velden.map(function(vd){
-          return ((vd.voor ? vd.voor + ' ' : '') + (vd.keuze ? esc(vd.antwoord) : fmt(vd.antwoord)) + (vd.na ? ' ' + vd.na : '')).trim();
-        }).join(' &nbsp;en&nbsp; ');
+        var juist = antwoordZin(v.velden);
         fb.className = 'feedback fout';
         fb.innerHTML = '&#10007; Helaas. Het juiste antwoord is: ' + juist;
         if (v.uitwerking) el('uitwerking').innerHTML = '<div class="uitwerking">' + v.uitwerking + '</div>';
@@ -2159,6 +2268,224 @@
     };
   }
 
+  // --- P5 FUNCTIES ---
+  var p5FcData = [
+    {voor:'Wat is een functie?', achter:'Een vast voorschrift dat van een getal (invoer) een ander getal (uitvoer) maakt.'},
+    {voor:'Wat betekent f(4) = 13?', achter:'De functiewaarde van 4 is 13; het punt (4, 13) ligt op de grafiek van f.'},
+    {voor:'Wat is een functievoorschrift?', achter:'De formule van de functie, bv. f(x) = 2x + 5.'},
+    {voor:'Wat is een lineaire functie?', achter:'Een functie van de vorm f(x) = ax + b; de grafiek is een lijn.'},
+    {voor:'Wat betekent x<sub>P</sub>?', achter:'De x-coördinaat van punt P.'},
+    {voor:'Hoe vind je het snijpunt met de y-as?', achter:'Bereken f(0); het punt is (0, f(0)).'},
+    {voor:'Hoe vind je het snijpunt met de x-as?', achter:'Los f(x) = 0 op; het punt is (x, 0).'},
+    {voor:'Hoe vind je het snijpunt van de grafieken van f en g?', achter:'Los f(x) = g(x) op voor x<sub>S</sub>, en bereken dan f(x<sub>S</sub>) of g(x<sub>S</sub>).'},
+    {voor:'f(x) = −5x + 2 en g(x) = 3x − 20. Wat is h(x) = f(x) + g(x)?', achter:'−2x − 18'},
+    {voor:'Hoe controleer je of A(48, 25) op de grafiek van f ligt?', achter:'Bereken f(48). Is dat 25, dan ligt A erop.'},
+    {voor:'De grafiek van f(x) = ax + 8 gaat door (−2, 40). Hoe vind je a?', achter:'f(−2) = 40, dus −2a + 8 = 40, dus a = −16.'},
+    {voor:'Uitvoer 17 bij "×2, dan +3". Wat is de invoer?', achter:'Terugrekenen: 17 − 3 = 14, 14 : 2 = 7.'}
+  ];
+
+  var P5_NAMEN = ['f','g','h'];
+  var P5_HINT = P3_HINT;
+  // a: geheel −6..6 (niet 0), soms ½, −½ of 1½
+  function p5KiesA(){ return Math.random() < 0.8 ? pick([-1, 1]) * rnd(1, 6) : pick([0.5, -0.5, 1.5]); }
+  function p5F(naam, a, b){ return '<b>' + naam + '(x) = ' + lin(a, b) + '</b>'; }
+  function p5Punt(n, x, y){ return n + '(' + fmt(x) + ', ' + fmt(y) + ')'; }
+
+  /* A. Invoer en uitvoer */
+  function p5Voorschrift(){
+    var p = rnd(2, 9), q = rnd(1, 20), plus = Math.random() < 0.5;
+    return {p:p, q:q, plus:plus, tekst:'eerst ×' + p + ', dan ' + (plus ? '+' : '−') + q, f:function(n){ return p * n + (plus ? q : -q); }};
+  }
+  function p5A1(){
+    var v = p5Voorschrift(), n = rnd(-10, 10), u = v.f(n);
+    return {
+      vraag: 'Een functie heeft het voorschrift: <b>' + v.tekst + '</b>. Welke uitvoer hoort bij invoer ' + fmt(n) + '?' + P0_HINT,
+      velden: [{voor:'uitvoer =', na:'', antwoord:u}],
+      uitwerking: fmt(n) + ' × ' + v.p + ' = ' + fmt(v.p * n) + '<br>' + fmt(v.p * n) + (v.plus ? ' + ' : ' − ') + v.q + ' = ' + fmt(u)
+    };
+  }
+  function p5A2(){
+    var v = p5Voorschrift(), n = rnd(-10, 10), u = v.f(n), tussen = v.plus ? u - v.q : u + v.q;
+    return {
+      vraag: 'Een functie heeft het voorschrift: <b>' + v.tekst + '</b>. Welke invoer hoort bij uitvoer ' + fmt(u) + '?' + P0_HINT,
+      velden: [{voor:'invoer =', na:'', antwoord:n}],
+      uitwerking: 'Terugrekenen: doe de stappen omgekeerd.<br>' +
+                  'eerst ' + (v.plus ? '−' : '+') + v.q + ': ' + fmt(u) + (v.plus ? ' − ' : ' + ') + v.q + ' = ' + fmt(tussen) +
+                  '<br>dan :' + v.p + ': ' + fmt(tussen) + ' : ' + v.p + ' = ' + fmt(n)
+    };
+  }
+  function p5A3(){
+    var k = pick([2, 3, 4]), q = rnd(1, 15), plus = Math.random() < 0.5, n = k * rnd(-8, 8), keer = n / k, u = keer + (plus ? q : -q);
+    return {
+      vraag: 'Het voorschrift van een functie is: <b>vermenigvuldig met ' + p3Br(1, k) + ' en ' + (plus ? 'tel er ' + q + ' bij op' : 'trek er ' + q + ' van af') + '</b>. Welke uitvoer hoort bij invoer ' + fmt(n) + '?' + P0_HINT,
+      velden: [{voor:'uitvoer =', na:'', antwoord:u}],
+      uitwerking: p3Br(1, k) + ' × ' + p3Haak(n) + ' = ' + fmt(keer) + '<br>' + fmt(keer) + (plus ? ' + ' : ' − ') + q + ' = ' + fmt(u)
+    };
+  }
+
+  /* B. Functiewaarden en h = f + g */
+  function p5B1(){
+    var n = pick(P5_NAMEN), a = p5KiesA(), b = rnd(-20, 20), k = rnd(-10, 10), y = a * k + b;
+    return {
+      vraag: 'Gegeven ' + p5F(n, a, b) + '. Bereken ' + n + '(' + fmt(k) + ').' + P5_HINT,
+      velden: [{voor:n + '(' + fmt(k) + ') =', na:'', antwoord:y}],
+      uitwerking: n + '(' + fmt(k) + ') = ' + p1Invul(a, k, b)
+    };
+  }
+  function p5B2(){
+    var a1 = p5KiesA(), b1 = rnd(-20, 20), a2 = p5KiesA(), b2 = rnd(-20, 20), k = rnd(-10, 10), m = rnd(-10, 10);
+    var fk = a1 * k + b1, gm = a2 * m + b2;
+    return {
+      vraag: 'Gegeven ' + p5F('f', a1, b1) + ' en ' + p5F('g', a2, b2) + '. Bereken f(' + fmt(k) + ') + g(' + fmt(m) + ').' + P5_HINT,
+      velden: [{voor:'f(' + fmt(k) + ') + g(' + fmt(m) + ') =', na:'', antwoord:fk + gm}],
+      uitwerking: 'f(' + fmt(k) + ') = ' + p1Invul(a1, k, b1) + '<br>g(' + fmt(m) + ') = ' + p1Invul(a2, m, b2) +
+                  '<br>f(' + fmt(k) + ') + g(' + fmt(m) + ') = ' + fmt(fk) + ' + ' + p3Haak(gm) + ' = ' + fmt(fk + gm)
+    };
+  }
+  function p5B3(){
+    var a1, a2, b1 = rnd(-20, 20, true), b2 = rnd(-20, 20, true);
+    do { a1 = rnd(-6, 6, true); a2 = rnd(-6, 6, true); } while (a1 + a2 === 0);
+    var A = a1 + a2, B = b1 + b2;
+    return {
+      vraag: 'Gegeven ' + p5F('f', a1, b1) + ' en ' + p5F('g', a2, b2) + '. h(x) = f(x) + g(x). Stel het functievoorschrift van h op en herleid.' + P0_HINT,
+      velden: [{voor:'h(x) =', na:'x +', antwoord:A}, {voor:'', na:'', antwoord:B}],
+      uitwerking: 'h(x) = ' + lin(a1, b1) + term(a2, 'x', false) + term(b2, '', false) +
+                  '<br>x-termen: ' + term(a1, 'x', true) + term(a2, 'x', false) + ' = ' + term(A, 'x', true) +
+                  '; getallen: ' + fmt(b1) + term(b2, '', false) + ' = ' + fmt(B) +
+                  '<br>dus h(x) = ' + lin(A, B)
+    };
+  }
+  function p5B4(){
+    var n = pick(P5_NAMEN), a = pick([-1, 1]) * rnd(2, 6), b = rnd(-20, 20, true), x = rnd(-10, 10), c = a * x + b;
+    return {
+      vraag: 'Gegeven ' + p5F(n, a, b) + '. Bij welke x is de functiewaarde van ' + n + ' gelijk aan ' + fmt(c) + '?' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: [n + '(x) = ' + fmt(c) + ' → ' + lin(a, b) + ' = ' + fmt(c)].concat(p3Oplos('x', a, b, 0, c, x)).join('<br>')
+    };
+  }
+
+  /* C. Punten op de grafiek */
+  function p5C1(){
+    var n = pick(P5_NAMEN), a = p5KiesA(), b = rnd(-20, 20), x = p1XGeheel(a, -10, 10), echt = a * x + b;
+    var ja = Math.random() < 0.5, y = ja ? echt : echt + pick([-1, 1]) * rnd(1, 5);
+    return {
+      vraag: 'Ligt ' + p5Punt('A', x, y) + ' op de grafiek van ' + p5F(n, a, b) + '?',
+      velden: [{keuze:['ja', 'nee'], antwoord: ja ? 'ja' : 'nee', voor:'', na:''}],
+      uitwerking: n + '(' + fmt(x) + ') = ' + p1Invul(a, x, b) + '<br>' +
+                  (ja ? 'Dat is gelijk aan y<sub>A</sub> = ' + fmt(y) + ', dus A ligt op de grafiek.' : fmt(echt) + ' ≠ ' + fmt(y) + ', dus A ligt niet op de grafiek.')
+    };
+  }
+  function p5C2(){
+    var n = pick(P5_NAMEN), a, b = rnd(-20, 20, true), x, y;
+    do { a = p5KiesA(); x = Math.random() < 0.25 ? rnd(-10, 9) + 0.5 : rnd(-10, 10); y = a * x + b; } while (!Number.isInteger(y) || a === 1);
+    return {
+      vraag: 'Het punt B op de grafiek van ' + p5F(n, a, b) + ' heeft y<sub>B</sub> = ' + fmt(y) + '. Bereken x<sub>B</sub>.' + P5_HINT,
+      velden: [{voor:'x<sub>B</sub> =', na:'', antwoord:x}],
+      uitwerking: [lin(a, b) + ' = ' + fmt(y)].concat(p3Oplos('x', a, b, 0, y, x)).join('<br>') + '<br>dus x<sub>B</sub> = ' + fmt(x)
+    };
+  }
+  function p5C3(){
+    var n = pick(P5_NAMEN), a = p5KiesA(), b = rnd(-20, 20), x = rnd(-10, 10), y = a * x + b;
+    return {
+      vraag: 'Het punt C op de grafiek van ' + p5F(n, a, b) + ' heeft x<sub>C</sub> = ' + fmt(x) + '. Bereken y<sub>C</sub>.' + P5_HINT,
+      velden: [{voor:'y<sub>C</sub> =', na:'', antwoord:y}],
+      uitwerking: 'y<sub>C</sub> = ' + n + '(' + fmt(x) + ') = ' + p1Invul(a, x, b)
+    };
+  }
+
+  /* D. Snijpunten met de assen */
+  function p5D1(){
+    var n = pick(P5_NAMEN), a, b, xA;
+    do { a = p5KiesA(); b = rnd(-20, 20, true); xA = p3R(-b / a); } while (!p2NetteNoemer(xA) || Math.abs(xA) > 20 || a === 1);
+    return {
+      vraag: 'De grafiek van ' + p5F(n, a, b) + ' snijdt de x-as in A en de y-as in B. Bereken de coördinaten.' + P5_HINT,
+      velden: [{voor:'x<sub>A</sub> =', na:'', antwoord:xA}, {voor:'y<sub>B</sub> =', na:'', antwoord:b}],
+      uitwerking: 'snijpunt y-as: ' + n + '(0) = ' + fmt(b) + ', dus B(0, ' + fmt(b) + ')' +
+                  '<br>snijpunt x-as: ' + lin(a, b) + ' = 0<br>' + p3Oplos('x', a, b, 0, 0, xA).join('<br>') + '<br>dus A(' + fmt(xA) + ', 0)'
+    };
+  }
+  function p5D2(){
+    var n = pick(P5_NAMEN), x0 = rnd(-10, 10), p, q, c, voorschrift, regels;
+    if (Math.random() < 0.5){
+      // f(x) = p(x + q): nulpunt x = −q
+      if (x0 === 0) x0 = rnd(1, 10);
+      p = pick([-1, 1]) * rnd(2, 6); q = -x0;
+      voorschrift = fmt(p) + '(' + lin(1, q) + ')';
+      regels = [voorschrift + ' = 0', 'haakjes weg: ' + p3Keer(p, q) + ' → ' + lin(p, p * q) + ' = 0'].concat(p3Oplos('x', p, p * q, 0, 0, x0));
+    } else {
+      // f(x) = c − p(x + q): nulpunt uit c − px − pq = 0
+      do { p = rnd(2, 6); q = rnd(-9, 9, true); c = p * (x0 + q); } while (c === 0 || Math.abs(c) > 60);
+      voorschrift = fmt(c) + ' − ' + p + '(' + lin(1, q) + ')';
+      regels = [voorschrift + ' = 0', 'haakjes weg: ' + p3Keer(-p, q) + ' → ' + fmt(c) + term(-p, 'x', false) + term(-p * q, '', false) + ' = 0']
+               .concat(p3Oplos('x', -p, c - p * q, 0, 0, x0));
+    }
+    return {
+      vraag: 'Gegeven <b>' + n + '(x) = ' + voorschrift + '</b>. Bereken de coördinaten van het snijpunt A van de grafiek van ' + n + ' met de x-as.' + P0_HINT,
+      velden: [{voor:'A(', na:', 0)', antwoord:x0}],
+      uitwerking: regels.join('<br>') + '<br>dus A(' + fmt(x0) + ', 0)'
+    };
+  }
+  function p5D3(){
+    var xA, xB, xS, yS, af, ag;
+    do { xA = rnd(-8, 8); xB = rnd(-8, 8); xS = rnd(-8, 8); yS = pick([-1, 1]) * rnd(1, 12); af = yS / (xS - xA); ag = yS / (xS - xB); }
+    while (xA === xB || xS === xA || xS === xB || !Number.isInteger(af) || !Number.isInteger(ag) || af === ag || Math.abs(af) > 6 || Math.abs(ag) > 6);
+    var bf = -af * xA, bg = -ag * xB, basis = Math.abs(xB - xA), hoogte = Math.abs(yS), opp = basis * hoogte / 2;
+    function nul(n, a, b, x0){ return n + '(x) = 0: ' + lin(a, b) + ' = 0 → ' + term(a, 'x', true) + ' = ' + fmt(-b) + ' → x = ' + fmt(x0); }
+    return {
+      vraag: 'De grafieken van ' + p5F('f', af, bf) + ' en ' + p5F('g', ag, bg) + ' snijden elkaar in S. De grafiek van f snijdt de x-as in A en die van g snijdt de x-as in B. Bereken de oppervlakte van driehoek ABS.' + P5_HINT,
+      velden: [{voor:'oppervlakte =', na:'', antwoord:opp}],
+      uitwerking: nul('f', af, bf, xA) + ', dus A(' + fmt(xA) + ', 0)' +
+                  '<br>' + nul('g', ag, bg, xB) + ', dus B(' + fmt(xB) + ', 0)' +
+                  '<br>f(x) = g(x): ' + lin(af, bf) + ' = ' + lin(ag, bg) + ' → ' + term(af - ag, 'x', true) + ' = ' + fmt(bg - bf) + ' → x = ' + fmt(xS) +
+                  '; y = f(' + fmt(xS) + ') = ' + fmt(yS) + ', dus S(' + fmt(xS) + ', ' + fmt(yS) + ')' +
+                  '<br>basis AB = |' + fmt(xB) + ' − ' + p3Haak(xA) + '| = ' + basis + ', hoogte = |y<sub>S</sub>| = ' + hoogte +
+                  '<br>oppervlakte = ½ · ' + basis + ' · ' + hoogte + ' = ' + fmt(opp)
+    };
+  }
+
+  /* E. Snijpunt van grafieken en onbekenden */
+  function p5E1(){
+    var g = p3LijnenGeheel(6, 6, 20);
+    return {
+      vraag: 'Bereken de coördinaten van het snijpunt S van de grafieken van ' + p5F('f', g.a1, g.b1) + ' en ' + p5F('g', g.a2, g.b2) + '.' + P0_HINT,
+      velden: [{voor:'x<sub>S</sub> =', na:'', antwoord:g.xs}, {voor:'y<sub>S</sub> =', na:'', antwoord:g.ys}],
+      uitwerking: ['f(x) = g(x) → ' + lin(g.a1, g.b1) + ' = ' + lin(g.a2, g.b2)].concat(p3Oplos('x', g.a1, g.b1, g.a2, g.b2, g.xs))
+                  .concat(['y<sub>S</sub> = f(' + fmt(g.xs) + ') = ' + p1Invul(g.a1, g.xs, g.b1), 'dus S(' + fmt(g.xs) + ', ' + fmt(g.ys) + ')']).join('<br>')
+    };
+  }
+  function p5E2(){
+    var a = pick([-1, 1]) * rnd(1, 9), b = rnd(-20, 20, true), xp, yp;
+    do { xp = rnd(-6, 6, true); yp = a * xp + b; } while (xp === 1);
+    return {
+      vraag: 'De grafiek van <b>f(x) = ax' + term(b, '', false) + '</b> gaat door het punt ' + p5Punt('P', xp, yp) + '. Bereken a.' + P0_HINT,
+      velden: [{voor:'a =', na:'', antwoord:a}],
+      uitwerking: ['f(' + fmt(xp) + ') = ' + fmt(yp) + ' → ' + term(xp, 'a', true) + term(b, '', false) + ' = ' + fmt(yp)].concat(p3Oplos('a', xp, b, 0, yp, a)).join('<br>')
+    };
+  }
+  function p5E3(){
+    var a = p5KiesA(), bk = rnd(-20, 20), b, xp = p1XGeheel(a, -6, 6);
+    do { b = rnd(-20, 20); } while (b === bk);
+    var yp = a * xp + b;
+    return {
+      vraag: 'De grafiek van f(x) = ax + b is evenwijdig met de lijn <b>k: y = ' + lin(a, bk) + '</b> en gaat door ' + p5Punt('P', xp, yp) + '. Bereken a en b.' + P5_HINT,
+      velden: [{voor:'a =', na:'', antwoord:a}, {voor:'b =', na:'', antwoord:b}],
+      uitwerking: 'Evenwijdig, dus a = rc<sub>k</sub> = ' + fmt(a) + '<br>' + p1BUitPunt(a, xp, yp) + '<br>dus f(x) = ' + lin(a, b)
+    };
+  }
+  function p5E4(){
+    var xs, q, r, p, ys;
+    do { xs = rnd(-6, 6, true); q = rnd(-9, 9, true); r = rnd(-15, 15, true); ys = q * xs + r; p = (ys - q) / xs; }
+    while (!Number.isInteger(p) || p === 0 || Math.abs(p) > 12 || xs === 1);
+    return {
+      vraag: 'De grafieken van <b>f(x) = px + q</b> en <b>g(x) = qx' + term(r, '', false) + '</b> snijden elkaar in ' + p5Punt('S', xs, ys) + '. Bereken p en q.' + P0_HINT,
+      velden: [{voor:'p =', na:'', antwoord:p}, {voor:'q =', na:'', antwoord:q}],
+      uitwerking: ['S ligt op g: g(' + fmt(xs) + ') = ' + fmt(ys) + ' → ' + term(xs, 'q', true) + term(r, '', false) + ' = ' + fmt(ys)]
+                  .concat(p3Oplos('q', xs, r, 0, ys, q))
+                  .concat(['S ligt op f: f(' + fmt(xs) + ') = ' + fmt(ys) + ' → ' + term(xs, 'p', true) + term(q, '', false) + ' = ' + fmt(ys)])
+                  .concat(p3Oplos('p', xs, q, 0, ys, p)).join('<br>')
+    };
+  }
+
   // === INIT ===
   maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
   maakOefening('p0-oef-a', [p0A1, p0A2, p0A3]);
@@ -2191,6 +2518,13 @@
   maakOefening('p4-oef-b', [p4B1, p4B2, p4B3]);
   maakOefening('p4-oef-c', [p4C1, p4C2, p4C3]);
   maakOefening('p4-oef-d', [p4D1, p4D2]);
+  document.getElementById('p5-uitleg-grafiek').innerHTML = tekenGrafiek([{a:0.5, b:-1, kleur:'#0d9488', naam:'f'}]);
+  maakFlashcards('p5-fc', p5FcData, '§1.5 — begrip → uitleg');
+  maakOefening('p5-oef-a', [p5A1, p5A2, p5A3]);
+  maakOefening('p5-oef-b', [p5B1, p5B2, p5B3, p5B4]);
+  maakOefening('p5-oef-c', [p5C1, p5C2, p5C3]);
+  maakOefening('p5-oef-d', [p5D1, p5D2, p5D3]);
+  maakOefening('p5-oef-e', [p5E1, p5E2, p5E3, p5E4]);
 </script>
 </body>
 </html>
