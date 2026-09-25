@@ -412,16 +412,110 @@
     <button class="sub-tab-btn" onclick="showSubTab('p3','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p3-uitleg" class="sub-tab-content active">
-    <!-- P3-UITLEG -->
-    <p class="binnenkort">Binnenkort</p>
+    <details class="uitleg-card" open>
+      <summary>A. Termen overbrengen</summary>
+      <p>10x &minus; 4 = 7x + 20 is een <strong>lineaire vergelijking</strong>. Je lost hem stap voor stap op, tot x alleen in het linkerlid staat.</p>
+      <div class="stappen">
+        <div class="stap">10x &minus; 4 = 7x + 20</div>
+        <div class="stap">links en rechts 7x aftrekken &rarr; 3x &minus; 4 = 20</div>
+        <div class="stap">links en rechts 4 optellen &rarr; 3x = 24</div>
+        <div class="stap">:3 &rarr; x = 8</div>
+      </div>
+      <p>Sneller: in &eacute;&eacute;n keer 7x en &minus;4 naar het andere lid brengen: 10x &minus; 7x = 20 + 4. Dat heet <strong>overbrengen</strong>.</p>
+      <div class="regel-blok groen">
+        <p>In een vergelijking mag je termen van het ene naar het andere lid <strong>overbrengen</strong>, maar dan moet je <strong>+ vervangen door &minus;</strong> en <strong>&minus; door +</strong>.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Lineaire vergelijkingen oplossen</summary>
+      <div class="voorbeeld-blok">
+        5x + 8 = &minus;3x + 24<br>
+        breng &minus;3x naar links en 8 naar rechts &rarr; 5x + 3x = 24 &minus; 8<br>
+        herleid &rarr; 8x = 16<br>
+        deel door 8 &rarr; x = 2
+      </div>
+      <div class="voorbeeld-blok">
+        6x &minus; 12 = 8x + 3<br>
+        6x &minus; 8x = 3 + 12<br>
+        &minus;2x = 15<br>
+        x = &minus;7&frac12;
+      </div>
+      <div class="regel-blok rood-blok">
+        <p>Deel door het getal dat v&oacute;&oacute;r x staat, <strong>inclusief het minteken</strong>.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Vergelijkingen met haakjes</summary>
+      <div class="stappen">
+        <div class="stap">1. Werk de haakjes weg.</div>
+        <div class="stap">2. Breng alle termen met x naar het linkerlid en de rest naar het rechterlid.</div>
+        <div class="stap">3. Herleid beide leden.</div>
+        <div class="stap">4. Deel beide leden door het getal dat v&oacute;&oacute;r x staat.</div>
+      </div>
+      <div class="voorbeeld-blok">
+        4(x &minus; 2) + 3 = 8 &minus; 7(x &minus; 6)<br>
+        4x &minus; 8 + 3 = 8 &minus; 7x + 42 (bedenk: &minus;7 &middot; &minus;6 = +42)<br>
+        4x + 7x = 8 + 42 + 8 &minus; 3<br>
+        11x = 55<br>
+        x = 5
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Vergelijkingen met breuken</summary>
+      <p>Werk eerst de breuken weg: vermenigvuldig beide leden met een getal waar alle noemers in passen.</p>
+      <div class="voorbeeld-blok">
+        &#8531;x + 2 = &frac12;x<br>
+        &times;6 &rarr; 2x + 12 = 3x<br>
+        2x &minus; 3x = &minus;12<br>
+        &minus;x = &minus;12<br>
+        x = 12
+      </div>
+      <div class="regel-blok rood-blok">
+        <p>Vermenigvuldig <strong>&Aacute;LLE</strong> termen, dus ook de getallen zonder breuk.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>E. Lineaire formules vergelijken (snijpunt berekenen)</summary>
+      <div class="regel-blok groen">
+        <p>De x-co&ouml;rdinaat van het snijpunt van y = 3x + 5 en y = &minus;2x + 15 is de oplossing van <strong>3x + 5 = &minus;2x + 15</strong>.</p>
+        <p>De y-co&ouml;rdinaat vind je door x in &eacute;&eacute;n van de formules in te vullen.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        l: y = 0,6x &minus; 0,4 en m: y = &minus;1,2x + 4,1<br>
+        0,6x &minus; 0,4 = &minus;1,2x + 4,1<br>
+        1,8x = 4,5<br>
+        x = 2,5<br>
+        y = 0,6 &middot; 2,5 &minus; 0,4 = 1,1<br>
+        dus S(2,5; 1,1)
+      </div>
+      <div id="p3-uitleg-grafiek"></div>
+      <p>Let op de notatie: bij kommagetallen scheid je de co&ouml;rdinaten met een <strong>puntkomma</strong>, S(2,5; 1,1).</p>
+    </details>
   </div>
   <div id="sub-p3-flashcards" class="sub-tab-content">
-    <!-- P3-FLASHCARDS -->
-    <p class="binnenkort">Binnenkort</p>
+    <div id="p3-fc"></div>
   </div>
   <div id="sub-p3-oefenen" class="sub-tab-content">
-    <!-- P3-OEFENEN -->
-    <p class="binnenkort">Binnenkort</p>
+    <div class="oefening-kaart">
+      <h3>A. Termen overbrengen</h3>
+      <div id="p3-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Vergelijkingen met haakjes</h3>
+      <div id="p3-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Vergelijkingen met breuken</h3>
+      <div id="p3-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Snijpunt van twee lijnen</h3>
+      <div id="p3-oef-d"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>E. Vergelijkingen in een context</h3>
+      <div id="p3-oef-e"></div>
+    </div>
   </div>
 </div>
 
@@ -1570,6 +1664,269 @@
     };
   }
 
+  // --- P3 VERGELIJKINGEN ---
+  var p3FcData = [
+    {voor:'Wat is overbrengen?', achter:'Een term naar het andere lid brengen. Daarbij wordt + dan − en − dan +.'},
+    {voor:'Breng 7x over in 10x − 4 = 7x + 20.', achter:'10x − 7x − 4 = 20'},
+    {voor:'Wat zijn de 4 stappen van het werkschema met haakjes?', achter:'1 Haakjes weg.<br>2 Termen met x naar links, de rest naar rechts.<br>3 Herleiden.<br>4 Delen door het getal vóór x.'},
+    {voor:'−2x = 15. Wat is x?', achter:'x = −7½ (deel door −2)'},
+    {voor:'Hoe werk je breuken weg in ⅓x + 2 = ½x?', achter:'Vermenigvuldig beide leden met 6: 2x + 12 = 3x.'},
+    {voor:'Welke fout maak je makkelijk bij breuken wegwerken?', achter:'Vergeten de getallen zonder breuk ook te vermenigvuldigen.'},
+    {voor:'−7(x − 6) = ?', achter:'−7x + 42'},
+    {voor:'Hoe bereken je de x-coördinaat van het snijpunt van twee lijnen?', achter:'Stel de formules aan elkaar gelijk en los de vergelijking op.'},
+    {voor:'Hoe bereken je daarna de y-coördinaat van het snijpunt?', achter:'Vul de gevonden x in één van de formules in.'},
+    {voor:'−x = −12. Wat is x?', achter:'x = 12'},
+    {voor:'Hoe schrijf je een punt met kommagetallen?', achter:'Met een puntkomma: S(2,5; 1,1)'}
+  ];
+
+  var P3_LETTERS = ['x','a','p','t'];
+  var P3_HINT = '<br><small style="color:#64748b;font-weight:600">(een negatief getal vul je in met −; breuk mag, bv. -15/2 of -7,5)</small>';
+  var P3_GLYPH = {'1/2':'½', '1/3':'⅓', '2/3':'⅔', '1/4':'¼', '3/4':'¾', '1/5':'⅕', '2/5':'⅖', '3/5':'⅗', '4/5':'⅘', '1/6':'⅙', '5/6':'⅚'};
+  function p3Ggd(a, b){ a = Math.abs(a); b = Math.abs(b); while (b){ var t = a % b; a = b; b = t; } return a; }
+  function p3Kgv(a, b){ return a / p3Ggd(a, b) * b; }
+  function p3R(n){ return Math.round(n * 1e6) / 1e6; }
+  // oplossing: geheel −10..10, of in 25% van de gevallen een halve
+  function p3Oplossing(){ return Math.random() < 0.25 ? rnd(-10, 9) + 0.5 : rnd(-10, 10); }
+  // "4 · −2 = −8", "−7 · −6 = +42"
+  function p3Keer(p, q){ var r = p * q; return fmt(p) + ' · ' + fmt(q) + ' = ' + (r > 0 ? '+' : '') + fmt(r); }
+  function p3Haak(n, f){ f = f || fmt; return n < 0 ? '(' + f(n) + ')' : f(n); }
+  // term met breuk-coëfficiënt k/n als nette breuk: ⅓x, −⅖x, 2x
+  function p3BTerm(k, n, L, eerste){
+    var g = p3Ggd(k, n); k /= g; n /= g;
+    if (n === 1) return term(k, L, eerste);
+    var br = P3_GLYPH[Math.abs(k) + '/' + n] || (Math.abs(k) + '/' + n);
+    return (k < 0 ? (eerste ? '−' : ' − ') : (eerste ? '' : ' + ')) + br + L;
+  }
+  function p3Br(k, n){ return P3_GLYPH[k + '/' + n] || (k + '/' + n); }
+  // aL·L + bL = aR·L + bR oplossen: overbrengen, herleiden, delen (f = fmt of p2Dec)
+  function p3Oplos(L, aL, bL, aR, bR, s, f){
+    f = f || fmt;
+    var delen = [], regels = [];
+    if (aR) delen.push(p2Term(aR, L, true, f) + ' naar links');
+    if (bL) delen.push(f(bL) + ' naar rechts');
+    var links = p2Term(aL, L, true, f) + p2Term(-aR, L, false, f);
+    var rechts = (bR ? f(bR) : '') + p2Term(-bL, '', !bR, f);
+    if (delen.length) regels.push('breng ' + delen.join(' en ') + ' → ' + links + ' = ' + (rechts || '0'));
+    var A = p3R(aL - aR), B = p3R(bR - bL);
+    regels.push('herleid → ' + p2Term(A, L, true, f) + ' = ' + f(B));
+    if (A !== 1){
+      var uitkomst = f === fmt ? fmt(s) : f(B) + ' : ' + p3Haak(A, f) + ' = ' + p2Dec(s);
+      regels.push('deel door ' + p3Haak(A, f) + ' → ' + L + ' = ' + uitkomst);
+    }
+    return regels;
+  }
+  function p3Veld(L, s){ return [{voor:L + ' =', na:'', antwoord:s}]; }
+
+  /* A. Termen overbrengen */
+  function p3A1(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), a, b, c, d;
+    do { a = rnd(-9, 9, true); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (a - c) * s + b; }
+    while (a === c || !Number.isInteger(d) || d === 0 || Math.abs(d) > 80);
+    var vgl = lin(a, b, L) + ' = ' + lin(c, d, L);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+            uitwerking: [vgl].concat(p3Oplos(L, a, b, c, d, s)).join('<br>')};
+  }
+  function p3A2(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), a, b, c, d;
+    do { a = rnd(1, 9); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (-a - c) * s + b; }
+    while (-a === c || !Number.isInteger(d) || d === 0 || Math.abs(d) > 80);
+    var vgl = fmt(b) + term(-a, L, false) + ' = ' + lin(c, d, L);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+            uitwerking: [vgl].concat(p3Oplos(L, -a, b, c, d, s)).join('<br>')};
+  }
+  function p3A3(){
+    var L = pick(P3_LETTERS), s, a, b, c, d;
+    do { s = rnd(-10, 10, true); a = rnd(-9, 9, true); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (a - c) * s + b; }
+    while (a === c || d === 0 || Math.abs(d) > 80);
+    var vgl = lin(a, b, L) + ' = ' + lin(c, d, L);
+    var juist = term(a, L, true) + term(-c, L, false) + ' = ' + fmt(d) + term(-b, '', false);
+    var klopt = Math.random() < 0.5, foutTerm = pick(['letter', 'getal']), stap = juist, uitleg;
+    if (klopt){
+      uitleg = 'Klopt: ' + term(c, L, true) + ' wordt ' + term(-c, L, true) + ' en ' + fmt(b) + ' wordt ' + fmt(-b) + '.';
+    } else if (foutTerm === 'letter'){
+      stap = term(a, L, true) + term(c, L, false) + ' = ' + fmt(d) + term(-b, '', false);
+      uitleg = 'Klopt niet: de term ' + term(c, L, true) + ' is overgebracht zonder het teken om te draaien; dat moet ' + term(-c, L, true) + ' worden.<br>Juiste stap: ' + juist;
+    } else {
+      stap = term(a, L, true) + term(-c, L, false) + ' = ' + fmt(d) + term(b, '', false);
+      uitleg = 'Klopt niet: de term ' + fmt(b) + ' is overgebracht zonder het teken om te draaien; dat moet ' + fmt(-b) + ' worden.<br>Juiste stap: ' + juist;
+    }
+    return {
+      vraag: 'Vergelijking: <b>' + vgl + '</b><br>Eerste stap: <b>' + stap + '</b><br>Klopt deze stap?',
+      velden: [{keuze:['klopt', 'klopt niet'], antwoord: klopt ? 'klopt' : 'klopt niet', voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* B. Vergelijkingen met haakjes */
+  function p3B1(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), p, q, r, c;
+    do { p = pick([-1, 1]) * rnd(2, 9); q = rnd(-9, 9, true); r = rnd(-9, 9, true); c = (p - r) * s + p * q; }
+    while (r === p || !Number.isInteger(c) || c === 0 || Math.abs(c) > 100);
+    var vgl = fmt(p) + '(' + lin(1, q, L) + ') = ' + lin(r, c, L);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl, 'haakjes weg: ' + p3Keer(p, q) + ' → ' + term(p, L, true) + term(p * q, '', false) + ' = ' + lin(r, c, L)]
+        .concat(p3Oplos(L, p, p * q, r, c, s)).join('<br>')};
+  }
+  function p3B2(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), p, q, r, t, u, c;
+    do { p = rnd(2, 9); t = rnd(2, 9); q = rnd(-9, 9, true); u = rnd(-9, 9, true); r = rnd(-9, 9, true); c = (p + t) * s + t * u + p * q + r; }
+    while (!Number.isInteger(c) || c === 0 || Math.abs(c) > 120);
+    var vgl = p + '(' + lin(1, q, L) + ')' + term(r, '', false) + ' = ' + fmt(c) + ' − ' + t + '(' + lin(1, u, L) + ')';
+    var weg = term(p, L, true) + term(p * q, '', false) + term(r, '', false) + ' = ' + fmt(c) + term(-t, L, false) + term(-t * u, '', false);
+    var over = term(p, L, true) + term(t, L, false) + ' = ' + fmt(c) + term(-t * u, '', false) + term(-p * q, '', false) + term(-r, '', false);
+    var A = p + t, B = c - t * u - p * q - r;
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl,
+        'haakjes weg: ' + p3Keer(p, q) + ' en ' + p3Keer(-t, u) + ' → ' + weg,
+        'breng ' + term(-t, L, true) + ' naar links en ' + fmt(p * q) + ' en ' + fmt(r) + ' naar rechts → ' + over,
+        'herleid → ' + term(A, L, true) + ' = ' + fmt(B),
+        'deel door ' + A + ' → ' + L + ' = ' + fmt(s)].join('<br>')};
+  }
+  function p3B3(){
+    var L = pick(P3_LETTERS), s = p3Oplossing(), p, q, r, v, t, u, A;
+    do { q = rnd(2, 9); r = rnd(1, 5); v = rnd(1, 9); t = pick([-1, 1]) * rnd(2, 9); u = rnd(-9, 9, true); A = -q * r - t; p = t * u - q * v - A * s; }
+    while (A === 0 || !Number.isInteger(p) || p === 0 || Math.abs(p) > 60);
+    var vgl = fmt(p) + ' − ' + q + '(' + lin(r, -v, L) + ') = ' + fmt(t) + '(' + lin(1, u, L) + ')';
+    var weg = fmt(p) + term(-q * r, L, false) + term(q * v, '', false) + ' = ' + term(t, L, true) + term(t * u, '', false);
+    var over = term(-q * r, L, true) + term(-t, L, false) + ' = ' + fmt(t * u) + term(-p, '', false) + term(-q * v, '', false);
+    var B = t * u - p - q * v;
+    var regels = [vgl,
+      'haakjes weg: ' + fmt(-q) + ' · ' + term(r, L, true) + ' = ' + term(-q * r, L, true) + ', ' + p3Keer(-q, -v) + ' en ' + p3Keer(t, u) + ' → ' + weg,
+      'breng ' + term(t, L, true) + ' naar links en ' + fmt(p) + ' en ' + fmt(q * v) + ' naar rechts → ' + over,
+      'herleid → ' + term(A, L, true) + ' = ' + fmt(B)];
+    if (A !== 1) regels.push('deel door ' + p3Haak(A) + ' → ' + L + ' = ' + fmt(s));
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s), uitwerking: regels.join('<br>')};
+  }
+
+  /* C. Vergelijkingen met breuken */
+  var P3_NOEMERS = [2, 3, 4, 5, 6];
+  function p3C1(){
+    var L = pick(P3_LETTERS), n, m, s, b;
+    do { n = pick(P3_NOEMERS); m = pick(P3_NOEMERS); s = rnd(-30, 30, true); b = s * (n - m) / (n * m); }
+    while (n === m || !Number.isInteger(b) || b === 0 || Math.abs(b) > 12);
+    var K = p3Kgv(n, m);
+    var vgl = p3BTerm(1, n, L, true) + term(b, '', false) + ' = ' + p3BTerm(1, m, L, true);
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl, '×' + K + ' (kgv van ' + n + ' en ' + m + ') → ' + term(K / n, L, true) + term(K * b, '', false) + ' = ' + term(K / m, L, true)]
+        .concat(p3Oplos(L, K / n, K * b, K / m, 0, s)).join('<br>')};
+  }
+  function p3C2(){
+    var L = pick(P3_LETTERS), n, m, k, s, b, c, K, A;
+    do {
+      n = pick(P3_NOEMERS); m = pick(P3_NOEMERS); k = rnd(1, n - 1); K = p3Kgv(n, m);
+      A = K * k / n - K / m; s = rnd(-30, 30, true); b = rnd(-9, 9, true); c = b + s * A / K;
+    } while (p3Ggd(k, n) !== 1 || A === 0 || !Number.isInteger(c) || c === 0 || Math.abs(c) > 30);
+    var vgl = p3BTerm(k, n, L, true) + term(b, '', false) + ' = ' + p3BTerm(1, m, L, true) + term(c, '', false);
+    var noemers = n === m ? 'noemer ' + n : 'kgv van ' + n + ' en ' + m;
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl, '×' + K + ' (' + noemers + ') → ' + term(K * k / n, L, true) + term(K * b, '', false) + ' = ' + term(K / m, L, true) + term(K * c, '', false)]
+        .concat(p3Oplos(L, K * k / n, K * b, K / m, K * c, s)).join('<br>')};
+  }
+  function p3C3(){
+    var L = pick(P3_LETTERS), n, m, s, q, r;
+    do { n = pick(P3_NOEMERS); m = pick(P3_NOEMERS); s = rnd(-30, 30, true); q = rnd(-9, 9, true); r = m * (s + q) / n - s; }
+    while (n === m || !Number.isInteger(r) || r === 0 || Math.abs(r) > 20);
+    var K = p3Kgv(n, m), pn = K / n, pm = K / m;
+    function haak(f, c){ return (f === 1 ? '' : f) + '(' + lin(1, c, L) + ')'; }
+    var vgl = p3Br(1, n) + '(' + lin(1, q, L) + ') = ' + p3Br(1, m) + '(' + lin(1, r, L) + ')';
+    return {vraag: 'Los op: <b>' + vgl + '</b>' + P3_HINT, velden: p3Veld(L, s),
+      uitwerking: [vgl,
+        '×' + K + ' (kgv van ' + n + ' en ' + m + ') → ' + haak(pn, q) + ' = ' + haak(pm, r),
+        'haakjes weg → ' + term(pn, L, true) + term(pn * q, '', false) + ' = ' + term(pm, L, true) + term(pm * r, '', false)]
+        .concat(p3Oplos(L, pn, pn * q, pm, pm * r, s)).join('<br>')};
+  }
+
+  /* D. Snijpunt van twee lijnen */
+  function p3Punt(x, y, f){ var sep = Number.isInteger(x) && Number.isInteger(y) ? ', ' : '; '; return 'S(' + f(x) + sep + f(y) + ')'; }
+  function p3Snijpunt(a1, b1, a2, b2, xs, ys, f){
+    return ['gelijkstellen: ' + p2Lin(a1, b1, 'x', f) + ' = ' + p2Lin(a2, b2, 'x', f)]
+      .concat(p3Oplos('x', a1, b1, a2, b2, xs, f))
+      .concat(['invullen in l: y = ' + f(a1) + ' · ' + p3Haak(xs, f) + p2Term(b1, '', false, f) + ' = ' + f(ys),
+               'dus ' + p3Punt(xs, ys, f)]).join('<br>');
+  }
+  function p3VeldenS(xs, ys){ return [{voor:'x<sub>S</sub> =', na:'', antwoord:xs}, {voor:'y<sub>S</sub> =', na:'', antwoord:ys}]; }
+  function p3LijnenGeheel(xmax, amax, bmax){
+    var xs, ys, a1, a2, b1, b2;
+    do { xs = rnd(-xmax, xmax); ys = rnd(-xmax, xmax); a1 = rnd(-amax, amax, true); a2 = rnd(-amax, amax, true); b1 = ys - a1 * xs; b2 = ys - a2 * xs; }
+    while (a1 === a2 || Math.abs(b1) > bmax || Math.abs(b2) > bmax);
+    return {xs:xs, ys:ys, a1:a1, b1:b1, a2:a2, b2:b2};
+  }
+  function p3D1(){
+    var g = p3LijnenGeheel(6, 5, 20);
+    return {vraag: 'Bereken het snijpunt S van <b>l: y = ' + lin(g.a1, g.b1) + '</b> en <b>m: y = ' + lin(g.a2, g.b2) + '</b>.' + P0_HINT,
+            velden: p3VeldenS(g.xs, g.ys), uitwerking: p3Snijpunt(g.a1, g.b1, g.a2, g.b2, g.xs, g.ys, fmt)};
+  }
+  function p3D2(){
+    var A1, A2, B1, xs, a1, a2, b1, b2, ys;
+    do {
+      A1 = pick([-1, 1]) * rnd(1, 20); A2 = pick([-1, 1]) * rnd(1, 20); B1 = rnd(-50, 50);
+      xs = Math.random() < 0.5 ? rnd(-6, 6) : rnd(-6, 5) + 0.5;
+      a1 = A1 / 10; a2 = A2 / 10; b1 = B1 / 10;
+      ys = p3R(a1 * xs + b1); b2 = p3R(ys - a2 * xs);
+    } while (A1 === A2 || Math.abs(b2 * 10 - Math.round(b2 * 10)) > 1e-6 || Math.abs(b2) > 10);
+    return {vraag: 'Bereken het snijpunt S van <b>l: y = ' + p2Lin(a1, b1, 'x', p2Dec) + '</b> en <b>m: y = ' + p2Lin(a2, b2, 'x', p2Dec) + '</b>.' + P0_HINT + P2_HINT_KOMMA,
+            velden: p3VeldenS(xs, ys), uitwerking: p3Snijpunt(a1, b1, a2, b2, xs, ys, p2Dec)};
+  }
+  function p3D3(){
+    var g = p3LijnenGeheel(4, 3, 12);
+    var svg = tekenGrafiek([{a:g.a1, b:g.b1, kleur:'#0d9488', naam:'l'}, {a:g.a2, b:g.b2, kleur:'#f59e0b', naam:'m'}]);
+    return {vraag: 'Bereken het snijpunt S van <b>l: y = ' + lin(g.a1, g.b1) + '</b> en <b>m: y = ' + lin(g.a2, g.b2) + '</b>.' + svg + P0_HINT,
+            velden: p3VeldenS(g.xs, g.ys), uitwerking: p3Snijpunt(g.a1, g.b1, g.a2, g.b2, g.xs, g.ys, fmt)};
+  }
+
+  /* E. Vergelijkingen in een context */
+  var P3_BEDRIJVEN = [
+    {namen:['AutoShare', 'GreenCar'], wat:'Twee autodeelbedrijven', per:'per km', eenheid:'km', vast:'vaste kosten'},
+    {namen:['FietsenMaar', 'CheapBikes'], wat:'Twee verhuurders van e-bikes', per:'per km', eenheid:'km', vast:'huurprijs per dag'},
+    {namen:['BelBel', 'PraatVeel'], wat:'Twee telefoonaanbieders', per:'per belminuut', eenheid:'minuten', vast:'abonnement per maand'}
+  ];
+  function p3KostenOpgave(){
+    var c = pick(P3_BEDRIJVEN), A1, A2, b1, b2, x, diff;
+    do { A1 = rnd(15, 45); A2 = rnd(15, 45); b1 = rnd(30, 80); x = rnd(20, 300); diff = (A1 - A2) * x; b2 = b1 + diff / 100; }
+    while (A1 === A2 || diff % 100 !== 0 || b2 < 30 || b2 > 80);
+    var i1 = c.namen[0].charAt(0), i2 = c.namen[1].charAt(0);
+    var f1 = 'K<sub>' + i1 + '</sub> = ' + p2Lin(A1 / 100, b1, 'x', p2Dec), f2 = 'K<sub>' + i2 + '</sub> = ' + p2Lin(A2 / 100, b2, 'x', p2Dec);
+    var tekst = c.wat + ': ' + c.namen[0] + ' rekent ' + p2Euro(b1) + ' ' + c.vast + ' en ' + p2Euro(A1 / 100) + ' ' + c.per + '; ' +
+                c.namen[1] + ' rekent ' + p2Euro(b2) + ' ' + c.vast + ' en ' + p2Euro(A2 / 100) + ' ' + c.per + '.<br>' +
+                'Met x ' + c.eenheid + ' gelden de formules <b>' + f1 + '</b> en <b>' + f2 + '</b>.';
+    return {c:c, a1:A1 / 100, a2:A2 / 100, b1:b1, b2:b2, x:x, f1:f1, f2:f2, tekst:tekst, i1:i1, i2:i2};
+  }
+  function p3E1(){
+    var o = p3KostenOpgave();
+    return {vraag: o.tekst + '<br>Bij hoeveel ' + o.c.eenheid + ' zijn de kosten gelijk?' + P2_HINT_KOMMA,
+      velden: [{voor:'x =', na:o.c.eenheid, antwoord:o.x}],
+      uitwerking: ['gelijkstellen: ' + p2Lin(o.a1, o.b1, 'x', p2Dec) + ' = ' + p2Lin(o.a2, o.b2, 'x', p2Dec)]
+        .concat(p3Oplos('x', o.a1, o.b1, o.a2, o.b2, o.x, p2Dec))
+        .concat(['bij ' + o.x + ' ' + o.c.eenheid + ' zijn de kosten gelijk']).join('<br>')};
+  }
+  function p3E2(){
+    // X duidelijk voorbij het omslagpunt: minstens € 2 verschil in kosten
+    var o, X, k1, k2, pogingen = 0;
+    do {
+      if (pogingen++ % 20 === 0) o = p3KostenOpgave();
+      X = o.x + pick([-1, 1]) * rnd(40, 150); k1 = p3R(o.a1 * X + o.b1); k2 = p3R(o.a2 * X + o.b2);
+    } while (X < 10 || X > 450 || Math.abs(k1 - k2) < 2);
+    var goedkoper = k1 < k2 ? o.c.namen[0] : o.c.namen[1];
+    return {vraag: o.tekst + '<br>Welk bedrijf is voordeliger bij ' + X + ' ' + o.c.eenheid + '?',
+      velden: [{keuze:o.c.namen.slice(), antwoord:goedkoper, voor:'', na:''}],
+      uitwerking: 'K<sub>' + o.i1 + '</sub> = ' + p2Dec(o.a1) + ' · ' + X + ' + ' + o.b1 + ' = ' + p2Euro(k1) +
+                  '<br>K<sub>' + o.i2 + '</sub> = ' + p2Dec(o.a2) + ' · ' + X + ' + ' + o.b2 + ' = ' + p2Euro(k2) +
+                  '<br>dus ' + goedkoper + ' is voordeliger bij ' + X + ' ' + o.c.eenheid + '.'};
+  }
+  function p3E3(){
+    var plant = pick(['bamboeplant', 'klimplant', 'zonnebloem']), H1, H2, a1, a2, b1, b2, t;
+    do { H1 = rnd(2, 16); H2 = rnd(2, 16); a1 = H1 / 2; a2 = H2 / 2; t = rnd(5, 60); b1 = rnd(10, 80); b2 = b1 + (a1 - a2) * t; }
+    while (a1 <= a2 || !Number.isInteger(b2) || b2 > 300);
+    var f1 = p2Lin(a1, b1, 't', p2Dec), f2 = p2Lin(a2, b2, 't', p2Dec);
+    return {
+      vraag: 'Een ' + plant + ' heeft twee stengels. Stengel I is ' + b1 + ' cm en groeit ' + p2Dec(a1) + ' cm per dag. Stengel II is ' + b2 + ' cm en groeit ' + p2Dec(a2) + ' cm per dag.<br>Na hoeveel dagen zijn ze even lang?' + P2_HINT_KOMMA,
+      velden: [{voor:'t =', na:'dagen', antwoord:t}],
+      uitwerking: ['L<sub>I</sub> = ' + f1 + ' en L<sub>II</sub> = ' + f2 + ' (L in cm, t in dagen)', 'gelijkstellen: ' + f1 + ' = ' + f2]
+        .concat(p3Oplos('t', a1, b1, a2, b2, t, p2Dec))
+        .concat(['na ' + t + ' dagen zijn ze even lang']).join('<br>')
+    };
+  }
+
   // === INIT ===
   maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
   maakOefening('p0-oef-a', [p0A1, p0A2, p0A3]);
@@ -1589,6 +1946,13 @@
   maakOefening('p2-oef-b', [p2B1, p2B2, p2B3]);
   maakOefening('p2-oef-c', [p2C1]);
   maakOefening('p2-oef-d', [p2D1, p2D2, p2D3]);
+  document.getElementById('p3-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-0.5, b:1, kleur:'#0d9488', naam:'l'}, {a:1.5, b:-1, kleur:'#f59e0b', naam:'m'}], {punten:[{x:1, y:0.5, naam:'S(1; 0,5)'}]});
+  maakFlashcards('p3-fc', p3FcData, '§1.3 — begrip → uitleg');
+  maakOefening('p3-oef-a', [p3A1, p3A2, p3A3]);
+  maakOefening('p3-oef-b', [p3B1, p3B2, p3B3]);
+  maakOefening('p3-oef-c', [p3C1, p3C2, p3C3]);
+  maakOefening('p3-oef-d', [p3D1, p3D2, p3D3]);
+  maakOefening('p3-oef-e', [p3E1, p3E2, p3E3]);
 </script>
 </body>
 </html>
