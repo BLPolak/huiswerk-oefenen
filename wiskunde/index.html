@@ -526,16 +526,76 @@
     <button class="sub-tab-btn" onclick="showSubTab('p4','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p4-uitleg" class="sub-tab-content active">
-    <!-- P4-UITLEG -->
-    <p class="binnenkort">Binnenkort</p>
+    <details class="uitleg-card" open>
+      <summary>A. Ongelijkheden oplossen met grafieken</summary>
+      <p>7 &minus; x &lt; 2x &minus; 5 is een <strong>lineaire ongelijkheid</strong>. De oplossing is geen &eacute;&eacute;n getal, maar een hele reeks getallen.</p>
+      <p>Je kijkt voor welke x de grafiek van y = 7 &minus; x <strong>onder</strong> de grafiek van y = 2x &minus; 5 ligt. Dat is zo rechts van het snijpunt (x = 4), dus de oplossing is <strong>x &gt; 4</strong>.</p>
+      <div id="p4-uitleg-grafiek"></div>
+      <div class="regel-blok groen">
+        <p><strong>&lt;</strong> betekent: de grafiek ligt <strong>onder</strong> de andere.</p>
+        <p><strong>&gt;</strong> betekent: de grafiek ligt <strong>boven</strong> de andere.</p>
+        <p>Eerst het snijpunt, dan kijken aan welke kant het klopt.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Ongelijkheden oplossen zonder grafieken</summary>
+      <p>Je lost stap voor stap op, net als een vergelijking.</p>
+      <div class="voorbeeld-blok">
+        4(a &minus; 3) &gt; 4 &minus; 3(5 &minus; a)<br>
+        haakjes weg &rarr; 4a &minus; 12 &gt; 4 &minus; 15 + 3a<br>
+        termen met a naar links, de rest naar rechts &rarr; 4a &minus; 3a &gt; 4 &minus; 15 + 12<br>
+        herleid &rarr; a &gt; 1
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Het omklappen van het ongelijkheidsteken</summary>
+      <p>&minus;35 &lt; 30 klopt. Deel je links en rechts door &minus;5, dan krijg je 7 en &minus;6. Nu klopt 7 &gt; &minus;6: het teken is <strong>omgeklapt</strong>.</p>
+      <div class="regel-blok rood-blok">
+        <p>Deel of vermenigvuldig je beide leden met een <strong>NEGATIEF</strong> getal, dan klapt het ongelijkheidsteken om.</p>
+      </div>
+      <div class="stappen">
+        <div class="stap">&minus;4x &gt; &minus;12 &rarr; x &lt; 3 (je deelt door &minus;4, dus &gt; klapt om)</div>
+        <div class="stap">&minus;&frac12;x &lt; 20 &rarr; x &gt; &minus;40 (je vermenigvuldigt met &minus;2, dus &lt; klapt om)</div>
+        <div class="stap">2x &lt; &minus;20 &rarr; x &lt; &minus;10 (je deelt door 2, dus &lt; klapt NIET om)</div>
+      </div>
+      <p><strong>Let op:</strong> een negatief getal rechts is geen reden om om te klappen; het gaat om het getal waardoor je deelt.</p>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Werkschema: lineaire ongelijkheden oplossen</summary>
+      <div class="stappen">
+        <div class="stap">1. Staan er haakjes? Werk ze weg.</div>
+        <div class="stap">2. Breng alle termen met x naar het linkerlid en de rest naar het rechterlid.</div>
+        <div class="stap">3. Herleid beide leden.</div>
+        <div class="stap">4. Deel beide leden door het getal dat v&oacute;&oacute;r x staat. Is dat getal negatief, dan klap je het ongelijkheidsteken om.</div>
+      </div>
+      <div class="voorbeeld-blok">
+        2x &lt; 5x + 6 &rarr; 2x &minus; 5x &lt; 6 &rarr; &minus;3x &lt; 6 &rarr; x &gt; &minus;2
+      </div>
+      <div class="voorbeeld-blok">
+        3(x &minus; 2) &gt; 5(2 + x) &minus; 16 &rarr; 3x &minus; 6 &gt; 10 + 5x &minus; 16 &rarr; &minus;2x &gt; 0 &rarr; x &lt; 0
+      </div>
+    </details>
   </div>
   <div id="sub-p4-flashcards" class="sub-tab-content">
-    <!-- P4-FLASHCARDS -->
-    <p class="binnenkort">Binnenkort</p>
+    <div id="p4-fc"></div>
   </div>
   <div id="sub-p4-oefenen" class="sub-tab-content">
-    <!-- P4-OEFENEN -->
-    <p class="binnenkort">Binnenkort</p>
+    <div class="oefening-kaart">
+      <h3>A. Ongelijkheden met grafieken</h3>
+      <div id="p4-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Omklappen</h3>
+      <div id="p4-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Ongelijkheden oplossen</h3>
+      <div id="p4-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Ongelijkheden in een context</h3>
+      <div id="p4-oef-d"></div>
+    </div>
   </div>
 </div>
 
@@ -1927,6 +1987,178 @@
     };
   }
 
+  // --- P4 ONGELIJKHEDEN ---
+  var p4FcData = [
+    {voor:'Wat is de oplossing van een ongelijkheid?', achter:'Geen één getal, maar alle getallen die eraan voldoen, bv. x &gt; 4.'},
+    {voor:'Wanneer klapt het ongelijkheidsteken om?', achter:'Als je beide leden deelt door (of vermenigvuldigt met) een negatief getal.'},
+    {voor:'−4x &gt; −12 geeft…', achter:'x &lt; 3 (omklappen, want je deelt door −4)'},
+    {voor:'2x &lt; −20 geeft…', achter:'x &lt; −10 (niet omklappen, want je deelt door +2)'},
+    {voor:'−x &gt; −4 geeft…', achter:'x &lt; 4'},
+    {voor:'−½x &lt; 20 geeft…', achter:'x &gt; −40 (vermenigvuldigen met −2, dus omklappen)'},
+    {voor:'Grafiek f ligt onder grafiek g. Bij welk teken hoort dat?', achter:'f(x) &lt; g(x): kleiner-dan'},
+    {voor:'Hoe los je 7 − x &lt; 2x − 5 op met een grafiek?', achter:'Zoek de x van het snijpunt en kijk waar 7 − x onder 2x − 5 ligt.'},
+    {voor:'Wat zijn de 4 stappen van het werkschema?', achter:'1 Haakjes weg.<br>2 x naar links, de rest naar rechts.<br>3 Herleiden.<br>4 Delen door het getal vóór x; is dat negatief, dan omklappen.'},
+    {voor:'3x &gt; −3 geeft…', achter:'x &gt; −1 (niet omklappen)'},
+    {voor:'Klopt: uit −12 &lt; 18 volgt na delen door −6 dat 2 &lt; −3?', achter:'Nee: het teken moet omklappen, dus 2 &gt; −3.'}
+  ];
+
+  var P4_LETTERS = ['x','a','p','q'];
+  var P4_HINT = '<br><small style="color:#64748b;font-weight:600">(kies het teken en vul het getal in; breuk mag, bv. -15/2 of -7,5)</small>';
+  function p4Om(t){ return t === '<' ? '>' : '<'; }
+  function p4T(t){ return t === '<' ? '&lt;' : '&gt;'; }
+  // grensgetal: geheel −10..10, of in 20% van de gevallen een halve
+  function p4Grens(){ return Math.random() < 0.2 ? rnd(-10, 9) + 0.5 : rnd(-10, 10); }
+  // antwoordvorm "x [<|>] [..]"
+  function p4Velden(L, t, g){ return [{keuze:['<', '>'], antwoord:t, voor:L, na:''}, {voor:'', na:'', antwoord:g}]; }
+  // stap 4 van het werkschema: delen door A, met expliciet wel/niet omklappen
+  function p4Deel(A, L, t, g){
+    var neg = A < 0, t2 = neg ? p4Om(t) : t;
+    return {regel: 'deel door ' + p3Haak(A) + (neg ? ' (negatief → omklappen)' : ' (positief → niet omklappen)') + ' → ' + L + ' ' + p4T(t2) + ' ' + fmt(g), teken: t2};
+  }
+  // aL·L + bL t aR·L + bR oplossen volgens het werkschema
+  function p4Oplos(L, aL, bL, aR, bR, t, g){
+    var delen = [], regels = [];
+    if (aR) delen.push(term(aR, L, true) + ' naar links');
+    if (bL) delen.push(fmt(bL) + ' naar rechts');
+    var links = term(aL, L, true) + term(-aR, L, false);
+    var rechts = (bR ? fmt(bR) : '') + term(-bL, '', !bR);
+    if (delen.length) regels.push('breng ' + delen.join(' en ') + ' → ' + links + ' ' + p4T(t) + ' ' + (rechts || '0'));
+    var A = aL - aR, B = bR - bL;
+    regels.push('herleid → ' + term(A, L, true) + ' ' + p4T(t) + ' ' + fmt(B));
+    var teken = t;
+    if (A !== 1){ var d = p4Deel(A, L, t, g); regels.push(d.regel); teken = d.teken; }
+    return {regels: regels, teken: teken};
+  }
+  function p4Vraag(ongelijkheid){ return 'Los op: <b>' + ongelijkheid + '</b>' + P4_HINT; }
+
+  /* A. Ongelijkheden met grafieken */
+  function p4Grafiek(omgekeerd){
+    var xs, ys, a1, a2, b1, b2;
+    do { xs = rnd(-5, 5); ys = rnd(-5, 5); a1 = rnd(-3, 3, true); a2 = rnd(-3, 3, true); b1 = ys - a1 * xs; b2 = ys - a2 * xs; }
+    while (a1 === a2 || Math.abs(b1) > 8 || Math.abs(b2) > 8);
+    var f1 = lin(a1, b1), f2 = lin(a2, b2), t = pick(['<', '>']);
+    var svg = tekenGrafiek([{a:a1, b:b1, kleur:'#0d9488', naam:'y = ' + f1}, {a:a2, b:b2, kleur:'#f59e0b', naam:'y = ' + f2}]);
+    // links en rechts in de vraag
+    var aL = omgekeerd ? a2 : a1, fL = omgekeerd ? f2 : f1, aR = omgekeerd ? a1 : a2, fR = omgekeerd ? f1 : f2;
+    // fL t fR ⇔ (aL − aR)·x t (…): rechts van het snijpunt als aL − aR > 0 en t = '>'
+    var ans = (aL - aR > 0) ? t : p4Om(t);
+    return {
+      vraag: 'Los op: <b>' + fL + ' ' + p4T(t) + ' ' + fR + '</b>' + svg + P4_HINT,
+      velden: p4Velden('x', ans, xs),
+      uitwerking: 'Snijpunt bij x = ' + fmt(xs) + ' (y = ' + fmt(ys) + ')' +
+                  '<br>De grafiek van y = ' + fL + ' ligt ' + (t === '<' ? 'onder' : 'boven') + ' die van y = ' + fR + ' voor x ' + p4T(ans) + ' ' + fmt(xs) +
+                  ' (' + (ans === '>' ? 'rechts' : 'links') + ' van het snijpunt)' +
+                  '<br>dus x ' + p4T(ans) + ' ' + fmt(xs)
+    };
+  }
+  function p4A1(){ return p4Grafiek(false); }
+  function p4A2(){ return p4Grafiek(true); }
+
+  /* B. Omklappen */
+  function p4B1(){
+    var L = pick(P4_LETTERS), a, g, c, t = pick(['<', '>']);
+    do { a = Math.random() < 0.6 ? pick([-1, -2, -3, -4, -5, -6, -7, -8, -9]) : rnd(2, 9); g = p4Grens(); c = a * g; } while (!Number.isInteger(c));
+    var d = p4Deel(a, L, t, g);
+    return {vraag: p4Vraag(term(a, L, true) + ' ' + p4T(t) + ' ' + fmt(c)), velden: p4Velden(L, d.teken, g),
+            uitwerking: term(a, L, true) + ' ' + p4T(t) + ' ' + fmt(c) + '<br>' + d.regel};
+  }
+  function p4B2(){
+    var L = pick(P4_LETTERS), n = pick([2, 3, 4]), teken = pick([1, -1]), t = pick(['<', '>']), c, g;
+    do { c = rnd(-5, 5); g = teken * n * c; } while (Math.abs(g) > 20);
+    var factor = teken * n, t2 = factor < 0 ? p4Om(t) : t;
+    var ong = p3BTerm(teken, n, L, true) + ' ' + p4T(t) + ' ' + fmt(c);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, t2, g),
+            uitwerking: ong + '<br>vermenigvuldig met ' + p3Haak(factor) + (factor < 0 ? ' (negatief → omklappen)' : ' (positief → niet omklappen)') +
+                        ' → ' + L + ' ' + p4T(t2) + ' ' + fmt(g)};
+  }
+  function p4B3(){
+    var d, r, s;
+    do { d = pick([-1, 1]) * rnd(2, 6); r = rnd(-9, 9); s = rnd(-9, 9); } while (r === s);
+    var p = r * d, q = s * d, t0 = p < q ? '<' : '>', juist = d < 0 ? p4Om(t0) : t0;
+    var klopt = Math.random() < 0.5, getoond = klopt ? juist : p4Om(juist);
+    var uitleg = 'Je deelt door ' + fmt(d) + (d < 0 ? ', een negatief getal, dus het teken klapt om: ' : ', een positief getal, dus het teken klapt niet om: ') +
+                 fmt(r) + ' ' + p4T(juist) + ' ' + fmt(s) + '.<br>' +
+                 (klopt ? 'Dat is wat er staat, dus het klopt.' :
+                  (d < 0 ? 'Er staat ' + p4T(getoond) + ': het omklappen is vergeten, dus het klopt niet.' : 'Er staat ' + p4T(getoond) + ': er is onterecht omgeklapt, dus het klopt niet.'));
+    return {
+      vraag: 'Je weet dat <b>' + fmt(p) + ' ' + p4T(t0) + ' ' + fmt(q) + '</b>. Je deelt links en rechts door ' + fmt(d) + '. Je krijgt <b>' + fmt(r) + ' ' + p4T(getoond) + ' ' + fmt(s) + '</b>. Klopt dat?',
+      velden: [{keuze:['klopt', 'klopt niet'], antwoord: klopt ? 'klopt' : 'klopt niet', voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* C. Ongelijkheden oplossen */
+  function p4C1(){
+    var L = pick(P4_LETTERS), g = p4Grens(), t = pick(['<', '>']), negatief = Math.random() < 0.5, a, b, c, d;
+    do { a = rnd(-9, 9, true); c = rnd(-9, 9, true); b = rnd(-15, 15, true); d = (a - c) * g + b; }
+    while (a - c === 0 || a - c === 1 || (a - c < 0) !== negatief || !Number.isInteger(d) || d === 0 || Math.abs(d) > 80);
+    var ong = lin(a, b, L) + ' ' + p4T(t) + ' ' + lin(c, d, L), o = p4Oplos(L, a, b, c, d, t, g);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, o.teken, g), uitwerking: [ong].concat(o.regels).join('<br>')};
+  }
+  function p4C2(){
+    var L = pick(P4_LETTERS), g = p4Grens(), t = pick(['<', '>']), p, q, s, u, sigma, r, A;
+    do { p = rnd(2, 9); s = rnd(2, 9); q = rnd(-9, 9, true); u = rnd(-9, 9, true); sigma = pick([1, -1]); A = p + s * sigma; r = A * g + p * q + s * u; }
+    while (A === 0 || A === 1 || !Number.isInteger(r) || r === 0 || Math.abs(r) > 60);
+    // rechterlid: r − s(x + u) of r − s(u − x)
+    var haak = sigma === 1 ? lin(1, u, L) : fmt(u) + term(-1, L, false);
+    var ong = p + '(' + lin(1, q, L) + ') ' + p4T(t) + ' ' + fmt(r) + ' − ' + s + '(' + haak + ')';
+    var xterm = sigma === 1 ? L : '−' + L;
+    var weg = term(p, L, true) + term(p * q, '', false) + ' ' + p4T(t) + ' ' + fmt(r) + term(-s * u, '', false) + term(-s * sigma, L, false);
+    var over = term(p, L, true) + term(s * sigma, L, false) + ' ' + p4T(t) + ' ' + fmt(r) + term(-s * u, '', false) + term(-p * q, '', false);
+    var B = r - s * u - p * q, d = p4Deel(A, L, t, g);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, d.teken, g),
+      uitwerking: [ong,
+        'haakjes weg: ' + p3Keer(p, q) + ', ' + p3Keer(-s, u) + ' en ' + fmt(-s) + ' · ' + xterm + ' = ' + term(-s * sigma, L, true) + ' → ' + weg,
+        'breng ' + term(-s * sigma, L, true) + ' naar links en ' + fmt(p * q) + ' naar rechts → ' + over,
+        'herleid → ' + term(A, L, true) + ' ' + p4T(t) + ' ' + fmt(B),
+        d.regel].join('<br>')};
+  }
+  function p4C3(){
+    var L = pick(P4_LETTERS), t = pick(['<', '>']), n, m, g, b, c;
+    do { n = pick([2, 3, 4]); m = pick([2, 3, 4]); g = rnd(-24, 24); b = rnd(-9, 9, true); c = b + g * (m - n) / (n * m); }
+    while (n === m || !Number.isInteger(c) || c === 0 || Math.abs(c) > 20);
+    var K = p3Kgv(n, m);
+    var ong = p3BTerm(1, n, L, true) + term(b, '', false) + ' ' + p4T(t) + ' ' + p3BTerm(1, m, L, true) + term(c, '', false);
+    var o = p4Oplos(L, K / n, K * b, K / m, K * c, t, g);
+    return {vraag: p4Vraag(ong), velden: p4Velden(L, o.teken, g),
+      uitwerking: [ong, '×' + K + ' (kgv van ' + n + ' en ' + m + '; positief → niet omklappen) → ' +
+                   term(K / n, L, true) + term(K * b, '', false) + ' ' + p4T(t) + ' ' + term(K / m, L, true) + term(K * c, '', false)]
+                   .concat(o.regels).join('<br>')};
+  }
+
+  /* D. Ongelijkheden in een context */
+  var P4_CONTEXTEN = [
+    {namen:['FietsenMaar', 'CheapBikes'], wat:'Twee fietsverhuurders', per:'per dag', vast:'vaste kosten', x:'het aantal dagen', aMin:8, aMax:25, bMin:5, bMax:60, gMin:2, gMax:20},
+    {namen:['De Schouwburg', 'Zaal Zuid'], wat:'Voor een schoolfeest kun je kiezen uit twee zalen', per:'per persoon', vast:'zaalhuur', x:'het aantal personen', aMin:4, aMax:15, bMin:100, bMax:800, gMin:20, gMax:150}
+  ];
+  function p4D1(){
+    var c = pick(P4_CONTEXTEN), aA, aB, bA, bB, g;
+    do { aA = rnd(c.aMin, c.aMax); aB = rnd(c.aMin, c.aMax); bA = rnd(c.bMin, c.bMax); g = rnd(c.gMin, c.gMax); bB = bA + (aA - aB) * g; }
+    while (aA === aB || bB < c.bMin || bB > c.bMax * 1.5);
+    var A = c.namen[0], B = c.namen[1], iA = A.charAt(A.indexOf(' ') + 1), iB = B.charAt(B.indexOf(' ') + 1);
+    var fA = lin(aA, bA), fB = lin(aB, bB), o = p4Oplos('x', aA, bA, aB, bB, '<', g);
+    return {
+      vraag: c.wat + '. ' + A + ' rekent ' + p2Euro(bA) + ' ' + c.vast + ' en ' + p2Euro(aA) + ' ' + c.per + '; ' + B + ' rekent ' + p2Euro(bB) + ' ' + c.vast + ' en ' + p2Euro(aB) + ' ' + c.per + '.<br>' +
+             'Met x = ' + c.x + ' gelden <b>K<sub>' + iA + '</sub> = ' + fA + '</b> en <b>K<sub>' + iB + '</sub> = ' + fB + '</b>.<br>' +
+             'Voor welke waarden van x is ' + A + ' voordeliger dan ' + B + '?' + P4_HINT,
+      velden: p4Velden('x', o.teken, g),
+      uitwerking: ['K<sub>' + iA + '</sub> &lt; K<sub>' + iB + '</sub> → ' + fA + ' &lt; ' + fB].concat(o.regels)
+                  .concat(['dus ' + A + ' is voordeliger als x ' + p4T(o.teken) + ' ' + g]).join('<br>')
+    };
+  }
+  function p4D2(){
+    var pp, e, d, g, vast;
+    do { pp = rnd(3, 10); d = rnd(2, 10); e = pp + d; g = rnd(20, 150); vast = d * g; } while (vast < 150 || vast > 1500);
+    var fK = lin(pp, vast), fR = term(e, 'x', true), o = p4Oplos('x', e, 0, pp, vast, '>', g);
+    return {
+      vraag: 'Voor een schoolfeest betaalt de school ' + p2Euro(vast) + ' zaalhuur en ' + p2Euro(pp) + ' per bezoeker voor eten en drinken. De entree is ' + p2Euro(e) + ' per persoon.<br>' +
+             'Met x bezoekers zijn de kosten <b>K = ' + fK + '</b> en de opbrengst <b>R = ' + fR + '</b>.<br>' +
+             'Bij hoeveel bezoekers is er winst (R &gt; K)?' + P4_HINT,
+      velden: p4Velden('x', o.teken, g),
+      uitwerking: ['R &gt; K → ' + fR + ' &gt; ' + fK].concat(o.regels).concat(['dus winst bij meer dan ' + g + ' bezoekers']).join('<br>')
+    };
+  }
+
   // === INIT ===
   maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
   maakOefening('p0-oef-a', [p0A1, p0A2, p0A3]);
@@ -1953,6 +2185,12 @@
   maakOefening('p3-oef-c', [p3C1, p3C2, p3C3]);
   maakOefening('p3-oef-d', [p3D1, p3D2, p3D3]);
   maakOefening('p3-oef-e', [p3E1, p3E2, p3E3]);
+  document.getElementById('p4-uitleg-grafiek').innerHTML = tekenGrafiek([{a:-1, b:7, kleur:'#0d9488', naam:'y = 7 − x'}, {a:2, b:-5, kleur:'#f59e0b', naam:'y = 2x − 5'}], {xmin:-2, xmax:8, ymin:-6, ymax:8, punten:[{x:4, y:3, naam:'S'}]});
+  maakFlashcards('p4-fc', p4FcData, '§1.4 — begrip → uitleg');
+  maakOefening('p4-oef-a', [p4A1, p4A2]);
+  maakOefening('p4-oef-b', [p4B1, p4B2, p4B3]);
+  maakOefening('p4-oef-c', [p4C1, p4C2, p4C3]);
+  maakOefening('p4-oef-d', [p4D1, p4D2]);
 </script>
 </body>
 </html>
