@@ -118,6 +118,9 @@
     .klaar-scherm .klaar-titel { font-size: 1.4rem; font-weight: 800; color: var(--teal); }
     .klaar-scherm .klaar-sub { color: var(--grijs); font-weight: 600; margin-top: .3rem; }
     .binnenkort { color: var(--grijs); font-style: italic; padding: 1rem 0; }
+    details.uitleg-card > summary { cursor: pointer; color: #0d9488; font-size: 1.15rem; font-weight: 800; }
+    details.uitleg-card[open] > summary { margin-bottom: 1rem; }
+    .oefening-kaart .oefening-kaart { box-shadow: none; padding: 0; margin-bottom: 0; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -146,16 +149,85 @@
     <button class="sub-tab-btn" onclick="showSubTab('p0','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p0-uitleg" class="sub-tab-content active">
-    <!-- P0-UITLEG -->
-    <p class="binnenkort">Binnenkort</p>
+    <details class="uitleg-card" open>
+      <summary>A. Herleiden</summary>
+      <p><strong>Herleiden</strong> = een formule eenvoudiger schrijven.</p>
+      <h3>Vermenigvuldigen</h3>
+      <p>Vermenigvuldig de getallen met elkaar en de letters met elkaar.</p>
+      <div class="voorbeeld-blok">
+        5 &middot; 2x = 10x<br>
+        2x &middot; 3y = 6xy<br>
+        6x &middot; 4x = 24x&sup2;
+      </div>
+      <h3>Optellen en aftrekken</h3>
+      <p>Optellen kan alleen bij <strong>gelijksoortige termen</strong>.</p>
+      <div class="voorbeeld-blok">
+        3x + 2x = 5x<br>
+        2z &minus; 5z = &minus;3z
+      </div>
+      <p style="margin-top:.8rem">3x + 5y en 2a &minus; 5 kun je <strong>niet</strong> herleiden.</p>
+      <div class="regel-blok oranje">
+        <p><strong>Vermenigvuldigen:</strong> 2x &middot; 5y = 10xy (kan altijd)</p>
+        <p><strong>Optellen:</strong> 2x + 5y kan niet korter</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Gelijksoortige termen</summary>
+      <div class="regel-blok groen">
+        <p>Neem de gelijksoortige termen samen, en let op het teken dat <strong>v&oacute;&oacute;r</strong> de term staat.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        3x + 8 &minus; 2x &minus; 6 = x + 2<br>
+        7a &minus; 5 &minus; a &minus; 11 = 6a &minus; 16
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Haakjes wegwerken</summary>
+      <div class="regel-blok blauw">
+        <p>a(b + c) = ab + ac</p>
+        <p>(a + b)(c + d) = ac + ad + bc + bd</p>
+      </div>
+      <div class="voorbeeld-blok">
+        3(x &minus; 2) = 3x &minus; 6<br>
+        &minus;3(2a &minus; 7) = &minus;6a + 21<br>
+        (a + 3)(a &minus; 4) = a&sup2; &minus; 4a + 3a &minus; 12 = a&sup2; &minus; a &minus; 12
+      </div>
+      <div class="regel-blok rood-blok">
+        <p><strong>Let op het minteken!</strong></p>
+        <p>8 &minus; 3(2a &minus; 6) = 8 &minus; 6a + 18 = 26 &minus; 6a, want &minus;3 &middot; &minus;6 = +18</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Eenvoudige vergelijkingen (balansmethode)</summary>
+      <p>In 3x + 5 = 17 heet 3x + 5 het <strong>linkerlid</strong> en 17 het <strong>rechterlid</strong>.</p>
+      <p>De <strong>oplossing</strong> is het getal dat je voor x moet invullen zodat de vergelijking klopt.</p>
+      <div class="stappen">
+        <div class="stap">3x + 5 = 17</div>
+        <div class="stap">&minus;5 aan beide kanten &rarr; 3x = 12</div>
+        <div class="stap">:3 aan beide kanten &rarr; x = 4</div>
+      </div>
+    </details>
   </div>
   <div id="sub-p0-flashcards" class="sub-tab-content">
-    <!-- P0-FLASHCARDS -->
-    <p class="binnenkort">Binnenkort</p>
+    <div id="p0-fc"></div>
   </div>
   <div id="sub-p0-oefenen" class="sub-tab-content">
-    <!-- P0-OEFENEN -->
-    <p class="binnenkort">Binnenkort</p>
+    <div class="oefening-kaart">
+      <h3>A. Herleiden</h3>
+      <div id="p0-oef-a"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>B. Gelijksoortige termen</h3>
+      <div id="p0-oef-b"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>C. Haakjes wegwerken</h3>
+      <div id="p0-oef-c"></div>
+    </div>
+    <div class="oefening-kaart">
+      <h3>D. Eenvoudige vergelijkingen</h3>
+      <div id="p0-oef-d"></div>
+    </div>
   </div>
 </div>
 
@@ -720,7 +792,231 @@
     return { shuffle: shuffle, opnieuw: opnieuw };
   }
 
+  // --- P0 VOORKENNIS ---
+  var p0FcData = [
+    {voor:'Wat betekent herleiden?', achter:'Een formule eenvoudiger (korter) schrijven.'},
+    {voor:'2x · 3y = ?', achter:'6xy'},
+    {voor:'6x · 4x = ?', achter:'24x²'},
+    {voor:'Wat zijn gelijksoortige termen?', achter:'Termen met precies dezelfde letter(s), bv. 3x en 2x. Die mag je optellen.'},
+    {voor:'Kun je 3x + 5y herleiden?', achter:'Nee, 3x en 5y zijn niet gelijksoortig.'},
+    {voor:'a(b + c) = ?', achter:'ab + ac'},
+    {voor:'(a + b)(c + d) = ?', achter:'ac + ad + bc + bd'},
+    {voor:'−3(2a − 7) = ?', achter:'−6a + 21 (min × min = plus)'},
+    {voor:'Wat is het linkerlid van 3x + 5 = 17?', achter:'3x + 5'},
+    {voor:'Wat is de oplossing van een vergelijking?', achter:'Het getal dat je voor de variabele invult zodat de vergelijking klopt.'},
+    {voor:'Hoe heet de methode om 3x + 5 = 17 op te lossen?', achter:'De balansmethode: links en rechts steeds hetzelfde doen.'}
+  ];
+
+  var P0_LETTERS = ['x','a','p','y'];
+  var P0_HINT = '<br><small style="color:#64748b;font-weight:600">(een negatief getal vul je in met −)</small>';
+  // negatief getal tussen haakjes, bv. 3 · (−2)
+  function p0H(n){ return n < 0 ? '(' + fmt(n) + ')' : fmt(n); }
+  function p0HT(c, l){ return c < 0 ? '(' + term(c, l, true) + ')' : term(c, l, true); }
+  // som van termen als tekst, eerste term zonder plusteken
+  function p0Som(termen){
+    var s = '';
+    termen.forEach(function(t){ s += term(t.c, t.l, s === ''); });
+    return s || '0';
+  }
+  function p0Totaal(termen){ return termen.reduce(function(som, t){ return som + t.c; }, 0); }
+  // velden voor de antwoordvorm [..]x + [..]
+  function p0VeldenLin(X, C, L){
+    return [{voor:'', na:L + ' +', antwoord:X}, {voor:'', na:'', antwoord:C}];
+  }
+
+  /* A. Herleiden */
+  function p0A1(){
+    var l = fisherYates(P0_LETTERS.slice()).slice(0, 2), L1 = l[0], L2 = l[1];
+    var p = rnd(-9, 9, true), q = rnd(-9, 9, true), K = p * q;
+    var letters = [L1, L2].sort().join('');
+    var q2 = term(q, L2, true);
+    return {
+      vraag: 'Herleid: <b>' + term(p, L1, true) + ' · ' + (q < 0 ? '(' + q2 + ')' : q2) + '</b>' + P0_HINT,
+      velden: [{voor:'', na:letters, antwoord:K}],
+      uitwerking: 'getallen: ' + p0H(p) + ' · ' + p0H(q) + ' = ' + fmt(K) + '<br>letters: ' + L1 + ' · ' + L2 + ' = ' + letters + '<br>dus: ' + term(K, letters, true)
+    };
+  }
+  function p0A2(){
+    var L = pick(P0_LETTERS), p = rnd(-9, 9, true), q = rnd(-9, 9, true), K = p * q;
+    var q2 = term(q, L, true);
+    return {
+      vraag: 'Herleid: <b>' + term(p, L, true) + ' · ' + (q < 0 ? '(' + q2 + ')' : q2) + '</b>' + P0_HINT,
+      velden: [{voor:'', na:L + '²', antwoord:K}],
+      uitwerking: 'getallen: ' + p0H(p) + ' · ' + p0H(q) + ' = ' + fmt(K) + '<br>letters: ' + L + ' · ' + L + ' = ' + L + '²<br>dus: ' + term(K, L + '²', true)
+    };
+  }
+  function p0A3(){
+    var l = fisherYates(P0_LETTERS.slice()).slice(0, 2), L = l[0], M = l[1];
+    var a = rnd(-9, 9, true), b, expr, antwoord, uitleg;
+    if (Math.random() < 0.5){
+      do { b = rnd(-9, 9, true); } while (a + b === 0);
+      expr = term(a, L, true) + term(b, L, false);
+      antwoord = 'ja';
+      uitleg = expr + ' zijn gelijksoortige termen (allebei met ' + L + '), dus je mag ze samennemen:<br>' + expr + ' = ' + term(a + b, L, true);
+    } else {
+      b = rnd(-9, 9, true);
+      var soort = pick(['getal', 'letter', 'kwadraat']);
+      if (soort === 'getal'){
+        expr = term(a, L, true) + term(b, '', false);
+        uitleg = term(a, L, true) + ' heeft een letter en ' + fmt(Math.abs(b)) + ' is een los getal: niet gelijksoortig, dus niet korter te schrijven.';
+      } else if (soort === 'letter'){
+        expr = term(a, L, true) + term(b, M, false);
+        uitleg = 'De letters ' + L + ' en ' + M + ' zijn verschillend: niet gelijksoortig, dus niet korter te schrijven.';
+      } else {
+        expr = term(a, L + '²', true) + term(b, L, false);
+        uitleg = L + '² en ' + L + ' zijn niet gelijksoortig, dus niet korter te schrijven.';
+      }
+      antwoord = 'nee';
+    }
+    return {
+      vraag: 'Kan dit korter? <b>' + expr + '</b>',
+      velden: [{keuze:['ja','nee'], antwoord:antwoord, voor:'', na:''}],
+      uitwerking: uitleg
+    };
+  }
+
+  /* B. Gelijksoortige termen */
+  function p0BMaak(aantalX, aantalGetal){
+    var L = pick(P0_LETTERS), xT, gT;
+    do {
+      xT = []; gT = [];
+      for (var i = 0; i < aantalX; i++) xT.push({c:rnd(-9, 9, true), l:L});
+      for (var j = 0; j < aantalGetal; j++) gT.push({c:rnd(-9, 9, true), l:''});
+    } while (p0Totaal(xT) === 0);
+    var X = p0Totaal(xT), C = p0Totaal(gT);
+    return {
+      vraag: 'Herleid: <b>' + p0Som(fisherYates(xT.concat(gT))) + '</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: L + '-termen: ' + p0Som(xT) + ' = ' + term(X, L, true) +
+                  '<br>getallen: ' + p0Som(gT) + ' = ' + fmt(C) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0B1(){ return p0BMaak(2, 2); }
+  function p0B2(){ return p0BMaak(3, 2); }
+
+  /* C. Haakjes wegwerken */
+  function p0C1(){
+    var L = pick(P0_LETTERS), p = rnd(2, 9), q = rnd(-9, 9, true), r = rnd(-9, 9, true);
+    var X = p * q, C = p * r;
+    return {
+      vraag: 'Herleid: <b>' + p + '(' + lin(q, r, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: p + ' · ' + p0HT(q, L) + ' = ' + term(X, L, true) +
+                  '<br>' + p + ' · ' + p0H(r) + ' = ' + fmt(C) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C2(){
+    var L = pick(P0_LETTERS), p = rnd(2, 9), q = rnd(1, 9), r = rnd(1, 9);
+    var X = -p * q, C = p * r;
+    return {
+      vraag: 'Herleid: <b>−' + p + '(' + lin(q, -r, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: '−' + p + ' · ' + term(q, L, true) + ' = ' + term(X, L, true) +
+                  '<br>−' + p + ' · −' + r + ' = +' + C + ' (min × min = plus)' +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C3(){
+    var L = pick(P0_LETTERS), s = rnd(1, 9), p = rnd(2, 9), q = rnd(-9, 9, true), r = rnd(-9, 9, true);
+    var X = -p * q, R = -p * r, C = s + R;
+    return {
+      vraag: 'Herleid: <b>' + s + ' − ' + p + '(' + lin(q, r, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: '−' + p + ' · ' + p0HT(q, L) + ' = ' + term(X, L, true) +
+                  '<br>−' + p + ' · ' + p0H(r) + ' = ' + fmt(R) + (r < 0 ? ' (min × min = plus)' : '') +
+                  '<br>' + s + ' − ' + p + '(' + lin(q, r, L) + ') = ' + s + term(X, L, false) + term(R, '', false) +
+                  '<br>getallen samen: ' + s + term(R, '', false) + ' = ' + fmt(C) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C4(){
+    var L = pick(P0_LETTERS), p = rnd(2, 9), r, q = rnd(-9, 9, true), s = rnd(-9, 9, true);
+    do { r = rnd(2, 9); } while (r === p);
+    var X = p - r, C = p * q - r * s;
+    var deel1 = term(p, L, true) + term(p * q, '', false);
+    var deel2 = term(-r, L, true) + term(-r * s, '', false);
+    return {
+      vraag: 'Herleid: <b>' + p + '(' + lin(1, q, L) + ') − ' + r + '(' + lin(1, s, L) + ')</b>' + P0_HINT,
+      velden: p0VeldenLin(X, C, L),
+      uitwerking: p + '(' + lin(1, q, L) + ') = ' + deel1 +
+                  '<br>−' + r + '(' + lin(1, s, L) + ') = ' + deel2 +
+                  '<br>samen: ' + term(p, L, true) + term(-r, L, false) + term(p * q, '', false) + term(-r * s, '', false) +
+                  '<br>dus: ' + lin(X, C, L)
+    };
+  }
+  function p0C5(){
+    var L = pick(P0_LETTERS), p = rnd(-9, 9, true), q = rnd(-9, 9, true);
+    var X = p + q, C = p * q;
+    return {
+      vraag: 'Herleid: <b>(' + lin(1, p, L) + ')(' + lin(1, q, L) + ')</b>' + P0_HINT,
+      velden: [{voor:L + '² +', na:L + ' +', antwoord:X}, {voor:'', na:'', antwoord:C}],
+      uitwerking: L + ' · ' + L + ' = ' + L + '²' +
+                  '<br>' + L + ' · ' + p0H(q) + ' = ' + term(q, L, true) +
+                  '<br>' + p0H(p) + ' · ' + L + ' = ' + term(p, L, true) +
+                  '<br>' + p0H(p) + ' · ' + p0H(q) + ' = ' + fmt(C) +
+                  '<br>samen: ' + L + '²' + term(q, L, false) + term(p, L, false) + term(C, '', false) +
+                  '<br>dus: ' + L + '²' + term(X, L, false) + term(C, '', false)
+    };
+  }
+  function p0C6(){
+    var L = pick(P0_LETTERS), p = rnd(-5, 5, true), q = rnd(-9, 9, true), r = rnd(-5, 5, true), s = rnd(-9, 9, true);
+    var A = p * r, B = p * s + q * r, C = q * s;
+    var L2 = L + '²';
+    return {
+      vraag: 'Herleid: <b>(' + lin(p, q, L) + ')(' + lin(r, s, L) + ')</b>' + P0_HINT,
+      velden: [{voor:'', na:L2 + ' +', antwoord:A}, {voor:'', na:L + ' +', antwoord:B}, {voor:'', na:'', antwoord:C}],
+      uitwerking: p0HT(p, L) + ' · ' + p0HT(r, L) + ' = ' + term(A, L2, true) +
+                  '<br>' + p0HT(p, L) + ' · ' + p0H(s) + ' = ' + term(p * s, L, true) +
+                  '<br>' + p0H(q) + ' · ' + p0HT(r, L) + ' = ' + term(q * r, L, true) +
+                  '<br>' + p0H(q) + ' · ' + p0H(s) + ' = ' + fmt(C) +
+                  '<br>samen: ' + term(A, L2, true) + term(p * s, L, false) + term(q * r, L, false) + term(C, '', false) +
+                  '<br>dus: ' + p0Som([{c:A, l:L2}, {c:B, l:L}, {c:C, l:''}])
+    };
+  }
+
+  /* D. Eenvoudige vergelijkingen (balansmethode) */
+  // stap-tekst om b weg te halen: "−5" of "+5"
+  function p0Weg(b){ return b > 0 ? '−' + b : '+' + Math.abs(b); }
+  function p0Deel(a){ return ':' + p0H(a); }
+  function p0D1(){
+    var x = rnd(-9, 9), a = pick([-1, 1]) * rnd(2, 9), b = rnd(-9, 9, true), c = a * x + b;
+    return {
+      vraag: 'Los op: <b>' + lin(a, b, 'x') + ' = ' + fmt(c) + '</b>' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: lin(a, b, 'x') + ' = ' + fmt(c) +
+                  '<br>' + p0Weg(b) + ' aan beide kanten → ' + term(a, 'x', true) + ' = ' + fmt(c - b) +
+                  '<br>' + p0Deel(a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+  function p0D2(){
+    var x = rnd(-9, 9), a = rnd(2, 9), b = rnd(-9, 9, true), c = b - a * x;
+    var links = fmt(b) + term(-a, 'x', false);
+    return {
+      vraag: 'Los op: <b>' + links + ' = ' + fmt(c) + '</b>' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: links + ' = ' + fmt(c) +
+                  '<br>' + p0Weg(b) + ' aan beide kanten → ' + term(-a, 'x', true) + ' = ' + fmt(c - b) +
+                  '<br>' + p0Deel(-a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+  function p0D3(){
+    var x = rnd(-9, 9), a = pick([-1, 1]) * rnd(2, 9), c = a * x;
+    return {
+      vraag: 'Los op: <b>' + term(a, 'x', true) + ' = ' + fmt(c) + '</b>' + P0_HINT,
+      velden: [{voor:'x =', na:'', antwoord:x}],
+      uitwerking: term(a, 'x', true) + ' = ' + fmt(c) +
+                  '<br>' + p0Deel(a) + ' aan beide kanten → x = ' + fmt(x)
+    };
+  }
+
   // === INIT ===
+  maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
+  maakOefening('p0-oef-a', [p0A1, p0A2, p0A3]);
+  maakOefening('p0-oef-b', [p0B1, p0B2]);
+  maakOefening('p0-oef-c', [p0C1, p0C2, p0C3, p0C4, p0C5, p0C6]);
+  maakOefening('p0-oef-d', [p0D1, p0D2, p0D3]);
 </script>
 </body>
 </html>
