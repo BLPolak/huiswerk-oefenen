@@ -392,10 +392,76 @@
     </div>
   </div>
   <div id="sub-p2-flashcards" class="sub-tab-content">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§1.2)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p2fc-goed">0</span> / <span id="p2fc-totaal">0</span></div>
+        <div class="fc-teller" id="p2fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p2Fc.flip()">
+        <div class="flip-card" id="p2fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p2fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p2fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p2fc-oordeel" style="display:none">
+        <button onclick="p2Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p2Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p2Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p2Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p2Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
   </div>
   <div id="sub-p2-oefenen" class="sub-tab-content">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Handeling, waarneming of conclusie?</h3>
+      <div class="score-balk">Score: <span id="p2hwc-goed">0</span> / <span id="p2hwc-totaal">0</span></div>
+      <div id="p2hwc-vraag" class="vraag-tekst"></div>
+      <div id="p2hwc-opties" class="mc-grid"></div>
+      <div id="p2hwc-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p2Hwc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Hwc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Veilig werken (pictogrammen, brander, lokaal)</h3>
+      <div class="score-balk">Score: <span id="p2vei-goed">0</span> / <span id="p2vei-totaal">0</span></div>
+      <div id="p2vei-vraag" class="vraag-tekst"></div>
+      <div id="p2vei-opties" class="mc-grid"></div>
+      <div id="p2vei-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p2Vei.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Vei.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — Rekenen met de grenswaarde</h3>
+      <div class="regel-blok blauw"><p>volume lokaal = lengte × breedte × hoogte (m³)<br>max. hoeveelheid (mg) = volume (m³) × grenswaarde (mg/m³)<br>concentratie (mg/m³) = hoeveelheid (mg) ÷ volume (m³)</p></div>
+      <div class="score-balk">Score: <span id="p2gw-goed">0</span> / <span id="p2gw-totaal">0</span></div>
+      <div id="p2gw-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p2gw-input" class="open-input" placeholder="Jouw antwoord" onkeydown="if(event.key==='Enter') p2Gw.controleer()">
+      <div id="p2gw-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p2gw-controleer-btn" onclick="p2Gw.controleer()">Controleer</button>
+        <button id="p2gw-volgende-btn" onclick="p2Gw.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p2Gw.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Gw.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -517,6 +583,29 @@
     s.schud = nieuw;
     s.opnieuw = function(){ s.goed = 0; s.totaal = 0; nieuw(); };
     s.start = nieuw;
+    return s;
+  }
+
+  /* Flashcards. data: [{voor, achter}] */
+  function maakFC(id, data){
+    var s = {kaarten: [], i: 0, goed: 0, totaal: 0, om: false};
+    function el(x){ return document.getElementById(id + '-' + x); }
+    function score(){ el('goed').textContent = s.goed; el('totaal').textContent = s.totaal; }
+    function toon(){
+      var k = s.kaarten[s.i];
+      el('voor').textContent = k.voor; el('achter').textContent = k.achter;
+      el('card').classList.remove('flipped'); s.om = false;
+      el('oordeel').style.display = 'none';
+      el('teller').textContent = (s.i + 1) + ' / ' + s.kaarten.length;
+      score();
+    }
+    s.flip = function(){ s.om = !s.om; el('card').classList.toggle('flipped', s.om); el('oordeel').style.display = s.om ? 'flex' : 'none'; };
+    s.oordeel = function(g){ s.totaal++; if (g) s.goed++; score(); s.volgende(); };
+    s.vorige = function(){ if (s.i > 0){ s.i--; toon(); } };
+    s.volgende = function(){ s.i = (s.i < s.kaarten.length - 1) ? s.i + 1 : 0; toon(); };
+    s.schud = function(){ if (s.totaal >= s.kaarten.length){ s.goed = 0; s.totaal = 0; } s.kaarten = fisherYates(s.kaarten); s.i = 0; toon(); };
+    s.opnieuw = function(){ s.kaarten = fisherYates(data.slice()); s.i = 0; s.goed = 0; s.totaal = 0; toon(); };
+    s.start = s.opnieuw;
     return s;
   }
 
@@ -646,11 +735,119 @@
   }
   var p1Dic = maakReken('p1dic', p1DicGenereer);
 
+  /* §1.2 FLASHCARDS */
+  var p2Fc = maakFC('p2fc', [
+    {voor:'Pictogram: doodshoofd', achter:'Giftige stoffen'},
+    {voor:'Pictogram: exploderende bom', achter:'Ontplofbare stoffen'},
+    {voor:'Pictogram: vlam', achter:'Ontvlambare stoffen'},
+    {voor:'Pictogram: vlam boven een rondje', achter:'Oxiderende stoffen'},
+    {voor:'Pictogram: druppels die een hand en metaal aantasten', achter:'Corrosieve (bijtende) stoffen'},
+    {voor:'Pictogram: uitroepteken', achter:'Schadelijke of irriterende stoffen'},
+    {voor:'Pictogram: persoon met een ster op de borst', achter:'Gevaar voor de gezondheid'},
+    {voor:'Pictogram: dode boom en dode vis', achter:'Gevaar voor het milieu'},
+    {voor:'Wat staat er in het boek Chemiekaarten?', achter:'Per stof: de gevaren, wat je moet doen bij een ongeluk en eigenschappen zoals smeltpunt, kookpunt en dichtheid'},
+    {voor:'Wat is de grenswaarde van een stof?', achter:'Hoeveel mg van de stof in 1 m³ lucht aanwezig mag zijn (mg/m³)'},
+    {voor:'Waar gaan H-zinnen over?', achter:'Gezondheidsgevaren (H van hazard)'},
+    {voor:'Waar gaan P-zinnen over?', achter:'Het voorkomen van ongelukken (P van prevention)'},
+    {voor:'Gele vlam: luchttoevoer en gebruik?', achter:'Luchttoevoer dicht; goed zichtbare pauzevlam'},
+    {voor:'Kleurloze vlam: gebruik?', achter:'Een kleine hoeveelheid stof voorzichtig verwarmen'},
+    {voor:'Ruisende vlam: gebruik?', achter:'Een grote hoeveelheid stof sterk verhitten (heetste vlam)'},
+    {voor:'Waar is de ruisende vlam het heetst?', achter:'Net boven de blauwe kern'},
+    {voor:'Wat is gedestilleerd water?', achter:'Water waaruit alle opgeloste stoffen zijn verwijderd'},
+    {voor:'Waarvoor dient een kroezentang?', achter:'Om hete of brandende dingen vast te pakken'},
+    {voor:'Waarvoor dient een reageerbuishouder?', achter:'Om een reageerbuis vast te houden tijdens het verwarmen'},
+    {voor:'Waarvoor dient een gaasje?', achter:'Ligt op de driepoot en verdeelt de warmte'},
+    {voor:'Waarvoor dient de noodstop?', achter:'Schakelt in één keer elektriciteit, water en gas uit'},
+    {voor:'Waarvoor dient de nooddouche?', achter:'Een gevaarlijke, bijtende stof van je huid spoelen'},
+    {voor:'Wat is een handeling?', achter:'Wat je doet tijdens een experiment'},
+    {voor:'Wat is een waarneming?', achter:'Wat je kunt zien, horen, voelen of ruiken'},
+    {voor:'Wat is een conclusie?', achter:'Wat je afleidt uit je waarnemingen'},
+    {voor:'Waarom houd je een logboek bij?', achter:'Zodat je later precies kunt teruglezen wat er tijdens het experiment gebeurde'}
+  ]);
+
+  /* §1.2 OEFENEN 1 — handeling / waarneming / conclusie */
+  var H = 'Handeling', W = 'Waarneming', C = 'Conclusie', HWC = [H, W, C];
+  var p2Hwc = maakMC('p2hwc', [
+    {vraag:'Je koopt een pak zout.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'Zout is een witte stof.', opties:HWC, antwoord:W, uitleg:'Dat zie je.'},
+    {vraag:'De kristalvorm van zout is een kubusje.', opties:HWC, antwoord:W, uitleg:'Dat zie je (met een microscoop).'},
+    {vraag:'Je bakt zoutstaafjes.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'Je mengt zout met zetmeel uit algen.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'De zoutkoepel bezwijkt niet bij grote druk.', opties:HWC, antwoord:W, uitleg:'Dat zie je gebeuren (of juist niet).'},
+    {vraag:'Zout is goed bruikbaar als bouwmateriaal.', opties:HWC, antwoord:C, uitleg:'Dit leid je af uit de waarnemingen.'},
+    {vraag:'Je laat een brandende lucifer in een bakje met benzine vallen.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'De benzine vliegt in brand.', opties:HWC, antwoord:W, uitleg:'Dat zie je.'},
+    {vraag:'Het wordt warm in de omgeving van het bakje.', opties:HWC, antwoord:W, uitleg:'Dat voel je.'},
+    {vraag:'Benzine is een licht ontvlambare stof.', opties:HWC, antwoord:C, uitleg:'Afgeleid uit wat je zag.'},
+    {vraag:'Bij de verbranding van benzine komt warmte vrij.', opties:HWC, antwoord:C, uitleg:'Afgeleid uit wat je voelde.'},
+    {vraag:'Je houdt een stukje magnesiumlint in de vlam.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'Er ontstaat fel wit licht en een wit poeder.', opties:HWC, antwoord:W, uitleg:'Dat zie je.'},
+    {vraag:'Magnesium is brandbaar.', opties:HWC, antwoord:C, uitleg:'Afgeleid uit de waarnemingen.'},
+    {vraag:'Je ruikt een scherpe geur.', opties:HWC, antwoord:W, uitleg:'Ruiken is waarnemen.'},
+    {vraag:'Je zet de luchttoevoer van de brander open.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'De vlam wordt blauw en gaat ruisen.', opties:HWC, antwoord:W, uitleg:'Dat zie en hoor je.'}
+  ]);
+
+  /* §1.2 OEFENEN 2 — veilig werken */
+  var p2Vei = maakMC('p2vei', [
+    {vraag:'Wat betekent het pictogram met het doodshoofd?', opties:['Giftige stoffen','Gevaar voor de gezondheid','Corrosieve stoffen','Gevaar voor het milieu'], antwoord:'Giftige stoffen'},
+    {vraag:'Wat betekent het pictogram met het uitroepteken?', opties:['Schadelijke of irriterende stoffen','Ontplofbare stoffen','Giftige stoffen','Oxiderende stoffen'], antwoord:'Schadelijke of irriterende stoffen'},
+    {vraag:'Wat betekent het pictogram met de vlam boven een rondje?', opties:['Oxiderende stoffen','Ontvlambare stoffen','Ontplofbare stoffen','Corrosieve stoffen'], antwoord:'Oxiderende stoffen', uitleg:'Let op het rondje: dat is het verschil met ontvlambaar.'},
+    {vraag:'Wat betekent het pictogram met de dode boom en vis?', opties:['Gevaar voor het milieu','Giftige stoffen','Gevaar voor de gezondheid','Schadelijke of irriterende stoffen'], antwoord:'Gevaar voor het milieu'},
+    {vraag:'Wat betekent het pictogram met de persoon met een ster op de borst?', opties:['Gevaar voor de gezondheid','Giftige stoffen','Schadelijke of irriterende stoffen','Ontplofbare stoffen'], antwoord:'Gevaar voor de gezondheid'},
+    {vraag:'Wat betekent het pictogram met druppels die een hand en metaal aantasten?', opties:['Corrosieve stoffen','Giftige stoffen','Oxiderende stoffen','Gevaar voor het milieu'], antwoord:'Corrosieve stoffen'},
+    {vraag:'Welke vlam is het heetst?', opties:['Ruisende vlam','Kleurloze vlam','Gele vlam'], antwoord:'Ruisende vlam'},
+    {vraag:'Welke vlam gebruik je als pauzevlam?', opties:['Gele vlam','Kleurloze vlam','Ruisende vlam'], antwoord:'Gele vlam', uitleg:'De gele vlam is goed zichtbaar.'},
+    {vraag:'Welke vlam gebruik je om een kleine hoeveelheid stof voorzichtig te verwarmen?', opties:['Kleurloze vlam','Gele vlam','Ruisende vlam'], antwoord:'Kleurloze vlam'},
+    {vraag:'Welke kleur heeft de vlam als de luchttoevoer helemaal dicht is?', opties:['Geel','Blauw','Kleurloos'], antwoord:'Geel'},
+    {vraag:'Wat doe je als eerste bij het aansteken van de brander?', opties:['Luchtschijf helemaal dicht draaien','Gaskraan opendraaien','Lucifer aansteken','Gasregelknop opendraaien'], antwoord:'Luchtschijf helemaal dicht draaien'},
+    {vraag:'Wat doe je als laatste bij het uitzetten van de brander?', opties:['Gaskraan dichtdraaien','Luchtschijf dichtdraaien','Gasregelknop dichtdraaien'], antwoord:'Gaskraan dichtdraaien'},
+    {vraag:'Waar is de ruisende vlam het heetst?', opties:['Net boven de blauwe kern','In de blauwe kern','Helemaal bovenin de vlam'], antwoord:'Net boven de blauwe kern'},
+    {vraag:'Waarom zit er gedestilleerd water in de spuitfles?', opties:['Kraanwater bevat opgeloste stoffen die het experiment storen','Gedestilleerd water is kouder','Kraanwater is giftig'], antwoord:'Kraanwater bevat opgeloste stoffen die het experiment storen'},
+    {vraag:'Je krijgt een gevaarlijke stof in je oog. Wat gebruik je?', opties:['Oogdouche','Nooddouche','Blusdeken','Brandblusser'], antwoord:'Oogdouche'},
+    {vraag:'Iemands kleding staat in brand. Wat gebruik je?', opties:['Blusdeken','Oogdouche','Noodstop','Spuitfles'], antwoord:'Blusdeken'},
+    {vraag:'Wat doet de noodstop?', opties:['Elektriciteit, water en gas in één keer uitschakelen','Het brandalarm laten afgaan','Alleen de gaskraan dichtdraaien'], antwoord:'Elektriciteit, water en gas in één keer uitschakelen'},
+    {vraag:'Waar gaan P-zinnen over?', opties:['Het voorkomen van ongelukken','Gezondheidsgevaren','De prijs van de stof'], antwoord:'Het voorkomen van ongelukken', uitleg:'P van prevention.'},
+    {vraag:'Waar gaan H-zinnen over?', opties:['Gezondheidsgevaren','Het voorkomen van ongelukken','Het kookpunt van de stof'], antwoord:'Gezondheidsgevaren', uitleg:'H van hazard.'},
+    {vraag:'Wat geeft de grenswaarde aan?', opties:['Hoeveel mg van een stof in 1 m³ lucht aanwezig mag zijn','Bij welke temperatuur een stof gaat koken','Hoeveel gram stof je mag gebruiken in een proef'], antwoord:'Hoeveel mg van een stof in 1 m³ lucht aanwezig mag zijn'},
+    {vraag:'Hoe ruik je veilig aan een stof?', opties:['Lucht met je hand naar je toe wapperen','Je neus vlak boven de buis houden','Diep inademen boven de buis'], antwoord:'Lucht met je hand naar je toe wapperen'},
+    {vraag:'Je verwarmt een vloeistof in een reageerbuis. Waar richt je de opening?', opties:['Van jezelf en anderen af','Naar jezelf toe','Naar je buurman'], antwoord:'Van jezelf en anderen af'}
+  ]);
+
+  /* §1.2 OEFENEN 3 — grenswaarde (gerandomiseerd) */
+  function p2GwGenereer(){
+    var l = rnd(6, 12, 1), b = rnd(5, 9, 1), h = rnd(2.5, 3.5, 1);
+    var V = l * b * h;
+    var stof = pick([{n:'ammoniak', g:14}, {n:'stof X', g:pick([5, 10, 15, 20, 25, 50])}, {n:'stof Y', g:pick([2, 8, 12, 30, 40])}]);
+    var type = pick(['volume','max','conc','lucifer']);
+    var lok = 'Een lokaal is ' + fmt(l) + ' m lang, ' + fmt(b) + ' m breed en ' + fmt(h) + ' m hoog.';
+    if (type === 'volume'){
+      return {vraag: lok + ' Bereken het volume van het lokaal in m³.', antwoord: V, eenheid:'m³', uitleg:'V = ' + fmt(l) + ' × ' + fmt(b) + ' × ' + fmt(h)};
+    }
+    if (type === 'max'){
+      return {vraag: lok + ' De grenswaarde van ' + stof.n + ' is ' + stof.g + ' mg/m³. Hoeveel mg ' + stof.n + ' mag er maximaal in de lucht van het lokaal zitten?', antwoord: V * stof.g, eenheid:'mg', uitleg:'V = ' + fmt(V) + ' m³; ' + fmt(V) + ' × ' + stof.g};
+    }
+    if (type === 'conc'){
+      var mg = Math.round(V * stof.g * rnd(0.4, 1.8, 2));
+      var c = mg / V;
+      return {vraag: lok + ' Er komt ' + fmt(mg) + ' mg ' + stof.n + ' vrij in de lucht. Bereken de concentratie in mg/m³. (De grenswaarde is ' + stof.g + ' mg/m³.)', antwoord: c, eenheid:'mg/m³', uitleg:'c = ' + fmt(mg) + ' ÷ ' + fmt(V) + (c > stof.g ? '. Dat is BOVEN de grenswaarde!' : '. Dat is onder de grenswaarde.')};
+    }
+    var perLucifer = pick([5, 10]);
+    var gz = 15;
+    var n = Math.floor(V * gz / perLucifer);
+    return {vraag: lok + ' Bij het afsteken van een lucifer komt ' + perLucifer + ' mg zwaveldioxide vrij. De grenswaarde is ' + gz + ' mg/m³. Hoeveel lucifers mogen er maximaal worden afgestoken? (Rond af naar beneden.)', antwoord: n, eenheid:'lucifers', uitleg:'max = ' + fmt(V) + ' × ' + gz + ' = ' + fmt(V*gz) + ' mg; ÷ ' + perLucifer + ' mg'};
+  }
+  var p2Gw = maakReken('p2gw', p2GwGenereer, 0.01);
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
   p1Omr.start();
   p1Dic.start();
+  p2Fc.start();
+  p2Hwc.start();
+  p2Vei.start();
+  p2Gw.start();
 </script>
 </body>
 </html>
