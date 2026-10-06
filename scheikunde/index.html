@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheikunde — 3 HAVO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Nunito, sans-serif; background: #f8fafc; color: #1e293b; }
+    a { color: inherit; text-decoration: none; }
+    header {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: white; padding: 1.2rem 1.5rem;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    header h1 { font-size: 1.4rem; font-weight: 800; }
+    header p  { font-size: .9rem; opacity: .85; margin-top: .2rem; }
+    header a  { font-size: .85rem; opacity: .8; display: inline-block; margin-top: .3rem; }
+    header a:hover { opacity: 1; }
+    .tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1rem 1.5rem; background: #fff; border-bottom: 2px solid #e2e8f0; }
+    .tab-btn { padding: .5rem 1rem; border: none; border-radius: 8px; background: #e5e7eb; cursor: pointer; font-family: Nunito, sans-serif; font-size: .9rem; font-weight: 700; transition: background .2s, color .2s; }
+    .tab-btn.active { background: linear-gradient(135deg, #059669, #047857); color: #fff; }
+    .tab-btn:hover:not(.active) { background: #d1d5db; }
+    .tab-content { display: none; padding: 1.5rem; max-width: 820px; margin: 0 auto; }
+    .tab-content.active { display: block; }
+    .sub-tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+    .sub-tab-btn {
+      padding: .4rem .95rem; border: 2px solid #059669; border-radius: 999px;
+      background: #fff; color: #059669; cursor: pointer;
+      font-family: Nunito, sans-serif; font-size: .85rem; font-weight: 700;
+      transition: background .15s, color .15s;
+    }
+    .sub-tab-btn.active { background: #059669; color: #fff; }
+    .sub-tab-btn:hover:not(.active) { background: #d1fae5; }
+    .sub-tab-content { display: none; }
+    .sub-tab-content.active { display: block; }
+    .uitleg-card, .oefening-kaart {
+      background: #fff; border-radius: 12px; padding: 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .uitleg-card h2 { color: #059669; margin-bottom: 1rem; font-size: 1.2rem; }
+    .uitleg-card h3 { color: #047857; margin: 1rem 0 .5rem; font-size: 1rem; }
+    .oefening-kaart h3 { color: #059669; margin-bottom: .5rem; font-size: 1.1rem; }
+    .regel-blok { border-radius: 8px; padding: .9rem 1.1rem; margin: .6rem 0; }
+    .regel-blok p { margin: .2rem 0; line-height: 1.5; }
+    .groen     { background: #d1fae5; border-left: 4px solid #10b981; }
+    .oranje    { background: #fef3c7; border-left: 4px solid #f59e0b; }
+    .rood-blok { background: #fee2e2; border-left: 4px solid #ef4444; }
+    .blauw     { background: #eff6ff; border-left: 4px solid #3b82f6; }
+    .stappen { display: flex; flex-direction: column; gap: .5rem; margin: .8rem 0; }
+    .stap { background: #eff6ff; border-left: 4px solid #3b82f6; padding: .6rem 1rem; border-radius: 6px; font-weight: 700; font-size: .95rem; }
+    .voorbeeld-blok { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin-top: .8rem; line-height: 1.7; }
+    .score-balk  { font-size: .88rem; color: #6b7280; margin-bottom: .7rem; }
+    .vraag-tekst { font-size: 1.15rem; font-weight: 700; min-height: 2rem; margin: .75rem 0; line-height: 1.4; }
+    .mc-grid { display: flex; flex-direction: column; gap: .5rem; margin: .6rem 0 .8rem; }
+    .mc-btn {
+      padding: .7rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      background: #fff; cursor: pointer; font-family: Nunito, sans-serif;
+      font-size: .98rem; font-weight: 600; text-align: left;
+      transition: border-color .15s, background .15s;
+    }
+    .mc-btn:hover { border-color: #059669; background: #d1fae5; }
+    .feedback      { min-height: 1.5rem; font-weight: 700; margin: .4rem 0; font-size: .97rem; }
+    .feedback.goed { color: #059669; }
+    .feedback.fout { color: #dc2626; }
+    .knoppen-rij { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+    .knoppen-rij button {
+      padding: .5rem 1rem; border: none; border-radius: 8px;
+      background: #059669; color: #fff; font-family: Nunito, sans-serif;
+      font-weight: 700; cursor: pointer; font-size: .9rem;
+    }
+    .knoppen-rij button:hover { background: #047857; }
+    .knoppen-rij button:disabled { background: #cbd5e1; cursor: default; }
+    .data-tabel { width: 100%; border-collapse: collapse; margin: .6rem 0 1rem; font-size: .92rem; }
+    .data-tabel th, .data-tabel td { padding: .4rem .6rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .data-tabel th { color: #059669; font-weight: 800; }
+    .data-tabel td:last-child, .data-tabel th:last-child { text-align: left; }
+    .data-tabel td { vertical-align: top; }
+    .data-tabel tr:has(.picto) td { vertical-align: middle; }
+    .open-input {
+      width: 100%; padding: .7rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px;
+      font-family: Nunito, sans-serif; font-size: 1rem; font-weight: 600; color: #1e293b;
+      margin: .6rem 0;
+    }
+    .open-input:focus { outline: none; border-color: #059669; }
+    .fc-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; gap: .6rem; }
+    .fc-teller { font-size: .85rem; font-weight: 800; color: #6b7280; background: #f1f5f9; padding: .25rem .6rem; border-radius: 6px; white-space: nowrap; }
+    .flip-wrapper { width: 100%; perspective: 1000px; cursor: pointer; margin-bottom: .8rem; }
+    .flip-card { width: 100%; min-height: 160px; position: relative; transform-style: preserve-3d; transition: transform .45s; }
+    .flip-card.flipped { transform: rotateY(180deg); }
+    .flip-face {
+      position: absolute; inset: 0; backface-visibility: hidden;
+      border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.2rem; text-align: center;
+    }
+    .flip-front { background: linear-gradient(135deg, #d1fae5, #fff); border: 2px solid #a7f3d0; }
+    .flip-back { background: linear-gradient(135deg, #ecfdf5, #fff); border: 2px solid #6ee7b7; transform: rotateY(180deg); }
+    .flip-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: #10b981; margin-bottom: .6rem; }
+    .flip-tekst { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; }
+    .flip-hint { font-size: .72rem; color: #94a3b8; font-weight: 600; margin-top: .8rem; }
+    footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
+    .picto { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border:3px solid #dc2626; background:#fff; transform:rotate(45deg); margin:6px; }
+    .picto span { transform:rotate(-45deg); font-size:1.1rem; }
+    .diagram-rij { display:flex; gap:.8rem; flex-wrap:wrap; margin:.8rem 0; }
+    .diagram-item { flex:1 1 220px; background:#f0fdf4; border-radius:8px; padding:.6rem; text-align:center; }
+    .diagram-label { font-size:.85rem; font-weight:800; color:#047857; margin-top:.3rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>&#129514; Scheikunde</h1>
+  <p>3 HAVO &middot; H1 Scheikunde is overal</p>
+  <a href="../">&larr; Terug naar overzicht</a>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('p1',this)">&sect;1.1 Stofeigenschappen</button>
+  <button class="tab-btn" onclick="showTab('p2',this)">&sect;1.2 Veiligheid</button>
+  <button class="tab-btn" onclick="showTab('p3',this)">&sect;1.3 Faseveranderingen</button>
+  <button class="tab-btn" onclick="showTab('p4',this)">&#128218; Begrippen H1</button>
+</nav>
+
+<div id="tab-p1" class="tab-content active">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p1','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p1','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p1-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card">
+      <h2>Wat is scheikunde?</h2>
+      <p><strong>Scheikunde</strong> is de natuurwetenschap die zich bezighoudt met <strong>stoffen</strong> en met het veranderen van stoffen in andere stoffen.</p>
+      <div class="regel-blok blauw"><p><strong>Stof:</strong> alles wat massa heeft is een stof. Alles om je heen bestaat uit stoffen, ook jijzelf.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Stofeigenschappen</h2>
+      <p>Een <strong>stofeigenschap</strong> is een eigenschap waaraan je een stof herkent. Elke stof heeft een <strong>unieke combinatie</strong> van stofeigenschappen. Verschillen twee stoffen in één of meer eigenschappen, dan zijn het verschillende stoffen.</p>
+      <div class="regel-blok groen"><p><strong>Wél een stofeigenschap:</strong> kleur, geur, smaak, fase bij kamertemperatuur, brandbaarheid, oplosbaarheid in water, giftigheid, bestand tegen zuren, smeltpunt, kookpunt, dichtheid.</p></div>
+      <div class="regel-blok rood-blok"><p><strong>Géén stofeigenschap:</strong> massa, volume, vorm en temperatuur. Die hangen af van <em>hoeveel</em> stof je hebt of van het voorwerp, niet van de stof zelf.</p></div>
+      <div class="voorbeeld-blok">Voorbeeld: suiker is wit, vast bij kamertemperatuur, brandbaar, lost goed op in water en smaakt zoet.</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Stofconstanten</h2>
+      <p>Een <strong>stofconstante</strong> is een stofeigenschap die je met een <strong>getal + eenheid</strong> kunt weergeven.</p>
+      <ul style="margin:.5rem 0 .5rem 1.2rem;line-height:1.7">
+        <li><strong>Smeltpunt:</strong> temperatuur waarbij een stof smelt (en stolt)</li>
+        <li><strong>Kookpunt:</strong> temperatuur waarbij een stof kookt</li>
+        <li><strong>Dichtheid:</strong> massa van 1 m³ (of 1 cm³) van een stof</li>
+      </ul>
+      <div class="voorbeeld-blok">Water: smeltpunt 0 °C · kookpunt 100 °C · dichtheid 1,0 g/cm³ = 1,0·10³ kg/m³</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Dichtheid</h2>
+      <p>Massa en volume zijn géén stofeigenschap, maar de <strong>dichtheid</strong> wel: die is voor een stof altijd hetzelfde, hoeveel je er ook van hebt.</p>
+      <div class="voorbeeld-blok"><strong>dichtheid = massa ÷ volume</strong> &nbsp;(ρ = m ÷ V)<br>
+      Omgekeerd: <strong>massa = dichtheid × volume</strong> &nbsp;en&nbsp; <strong>volume = massa ÷ dichtheid</strong></div>
+      <div class="regel-blok blauw"><p><strong>Eenheden:</strong> kg/m³ of g/cm³.<br><strong>g/cm³ × 1000 = kg/m³</strong> (water: 1,0 g/cm³ = 1000 kg/m³)</p></div>
+      <div class="regel-blok oranje"><p><strong>Let op:</strong> zorg dat massa en volume in de eenheden staan die bij de dichtheid horen (kg en m³, óf g en cm³) voordat je rekent.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Grootheden en eenheden</h2>
+      <p>Een <strong>grootheid</strong> is een eigenschap die je kunt meten, zoals massa of volume. De <strong>eenheid</strong> is de maat waarmee je die grootheid meet, zoals kilogram of liter.</p>
+      <div class="voorbeeld-blok">grootheid: massa → eenheid: kg &nbsp;·&nbsp; grootheid: volume → eenheid: L of m³<br><strong>kilo (k)</strong> betekent duizend: 1 kg = 1000 g</div>
+
+      <h3>Omrekenschema massa</h3>
+      <table class="data-tabel">
+        <tr><th>Van → naar</th><th>Doe</th></tr>
+        <tr><td>kg → g → mg → µg (kleiner)</td><td>× 1000 per stap</td></tr>
+        <tr><td>µg → mg → g → kg (groter)</td><td>÷ 1000 per stap</td></tr>
+        <tr><td>ton → kg</td><td>× 1000 (1 ton = 1000 kg)</td></tr>
+      </table>
+
+      <h3>Omrekenschema volume</h3>
+      <table class="data-tabel">
+        <tr><th>Van → naar</th><th>Doe</th></tr>
+        <tr><td>m³ → dm³ (= L) → cm³ (= mL)</td><td>× 1000 per stap</td></tr>
+        <tr><td>cm³ (= mL) → dm³ (= L) → m³</td><td>÷ 1000 per stap</td></tr>
+      </table>
+      <div class="regel-blok groen"><p><strong>Onthoud:</strong> 1 cm³ = 1 mL &nbsp;·&nbsp; 1 dm³ = 1 L &nbsp;·&nbsp; 1 m³ = 1000 L</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Rekenvoorbeeld</h2>
+      <p>Je hebt 325 g suiker met een volume van 0,205 L. Wat is de dichtheid in kg/m³?</p>
+      <div class="stappen">
+        <div class="stap">① Massa naar kg: 325 g ÷ 1000 = 0,325 kg</div>
+        <div class="stap">② Volume naar m³: 0,205 L ÷ 1000 = 0,000205 m³</div>
+        <div class="stap">③ ρ = m ÷ V = 0,325 ÷ 0,000205 ≈ 1,6·10³ kg/m³</div>
+      </div>
+      <div class="regel-blok oranje"><p><strong>Waarom eenheden zo belangrijk zijn:</strong> in 1999 ging de Mars Climate Orbiter verloren doordat het ene team in Engelse eenheden (pound) rekende en het andere in metrische eenheden. Het ruimtevaartuig kwam te dicht bij Mars en verbrandde.</p></div>
+    </div>
+  </div>
+  <div id="sub-p1-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Begrip → betekenis (§1.1)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p1fc-goed">0</span> / <span id="p1fc-totaal">0</span></div>
+        <div class="fc-teller" id="p1fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p1FcFlip()">
+        <div class="flip-card" id="p1fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p1fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p1fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p1fc-oordeel" style="display:none">
+        <button onclick="p1FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p1FcOordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p1FcVorige()">&larr; Vorige</button>
+        <button onclick="p1FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p1FcOpnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1FcSchud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p1-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Stofeigenschap of niet?</h3>
+      <div class="score-balk">Score: <span id="p1eig-goed">0</span> / <span id="p1eig-totaal">0</span></div>
+      <div id="p1eig-vraag" class="vraag-tekst"></div>
+      <div id="p1eig-opties" class="mc-grid"></div>
+      <div id="p1eig-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p1Eig.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1Eig.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Eenheden omrekenen</h3>
+      <div class="score-balk">Score: <span id="p1omr-goed">0</span> / <span id="p1omr-totaal">0</span></div>
+      <div id="p1omr-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p1omr-input" class="open-input" placeholder="Jouw antwoord (bijv. 0,25)" onkeydown="if(event.key==='Enter') p1Omr.controleer()">
+      <div id="p1omr-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p1omr-controleer-btn" onclick="p1Omr.controleer()">Controleer</button>
+        <button id="p1omr-volgende-btn" onclick="p1Omr.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p1Omr.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1Omr.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — Rekenen met dichtheid</h3>
+      <div class="regel-blok blauw"><p>ρ = m ÷ V &nbsp;·&nbsp; m = ρ × V &nbsp;·&nbsp; V = m ÷ ρ</p></div>
+      <div class="score-balk">Score: <span id="p1dic-goed">0</span> / <span id="p1dic-totaal">0</span></div>
+      <div id="p1dic-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p1dic-input" class="open-input" placeholder="Jouw antwoord (bijv. 7,9)" onkeydown="if(event.key==='Enter') p1Dic.controleer()">
+      <div id="p1dic-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p1dic-controleer-btn" onclick="p1Dic.controleer()">Controleer</button>
+        <button id="p1dic-volgende-btn" onclick="p1Dic.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p1Dic.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1Dic.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p2" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p2','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p2','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p2-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card">
+      <h2>De 8 gevarenpictogrammen</h2>
+      <p>Gevarenpictogrammen zijn een soort &lsquo;waarschuwingsborden&rsquo; voor gevaarlijke stoffen. Ze staan op de verpakking en worden over de hele wereld gebruikt: een rode ruit met een zwart symbool.</p>
+      <table class="data-tabel">
+        <tr><th></th><th>Symbool</th><th>Betekenis</th></tr>
+        <tr><td><span class="picto"><span>☠️</span></span></td><td>Doodshoofd</td><td><strong>Giftige stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>💥</span></span></td><td>Exploderende bom</td><td><strong>Ontplofbare stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>🔥</span></span></td><td>Vlam</td><td><strong>Ontvlambare stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>⭕</span></span></td><td>Vlam boven een rondje</td><td><strong>Oxiderende stoffen</strong> (maken een brand heviger)</td></tr>
+        <tr><td><span class="picto"><span>🧪</span></span></td><td>Druppels die een hand en metaal aantasten</td><td><strong>Corrosieve stoffen</strong> (bijtend)</td></tr>
+        <tr><td><span class="picto"><span>❗</span></span></td><td>Uitroepteken</td><td><strong>Schadelijke of irriterende stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>🧍</span></span></td><td>Persoon met een &lsquo;ster&rsquo; op de borst</td><td><strong>Gevaar voor de gezondheid</strong> (op lange termijn)</td></tr>
+        <tr><td><span class="picto"><span>🐟</span></span></td><td>Dode boom en dode vis</td><td><strong>Gevaar voor het milieu</strong></td></tr>
+      </table>
+      <p style="font-size:.85rem;color:#6b7280">De emoji's zijn hulpjes; op de SO zie je de echte zwarte symbolen.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Chemiekaarten, grenswaarde, H- en P-zinnen</h2>
+      <p>In het boek <strong>Chemiekaarten</strong> (of op internet) vind je per stof informatie: de gevaren, wat je moet doen bij een ongeluk, en fysische eigenschappen zoals smeltpunt, kookpunt en dichtheid.</p>
+      <div class="regel-blok oranje"><p><strong>Grenswaarde:</strong> geeft aan hoeveel mg van een stof er in <strong>1 m³ lucht</strong> aanwezig mag zijn. Ga je boven deze grens, dan is het schadelijk. Eenheid: <strong>mg/m³</strong>.</p></div>
+      <div class="regel-blok blauw"><p><strong>H-zinnen</strong> (H van <em>hazard</em>) gaan over gezondheidsgevaren. Bijv. H314: veroorzaakt ernstige brandwonden.<br><strong>P-zinnen</strong> (P van <em>prevention</em>) gaan over het voorkomen van ongelukken, dus wat je moet doen.</p></div>
+      <div class="voorbeeld-blok"><strong>Grenswaarde-som:</strong> een lokaal is 10 m × 8 m × 3 m = 240 m³. De grenswaarde is 15 mg/m³. Dan mag er maximaal 240 × 15 = 3600 mg van de stof in de lucht zitten.</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Veiligheidsregels</h2>
+      <ol style="margin:.5rem 0 .5rem 1.3rem;line-height:1.7">
+        <li>Draag altijd een bril.</li>
+        <li>Draag altijd een labjas en knoop deze dicht.</li>
+        <li>Bind lange haren bij elkaar.</li>
+        <li>Neem zo min mogelijk spullen mee het practicumlokaal in.</li>
+        <li>Werk rustig en geconcentreerd.</li>
+        <li>Houd je stipt aan de proefvoorschriften.</li>
+        <li>Twijfel je ergens aan? Raadpleeg dan je docent.</li>
+        <li>Richt een reageerbuis nooit op jezelf of op een ander.</li>
+        <li>Proef niet van de stoffen.</li>
+        <li>Raak stoffen niet met je handen aan.</li>
+        <li>Moet je ruiken? Doe het voorzichtig: wapper de lucht met je hand naar je toe.</li>
+        <li>Eet en drink niet in het practicumlokaal.</li>
+        <li>Was na afloop van het practicum goed je handen.</li>
+      </ol>
+      <div class="regel-blok oranje"><p><strong>Reageerbuis verwarmen:</strong> klem hem bovenaan in de reageerbuishouder, houd de opening van je af (en van anderen) en schud zachtjes, zodat de vloeistof er niet plotseling uit spuit.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>De gasbrander</h2>
+      <p>Met de <strong>gastoevoer</strong> (gasregelknop) regel je hoeveel gas er in de brander komt, met de <strong>luchttoevoer</strong> (luchtschijf) hoeveel lucht.</p>
+      <table class="data-tabel">
+        <tr><th>Vlam</th><th>Luchttoevoer</th><th>Gebruik</th></tr>
+        <tr><td><strong>Gele vlam</strong> (pauzevlam)</td><td>helemaal dicht</td><td>Goed zichtbaar: als je de brander even niet gebruikt</td></tr>
+        <tr><td><strong>Kleurloze vlam</strong></td><td>een beetje open</td><td>Een kleine hoeveelheid stof voorzichtig verwarmen</td></tr>
+        <tr><td><strong>Ruisende vlam</strong></td><td>verder open</td><td>Een grote hoeveelheid stof sterk verhitten (heetste vlam)</td></tr>
+      </table>
+      <div class="regel-blok blauw"><p>De ruisende vlam is het heetst <strong>net boven de blauwe kern</strong>.</p></div>
+      <h3>Aansteken</h3>
+      <div class="stappen">
+        <div class="stap">① Luchtschijf helemaal dicht</div>
+        <div class="stap">② Gasregelknop helemaal dicht</div>
+        <div class="stap">③ Gaskraan open</div>
+        <div class="stap">④ Brandende lucifer boven de brander houden</div>
+        <div class="stap">⑤ Gasregelknop een beetje open → gele vlam</div>
+      </div>
+      <h3>Uitzetten</h3>
+      <div class="stappen">
+        <div class="stap">① Luchtschijf dicht &nbsp;② Gasregelknop dicht &nbsp;③ Gaskraan dicht</div>
+      </div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Spuitfles met gedestilleerd water</h2>
+      <p>Kraanwater bevat allerlei opgeloste stoffen die een experiment kunnen storen. Daarom zit in de spuitfles <strong>gedestilleerd water</strong>: water waaruit alle opgeloste stoffen zijn verwijderd.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Hulpmiddelen bij het practicum</h2>
+      <table class="data-tabel">
+        <tr><th>Hulpmiddel</th><th>Waarvoor?</th></tr>
+        <tr><td>Reageerbuis</td><td>Glazen buisje waarin je proeven doet</td></tr>
+        <tr><td>Reageerbuisrek</td><td>Om reageerbuizen in te zetten</td></tr>
+        <tr><td>Reageerbuisborstel</td><td>Om reageerbuizen schoon te maken</td></tr>
+        <tr><td>Reageerbuishouder</td><td>Houten knijper om een reageerbuis vast te houden bij verwarmen</td></tr>
+        <tr><td>Gasbrander</td><td>Om iets te verwarmen of te verbranden</td></tr>
+        <tr><td>Driepoot</td><td>Standaard die je boven de brander zet</td></tr>
+        <tr><td>Gaasje</td><td>Ligt op de driepoot; verdeelt de warmte</td></tr>
+        <tr><td>Kroezentang</td><td>Tang om hete of brandende dingen vast te pakken</td></tr>
+        <tr><td>Spuitfles</td><td>Bevat gedestilleerd water</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Het practicumlokaal</h2>
+      <table class="data-tabel">
+        <tr><th>Middel</th><th>Functie</th></tr>
+        <tr><td>Brandblusser</td><td>Een brand blussen</td></tr>
+        <tr><td>Blusdeken</td><td>Over een brandend voorwerp of brandende kleding leggen</td></tr>
+        <tr><td>Veiligheidsbril</td><td>Beschermt je ogen tegen gevaarlijke stoffen</td></tr>
+        <tr><td>Oogdouche</td><td>Een gevaarlijke stof uit je oog spoelen</td></tr>
+        <tr><td>Nooddouche</td><td>Een gevaarlijke, bijtende stof van je huid spoelen</td></tr>
+        <tr><td>Noodstop</td><td>Schakelt in één keer elektriciteit, water en gas uit</td></tr>
+        <tr><td>Labjas</td><td>Beschermt je kleding en huid tegen gevaarlijke stoffen</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Experimenten doen</h2>
+      <p>Bij een onderzoek stel je eerst een <strong>onderzoeksvraag</strong> op en bedenk je een <strong>werkplan</strong>. Daarna voer je het experiment uit:</p>
+      <table class="data-tabel">
+        <tr><th>Stap</th><th>Wat is het?</th></tr>
+        <tr><td><strong>Handeling</strong></td><td>Wat je dóét (bijv. je steekt de brander aan)</td></tr>
+        <tr><td><strong>Waarneming</strong></td><td>Wat je kunt zien, horen, voelen of ruiken (bijv. er ontstaat wit licht en een wit poeder)</td></tr>
+        <tr><td><strong>Conclusie</strong></td><td>Wat je uit de waarnemingen afleidt (bijv. magnesium is brandbaar)</td></tr>
+      </table>
+      <div class="regel-blok groen"><p>Tijdens het experiment houd je een <strong>logboek</strong> bij, zodat je later precies kunt teruglezen wat er gebeurde. Soms maak je achteraf een <strong>verslag</strong>.</p></div>
+    </div>
+  </div>
+  <div id="sub-p2-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§1.2)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p2fc-goed">0</span> / <span id="p2fc-totaal">0</span></div>
+        <div class="fc-teller" id="p2fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p2Fc.flip()">
+        <div class="flip-card" id="p2fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p2fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p2fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p2fc-oordeel" style="display:none">
+        <button onclick="p2Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p2Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p2Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p2Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p2Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p2-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Handeling, waarneming of conclusie?</h3>
+      <div class="score-balk">Score: <span id="p2hwc-goed">0</span> / <span id="p2hwc-totaal">0</span></div>
+      <div id="p2hwc-vraag" class="vraag-tekst"></div>
+      <div id="p2hwc-opties" class="mc-grid"></div>
+      <div id="p2hwc-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p2Hwc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Hwc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Veilig werken (pictogrammen, brander, lokaal)</h3>
+      <div class="score-balk">Score: <span id="p2vei-goed">0</span> / <span id="p2vei-totaal">0</span></div>
+      <div id="p2vei-vraag" class="vraag-tekst"></div>
+      <div id="p2vei-opties" class="mc-grid"></div>
+      <div id="p2vei-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p2Vei.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Vei.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — Rekenen met de grenswaarde</h3>
+      <div class="regel-blok blauw"><p>volume lokaal = lengte × breedte × hoogte (m³)<br>max. hoeveelheid (mg) = volume (m³) × grenswaarde (mg/m³)<br>concentratie (mg/m³) = hoeveelheid (mg) ÷ volume (m³)</p></div>
+      <div class="score-balk">Score: <span id="p2gw-goed">0</span> / <span id="p2gw-totaal">0</span></div>
+      <div id="p2gw-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p2gw-input" class="open-input" placeholder="Jouw antwoord" onkeydown="if(event.key==='Enter') p2Gw.controleer()">
+      <div id="p2gw-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p2gw-controleer-btn" onclick="p2Gw.controleer()">Controleer</button>
+        <button id="p2gw-volgende-btn" onclick="p2Gw.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p2Gw.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p2Gw.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p3" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p3','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p3','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p3-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card">
+      <h2>Fasen</h2>
+      <p>IJs, water en waterdamp zijn alle drie dezelfde stof: water. Een stof kan in drie <strong>fasen</strong> voorkomen: <strong>vast</strong>, <strong>vloeibaar</strong> en <strong>gas</strong>. De fase wordt bepaald door de temperatuur (en de druk).</p>
+      <table class="data-tabel">
+        <tr><th>Temperatuur</th><th>Fase</th></tr>
+        <tr><td>lager dan het smeltpunt</td><td>vast</td></tr>
+        <tr><td>tussen smeltpunt en kookpunt</td><td>vloeibaar</td></tr>
+        <tr><td>hoger dan het kookpunt</td><td>gas</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Toestandsaanduidingen</h2>
+      <p>De fase geef je aan met een letter tussen haakjes achter de stof:</p>
+      <table class="data-tabel">
+        <tr><th>Notatie</th><th>Betekenis</th><th>Voorbeeld</th></tr>
+        <tr><td><strong>(s)</strong></td><td>vast (solid)</td><td>ijs: water (s)</td></tr>
+        <tr><td><strong>(l)</strong></td><td>vloeibaar (liquid)</td><td>water (l)</td></tr>
+        <tr><td><strong>(g)</strong></td><td>gas</td><td>waterdamp: water (g)</td></tr>
+        <tr><td><strong>(aq)</strong></td><td>opgelost in water (aqua)</td><td>suiker (aq)</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Faseveranderingen — de fasedriehoek</h2>
+      <svg viewBox="0 0 320 230" style="width:100%;max-width:420px;height:auto;display:block;margin:0 auto">
+        <defs><marker id="pijl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#047857"/></marker></defs>
+        <rect x="135" y="10" width="50" height="34" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="160" y="33" text-anchor="middle" font-size="16" font-weight="800" fill="#047857">g</text>
+        <rect x="15" y="180" width="50" height="34" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="40" y="203" text-anchor="middle" font-size="16" font-weight="800" fill="#047857">s</text>
+        <rect x="255" y="180" width="50" height="34" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="280" y="203" text-anchor="middle" font-size="16" font-weight="800" fill="#047857">l</text>
+        <line x1="72" y1="190" x2="248" y2="190" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <line x1="248" y1="205" x2="72" y2="205" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <text x="160" y="184" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">smelten →</text>
+        <text x="160" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">← stollen</text>
+        <line x1="45" y1="176" x2="135" y2="40" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <line x1="140" y1="50" x2="58" y2="176" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <text x="52" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(-57 52 105)">sublimeren ↑</text>
+        <text x="118" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(-57 118 125)">↓ rijpen</text>
+        <line x1="262" y1="176" x2="180" y2="50" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <line x1="185" y1="40" x2="275" y2="176" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <text x="202" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(57 202 125)">verdampen ↑</text>
+        <text x="268" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(57 268 105)">↓ condenseren</text>
+      </svg>
+      <table class="data-tabel">
+        <tr><th>Overgang</th><th>Naam</th></tr>
+        <tr><td>(s) → (l)</td><td><strong>smelten</strong></td></tr>
+        <tr><td>(l) → (s)</td><td><strong>stollen</strong></td></tr>
+        <tr><td>(l) → (g)</td><td><strong>verdampen</strong></td></tr>
+        <tr><td>(g) → (l)</td><td><strong>condenseren</strong></td></tr>
+        <tr><td>(s) → (g)</td><td><strong>sublimeren</strong></td></tr>
+        <tr><td>(g) → (s)</td><td><strong>rijpen</strong></td></tr>
+      </table>
+      <div class="voorbeeld-blok">Schrijfwijze: water (l) → water (g) &nbsp;(verdampen)<br>Rijp op de takken: waterdamp gaat 's nachts direct over in ijs: water (g) → water (s)</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Temperatuurschalen: Celsius en kelvin</h2>
+      <p>Temperatuur geef je meestal in <strong>°C</strong>. Maar je kunt ook de eenheid <strong>kelvin (K)</strong> gebruiken.</p>
+      <div class="voorbeeld-blok"><strong>°C → K: + 273</strong> &nbsp;&nbsp;(20 °C = 293 K)<br><strong>K → °C: − 273</strong> &nbsp;&nbsp;(373 K = 100 °C)<br>0 K = −273 °C (lager kan niet)</div>
+      <div class="regel-blok blauw"><p><strong>Voorbeeld ethanol:</strong> smeltpunt −114 °C = 159 K, kookpunt 78 °C = 351 K. Bij 60 °C ligt de temperatuur tussen smelt- en kookpunt, dus ethanol is dan <strong>vloeibaar</strong>.</p></div>
+      <div class="regel-blok oranje"><p><strong>Let op:</strong> schrijf bij kelvin géén gradenteken: 293 K, niet 293 °K.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Zuivere stoffen en mengsels</h2>
+      <p>Een <strong>zuivere stof</strong> bestaat uit één stof. Een <strong>mengsel</strong> bestaat uit twee of meer stoffen.</p>
+      <div class="regel-blok groen"><p><strong>Zuivere stoffen:</strong> suiker, (gedestilleerd) water, ethanol, kwik, ijzer</p></div>
+      <div class="regel-blok oranje"><p><strong>Mengsels:</strong> suikerwater, lucht, zeewater, sinaasappelsap, bloed, melk, kraanwater</p></div>
+      <p>Op de verpakking van producten staat vaak de <strong>samenstelling</strong>. Staat er maar één stof op, dan is het een zuivere stof.</p>
+      <h3>Het verschil meten</h3>
+      <p>Een <strong>zuivere stof</strong> heeft een <strong>smeltpunt</strong> en een <strong>kookpunt</strong>: tijdens het smelten en koken blijft de temperatuur gelijk (horizontaal stuk in de grafiek).<br>
+      Een <strong>mengsel</strong> heeft een <strong>smelttraject</strong> en een <strong>kooktraject</strong>: tijdens het smelten en koken loopt de temperatuur langzaam op (schuin stuk).</p>
+      <div class="diagram-rij">
+        <div class="diagram-item">
+          <svg viewBox="0 0 180 130" style="width:100%;height:auto;display:block">
+            <line x1="20" y1="10" x2="20" y2="115" stroke="#94a3b8" stroke-width="1.5"/><line x1="20" y1="115" x2="175" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="8" y="60" font-size="8" fill="#6b7280" transform="rotate(-90 8 60)">temperatuur</text><text x="160" y="126" font-size="8" fill="#6b7280">tijd</text>
+            <polyline points="22,108 50,85 85,85 110,48 145,48 172,25" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+            <text x="67" y="80" text-anchor="middle" font-size="8" fill="#1e293b">smelten</text><text x="127" y="43" text-anchor="middle" font-size="8" fill="#1e293b">koken</text>
+            <text x="30" y="103" font-size="8" fill="#047857">s</text><text x="93" y="72" font-size="8" fill="#047857">l</text><text x="155" y="33" font-size="8" fill="#047857">g</text>
+          </svg>
+          <div class="diagram-label">Zuivere stof: smeltpunt en kookpunt</div>
+        </div>
+        <div class="diagram-item">
+          <svg viewBox="0 0 180 130" style="width:100%;height:auto;display:block">
+            <line x1="20" y1="10" x2="20" y2="115" stroke="#94a3b8" stroke-width="1.5"/><line x1="20" y1="115" x2="175" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="8" y="60" font-size="8" fill="#6b7280" transform="rotate(-90 8 60)">temperatuur</text><text x="160" y="126" font-size="8" fill="#6b7280">tijd</text>
+            <polyline points="22,108 50,88 85,75 110,50 145,36 172,18" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+            <text x="62" y="73" text-anchor="middle" font-size="8" fill="#1e293b">smelttraject</text><text x="122" y="33" text-anchor="middle" font-size="8" fill="#1e293b">kooktraject</text>
+          </svg>
+          <div class="diagram-label">Mengsel: smelttraject en kooktraject</div>
+        </div>
+      </div>
+      <div class="regel-blok blauw"><p><strong>Onthoud:</strong> horizontaal stuk = zuivere stof &nbsp;·&nbsp; schuin stuk = mengsel</p></div>
+    </div>
+  </div>
+  <div id="sub-p3-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§1.3)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p3fc-goed">0</span> / <span id="p3fc-totaal">0</span></div>
+        <div class="fc-teller" id="p3fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p3Fc.flip()">
+        <div class="flip-card" id="p3fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p3fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p3fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p3fc-oordeel" style="display:none">
+        <button onclick="p3Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p3Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p3Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p3Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p3Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p3-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Hoe heet deze faseovergang?</h3>
+      <div class="score-balk">Score: <span id="p3ovg-goed">0</span> / <span id="p3ovg-totaal">0</span></div>
+      <div id="p3ovg-vraag" class="vraag-tekst"></div>
+      <div id="p3ovg-opties" class="mc-grid"></div>
+      <div id="p3ovg-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p3Ovg.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Ovg.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Celsius ↔ kelvin</h3>
+      <div class="regel-blok blauw"><p>°C → K: + 273 &nbsp;·&nbsp; K → °C: − 273</p></div>
+      <div class="score-balk">Score: <span id="p3ck-goed">0</span> / <span id="p3ck-totaal">0</span></div>
+      <div id="p3ck-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p3ck-input" class="open-input" placeholder="Jouw antwoord (bijv. -50)" onkeydown="if(event.key==='Enter') p3Ck.controleer()">
+      <div id="p3ck-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p3ck-controleer-btn" onclick="p3Ck.controleer()">Controleer</button>
+        <button id="p3ck-volgende-btn" onclick="p3Ck.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p3Ck.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Ck.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — In welke fase is de stof?</h3>
+      <table class="data-tabel">
+        <tr><th>Stof</th><th>Smeltpunt</th><th>Kookpunt</th></tr>
+        <tr><td>water</td><td>273 K (0 °C)</td><td>373 K (100 °C)</td></tr>
+        <tr><td>ethanol</td><td>159 K (−114 °C)</td><td>351 K (78 °C)</td></tr>
+        <tr><td>benzeen</td><td>279 K (6 °C)</td><td>353 K (80 °C)</td></tr>
+        <tr><td>kamfer</td><td>453 K (180 °C)</td><td>477 K (204 °C)</td></tr>
+        <tr><td>kwik</td><td>234 K (−39 °C)</td><td>630 K (357 °C)</td></tr>
+        <tr><td>lood</td><td>601 K (328 °C)</td><td>2022 K (1749 °C)</td></tr>
+        <tr><td>azijnzuur</td><td>290 K (17 °C)</td><td>391 K (118 °C)</td></tr>
+        <tr><td>zwaveldioxide</td><td>198 K (−75 °C)</td><td>263 K (−10 °C)</td></tr>
+        <tr><td>propaan</td><td>86 K (−187 °C)</td><td>231 K (−42 °C)</td></tr>
+        <tr><td>zuurstof</td><td>54 K (−219 °C)</td><td>90 K (−183 °C)</td></tr>
+      </table>
+      <div class="score-balk">Score: <span id="p3fase-goed">0</span> / <span id="p3fase-totaal">0</span></div>
+      <div id="p3fase-vraag" class="vraag-tekst"></div>
+      <div id="p3fase-opties" class="mc-grid"></div>
+      <div id="p3fase-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p3FaseNieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Fase.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 4 — Zuivere stof of mengsel?</h3>
+      <div class="score-balk">Score: <span id="p3zm-goed">0</span> / <span id="p3zm-totaal">0</span></div>
+      <div id="p3zm-vraag" class="vraag-tekst"></div>
+      <div id="p3zm-opties" class="mc-grid"></div>
+      <div id="p3zm-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p3Zm.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Zm.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-p4" class="tab-content">
+  <div class="uitleg-card">
+    <h2>Begrippen H1 — herhaling voor de SO</h2>
+    <p>Alle begrippen uit het overzicht van hoofdstuk 1. Oefen ze in beide richtingen.</p>
+  </div>
+
+  <div class="uitleg-card">
+    <h3 style="color:#059669;margin-bottom:.6rem">Begrip → betekenis</h3>
+    <div class="fc-topbar">
+      <div class="score-balk" style="margin-bottom:0">Score: <span id="p4a-goed">0</span> / <span id="p4a-totaal">0</span></div>
+      <div class="fc-teller" id="p4a-teller">1 / 1</div>
+    </div>
+    <div class="flip-wrapper" onclick="p4a.flip()">
+      <div class="flip-card" id="p4a-card">
+        <div class="flip-face flip-front">
+          <div class="flip-label">Begrip</div>
+          <div class="flip-tekst" id="p4a-voor"></div>
+          <div class="flip-hint">Klik om om te draaien</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-label">Betekenis</div>
+          <div class="flip-tekst" id="p4a-achter"></div>
+        </div>
+      </div>
+    </div>
+    <div class="knoppen-rij" id="p4a-oordeel" style="display:none">
+      <button onclick="p4a.oordeel(false)">&#10007; Fout</button>
+      <button onclick="p4a.oordeel(true)">&#10003; Goed</button>
+    </div>
+    <div class="knoppen-rij">
+      <button onclick="p4a.vorige()">&larr; Vorige</button>
+      <button onclick="p4a.volgende()">Volgende &rarr;</button>
+      <button onclick="p4a.opnieuw()">&#8635; Opnieuw</button>
+      <button onclick="p4a.schud()">&#128256; Shuffle</button>
+    </div>
+  </div>
+
+  <div class="uitleg-card">
+    <h3 style="color:#059669;margin-bottom:.6rem">Betekenis → begrip</h3>
+    <div class="fc-topbar">
+      <div class="score-balk" style="margin-bottom:0">Score: <span id="p4b-goed">0</span> / <span id="p4b-totaal">0</span></div>
+      <div class="fc-teller" id="p4b-teller">1 / 1</div>
+    </div>
+    <div class="flip-wrapper" onclick="p4b.flip()">
+      <div class="flip-card" id="p4b-card">
+        <div class="flip-face flip-front">
+          <div class="flip-label">Betekenis</div>
+          <div class="flip-tekst" id="p4b-voor"></div>
+          <div class="flip-hint">Klik om om te draaien</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-label">Begrip</div>
+          <div class="flip-tekst" id="p4b-achter"></div>
+        </div>
+      </div>
+    </div>
+    <div class="knoppen-rij" id="p4b-oordeel" style="display:none">
+      <button onclick="p4b.oordeel(false)">&#10007; Fout</button>
+      <button onclick="p4b.oordeel(true)">&#10003; Goed</button>
+    </div>
+    <div class="knoppen-rij">
+      <button onclick="p4b.vorige()">&larr; Vorige</button>
+      <button onclick="p4b.volgende()">Volgende &rarr;</button>
+      <button onclick="p4b.opnieuw()">&#8635; Opnieuw</button>
+      <button onclick="p4b.schud()">&#128256; Shuffle</button>
+    </div>
+  </div>
+</div>
+
+<footer>Gemaakt voor Sam &middot; 3 HAVO</footer>
+
+<script>
+  function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+  function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
+  function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+  function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+  /* ===== GEDEELDE HELPERS ===== */
+  function fmt(x){ return Number(x).toLocaleString('nl-NL', {maximumSignificantDigits: 4}); }
+  function rnd(min, max, dec){ var f = Math.pow(10, dec); return Math.round((min + Math.random()*(max-min))*f)/f; }
+  function leesGetal(s){
+    s = String(s).trim().replace(/\s/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',', '.');
+    return parseFloat(s);
+  }
+
+  /* Meerkeuze met vaste vragenbank. Items: {vraag, opties:[...], antwoord, uitleg} */
+  function maakMC(id, bank){
+    var s = {bank: fisherYates(bank.slice()), i: 0, goed: 0, totaal: 0, klaar: false};
+    function el(x){ return document.getElementById(id + '-' + x); }
+    function score(){ el('goed').textContent = s.goed; el('totaal').textContent = s.totaal; }
+    function toon(){
+      var fb = el('feedback'); fb.className = 'feedback'; fb.textContent = '';
+      var box = el('opties'); box.innerHTML = '';
+      if (s.i >= s.bank.length){
+        s.klaar = true;
+        el('vraag').textContent = '🎉 Klaar! Je had er ' + s.goed + ' van de ' + s.totaal + ' goed.';
+        score(); return;
+      }
+      s.klaar = false;
+      var item = s.bank[s.i];
+      el('vraag').textContent = item.vraag;
+      var opties = item.opties.length > 2 ? fisherYates(item.opties.slice()) : item.opties.slice();
+      opties.forEach(function(o){
+        var b = document.createElement('button');
+        b.className = 'mc-btn'; b.textContent = o;
+        b.addEventListener('click', function(){ antwoord(o, b); });
+        box.appendChild(b);
+      });
+      score();
+    }
+    function antwoord(o, knop){
+      var item = s.bank[s.i];
+      el('opties').querySelectorAll('button').forEach(function(b){ b.disabled = true; });
+      s.totaal++;
+      var ok = o === item.antwoord;
+      if (ok) s.goed++;
+      knop.style.borderColor = ok ? '#10b981' : '#ef4444';
+      knop.style.background = ok ? '#d1fae5' : '#fee2e2';
+      var fb = el('feedback');
+      fb.textContent = (ok ? '✓ Juist! ' : '✗ Fout — juist: ' + item.antwoord + '. ') + (item.uitleg || '');
+      fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+      score();
+      s.i++;
+      setTimeout(toon, ok ? 1300 : 2600);
+    }
+    s.opnieuw = function(){ s.i = 0; s.goed = 0; s.totaal = 0; s.bank = fisherYates(s.bank); toon(); };
+    s.schud = function(){ if (s.klaar){ s.goed = 0; s.totaal = 0; } s.i = 0; s.bank = fisherYates(s.bank); toon(); };
+    s.start = toon;
+    return s;
+  }
+
+  /* Rekenoefening met willekeurige getallen. genereer() geeft {vraag, antwoord, eenheid, uitleg} */
+  function maakReken(id, genereer, marge){
+    marge = marge || 0.02;
+    var s = {goed: 0, totaal: 0, huidig: null};
+    function el(x){ return document.getElementById(id + '-' + x); }
+    function score(){ el('goed').textContent = s.goed; el('totaal').textContent = s.totaal; }
+    function nieuw(){
+      s.huidig = genereer();
+      el('vraag').textContent = s.huidig.vraag;
+      var inp = el('input'); inp.value = ''; inp.disabled = false;
+      el('controleer-btn').disabled = false;
+      el('volgende-btn').style.display = 'none';
+      var fb = el('feedback'); fb.className = 'feedback'; fb.textContent = '';
+      score();
+    }
+    s.controleer = function(){
+      var inp = el('input');
+      if (inp.disabled || inp.value.trim() === '') return;
+      var w = leesGetal(inp.value);
+      if (isNaN(w)) return;
+      inp.disabled = true; el('controleer-btn').disabled = true;
+      s.totaal++;
+      var c = s.huidig.antwoord;
+      var ok = Math.abs(w - c) <= Math.max(Math.abs(c) * marge, 1e-12);
+      if (ok) s.goed++;
+      var fb = el('feedback');
+      fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Antwoord: ' + fmt(c) + ' ' + s.huidig.eenheid + (s.huidig.uitleg ? ' — ' + s.huidig.uitleg : '');
+      fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+      score();
+      el('volgende-btn').style.display = '';
+    };
+    s.volgende = nieuw;
+    s.schud = nieuw;
+    s.opnieuw = function(){ s.goed = 0; s.totaal = 0; nieuw(); };
+    s.start = nieuw;
+    return s;
+  }
+
+  /* Flashcards. data: [{voor, achter}] */
+  function maakFC(id, data){
+    var s = {kaarten: [], i: 0, goed: 0, totaal: 0, om: false};
+    function el(x){ return document.getElementById(id + '-' + x); }
+    function score(){ el('goed').textContent = s.goed; el('totaal').textContent = s.totaal; }
+    function toon(){
+      var k = s.kaarten[s.i];
+      el('voor').textContent = k.voor; el('achter').textContent = k.achter;
+      el('card').classList.remove('flipped'); s.om = false;
+      el('oordeel').style.display = 'none';
+      el('teller').textContent = (s.i + 1) + ' / ' + s.kaarten.length;
+      score();
+    }
+    s.flip = function(){ s.om = !s.om; el('card').classList.toggle('flipped', s.om); el('oordeel').style.display = s.om ? 'flex' : 'none'; };
+    s.oordeel = function(g){ s.totaal++; if (g) s.goed++; score(); s.volgende(); };
+    s.vorige = function(){ if (s.i > 0){ s.i--; toon(); } };
+    s.volgende = function(){ s.i = (s.i < s.kaarten.length - 1) ? s.i + 1 : 0; toon(); };
+    s.schud = function(){ if (s.totaal >= s.kaarten.length){ s.goed = 0; s.totaal = 0; } s.kaarten = fisherYates(s.kaarten); s.i = 0; toon(); };
+    s.opnieuw = function(){ s.kaarten = fisherYates(data.slice()); s.i = 0; s.goed = 0; s.totaal = 0; toon(); };
+    s.start = s.opnieuw;
+    return s;
+  }
+
+  /* §1.1 FLASHCARDS */
+  var p1FcData = [
+    {voor:'Wat is scheikunde?', achter:'De natuurwetenschap die zich bezighoudt met stoffen en met het veranderen van stoffen in andere stoffen'},
+    {voor:'Wat is een stof?', achter:'Alles wat massa heeft'},
+    {voor:'Wat is een stofeigenschap?', achter:'Een eigenschap waaraan je een stof herkent'},
+    {voor:'Hoe weet je dat twee stoffen verschillend zijn?', achter:'Ze verschillen in één of meer stofeigenschappen'},
+    {voor:'Wat is een stofconstante?', achter:'Een stofeigenschap die je met een getal en een eenheid weergeeft'},
+    {voor:'Noem drie stofconstanten', achter:'Smeltpunt, kookpunt en dichtheid'},
+    {voor:'Wat is de dichtheid van een stof?', achter:'De massa van 1 m³ (of 1 cm³) van die stof'},
+    {voor:'Geef de formule voor dichtheid', achter:'dichtheid = massa ÷ volume'},
+    {voor:'Waarom is massa géén stofeigenschap?', achter:'Massa hangt af van hoeveel stof je hebt, niet van welke stof het is'},
+    {voor:'Wat is een grootheid?', achter:'Een eigenschap die je kunt meten, zoals massa of volume'},
+    {voor:'Wat is een eenheid?', achter:'De maat waarmee je een grootheid meet, zoals kg of L'},
+    {voor:'Wat betekent het voorvoegsel kilo?', achter:'Duizend (× 1000)'},
+    {voor:'1 mL = ... cm³', achter:'1 cm³'},
+    {voor:'1 L = ... dm³', achter:'1 dm³'},
+    {voor:'1 m³ = ... L', achter:'1000 L'},
+    {voor:'Smeltpunt en kookpunt van water?', achter:'Smeltpunt 0 °C, kookpunt 100 °C'},
+    {voor:'Hoe reken je g/cm³ om naar kg/m³?', achter:'× 1000 (1,0 g/cm³ = 1000 kg/m³)'}
+  ];
+  var p1FcKaarten = [], p1FcIndex = 0, p1FcGoed = 0, p1FcTotaal = 0, p1FcOmgedraaid = false;
+  function p1FcInit(){ p1FcKaarten = fisherYates(p1FcData.slice()); p1FcIndex = 0; p1FcGoed = 0; p1FcTotaal = 0; p1FcToonKaart(); }
+  function p1FcToonKaart(){
+    var k = p1FcKaarten[p1FcIndex];
+    document.getElementById('p1fc-voor').textContent = k.voor;
+    document.getElementById('p1fc-achter').textContent = k.achter;
+    document.getElementById('p1fc-card').classList.remove('flipped');
+    p1FcOmgedraaid = false;
+    document.getElementById('p1fc-oordeel').style.display = 'none';
+    document.getElementById('p1fc-teller').textContent = (p1FcIndex+1) + ' / ' + p1FcKaarten.length;
+    p1FcUpdateScore();
+  }
+  function p1FcFlip(){
+    p1FcOmgedraaid = !p1FcOmgedraaid;
+    document.getElementById('p1fc-card').classList.toggle('flipped', p1FcOmgedraaid);
+    document.getElementById('p1fc-oordeel').style.display = p1FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p1FcOordeel(goed){ p1FcTotaal++; if (goed) p1FcGoed++; p1FcUpdateScore(); p1FcVolgende(); }
+  function p1FcUpdateScore(){
+    document.getElementById('p1fc-goed').textContent = p1FcGoed;
+    document.getElementById('p1fc-totaal').textContent = p1FcTotaal;
+  }
+  function p1FcVorige(){ if (p1FcIndex > 0){ p1FcIndex--; p1FcToonKaart(); } }
+  function p1FcVolgende(){ p1FcIndex = (p1FcIndex < p1FcKaarten.length - 1) ? p1FcIndex + 1 : 0; p1FcToonKaart(); }
+  function p1FcSchud(){
+    var klaar = p1FcTotaal >= p1FcKaarten.length;
+    if (klaar){ p1FcGoed = 0; p1FcTotaal = 0; }
+    p1FcKaarten = fisherYates(p1FcKaarten); p1FcIndex = 0; p1FcToonKaart();
+  }
+  function p1FcOpnieuw(){ p1FcInit(); }
+
+  /* §1.1 OEFENEN 1 — stofeigenschap of niet */
+  var JA = 'Wél een stofeigenschap', NEE = 'Géén stofeigenschap';
+  var p1EigBank = [
+    {vraag:'Kleur', opties:[JA,NEE], antwoord:JA, uitleg:'Aan de kleur kun je een stof (mede) herkennen.'},
+    {vraag:'Geur', opties:[JA,NEE], antwoord:JA, uitleg:'Elke stof heeft zijn eigen geur (of is reukloos).'},
+    {vraag:'Smaak', opties:[JA,NEE], antwoord:JA, uitleg:'Smaak hoort bij de stof (maar proef nooit stoffen in het lokaal!).'},
+    {vraag:'Fase bij kamertemperatuur', opties:[JA,NEE], antwoord:JA, uitleg:'Bijv. suiker is vast, water vloeibaar bij kamertemperatuur.'},
+    {vraag:'Smeltpunt', opties:[JA,NEE], antwoord:JA, uitleg:'Het smeltpunt is zelfs een stofconstante.'},
+    {vraag:'Kookpunt', opties:[JA,NEE], antwoord:JA, uitleg:'Het kookpunt is zelfs een stofconstante.'},
+    {vraag:'Dichtheid', opties:[JA,NEE], antwoord:JA, uitleg:'Dichtheid hangt niet af van de hoeveelheid: het is een stofconstante.'},
+    {vraag:'Brandbaarheid', opties:[JA,NEE], antwoord:JA, uitleg:'Een stof is wel of niet brandbaar.'},
+    {vraag:'Oplosbaarheid in water', opties:[JA,NEE], antwoord:JA, uitleg:'Bijv. suiker lost goed op, zand niet.'},
+    {vraag:'Giftigheid', opties:[JA,NEE], antwoord:JA, uitleg:'Of een stof giftig is, hoort bij de stof.'},
+    {vraag:'Bestand tegen zuren', opties:[JA,NEE], antwoord:JA, uitleg:'Sommige stoffen worden door zuren aangetast, andere niet.'},
+    {vraag:'Massa', opties:[JA,NEE], antwoord:NEE, uitleg:'Massa hangt af van hoeveel stof je hebt.'},
+    {vraag:'Volume', opties:[JA,NEE], antwoord:NEE, uitleg:'Volume hangt af van hoeveel stof je hebt.'},
+    {vraag:'Vorm', opties:[JA,NEE], antwoord:NEE, uitleg:'De vorm hoort bij het voorwerp, niet bij de stof.'},
+    {vraag:'Temperatuur', opties:[JA,NEE], antwoord:NEE, uitleg:'De temperatuur kun je veranderen; de stof blijft hetzelfde.'},
+    {vraag:'Is kleur een stofconstante?', opties:['Ja','Nee'], antwoord:'Nee', uitleg:'Kleur is wel een stofeigenschap, maar je geeft het niet weer met een getal + eenheid.'},
+    {vraag:'Is het kookpunt een stofconstante?', opties:['Ja','Nee'], antwoord:'Ja', uitleg:'Een getal + eenheid, bijv. water: 100 °C.'},
+    {vraag:'Is de dichtheid een stofconstante?', opties:['Ja','Nee'], antwoord:'Ja', uitleg:'Een getal + eenheid, bijv. water: 1,0 g/cm³.'},
+    {vraag:'Is brandbaarheid een stofconstante?', opties:['Ja','Nee'], antwoord:'Nee', uitleg:'Wel een stofeigenschap, maar geen getal + eenheid.'}
+  ];
+  var p1Eig = maakMC('p1eig', p1EigBank);
+
+  /* §1.1 OEFENEN 2 — eenheden omrekenen */
+  var p1MassaEenh = [{n:'µg', f:1e-9}, {n:'mg', f:1e-6}, {n:'g', f:1e-3}, {n:'kg', f:1}, {n:'ton', f:1000}];
+  var p1VolEenh = [{n:'mL', f:1e-6}, {n:'cm³', f:1e-6}, {n:'L', f:1e-3}, {n:'dm³', f:1e-3}, {n:'m³', f:1}];
+  function p1OmrGenereer(){
+    var lijst = pick([p1MassaEenh, p1VolEenh]);
+    var a, b;
+    do {
+      a = Math.floor(Math.random()*lijst.length);
+      b = Math.floor(Math.random()*lijst.length);
+    } while (a === b || Math.abs(Math.log10(lijst[a].f / lijst[b].f)) > 6);
+    var waarde = pick([rnd(1, 9.9, 1), rnd(10, 99, 0), rnd(100, 950, 0), rnd(0.1, 0.95, 2)]);
+    var antw = waarde * lijst[a].f / lijst[b].f;
+    var stappen = Math.round(Math.log10(lijst[a].f / lijst[b].f));
+    var uitleg = stappen === 0 ? lijst[a].n + ' en ' + lijst[b].n + ' zijn even groot'
+      : (stappen > 0 ? '× ' : '÷ ') + fmt(Math.pow(10, Math.abs(stappen))) + ' (' + lijst[a].n + ' → ' + lijst[b].n + ')';
+    return {vraag:'Reken om: ' + fmt(waarde) + ' ' + lijst[a].n + ' = ? ' + lijst[b].n, antwoord: antw, eenheid: lijst[b].n, uitleg: uitleg};
+  }
+  var p1Omr = maakReken('p1omr', p1OmrGenereer);
+
+  /* §1.1 OEFENEN 3 — dichtheid (ρ in kg/m³) */
+  var p1Stoffen = [
+    {n:'water', r:1000}, {n:'ijs', r:917}, {n:'ethanol', r:800}, {n:'kerosine', r:800},
+    {n:'aluminium', r:2700}, {n:'ijzer', r:7870}, {n:'koper', r:8960}, {n:'lood', r:11340},
+    {n:'kwik', r:13500}, {n:'goud', r:19300}, {n:'diamant', r:3510}, {n:'suiker', r:1600}
+  ];
+  function p1DicGenereer(){
+    var st = pick(p1Stoffen), rg = st.r / 1000;
+    var type = pick(['rho_g','m_g','V_g','rho_kg','m_kg']);
+    var V, m;
+    if (type === 'rho_g'){
+      V = rnd(5, 250, 0); m = Math.round(rg * V * 10)/10;
+      return {vraag:'Een blokje ' + st.n + ' heeft een massa van ' + fmt(m) + ' g en een volume van ' + fmt(V) + ' cm³. Bereken de dichtheid in g/cm³.', antwoord: m/V, eenheid:'g/cm³', uitleg:'ρ = m ÷ V = ' + fmt(m) + ' ÷ ' + fmt(V)};
+    }
+    if (type === 'm_g'){
+      V = rnd(5, 250, 0);
+      return {vraag:'De dichtheid van ' + st.n + ' is ' + fmt(rg) + ' g/cm³. Bereken de massa van ' + fmt(V) + ' cm³ ' + st.n + ' in gram.', antwoord: rg*V, eenheid:'g', uitleg:'m = ρ × V = ' + fmt(rg) + ' × ' + fmt(V)};
+    }
+    if (type === 'V_g'){
+      m = rnd(10, 900, 0);
+      return {vraag:'De dichtheid van ' + st.n + ' is ' + fmt(rg) + ' g/cm³. Hoeveel cm³ is ' + fmt(m) + ' g ' + st.n + '?', antwoord: m/rg, eenheid:'cm³', uitleg:'V = m ÷ ρ = ' + fmt(m) + ' ÷ ' + fmt(rg)};
+    }
+    if (type === 'rho_kg'){
+      V = rnd(0.2, 5, 1); m = Math.round(st.r * V / 1000 * 1000);
+      return {vraag:'Je hebt ' + fmt(m) + ' g ' + st.n + ' met een volume van ' + fmt(V) + ' L. Bereken de dichtheid in kg/m³.', antwoord: (m/1000)/(V/1000), eenheid:'kg/m³', uitleg:'m = ' + fmt(m/1000) + ' kg, V = ' + fmt(V/1000) + ' m³, ρ = m ÷ V'};
+    }
+    V = rnd(0.5, 20, 1);
+    return {vraag:'Een tank bevat ' + fmt(V) + ' m³ ' + st.n + ' (dichtheid ' + fmt(st.r) + ' kg/m³). Bereken de massa in kg.', antwoord: st.r*V, eenheid:'kg', uitleg:'m = ρ × V = ' + fmt(st.r) + ' × ' + fmt(V)};
+  }
+  var p1Dic = maakReken('p1dic', p1DicGenereer);
+
+  /* §1.2 FLASHCARDS */
+  var p2Fc = maakFC('p2fc', [
+    {voor:'Pictogram: doodshoofd', achter:'Giftige stoffen'},
+    {voor:'Pictogram: exploderende bom', achter:'Ontplofbare stoffen'},
+    {voor:'Pictogram: vlam', achter:'Ontvlambare stoffen'},
+    {voor:'Pictogram: vlam boven een rondje', achter:'Oxiderende stoffen'},
+    {voor:'Pictogram: druppels die een hand en metaal aantasten', achter:'Corrosieve (bijtende) stoffen'},
+    {voor:'Pictogram: uitroepteken', achter:'Schadelijke of irriterende stoffen'},
+    {voor:'Pictogram: persoon met een ster op de borst', achter:'Gevaar voor de gezondheid'},
+    {voor:'Pictogram: dode boom en dode vis', achter:'Gevaar voor het milieu'},
+    {voor:'Wat staat er in het boek Chemiekaarten?', achter:'Per stof: de gevaren, wat je moet doen bij een ongeluk en eigenschappen zoals smeltpunt, kookpunt en dichtheid'},
+    {voor:'Wat is de grenswaarde van een stof?', achter:'Hoeveel mg van de stof in 1 m³ lucht aanwezig mag zijn (mg/m³)'},
+    {voor:'Waar gaan H-zinnen over?', achter:'Gezondheidsgevaren (H van hazard)'},
+    {voor:'Waar gaan P-zinnen over?', achter:'Het voorkomen van ongelukken (P van prevention)'},
+    {voor:'Gele vlam: luchttoevoer en gebruik?', achter:'Luchttoevoer dicht; goed zichtbare pauzevlam'},
+    {voor:'Kleurloze vlam: gebruik?', achter:'Een kleine hoeveelheid stof voorzichtig verwarmen'},
+    {voor:'Ruisende vlam: gebruik?', achter:'Een grote hoeveelheid stof sterk verhitten (heetste vlam)'},
+    {voor:'Waar is de ruisende vlam het heetst?', achter:'Net boven de blauwe kern'},
+    {voor:'Wat is gedestilleerd water?', achter:'Water waaruit alle opgeloste stoffen zijn verwijderd'},
+    {voor:'Waarvoor dient een kroezentang?', achter:'Om hete of brandende dingen vast te pakken'},
+    {voor:'Waarvoor dient een reageerbuishouder?', achter:'Om een reageerbuis vast te houden tijdens het verwarmen'},
+    {voor:'Waarvoor dient een gaasje?', achter:'Ligt op de driepoot en verdeelt de warmte'},
+    {voor:'Waarvoor dient de noodstop?', achter:'Schakelt in één keer elektriciteit, water en gas uit'},
+    {voor:'Waarvoor dient de nooddouche?', achter:'Een gevaarlijke, bijtende stof van je huid spoelen'},
+    {voor:'Wat is een handeling?', achter:'Wat je doet tijdens een experiment'},
+    {voor:'Wat is een waarneming?', achter:'Wat je kunt zien, horen, voelen of ruiken'},
+    {voor:'Wat is een conclusie?', achter:'Wat je afleidt uit je waarnemingen'},
+    {voor:'Waarom houd je een logboek bij?', achter:'Zodat je later precies kunt teruglezen wat er tijdens het experiment gebeurde'}
+  ]);
+
+  /* §1.2 OEFENEN 1 — handeling / waarneming / conclusie */
+  var H = 'Handeling', W = 'Waarneming', C = 'Conclusie', HWC = [H, W, C];
+  var p2Hwc = maakMC('p2hwc', [
+    {vraag:'Je koopt een pak zout.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'Zout is een witte stof.', opties:HWC, antwoord:W, uitleg:'Dat zie je.'},
+    {vraag:'De kristalvorm van zout is een kubusje.', opties:HWC, antwoord:W, uitleg:'Dat zie je (met een microscoop).'},
+    {vraag:'Je bakt zoutstaafjes.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'Je mengt zout met zetmeel uit algen.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'De zoutkoepel bezwijkt niet bij grote druk.', opties:HWC, antwoord:W, uitleg:'Dat zie je gebeuren (of juist niet).'},
+    {vraag:'Zout is goed bruikbaar als bouwmateriaal.', opties:HWC, antwoord:C, uitleg:'Dit leid je af uit de waarnemingen.'},
+    {vraag:'Je laat een brandende lucifer in een bakje met benzine vallen.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'De benzine vliegt in brand.', opties:HWC, antwoord:W, uitleg:'Dat zie je.'},
+    {vraag:'Het wordt warm in de omgeving van het bakje.', opties:HWC, antwoord:W, uitleg:'Dat voel je.'},
+    {vraag:'Benzine is een licht ontvlambare stof.', opties:HWC, antwoord:C, uitleg:'Afgeleid uit wat je zag.'},
+    {vraag:'Bij de verbranding van benzine komt warmte vrij.', opties:HWC, antwoord:C, uitleg:'Afgeleid uit wat je voelde.'},
+    {vraag:'Je houdt een stukje magnesiumlint in de vlam.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'Er ontstaat fel wit licht en een wit poeder.', opties:HWC, antwoord:W, uitleg:'Dat zie je.'},
+    {vraag:'Magnesium is brandbaar.', opties:HWC, antwoord:C, uitleg:'Afgeleid uit de waarnemingen.'},
+    {vraag:'Je ruikt een scherpe geur.', opties:HWC, antwoord:W, uitleg:'Ruiken is waarnemen.'},
+    {vraag:'Je zet de luchttoevoer van de brander open.', opties:HWC, antwoord:H, uitleg:'Iets wat je doet.'},
+    {vraag:'De vlam wordt blauw en gaat ruisen.', opties:HWC, antwoord:W, uitleg:'Dat zie en hoor je.'}
+  ]);
+
+  /* §1.2 OEFENEN 2 — veilig werken */
+  var p2Vei = maakMC('p2vei', [
+    {vraag:'Wat betekent het pictogram met het doodshoofd?', opties:['Giftige stoffen','Gevaar voor de gezondheid','Corrosieve stoffen','Gevaar voor het milieu'], antwoord:'Giftige stoffen'},
+    {vraag:'Wat betekent het pictogram met het uitroepteken?', opties:['Schadelijke of irriterende stoffen','Ontplofbare stoffen','Giftige stoffen','Oxiderende stoffen'], antwoord:'Schadelijke of irriterende stoffen'},
+    {vraag:'Wat betekent het pictogram met de vlam boven een rondje?', opties:['Oxiderende stoffen','Ontvlambare stoffen','Ontplofbare stoffen','Corrosieve stoffen'], antwoord:'Oxiderende stoffen', uitleg:'Let op het rondje: dat is het verschil met ontvlambaar.'},
+    {vraag:'Wat betekent het pictogram met de dode boom en vis?', opties:['Gevaar voor het milieu','Giftige stoffen','Gevaar voor de gezondheid','Schadelijke of irriterende stoffen'], antwoord:'Gevaar voor het milieu'},
+    {vraag:'Wat betekent het pictogram met de persoon met een ster op de borst?', opties:['Gevaar voor de gezondheid','Giftige stoffen','Schadelijke of irriterende stoffen','Ontplofbare stoffen'], antwoord:'Gevaar voor de gezondheid'},
+    {vraag:'Wat betekent het pictogram met druppels die een hand en metaal aantasten?', opties:['Corrosieve stoffen','Giftige stoffen','Oxiderende stoffen','Gevaar voor het milieu'], antwoord:'Corrosieve stoffen'},
+    {vraag:'Welke vlam is het heetst?', opties:['Ruisende vlam','Kleurloze vlam','Gele vlam'], antwoord:'Ruisende vlam'},
+    {vraag:'Welke vlam gebruik je als pauzevlam?', opties:['Gele vlam','Kleurloze vlam','Ruisende vlam'], antwoord:'Gele vlam', uitleg:'De gele vlam is goed zichtbaar.'},
+    {vraag:'Welke vlam gebruik je om een kleine hoeveelheid stof voorzichtig te verwarmen?', opties:['Kleurloze vlam','Gele vlam','Ruisende vlam'], antwoord:'Kleurloze vlam'},
+    {vraag:'Welke kleur heeft de vlam als de luchttoevoer helemaal dicht is?', opties:['Geel','Blauw','Kleurloos'], antwoord:'Geel'},
+    {vraag:'Wat doe je als eerste bij het aansteken van de brander?', opties:['Luchtschijf helemaal dicht draaien','Gaskraan opendraaien','Lucifer aansteken','Gasregelknop opendraaien'], antwoord:'Luchtschijf helemaal dicht draaien'},
+    {vraag:'Wat doe je als laatste bij het uitzetten van de brander?', opties:['Gaskraan dichtdraaien','Luchtschijf dichtdraaien','Gasregelknop dichtdraaien'], antwoord:'Gaskraan dichtdraaien'},
+    {vraag:'Waar is de ruisende vlam het heetst?', opties:['Net boven de blauwe kern','In de blauwe kern','Helemaal bovenin de vlam'], antwoord:'Net boven de blauwe kern'},
+    {vraag:'Waarom zit er gedestilleerd water in de spuitfles?', opties:['Kraanwater bevat opgeloste stoffen die het experiment storen','Gedestilleerd water is kouder','Kraanwater is giftig'], antwoord:'Kraanwater bevat opgeloste stoffen die het experiment storen'},
+    {vraag:'Je krijgt een gevaarlijke stof in je oog. Wat gebruik je?', opties:['Oogdouche','Nooddouche','Blusdeken','Brandblusser'], antwoord:'Oogdouche'},
+    {vraag:'Iemands kleding staat in brand. Wat gebruik je?', opties:['Blusdeken','Oogdouche','Noodstop','Spuitfles'], antwoord:'Blusdeken'},
+    {vraag:'Wat doet de noodstop?', opties:['Elektriciteit, water en gas in één keer uitschakelen','Het brandalarm laten afgaan','Alleen de gaskraan dichtdraaien'], antwoord:'Elektriciteit, water en gas in één keer uitschakelen'},
+    {vraag:'Waar gaan P-zinnen over?', opties:['Het voorkomen van ongelukken','Gezondheidsgevaren','De prijs van de stof'], antwoord:'Het voorkomen van ongelukken', uitleg:'P van prevention.'},
+    {vraag:'Waar gaan H-zinnen over?', opties:['Gezondheidsgevaren','Het voorkomen van ongelukken','Het kookpunt van de stof'], antwoord:'Gezondheidsgevaren', uitleg:'H van hazard.'},
+    {vraag:'Wat geeft de grenswaarde aan?', opties:['Hoeveel mg van een stof in 1 m³ lucht aanwezig mag zijn','Bij welke temperatuur een stof gaat koken','Hoeveel gram stof je mag gebruiken in een proef'], antwoord:'Hoeveel mg van een stof in 1 m³ lucht aanwezig mag zijn'},
+    {vraag:'Hoe ruik je veilig aan een stof?', opties:['Lucht met je hand naar je toe wapperen','Je neus vlak boven de buis houden','Diep inademen boven de buis'], antwoord:'Lucht met je hand naar je toe wapperen'},
+    {vraag:'Je verwarmt een vloeistof in een reageerbuis. Waar richt je de opening?', opties:['Van jezelf en anderen af','Naar jezelf toe','Naar je buurman'], antwoord:'Van jezelf en anderen af'}
+  ]);
+
+  /* §1.2 OEFENEN 3 — grenswaarde (gerandomiseerd) */
+  function p2GwGenereer(){
+    var l = rnd(6, 12, 1), b = rnd(5, 9, 1), h = rnd(2.5, 3.5, 1);
+    var V = l * b * h;
+    var stof = pick([{n:'ammoniak', g:14}, {n:'stof X', g:pick([5, 10, 15, 20, 25, 50])}, {n:'stof Y', g:pick([2, 8, 12, 30, 40])}]);
+    var type = pick(['volume','max','conc','lucifer']);
+    var lok = 'Een lokaal is ' + fmt(l) + ' m lang, ' + fmt(b) + ' m breed en ' + fmt(h) + ' m hoog.';
+    if (type === 'volume'){
+      return {vraag: lok + ' Bereken het volume van het lokaal in m³.', antwoord: V, eenheid:'m³', uitleg:'V = ' + fmt(l) + ' × ' + fmt(b) + ' × ' + fmt(h)};
+    }
+    if (type === 'max'){
+      return {vraag: lok + ' De grenswaarde van ' + stof.n + ' is ' + stof.g + ' mg/m³. Hoeveel mg ' + stof.n + ' mag er maximaal in de lucht van het lokaal zitten?', antwoord: V * stof.g, eenheid:'mg', uitleg:'V = ' + fmt(V) + ' m³; ' + fmt(V) + ' × ' + stof.g};
+    }
+    if (type === 'conc'){
+      var mg = Math.round(V * stof.g * rnd(0.4, 1.8, 2));
+      var c = mg / V;
+      return {vraag: lok + ' Er komt ' + fmt(mg) + ' mg ' + stof.n + ' vrij in de lucht. Bereken de concentratie in mg/m³. (De grenswaarde is ' + stof.g + ' mg/m³.)', antwoord: c, eenheid:'mg/m³', uitleg:'c = ' + fmt(mg) + ' ÷ ' + fmt(V) + (c > stof.g ? '. Dat is BOVEN de grenswaarde!' : '. Dat is onder de grenswaarde.')};
+    }
+    var perLucifer = pick([5, 10]);
+    var gz = 15;
+    var n = Math.floor(V * gz / perLucifer);
+    return {vraag: lok + ' Bij het afsteken van een lucifer komt ' + perLucifer + ' mg zwaveldioxide vrij. De grenswaarde is ' + gz + ' mg/m³. Hoeveel lucifers mogen er maximaal worden afgestoken? (Rond af naar beneden.)', antwoord: n, eenheid:'lucifers', uitleg:'max = ' + fmt(V) + ' × ' + gz + ' = ' + fmt(V*gz) + ' mg; ÷ ' + perLucifer + ' mg'};
+  }
+  var p2Gw = maakReken('p2gw', p2GwGenereer, 0.01);
+
+  /* §1.3 FLASHCARDS */
+  var p3Fc = maakFC('p3fc', [
+    {voor:'In welke drie fasen kan een stof voorkomen?', achter:'Vast, vloeibaar en gas'},
+    {voor:'Wat betekent (s)?', achter:'Vast (solid)'},
+    {voor:'Wat betekent (l)?', achter:'Vloeibaar (liquid)'},
+    {voor:'Wat betekent (g)?', achter:'Gasvormig'},
+    {voor:'Wat betekent (aq)?', achter:'Opgelost in water (aqua)'},
+    {voor:'(s) → (l)', achter:'Smelten'},
+    {voor:'(l) → (s)', achter:'Stollen'},
+    {voor:'(l) → (g)', achter:'Verdampen'},
+    {voor:'(g) → (l)', achter:'Condenseren'},
+    {voor:'(s) → (g)', achter:'Sublimeren'},
+    {voor:'(g) → (s)', achter:'Rijpen'},
+    {voor:'Een stof is vast als de temperatuur ...', achter:'lager is dan het smeltpunt'},
+    {voor:'Een stof is vloeibaar als de temperatuur ...', achter:'tussen het smeltpunt en het kookpunt ligt'},
+    {voor:'Een stof is een gas als de temperatuur ...', achter:'hoger is dan het kookpunt'},
+    {voor:'Hoe reken je °C om naar K?', achter:'+ 273'},
+    {voor:'Hoe reken je K om naar °C?', achter:'− 273'},
+    {voor:'Wat is een zuivere stof?', achter:'Een stof die uit één stof bestaat'},
+    {voor:'Wat is een mengsel?', achter:'Een stof die uit twee of meer stoffen bestaat'},
+    {voor:'Zuivere stof: smeltpunt of smelttraject?', achter:'Smeltpunt (en kookpunt): de temperatuur blijft gelijk'},
+    {voor:'Mengsel: smeltpunt of smelttraject?', achter:'Smelttraject (en kooktraject): de temperatuur loopt langzaam op'},
+    {voor:'Hoe zie je in een temperatuur-tijddiagram dat het een zuivere stof is?', achter:'Er zijn horizontale stukken bij smelten en koken'}
+  ]);
+
+  /* §1.3 OEFENEN 1 — naam faseovergang */
+  var OVG = ['smelten','stollen','verdampen','condenseren','sublimeren','rijpen'];
+  var p3Ovg = maakMC('p3ovg', [
+    {vraag:'water (g) → water (s)', opties:OVG, antwoord:'rijpen'},
+    {vraag:'zwavel (s) → zwavel (l)', opties:OVG, antwoord:'smelten'},
+    {vraag:'jood (s) → jood (g)', opties:OVG, antwoord:'sublimeren'},
+    {vraag:'kaarsvet (l) → kaarsvet (s)', opties:OVG, antwoord:'stollen'},
+    {vraag:'alcohol (g) → alcohol (l)', opties:OVG, antwoord:'condenseren'},
+    {vraag:'butagas (l) → butagas (g)', opties:OVG, antwoord:'verdampen'},
+    {vraag:'ijzer (s) → ijzer (l)', opties:OVG, antwoord:'smelten'},
+    {vraag:'kwik (l) → kwik (g)', opties:OVG, antwoord:'verdampen'},
+    {vraag:'lood (l) → lood (s)', opties:OVG, antwoord:'stollen'},
+    {vraag:'zuurstof (g) → zuurstof (l)', opties:OVG, antwoord:'condenseren'},
+    {vraag:'koolstofdioxide (s) → koolstofdioxide (g)', opties:OVG, antwoord:'sublimeren', uitleg:'Droogijs gaat direct over in gas.'},
+    {vraag:'Waterdamp wordt in een koude nacht direct ijs op de takken.', opties:OVG, antwoord:'rijpen'},
+    {vraag:'Er ontstaan druppels water op een koude spiegel na het douchen.', opties:OVG, antwoord:'condenseren'},
+    {vraag:'Een plas water op straat droogt op in de zon.', opties:OVG, antwoord:'verdampen'},
+    {vraag:'Kaarsvet druipt langs de kaars en wordt weer hard.', opties:OVG, antwoord:'stollen'}
+  ]);
+
+  /* §1.3 OEFENEN 2 — °C ↔ K (gerandomiseerd) */
+  function p3CkGenereer(){
+    if (Math.random() < 0.5){
+      var c = pick([rnd(-250, -1, 0), rnd(0, 150, 0), rnd(150, 1500, 0)]);
+      return {vraag:'Reken om: ' + c + ' °C = ? K', antwoord: c + 273, eenheid:'K', uitleg: c + ' + 273'};
+    }
+    var k = pick([rnd(20, 272, 0), rnd(273, 450, 0), rnd(450, 2000, 0)]);
+    return {vraag:'Reken om: ' + k + ' K = ? °C', antwoord: k - 273, eenheid:'°C', uitleg: k + ' − 273'};
+  }
+  var p3Ck = maakReken('p3ck', p3CkGenereer, 0.0001);
+
+  /* §1.3 OEFENEN 3 — fase bij temperatuur (bank wordt willekeurig gegenereerd) */
+  var p3StofTabel = [
+    {n:'water', s:273, k:373}, {n:'ethanol', s:159, k:351}, {n:'benzeen', s:279, k:353},
+    {n:'kamfer', s:453, k:477}, {n:'kwik', s:234, k:630}, {n:'lood', s:601, k:2022},
+    {n:'azijnzuur', s:290, k:391}, {n:'zwaveldioxide', s:198, k:263},
+    {n:'propaan', s:86, k:231}, {n:'zuurstof', s:54, k:90}
+  ];
+  var FASEN = ['vast (s)','vloeibaar (l)','gas (g)'];
+  function p3FaseBank(n){
+    var bank = [];
+    for (var i = 0; i < n; i++){
+      var st = pick(p3StofTabel), TK;
+      var zone = pick([0, 1, 2]);
+      if (zone === 0) TK = Math.max(5, Math.round(st.s - 5 - Math.random()*80));
+      else if (zone === 1) TK = Math.round(st.s + 3 + Math.random()*Math.max(1, st.k - st.s - 6));
+      else TK = Math.round(st.k + 5 + Math.random()*150);
+      var inK = Math.random() < 0.5;
+      var tTekst = inK ? TK + ' K' : (TK - 273) + ' °C';
+      var fase = TK < st.s ? FASEN[0] : (TK < st.k ? FASEN[1] : FASEN[2]);
+      bank.push({vraag:'In welke fase is ' + st.n + ' bij ' + tTekst + '?', opties:FASEN, antwoord:fase,
+        uitleg:'Smeltpunt ' + st.s + ' K (' + (st.s - 273) + ' °C), kookpunt ' + st.k + ' K (' + (st.k - 273) + ' °C).'});
+    }
+    return bank;
+  }
+  var p3Fase = maakMC('p3fase', p3FaseBank(12));
+  function p3FaseNieuw(){ p3Fase.bank = p3FaseBank(12); p3Fase.opnieuw(); }
+
+  /* §1.3 OEFENEN 4 — zuivere stof of mengsel */
+  var ZS = 'Zuivere stof', MG = 'Mengsel', ZM = [ZS, MG];
+  var p3Zm = maakMC('p3zm', [
+    {vraag:'Suiker', opties:ZM, antwoord:ZS},
+    {vraag:'Suikerwater', opties:ZM, antwoord:MG, uitleg:'Suiker + water.'},
+    {vraag:'Gedestilleerd water', opties:ZM, antwoord:ZS},
+    {vraag:'Kraanwater', opties:ZM, antwoord:MG, uitleg:'Bevat opgeloste stoffen.'},
+    {vraag:'Zeewater (ook als het niet vervuild is)', opties:ZM, antwoord:MG, uitleg:'Water met o.a. opgelost zout.'},
+    {vraag:'Zuivere berglucht', opties:ZM, antwoord:MG, uitleg:'Lucht bestaat uit o.a. stikstof en zuurstof: scheikundig altijd een mengsel.'},
+    {vraag:'Sinaasappelsap', opties:ZM, antwoord:MG},
+    {vraag:'Bloed', opties:ZM, antwoord:MG},
+    {vraag:'Melk', opties:ZM, antwoord:MG},
+    {vraag:'Kerosine (vliegtuigbrandstof)', opties:ZM, antwoord:MG, uitleg:'Kerosine heeft een kooktraject van 70 tot 90 °C.'},
+    {vraag:'Ethanol', opties:ZM, antwoord:ZS},
+    {vraag:'Kwik', opties:ZM, antwoord:ZS},
+    {vraag:'Een stof waarvan de temperatuur tijdens het koken gelijk blijft', opties:ZM, antwoord:ZS, uitleg:'Een kookpunt hoort bij een zuivere stof.'},
+    {vraag:'Een stof met een kooktraject van 70 tot 90 °C', opties:ZM, antwoord:MG, uitleg:'Een traject hoort bij een mengsel.'},
+    {vraag:'Een stof waarvan de temperatuur tijdens het smelten langzaam oploopt', opties:ZM, antwoord:MG, uitleg:'Dat is een smelttraject.'},
+    {vraag:'Een temperatuur-tijddiagram met horizontale stukken bij smelten en koken', opties:ZM, antwoord:ZS},
+    {vraag:'Biologische verfstof zoals Tyrees purper', opties:ZM, antwoord:MG, uitleg:'Biologische verfstoffen zijn bijna altijd mengsels.'}
+  ]);
+
+  /* BEGRIPPEN H1 */
+  var p4Begrippen = [
+    ['Scheikunde', 'De natuurwetenschap die zich bezighoudt met stoffen en het veranderen van stoffen'],
+    ['Stof', 'Alles wat massa heeft'],
+    ['Stofeigenschap', 'Een eigenschap waaraan je een stof herkent; elke stof heeft een unieke combinatie'],
+    ['Stofconstante', 'Een stofeigenschap die je met een getal en een eenheid kunt aangeven'],
+    ['Dichtheid', 'De massa van 1 m³ (of 1 cm³) van een stof: massa ÷ volume'],
+    ['Grootheid', 'Een eigenschap die meetbaar is, zoals massa of volume'],
+    ['Eenheid', 'De maat waarmee je een grootheid meet, zoals kilogram of liter'],
+    ['Gevarenpictogram', 'Rode ruit met zwart symbool die waarschuwt voor een gevaarlijke stof'],
+    ['Chemiekaart', 'Kaart met informatie over de gevaren en eigenschappen van een stof'],
+    ['Grenswaarde', 'Hoeveel mg van een stof in 1 m³ lucht aanwezig mag zijn; daarboven is het schadelijk'],
+    ['Experiment', 'Proef om een theorie te onderbouwen of om een nieuwe theorie op te stellen'],
+    ['Handeling', 'Wat je doet bij een experiment'],
+    ['Waarneming', 'Wat je ziet, hoort, voelt of ruikt bij een experiment'],
+    ['Conclusie', 'Wat je afleidt uit je waarnemingen'],
+    ['Fasen van een stof', 'Vast (s), vloeibaar (l) en gasvormig (g)'],
+    ['Faseverandering', 'De overgang van een stof van de ene fase naar een andere fase'],
+    ['Smeltpunt', 'De temperatuur waarbij een zuivere stof smelt (en stolt)'],
+    ['Kookpunt', 'De temperatuur waarbij een zuivere stof kookt'],
+    ['Temperatuur in kelvin', 'Temperatuur in °C + 273'],
+    ['Zuivere stof', 'Bestaat uit één stof; heeft een smeltpunt en een kookpunt'],
+    ['Mengsel', 'Bestaat uit meerdere stoffen; heeft een smelttraject en een kooktraject'],
+    ['Smelttraject', 'Temperatuurgebied waarin een mengsel smelt; de temperatuur loopt tijdens het smelten op'],
+    ['Kooktraject', 'Temperatuurgebied waarin een mengsel kookt; de temperatuur loopt tijdens het koken op']
+  ];
+  var p4a = maakFC('p4a', p4Begrippen.map(function(b){ return {voor:b[0], achter:b[1]}; }));
+  var p4b = maakFC('p4b', p4Begrippen.map(function(b){ return {voor:b[1], achter:b[0]}; }));
+
+  /* INIT */
+  p1FcInit();
+  p1Eig.start();
+  p1Omr.start();
+  p1Dic.start();
+  p2Fc.start();
+  p2Hwc.start();
+  p2Vei.start();
+  p2Gw.start();
+  p3Fc.start();
+  p3Ovg.start();
+  p3Ck.start();
+  p3Fase.start();
+  p3Zm.start();
+  p4a.start();
+  p4b.start();
+</script>
+</body>
+</html>
