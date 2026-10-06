@@ -191,7 +191,36 @@
     </div>
   </div>
   <div id="sub-p1-flashcards" class="sub-tab-content">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Begrip → betekenis (§1.1)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p1fc-goed">0</span> / <span id="p1fc-totaal">0</span></div>
+        <div class="fc-teller" id="p1fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p1FcFlip()">
+        <div class="flip-card" id="p1fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p1fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p1fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p1fc-oordeel" style="display:none">
+        <button onclick="p1FcOordeel(false)">&#10007; Fout</button>
+        <button onclick="p1FcOordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p1FcVorige()">&larr; Vorige</button>
+        <button onclick="p1FcVolgende()">Volgende &rarr;</button>
+        <button onclick="p1FcOpnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1FcSchud()">&#128256; Shuffle</button>
+      </div>
+    </div>
   </div>
   <div id="sub-p1-oefenen" class="sub-tab-content">
     <div class="uitleg-card"><p>Binnenkort.</p></div>
@@ -243,6 +272,60 @@
   function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+  /* §1.1 FLASHCARDS */
+  var p1FcData = [
+    {voor:'Wat is scheikunde?', achter:'De natuurwetenschap die zich bezighoudt met stoffen en met het veranderen van stoffen in andere stoffen'},
+    {voor:'Wat is een stof?', achter:'Alles wat massa heeft'},
+    {voor:'Wat is een stofeigenschap?', achter:'Een eigenschap waaraan je een stof herkent'},
+    {voor:'Hoe weet je dat twee stoffen verschillend zijn?', achter:'Ze verschillen in één of meer stofeigenschappen'},
+    {voor:'Wat is een stofconstante?', achter:'Een stofeigenschap die je met een getal en een eenheid weergeeft'},
+    {voor:'Noem drie stofconstanten', achter:'Smeltpunt, kookpunt en dichtheid'},
+    {voor:'Wat is de dichtheid van een stof?', achter:'De massa van 1 m³ (of 1 cm³) van die stof'},
+    {voor:'Geef de formule voor dichtheid', achter:'dichtheid = massa ÷ volume'},
+    {voor:'Waarom is massa géén stofeigenschap?', achter:'Massa hangt af van hoeveel stof je hebt, niet van welke stof het is'},
+    {voor:'Wat is een grootheid?', achter:'Een eigenschap die je kunt meten, zoals massa of volume'},
+    {voor:'Wat is een eenheid?', achter:'De maat waarmee je een grootheid meet, zoals kg of L'},
+    {voor:'Wat betekent het voorvoegsel kilo?', achter:'Duizend (× 1000)'},
+    {voor:'1 mL = ... cm³', achter:'1 cm³'},
+    {voor:'1 L = ... dm³', achter:'1 dm³'},
+    {voor:'1 m³ = ... L', achter:'1000 L'},
+    {voor:'Smeltpunt en kookpunt van water?', achter:'Smeltpunt 0 °C, kookpunt 100 °C'},
+    {voor:'Hoe reken je g/cm³ om naar kg/m³?', achter:'× 1000 (1,0 g/cm³ = 1000 kg/m³)'}
+  ];
+  var p1FcKaarten = [], p1FcIndex = 0, p1FcGoed = 0, p1FcTotaal = 0, p1FcOmgedraaid = false;
+  function p1FcInit(){ p1FcKaarten = fisherYates(p1FcData.slice()); p1FcIndex = 0; p1FcGoed = 0; p1FcTotaal = 0; p1FcToonKaart(); }
+  function p1FcToonKaart(){
+    var k = p1FcKaarten[p1FcIndex];
+    document.getElementById('p1fc-voor').textContent = k.voor;
+    document.getElementById('p1fc-achter').textContent = k.achter;
+    document.getElementById('p1fc-card').classList.remove('flipped');
+    p1FcOmgedraaid = false;
+    document.getElementById('p1fc-oordeel').style.display = 'none';
+    document.getElementById('p1fc-teller').textContent = (p1FcIndex+1) + ' / ' + p1FcKaarten.length;
+    p1FcUpdateScore();
+  }
+  function p1FcFlip(){
+    p1FcOmgedraaid = !p1FcOmgedraaid;
+    document.getElementById('p1fc-card').classList.toggle('flipped', p1FcOmgedraaid);
+    document.getElementById('p1fc-oordeel').style.display = p1FcOmgedraaid ? 'flex' : 'none';
+  }
+  function p1FcOordeel(goed){ p1FcTotaal++; if (goed) p1FcGoed++; p1FcUpdateScore(); p1FcVolgende(); }
+  function p1FcUpdateScore(){
+    document.getElementById('p1fc-goed').textContent = p1FcGoed;
+    document.getElementById('p1fc-totaal').textContent = p1FcTotaal;
+  }
+  function p1FcVorige(){ if (p1FcIndex > 0){ p1FcIndex--; p1FcToonKaart(); } }
+  function p1FcVolgende(){ p1FcIndex = (p1FcIndex < p1FcKaarten.length - 1) ? p1FcIndex + 1 : 0; p1FcToonKaart(); }
+  function p1FcSchud(){
+    var klaar = p1FcTotaal >= p1FcKaarten.length;
+    if (klaar){ p1FcGoed = 0; p1FcTotaal = 0; }
+    p1FcKaarten = fisherYates(p1FcKaarten); p1FcIndex = 0; p1FcToonKaart();
+  }
+  function p1FcOpnieuw(){ p1FcInit(); }
+
+  /* INIT */
+  p1FcInit();
 </script>
 </body>
 </html>
