@@ -671,7 +671,73 @@
 </div>
 
 <div id="tab-p4" class="tab-content">
-  <div class="uitleg-card"><p>Binnenkort.</p></div>
+  <div class="uitleg-card">
+    <h2>Begrippen H1 — herhaling voor de SO</h2>
+    <p>Alle begrippen uit het overzicht van hoofdstuk 1. Oefen ze in beide richtingen.</p>
+  </div>
+
+  <!-- BLOCK A -->
+  <div class="uitleg-card">
+    <h3 style="color:#059669;margin-bottom:.6rem">Begrip → betekenis</h3>
+    <div class="fc-topbar">
+      <div class="score-balk" style="margin-bottom:0">Score: <span id="p4a-goed">0</span> / <span id="p4a-totaal">0</span></div>
+      <div class="fc-teller" id="p4a-teller">1 / 1</div>
+    </div>
+    <div class="flip-wrapper" onclick="p4a.flip()">
+      <div class="flip-card" id="p4a-card">
+        <div class="flip-face flip-front">
+          <div class="flip-label">Begrip</div>
+          <div class="flip-tekst" id="p4a-voor"></div>
+          <div class="flip-hint">Klik om om te draaien</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-label">Betekenis</div>
+          <div class="flip-tekst" id="p4a-achter"></div>
+        </div>
+      </div>
+    </div>
+    <div class="knoppen-rij" id="p4a-oordeel" style="display:none">
+      <button onclick="p4a.oordeel(false)">&#10007; Fout</button>
+      <button onclick="p4a.oordeel(true)">&#10003; Goed</button>
+    </div>
+    <div class="knoppen-rij">
+      <button onclick="p4a.vorige()">&larr; Vorige</button>
+      <button onclick="p4a.volgende()">Volgende &rarr;</button>
+      <button onclick="p4a.opnieuw()">&#8635; Opnieuw</button>
+      <button onclick="p4a.schud()">&#128256; Shuffle</button>
+    </div>
+  </div>
+
+  <div class="uitleg-card">
+    <h3 style="color:#059669;margin-bottom:.6rem">Betekenis → begrip</h3>
+    <div class="fc-topbar">
+      <div class="score-balk" style="margin-bottom:0">Score: <span id="p4b-goed">0</span> / <span id="p4b-totaal">0</span></div>
+      <div class="fc-teller" id="p4b-teller">1 / 1</div>
+    </div>
+    <div class="flip-wrapper" onclick="p4b.flip()">
+      <div class="flip-card" id="p4b-card">
+        <div class="flip-face flip-front">
+          <div class="flip-label">Betekenis</div>
+          <div class="flip-tekst" id="p4b-voor"></div>
+          <div class="flip-hint">Klik om om te draaien</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-label">Begrip</div>
+          <div class="flip-tekst" id="p4b-achter"></div>
+        </div>
+      </div>
+    </div>
+    <div class="knoppen-rij" id="p4b-oordeel" style="display:none">
+      <button onclick="p4b.oordeel(false)">&#10007; Fout</button>
+      <button onclick="p4b.oordeel(true)">&#10003; Goed</button>
+    </div>
+    <div class="knoppen-rij">
+      <button onclick="p4b.vorige()">&larr; Vorige</button>
+      <button onclick="p4b.volgende()">Volgende &rarr;</button>
+      <button onclick="p4b.opnieuw()">&#8635; Opnieuw</button>
+      <button onclick="p4b.schud()">&#128256; Shuffle</button>
+    </div>
+  </div>
 </div>
 
 <footer>Gemaakt voor Sam &middot; 3 HAVO</footer>
@@ -1132,6 +1198,35 @@
     {vraag:'Biologische verfstof zoals Tyrees purper', opties:ZM, antwoord:MG, uitleg:'Biologische verfstoffen zijn bijna altijd mengsels.'}
   ]);
 
+  /* BEGRIPPEN H1 */
+  var p4Begrippen = [
+    ['Scheikunde', 'De natuurwetenschap die zich bezighoudt met stoffen en het veranderen van stoffen'],
+    ['Stof', 'Alles wat massa heeft'],
+    ['Stofeigenschap', 'Een eigenschap waaraan je een stof herkent; elke stof heeft een unieke combinatie'],
+    ['Stofconstante', 'Een stofeigenschap die je met een getal en een eenheid kunt aangeven'],
+    ['Dichtheid', 'De massa van 1 m³ (of 1 cm³) van een stof: massa ÷ volume'],
+    ['Grootheid', 'Een eigenschap die meetbaar is, zoals massa of volume'],
+    ['Eenheid', 'De maat waarmee je een grootheid meet, zoals kilogram of liter'],
+    ['Gevarenpictogram', 'Rode ruit met zwart symbool die waarschuwt voor een gevaarlijke stof'],
+    ['Chemiekaart', 'Kaart met informatie over de gevaren en eigenschappen van een stof'],
+    ['Grenswaarde', 'Hoeveel mg van een stof in 1 m³ lucht aanwezig mag zijn; daarboven is het schadelijk'],
+    ['Experiment', 'Proef om een theorie te onderbouwen of om een nieuwe theorie op te stellen'],
+    ['Handeling', 'Wat je doet bij een experiment'],
+    ['Waarneming', 'Wat je ziet, hoort, voelt of ruikt bij een experiment'],
+    ['Conclusie', 'Wat je afleidt uit je waarnemingen'],
+    ['Fasen van een stof', 'Vast (s), vloeibaar (l) en gasvormig (g)'],
+    ['Faseverandering', 'De overgang van een stof van de ene fase naar een andere fase'],
+    ['Smeltpunt', 'De temperatuur waarbij een zuivere stof smelt (en stolt)'],
+    ['Kookpunt', 'De temperatuur waarbij een zuivere stof kookt'],
+    ['Temperatuur in kelvin', 'Temperatuur in °C + 273'],
+    ['Zuivere stof', 'Bestaat uit één stof; heeft een smeltpunt en een kookpunt'],
+    ['Mengsel', 'Bestaat uit meerdere stoffen; heeft een smelttraject en een kooktraject'],
+    ['Smelttraject', 'Temperatuurgebied waarin een mengsel smelt; de temperatuur loopt tijdens het smelten op'],
+    ['Kooktraject', 'Temperatuurgebied waarin een mengsel kookt; de temperatuur loopt tijdens het koken op']
+  ];
+  var p4a = maakFC('p4a', p4Begrippen.map(function(b){ return {voor:b[0], achter:b[1]}; }));
+  var p4b = maakFC('p4b', p4Begrippen.map(function(b){ return {voor:b[1], achter:b[0]}; }));
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
@@ -1146,6 +1241,8 @@
   p3Ck.start();
   p3Fase.start();
   p3Zm.start();
+  p4a.start();
+  p4b.start();
 </script>
 </body>
 </html>
