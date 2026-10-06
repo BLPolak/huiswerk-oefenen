@@ -101,6 +101,9 @@
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
     .picto { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border:3px solid #dc2626; background:#fff; transform:rotate(45deg); margin:6px; }
     .picto span { transform:rotate(-45deg); font-size:1.1rem; }
+    .diagram-rij { display:flex; gap:.8rem; flex-wrap:wrap; margin:.8rem 0; }
+    .diagram-item { flex:1 1 220px; background:#f0fdf4; border-radius:8px; padding:.6rem; text-align:center; }
+    .diagram-label { font-size:.85rem; font-weight:800; color:#047857; margin-top:.3rem; }
   </style>
 </head>
 <body>
@@ -472,7 +475,101 @@
     <button class="sub-tab-btn" onclick="showSubTab('p3','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p3-uitleg" class="sub-tab-content active">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="uitleg-card">
+      <h2>Fasen</h2>
+      <p>IJs, water en waterdamp zijn alle drie dezelfde stof: water. Een stof kan in drie <strong>fasen</strong> voorkomen: <strong>vast</strong>, <strong>vloeibaar</strong> en <strong>gas</strong>. De fase wordt bepaald door de temperatuur (en de druk).</p>
+      <table class="data-tabel">
+        <tr><th>Temperatuur</th><th>Fase</th></tr>
+        <tr><td>lager dan het smeltpunt</td><td>vast</td></tr>
+        <tr><td>tussen smeltpunt en kookpunt</td><td>vloeibaar</td></tr>
+        <tr><td>hoger dan het kookpunt</td><td>gas</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Toestandsaanduidingen</h2>
+      <p>De fase geef je aan met een letter tussen haakjes achter de stof:</p>
+      <table class="data-tabel">
+        <tr><th>Notatie</th><th>Betekenis</th><th>Voorbeeld</th></tr>
+        <tr><td><strong>(s)</strong></td><td>vast (solid)</td><td>ijs: water (s)</td></tr>
+        <tr><td><strong>(l)</strong></td><td>vloeibaar (liquid)</td><td>water (l)</td></tr>
+        <tr><td><strong>(g)</strong></td><td>gas</td><td>waterdamp: water (g)</td></tr>
+        <tr><td><strong>(aq)</strong></td><td>opgelost in water (aqua)</td><td>suiker (aq)</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Faseveranderingen — de fasedriehoek</h2>
+      <svg viewBox="0 0 320 230" style="width:100%;max-width:420px;height:auto;display:block;margin:0 auto">
+        <defs><marker id="pijl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#047857"/></marker></defs>
+        <rect x="135" y="10" width="50" height="34" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="160" y="33" text-anchor="middle" font-size="16" font-weight="800" fill="#047857">g</text>
+        <rect x="15" y="180" width="50" height="34" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="40" y="203" text-anchor="middle" font-size="16" font-weight="800" fill="#047857">s</text>
+        <rect x="255" y="180" width="50" height="34" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="280" y="203" text-anchor="middle" font-size="16" font-weight="800" fill="#047857">l</text>
+        <line x1="72" y1="190" x2="248" y2="190" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <line x1="248" y1="205" x2="72" y2="205" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <text x="160" y="184" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">smelten →</text>
+        <text x="160" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">← stollen</text>
+        <line x1="45" y1="176" x2="135" y2="40" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <line x1="140" y1="50" x2="58" y2="176" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <text x="52" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(-57 52 105)">sublimeren ↑</text>
+        <text x="118" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(-57 118 125)">↓ rijpen</text>
+        <line x1="262" y1="176" x2="180" y2="50" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <line x1="185" y1="40" x2="275" y2="176" stroke="#047857" stroke-width="2" marker-end="url(#pijl)"/>
+        <text x="202" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(57 202 125)">verdampen ↑</text>
+        <text x="268" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b" transform="rotate(57 268 105)">↓ condenseren</text>
+      </svg>
+      <table class="data-tabel">
+        <tr><th>Overgang</th><th>Naam</th></tr>
+        <tr><td>(s) → (l)</td><td><strong>smelten</strong></td></tr>
+        <tr><td>(l) → (s)</td><td><strong>stollen</strong></td></tr>
+        <tr><td>(l) → (g)</td><td><strong>verdampen</strong></td></tr>
+        <tr><td>(g) → (l)</td><td><strong>condenseren</strong></td></tr>
+        <tr><td>(s) → (g)</td><td><strong>sublimeren</strong></td></tr>
+        <tr><td>(g) → (s)</td><td><strong>rijpen</strong></td></tr>
+      </table>
+      <div class="voorbeeld-blok">Schrijfwijze: water (l) → water (g) &nbsp;(verdampen)<br>Rijp op de takken: waterdamp gaat 's nachts direct over in ijs: water (g) → water (s)</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Temperatuurschalen: Celsius en kelvin</h2>
+      <p>Temperatuur geef je meestal in <strong>°C</strong>. Maar je kunt ook de eenheid <strong>kelvin (K)</strong> gebruiken.</p>
+      <div class="voorbeeld-blok"><strong>°C → K: + 273</strong> &nbsp;&nbsp;(20 °C = 293 K)<br><strong>K → °C: − 273</strong> &nbsp;&nbsp;(373 K = 100 °C)<br>0 K = −273 °C (lager kan niet)</div>
+      <div class="regel-blok blauw"><p><strong>Voorbeeld ethanol:</strong> smeltpunt −114 °C = 159 K, kookpunt 78 °C = 351 K. Bij 60 °C ligt de temperatuur tussen smelt- en kookpunt, dus ethanol is dan <strong>vloeibaar</strong>.</p></div>
+      <div class="regel-blok oranje"><p><strong>Let op:</strong> schrijf bij kelvin géén gradenteken: 293 K, niet 293 °K.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Zuivere stoffen en mengsels</h2>
+      <p>Een <strong>zuivere stof</strong> bestaat uit één stof. Een <strong>mengsel</strong> bestaat uit twee of meer stoffen.</p>
+      <div class="regel-blok groen"><p><strong>Zuivere stoffen:</strong> suiker, (gedestilleerd) water, ethanol, kwik, ijzer</p></div>
+      <div class="regel-blok oranje"><p><strong>Mengsels:</strong> suikerwater, lucht, zeewater, sinaasappelsap, bloed, melk, kraanwater</p></div>
+      <p>Op de verpakking van producten staat vaak de <strong>samenstelling</strong>. Staat er maar één stof op, dan is het een zuivere stof.</p>
+      <h3>Het verschil meten</h3>
+      <p>Een <strong>zuivere stof</strong> heeft een <strong>smeltpunt</strong> en een <strong>kookpunt</strong>: tijdens het smelten en koken blijft de temperatuur gelijk (horizontaal stuk in de grafiek).<br>
+      Een <strong>mengsel</strong> heeft een <strong>smelttraject</strong> en een <strong>kooktraject</strong>: tijdens het smelten en koken loopt de temperatuur langzaam op (schuin stuk).</p>
+      <div class="diagram-rij">
+        <div class="diagram-item">
+          <svg viewBox="0 0 180 130" style="width:100%;height:auto;display:block">
+            <line x1="20" y1="10" x2="20" y2="115" stroke="#94a3b8" stroke-width="1.5"/><line x1="20" y1="115" x2="175" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="8" y="60" font-size="8" fill="#6b7280" transform="rotate(-90 8 60)">temperatuur</text><text x="160" y="126" font-size="8" fill="#6b7280">tijd</text>
+            <polyline points="22,108 50,85 85,85 110,48 145,48 172,25" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+            <text x="67" y="80" text-anchor="middle" font-size="8" fill="#1e293b">smelten</text><text x="127" y="43" text-anchor="middle" font-size="8" fill="#1e293b">koken</text>
+            <text x="30" y="103" font-size="8" fill="#047857">s</text><text x="93" y="72" font-size="8" fill="#047857">l</text><text x="155" y="33" font-size="8" fill="#047857">g</text>
+          </svg>
+          <div class="diagram-label">Zuivere stof: smeltpunt en kookpunt</div>
+        </div>
+        <div class="diagram-item">
+          <svg viewBox="0 0 180 130" style="width:100%;height:auto;display:block">
+            <line x1="20" y1="10" x2="20" y2="115" stroke="#94a3b8" stroke-width="1.5"/><line x1="20" y1="115" x2="175" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="8" y="60" font-size="8" fill="#6b7280" transform="rotate(-90 8 60)">temperatuur</text><text x="160" y="126" font-size="8" fill="#6b7280">tijd</text>
+            <polyline points="22,108 50,88 85,75 110,50 145,36 172,18" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+            <text x="62" y="73" text-anchor="middle" font-size="8" fill="#1e293b">smelttraject</text><text x="122" y="33" text-anchor="middle" font-size="8" fill="#1e293b">kooktraject</text>
+          </svg>
+          <div class="diagram-label">Mengsel: smelttraject en kooktraject</div>
+        </div>
+      </div>
+      <div class="regel-blok blauw"><p><strong>Onthoud:</strong> horizontaal stuk = zuivere stof &nbsp;·&nbsp; schuin stuk = mengsel</p></div>
+    </div>
   </div>
   <div id="sub-p3-flashcards" class="sub-tab-content">
     <div class="uitleg-card"><p>Binnenkort.</p></div>
