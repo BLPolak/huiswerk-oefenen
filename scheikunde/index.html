@@ -676,7 +676,6 @@
     <p>Alle begrippen uit het overzicht van hoofdstuk 1. Oefen ze in beide richtingen.</p>
   </div>
 
-  <!-- BLOCK A -->
   <div class="uitleg-card">
     <h3 style="color:#059669;margin-bottom:.6rem">Begrip → betekenis</h3>
     <div class="fc-topbar">
@@ -1174,7 +1173,7 @@
     return bank;
   }
   var p3Fase = maakMC('p3fase', p3FaseBank(12));
-  function p3FaseNieuw(){ p3Fase = maakMC('p3fase', p3FaseBank(12)); p3Fase.start(); }
+  function p3FaseNieuw(){ p3Fase.bank = p3FaseBank(12); p3Fase.opnieuw(); }
 
   /* §1.3 OEFENEN 4 — zuivere stof of mengsel */
   var ZS = 'Zuivere stof', MG = 'Mengsel', ZM = [ZS, MG];
