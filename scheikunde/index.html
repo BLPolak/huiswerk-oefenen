@@ -572,10 +572,101 @@
     </div>
   </div>
   <div id="sub-p3-flashcards" class="sub-tab-content">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§1.3)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p3fc-goed">0</span> / <span id="p3fc-totaal">0</span></div>
+        <div class="fc-teller" id="p3fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p3Fc.flip()">
+        <div class="flip-card" id="p3fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p3fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p3fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p3fc-oordeel" style="display:none">
+        <button onclick="p3Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p3Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p3Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p3Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p3Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
   </div>
   <div id="sub-p3-oefenen" class="sub-tab-content">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Hoe heet deze faseovergang?</h3>
+      <div class="score-balk">Score: <span id="p3ovg-goed">0</span> / <span id="p3ovg-totaal">0</span></div>
+      <div id="p3ovg-vraag" class="vraag-tekst"></div>
+      <div id="p3ovg-opties" class="mc-grid"></div>
+      <div id="p3ovg-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p3Ovg.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Ovg.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Celsius ↔ kelvin</h3>
+      <div class="regel-blok blauw"><p>°C → K: + 273 &nbsp;·&nbsp; K → °C: − 273</p></div>
+      <div class="score-balk">Score: <span id="p3ck-goed">0</span> / <span id="p3ck-totaal">0</span></div>
+      <div id="p3ck-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p3ck-input" class="open-input" placeholder="Jouw antwoord (bijv. -50)" onkeydown="if(event.key==='Enter') p3Ck.controleer()">
+      <div id="p3ck-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p3ck-controleer-btn" onclick="p3Ck.controleer()">Controleer</button>
+        <button id="p3ck-volgende-btn" onclick="p3Ck.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p3Ck.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Ck.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — In welke fase is de stof?</h3>
+      <table class="data-tabel">
+        <tr><th>Stof</th><th>Smeltpunt</th><th>Kookpunt</th></tr>
+        <tr><td>water</td><td>273 K (0 °C)</td><td>373 K (100 °C)</td></tr>
+        <tr><td>ethanol</td><td>159 K (−114 °C)</td><td>351 K (78 °C)</td></tr>
+        <tr><td>benzeen</td><td>279 K (6 °C)</td><td>353 K (80 °C)</td></tr>
+        <tr><td>kamfer</td><td>453 K (180 °C)</td><td>477 K (204 °C)</td></tr>
+        <tr><td>kwik</td><td>234 K (−39 °C)</td><td>630 K (357 °C)</td></tr>
+        <tr><td>lood</td><td>601 K (328 °C)</td><td>2022 K (1749 °C)</td></tr>
+        <tr><td>azijnzuur</td><td>290 K (17 °C)</td><td>391 K (118 °C)</td></tr>
+        <tr><td>zwaveldioxide</td><td>198 K (−75 °C)</td><td>263 K (−10 °C)</td></tr>
+        <tr><td>propaan</td><td>86 K (−187 °C)</td><td>231 K (−42 °C)</td></tr>
+        <tr><td>zuurstof</td><td>54 K (−219 °C)</td><td>90 K (−183 °C)</td></tr>
+      </table>
+      <div class="score-balk">Score: <span id="p3fase-goed">0</span> / <span id="p3fase-totaal">0</span></div>
+      <div id="p3fase-vraag" class="vraag-tekst"></div>
+      <div id="p3fase-opties" class="mc-grid"></div>
+      <div id="p3fase-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p3FaseNieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Fase.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 4 — Zuivere stof of mengsel?</h3>
+      <div class="score-balk">Score: <span id="p3zm-goed">0</span> / <span id="p3zm-totaal">0</span></div>
+      <div id="p3zm-vraag" class="vraag-tekst"></div>
+      <div id="p3zm-opties" class="mc-grid"></div>
+      <div id="p3zm-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p3Zm.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p3Zm.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -936,6 +1027,111 @@
   }
   var p2Gw = maakReken('p2gw', p2GwGenereer, 0.01);
 
+  /* §1.3 FLASHCARDS */
+  var p3Fc = maakFC('p3fc', [
+    {voor:'In welke drie fasen kan een stof voorkomen?', achter:'Vast, vloeibaar en gas'},
+    {voor:'Wat betekent (s)?', achter:'Vast (solid)'},
+    {voor:'Wat betekent (l)?', achter:'Vloeibaar (liquid)'},
+    {voor:'Wat betekent (g)?', achter:'Gasvormig'},
+    {voor:'Wat betekent (aq)?', achter:'Opgelost in water (aqua)'},
+    {voor:'(s) → (l)', achter:'Smelten'},
+    {voor:'(l) → (s)', achter:'Stollen'},
+    {voor:'(l) → (g)', achter:'Verdampen'},
+    {voor:'(g) → (l)', achter:'Condenseren'},
+    {voor:'(s) → (g)', achter:'Sublimeren'},
+    {voor:'(g) → (s)', achter:'Rijpen'},
+    {voor:'Een stof is vast als de temperatuur ...', achter:'lager is dan het smeltpunt'},
+    {voor:'Een stof is vloeibaar als de temperatuur ...', achter:'tussen het smeltpunt en het kookpunt ligt'},
+    {voor:'Een stof is een gas als de temperatuur ...', achter:'hoger is dan het kookpunt'},
+    {voor:'Hoe reken je °C om naar K?', achter:'+ 273'},
+    {voor:'Hoe reken je K om naar °C?', achter:'− 273'},
+    {voor:'Wat is een zuivere stof?', achter:'Een stof die uit één stof bestaat'},
+    {voor:'Wat is een mengsel?', achter:'Een stof die uit twee of meer stoffen bestaat'},
+    {voor:'Zuivere stof: smeltpunt of smelttraject?', achter:'Smeltpunt (en kookpunt): de temperatuur blijft gelijk'},
+    {voor:'Mengsel: smeltpunt of smelttraject?', achter:'Smelttraject (en kooktraject): de temperatuur loopt langzaam op'},
+    {voor:'Hoe zie je in een temperatuur-tijddiagram dat het een zuivere stof is?', achter:'Er zijn horizontale stukken bij smelten en koken'}
+  ]);
+
+  /* §1.3 OEFENEN 1 — naam faseovergang */
+  var OVG = ['smelten','stollen','verdampen','condenseren','sublimeren','rijpen'];
+  var p3Ovg = maakMC('p3ovg', [
+    {vraag:'water (g) → water (s)', opties:OVG, antwoord:'rijpen'},
+    {vraag:'zwavel (s) → zwavel (l)', opties:OVG, antwoord:'smelten'},
+    {vraag:'jood (s) → jood (g)', opties:OVG, antwoord:'sublimeren'},
+    {vraag:'kaarsvet (l) → kaarsvet (s)', opties:OVG, antwoord:'stollen'},
+    {vraag:'alcohol (g) → alcohol (l)', opties:OVG, antwoord:'condenseren'},
+    {vraag:'butagas (l) → butagas (g)', opties:OVG, antwoord:'verdampen'},
+    {vraag:'ijzer (s) → ijzer (l)', opties:OVG, antwoord:'smelten'},
+    {vraag:'kwik (l) → kwik (g)', opties:OVG, antwoord:'verdampen'},
+    {vraag:'lood (l) → lood (s)', opties:OVG, antwoord:'stollen'},
+    {vraag:'zuurstof (g) → zuurstof (l)', opties:OVG, antwoord:'condenseren'},
+    {vraag:'koolstofdioxide (s) → koolstofdioxide (g)', opties:OVG, antwoord:'sublimeren', uitleg:'Droogijs gaat direct over in gas.'},
+    {vraag:'Waterdamp wordt in een koude nacht direct ijs op de takken.', opties:OVG, antwoord:'rijpen'},
+    {vraag:'Er ontstaan druppels water op een koude spiegel na het douchen.', opties:OVG, antwoord:'condenseren'},
+    {vraag:'Een plas water op straat droogt op in de zon.', opties:OVG, antwoord:'verdampen'},
+    {vraag:'Kaarsvet druipt langs de kaars en wordt weer hard.', opties:OVG, antwoord:'stollen'}
+  ]);
+
+  /* §1.3 OEFENEN 2 — °C ↔ K (gerandomiseerd) */
+  function p3CkGenereer(){
+    if (Math.random() < 0.5){
+      var c = pick([rnd(-250, -1, 0), rnd(0, 150, 0), rnd(150, 1500, 0)]);
+      return {vraag:'Reken om: ' + c + ' °C = ? K', antwoord: c + 273, eenheid:'K', uitleg: c + ' + 273'};
+    }
+    var k = pick([rnd(20, 272, 0), rnd(273, 450, 0), rnd(450, 2000, 0)]);
+    return {vraag:'Reken om: ' + k + ' K = ? °C', antwoord: k - 273, eenheid:'°C', uitleg: k + ' − 273'};
+  }
+  var p3Ck = maakReken('p3ck', p3CkGenereer, 0.0001);
+
+  /* §1.3 OEFENEN 3 — fase bij temperatuur (bank wordt willekeurig gegenereerd) */
+  var p3StofTabel = [
+    {n:'water', s:273, k:373}, {n:'ethanol', s:159, k:351}, {n:'benzeen', s:279, k:353},
+    {n:'kamfer', s:453, k:477}, {n:'kwik', s:234, k:630}, {n:'lood', s:601, k:2022},
+    {n:'azijnzuur', s:290, k:391}, {n:'zwaveldioxide', s:198, k:263},
+    {n:'propaan', s:86, k:231}, {n:'zuurstof', s:54, k:90}
+  ];
+  var FASEN = ['vast (s)','vloeibaar (l)','gas (g)'];
+  function p3FaseBank(n){
+    var bank = [];
+    for (var i = 0; i < n; i++){
+      var st = pick(p3StofTabel), TK;
+      var zone = pick([0, 1, 2]);
+      if (zone === 0) TK = Math.max(5, Math.round(st.s - 5 - Math.random()*80));
+      else if (zone === 1) TK = Math.round(st.s + 3 + Math.random()*Math.max(1, st.k - st.s - 6));
+      else TK = Math.round(st.k + 5 + Math.random()*150);
+      var inK = Math.random() < 0.5;
+      var tTekst = inK ? TK + ' K' : (TK - 273) + ' °C';
+      var fase = TK < st.s ? FASEN[0] : (TK < st.k ? FASEN[1] : FASEN[2]);
+      bank.push({vraag:'In welke fase is ' + st.n + ' bij ' + tTekst + '?', opties:FASEN, antwoord:fase,
+        uitleg:'Smeltpunt ' + st.s + ' K (' + (st.s - 273) + ' °C), kookpunt ' + st.k + ' K (' + (st.k - 273) + ' °C).'});
+    }
+    return bank;
+  }
+  var p3Fase = maakMC('p3fase', p3FaseBank(12));
+  function p3FaseNieuw(){ p3Fase = maakMC('p3fase', p3FaseBank(12)); p3Fase.start(); }
+
+  /* §1.3 OEFENEN 4 — zuivere stof of mengsel */
+  var ZS = 'Zuivere stof', MG = 'Mengsel', ZM = [ZS, MG];
+  var p3Zm = maakMC('p3zm', [
+    {vraag:'Suiker', opties:ZM, antwoord:ZS},
+    {vraag:'Suikerwater', opties:ZM, antwoord:MG, uitleg:'Suiker + water.'},
+    {vraag:'Gedestilleerd water', opties:ZM, antwoord:ZS},
+    {vraag:'Kraanwater', opties:ZM, antwoord:MG, uitleg:'Bevat opgeloste stoffen.'},
+    {vraag:'Zeewater (ook als het niet vervuild is)', opties:ZM, antwoord:MG, uitleg:'Water met o.a. opgelost zout.'},
+    {vraag:'Zuivere berglucht', opties:ZM, antwoord:MG, uitleg:'Lucht bestaat uit o.a. stikstof en zuurstof: scheikundig altijd een mengsel.'},
+    {vraag:'Sinaasappelsap', opties:ZM, antwoord:MG},
+    {vraag:'Bloed', opties:ZM, antwoord:MG},
+    {vraag:'Melk', opties:ZM, antwoord:MG},
+    {vraag:'Kerosine (vliegtuigbrandstof)', opties:ZM, antwoord:MG, uitleg:'Kerosine heeft een kooktraject van 70 tot 90 °C.'},
+    {vraag:'Ethanol', opties:ZM, antwoord:ZS},
+    {vraag:'Kwik', opties:ZM, antwoord:ZS},
+    {vraag:'Een stof waarvan de temperatuur tijdens het koken gelijk blijft', opties:ZM, antwoord:ZS, uitleg:'Een kookpunt hoort bij een zuivere stof.'},
+    {vraag:'Een stof met een kooktraject van 70 tot 90 °C', opties:ZM, antwoord:MG, uitleg:'Een traject hoort bij een mengsel.'},
+    {vraag:'Een stof waarvan de temperatuur tijdens het smelten langzaam oploopt', opties:ZM, antwoord:MG, uitleg:'Dat is een smelttraject.'},
+    {vraag:'Een temperatuur-tijddiagram met horizontale stukken bij smelten en koken', opties:ZM, antwoord:ZS},
+    {vraag:'Biologische verfstof zoals Tyrees purper', opties:ZM, antwoord:MG, uitleg:'Biologische verfstoffen zijn bijna altijd mengsels.'}
+  ]);
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
@@ -945,6 +1141,11 @@
   p2Hwc.start();
   p2Vei.start();
   p2Gw.start();
+  p3Fc.start();
+  p3Ovg.start();
+  p3Ck.start();
+  p3Fase.start();
+  p3Zm.start();
 </script>
 </body>
 </html>
