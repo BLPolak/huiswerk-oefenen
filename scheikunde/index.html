@@ -99,6 +99,8 @@
     .flip-tekst { font-size: 1.05rem; font-weight: 700; color: #1e293b; line-height: 1.4; }
     .flip-hint { font-size: .72rem; color: #94a3b8; font-weight: 600; margin-top: .8rem; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
+    .picto { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border:3px solid #dc2626; background:#fff; transform:rotate(45deg); margin:6px; }
+    .picto span { transform:rotate(-45deg); font-size:1.1rem; }
   </style>
 </head>
 <body>
@@ -273,7 +275,121 @@
     <button class="sub-tab-btn" onclick="showSubTab('p2','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
   <div id="sub-p2-uitleg" class="sub-tab-content active">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="uitleg-card">
+      <h2>De 8 gevarenpictogrammen</h2>
+      <p>Gevarenpictogrammen zijn een soort &lsquo;waarschuwingsborden&rsquo; voor gevaarlijke stoffen. Ze staan op de verpakking en worden over de hele wereld gebruikt: een rode ruit met een zwart symbool.</p>
+      <table class="data-tabel">
+        <tr><th></th><th>Symbool</th><th>Betekenis</th></tr>
+        <tr><td><span class="picto"><span>☠️</span></span></td><td>Doodshoofd</td><td><strong>Giftige stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>💥</span></span></td><td>Exploderende bom</td><td><strong>Ontplofbare stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>🔥</span></span></td><td>Vlam</td><td><strong>Ontvlambare stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>⭕</span></span></td><td>Vlam boven een rondje</td><td><strong>Oxiderende stoffen</strong> (maken een brand heviger)</td></tr>
+        <tr><td><span class="picto"><span>🧪</span></span></td><td>Druppels die een hand en metaal aantasten</td><td><strong>Corrosieve stoffen</strong> (bijtend)</td></tr>
+        <tr><td><span class="picto"><span>❗</span></span></td><td>Uitroepteken</td><td><strong>Schadelijke of irriterende stoffen</strong></td></tr>
+        <tr><td><span class="picto"><span>🧍</span></span></td><td>Persoon met een &lsquo;ster&rsquo; op de borst</td><td><strong>Gevaar voor de gezondheid</strong> (op lange termijn)</td></tr>
+        <tr><td><span class="picto"><span>🐟</span></span></td><td>Dode boom en dode vis</td><td><strong>Gevaar voor het milieu</strong></td></tr>
+      </table>
+      <p style="font-size:.85rem;color:#6b7280">De emoji's zijn hulpjes; op de SO zie je de echte zwarte symbolen.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Chemiekaarten, grenswaarde, H- en P-zinnen</h2>
+      <p>In het boek <strong>Chemiekaarten</strong> (of op internet) vind je per stof informatie: de gevaren, wat je moet doen bij een ongeluk, en fysische eigenschappen zoals smeltpunt, kookpunt en dichtheid.</p>
+      <div class="regel-blok oranje"><p><strong>Grenswaarde:</strong> geeft aan hoeveel mg van een stof er in <strong>1 m³ lucht</strong> aanwezig mag zijn. Ga je boven deze grens, dan is het schadelijk. Eenheid: <strong>mg/m³</strong>.</p></div>
+      <div class="regel-blok blauw"><p><strong>H-zinnen</strong> (H van <em>hazard</em>) gaan over gezondheidsgevaren. Bijv. H314: veroorzaakt ernstige brandwonden.<br><strong>P-zinnen</strong> (P van <em>prevention</em>) gaan over het voorkomen van ongelukken, dus wat je moet doen.</p></div>
+      <div class="voorbeeld-blok"><strong>Grenswaarde-som:</strong> een lokaal is 10 m × 8 m × 3 m = 240 m³. De grenswaarde is 15 mg/m³. Dan mag er maximaal 240 × 15 = 3600 mg van de stof in de lucht zitten.</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Veiligheidsregels</h2>
+      <ol style="margin:.5rem 0 .5rem 1.3rem;line-height:1.7">
+        <li>Draag altijd een bril.</li>
+        <li>Draag altijd een labjas en knoop deze dicht.</li>
+        <li>Bind lange haren bij elkaar.</li>
+        <li>Neem zo min mogelijk spullen mee het practicumlokaal in.</li>
+        <li>Werk rustig en geconcentreerd.</li>
+        <li>Houd je stipt aan de proefvoorschriften.</li>
+        <li>Twijfel je ergens aan? Raadpleeg dan je docent.</li>
+        <li>Richt een reageerbuis nooit op jezelf of op een ander.</li>
+        <li>Proef niet van de stoffen.</li>
+        <li>Raak stoffen niet met je handen aan.</li>
+        <li>Moet je ruiken? Doe het voorzichtig: wapper de lucht met je hand naar je toe.</li>
+        <li>Eet en drink niet in het practicumlokaal.</li>
+        <li>Was na afloop van het practicum goed je handen.</li>
+      </ol>
+      <div class="regel-blok oranje"><p><strong>Reageerbuis verwarmen:</strong> klem hem bovenaan in de reageerbuishouder, houd de opening van je af (en van anderen) en schud zachtjes, zodat de vloeistof er niet plotseling uit spuit.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>De gasbrander</h2>
+      <p>Met de <strong>gastoevoer</strong> (gasregelknop) regel je hoeveel gas er in de brander komt, met de <strong>luchttoevoer</strong> (luchtschijf) hoeveel lucht.</p>
+      <table class="data-tabel">
+        <tr><th>Vlam</th><th>Luchttoevoer</th><th>Gebruik</th></tr>
+        <tr><td><strong>Gele vlam</strong> (pauzevlam)</td><td>helemaal dicht</td><td>Goed zichtbaar: als je de brander even niet gebruikt</td></tr>
+        <tr><td><strong>Kleurloze vlam</strong></td><td>een beetje open</td><td>Een kleine hoeveelheid stof voorzichtig verwarmen</td></tr>
+        <tr><td><strong>Ruisende vlam</strong></td><td>verder open</td><td>Een grote hoeveelheid stof sterk verhitten (heetste vlam)</td></tr>
+      </table>
+      <div class="regel-blok blauw"><p>De ruisende vlam is het heetst <strong>net boven de blauwe kern</strong>.</p></div>
+      <h3>Aansteken</h3>
+      <div class="stappen">
+        <div class="stap">① Luchtschijf helemaal dicht</div>
+        <div class="stap">② Gasregelknop helemaal dicht</div>
+        <div class="stap">③ Gaskraan open</div>
+        <div class="stap">④ Brandende lucifer boven de brander houden</div>
+        <div class="stap">⑤ Gasregelknop een beetje open → gele vlam</div>
+      </div>
+      <h3>Uitzetten</h3>
+      <div class="stappen">
+        <div class="stap">① Luchtschijf dicht &nbsp;② Gasregelknop dicht &nbsp;③ Gaskraan dicht</div>
+      </div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Spuitfles met gedestilleerd water</h2>
+      <p>Kraanwater bevat allerlei opgeloste stoffen die een experiment kunnen storen. Daarom zit in de spuitfles <strong>gedestilleerd water</strong>: water waaruit alle opgeloste stoffen zijn verwijderd.</p>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Hulpmiddelen bij het practicum</h2>
+      <table class="data-tabel">
+        <tr><th>Hulpmiddel</th><th>Waarvoor?</th></tr>
+        <tr><td>Reageerbuis</td><td>Glazen buisje waarin je proeven doet</td></tr>
+        <tr><td>Reageerbuisrek</td><td>Om reageerbuizen in te zetten</td></tr>
+        <tr><td>Reageerbuisborstel</td><td>Om reageerbuizen schoon te maken</td></tr>
+        <tr><td>Reageerbuishouder</td><td>Houten knijper om een reageerbuis vast te houden bij verwarmen</td></tr>
+        <tr><td>Gasbrander</td><td>Om iets te verwarmen of te verbranden</td></tr>
+        <tr><td>Driepoot</td><td>Standaard die je boven de brander zet</td></tr>
+        <tr><td>Gaasje</td><td>Ligt op de driepoot; verdeelt de warmte</td></tr>
+        <tr><td>Kroezentang</td><td>Tang om hete of brandende dingen vast te pakken</td></tr>
+        <tr><td>Spuitfles</td><td>Bevat gedestilleerd water</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Het practicumlokaal</h2>
+      <table class="data-tabel">
+        <tr><th>Middel</th><th>Functie</th></tr>
+        <tr><td>Brandblusser</td><td>Een brand blussen</td></tr>
+        <tr><td>Blusdeken</td><td>Over een brandend voorwerp of brandende kleding leggen</td></tr>
+        <tr><td>Veiligheidsbril</td><td>Beschermt je ogen tegen gevaarlijke stoffen</td></tr>
+        <tr><td>Oogdouche</td><td>Een gevaarlijke stof uit je oog spoelen</td></tr>
+        <tr><td>Nooddouche</td><td>Een gevaarlijke, bijtende stof van je huid spoelen</td></tr>
+        <tr><td>Noodstop</td><td>Schakelt in één keer elektriciteit, water en gas uit</td></tr>
+        <tr><td>Labjas</td><td>Beschermt je kleding en huid tegen gevaarlijke stoffen</td></tr>
+      </table>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Experimenten doen</h2>
+      <p>Bij een onderzoek stel je eerst een <strong>onderzoeksvraag</strong> op en bedenk je een <strong>werkplan</strong>. Daarna voer je het experiment uit:</p>
+      <table class="data-tabel">
+        <tr><th>Stap</th><th>Wat is het?</th></tr>
+        <tr><td><strong>Handeling</strong></td><td>Wat je dóét (bijv. je steekt de brander aan)</td></tr>
+        <tr><td><strong>Waarneming</strong></td><td>Wat je kunt zien, horen, voelen of ruiken (bijv. er ontstaat wit licht en een wit poeder)</td></tr>
+        <tr><td><strong>Conclusie</strong></td><td>Wat je uit de waarnemingen afleidt (bijv. magnesium is brandbaar)</td></tr>
+      </table>
+      <div class="regel-blok groen"><p>Tijdens het experiment houd je een <strong>logboek</strong> bij, zodat je later precies kunt teruglezen wat er gebeurde. Soms maak je achteraf een <strong>verslag</strong>.</p></div>
+    </div>
   </div>
   <div id="sub-p2-flashcards" class="sub-tab-content">
     <div class="uitleg-card"><p>Binnenkort.</p></div>
