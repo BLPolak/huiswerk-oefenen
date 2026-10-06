@@ -223,7 +223,46 @@
     </div>
   </div>
   <div id="sub-p1-oefenen" class="sub-tab-content">
-    <div class="uitleg-card"><p>Binnenkort.</p></div>
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Stofeigenschap of niet?</h3>
+      <div class="score-balk">Score: <span id="p1eig-goed">0</span> / <span id="p1eig-totaal">0</span></div>
+      <div id="p1eig-vraag" class="vraag-tekst"></div>
+      <div id="p1eig-opties" class="mc-grid"></div>
+      <div id="p1eig-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p1Eig.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1Eig.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Eenheden omrekenen</h3>
+      <div class="score-balk">Score: <span id="p1omr-goed">0</span> / <span id="p1omr-totaal">0</span></div>
+      <div id="p1omr-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p1omr-input" class="open-input" placeholder="Jouw antwoord (bijv. 0,25)" onkeydown="if(event.key==='Enter') p1Omr.controleer()">
+      <div id="p1omr-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p1omr-controleer-btn" onclick="p1Omr.controleer()">Controleer</button>
+        <button id="p1omr-volgende-btn" onclick="p1Omr.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p1Omr.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1Omr.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — Rekenen met dichtheid</h3>
+      <div class="regel-blok blauw"><p>ρ = m ÷ V &nbsp;·&nbsp; m = ρ × V &nbsp;·&nbsp; V = m ÷ ρ</p></div>
+      <div class="score-balk">Score: <span id="p1dic-goed">0</span> / <span id="p1dic-totaal">0</span></div>
+      <div id="p1dic-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p1dic-input" class="open-input" placeholder="Jouw antwoord (bijv. 7,9)" onkeydown="if(event.key==='Enter') p1Dic.controleer()">
+      <div id="p1dic-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p1dic-controleer-btn" onclick="p1Dic.controleer()">Controleer</button>
+        <button id="p1dic-volgende-btn" onclick="p1Dic.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p1Dic.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p1Dic.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -272,6 +311,98 @@
   function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+  /* ===== GEDEELDE HELPERS ===== */
+  function fmt(x){ return Number(x).toLocaleString('nl-NL', {maximumSignificantDigits: 4}); }
+  function rnd(min, max, dec){ var f = Math.pow(10, dec); return Math.round((min + Math.random()*(max-min))*f)/f; }
+  function leesGetal(s){
+    s = String(s).trim().replace(/\s/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',', '.');
+    return parseFloat(s);
+  }
+
+  /* Meerkeuze met vaste vragenbank. Items: {vraag, opties:[...], antwoord, uitleg} */
+  function maakMC(id, bank){
+    var s = {bank: fisherYates(bank.slice()), i: 0, goed: 0, totaal: 0, klaar: false};
+    function el(x){ return document.getElementById(id + '-' + x); }
+    function score(){ el('goed').textContent = s.goed; el('totaal').textContent = s.totaal; }
+    function toon(){
+      var fb = el('feedback'); fb.className = 'feedback'; fb.textContent = '';
+      var box = el('opties'); box.innerHTML = '';
+      if (s.i >= s.bank.length){
+        s.klaar = true;
+        el('vraag').textContent = '🎉 Klaar! Je had er ' + s.goed + ' van de ' + s.totaal + ' goed.';
+        score(); return;
+      }
+      s.klaar = false;
+      var item = s.bank[s.i];
+      el('vraag').textContent = item.vraag;
+      var opties = item.opties.length > 2 ? fisherYates(item.opties.slice()) : item.opties.slice();
+      opties.forEach(function(o){
+        var b = document.createElement('button');
+        b.className = 'mc-btn'; b.textContent = o;
+        b.addEventListener('click', function(){ antwoord(o, b); });
+        box.appendChild(b);
+      });
+      score();
+    }
+    function antwoord(o, knop){
+      var item = s.bank[s.i];
+      el('opties').querySelectorAll('button').forEach(function(b){ b.disabled = true; });
+      s.totaal++;
+      var ok = o === item.antwoord;
+      if (ok) s.goed++;
+      knop.style.borderColor = ok ? '#10b981' : '#ef4444';
+      knop.style.background = ok ? '#d1fae5' : '#fee2e2';
+      var fb = el('feedback');
+      fb.textContent = (ok ? '✓ Juist! ' : '✗ Fout — juist: ' + item.antwoord + '. ') + (item.uitleg || '');
+      fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+      score();
+      s.i++;
+      setTimeout(toon, ok ? 1300 : 2600);
+    }
+    s.opnieuw = function(){ s.i = 0; s.goed = 0; s.totaal = 0; s.bank = fisherYates(s.bank); toon(); };
+    s.schud = function(){ if (s.klaar){ s.goed = 0; s.totaal = 0; } s.i = 0; s.bank = fisherYates(s.bank); toon(); };
+    s.start = toon;
+    return s;
+  }
+
+  /* Rekenoefening met willekeurige getallen. genereer() geeft {vraag, antwoord, eenheid, uitleg} */
+  function maakReken(id, genereer, marge){
+    marge = marge || 0.02;
+    var s = {goed: 0, totaal: 0, huidig: null};
+    function el(x){ return document.getElementById(id + '-' + x); }
+    function score(){ el('goed').textContent = s.goed; el('totaal').textContent = s.totaal; }
+    function nieuw(){
+      s.huidig = genereer();
+      el('vraag').textContent = s.huidig.vraag;
+      var inp = el('input'); inp.value = ''; inp.disabled = false;
+      el('controleer-btn').disabled = false;
+      el('volgende-btn').style.display = 'none';
+      var fb = el('feedback'); fb.className = 'feedback'; fb.textContent = '';
+      score();
+    }
+    s.controleer = function(){
+      var inp = el('input');
+      if (inp.disabled || inp.value.trim() === '') return;
+      var w = leesGetal(inp.value);
+      if (isNaN(w)) return;
+      inp.disabled = true; el('controleer-btn').disabled = true;
+      s.totaal++;
+      var c = s.huidig.antwoord;
+      var ok = Math.abs(w - c) <= Math.max(Math.abs(c) * marge, 1e-12);
+      if (ok) s.goed++;
+      var fb = el('feedback');
+      fb.textContent = (ok ? '✓ Goed! ' : '✗ Net niet. ') + 'Antwoord: ' + fmt(c) + ' ' + s.huidig.eenheid + (s.huidig.uitleg ? ' — ' + s.huidig.uitleg : '');
+      fb.className = 'feedback ' + (ok ? 'goed' : 'fout');
+      score();
+      el('volgende-btn').style.display = '';
+    };
+    s.volgende = nieuw;
+    s.schud = nieuw;
+    s.opnieuw = function(){ s.goed = 0; s.totaal = 0; nieuw(); };
+    s.start = nieuw;
+    return s;
+  }
 
   /* §1.1 FLASHCARDS */
   var p1FcData = [
@@ -324,8 +455,86 @@
   }
   function p1FcOpnieuw(){ p1FcInit(); }
 
+  /* §1.1 OEFENEN 1 — stofeigenschap of niet */
+  var JA = 'Wél een stofeigenschap', NEE = 'Géén stofeigenschap';
+  var p1EigBank = [
+    {vraag:'Kleur', opties:[JA,NEE], antwoord:JA, uitleg:'Aan de kleur kun je een stof (mede) herkennen.'},
+    {vraag:'Geur', opties:[JA,NEE], antwoord:JA, uitleg:'Elke stof heeft zijn eigen geur (of is reukloos).'},
+    {vraag:'Smaak', opties:[JA,NEE], antwoord:JA, uitleg:'Smaak hoort bij de stof (maar proef nooit stoffen in het lokaal!).'},
+    {vraag:'Fase bij kamertemperatuur', opties:[JA,NEE], antwoord:JA, uitleg:'Bijv. suiker is vast, water vloeibaar bij kamertemperatuur.'},
+    {vraag:'Smeltpunt', opties:[JA,NEE], antwoord:JA, uitleg:'Het smeltpunt is zelfs een stofconstante.'},
+    {vraag:'Kookpunt', opties:[JA,NEE], antwoord:JA, uitleg:'Het kookpunt is zelfs een stofconstante.'},
+    {vraag:'Dichtheid', opties:[JA,NEE], antwoord:JA, uitleg:'Dichtheid hangt niet af van de hoeveelheid: het is een stofconstante.'},
+    {vraag:'Brandbaarheid', opties:[JA,NEE], antwoord:JA, uitleg:'Een stof is wel of niet brandbaar.'},
+    {vraag:'Oplosbaarheid in water', opties:[JA,NEE], antwoord:JA, uitleg:'Bijv. suiker lost goed op, zand niet.'},
+    {vraag:'Giftigheid', opties:[JA,NEE], antwoord:JA, uitleg:'Of een stof giftig is, hoort bij de stof.'},
+    {vraag:'Bestand tegen zuren', opties:[JA,NEE], antwoord:JA, uitleg:'Sommige stoffen worden door zuren aangetast, andere niet.'},
+    {vraag:'Massa', opties:[JA,NEE], antwoord:NEE, uitleg:'Massa hangt af van hoeveel stof je hebt.'},
+    {vraag:'Volume', opties:[JA,NEE], antwoord:NEE, uitleg:'Volume hangt af van hoeveel stof je hebt.'},
+    {vraag:'Vorm', opties:[JA,NEE], antwoord:NEE, uitleg:'De vorm hoort bij het voorwerp, niet bij de stof.'},
+    {vraag:'Temperatuur', opties:[JA,NEE], antwoord:NEE, uitleg:'De temperatuur kun je veranderen; de stof blijft hetzelfde.'},
+    {vraag:'Is kleur een stofconstante?', opties:['Ja','Nee'], antwoord:'Nee', uitleg:'Kleur is wel een stofeigenschap, maar je geeft het niet weer met een getal + eenheid.'},
+    {vraag:'Is het kookpunt een stofconstante?', opties:['Ja','Nee'], antwoord:'Ja', uitleg:'Een getal + eenheid, bijv. water: 100 °C.'},
+    {vraag:'Is de dichtheid een stofconstante?', opties:['Ja','Nee'], antwoord:'Ja', uitleg:'Een getal + eenheid, bijv. water: 1,0 g/cm³.'},
+    {vraag:'Is brandbaarheid een stofconstante?', opties:['Ja','Nee'], antwoord:'Nee', uitleg:'Wel een stofeigenschap, maar geen getal + eenheid.'}
+  ];
+  var p1Eig = maakMC('p1eig', p1EigBank);
+
+  /* §1.1 OEFENEN 2 — eenheden omrekenen */
+  var p1MassaEenh = [{n:'µg', f:1e-9}, {n:'mg', f:1e-6}, {n:'g', f:1e-3}, {n:'kg', f:1}, {n:'ton', f:1000}];
+  var p1VolEenh = [{n:'mL', f:1e-6}, {n:'cm³', f:1e-6}, {n:'L', f:1e-3}, {n:'dm³', f:1e-3}, {n:'m³', f:1}];
+  function p1OmrGenereer(){
+    var lijst = pick([p1MassaEenh, p1VolEenh]);
+    var a, b;
+    do {
+      a = Math.floor(Math.random()*lijst.length);
+      b = Math.floor(Math.random()*lijst.length);
+    } while (a === b || Math.abs(Math.log10(lijst[a].f / lijst[b].f)) > 6);
+    var waarde = pick([rnd(1, 9.9, 1), rnd(10, 99, 0), rnd(100, 950, 0), rnd(0.1, 0.95, 2)]);
+    var antw = waarde * lijst[a].f / lijst[b].f;
+    var stappen = Math.round(Math.log10(lijst[a].f / lijst[b].f));
+    var uitleg = stappen === 0 ? lijst[a].n + ' en ' + lijst[b].n + ' zijn even groot'
+      : (stappen > 0 ? '× ' : '÷ ') + fmt(Math.pow(10, Math.abs(stappen))) + ' (' + lijst[a].n + ' → ' + lijst[b].n + ')';
+    return {vraag:'Reken om: ' + fmt(waarde) + ' ' + lijst[a].n + ' = ? ' + lijst[b].n, antwoord: antw, eenheid: lijst[b].n, uitleg: uitleg};
+  }
+  var p1Omr = maakReken('p1omr', p1OmrGenereer);
+
+  /* §1.1 OEFENEN 3 — dichtheid (ρ in kg/m³) */
+  var p1Stoffen = [
+    {n:'water', r:1000}, {n:'ijs', r:917}, {n:'ethanol', r:800}, {n:'kerosine', r:800},
+    {n:'aluminium', r:2700}, {n:'ijzer', r:7870}, {n:'koper', r:8960}, {n:'lood', r:11340},
+    {n:'kwik', r:13500}, {n:'goud', r:19300}, {n:'diamant', r:3510}, {n:'suiker', r:1600}
+  ];
+  function p1DicGenereer(){
+    var st = pick(p1Stoffen), rg = st.r / 1000;
+    var type = pick(['rho_g','m_g','V_g','rho_kg','m_kg']);
+    var V, m;
+    if (type === 'rho_g'){
+      V = rnd(5, 250, 0); m = Math.round(rg * V * 10)/10;
+      return {vraag:'Een blokje ' + st.n + ' heeft een massa van ' + fmt(m) + ' g en een volume van ' + fmt(V) + ' cm³. Bereken de dichtheid in g/cm³.', antwoord: m/V, eenheid:'g/cm³', uitleg:'ρ = m ÷ V = ' + fmt(m) + ' ÷ ' + fmt(V)};
+    }
+    if (type === 'm_g'){
+      V = rnd(5, 250, 0);
+      return {vraag:'De dichtheid van ' + st.n + ' is ' + fmt(rg) + ' g/cm³. Bereken de massa van ' + fmt(V) + ' cm³ ' + st.n + ' in gram.', antwoord: rg*V, eenheid:'g', uitleg:'m = ρ × V = ' + fmt(rg) + ' × ' + fmt(V)};
+    }
+    if (type === 'V_g'){
+      m = rnd(10, 900, 0);
+      return {vraag:'De dichtheid van ' + st.n + ' is ' + fmt(rg) + ' g/cm³. Hoeveel cm³ is ' + fmt(m) + ' g ' + st.n + '?', antwoord: m/rg, eenheid:'cm³', uitleg:'V = m ÷ ρ = ' + fmt(m) + ' ÷ ' + fmt(rg)};
+    }
+    if (type === 'rho_kg'){
+      V = rnd(0.2, 5, 1); m = Math.round(st.r * V / 1000 * 1000);
+      return {vraag:'Je hebt ' + fmt(m) + ' g ' + st.n + ' met een volume van ' + fmt(V) + ' L. Bereken de dichtheid in kg/m³.', antwoord: (m/1000)/(V/1000), eenheid:'kg/m³', uitleg:'m = ' + fmt(m/1000) + ' kg, V = ' + fmt(V/1000) + ' m³, ρ = m ÷ V'};
+    }
+    V = rnd(0.5, 20, 1);
+    return {vraag:'Een tank bevat ' + fmt(V) + ' m³ ' + st.n + ' (dichtheid ' + fmt(st.r) + ' kg/m³). Bereken de massa in kg.', antwoord: st.r*V, eenheid:'kg', uitleg:'m = ρ × V = ' + fmt(st.r) + ' × ' + fmt(V)};
+  }
+  var p1Dic = maakReken('p1dic', p1DicGenereer);
+
   /* INIT */
   p1FcInit();
+  p1Eig.start();
+  p1Omr.start();
+  p1Dic.start();
 </script>
 </body>
 </html>
