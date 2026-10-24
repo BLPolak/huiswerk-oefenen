@@ -353,9 +353,29 @@
   </nav>
   <div id="sub-t5-uitleg" class="sub-tab-content active">
     <!-- UITLEG t5 START -->
-    <div class="uitleg-card">
-      <h2>Uitleg volgt</h2>
-    </div>
+    <div class="uitleg-card"><h3>🌍 Een open economie</h3>
+    <p>Nederland heeft een <b>open economie</b>: we handelen veel met het buitenland. Nederlandse bedrijven kunnen niet alles zelf produceren, en buitenlandse klanten kopen veel van ons.</p></div>
+
+    <div class="uitleg-card"><h3>🚢 Import en export</h3>
+    <table><tr><th></th><th>Wat is het?</th><th>Voordelen voor Nederland</th></tr>
+    <tr><td><b>Import</b> (= invoer)</td><td>Nederlandse bedrijven kopen goederen en diensten van buitenlandse bedrijven.</td><td>• Consumenten kunnen buitenlandse producten kopen (meer keuze).<br>• Concurrentie tussen bedrijven ➜ lagere prijzen.</td></tr>
+    <tr><td><b>Export</b> (= uitvoer)</td><td>Nederlandse bedrijven verkopen goederen en diensten aan het buitenland.</td><td>• Inkomsten en winst voor bedrijven.<br>• Werkgelegenheid: banen in Nederland.<br>• Gevolg: meer welvaart voor iedereen.</td></tr></table></div>
+
+    <div class="uitleg-card"><h3>⚖️ Handelsbalans</h3>
+    <p>Op de <b>handelsbalans</b> staan de ontvangsten van de export en de uitgaven aan de import in een bepaalde periode (meestal een jaar).</p>
+    <p class="formule">Handelsbalanssaldo = waarde export − waarde import</p>
+    <ul><li>Saldo positief (export &gt; import) ➜ <b>overschot</b></li>
+    <li>Saldo negatief (import &gt; export) ➜ <b>tekort</b></li></ul>
+    <p>Voorbeeld: export € 14,1 miljard, import € 53,6 miljard ➜ 14,1 − 53,6 = −€ 39,5 miljard: een tekort.</p></div>
+
+    <div class="uitleg-card"><h3>📉📈 Kwetsbaar, maar ook rijker</h3>
+    <p><b>Kwetsbaar:</b> een open economie is afhankelijk van het buitenland. Gaat het slecht in andere landen, dan kopen zij minder ➜ onze export daalt ➜ bedrijven produceren minder ➜ er verdwijnen banen en inkomens.</p>
+    <p><b>Hoger inkomen:</b> bedrijven kunnen aan veel meer klanten verkopen dan alleen in eigen land ➜ meer productie en omzet ➜ meer banen en hogere inkomens. Goedkope import zorgt bovendien voor lagere prijzen.</p></div>
+
+    <div class="uitleg-card"><h3>🧮 Handige berekeningen</h3>
+    <p class="formule">Per hoofd van de bevolking = totaal ÷ aantal inwoners</p>
+    <p class="formule">Aandeel in % = deel ÷ totaal × 100</p>
+    <p class="tip">💡 Let op de eenheden! Reken miljarden en miljoenen eerst om als je ze door elkaar deelt: € 1.185.554 miljoen ÷ 273,8 miljoen inwoners = € 4.330 per inwoner.</p></div>
     <!-- UITLEG t5 END -->
   </div>
   <div id="sub-t5-flashcards" class="sub-tab-content"></div>
@@ -363,6 +383,13 @@
 </div>
 
 <div id="tab-t6" class="tab-content">
+  <!-- UITLEG t6 START -->
+  <div class="uitleg-card"><h3>📝 Proeftoets</h3>
+  <p>Gemengde vragen over alle vijf de sectoren, in de stijl van het proefwerk. Tips:</p>
+  <ul><li>Bij <b>"licht toe" / "leg uit"</b>: noem het begrip én de reden. Een 2-puntsvraag wil meestal twee kernpunten.</li>
+  <li>Bij <b>rekenen</b>: schrijf de formule op, vul in, en zet de eenheid erbij.</li>
+  <li>Bij een <b>bedrijfskolom</b>: groothandel zit tussen fabriek en detailhandel.</li></ul></div>
+  <!-- UITLEG t6 END -->
   <div id="t6-oefenen"></div>
 </div>
 
@@ -663,13 +690,129 @@
   // ===== DATA t4 END =====
 
   // ===== DATA t5 START =====
-  DATA.t5 = { fc: [], mc: [], open: [], volgorde: [] };
-  GEN.t5 = [];
+  DATA.t5 = {
+  fc: [
+  {begrip:"Open economie", omschrijving:"Economie waarin een land veel handelt met het buitenland (veel import en export)."},
+  {begrip:"Import", omschrijving:"Nederlandse bedrijven kopen goederen en diensten van buitenlandse bedrijven. Ook wel invoer."},
+  {begrip:"Export", omschrijving:"Nederlandse bedrijven verkopen goederen en diensten aan buitenlandse bedrijven. Ook wel uitvoer."},
+  {begrip:"Invoer", omschrijving:"Ander woord voor import."},
+  {begrip:"Uitvoer", omschrijving:"Ander woord voor export."},
+  {begrip:"Handelsbalans", omschrijving:"Overzicht van de ontvangsten van de export en de uitgaven aan de import van een land in een bepaalde periode."},
+  {begrip:"Handelsbalanssaldo", omschrijving:"Waarde export min waarde import."},
+  {begrip:"Overschot (handelsbalans)", omschrijving:"De export is groter dan de import: het saldo is positief."},
+  {begrip:"Tekort (handelsbalans)", omschrijving:"De import is groter dan de export: het saldo is negatief."},
+  {begrip:"Concurrentie", omschrijving:"Bedrijven strijden om dezelfde klanten; dat kan tot lagere prijzen leiden."},
+  {begrip:"Werkgelegenheid", omschrijving:"Het aantal banen; export zorgt voor banen in Nederland."},
+  {begrip:"Per hoofd van de bevolking", omschrijving:"Een totaal gedeeld door het aantal inwoners (bijv. nationaal inkomen per inwoner)."}
+  ],
+  mc: [
+  {vraag:"Een Nederlandse supermarkt koopt bananen uit Ecuador. Voor Nederland is dit…", opties:["import","export"], antwoord:"import", uitleg:"Nederland koopt van het buitenland: invoer."},
+  {vraag:"Een Nederlandse kaasmakerij verkoopt kaas aan een winkelketen in Frankrijk. Voor Nederland is dit…", opties:["export","import"], antwoord:"export", uitleg:"Nederland verkoopt aan het buitenland: uitvoer."},
+  {vraag:"Een ander woord voor import is…", opties:["invoer","uitvoer","handelsbalans","overschot"], antwoord:"invoer", uitleg:"Import = invoer, export = uitvoer."},
+  {vraag:"Een ander woord voor export is…", opties:["uitvoer","invoer","handelsbalans","tekort"], antwoord:"uitvoer", uitleg:"Export = uitvoer."},
+  {vraag:"Hoe bereken je het handelsbalanssaldo?", opties:["Waarde export − waarde import","Waarde import − waarde export","Waarde export + waarde import","Waarde export ÷ waarde import"], antwoord:"Waarde export − waarde import", uitleg:"Altijd export min import."},
+  {vraag:"Een land exporteert voor € 50 miljard en importeert voor € 60 miljard. Er is sprake van…", opties:["een tekort van € 10 miljard","een overschot van € 10 miljard","een tekort van € 110 miljard","een overschot van € 110 miljard"], antwoord:"een tekort van € 10 miljard", uitleg:"50 − 60 = −10: negatief, dus een tekort."},
+  {vraag:"De export is groter dan de import. Dit heet een…", opties:["overschot","tekort"], antwoord:"overschot", uitleg:"Positief saldo = overschot."},
+  {vraag:"Wat is een voordeel van import voor Nederlandse consumenten?", opties:["Meer keuze en lagere prijzen door concurrentie","Meer banen bij Nederlandse bedrijven","Hogere prijzen voor Nederlandse producten","Een overschot op de handelsbalans"], antwoord:"Meer keuze en lagere prijzen door concurrentie", uitleg:"Buitenlandse producten erbij ➜ meer aanbod en concurrentie."},
+  {vraag:"Wat is een voordeel van export voor Nederland?", opties:["Werkgelegenheid: banen in Nederland","Lagere prijzen voor consumenten","Minder concurrentie","Meer buitenlandse producten in de winkel"], antwoord:"Werkgelegenheid: banen in Nederland", uitleg:"Om voor het buitenland te produceren zijn werknemers nodig."},
+  {vraag:"Wat betekent: Nederland heeft een open economie?", opties:["Nederland handelt veel met het buitenland","Winkels zijn altijd open","Iedereen mag een bedrijf beginnen","De overheid bepaalt alle prijzen"], antwoord:"Nederland handelt veel met het buitenland", uitleg:"Veel import en export."},
+  {vraag:"Waarom maakt een open economie een land kwetsbaar?", opties:["Het land is afhankelijk van hoe het in andere landen gaat","Het land heeft te veel banen","De prijzen worden te laag","Er komt te weinig import"], antwoord:"Het land is afhankelijk van hoe het in andere landen gaat", uitleg:"Crisis in het buitenland ➜ minder export ➜ minder banen."},
+  {vraag:"Je wilt weten hoe belangrijk Nederland is als klant van de VS. Welke twee gegevens heb je nodig?", opties:["De export van de VS naar Nederland en de totale export van de VS","De import van Nederland en het nationaal inkomen van de VS","De totale export van Nederland en de import van de VS uit Nederland","Het aantal inwoners van beide landen"], antwoord:"De export van de VS naar Nederland en de totale export van de VS", uitleg:"Aandeel = deel ÷ totaal × 100: export VS naar NL ÷ totale export VS."},
+  {vraag:"Hoe bereken je het nationaal inkomen per hoofd van de bevolking?", opties:["Nationaal inkomen ÷ aantal inwoners","Nationaal inkomen × aantal inwoners","Aantal inwoners ÷ nationaal inkomen","Export − import"], antwoord:"Nationaal inkomen ÷ aantal inwoners", uitleg:"Per hoofd = totaal gedeeld door het aantal inwoners."},
+  {vraag:"Winkels importeren goedkoop speelgoed uit China. Wat gebeurt er met de prijs van in Nederland gemaakt speelgoed?", opties:["Die daalt door de concurrentie","Die stijgt","Die blijft gelijk","Die wordt door de overheid bepaald"], antwoord:"Die daalt door de concurrentie", uitleg:"Meer aanbod en goedkope concurrenten ➜ Nederlandse makers moeten hun prijs verlagen."}
+  ],
+  open: [
+  {vraag:"Leg uit waarom een open economie een land economisch kwetsbaar maakt.", kernpunten:["Het land is afhankelijk van het buitenland (veel export/import)","Gaat het slecht in andere landen, dan kopen die minder ➜ de export daalt","Bedrijven produceren minder ➜ banen en inkomens verdwijnen"], model:"Een land met een open economie is sterk afhankelijk van andere landen. Als het in die landen slecht gaat, kopen ze minder producten. Dan daalt de export, gaan bedrijven minder produceren en verdwijnen er banen en inkomens."},
+  {vraag:"Noem een argument waarom een open economie kan leiden tot een hoger inkomen voor de inwoners van een land.", kernpunten:["Bedrijven kunnen aan meer klanten in het buitenland verkopen ➜ meer productie ➜ meer banen/hogere inkomens (of: goedkope import ➜ lagere prijzen ➜ meer koopkracht)"], model:"Door export kunnen bedrijven aan veel meer klanten verkopen dan alleen in eigen land. Ze gaan meer produceren en hebben meer werknemers nodig, waardoor er meer inkomen wordt verdiend."},
+  {vraag:"Noem twee voordelen van import voor Nederland.", kernpunten:["Consumenten kunnen buitenlandse producten kopen (meer keuze)","Concurrentie met buitenlandse bedrijven kan leiden tot lagere prijzen"], model:"1. Consumenten kunnen producten kopen die in Nederland niet gemaakt worden. 2. Door concurrentie met buitenlandse bedrijven worden de prijzen lager."},
+  {vraag:"Noem twee voordelen van export voor Nederland.", kernpunten:["Inkomsten/winst voor Nederlandse bedrijven","Werkgelegenheid: banen in Nederland (gevolg: meer welvaart)"], model:"1. Bedrijven verdienen geld aan buitenlandse klanten en maken winst. 2. Er ontstaan banen in Nederland, wat zorgt voor meer welvaart."},
+  {vraag:"Een land heeft een tekort op de handelsbalans. Leg uit wat dat betekent.", kernpunten:["De waarde van de import is groter dan de waarde van de export","Het handelsbalanssaldo (export − import) is negatief"], model:"Het land koopt voor meer geld in het buitenland (import) dan het aan het buitenland verkoopt (export). Export min import is dan negatief."},
+  {vraag:"Leg uit waarom Nederland bananen importeert.", kernpunten:["Nederland kan bananen zelf niet (goed of goedkoop) produceren, door het klimaat","Via import kunnen consumenten ze toch kopen"], model:"In Nederland groeien bananen niet goed door het klimaat. Door ze te importeren kunnen Nederlandse consumenten toch bananen kopen."},
+  {vraag:"Een Nederlands bedrijf verplaatst een deel van zijn productie naar Indonesië. Noem een voordeel voor Indonesië en geef een verklaring.", kernpunten:["Er komen banen bij in Indonesië (werkgelegenheid)","Daardoor verdienen meer mensen een inkomen / stijgt de welvaart (of: Indonesië krijgt kennis en technologie)"], model:"Er ontstaan nieuwe banen in Indonesië. Meer mensen verdienen dan een inkomen, waardoor de welvaart in het land stijgt."}
+  ],
+  volgorde: [
+  {titel:"Gevolgen van goedkope import (oorzaak ➜ gevolg)", items:["Supermarkten importeren goedkope tomaten uit Spanje","Het aanbod van tomaten in Nederland neemt toe","Nederlandse tomatentelers krijgen meer concurrentie","De prijs van Nederlandse tomaten daalt"], uitleg:"Eerst de import, dan meer aanbod, dan concurrentie, en daardoor een lagere prijs."},
+  {titel:"Waarom een open economie kwetsbaar is (oorzaak ➜ gevolg)", items:["Er komt een economische crisis in Duitsland","Duitsers kopen minder producten","De Nederlandse export daalt","Nederlandse bedrijven gaan minder produceren","Er verdwijnen banen in Nederland"], uitleg:"Problemen in het buitenland werken via de export door naar Nederland."},
+  {titel:"Hoe export tot hoger inkomen leidt (oorzaak ➜ gevolg)", items:["Nederlandse bedrijven verkopen ook aan het buitenland","Ze krijgen meer klanten en gaan meer produceren","Ze hebben meer werknemers nodig","Meer inwoners verdienen een inkomen"], uitleg:"Een grotere afzetmarkt ➜ meer productie ➜ meer banen ➜ meer inkomen."}
+  ]
+  };
+  GEN.t5 = [
+  function(){
+    var ex = rnd(50,600)/10, im = rnd(50,600)/10;
+    if (ex === im) im = Math.round((im + 1.3)*10)/10;
+    var s = Math.round((ex-im)*10)/10;
+    return {vraag:"Een land exporteert voor € "+fmt(ex,1)+" miljard en importeert voor € "+fmt(im,1)+" miljard. Bereken het handelsbalanssaldo in miljard euro (gebruik een minteken bij een tekort).", antwoord:s, eenheid:"miljard",
+      uitleg:"Saldo = export − import = "+fmt(ex,1)+" − "+fmt(im,1)+" = "+fmt(s,1)+" miljard: "+(s>0?"een overschot.":"een tekort.")};
+  },
+  function(){
+    var im = rnd(100,600)/10, s = rnd(-150,150)/10;
+    if (s === 0) s = 2.5;
+    if (im + s <= 0) s = -s; // export kan niet negatief of nul zijn
+    var ex = Math.round((im+s)*10)/10;
+    return {vraag:"Een land importeert voor € "+fmt(im,1)+" miljard. Het handelsbalanssaldo is "+fmt(s,1)+" miljard ("+(s>0?"overschot":"tekort")+"). Bereken de waarde van de export in miljard euro.", antwoord:ex, eenheid:"miljard",
+      uitleg:"Saldo = export − import, dus export = saldo + import = "+fmt(s,1)+" + "+fmt(im,1)+" = "+fmt(ex,1)+" miljard"};
+  },
+  function(){
+    var land = pick(["Fiorina","Velaria","Zorvia","Panum","Bazaria"]);
+    var ni = rnd(200,1500), inw = rnd(5,300);
+    var per = Math.round(ni*1e9/(inw*1e6));
+    return {vraag:"Het nationaal inkomen van "+land+" is € "+fmt(ni,0)+" miljard. Het land heeft "+fmt(inw,0)+" miljoen inwoners. Bereken het nationaal inkomen per hoofd van de bevolking. Rond af op hele euro's.", antwoord:per, eenheid:"euro",
+      uitleg:"€ "+fmt(ni,0)+" miljard = € "+fmt(ni*1e9,0)+"; "+fmt(inw,0)+" miljoen = "+fmt(inw*1e6,0)+". Per hoofd = "+fmt(ni*1e9,0)+" ÷ "+fmt(inw*1e6,0)+" = € "+fmt(per,0)};
+  },
+  function(){
+    var land = pick(["Indonesië","Brazilië","Japan","Canada","Zuid-Afrika"]);
+    var deel = rnd(10,600)/10, tot = rnd(3500,6000)/10;
+    var pct = Math.round(deel/tot*10000)/100;
+    return {vraag:"De totale export van Nederland is € "+fmt(tot,1)+" miljard. Daarvan gaat € "+fmt(deel,1)+" miljard naar "+land+". Bereken in twee decimalen welk percentage van de Nederlandse export naar "+land+" gaat.", antwoord:pct, eenheid:"%",
+      uitleg:"Aandeel = deel ÷ totaal × 100 = "+fmt(deel,1)+" ÷ "+fmt(tot,1)+" × 100 = "+fmt(pct,2)+"%"};
+  },
+  function(){
+    var a = rnd(500,1500)/10, p = rnd(20,250)/10;
+    var b = Math.round(a*(1+p/100)*100)/100;
+    return {vraag:"Een land exporteerde vorig jaar voor € "+fmt(a,1)+" miljard aan landbouwproducten. Dit jaar is dat "+fmt(p,1)+"% meer. Bereken de export van dit jaar in miljard euro (twee decimalen).", antwoord:b, eenheid:"miljard",
+      uitleg:"Toename = "+fmt(p,1)+" / 100 × "+fmt(a,1)+" = "+fmt(a*p/100,2)+" miljard. Nieuw = "+fmt(a,1)+" + "+fmt(a*p/100,2)+" = "+fmt(b,2)+" miljard"};
+  },
+  function(){
+    var land = pick(["Duitsland","België","Frankrijk","het Verenigd Koninkrijk"]);
+    var tot = rnd(3500,6000)/10, p = rnd(5,25);
+    var w = Math.round(tot*p)/100;
+    return {vraag:"De totale export van Nederland is € "+fmt(tot,1)+" miljard. Daarvan gaat "+p+"% naar "+land+". Bereken de waarde van de export naar "+land+" in miljard euro.", antwoord:w, eenheid:"miljard",
+      uitleg:p+"% van "+fmt(tot,1)+" = "+p+" / 100 × "+fmt(tot,1)+" = "+fmt(w,2)+" miljard"};
+  }
+  ];
   // ===== DATA t5 END =====
 
   // ===== DATA t6 START =====
-  DATA.t6 = { fc: [], mc: [], open: [], volgorde: [] };
-  GEN.t6 = [];
+  DATA.t6 = {
+  fc: [],
+  mc: [
+  {vraag:"Sam betaalt in de kantine met de bank-app op zijn telefoon. Met welke soort geld betaalt hij?", opties:["Giraal geld","Chartaal geld"], antwoord:"Giraal geld", uitleg:"Het geld gaat van zijn bankrekening af: giraal geld."},
+  {vraag:"Bedrijfskolom van appelsap: 1. Appelteler – 2. Sapfabriek – 3. Supermarkt. Waar hoort een groothandel in dranken?", opties:["Tussen schakel 2 en 3","Tussen schakel 1 en 2","Vóór schakel 1","Na schakel 3"], antwoord:"Tussen schakel 2 en 3", uitleg:"De groothandel zit tussen de fabriek en de detailhandel."},
+  {vraag:"Het land Zorvia exporteert voor € 80 miljard en importeert voor € 95 miljard. Wat klopt?", opties:["Er is een tekort van € 15 miljard","Er is een overschot van € 15 miljard","Er is een tekort van € 175 miljard","Er is een overschot van € 175 miljard"], antwoord:"Er is een tekort van € 15 miljard", uitleg:"80 − 95 = −15: tekort."},
+  {vraag:"Welk goed is quasi-collectief?", opties:["Een openbare bibliotheek","Een dijk","Een brood","De politie"], antwoord:"Een openbare bibliotheek", uitleg:"Dijk en politie zijn collectief, een brood is individueel."},
+  {vraag:"Een fietsenmaker repareert een lekke band. Welke productiefactor is hier het belangrijkst?", opties:["Arbeid","Natuur","Kapitaal","Ondernemerschap"], antwoord:"Arbeid", uitleg:"De reparatie wordt vooral met de handen gedaan door de werknemer."},
+  {vraag:"Je vergelijkt de prijzen in twee reclamefolders. Welke functie van geld gebruik je?", opties:["Rekeneenheid","Ruilmiddel","Oppotmiddel"], antwoord:"Rekeneenheid", uitleg:"Waarde uitdrukken en vergelijken = rekeneenheid."},
+  {vraag:"Het maken van een munt van € 0,50 kost ongeveer 8 cent. Wat klopt?", opties:["De intrinsieke waarde is lager dan de nominale waarde","De intrinsieke waarde is hoger dan de nominale waarde","Ze zijn even hoog","De nominale waarde is 8 cent"], antwoord:"De intrinsieke waarde is lager dan de nominale waarde", uitleg:"Nominaal € 0,50 (wat erop staat), intrinsiek ongeveer € 0,08."},
+  {vraag:"Een abonnement op een streamingdienst is een…", opties:["luxe product","eerste levensbehoefte"], antwoord:"luxe product", uitleg:"Je hebt het niet nodig om te overleven."},
+  {vraag:"Wie houdt toezicht op de Rabobank?", opties:["De Nederlandsche Bank","ING","De Tweede Kamer","De consumenten"], antwoord:"De Nederlandsche Bank", uitleg:"DNB houdt toezicht op de commerciële banken."},
+  {vraag:"Welk primair inkomen krijgt de eigenaar van een pizzeria die alle beslissingen neemt?", opties:["Winst","Loon","Pacht","Rente"], antwoord:"Winst", uitleg:"Ondernemerschap ➜ winst."},
+  {vraag:"Welke stroom ontstaat er als je online een concertkaartje koopt?", opties:["Een geldstroom van jou naar de organisator en een goederenstroom (dienst) terug","Alleen een geldstroom","Alleen een goederenstroom","Geen van beide"], antwoord:"Een geldstroom van jou naar de organisator en een goederenstroom (dienst) terug", uitleg:"Ook een dienst hoort bij de goederenstroom."},
+  {vraag:"Zet je geld op een spaarrekening, dan krijg je daarvoor…", opties:["rente","pacht","winst","loon"], antwoord:"rente", uitleg:"Rente is de beloning voor de spaarder."}
+  ],
+  open: [
+  {vraag:"Uit onderzoek in het land Fiorina blijkt: veel huishoudens met een laag inkomen hebben geen geld om op vakantie te gaan, maar wel om hun huis te verwarmen. Leg uit hoe dat past bij het verschil tussen eerste levensbehoeften en luxe producten.", kernpunten:["Verwarming is een eerste levensbehoefte: nodig om (gezond) te overleven, dus daar gaat het geld eerst naartoe","Vakantie is een luxe product: als het geld (schaars) op is, kiezen mensen ervoor dat te laten schieten"], model:"Een warm huis is een eerste levensbehoefte, die heb je nodig om gezond te blijven. Daar geven mensen hun geld als eerste aan uit. Vakantie is een luxe product. Omdat hun geld schaars is, moeten ze kiezen, en dan valt de vakantie af."},
+  {vraag:"De economie van het land Velaria groeit vooral door export. Velaria heeft een open economie. Leg uit waarom een open economie Velaria kwetsbaar maakt.", kernpunten:["Velaria is afhankelijk van het buitenland","Gaat het in andere landen slecht, dan kopen die minder ➜ export van Velaria daalt","Minder productie ➜ minder banen/inkomen in Velaria"], model:"Velaria is afhankelijk van andere landen. Als het daar slecht gaat, kopen ze minder producten uit Velaria. De export daalt, bedrijven produceren minder en er verdwijnen banen."},
+  {vraag:"Noem een argument waarom de export kan zorgen voor hogere inkomens in Velaria.", kernpunten:["Bedrijven verkopen meer (grotere markt) ➜ meer productie ➜ meer banen/hogere inkomens"], model:"Door export hebben bedrijven meer klanten, gaan ze meer produceren en hebben ze meer werknemers nodig. Daardoor verdienen meer mensen een inkomen."},
+  {vraag:"Is betalen met een smartwatch een vorm van directe of indirecte ruil? Licht je keuze toe.", kernpunten:["Indirecte ruil","Je betaalt met (giraal) geld als ruilmiddel, niet goed tegen goed"], model:"Indirecte ruil: je ruilt niet een goed tegen een goed, maar betaalt met geld van je bankrekening."},
+  {vraag:"Een fles appelsap kost in de supermarkt € 2,40. De appelteler krijgt € 0,40 voor de appels. Een klant zegt: de supermarkt verdient € 2,00 per fles. Noem twee argumenten waarom de klant geen gelijk heeft. Gebruik bij één argument de bedrijfskolom.", kernpunten:["Bedrijfskolom: de sapfabriek (en groothandel) zitten ertussen; die moeten ook betaald worden en voegen waarde toe","De supermarkt heeft eigen kosten (personeel, huur, energie), dus de winst is lager"], model:"1. Tussen de appelteler en de supermarkt zitten nog schakels, zoals de sapfabriek en de groothandel. Die willen ook betaald worden. 2. De supermarkt heeft zelf kosten, zoals loon, huur en energie. De winst is dus veel minder dan € 2,00."},
+  {vraag:"Leg met de twee voorwaarden uit dat straatverlichting een collectief goed is.", kernpunten:["Je kunt niemand uitsluiten: iedereen op straat heeft er licht van, ook wie niet betaalt","Niet-rivaliserend: jouw gebruik gaat niet ten koste van dat van een ander"], model:"Iedereen die over straat loopt, heeft licht van de lantaarnpalen; je kunt niemand uitsluiten. En als jij het licht gebruikt, heeft een ander er net zoveel aan: niet-rivaliserend."},
+  {vraag:"Noem een voordeel van pinnen voor een winkelier.", kernpunten:["Bijv.: minder contant geld in de winkel ➜ veiliger bij overvallen / minder tellen en wegbrengen van geld / geen wisselgeld nodig"], model:"Er ligt minder contant geld in de kassa, dus de winkel is minder aantrekkelijk voor dieven. Ook hoeft de winkelier minder geld te tellen en naar de bank te brengen."}
+  ],
+  volgorde: [
+  {titel:"Bedrijfskolom van appelsap", items:["Appelteler","Sapfabriek","Groothandel in dranken","Supermarkt"], uitleg:"Grondstof ➜ fabriek ➜ groothandel ➜ detailhandel."}
+  ]
+  };
+  GEN.t6 = [GEN.t2[1], GEN.t2[3], GEN.t2[4], GEN.t4[1], GEN.t4[4], GEN.t4[6], GEN.t5[0], GEN.t5[2], GEN.t5[3]];
   // ===== DATA t6 END =====
 
   /* ===== MOTOR — hieronder niets per tab aanpassen ===== */
@@ -710,17 +853,18 @@
 
   /* Getallen lezen: "€ 1.250,50", "12,5%", "1.000" (duizendtallen), "3.75" */
   function leesGetal(invoer){
-    var s = String(invoer).replace(/[€%\s]/g, '');
+    var s = String(invoer).replace(/[€%\s]/g, '').replace(/[−–]/g, '-');
     if (s.indexOf(',') !== -1) s = s.replace(/\./g, '').replace(',', '.');
     else if (/^-?\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
     if (!/^-?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
     return parseFloat(s);
   }
   function isGoed(waarde, antwoord){ return Math.abs(waarde - antwoord) <= Math.max(Math.abs(antwoord) * 0.01, 0.01); }
-  function nl(n){ return Number(n).toLocaleString('nl-NL', {maximumFractionDigits: 2}); }
   function metEenheid(n, eenheid){
     if (eenheid === '€' || eenheid === 'euro') return '€ ' + Number(n).toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    return nl(n) + (eenheid ? ' ' + eenheid : '');
+    var getal = Number(n).toLocaleString('nl-NL', {maximumFractionDigits: 3});
+    if (eenheid === '%') return getal + '%';
+    return getal + (eenheid ? ' ' + eenheid : '');
   }
 
   /* ---------- a. FLASHCARDS ---------- */
