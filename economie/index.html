@@ -12,13 +12,24 @@
       --donker: #1a1a2e;
       --grijs: #7f8c8d;
       --bg: #f8f9fa;
+      --wit: #fff;
+      --blauw-licht: #dbeafe;
+      --blauw-zacht: #eff6ff;
+      --blauw-rand: #bfdbfe;
+      --rand: #e2e8f0;
+      --vlak: #f1f5f9;
+      --uit: #cbd5e1;
+      --goed: #059669;
+      --goed-bg: #d1fae5;
+      --fout: #dc2626;
+      --fout-bg: #fee2e2;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: #333; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Nunito, sans-serif; background: var(--bg); color: var(--donker); }
 
     header {
       position: sticky; top: 0; z-index: 100;
-      background: var(--donker); color: white;
+      background: var(--donker); color: var(--wit);
       padding: 0.9rem 1.5rem;
       display: flex; align-items: center; gap: 1rem;
     }
@@ -26,89 +37,116 @@
     header h1 { font-size: 1.1rem; font-weight: 800; }
 
     .hero {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white; padding: 2rem 1.5rem; text-align: center;
+      background: linear-gradient(135deg, var(--blauw), var(--blauw-donker));
+      color: var(--wit); padding: 2rem 1.5rem; text-align: center;
     }
     .hero h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.3rem; }
     .hero p { opacity: 0.9; }
 
-    .tab-buttons {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      background: white; border-bottom: 2px solid #eee;
-      position: sticky; top: 52px; z-index: 90;
+    .tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1rem 1.5rem; background: var(--wit); border-bottom: 2px solid var(--rand); }
+    .tab-btn { padding: .5rem 1rem; border: none; border-radius: 8px; background: var(--vlak); color: var(--donker); cursor: pointer; font-family: Nunito, sans-serif; font-size: .9rem; font-weight: 700; transition: background .2s, color .2s; }
+    .tab-btn.active { background: linear-gradient(135deg, var(--blauw), var(--blauw-donker)); color: var(--wit); }
+    .tab-btn:hover:not(.active) { background: var(--blauw-licht); }
+    .tab-content { display: none; padding: 1.5rem; max-width: 820px; margin: 0 auto; }
+    .tab-content.active { display: block; }
+    .sub-tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+    .sub-tab-btn {
+      padding: .4rem .95rem; border: 2px solid var(--blauw); border-radius: 999px;
+      background: var(--wit); color: var(--blauw); cursor: pointer;
+      font-family: Nunito, sans-serif; font-size: .85rem; font-weight: 700;
+      transition: background .15s, color .15s;
     }
-    .tab-btn {
-      padding: 0.45rem 1rem;
-      border: 2px solid var(--blauw); border-radius: 2rem;
-      background: white; color: var(--blauw);
-      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.88rem;
-      cursor: pointer; transition: all 0.2s;
-    }
-    .tab-btn.active, .tab-btn:hover { background: var(--blauw); color: white; }
+    .sub-tab-btn.active { background: var(--blauw); color: var(--wit); }
+    .sub-tab-btn:hover:not(.active) { background: var(--blauw-licht); }
+    .sub-tab-content { display: none; }
+    .sub-tab-content.active { display: block; }
 
-    .tab-pane { display: none; padding: 1.5rem; max-width: 780px; margin: 0 auto; }
-    .tab-pane.active { display: block; }
+    .uitleg-card, .oefening-kaart {
+      background: var(--wit); border-radius: 12px; padding: 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .uitleg-card h2 { color: var(--blauw); margin-bottom: 1rem; font-size: 1.2rem; }
+    .uitleg-card h3 { color: var(--blauw-donker); margin: 1rem 0 .5rem; font-size: 1rem; }
+    .oefening-kaart h3, .uitleg-card h3.blok-titel { color: var(--blauw); margin: 0 0 .5rem; font-size: 1.1rem; }
+    .binnenkort { text-align: center; color: var(--grijs); font-weight: 700; }
 
-    .video-wrap {
-      position: relative; padding-bottom: 56.25%; height: 0;
-      border-radius: 12px; overflow: hidden;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    .score-balk  { font-size: .88rem; color: var(--grijs); margin-bottom: .7rem; }
+    .vraag-tekst { font-size: 1.15rem; font-weight: 700; min-height: 2rem; margin: .75rem 0; line-height: 1.4; overflow-wrap: anywhere; }
+    .mc-grid { display: flex; flex-direction: column; gap: .5rem; margin: .6rem 0 .8rem; }
+    .mc-btn {
+      padding: .7rem 1rem; border: 2px solid var(--rand); border-radius: 8px;
+      background: var(--wit); color: var(--donker); cursor: pointer; font-family: Nunito, sans-serif;
+      font-size: .98rem; font-weight: 600; text-align: left;
+      transition: border-color .15s, background .15s;
     }
-    .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .mc-btn:hover:not(:disabled) { border-color: var(--blauw); background: var(--blauw-licht); }
+    .mc-btn:disabled { cursor: default; }
+    .mc-btn.goed { background: var(--goed-bg); border-color: var(--goed); color: var(--goed); font-weight: 700; }
+    .mc-btn.fout { background: var(--fout-bg); border-color: var(--fout); color: var(--fout); font-weight: 700; }
+    .mc-btn.gekozen { opacity: .45; }
+    .feedback      { min-height: 1.5rem; font-weight: 700; margin: .4rem 0; font-size: .97rem; }
+    .feedback.goed { color: var(--goed); }
+    .feedback.fout { color: var(--fout); }
+    .uitleg-tekst { display: none; background: var(--blauw-zacht); border-left: 4px solid var(--blauw); border-radius: 6px; padding: .7rem 1rem; margin: .4rem 0; line-height: 1.5; white-space: pre-line; }
+    .uitleg-tekst.zichtbaar { display: block; }
+    .knoppen-rij { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+    .knoppen-rij button {
+      padding: .5rem 1rem; border: none; border-radius: 8px;
+      background: var(--blauw); color: var(--wit); font-family: Nunito, sans-serif;
+      font-weight: 700; cursor: pointer; font-size: .9rem;
+    }
+    .knoppen-rij button:hover:not(:disabled) { background: var(--blauw-donker); }
+    .knoppen-rij button:disabled { background: var(--uit); cursor: default; }
 
-    .sec-title {
-      font-size: 1rem; font-weight: 800; color: var(--donker);
-      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem;
+    .open-input {
+      width: 100%; padding: .7rem 1rem; border: 2px solid var(--rand); border-radius: 8px;
+      font-family: Nunito, sans-serif; font-size: 1rem; font-weight: 600; color: var(--donker);
+      margin: .6rem 0;
     }
+    .open-input:focus { outline: none; border-color: var(--blauw); }
+    textarea.open-input { resize: vertical; min-height: 6rem; line-height: 1.4; }
+    .invoer-rij { display: flex; align-items: center; gap: .5rem; }
+    .invoer-rij .open-input { flex: 1; min-width: 0; }
+    .eenheid { font-weight: 800; color: var(--grijs); white-space: nowrap; }
 
-    .fc-box {
-      background: white; border-radius: 16px; padding: 1.2rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 1.8rem;
-    }
-    .fc-prog { text-align: center; font-size: 0.82rem; color: var(--grijs); margin-bottom: 0.8rem; }
-    .fc-card {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white; border-radius: 12px; padding: 1.8rem 1.2rem;
-      min-height: 130px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; text-align: center;
-      cursor: pointer; transition: background 0.3s; margin-bottom: 0.9rem;
-    }
-    .fc-card.flipped { background: linear-gradient(135deg, #27ae60, #2ecc71); }
-    .fc-label { font-size: 0.72rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
-    .fc-text { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
-    .fc-hint { font-size: 0.72rem; opacity: 0.7; margin-top: 0.7rem; }
-    .btn-row { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
-    .btn { padding: 0.45rem 0.9rem; border: none; border-radius: 2rem; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.82rem; cursor: pointer; }
-    .btn-gray { background: #ecf0f1; color: #555; }
-    .btn-red { background: var(--blauw); color: white; }
-    .btn-gold { background: var(--blauw-donker); color: white; }
+    .volgorde-rij { list-style: none; counter-reset: stap; display: flex; flex-direction: column; gap: .4rem; min-height: 2.6rem; margin: .6rem 0; padding: .5rem; border: 2px dashed var(--blauw-rand); border-radius: 8px; }
+    .volgorde-rij li { counter-increment: stap; background: var(--blauw-zacht); border-left: 4px solid var(--blauw); padding: .45rem .8rem; border-radius: 6px; font-weight: 700; }
+    .volgorde-rij li::before { content: counter(stap) ". "; color: var(--blauw); }
+    .volgorde-leeg { color: var(--grijs); font-size: .85rem; padding: .3rem; }
 
-    .mcq-box {
-      background: white; border-radius: 16px; padding: 1.2rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 2rem;
+    .modelantwoord { display: none; margin: .6rem 0; }
+    .modelantwoord.zichtbaar { display: block; }
+    .kernpunt { display: flex; gap: .6rem; align-items: flex-start; padding: .5rem .7rem; margin: .35rem 0; background: var(--vlak); border-radius: 6px; cursor: pointer; line-height: 1.4; }
+    .kernpunt input { margin-top: .25rem; width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+
+    .fc-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; gap: .6rem; }
+    .fc-topbar .score-balk { margin-bottom: 0; }
+    .fc-teller { font-size: .85rem; font-weight: 800; color: var(--grijs); background: var(--vlak); padding: .25rem .6rem; border-radius: 6px; white-space: nowrap; }
+    .flip-wrapper { width: 100%; perspective: 1000px; cursor: pointer; margin-bottom: .8rem; }
+    .flip-card { width: 100%; min-height: 180px; position: relative; transform-style: preserve-3d; transition: transform .45s; }
+    .flip-card.flipped { transform: rotateY(180deg); }
+    .flip-face {
+      position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.2rem; text-align: center;
     }
-    .mcq-prog { text-align: center; font-size: 0.82rem; color: var(--grijs); margin-bottom: 0.8rem; }
-    .mcq-q { font-size: 0.98rem; font-weight: 700; color: var(--donker); margin-bottom: 0.9rem; line-height: 1.5; min-height: 2rem; }
-    .mcq-opts { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 0.8rem; }
-    .mcq-opt {
-      padding: 0.65rem 1rem; border: 2px solid #ddd; border-radius: 10px;
-      background: white; font-family: 'Nunito', sans-serif; font-size: 0.9rem;
-      cursor: pointer; text-align: left; transition: border-color 0.15s, background 0.15s;
-    }
-    .mcq-opt:hover:not(:disabled) { border-color: var(--blauw); background: #dbeafe; }
-    .mcq-opt.correct { background: #d5f5e3; border-color: #27ae60; color: #1e8449; font-weight: 700; }
-    .mcq-opt.wrong { background: #fde8e8; border-color: #e74c3c; color: #c0392b; font-weight: 700; }
-    .mcq-opt:disabled { cursor: default; }
-    .mcq-fb { font-size: 0.88rem; font-weight: 700; min-height: 1.3rem; margin-bottom: 0.5rem; }
-    .mcq-fb.goed { color: #27ae60; }
-    .mcq-fb.fout { color: #e74c3c; }
-    .mcq-sc { text-align: center; font-size: 0.82rem; color: var(--grijs); margin-top: 0.5rem; }
-    .done-banner {
-      margin-top: 1rem; padding: 1.2rem; border-radius: 12px;
-      background: linear-gradient(135deg, #27ae60, #2ecc71);
-      color: white; text-align: center; font-weight: 700; font-size: 1rem;
+    .flip-front { background: linear-gradient(135deg, var(--blauw-licht), var(--wit)); border: 2px solid var(--blauw-rand); }
+    .flip-back { background: linear-gradient(135deg, var(--blauw-zacht), var(--wit)); border: 2px solid var(--blauw); transform: rotateY(180deg); }
+    .flip-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--blauw); margin-bottom: .6rem; }
+    .flip-tekst { font-size: 1.05rem; font-weight: 700; color: var(--donker); line-height: 1.4; overflow-wrap: anywhere; }
+    .flip-hint { font-size: .72rem; color: var(--grijs); font-weight: 600; margin-top: .8rem; }
+
+    @media (max-width: 520px) {
+      header { padding: .8rem 1rem; }
+      .hero { padding: 1.4rem 1rem; }
+      .hero h2 { font-size: 1.35rem; }
+      .tab-nav { padding: .6rem .75rem; gap: .35rem; }
+      .tab-btn { padding: .45rem .7rem; font-size: .82rem; }
+      .tab-content { padding: 1rem .75rem; }
+      .uitleg-card, .oefening-kaart { padding: 1rem; }
+      .vraag-tekst { font-size: 1.05rem; }
+      .knoppen-rij button { flex: 1 1 auto; }
+      .flip-card { min-height: 200px; }
     }
   </style>
 </head>
@@ -121,33 +159,510 @@
 
 <div class="hero">
   <h2>💶 Economie</h2>
-  <p>3 HAVO</p>
+  <p>3 HAVO · Wat is economie? (Geldzaken 1.1)</p>
 </div>
 
-<div class="tab-buttons">
-  <button class="tab-btn active" data-tab="tab-binnenkort" onclick="showTab('tab-binnenkort')">🚧 Binnenkort</button>
-</div>
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('t1',this)">👥 Consumenten</button>
+  <button class="tab-btn" onclick="showTab('t2',this)">🏭 Producenten</button>
+  <button class="tab-btn" onclick="showTab('t3',this)">🏛️ Overheid</button>
+  <button class="tab-btn" onclick="showTab('t4',this)">💰 Geld &amp; banken</button>
+  <button class="tab-btn" onclick="showTab('t5',this)">🌍 Buitenland</button>
+  <button class="tab-btn" onclick="showTab('t6',this)">📝 Proeftoets</button>
+</nav>
 
-<div id="tab-binnenkort" class="tab-pane active">
-  <div class="fc-box">
-    <p>Hier komt de oefenstof voor Economie zodra het eerste proefwerk bekend is.</p>
+<div id="tab-t1" class="tab-content active">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('t1','uitleg',this)">📖 Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t1','flashcards',this)">🃏 Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t1','oefenen',this)">✏️ Oefenen</button>
+  </nav>
+  <div id="sub-t1-uitleg" class="sub-tab-content active">
+    <!-- UITLEG t1 START -->
+    <div class="uitleg-card">
+      <h2>Uitleg volgt</h2>
+    </div>
+    <!-- UITLEG t1 END -->
   </div>
+  <div id="sub-t1-flashcards" class="sub-tab-content"></div>
+  <div id="sub-t1-oefenen" class="sub-tab-content"></div>
+</div>
+
+<div id="tab-t2" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('t2','uitleg',this)">📖 Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t2','flashcards',this)">🃏 Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t2','oefenen',this)">✏️ Oefenen</button>
+  </nav>
+  <div id="sub-t2-uitleg" class="sub-tab-content active">
+    <!-- UITLEG t2 START -->
+    <div class="uitleg-card">
+      <h2>Uitleg volgt</h2>
+    </div>
+    <!-- UITLEG t2 END -->
+  </div>
+  <div id="sub-t2-flashcards" class="sub-tab-content"></div>
+  <div id="sub-t2-oefenen" class="sub-tab-content"></div>
+</div>
+
+<div id="tab-t3" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('t3','uitleg',this)">📖 Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t3','flashcards',this)">🃏 Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t3','oefenen',this)">✏️ Oefenen</button>
+  </nav>
+  <div id="sub-t3-uitleg" class="sub-tab-content active">
+    <!-- UITLEG t3 START -->
+    <div class="uitleg-card">
+      <h2>Uitleg volgt</h2>
+    </div>
+    <!-- UITLEG t3 END -->
+  </div>
+  <div id="sub-t3-flashcards" class="sub-tab-content"></div>
+  <div id="sub-t3-oefenen" class="sub-tab-content"></div>
+</div>
+
+<div id="tab-t4" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('t4','uitleg',this)">📖 Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t4','flashcards',this)">🃏 Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t4','oefenen',this)">✏️ Oefenen</button>
+  </nav>
+  <div id="sub-t4-uitleg" class="sub-tab-content active">
+    <!-- UITLEG t4 START -->
+    <div class="uitleg-card">
+      <h2>Uitleg volgt</h2>
+    </div>
+    <!-- UITLEG t4 END -->
+  </div>
+  <div id="sub-t4-flashcards" class="sub-tab-content"></div>
+  <div id="sub-t4-oefenen" class="sub-tab-content"></div>
+</div>
+
+<div id="tab-t5" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('t5','uitleg',this)">📖 Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t5','flashcards',this)">🃏 Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('t5','oefenen',this)">✏️ Oefenen</button>
+  </nav>
+  <div id="sub-t5-uitleg" class="sub-tab-content active">
+    <!-- UITLEG t5 START -->
+    <div class="uitleg-card">
+      <h2>Uitleg volgt</h2>
+    </div>
+    <!-- UITLEG t5 END -->
+  </div>
+  <div id="sub-t5-flashcards" class="sub-tab-content"></div>
+  <div id="sub-t5-oefenen" class="sub-tab-content"></div>
+</div>
+
+<div id="tab-t6" class="tab-content">
+  <div id="t6-oefenen"></div>
 </div>
 
 <script>
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
+  var DATA = {}, GEN = {};
 
-function showTab(id) {
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
-  document.getElementById(id).classList.add('active');
-}
+  // ===== DATA t1 START =====
+  DATA.t1 = { fc: [], mc: [], open: [], volgorde: [] };
+  GEN.t1 = [];
+  // ===== DATA t1 END =====
+
+  // ===== DATA t2 START =====
+  DATA.t2 = { fc: [], mc: [], open: [], volgorde: [] };
+  GEN.t2 = [];
+  // ===== DATA t2 END =====
+
+  // ===== DATA t3 START =====
+  DATA.t3 = { fc: [], mc: [], open: [], volgorde: [] };
+  GEN.t3 = [];
+  // ===== DATA t3 END =====
+
+  // ===== DATA t4 START =====
+  DATA.t4 = { fc: [], mc: [], open: [], volgorde: [] };
+  GEN.t4 = [];
+  // ===== DATA t4 END =====
+
+  // ===== DATA t5 START =====
+  DATA.t5 = { fc: [], mc: [], open: [], volgorde: [] };
+  GEN.t5 = [];
+  // ===== DATA t5 END =====
+
+  // ===== DATA t6 START =====
+  DATA.t6 = { fc: [], mc: [], open: [], volgorde: [] };
+  GEN.t6 = [];
+  // ===== DATA t6 END =====
+
+  /* ===== MOTOR — hieronder niets per tab aanpassen ===== */
+
+  function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+  function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
+
+  /* Fisher-Yates op een KOPIE: de bron-array blijft ongemoeid */
+  function fisherYates(bron){var arr=bron.slice();for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+  function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+  /* Klein hulpje om elementen te bouwen: h('div', {class:'x', onclick:fn, text:'...'}, kind1, kind2) */
+  function h(tag, props){
+    var el = document.createElement(tag);
+    Object.keys(props || {}).forEach(function(k){
+      var v = props[k];
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k.indexOf('on') === 0) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v);
+    });
+    for (var i = 2; i < arguments.length; i++){
+      if (arguments[i] != null) el.append(arguments[i]);
+    }
+    return el;
+  }
+  function knop(label, fn){ return h('button', {type:'button', onclick:fn, text:label}); }
+  function toon(el, aan){ el.style.display = aan ? '' : 'none'; }
+  function maakScore(){
+    var goed = h('span', {text:'0'}), totaal = h('span', {text:'0'});
+    return { el: h('div', {class:'score-balk'}, 'Score: ', goed, ' / ', totaal),
+             zet: function(g, t){ goed.textContent = g; totaal.textContent = t; } };
+  }
+  function zetFeedback(fb, tekst, soort){ fb.textContent = tekst; fb.className = 'feedback' + (soort ? ' ' + soort : ''); }
+  function zetUitleg(el, tekst){ el.textContent = tekst || ''; el.classList.toggle('zichtbaar', !!tekst); }
+
+  /* Getallen lezen: "€ 1.250,50", "12,5%", "1.000" (duizendtallen), "3.75" */
+  function leesGetal(invoer){
+    var s = String(invoer).replace(/[€%\s]/g, '');
+    if (s.indexOf(',') !== -1) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^-?\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    if (!/^-?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
+    return parseFloat(s);
+  }
+  function isGoed(waarde, antwoord){ return Math.abs(waarde - antwoord) <= Math.max(Math.abs(antwoord) * 0.01, 0.01); }
+  function nl(n){ return Number(n).toLocaleString('nl-NL', {maximumFractionDigits: 2}); }
+  function metEenheid(n, eenheid){
+    if (eenheid === '€') return '€ ' + Number(n).toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    return nl(n) + (eenheid ? ' ' + eenheid : '');
+  }
+
+  /* ---------- a. FLASHCARDS ---------- */
+  function maakFlashcards(bron){
+    var richting = 'ob'; // 'ob' = Omschrijving → begrip, 'bo' = Begrip → omschrijving
+    var kaarten = [], i = 0, goed = 0, totaal = 0, klaar = false, omgedraaid = false;
+
+    var titel = h('h3', {class:'blok-titel'});
+    var richtingKnop = knop('', function(){ richting = richting === 'ob' ? 'bo' : 'ob'; opnieuw(); });
+    var score = maakScore(), teller = h('div', {class:'fc-teller'});
+    var voorLabel = h('div', {class:'flip-label'}), voorTekst = h('div', {class:'flip-tekst'});
+    var achterLabel = h('div', {class:'flip-label'}), achterTekst = h('div', {class:'flip-tekst'});
+    var kaart = h('div', {class:'flip-card'},
+      h('div', {class:'flip-face flip-front'}, voorLabel, voorTekst, h('div', {class:'flip-hint', text:'Klik om om te draaien'})),
+      h('div', {class:'flip-face flip-back'}, achterLabel, achterTekst));
+    var oordeel = h('div', {class:'knoppen-rij'},
+      knop('✗ Fout', function(){ beoordeel(false); }),
+      knop('✓ Goed', function(){ beoordeel(true); }));
+    var fb = h('div', {class:'feedback'});
+
+    function toonKaart(){
+      var k = kaarten[i], ob = richting === 'ob';
+      titel.textContent = 'Flashcards: ' + (ob ? 'Omschrijving → begrip' : 'Begrip → omschrijving');
+      richtingKnop.textContent = '🔁 Wissel naar ' + (ob ? 'Begrip → omschrijving' : 'Omschrijving → begrip');
+      voorLabel.textContent = ob ? 'Omschrijving' : 'Begrip';
+      achterLabel.textContent = ob ? 'Begrip' : 'Omschrijving';
+      voorTekst.textContent = ob ? k.omschrijving : k.begrip;
+      achterTekst.textContent = ob ? k.begrip : k.omschrijving;
+      omgedraaid = false;
+      kaart.classList.remove('flipped');
+      toon(oordeel, false);
+      teller.textContent = (i + 1) + ' / ' + kaarten.length;
+      score.zet(goed, totaal);
+    }
+    function flip(){ omgedraaid = !omgedraaid; kaart.classList.toggle('flipped', omgedraaid); toon(oordeel, omgedraaid); }
+    function beoordeel(ok){
+      totaal++; if (ok) goed++;
+      if (i === kaarten.length - 1){ klaar = true; zetFeedback(fb, '🎉 Klaar! ' + goed + '/' + totaal, 'goed'); }
+      volgende();
+    }
+    function vorige(){ if (i > 0){ i--; toonKaart(); } }
+    function volgende(){ i = i < kaarten.length - 1 ? i + 1 : 0; toonKaart(); }
+    function schud(){
+      if (klaar){ goed = 0; totaal = 0; klaar = false; zetFeedback(fb, ''); }
+      kaarten = fisherYates(bron); i = 0; toonKaart();
+    }
+    function opnieuw(){ goed = 0; totaal = 0; klaar = false; zetFeedback(fb, ''); kaarten = fisherYates(bron); i = 0; toonKaart(); }
+
+    var blok = h('div', {class:'uitleg-card'},
+      titel,
+      h('div', {class:'knoppen-rij'}, richtingKnop),
+      h('div', {class:'fc-topbar', style:'margin-top:.8rem'}, score.el, teller),
+      h('div', {class:'flip-wrapper', onclick:flip}, kaart),
+      oordeel, fb,
+      h('div', {class:'knoppen-rij'},
+        knop('← Vorige', vorige), knop('Volgende →', volgende),
+        knop('🔀 Shuffle', schud), knop('↻ Opnieuw', opnieuw)));
+    opnieuw();
+    return blok;
+  }
+
+  /* ---------- b. MEERKEUZE ---------- */
+  function maakMeerkeuze(bron){
+    var lijst = [], i = 0, goed = 0, totaal = 0, klaar = false, timer = null;
+    var score = maakScore(), teller = h('div', {class:'fc-teller'});
+    var vraag = h('div', {class:'vraag-tekst'}), opties = h('div', {class:'mc-grid'});
+    var fb = h('div', {class:'feedback'}), uitleg = h('div', {class:'uitleg-tekst'});
+    var volgendeKnop = knop('Volgende →', function(){ volgende(); });
+
+    function toonVraag(){
+      clearTimeout(timer);
+      score.zet(goed, totaal);
+      zetFeedback(fb, ''); zetUitleg(uitleg, ''); toon(volgendeKnop, false);
+      opties.innerHTML = '';
+      if (i >= lijst.length){
+        klaar = true;
+        teller.textContent = lijst.length + ' / ' + lijst.length;
+        vraag.textContent = '🎉 Klaar! ' + goed + '/' + lijst.length;
+        return;
+      }
+      var item = lijst[i];
+      teller.textContent = (i + 1) + ' / ' + lijst.length;
+      vraag.textContent = item.vraag;
+      fisherYates(item.opties).forEach(function(optie){
+        opties.append(h('button', {type:'button', class:'mc-btn', text:optie, onclick:function(){ kies(optie, this); }}));
+      });
+    }
+    function kies(optie, btn){
+      var item = lijst[i], ok = optie === item.antwoord;
+      totaal++; if (ok) goed++;
+      score.zet(goed, totaal);
+      opties.querySelectorAll('.mc-btn').forEach(function(b){
+        b.disabled = true;
+        if (b.textContent === item.antwoord) b.classList.add('goed');
+      });
+      if (ok){
+        zetFeedback(fb, '✓ Goed!', 'goed');
+        timer = setTimeout(volgende, 1300);
+      } else {
+        btn.classList.add('fout');
+        zetFeedback(fb, '✗ Fout — juist: ' + item.antwoord, 'fout');
+        zetUitleg(uitleg, item.uitleg);
+        toon(volgendeKnop, true);
+      }
+    }
+    function volgende(){ i++; toonVraag(); }
+    function schud(){ if (klaar){ goed = 0; totaal = 0; klaar = false; } lijst = fisherYates(bron); i = 0; toonVraag(); }
+    function opnieuw(){ goed = 0; totaal = 0; klaar = false; lijst = fisherYates(bron); i = 0; toonVraag(); }
+
+    var blok = h('div', {class:'oefening-kaart'},
+      h('h3', {text:'Kies het juiste antwoord'}),
+      h('div', {class:'fc-topbar'}, score.el, teller),
+      vraag, opties, fb, uitleg,
+      h('div', {class:'knoppen-rij'}, volgendeKnop, knop('🔀 Shuffle', schud), knop('↻ Opnieuw', opnieuw)));
+    opnieuw();
+    return blok;
+  }
+
+  /* ---------- c. VOLGORDE ---------- */
+  function maakVolgorde(bron){
+    var lijst = [], i = 0, goed = 0, totaal = 0, klaar = false, gekozen = [], gecontroleerd = false;
+    var score = maakScore(), teller = h('div', {class:'fc-teller'});
+    var titel = h('div', {class:'vraag-tekst'}), keuzes = h('div', {class:'mc-grid'});
+    var rij = h('ol', {class:'volgorde-rij'});
+    var fb = h('div', {class:'feedback'}), uitleg = h('div', {class:'uitleg-tekst'});
+    var wisKnop = knop('↩️ Wis', wis), controleerKnop = knop('Controleer', controleer);
+    var volgendeKnop = knop('Volgende →', function(){ i++; toonOpgave(); });
+
+    function tekenRij(){
+      rij.innerHTML = '';
+      if (!gekozen.length) rij.append(h('div', {class:'volgorde-leeg', text:'Klik de stappen hierboven aan in de juiste volgorde…'}));
+      gekozen.forEach(function(item){ rij.append(h('li', {text:item})); });
+    }
+    function toonOpgave(){
+      score.zet(goed, totaal);
+      gekozen = []; gecontroleerd = false;
+      zetFeedback(fb, ''); zetUitleg(uitleg, '');
+      keuzes.innerHTML = '';
+      toon(volgendeKnop, false);
+      if (i >= lijst.length){
+        klaar = true;
+        teller.textContent = lijst.length + ' / ' + lijst.length;
+        titel.textContent = '🎉 Klaar! ' + goed + '/' + lijst.length;
+        toon(rij, false); toon(wisKnop, false); toon(controleerKnop, false);
+        return;
+      }
+      var opg = lijst[i];
+      toon(rij, true); toon(wisKnop, true); toon(controleerKnop, true);
+      wisKnop.disabled = false; controleerKnop.disabled = false;
+      teller.textContent = (i + 1) + ' / ' + lijst.length;
+      titel.textContent = opg.titel;
+      fisherYates(opg.items).forEach(function(item){
+        keuzes.append(h('button', {type:'button', class:'mc-btn', text:item, onclick:function(){
+          if (gecontroleerd || this.disabled) return;
+          this.disabled = true; this.classList.add('gekozen');
+          gekozen.push(item); tekenRij();
+        }}));
+      });
+      tekenRij();
+    }
+    function wis(){
+      if (gecontroleerd) return;
+      gekozen = [];
+      keuzes.querySelectorAll('.mc-btn').forEach(function(b){ b.disabled = false; b.classList.remove('gekozen'); });
+      zetFeedback(fb, '');
+      tekenRij();
+    }
+    function controleer(){
+      var opg = lijst[i];
+      if (gekozen.length < opg.items.length){ zetFeedback(fb, 'Zet eerst alle ' + opg.items.length + ' stappen in de rij.', 'fout'); return; }
+      gecontroleerd = true;
+      var ok = gekozen.every(function(item, k){ return item === opg.items[k]; });
+      totaal++; if (ok) goed++;
+      score.zet(goed, totaal);
+      keuzes.querySelectorAll('.mc-btn').forEach(function(b){ b.disabled = true; });
+      wisKnop.disabled = true; controleerKnop.disabled = true;
+      zetFeedback(fb, ok ? '✓ Goed!' : '✗ Niet helemaal.', ok ? 'goed' : 'fout');
+      var juist = 'Juiste volgorde:\n' + opg.items.map(function(item, k){ return (k + 1) + '. ' + item; }).join('\n');
+      zetUitleg(uitleg, juist + (opg.uitleg ? '\n\n' + opg.uitleg : ''));
+      toon(volgendeKnop, true);
+    }
+    function schud(){ if (klaar){ goed = 0; totaal = 0; klaar = false; } lijst = fisherYates(bron); i = 0; toonOpgave(); }
+    function opnieuw(){ goed = 0; totaal = 0; klaar = false; lijst = fisherYates(bron); i = 0; toonOpgave(); }
+
+    var blok = h('div', {class:'oefening-kaart'},
+      h('h3', {text:'Zet in de juiste volgorde'}),
+      h('div', {class:'fc-topbar'}, score.el, teller),
+      titel, keuzes, rij, fb, uitleg,
+      h('div', {class:'knoppen-rij'}, wisKnop, controleerKnop, volgendeKnop, knop('🔀 Shuffle', schud), knop('↻ Opnieuw', opnieuw)));
+    opnieuw();
+    return blok;
+  }
+
+  /* ---------- d. REKENEN (oneindig, steeds nieuwe getallen) ---------- */
+  function maakRekenen(generatoren){
+    var huidig = null, goed = 0, totaal = 0, beantwoord = false;
+    var score = maakScore();
+    var vraag = h('div', {class:'vraag-tekst'});
+    var invoer = h('input', {type:'text', inputmode:'decimal', autocomplete:'off', class:'open-input', placeholder:'Jouw antwoord…',
+      onkeydown:function(e){ if (e.key === 'Enter') controleer(); }});
+    var eenheid = h('span', {class:'eenheid'});
+    var fb = h('div', {class:'feedback'}), uitleg = h('div', {class:'uitleg-tekst'});
+    var controleerKnop = knop('Controleer', controleer);
+    var volgendeKnop = knop('Volgende →', nieuweOpgave);
+
+    function nieuweOpgave(){
+      huidig = pick(generatoren)();
+      beantwoord = false;
+      vraag.textContent = huidig.vraag;
+      eenheid.textContent = huidig.eenheid || '';
+      invoer.value = ''; invoer.disabled = false;
+      controleerKnop.disabled = false; toon(volgendeKnop, false);
+      zetFeedback(fb, ''); zetUitleg(uitleg, '');
+      score.zet(goed, totaal);
+    }
+    function controleer(){
+      if (beantwoord) return;
+      if (invoer.value.trim() === '') return;
+      var waarde = leesGetal(invoer.value);
+      if (isNaN(waarde)){ zetFeedback(fb, 'Vul een getal in (bijv. 12,50).', 'fout'); return; }
+      beantwoord = true;
+      invoer.disabled = true; controleerKnop.disabled = true;
+      var ok = isGoed(waarde, huidig.antwoord);
+      totaal++; if (ok) goed++;
+      score.zet(goed, totaal);
+      zetFeedback(fb, (ok ? '✓ Goed! ' : '✗ Fout. ') + 'Juiste antwoord: ' + metEenheid(huidig.antwoord, huidig.eenheid), ok ? 'goed' : 'fout');
+      zetUitleg(uitleg, huidig.uitleg);
+      toon(volgendeKnop, true);
+    }
+    function opnieuw(){ goed = 0; totaal = 0; nieuweOpgave(); }
+
+    var blok = h('div', {class:'oefening-kaart'},
+      h('h3', {text:'Rekenen – steeds nieuwe getallen'}),
+      score.el, vraag,
+      h('div', {class:'invoer-rij'}, invoer, eenheid),
+      fb, uitleg,
+      h('div', {class:'knoppen-rij'}, controleerKnop, volgendeKnop, knop('🔀 Shuffle', nieuweOpgave), knop('↻ Opnieuw', opnieuw)));
+    nieuweOpgave();
+    return blok;
+  }
+
+  /* ---------- e. UITLEGVRAGEN (kernpunten zelf afvinken) ---------- */
+  function maakUitlegvragen(bron){
+    var lijst = [], i = 0, punten = 0, max = 0, klaar = false;
+    var score = maakScore(), teller = h('div', {class:'fc-teller'});
+    var vraag = h('div', {class:'vraag-tekst'});
+    var antwoord = h('textarea', {class:'open-input', rows:'4', placeholder:'Typ hier je uitleg…'});
+    var modelTekst = h('p', {style:'line-height:1.5'}), checks = h('div');
+    var model = h('div', {class:'modelantwoord'},
+      h('div', {class:'uitleg-tekst zichtbaar'}, h('strong', {text:'Modelantwoord: '}), modelTekst),
+      h('div', {class:'score-balk', style:'margin:.6rem 0 0', text:'Vink aan welke kernpunten in jouw antwoord stonden:'}),
+      checks);
+    var toonKnop = knop('Toon modelantwoord', toonModel);
+    var volgendeKnop = knop('Volgende', volgende);
+
+    function toonVraag(){
+      score.zet(punten, max);
+      model.classList.remove('zichtbaar'); checks.innerHTML = '';
+      antwoord.value = '';
+      toon(volgendeKnop, false);
+      if (i >= lijst.length){
+        klaar = true;
+        teller.textContent = lijst.length + ' / ' + lijst.length;
+        vraag.textContent = '🎉 Klaar! ' + punten + '/' + max + ' punten';
+        toon(antwoord, false); toon(toonKnop, false);
+        return;
+      }
+      var item = lijst[i];
+      teller.textContent = (i + 1) + ' / ' + lijst.length;
+      vraag.textContent = item.vraag;
+      toon(antwoord, true); toon(toonKnop, true);
+    }
+    function toonModel(){
+      var item = lijst[i];
+      modelTekst.textContent = item.model;
+      checks.innerHTML = '';
+      item.kernpunten.forEach(function(kp){
+        checks.append(h('label', {class:'kernpunt'}, h('input', {type:'checkbox'}), h('span', {text:'Had ik dit? — ' + kp})));
+      });
+      model.classList.add('zichtbaar');
+      toon(toonKnop, false); toon(volgendeKnop, true);
+    }
+    function volgende(){
+      punten += checks.querySelectorAll('input:checked').length;
+      max += lijst[i].kernpunten.length;
+      i++; toonVraag();
+    }
+    function schud(){ if (klaar){ punten = 0; max = 0; klaar = false; } lijst = fisherYates(bron); i = 0; toonVraag(); }
+    function opnieuw(){ punten = 0; max = 0; klaar = false; lijst = fisherYates(bron); i = 0; toonVraag(); }
+
+    var blok = h('div', {class:'oefening-kaart'},
+      h('h3', {text:'Leg uit – check je kernpunten'}),
+      h('div', {class:'fc-topbar'}, score.el, teller),
+      vraag, antwoord, model,
+      h('div', {class:'knoppen-rij'}, toonKnop, volgendeKnop, knop('🔀 Shuffle', schud), knop('↻ Opnieuw', opnieuw)));
+    opnieuw();
+    return blok;
+  }
+
+  /* ---------- RENDEREN ---------- */
+  function vul(id, blokken){
+    var doel = document.getElementById(id);
+    doel.innerHTML = '';
+    if (!blokken.length) blokken = [h('div', {class:'uitleg-card binnenkort', text:'🚧 Binnenkort'})];
+    blokken.forEach(function(b){ doel.append(b); });
+  }
+  function vol(arr){ return Array.isArray(arr) && arr.length > 0; }
+  function renderTab(t){
+    var d = DATA[t] || {}, gen = GEN[t] || [];
+    var fc = vol(d.fc) ? [maakFlashcards(d.fc)] : [];
+    var oefenen = [];
+    if (vol(d.mc)) oefenen.push(maakMeerkeuze(d.mc));
+    if (vol(d.volgorde)) oefenen.push(maakVolgorde(d.volgorde));
+    if (vol(gen)) oefenen.push(maakRekenen(gen));
+    if (vol(d.open)) oefenen.push(maakUitlegvragen(d.open));
+    if (t === 't6'){
+      vul('t6-oefenen', fc.concat(oefenen));
+    } else {
+      vul('sub-' + t + '-flashcards', fc);
+      vul('sub-' + t + '-oefenen', oefenen);
+    }
+  }
+  ['t1','t2','t3','t4','t5','t6'].forEach(renderTab);
 </script>
 </body>
 </html>
