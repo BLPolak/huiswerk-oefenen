@@ -68,6 +68,14 @@
     .uitleg-card h2 { color: var(--blauw); margin-bottom: 1rem; font-size: 1.2rem; }
     .uitleg-card h3 { color: var(--blauw-donker); margin: 1rem 0 .5rem; font-size: 1rem; }
     .oefening-kaart h3, .uitleg-card h3.blok-titel { color: var(--blauw); margin: 0 0 .5rem; font-size: 1.1rem; }
+    .uitleg-card table{width:100%;border-collapse:collapse;font-size:.92em;margin:.6em 0}
+    .uitleg-card th,.uitleg-card td{border:1px solid var(--rand,#ddd);padding:6px;text-align:left;vertical-align:top;overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+    .uitleg-card th{background:var(--blauw-zacht,#eef4ff)}
+    .uitleg-card .tip{background:var(--blauw-zacht,#eef4ff);border-left:4px solid var(--blauw);padding:8px 10px;border-radius:6px}
+    .uitleg-card .formule{font-weight:700;text-align:center;padding:8px;background:var(--vlak,#f3f4f6);border-radius:6px}
+    .uitleg-card p, .uitleg-card ul, .uitleg-card ol { margin: .5em 0; line-height: 1.5; }
+    .uitleg-card ul, .uitleg-card ol { padding-left: 1.3em; }
+    .uitleg-card { overflow-x: auto; }
     .binnenkort { text-align: center; color: var(--grijs); font-weight: 700; }
 
     .score-balk  { font-size: .88rem; color: var(--grijs); margin-bottom: .7rem; }
@@ -179,9 +187,34 @@
   </nav>
   <div id="sub-t1-uitleg" class="sub-tab-content active">
     <!-- UITLEG t1 START -->
-    <div class="uitleg-card">
-      <h2>Uitleg volgt</h2>
-    </div>
+    <div class="uitleg-card"><h3>🎯 Waar gaat economie over?</h3>
+    <p>Iedereen heeft <b>behoeften</b>: dingen die je nodig hebt of graag wilt hebben. Je behoeften zijn <b>onbeperkt</b>, maar je <b>middelen</b> (geld en tijd) zijn <b>beperkt</b>. Dat noemen we <b>schaarste</b>. Daardoor moet je steeds <b>kiezen</b>. Economie gaat over die keuzes.</p>
+    <p class="tip">💡 Geld en tijd kun je maar één keer uitgeven: wat je aan het ene besteedt, kun je niet meer aan iets anders besteden.</p></div>
+
+    <div class="uitleg-card"><h3>🍞 Twee soorten behoeften</h3>
+    <table><tr><th></th><th>Wat is het?</th><th>Voorbeelden</th></tr>
+    <tr><td><b>Eerste levensbehoeften</b></td><td>Nodig om te overleven</td><td>Voeding, kleding, onderdak, gezondheidszorg</td></tr>
+    <tr><td><b>Luxe producten</b></td><td>Niet nodig om te overleven, maken je leven comfortabeler</td><td>Auto, laptop, vakantie</td></tr></table></div>
+
+    <div class="uitleg-card"><h3>💶 Middelen</h3>
+    <ul><li>Middelen zijn je <b>geld</b> en je <b>tijd</b>.</li>
+    <li>Geld dat je verdient door te werken heet <b>inkomen</b>.</li>
+    <li>Je kunt ook geld krijgen (zakgeld) of sparen op een spaarrekening.</li></ul></div>
+
+    <div class="uitleg-card"><h3>📦 Goederen en diensten</h3>
+    <table><tr><th></th><th>Kenmerk</th><th>Voorbeelden</th></tr>
+    <tr><td><b>Goed</b></td><td>Tastbaar = <b>materieel</b>. Je kunt het op voorraad hebben.</td><td>Fiets, pizza, boek</td></tr>
+    <tr><td><b>Dienst</b></td><td>Niet tastbaar = <b>immaterieel</b>. Productie en consumptie vallen samen.</td><td>Knipbeurt, concert, bijles</td></tr></table></div>
+
+    <div class="uitleg-card"><h3>🔄 Consumptie: geldstroom en goederenstroom</h3>
+    <p><b>Consumptie</b> is het kopen van goederen en diensten om in je behoeften te voorzien. Wie dat doet is een <b>consument</b>.</p>
+    <ul><li><b>Goederenstroom</b>: van producent ➜ consument</li>
+    <li><b>Geldstroom</b>: van consument ➜ producent (de betaling)</li></ul>
+    <p>De twee stromen gaan in <b>tegengestelde richting</b>. Ze horen niet altijd bij elkaar: zet je geld op je spaarrekening, dan is er alleen een geldstroom en geen goederenstroom.</p></div>
+
+    <div class="uitleg-card"><h3>🗺️ De vijf sectoren van de economie</h3>
+    <ol><li>Consumenten</li><li>Producenten</li><li>De overheid</li><li>Geld en banken</li><li>Het buitenland</li></ol>
+    <p>Deze sectoren staan niet los van elkaar: er lopen geld- en goederenstromen tussen. Elke sector heeft hier een eigen tab.</p></div>
     <!-- UITLEG t1 END -->
   </div>
   <div id="sub-t1-flashcards" class="sub-tab-content"></div>
@@ -196,9 +229,39 @@
   </nav>
   <div id="sub-t2-uitleg" class="sub-tab-content active">
     <!-- UITLEG t2 START -->
-    <div class="uitleg-card">
-      <h2>Uitleg volgt</h2>
-    </div>
+    <div class="uitleg-card"><h3>🏭 Wat doen producenten?</h3>
+    <p><b>Producenten</b> (ondernemingen) maken goederen en diensten. Daarvoor hebben ze nodig:</p>
+    <ul><li><b>Grondstoffen</b>: materiaal dat ín het product komt (bij een fietsfabriek: staal, rubber).</li>
+    <li><b>Hulpstoffen</b>: nodig bij het maken, maar zit niet in het product (elektriciteit, water).</li></ul></div>
+
+    <div class="uitleg-card"><h3>⚙️ De vier productiefactoren en hun beloning</h3>
+    <table><tr><th>Productiefactor</th><th>Wat is het?</th><th>Beloning (primair inkomen)</th></tr>
+    <tr><td><b>Arbeid</b></td><td>De werknemers (kok, monteur)</td><td>Loon</td></tr>
+    <tr><td><b>Kapitaal(goederen)</b></td><td>Gebouwen, machines, vrachtwagens, kassasystemen</td><td>Rente en huur</td></tr>
+    <tr><td><b>Natuur</b></td><td>De grond waarop het bedrijf staat</td><td>Pacht</td></tr>
+    <tr><td><b>Ondernemerschap</b></td><td>De eigenaar die de beslissingen neemt</td><td>Winst</td></tr></table>
+    <p class="tip">💡 Er zijn dus <b>vijf primaire inkomens</b>: loon, rente, huur, pacht en winst. Tel je ze voor een heel land in één jaar op, dan heb je het <b>nationaal inkomen</b>.</p></div>
+
+    <div class="uitleg-card"><h3>➕ Toegevoegde waarde</h3>
+    <p class="formule">Omzet = verkoopprijs × aantal</p>
+    <p class="formule">Toegevoegde waarde = omzet − kosten grond- en hulpstoffen</p>
+    <p>Voorbeeld: een bakker verkoopt 2.000 broden à € 3,00.</p>
+    <table><tr><th></th><th>Bedrag (€)</th></tr>
+    <tr><td>Omzet (2.000 × € 3,00)</td><td>6.000</td></tr>
+    <tr><td>− Kosten grond- en hulpstoffen</td><td>−1.500</td></tr>
+    <tr><td><b>Toegevoegde waarde</b></td><td><b>4.500</b></td></tr></table>
+    <p class="tip">⚠️ Toegevoegde waarde is <b>niet</b> hetzelfde als winst. Uit de toegevoegde waarde moeten nog loon, rente, huur en pacht betaald worden. Wat overblijft is de winst.</p></div>
+
+    <div class="uitleg-card"><h3>🔗 De bedrijfskolom</h3>
+    <p>Een product legt een lange weg af van grondstof tot consument. Die weg langs verschillende bedrijven heet de <b>bedrijfskolom</b>. Elk bedrijf is een <b>schakel</b>, en in elke schakel wordt <b>waarde toegevoegd</b>.</p>
+    <p>Voorbeeld: Cacaoboer ➜ Chocoladefabriek ➜ Groothandel ➜ Supermarkt (detailhandel) ➜ consument</p>
+    <ul><li><b>Groothandel</b>: koopt in grote hoeveelheden bij de fabriek en verkoopt aan winkels. Staat tussen fabriek en detailhandel.</li>
+    <li><b>Detailhandel</b>: de winkel die aan de consument verkoopt; de laatste schakel.</li></ul></div>
+
+    <div class="uitleg-card"><h3>🚨 Toetsvalkuil</h3>
+    <p>"De winkel verkoopt het voor € 2 en de boer krijgt € 0,50, dus de winkel verdient € 1,50." <b>Fout!</b> Twee redenen:</p>
+    <ol><li>Tussen boer en winkel zitten <b>meer schakels</b> (fabriek, groothandel) die ook betaald moeten worden en waarde toevoegen.</li>
+    <li>De winkel heeft ook <b>eigen kosten</b> (loon personeel, huur, energie). De winst is dus veel lager.</li></ol></div>
     <!-- UITLEG t2 END -->
   </div>
   <div id="sub-t2-flashcards" class="sub-tab-content"></div>
@@ -264,13 +327,152 @@
   var DATA = {}, GEN = {};
 
   // ===== DATA t1 START =====
-  DATA.t1 = { fc: [], mc: [], open: [], volgorde: [] };
+  DATA.t1 = {
+  fc: [
+  {begrip:"Economie", omschrijving:"Hoe mensen keuzes maken om met beperkte middelen (geld en tijd) zo goed mogelijk in hun behoeften te voorzien."},
+  {begrip:"Behoefte", omschrijving:"Iets wat je nodig hebt of graag wilt hebben."},
+  {begrip:"Eerste levensbehoefte", omschrijving:"Goed of dienst die je nodig hebt om te overleven, zoals voeding, kleding, onderdak en gezondheidszorg."},
+  {begrip:"Luxe product", omschrijving:"Goed of dienst die je niet nodig hebt om te overleven, maar die je leven comfortabeler maakt (bijv. een auto of laptop)."},
+  {begrip:"Middelen", omschrijving:"Het geld en de tijd die je hebt om in je behoeften te voorzien."},
+  {begrip:"Inkomen", omschrijving:"Geld dat je verdient door te werken."},
+  {begrip:"Schaarste", omschrijving:"Onbeperkte behoeften tegenover beperkte middelen, waardoor je moet kiezen."},
+  {begrip:"Goed", omschrijving:"Product dat je kunt aanraken: tastbaar oftewel materieel."},
+  {begrip:"Dienst", omschrijving:"Product dat je niet kunt aanraken (immaterieel); productie en consumptie vallen samen."},
+  {begrip:"Materieel", omschrijving:"Tastbaar; kenmerk van goederen."},
+  {begrip:"Immaterieel", omschrijving:"Niet tastbaar; kenmerk van diensten."},
+  {begrip:"Consumptie", omschrijving:"Het kopen van goederen en diensten om in je behoeften te voorzien."},
+  {begrip:"Consument", omschrijving:"Iemand die goederen en diensten koopt om in zijn behoeften te voorzien."},
+  {begrip:"Goederenstroom", omschrijving:"Goederen en diensten die van de producent naar de consument gaan."},
+  {begrip:"Geldstroom", omschrijving:"Geld dat van de ene sector naar de andere gaat, bijv. van consument naar producent als betaling."}
+  ],
+  mc: [
+  {vraag:"Brood voor je ontbijt is een…", opties:["eerste levensbehoefte","luxe product"], antwoord:"eerste levensbehoefte", uitleg:"Voeding heb je nodig om te overleven."},
+  {vraag:"Een spelcomputer is een…", opties:["eerste levensbehoefte","luxe product"], antwoord:"luxe product", uitleg:"Een spelcomputer maakt je leven leuker, maar je hebt hem niet nodig om te overleven."},
+  {vraag:"Een winterjas is een…", opties:["eerste levensbehoefte","luxe product"], antwoord:"eerste levensbehoefte", uitleg:"Kleding heb je nodig om te overleven (warm blijven)."},
+  {vraag:"Een bezoek aan de huisarts is een…", opties:["eerste levensbehoefte","luxe product"], antwoord:"eerste levensbehoefte", uitleg:"Gezondheidszorg hoort bij de eerste levensbehoeften."},
+  {vraag:"Een weekendje Parijs is een…", opties:["eerste levensbehoefte","luxe product"], antwoord:"luxe product", uitleg:"Een vakantie heb je niet nodig om te overleven."},
+  {vraag:"Een knipbeurt bij de kapper is een…", opties:["goed","dienst"], antwoord:"dienst", uitleg:"Een knipbeurt kun je niet aanraken (immaterieel) en wordt gemaakt terwijl je hem afneemt."},
+  {vraag:"Een nieuwe fiets is een…", opties:["goed","dienst"], antwoord:"goed", uitleg:"Een fiets kun je aanraken: tastbaar, dus materieel."},
+  {vraag:"Een concert van je favoriete band is een…", opties:["goed","dienst"], antwoord:"dienst", uitleg:"Een concert is niet tastbaar; productie en consumptie vallen samen."},
+  {vraag:"Een schoolboek is een…", opties:["goed","dienst"], antwoord:"goed", uitleg:"Een boek is tastbaar (materieel)."},
+  {vraag:"Bijles wiskunde is een…", opties:["goed","dienst"], antwoord:"dienst", uitleg:"Bijles kun je niet aanraken (immaterieel)."},
+  {vraag:"Welk kenmerk hoort bij een dienst?", opties:["Je kunt hem op voorraad houden","Productie en consumptie vallen samen","Je kunt hem aanraken","Hij is materieel"], antwoord:"Productie en consumptie vallen samen", uitleg:"Een dienst wordt gemaakt op het moment dat jij hem afneemt; daarom is er geen voorraad."},
+  {vraag:"Wat zijn in de economie de middelen van een consument?", opties:["Geld en tijd","Goederen en diensten","Behoeften en wensen","Arbeid en kapitaal"], antwoord:"Geld en tijd", uitleg:"Met geld en tijd voorzie je in je behoeften."},
+  {vraag:"Waardoor ontstaat schaarste?", opties:["Onbeperkte behoeften en beperkte middelen","Beperkte behoeften en onbeperkte middelen","Te weinig winkels","Te hoge prijzen"], antwoord:"Onbeperkte behoeften en beperkte middelen", uitleg:"Je wilt meer dan je met je geld en tijd kunt doen, dus je moet kiezen."},
+  {vraag:"Sam koopt een spijkerbroek. Welke kant op gaat de goederenstroom?", opties:["Van de winkel naar Sam","Van Sam naar de winkel"], antwoord:"Van de winkel naar Sam", uitleg:"Het product gaat van producent naar consument."},
+  {vraag:"Sam koopt een spijkerbroek. Welke kant op gaat de geldstroom?", opties:["Van Sam naar de winkel","Van de winkel naar Sam"], antwoord:"Van Sam naar de winkel", uitleg:"De betaling gaat van consument naar producent, tegengesteld aan de goederenstroom."},
+  {vraag:"Sam zet € 50 op zijn spaarrekening. Welke stroom ontstaat er?", opties:["Alleen een geldstroom","Alleen een goederenstroom","Een geldstroom én een goederenstroom"], antwoord:"Alleen een geldstroom", uitleg:"Bij sparen gaat er geld naar de bank, maar er staat geen product tegenover."},
+  {vraag:"Welke hoort NIET bij de vijf sectoren van de economie?", opties:["Scholen","Consumenten","Producenten","Het buitenland"], antwoord:"Scholen", uitleg:"De vijf sectoren zijn: consumenten, producenten, de overheid, geld en banken, en het buitenland."}
+  ],
+  open: [
+  {vraag:"Heeft een mens onbeperkte behoeften als het gaat om eerste levensbehoeften, luxe producten of allebei? Licht je keuze toe.", kernpunten:["Luxe producten: er komen steeds nieuwe en betere producten bij, dus je wilt altijd meer","Eerste levensbehoeften: de hoeveelheid die je nodig hebt is beperkt, maar je wilt wel steeds betere kwaliteit (beter eten, mooier huis)","Duidelijke keuze gemaakt en onderbouwd"], model:"Beide. Bij luxe producten komen er steeds nieuwe dingen bij die je ook wilt hebben. Bij eerste levensbehoeften kun je maar een beperkte hoeveelheid eten of dragen, maar je wilt wel steeds betere kwaliteit, zoals lekkerder eten of een groter huis."},
+  {vraag:"Leg met een voorbeeld uit je eigen leven uit wat schaarste is.", kernpunten:["Je hebt (onbeperkt) veel wensen/behoeften","Je geld en/of tijd is beperkt","Daardoor moet je kiezen: wat je aan het ene besteedt, kun je niet aan het andere besteden"], model:"Ik wil nieuwe sneakers en een nieuw spel, maar ik heb maar € 80 zakgeld. Mijn behoeften zijn groter dan mijn middelen, dus ik moet kiezen: geef ik het geld aan de sneakers uit, dan kan ik het spel niet meer kopen."},
+  {vraag:"Leg het verschil uit tussen een goed en een dienst. Geef van allebei een voorbeeld.", kernpunten:["Een goed is tastbaar (materieel), bijv. een fiets","Een dienst is niet tastbaar (immaterieel), bijv. een knipbeurt","Bij een dienst vallen productie en consumptie samen / geen voorraad"], model:"Een goed kun je aanraken, het is materieel, zoals een fiets. Een dienst kun je niet aanraken, die is immaterieel, zoals een knipbeurt. Bij een dienst vallen productie en consumptie samen; je kunt een dienst dus niet op voorraad hebben."},
+  {vraag:"Leg uit waarom er niet altijd tegelijk een geldstroom en een goederenstroom is.", kernpunten:["Bij sparen gaat er geld naar de bank zonder dat je er een product voor krijgt","Soms betaal je op een ander moment dan je het product krijgt (vooraf of achteraf/op afbetaling)"], model:"Als je geld op je spaarrekening zet, is er een geldstroom naar de bank, maar je krijgt geen product terug. Ook betaal je soms eerder of later dan je het product krijgt, bijvoorbeeld bij vooruitbetalen of kopen op afbetaling."},
+  {vraag:"Is stromend water in huis een eerste levensbehoefte of een luxe product? Licht je keuze toe.", kernpunten:["Eerste levensbehoefte","Je hebt water nodig om te overleven (drinken, hygiëne/gezondheid)"], model:"Een eerste levensbehoefte: zonder schoon water kun je niet overleven, je hebt het nodig om te drinken en om gezond te blijven."}
+  ],
+  volgorde: []
+  };
   GEN.t1 = [];
   // ===== DATA t1 END =====
 
   // ===== DATA t2 START =====
-  DATA.t2 = { fc: [], mc: [], open: [], volgorde: [] };
-  GEN.t2 = [];
+  DATA.t2 = {
+  fc: [
+  {begrip:"Producent", omschrijving:"Onderneming die goederen en diensten maakt en verkoopt."},
+  {begrip:"Grondstof", omschrijving:"Materiaal waarvan een product gemaakt wordt en dat erin terechtkomt (bijv. staal, plastic, meel)."},
+  {begrip:"Hulpstof", omschrijving:"Iets wat nodig is bij het produceren, maar niet in het product zit (bijv. elektriciteit, water)."},
+  {begrip:"Productiefactoren", omschrijving:"De middelen die een onderneming nodig heeft om te produceren: arbeid, kapitaal, natuur en ondernemerschap."},
+  {begrip:"Arbeid", omschrijving:"Productiefactor: de werknemers. Beloning: loon."},
+  {begrip:"Kapitaal(goederen)", omschrijving:"Productiefactor: gebouwen, machines, vrachtwagens. Beloning: rente en huur."},
+  {begrip:"Natuur", omschrijving:"Productiefactor: de grond waarop het bedrijf staat. Beloning: pacht."},
+  {begrip:"Ondernemerschap", omschrijving:"Productiefactor: de eigenaar die de beslissingen neemt. Beloning: winst."},
+  {begrip:"Primaire inkomens", omschrijving:"De beloningen voor de productiefactoren: loon, rente, huur, pacht en winst."},
+  {begrip:"Pacht", omschrijving:"Beloning voor het gebruik van grond (productiefactor natuur)."},
+  {begrip:"Nationaal inkomen", omschrijving:"Alle primaire inkomens in een land in één jaar bij elkaar opgeteld."},
+  {begrip:"Omzet", omschrijving:"Verkoopprijs × aantal verkochte producten."},
+  {begrip:"Toegevoegde waarde", omschrijving:"Omzet min de kosten van grond- en hulpstoffen."},
+  {begrip:"Bedrijfskolom", omschrijving:"De weg die een product aflegt van grondstof tot consument, langs verschillende bedrijven."},
+  {begrip:"Schakel", omschrijving:"Eén bedrijf in de bedrijfskolom; in elke schakel wordt waarde toegevoegd."},
+  {begrip:"Groothandel", omschrijving:"Schakel die in grote hoeveelheden bij producenten inkoopt en aan winkels verkoopt."},
+  {begrip:"Detailhandel", omschrijving:"De winkel die aan de consument verkoopt; de laatste schakel in de bedrijfskolom."}
+  ],
+  mc: [
+  {vraag:"De kok in een restaurant. Welke productiefactor?", opties:["Arbeid","Kapitaal","Natuur","Ondernemerschap"], antwoord:"Arbeid", uitleg:"Werknemers zijn de productiefactor arbeid."},
+  {vraag:"De pizzaoven. Welke productiefactor?", opties:["Arbeid","Kapitaal","Natuur","Ondernemerschap"], antwoord:"Kapitaal", uitleg:"Machines en apparaten zijn kapitaalgoederen."},
+  {vraag:"De grond waarop het restaurant staat. Welke productiefactor?", opties:["Arbeid","Kapitaal","Natuur","Ondernemerschap"], antwoord:"Natuur", uitleg:"De grond is de productiefactor natuur."},
+  {vraag:"De eigenaar die alle beslissingen neemt. Welke productiefactor?", opties:["Arbeid","Kapitaal","Natuur","Ondernemerschap"], antwoord:"Ondernemerschap", uitleg:"Beslissingen nemen (en risico lopen) is ondernemerschap."},
+  {vraag:"De bezorgscooters van een pizzeria. Welke productiefactor?", opties:["Arbeid","Kapitaal","Natuur","Ondernemerschap"], antwoord:"Kapitaal", uitleg:"Vervoermiddelen zijn kapitaalgoederen."},
+  {vraag:"Het pand dat een restaurant huurt. Welke productiefactor?", opties:["Arbeid","Kapitaal","Natuur","Ondernemerschap"], antwoord:"Kapitaal", uitleg:"Een gebouw is een kapitaalgoed; de verhuurder krijgt huur."},
+  {vraag:"Welk primair inkomen hoort bij natuur?", opties:["Loon","Rente en huur","Pacht","Winst"], antwoord:"Pacht", uitleg:"Voor het gebruik van grond betaal je pacht."},
+  {vraag:"Welk primair inkomen hoort bij ondernemerschap?", opties:["Loon","Rente en huur","Pacht","Winst"], antwoord:"Winst", uitleg:"De ondernemer krijgt wat overblijft: de winst."},
+  {vraag:"Welk primair inkomen hoort bij arbeid?", opties:["Loon","Rente en huur","Pacht","Winst"], antwoord:"Loon", uitleg:"Werknemers krijgen loon."},
+  {vraag:"Welk primair inkomen hoort bij kapitaal?", opties:["Loon","Rente en huur","Pacht","Winst"], antwoord:"Rente en huur", uitleg:"Wie geld leent of een gebouw verhuurt, krijgt rente of huur."},
+  {vraag:"Meel voor pizzadeeg is een…", opties:["grondstof","hulpstof"], antwoord:"grondstof", uitleg:"Het meel zit straks in het product."},
+  {vraag:"Elektriciteit voor de pizzaoven is een…", opties:["grondstof","hulpstof"], antwoord:"hulpstof", uitleg:"Je hebt het nodig bij het maken, maar het zit niet in de pizza."},
+  {vraag:"Tomaten voor de pizzasaus zijn een…", opties:["grondstof","hulpstof"], antwoord:"grondstof", uitleg:"De tomaten komen in het product terecht."},
+  {vraag:"Aardgas om de kas van een tomatenkweker te verwarmen is een…", opties:["grondstof","hulpstof"], antwoord:"hulpstof", uitleg:"Het gas is nodig bij de productie, maar zit niet in de tomaat."},
+  {vraag:"Hoe bereken je de toegevoegde waarde?", opties:["Omzet − kosten grond- en hulpstoffen","Omzet − alle kosten","Prijs × aantal","Omzet + kosten grond- en hulpstoffen"], antwoord:"Omzet − kosten grond- en hulpstoffen", uitleg:"Omzet − alle kosten is de winst; prijs × aantal is de omzet."},
+  {vraag:"Hoe bereken je de omzet?", opties:["Verkoopprijs × aantal verkocht","Verkoopprijs − kosten","Winst + loon","Aantal ÷ prijs"], antwoord:"Verkoopprijs × aantal verkocht", uitleg:"Omzet is alles wat je binnenkrijgt door te verkopen."},
+  {vraag:"Bij welk bedrijf speelt de productiefactor natuur de grootste rol?", opties:["Akkerbouwer","Bank","Kapper","Webwinkel"], antwoord:"Akkerbouwer", uitleg:"Een akkerbouwer heeft veel grond nodig om gewassen te telen."},
+  {vraag:"Waar in de bedrijfskolom staat de groothandel?", opties:["Tussen de fabriek en de detailhandel","Tussen de boer en de fabriek","Na de detailhandel","Vóór de boer"], antwoord:"Tussen de fabriek en de detailhandel", uitleg:"De groothandel koopt in grote hoeveelheden bij de fabriek en verkoopt aan winkels."},
+  {vraag:"Wat is het nationaal inkomen?", opties:["Alle primaire inkomens in een land in één jaar","Alle belastingen die de overheid ontvangt","De totale export van een land","Het inkomen van de regering"], antwoord:"Alle primaire inkomens in een land in één jaar", uitleg:"Loon, rente, huur, pacht en winst van een heel land in een jaar opgeteld."},
+  {vraag:"Is de toegevoegde waarde hetzelfde als de winst?", opties:["Nee, uit de toegevoegde waarde moeten nog o.a. loon, huur en rente betaald worden","Ja, dat is hetzelfde","Nee, de winst is altijd hoger"], antwoord:"Nee, uit de toegevoegde waarde moeten nog o.a. loon, huur en rente betaald worden", uitleg:"Winst is wat overblijft nadat álle kosten zijn betaald."}
+  ],
+  open: [
+  {vraag:"Leg uit waarom de toegevoegde waarde van een bedrijf niet gelijk is aan de winst.", kernpunten:["Toegevoegde waarde = omzet − kosten grond- en hulpstoffen","Uit de toegevoegde waarde moeten nog andere kosten betaald worden: loon, rente, huur, pacht","Wat daarna overblijft is de winst"], model:"De toegevoegde waarde is de omzet min de kosten van grond- en hulpstoffen. Daaruit moet het bedrijf nog loon, rente, huur en pacht betalen. Pas wat daarna overblijft is de winst."},
+  {vraag:"Een pak koffie kost in de supermarkt € 6,00. De koffieboer krijgt er € 1,00 voor. Iemand zegt: de supermarkt verdient € 5,00 per pak. Noem twee argumenten waarom dat niet klopt. Gebruik bij één argument de bedrijfskolom.", kernpunten:["Bedrijfskolom: tussen boer en supermarkt zitten nog andere schakels (branderij, groothandel) die ook betaald worden en waarde toevoegen","De supermarkt heeft ook eigen kosten (loon personeel, huur winkel, energie), dus de winst is lager"], model:"1. In de bedrijfskolom zitten tussen de boer en de supermarkt nog schakels, zoals de koffiebranderij en de groothandel. Die willen ook betaald worden. 2. De supermarkt moet zelf ook kosten betalen, zoals loon voor het personeel, huur en energie. De winst is dus veel lager dan € 5,00."},
+  {vraag:"Leg uit wat een bedrijfskolom is.", kernpunten:["De weg van een product van grondstof tot consument","Langs verschillende bedrijven; elk bedrijf is een schakel","In elke schakel wordt waarde toegevoegd"], model:"Een bedrijfskolom is de weg die een product aflegt van grondstof tot de consument. Elk bedrijf onderweg is een schakel, en in elke schakel wordt waarde toegevoegd."},
+  {vraag:"Bij welk bedrijf speelt de productiefactor natuur een belangrijke rol: een melkveehouder of een kledingwinkel? Licht toe.", kernpunten:["Melkveehouder","Die heeft veel grond (weiland) nodig voor zijn koeien en voer"], model:"Bij de melkveehouder, want hij heeft veel grond nodig waarop de koeien grazen en voer groeit."},
+  {vraag:"Leg uit waarom een snoepwinkel naar verhouding meer arbeid gebruikt dan een snoepfabriek.", kernpunten:["In de winkel helpen werknemers klanten en zitten ze achter de kassa","In de fabriek wordt veel gedaan door machines (kapitaal)"], model:"In een snoepwinkel werkt vooral personeel dat klanten helpt en afrekent. In een snoepfabriek doen machines het meeste werk, dus daar gebruik je naar verhouding meer kapitaal en minder arbeid."}
+  ],
+  volgorde: [
+  {titel:"Chocoladereep", items:["Cacaoboer","Chocoladefabriek","Groothandel","Supermarkt"], uitleg:"Grondstof (cacao) ➜ fabriek ➜ groothandel ➜ detailhandel. De consument is het eindpunt, geen schakel."},
+  {titel:"Brood", items:["Graanboer","Meelfabriek","Broodfabriek","Groothandel","Supermarkt"], uitleg:"Van graan naar meel naar brood, dan via de groothandel naar de winkel."},
+  {titel:"Pak melk", items:["Melkveehouder","Zuivelcoöperatie","Melkfabriek","Groothandel in zuivel","Supermarkt"], uitleg:"De groothandel staat tussen de fabriek en de detailhandel (supermarkt)."},
+  {titel:"Spijkerbroek", items:["Katoenboer","Spinnerij","Kledingfabriek","Groothandel","Kledingwinkel"], uitleg:"Katoen wordt garen (spinnerij), garen wordt kleding (fabriek), daarna groothandel en winkel."},
+  {titel:"Houten tafel", items:["Bosbouwer","Zagerij","Meubelfabriek","Meubelwinkel"], uitleg:"Boom ➜ planken ➜ tafel ➜ winkel."}
+  ]
+  };
+  GEN.t2 = [
+  function(){
+    var p = pick([{n:"zonnebrillen",a:40,b:150},{n:"fietsen",a:300,b:900},{n:"spijkerbroeken",a:40,b:120},{n:"koptelefoons",a:50,b:250},{n:"skateboards",a:60,b:180}]);
+    var prijs = rnd(p.a,p.b), aantal = rnd(2,40)*50, omzet = prijs*aantal;
+    return {vraag:"Een bedrijf verkoopt "+fmt(aantal,0)+" "+p.n+" voor € "+fmt(prijs,2)+" per stuk. Bereken de omzet.", antwoord:omzet, eenheid:"euro",
+      uitleg:"Omzet = prijs × aantal = € "+fmt(prijs,2)+" × "+fmt(aantal,0)+" = € "+fmt(omzet,2)};
+  },
+  function(){
+    var p = pick([{n:"zonnebrillen",a:40,b:150},{n:"fietsen",a:300,b:900},{n:"spijkerbroeken",a:40,b:120},{n:"koptelefoons",a:50,b:250},{n:"skateboards",a:60,b:180}]);
+    var prijs = rnd(p.a,p.b), aantal = rnd(2,40)*50, omzet = prijs*aantal;
+    var kosten = Math.round(omzet*rnd(15,50)/100/100)*100, tw = omzet-kosten;
+    return {vraag:"Een fabriek verkoopt "+fmt(aantal,0)+" "+p.n+" voor € "+fmt(prijs,2)+" per stuk. De kosten van grond- en hulpstoffen zijn € "+fmt(kosten,2)+". Bereken de toegevoegde waarde.", antwoord:tw, eenheid:"euro",
+      uitleg:"Omzet = € "+fmt(prijs,2)+" × "+fmt(aantal,0)+" = € "+fmt(omzet,2)+". Toegevoegde waarde = € "+fmt(omzet,2)+" − € "+fmt(kosten,2)+" = € "+fmt(tw,2)};
+  },
+  function(){
+    var omzet = rnd(40,400)*1000, kosten = Math.round(omzet*rnd(15,50)/100/1000)*1000, tw = omzet-kosten;
+    return {vraag:"Een bedrijf heeft een omzet van € "+fmt(omzet,2)+" en een toegevoegde waarde van € "+fmt(tw,2)+". Hoeveel zijn de kosten van grond- en hulpstoffen?", antwoord:kosten, eenheid:"euro",
+      uitleg:"Toegevoegde waarde = omzet − kosten grond- en hulpstoffen, dus kosten = omzet − toegevoegde waarde = € "+fmt(omzet,2)+" − € "+fmt(tw,2)+" = € "+fmt(kosten,2)};
+  },
+  function(){
+    var p1 = rnd(24,36)/2, p2 = p1 - rnd(1,4)/2, c = rnd(4,8)/2, x = rnd(80,250), y = rnd(20,90);
+    var omzet = x*p1 + y*p2, kosten = (x+y)*c, tw = omzet-kosten;
+    return {vraag:"Een pizzeria verkoopt op zaterdag "+x+" pizza's in het restaurant voor € "+fmt(p1,2)+" en "+y+" pizza's online voor € "+fmt(p2,2)+". De grond- en hulpstoffen kosten € "+fmt(c,2)+" per pizza. Bereken de toegevoegde waarde van die dag.", antwoord:tw, eenheid:"euro",
+      uitleg:"Omzet = "+x+" × € "+fmt(p1,2)+" + "+y+" × € "+fmt(p2,2)+" = € "+fmt(omzet,2)+". Kosten grond- en hulpstoffen = "+(x+y)+" × € "+fmt(c,2)+" = € "+fmt(kosten,2)+". Toegevoegde waarde = € "+fmt(omzet,2)+" − € "+fmt(kosten,2)+" = € "+fmt(tw,2)};
+  },
+  function(){
+    var koeien = rnd(800,2000)*1000, lpk = rnd(70,95)*100, liters = koeien*lpk, prijs = rnd(45,65)/100;
+    var totaal = liters*prijs, perKoe = lpk*prijs;
+    return {vraag:"Er zijn "+fmt(koeien,0)+" koeien die samen "+fmt(liters,0)+" liter melk geven. Een boer krijgt gemiddeld € "+fmt(prijs,2)+" per liter. Bereken de gemiddelde opbrengst van de melk per koe.", antwoord:perKoe, eenheid:"euro",
+      uitleg:"Totale opbrengst = "+fmt(liters,0)+" × € "+fmt(prijs,2)+" = € "+fmt(totaal,2)+". Per koe: € "+fmt(totaal,2)+" ÷ "+fmt(koeien,0)+" = € "+fmt(perKoe,2)+". (Of: "+fmt(lpk,0)+" liter per koe × € "+fmt(prijs,2)+".)"};
+  },
+  function(){
+    var a = rnd(20,40), b = a+rnd(15,40), c = b+rnd(60,150);
+    var welke = pick(["meelfabriek","bakker"]);
+    var tw = welke==="meelfabriek" ? b-a : c-b;
+    return {vraag:"Bedrijfskolom van brood (per 100 kg graan): de boer verkoopt het graan voor € "+fmt(a,2)+" aan de meelfabriek. De meelfabriek verkoopt het meel voor € "+fmt(b,2)+" aan de bakker. De bakker verkoopt de broden voor € "+fmt(c,2)+". Bereken de toegevoegde waarde van de "+welke+" (we rekenen alleen het ingekochte product als kosten).", antwoord:tw, eenheid:"euro",
+      uitleg: welke==="meelfabriek" ? "Toegevoegde waarde meelfabriek = verkoop € "+fmt(b,2)+" − inkoop € "+fmt(a,2)+" = € "+fmt(tw,2) : "Toegevoegde waarde bakker = verkoop € "+fmt(c,2)+" − inkoop € "+fmt(b,2)+" = € "+fmt(tw,2)};
+  }
+  ];
   // ===== DATA t2 END =====
 
   // ===== DATA t3 START =====
@@ -301,6 +503,8 @@
   /* Fisher-Yates op een KOPIE: de bron-array blijft ongemoeid */
   function fisherYates(bron){var arr=bron.slice();for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function fmt(n,dec){return Number(n).toLocaleString('nl-NL',{minimumFractionDigits:dec,maximumFractionDigits:dec});}
 
   /* Klein hulpje om elementen te bouwen: h('div', {class:'x', onclick:fn, text:'...'}, kind1, kind2) */
   function h(tag, props){
@@ -338,7 +542,7 @@
   function isGoed(waarde, antwoord){ return Math.abs(waarde - antwoord) <= Math.max(Math.abs(antwoord) * 0.01, 0.01); }
   function nl(n){ return Number(n).toLocaleString('nl-NL', {maximumFractionDigits: 2}); }
   function metEenheid(n, eenheid){
-    if (eenheid === '€') return '€ ' + Number(n).toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    if (eenheid === '€' || eenheid === 'euro') return '€ ' + Number(n).toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     return nl(n) + (eenheid ? ' ' + eenheid : '');
   }
 
