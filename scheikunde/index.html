@@ -1244,9 +1244,168 @@
     <button class="sub-tab-btn" onclick="showSubTab('p8','flashcards',this)">&#127183; Flashcards</button>
     <button class="sub-tab-btn" onclick="showSubTab('p8','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
-  <div id="sub-p8-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p8-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p8-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p8-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card">
+      <h2>Rekenen met een verhoudingstabel</h2>
+      <p>Bij rekenen in de scheikunde gebruik je vaak een <strong>verhoudingstabel</strong>. Zet op elke regel steeds dezelfde grootheid met dezelfde eenheid. De onbekende geef je weer met x. Met <strong>kruisproducten</strong> reken je x uit.</p>
+      <div class="voorbeeld-blok">
+        <table class="data-tabel" style="max-width:260px">
+          <tr><td>massa (g)</td><td>7,9</td><td>x</td></tr>
+          <tr><td>volume (cm³)</td><td>1,0</td><td>3,0</td></tr>
+        </table>
+        x = (7,9 × 3,0) ÷ 1,0 = 23,7 g
+      </div>
+      <div class="regel-blok oranje"><p>Reken eerst om naar de juiste eenheden, zodat ze passen bij de gegevens (bijv. m³ naar L, of kg naar g).</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Dichtheid en de onderdompelmethode</h2>
+      <p>Archimedes moest bepalen of een kroon van zuiver goud was. De massa kon hij wegen, maar het volume van zo'n vreemde vorm niet meten. Tot hij in bad stapte en het water zag stijgen. Eureka!</p>
+      <p>Met de <strong>onderdompelmethode</strong> bepaal je het volume van een voorwerp met een onregelmatige vorm:</p>
+      <div class="stappen">
+        <div class="stap">① Lees het beginvolume van het water in de maatcilinder af</div>
+        <div class="stap">② Dompel het voorwerp onder en lees het eindvolume af</div>
+        <div class="stap">③ Volume voorwerp = eindvolume − beginvolume</div>
+        <div class="stap">④ Dichtheid = massa ÷ volume</div>
+      </div>
+      <div class="voorbeeld-blok"><strong>Voorbeeld:</strong> een sleutel heeft een massa van 19,5 g. Het water stijgt van 21,0 mL naar 24,0 mL. Volume = 3,0 cm³ (1 mL = 1 cm³).<br>Dichtheid = 19,5 ÷ 3,0 = 6,5 g/cm³. IJzer heeft een dichtheid van 7,9 g/cm³, dus de sleutel is <strong>niet van ijzer</strong>.</div>
+      <h3>Dichtheden (g/cm³)</h3>
+      <table class="data-tabel">
+        <tr><th>Stof</th><th>Dichtheid</th><th>Stof</th><th>Dichtheid</th></tr>
+        <tr><td>ijs</td><td>0,92</td><td>ijzer</td><td>7,9</td></tr>
+        <tr><td>water</td><td>1,0</td><td>koper</td><td>8,9</td></tr>
+        <tr><td>suiker</td><td>1,6</td><td>zilver</td><td>10,5</td></tr>
+        <tr><td>aluminium</td><td>2,7</td><td>lood</td><td>11,4</td></tr>
+        <tr><td>zink</td><td>7,1</td><td>goud</td><td>19,3</td></tr>
+      </table>
+      <h3>Drijven, zweven of zinken</h3>
+      <table class="data-tabel">
+        <tr><th>Dichtheid voorwerp t.o.v. vloeistof</th><th>Gevolg</th></tr>
+        <tr><td>kleiner</td><td><strong>drijven</strong> (ijs drijft op water)</td></tr>
+        <tr><td>gelijk</td><td><strong>zweven</strong></td></tr>
+        <tr><td>groter</td><td><strong>zinken</strong></td></tr>
+      </table>
+      <div class="regel-blok blauw"><p>Los je zout op in water, dan wordt de dichtheid van het water <strong>groter</strong>. Daarom blijf je in de Dode Zee (heel zout) vanzelf drijven.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Oplosbaarheid berekenen</h2>
+      <p>De <strong>oplosbaarheid</strong> is het aantal gram stof dat maximaal in 1 L oplossing kan zitten, in <strong>g/L</strong>. Keukenzout: 359 g/L.</p>
+      <div class="regel-blok groen"><p><strong>Handig:</strong> 1 g/L = 1 kg/m³ (want 1 m³ = 1000 L en 1 kg = 1000 g). Zeewater met 35 g/L zout bevat dus 35 kg zout per m³.</p></div>
+      <div class="voorbeeld-blok"><strong>Voorbeeld:</strong> een fabriek maakt per dag 136 000 m³ drinkwater uit zeewater met 35 g/L zout. Hoeveel kg zout blijft er over?<br>35 g/L = 35 kg/m³ → 35 × 136 000 = 4 760 000 kg ≈ 4,8·10⁶ kg zout</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Volumepercentage en massapercentage</h2>
+      <table class="data-tabel">
+        <tr><th>Percentage</th><th>Betekenis</th></tr>
+        <tr><td><strong>volumepercentage</strong> (vol%)</td><td>aantal mL stof per 100 mL mengsel</td></tr>
+        <tr><td><strong>massapercentage</strong> (massa%)</td><td>aantal g stof per 100 g mengsel</td></tr>
+      </table>
+      <div class="voorbeeld-blok"><strong>percentage = (deel ÷ geheel) × 100%</strong><br>
+      Siroop bevat 75 vol% vruchtensap. In 25 mL siroop zit 75 ÷ 100 × 25 = 19 mL vruchtensap.<br>
+      In 126 g siroop zit 73,5 g suiker: massapercentage = 73,5 ÷ 126 × 100% = 58%.</div>
+      <div class="regel-blok oranje"><p>Krijg je een volume maar vraagt de som om een massapercentage? Reken het volume eerst om naar massa met de dichtheid (bijv. cola: 1,0 g/mL, dus 250 mL = 250 g).</p></div>
+    </div>
+  </div>
+  <div id="sub-p8-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§2.4)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p8fc-goed">0</span> / <span id="p8fc-totaal">0</span></div>
+        <div class="fc-teller" id="p8fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p8Fc.flip()">
+        <div class="flip-card" id="p8fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p8fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p8fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p8fc-oordeel" style="display:none">
+        <button onclick="p8Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p8Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p8Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p8Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p8Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p8Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p8-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Dichtheid en de onderdompelmethode</h3>
+      <table class="data-tabel">
+        <tr><th>Stof</th><th>Dichtheid</th><th>Stof</th><th>Dichtheid</th></tr>
+        <tr><td>ijs</td><td>0,92</td><td>ijzer</td><td>7,9</td></tr>
+        <tr><td>water</td><td>1,0</td><td>koper</td><td>8,9</td></tr>
+        <tr><td>suiker</td><td>1,6</td><td>zilver</td><td>10,5</td></tr>
+        <tr><td>aluminium</td><td>2,7</td><td>lood</td><td>11,4</td></tr>
+        <tr><td>zink</td><td>7,1</td><td>goud</td><td>19,3</td></tr>
+      </table>
+      <div class="regel-blok blauw"><p>volume = eindvolume − beginvolume &nbsp;·&nbsp; ρ = m ÷ V &nbsp;·&nbsp; 1 mL = 1 cm³</p></div>
+      <div class="score-balk">Score: <span id="p8dic-goed">0</span> / <span id="p8dic-totaal">0</span></div>
+      <div id="p8dic-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p8dic-input" class="open-input" placeholder="Jouw antwoord (bijv. 7,9)" onkeydown="if(event.key==='Enter') p8Dic.controleer()">
+      <div id="p8dic-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p8dic-controleer-btn" onclick="p8Dic.controleer()">Controleer</button>
+        <button id="p8dic-volgende-btn" onclick="p8Dic.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p8Dic.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p8Dic.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Oplosbaarheid</h3>
+      <div class="regel-blok blauw"><p>oplosbaarheid in g/L &nbsp;·&nbsp; 1 g/L = 1 kg/m³ &nbsp;·&nbsp; 1 m³ = 1000 L</p></div>
+      <div class="score-balk">Score: <span id="p8opl-goed">0</span> / <span id="p8opl-totaal">0</span></div>
+      <div id="p8opl-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p8opl-input" class="open-input" placeholder="Jouw antwoord" onkeydown="if(event.key==='Enter') p8Opl.controleer()">
+      <div id="p8opl-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p8opl-controleer-btn" onclick="p8Opl.controleer()">Controleer</button>
+        <button id="p8opl-volgende-btn" onclick="p8Opl.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p8Opl.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p8Opl.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — Volume- en massapercentage</h3>
+      <div class="regel-blok blauw"><p>percentage = (deel ÷ geheel) × 100%</p></div>
+      <div class="score-balk">Score: <span id="p8pct-goed">0</span> / <span id="p8pct-totaal">0</span></div>
+      <div id="p8pct-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p8pct-input" class="open-input" placeholder="Jouw antwoord (bijv. 58)" onkeydown="if(event.key==='Enter') p8Pct.controleer()">
+      <div id="p8pct-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p8pct-controleer-btn" onclick="p8Pct.controleer()">Controleer</button>
+        <button id="p8pct-volgende-btn" onclick="p8Pct.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p8Pct.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p8Pct.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 4 — Drijven, zinken en begrippen</h3>
+      <div class="score-balk">Score: <span id="p8mc-goed">0</span> / <span id="p8mc-totaal">0</span></div>
+      <div id="p8mc-vraag" class="vraag-tekst"></div>
+      <div id="p8mc-opties" class="mc-grid"></div>
+      <div id="p8mc-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p8Mc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p8Mc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="tab-p9" class="tab-content">
@@ -1982,6 +2141,116 @@
     {vraag:'Een opgeloste vaste stof uit een oplossing halen (de vloeistof mag verloren gaan).', opties:ALLE, antwoord:'indampen'}
   ]);
 
+  /* §2.4 FLASHCARDS */
+  var p8Fc = maakFC('p8fc', [
+    {voor:'Wat is de onderdompelmethode?', achter:'Volume van een voorwerp bepalen: eindvolume − beginvolume van het water in een maatcilinder'},
+    {voor:'1 mL = ... cm³', achter:'1 cm³'},
+    {voor:'Wanneer drijft een voorwerp?', achter:'Als de dichtheid kleiner is dan die van de vloeistof'},
+    {voor:'Wanneer zinkt een voorwerp?', achter:'Als de dichtheid groter is dan die van de vloeistof'},
+    {voor:'Wanneer zweeft een voorwerp?', achter:'Als de dichtheid gelijk is aan die van de vloeistof'},
+    {voor:'Wat gebeurt er met de dichtheid van water als je er zout in oplost?', achter:'De dichtheid wordt groter'},
+    {voor:'Wat is oplosbaarheid?', achter:'Het aantal gram stof dat maximaal in 1 L oplossing kan zitten (g/L)'},
+    {voor:'1 g/L = ... kg/m³', achter:'1 kg/m³'},
+    {voor:'Wat is het volumepercentage?', achter:'Het aantal mL stof per 100 mL mengsel'},
+    {voor:'Wat is het massapercentage?', achter:'Het aantal g stof per 100 g mengsel'},
+    {voor:'Formule voor een percentage', achter:'(deel ÷ geheel) × 100%'},
+    {voor:'Hoe reken je x uit in een verhoudingstabel?', achter:'Met kruisproducten'},
+    {voor:'Wat moet op één regel van een verhoudingstabel staan?', achter:'Steeds dezelfde grootheid met dezelfde eenheid'},
+    {voor:'Dichtheid van goud?', achter:'19,3 g/cm³'},
+    {voor:'Dichtheid van ijzer?', achter:'7,9 g/cm³'},
+    {voor:'Dichtheid van ijs?', achter:'0,92 g/cm³ (daarom drijft ijs op water)'}
+  ]);
+
+  /* §2.4 OEFENEN 1 — dichtheid / onderdompelmethode */
+  var p8Metalen = [{n:'aluminium', r:2.7}, {n:'zink', r:7.1}, {n:'ijzer', r:7.9}, {n:'koper', r:8.9}, {n:'zilver', r:10.5}, {n:'lood', r:11.4}, {n:'goud', r:19.3}];
+  function p8DicGenereer(){
+    var met = pick(p8Metalen);
+    var V = rnd(1.5, 15, 1);
+    var begin = rnd(15, 40, 1);
+    var eind = Math.round((begin + V) * 10) / 10;
+    V = Math.round((eind - begin) * 10) / 10;
+    var m = Math.round(met.r * V * 10) / 10;
+    var voorwerp = pick(['Een sleutel','Een munt','Een ring','Een blokje','Een schroef','Een kroontje']);
+    var type = pick(['V','rho','rho','m']);
+    if (type === 'V'){
+      return {vraag: voorwerp + ' wordt ondergedompeld in een maatcilinder. Het water stijgt van ' + fmt(begin) + ' mL naar ' + fmt(eind) + ' mL. Wat is het volume van het voorwerp in cm³?', antwoord: V, eenheid:'cm³', uitleg: fmt(eind) + ' − ' + fmt(begin)};
+    }
+    if (type === 'rho'){
+      return {vraag: voorwerp + ' heeft een massa van ' + fmt(m) + ' g. Bij onderdompelen stijgt het water van ' + fmt(begin) + ' mL naar ' + fmt(eind) + ' mL. Bereken de dichtheid in g/cm³. (Kijk daarna in de tabel van welk metaal het is.)', antwoord: m / V, eenheid:'g/cm³', uitleg:'V = ' + fmt(V) + ' cm³; ρ = ' + fmt(m) + ' ÷ ' + fmt(V) + ' → dat is ' + met.n};
+    }
+    return {vraag: voorwerp + ' is van ' + met.n + ' (' + fmt(met.r) + ' g/cm³). Bij onderdompelen stijgt het water van ' + fmt(begin) + ' mL naar ' + fmt(eind) + ' mL. Bereken de massa in g.', antwoord: met.r * V, eenheid:'g', uitleg:'V = ' + fmt(V) + ' cm³; m = ' + fmt(met.r) + ' × ' + fmt(V)};
+  }
+  var p8Dic = maakReken('p8dic', p8DicGenereer, 0.02);
+
+  /* §2.4 OEFENEN 2 — oplosbaarheid */
+  var p8Stoffen = [{n:'keukenzout', s:359}, {n:'kaliumnitraat', s:316}, {n:'suiker', s:2000}, {n:'stof X', s:pick([40, 85, 120, 250])}];
+  function p8OplGenereer(){
+    var st = pick(p8Stoffen);
+    var type = pick(['max','liter','verz','zee']);
+    if (type === 'max'){
+      var L = pick([0.25, 0.5, 0.75, 1.5, 2, 2.5, 3]);
+      return {vraag:'De oplosbaarheid van ' + st.n + ' is ' + st.s + ' g/L. Hoeveel gram ' + st.n + ' kan maximaal oplossen in ' + fmt(L) + ' L water?', antwoord: st.s * L, eenheid:'g', uitleg: st.s + ' × ' + fmt(L)};
+    }
+    if (type === 'liter'){
+      var g = Math.round(st.s * rnd(0.3, 4, 1));
+      return {vraag:'De oplosbaarheid van ' + st.n + ' is ' + st.s + ' g/L. Hoeveel liter water heb je minimaal nodig om ' + g + ' g ' + st.n + ' op te lossen?', antwoord: g / st.s, eenheid:'L', uitleg: g + ' ÷ ' + st.s};
+    }
+    if (type === 'verz'){
+      var mL = pick([100, 200, 250, 400, 500]);
+      return {vraag:'De oplosbaarheid van ' + st.n + ' is ' + st.s + ' g/L. Hoeveel gram ' + st.n + ' zit er in ' + mL + ' mL verzadigde oplossing?', antwoord: st.s * mL / 1000, eenheid:'g', uitleg: mL + ' mL = ' + fmt(mL/1000) + ' L; ' + st.s + ' × ' + fmt(mL/1000)};
+    }
+    var gehalte = pick([30, 35, 38, 40]);
+    var m3 = pick([50, 120, 500, 2000, 15000]);
+    return {vraag:'Zeewater bevat ' + gehalte + ' g/L zout. Een installatie haalt het zout uit ' + fmt(m3) + ' m³ zeewater. Hoeveel kg zout is dat?', antwoord: gehalte * m3, eenheid:'kg', uitleg: gehalte + ' g/L = ' + gehalte + ' kg/m³; ' + gehalte + ' × ' + fmt(m3)};
+  }
+  var p8Opl = maakReken('p8opl', p8OplGenereer, 0.015);
+
+  /* §2.4 OEFENEN 3 — volume- en massapercentage */
+  function p8PctGenereer(){
+    var type = pick(['massaPct','volPct','deelMassa','deelVol','cola']);
+    if (type === 'massaPct'){
+      var geheel = rnd(80, 400, 0), deel = Math.round(geheel * rnd(0.05, 0.7, 2) * 10) / 10;
+      var prod = pick(['siroop','jam','snoep','koekjes']);
+      return {vraag:'In ' + fmt(geheel) + ' g ' + prod + ' zit ' + fmt(deel) + ' g suiker. Bereken het massapercentage suiker.', antwoord: deel / geheel * 100, eenheid:'%', uitleg: fmt(deel) + ' ÷ ' + fmt(geheel) + ' × 100%'};
+    }
+    if (type === 'volPct'){
+      var tot = pick([100, 200, 250, 330, 500, 750]), alc = Math.round(tot * rnd(0.04, 0.4, 2));
+      return {vraag:'In een fles van ' + tot + ' mL zit ' + alc + ' mL alcohol. Bereken het volumepercentage alcohol.', antwoord: alc / tot * 100, eenheid:'%', uitleg: alc + ' ÷ ' + tot + ' × 100%'};
+    }
+    if (type === 'deelMassa'){
+      var p = pick([11, 25, 30, 52, 58, 80]), g2 = pick([50, 125, 150, 250, 500]);
+      var w = pick(['pinda’s (vet)','slasaus (olie)','mayonaise (olie)','siroop (suiker)']);
+      return {vraag:'Het massapercentage van ' + w + ' is ' + p + '%. Hoeveel gram is dat in ' + g2 + ' g?', antwoord: p / 100 * g2, eenheid:'g', uitleg: p + ' ÷ 100 × ' + g2};
+    }
+    if (type === 'deelVol'){
+      var vp = pick([5, 12, 40, 75]), mL2 = pick([25, 100, 200, 330, 500]);
+      var d = vp === 75 ? 'vruchtensap in siroop' : 'alcohol in de drank';
+      return {vraag:'Het volumepercentage ' + d + ' is ' + vp + '%. Hoeveel mL is dat in ' + mL2 + ' mL?', antwoord: vp / 100 * mL2, eenheid:'mL', uitleg: vp + ' ÷ 100 × ' + mL2};
+    }
+    var pc = pick([9, 10, 11]), gl = pick([125, 200, 250, 330]);
+    return {vraag:'Cola bevat ' + pc + ' massa% suiker. De dichtheid van cola is 1,0 g/mL. Hoeveel gram suiker zit er in een glas van ' + gl + ' mL?', antwoord: pc / 100 * gl, eenheid:'g', uitleg: gl + ' mL × 1,0 g/mL = ' + gl + ' g; ' + pc + '% daarvan'};
+  }
+  var p8Pct = maakReken('p8pct', p8PctGenereer, 0.015);
+
+  /* §2.4 OEFENEN 4 — drijven, zinken en begrippen */
+  var DZZ = ['drijven','zweven','zinken'];
+  var p8Mc = maakMC('p8mc', [
+    {vraag:'Een blokje ijs (0,92 g/cm³) in water (1,0 g/cm³).', opties:DZZ, antwoord:'drijven'},
+    {vraag:'Een blokje aluminium (2,7 g/cm³) in water.', opties:DZZ, antwoord:'zinken'},
+    {vraag:'Een legosteentje met dichtheid 1,05 g/cm³ in water.', opties:DZZ, antwoord:'zinken'},
+    {vraag:'Een voorwerp met precies dezelfde dichtheid als de vloeistof.', opties:DZZ, antwoord:'zweven'},
+    {vraag:'Hout (0,6 g/cm³) in water.', opties:DZZ, antwoord:'drijven'},
+    {vraag:'Een ijzeren spijker in kwik (13,5 g/cm³).', opties:DZZ, antwoord:'drijven', uitleg:'IJzer (7,9) heeft een kleinere dichtheid dan kwik.'},
+    {vraag:'Je lost zout op in water. Wat gebeurt er met de dichtheid van het water?', opties:['wordt groter','wordt kleiner','blijft gelijk'], antwoord:'wordt groter'},
+    {vraag:'Een legosteentje zinkt in water. Je lost steeds meer zout op. Wat gebeurt er uiteindelijk?', opties:['het gaat zweven of drijven','het zinkt nog sneller','er verandert niets'], antwoord:'het gaat zweven of drijven'},
+    {vraag:'Waarom blijf je in de Dode Zee vanzelf drijven?', opties:['Het zoute water heeft een grote dichtheid','Het water is warm','Er zitten veel golven in'], antwoord:'Het zoute water heeft een grote dichtheid'},
+    {vraag:'Volumepercentage betekent ...', opties:['aantal mL stof per 100 mL mengsel','aantal g stof per 100 g mengsel','aantal g stof per L'], antwoord:'aantal mL stof per 100 mL mengsel'},
+    {vraag:'Massapercentage betekent ...', opties:['aantal g stof per 100 g mengsel','aantal mL stof per 100 mL mengsel','aantal g stof per L'], antwoord:'aantal g stof per 100 g mengsel'},
+    {vraag:'Oplosbaarheid geef je meestal in ...', opties:['g/L','g/cm³','%'], antwoord:'g/L'},
+    {vraag:'Archimedes wilde weten of de kroon van zuiver goud was. Welke stofeigenschap gebruikte hij?', opties:['dichtheid','kookpunt','oplosbaarheid','kleur'], antwoord:'dichtheid'},
+    {vraag:'Een kroon heeft een dichtheid van 15,7 g/cm³. Is hij van zuiver goud (19,3 g/cm³)?', opties:['Nee','Ja'], antwoord:'Nee'}
+  ]);
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
@@ -2010,6 +2279,11 @@
   p7Opst.start();
   p7Verz.start();
   p7Met.start();
+  p8Fc.start();
+  p8Dic.start();
+  p8Opl.start();
+  p8Pct.start();
+  p8Mc.start();
 </script>
 </body>
 </html>
