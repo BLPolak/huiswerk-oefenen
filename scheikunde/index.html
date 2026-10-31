@@ -1409,7 +1409,72 @@
 </div>
 
 <div id="tab-p9" class="tab-content">
-  <div class="uitleg-card"><p>Binnenkort.</p></div>
+  <div class="uitleg-card">
+    <h2>Begrippen H2 — herhaling voor het proefwerk</h2>
+    <p>Alle begrippen uit het overzicht van hoofdstuk 2. Oefen ze in beide richtingen.</p>
+  </div>
+
+  <div class="uitleg-card">
+    <h3 style="color:#059669;margin-bottom:.6rem">Begrip → betekenis</h3>
+    <div class="fc-topbar">
+      <div class="score-balk" style="margin-bottom:0">Score: <span id="p9a-goed">0</span> / <span id="p9a-totaal">0</span></div>
+      <div class="fc-teller" id="p9a-teller">1 / 1</div>
+    </div>
+    <div class="flip-wrapper" onclick="p9a.flip()">
+      <div class="flip-card" id="p9a-card">
+        <div class="flip-face flip-front">
+          <div class="flip-label">Begrip</div>
+          <div class="flip-tekst" id="p9a-voor"></div>
+          <div class="flip-hint">Klik om om te draaien</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-label">Betekenis</div>
+          <div class="flip-tekst" id="p9a-achter"></div>
+        </div>
+      </div>
+    </div>
+    <div class="knoppen-rij" id="p9a-oordeel" style="display:none">
+      <button onclick="p9a.oordeel(false)">&#10007; Fout</button>
+      <button onclick="p9a.oordeel(true)">&#10003; Goed</button>
+    </div>
+    <div class="knoppen-rij">
+      <button onclick="p9a.vorige()">&larr; Vorige</button>
+      <button onclick="p9a.volgende()">Volgende &rarr;</button>
+      <button onclick="p9a.opnieuw()">&#8635; Opnieuw</button>
+      <button onclick="p9a.schud()">&#128256; Shuffle</button>
+    </div>
+  </div>
+
+  <div class="uitleg-card">
+    <h3 style="color:#059669;margin-bottom:.6rem">Betekenis → begrip</h3>
+    <div class="fc-topbar">
+      <div class="score-balk" style="margin-bottom:0">Score: <span id="p9b-goed">0</span> / <span id="p9b-totaal">0</span></div>
+      <div class="fc-teller" id="p9b-teller">1 / 1</div>
+    </div>
+    <div class="flip-wrapper" onclick="p9b.flip()">
+      <div class="flip-card" id="p9b-card">
+        <div class="flip-face flip-front">
+          <div class="flip-label">Betekenis</div>
+          <div class="flip-tekst" id="p9b-voor"></div>
+          <div class="flip-hint">Klik om om te draaien</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-label">Begrip</div>
+          <div class="flip-tekst" id="p9b-achter"></div>
+        </div>
+      </div>
+    </div>
+    <div class="knoppen-rij" id="p9b-oordeel" style="display:none">
+      <button onclick="p9b.oordeel(false)">&#10007; Fout</button>
+      <button onclick="p9b.oordeel(true)">&#10003; Goed</button>
+    </div>
+    <div class="knoppen-rij">
+      <button onclick="p9b.vorige()">&larr; Vorige</button>
+      <button onclick="p9b.volgende()">Volgende &rarr;</button>
+      <button onclick="p9b.opnieuw()">&#8635; Opnieuw</button>
+      <button onclick="p9b.schud()">&#128256; Shuffle</button>
+    </div>
+  </div>
 </div>
 
 <footer>Gemaakt voor Sam &middot; 3 HAVO</footer>
@@ -2251,6 +2316,39 @@
     {vraag:'Een kroon heeft een dichtheid van 15,7 g/cm³. Is hij van zuiver goud (19,3 g/cm³)?', opties:['Nee','Ja'], antwoord:'Nee'}
   ]);
 
+  /* BEGRIPPEN H2 */
+  var p9Begrippen = [
+    ['Mengsel', 'Bestaat uit twee of meer stoffen'],
+    ['Oplossing', 'Een helder mengsel van een stof en een vloeistof; de opgeloste deeltjes zijn zo klein dat ze het licht doorlaten'],
+    ['Suspensie', 'Een troebel mengsel van een vaste stof in een vloeistof; de deeltjes zijn zo groot dat ze het licht tegenhouden'],
+    ['Emulsie', 'Een troebel mengsel van twee vloeistoffen'],
+    ['Emulgator', 'Een hulpstof die ervoor zorgt dat een emulsie langer gemengd blijft'],
+    ['Tweelagensysteem', 'Twee vloeistoffen die niet gemengd zijn en twee lagen vormen'],
+    ['Rook', 'Een mengsel van een fijn verdeelde vaste stof in een gas'],
+    ['Schuim', 'Een mengsel van een fijn verdeeld gas in een vloeistof'],
+    ['Nevel', 'Een mengsel van een fijn verdeelde vloeistof in een gas'],
+    ['Scheiden', 'Het uit elkaar halen van de stoffen in een mengsel'],
+    ['Bezinken', 'Scheiden van een suspensie of emulsie; de stof met de grootste dichtheid zakt naar beneden (verschil in dichtheid)'],
+    ['Centrifugeren', 'Bezinken versnellen door het mengsel met grote snelheid te laten ronddraaien (verschil in dichtheid)'],
+    ['Filtreren', 'Scheidingsmethode voor suspensies, waarbij het mengsel een filter passeert (verschil in deeltjesgrootte)'],
+    ['Filtraat', 'De vloeistof die bij filtreren door het filter loopt'],
+    ['Residu', 'De stof die achterblijft: op het filter bij filtreren, of in de kolf bij destilleren'],
+    ['Extraheren', 'Scheidingsmethode waarbij één stof wel en de andere niet oplost in een oplosmiddel (verschil in oplosbaarheid)'],
+    ['Extractiemiddel', 'Het oplosmiddel dat je bij extraheren gebruikt'],
+    ['Rendement', '(praktische opbrengst ÷ theoretische opbrengst) × 100%'],
+    ['Indampen', 'Scheidingsmethode om een opgeloste vaste stof uit een vloeistof te halen (verschil in kookpunt)'],
+    ['Destilleren', 'Scheiden van een oplossing of een mengsel van vloeistoffen door verdampen en condenseren (verschil in kookpunt)'],
+    ['Destillaat', 'De vloeistof die bij destilleren na het condenseren wordt opgevangen'],
+    ['Oplosbaarheid', 'Het aantal gram stof dat maximaal in 1 L vloeistof kan oplossen'],
+    ['Verzadigde oplossing', 'Een oplossing waarin de maximale hoeveelheid stof is opgelost'],
+    ['Onverzadigde oplossing', 'Een oplossing waarin minder dan de maximale hoeveelheid stof is opgelost'],
+    ['Onderdompelmethode', 'Het volume van een voorwerp bepalen: eindvolume − beginvolume van het water'],
+    ['Volumepercentage', 'Het aantal mL stof per 100 mL mengsel'],
+    ['Massapercentage', 'Het aantal g stof per 100 g mengsel']
+  ];
+  var p9a = maakFC('p9a', p9Begrippen.map(function(b){ return {voor:b[0], achter:b[1]}; }));
+  var p9b = maakFC('p9b', p9Begrippen.map(function(b){ return {voor:b[1], achter:b[0]}; }));
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
@@ -2284,6 +2382,8 @@
   p8Opl.start();
   p8Pct.start();
   p8Mc.start();
+  p9a.start();
+  p9b.start();
 </script>
 </body>
 </html>
