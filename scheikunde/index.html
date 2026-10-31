@@ -112,6 +112,13 @@
     .tab-groep { display:flex; flex-wrap:wrap; gap:.5rem; }
     .opstelling { width:100%; max-width:320px; height:auto; display:block; margin:.6rem auto; }
     .tekentip { background:#fef3c7; border-left:4px solid #f59e0b; border-radius:8px; padding:.6rem 1rem; margin:.6rem 0; font-size:.92rem; }
+    .data-tabel th, .data-tabel td { overflow-wrap: anywhere; }
+    @media (max-width: 480px) {
+      .data-tabel { font-size: .8rem; }
+      .data-tabel th, .data-tabel td { padding: .35rem .3rem; }
+      .tab-content { padding: 1rem .75rem; }
+      .uitleg-card, .oefening-kaart { padding: 1rem; }
+    }
   </style>
 </head>
 <body>
@@ -1050,9 +1057,185 @@
     <button class="sub-tab-btn" onclick="showSubTab('p7','flashcards',this)">&#127183; Flashcards</button>
     <button class="sub-tab-btn" onclick="showSubTab('p7','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
-  <div id="sub-p7-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p7-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p7-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p7-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card">
+      <h2>Indampen</h2>
+      <p>Bij <strong>indampen</strong> verwarm je een oplossing tot de vloeistof helemaal verdampt is. De opgeloste vaste stof blijft achter als residu. De methode berust op verschil in <strong>kookpunt</strong>: het kookpunt van de vloeistof is veel lager dan dat van de vaste stof.</p>
+      <div class="voorbeeld-blok">In het lab: de oplossing in een <strong>indampschaaltje</strong>, dat op een <strong>driehoek</strong> op een <strong>driepoot</strong> boven de brander staat.<br>In het groot: zout winnen uit zeewater in ondiepe bassins; de zon laat het water verdampen.</div>
+      <div class="regel-blok oranje"><p>Met <strong>filtreren</strong> haal je een vaste stof uit een <strong>suspensie</strong>. Met <strong>indampen</strong> haal je een opgeloste vaste stof uit een <strong>oplossing</strong>.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Oplosbaarheid, verzadigd en onverzadigd</h2>
+      <p>De <strong>oplosbaarheid</strong> van een stof is het aantal gram stof dat maximaal in 1 L vloeistof kan oplossen. Voorbeeld: van keukenzout lost bij 25 °C maximaal 359 g op in 1 L water: 359 g/L.</p>
+      <table class="data-tabel">
+        <tr><th>Oplossing</th><th>Betekenis</th></tr>
+        <tr><td><strong>verzadigde oplossing</strong></td><td>De maximale hoeveelheid stof is opgelost. Meer stof lost niet meer op.</td></tr>
+        <tr><td><strong>onverzadigde oplossing</strong></td><td>Er is minder dan de maximale hoeveelheid opgelost. Er kan nog stof bij.</td></tr>
+      </table>
+      <div class="regel-blok blauw"><p>Dampt een onverzadigde oplossing in, dan wordt het gehalte steeds groter. Zodra de oplossing <strong>verzadigd</strong> is en je doorgaat met indampen, ontstaat er <strong>vaste stof</strong>.</p></div>
+      <h3>Oplosbaarheid en temperatuur</h3>
+      <div class="regel-blok groen"><p><strong>Vaste stoffen:</strong> de oplosbaarheid neemt meestal <strong>toe</strong> als de temperatuur stijgt.</p></div>
+      <div class="regel-blok rood-blok"><p><strong>Gassen:</strong> de oplosbaarheid neemt <strong>af</strong> als de temperatuur stijgt. Daarom zie je in een hete zomer vissen naar lucht happen: in warm water zit minder zuurstof opgelost.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Destilleren</h2>
+      <p>Bij <strong>destilleren</strong> verwarm je een mengsel van vloeistoffen (of een oplossing). De vloeistof met het laagste kookpunt kookt het eerst. De damp gaat door een <strong>koeler</strong>, waar hij condenseert. De opgevangen vloeistof heet het <strong>destillaat</strong>. Wat in de kolf achterblijft heet het <strong>residu</strong>. De methode berust op verschil in <strong>kookpunt</strong>.</p>
+      <svg class="opstelling" viewBox="0 0 350 245" style="max-width:420px">
+        <line x1="65" y1="55" x2="65" y2="112" stroke="#475569" stroke-width="3"/>
+        <circle cx="65" cy="113" r="3" fill="#dc2626"/>
+        <rect x="57" y="92" width="16" height="44" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <circle cx="65" cy="162" r="29" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <path d="M37,168 A29,29 0 0,0 93,168 Z" fill="#fdba74"/>
+        <line x1="73" y1="104" x2="118" y2="122" stroke="#475569" stroke-width="3"/>
+        <line x1="118" y1="122" x2="270" y2="180" stroke="#475569" stroke-width="2"/>
+        <line x1="122" y1="110" x2="268" y2="166" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="116" y1="130" x2="262" y2="186" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="122" y1="110" x2="116" y2="130" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="268" y1="166" x2="262" y2="186" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="140" y1="117" x2="140" y2="88" stroke="#3b82f6" stroke-width="3"/>
+        <line x1="245" y1="179" x2="245" y2="208" stroke="#3b82f6" stroke-width="3"/>
+        <polygon points="272,238 308,238 298,198 288,198" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <polygon points="276,236 304,236 301,224 279,224" fill="#bfdbfe"/>
+        <rect x="57" y="205" width="16" height="30" fill="#94a3b8"/>
+        <polygon points="65,193 59,205 71,205" fill="#3b82f6"/>
+        <g font-size="11" font-weight="800" fill="#fff" text-anchor="middle">
+          <line x1="62" y1="62" x2="36" y2="62" stroke="#94a3b8"/><circle cx="26" cy="62" r="10" fill="#059669"/><text x="26" y="66">1</text>
+          <line x1="37" y1="150" x2="24" y2="150" stroke="#94a3b8"/><circle cx="14" cy="150" r="10" fill="#059669"/><text x="14" y="154">2</text>
+          <line x1="80" y1="178" x2="108" y2="210" stroke="#94a3b8"/><circle cx="116" cy="216" r="10" fill="#059669"/><text x="116" y="220">3</text>
+          <line x1="57" y1="222" x2="36" y2="222" stroke="#94a3b8"/><circle cx="26" cy="222" r="10" fill="#059669"/><text x="26" y="226">4</text>
+          <line x1="200" y1="142" x2="200" y2="108" stroke="#94a3b8"/><circle cx="200" cy="98" r="10" fill="#059669"/><text x="200" y="102">5</text>
+          <line x1="245" y1="208" x2="245" y2="221" stroke="#94a3b8"/><circle cx="245" cy="231" r="10" fill="#059669"/><text x="245" y="235">6</text>
+          <line x1="140" y1="88" x2="158" y2="76" stroke="#94a3b8"/><circle cx="166" cy="72" r="10" fill="#059669"/><text x="166" y="76">7</text>
+          <line x1="302" y1="212" x2="322" y2="204" stroke="#94a3b8"/><circle cx="332" cy="200" r="10" fill="#059669"/><text x="332" y="204">8</text>
+          <line x1="302" y1="232" x2="322" y2="232" stroke="#94a3b8"/><circle cx="332" cy="232" r="10" fill="#059669"/><text x="332" y="236">9</text>
+        </g>
+      </svg>
+      <table class="data-tabel">
+        <tr><th>Nr.</th><th>Onderdeel</th></tr>
+        <tr><td>1</td><td><strong>thermometer</strong> (meet de temperatuur van de damp)</td></tr>
+        <tr><td>2</td><td><strong>destilleerkolf</strong></td></tr>
+        <tr><td>3</td><td><strong>residu</strong> (blijft achter in de kolf)</td></tr>
+        <tr><td>4</td><td><strong>brander</strong></td></tr>
+        <tr><td>5</td><td><strong>koeler</strong> (hier condenseert de damp)</td></tr>
+        <tr><td>6</td><td><strong>koelwater in</strong> (aanvoer van koud water, onderaan)</td></tr>
+        <tr><td>7</td><td><strong>koelwater uit</strong> (bovenaan)</td></tr>
+        <tr><td>8</td><td><strong>opvangvat</strong> (erlenmeyer)</td></tr>
+        <tr><td>9</td><td><strong>destillaat</strong></td></tr>
+      </table>
+      <div class="regel-blok blauw"><p><strong>Faseovergangen bij destilleren:</strong> in de kolf <strong>verdampt</strong> de vloeistof, in de koeler <strong>condenseert</strong> de damp.</p></div>
+      <div class="regel-blok oranje"><p><strong>Let op:</strong></p>
+        <p>• Het koelwater gaat er <strong>onderaan in</strong> en <strong>bovenaan uit</strong>, zodat de koeler helemaal gevuld blijft met koud water.</p>
+        <p>• <strong>Kooksteentjes</strong> in de kolf zorgen dat het mengsel rustig kookt en niet plotseling opspat.</p>
+        <p>• Bij een mengsel van vloeistoffen is het destillaat meestal <strong>geen zuivere stof</strong>, maar nog steeds een mengsel.</p></div>
+      <div class="tekentip">✏️ <strong>Tekenen:</strong> teken de destillatieopstelling zelf op papier met alle 9 namen erbij. Let op de richting van het koelwater!</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Aardolie destilleren</h2>
+      <p>Aardolie is een mengsel van heel veel stoffen. In een raffinaderij wordt het verhit in een hoge <strong>destillatiekolom</strong>. Bovenin is het het koelst: daar condenseren de stoffen met het laagste kookpunt (lpg, benzine). Onderin condenseren stoffen met een hoog kookpunt (stookolie). Asfalt blijft over als residu.</p>
+    </div>
+  </div>
+  <div id="sub-p7-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§2.3)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p7fc-goed">0</span> / <span id="p7fc-totaal">0</span></div>
+        <div class="fc-teller" id="p7fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p7Fc.flip()">
+        <div class="flip-card" id="p7fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p7fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p7fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p7fc-oordeel" style="display:none">
+        <button onclick="p7Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p7Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p7Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p7Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p7Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p7Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p7-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Onderdelen van de destillatieopstelling</h3>
+      <svg class="opstelling" viewBox="0 0 350 245" style="max-width:420px">
+        <line x1="65" y1="55" x2="65" y2="112" stroke="#475569" stroke-width="3"/>
+        <circle cx="65" cy="113" r="3" fill="#dc2626"/>
+        <rect x="57" y="92" width="16" height="44" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <circle cx="65" cy="162" r="29" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <path d="M37,168 A29,29 0 0,0 93,168 Z" fill="#fdba74"/>
+        <line x1="73" y1="104" x2="118" y2="122" stroke="#475569" stroke-width="3"/>
+        <line x1="118" y1="122" x2="270" y2="180" stroke="#475569" stroke-width="2"/>
+        <line x1="122" y1="110" x2="268" y2="166" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="116" y1="130" x2="262" y2="186" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="122" y1="110" x2="116" y2="130" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="268" y1="166" x2="262" y2="186" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="140" y1="117" x2="140" y2="88" stroke="#3b82f6" stroke-width="3"/>
+        <line x1="245" y1="179" x2="245" y2="208" stroke="#3b82f6" stroke-width="3"/>
+        <polygon points="272,238 308,238 298,198 288,198" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <polygon points="276,236 304,236 301,224 279,224" fill="#bfdbfe"/>
+        <rect x="57" y="205" width="16" height="30" fill="#94a3b8"/>
+        <polygon points="65,193 59,205 71,205" fill="#3b82f6"/>
+        <g font-size="11" font-weight="800" fill="#fff" text-anchor="middle">
+          <line x1="62" y1="62" x2="36" y2="62" stroke="#94a3b8"/><circle cx="26" cy="62" r="10" fill="#059669"/><text x="26" y="66">1</text>
+          <line x1="37" y1="150" x2="24" y2="150" stroke="#94a3b8"/><circle cx="14" cy="150" r="10" fill="#059669"/><text x="14" y="154">2</text>
+          <line x1="80" y1="178" x2="108" y2="210" stroke="#94a3b8"/><circle cx="116" cy="216" r="10" fill="#059669"/><text x="116" y="220">3</text>
+          <line x1="57" y1="222" x2="36" y2="222" stroke="#94a3b8"/><circle cx="26" cy="222" r="10" fill="#059669"/><text x="26" y="226">4</text>
+          <line x1="200" y1="142" x2="200" y2="108" stroke="#94a3b8"/><circle cx="200" cy="98" r="10" fill="#059669"/><text x="200" y="102">5</text>
+          <line x1="245" y1="208" x2="245" y2="221" stroke="#94a3b8"/><circle cx="245" cy="231" r="10" fill="#059669"/><text x="245" y="235">6</text>
+          <line x1="140" y1="88" x2="158" y2="76" stroke="#94a3b8"/><circle cx="166" cy="72" r="10" fill="#059669"/><text x="166" y="76">7</text>
+          <line x1="302" y1="212" x2="322" y2="204" stroke="#94a3b8"/><circle cx="332" cy="200" r="10" fill="#059669"/><text x="332" y="204">8</text>
+          <line x1="302" y1="232" x2="322" y2="232" stroke="#94a3b8"/><circle cx="332" cy="232" r="10" fill="#059669"/><text x="332" y="236">9</text>
+        </g>
+      </svg>
+      <div class="score-balk">Score: <span id="p7opst-goed">0</span> / <span id="p7opst-totaal">0</span></div>
+      <div id="p7opst-vraag" class="vraag-tekst"></div>
+      <div id="p7opst-opties" class="mc-grid"></div>
+      <div id="p7opst-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p7Opst.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p7Opst.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Oplosbaarheid en destilleren</h3>
+      <div class="score-balk">Score: <span id="p7verz-goed">0</span> / <span id="p7verz-totaal">0</span></div>
+      <div id="p7verz-vraag" class="vraag-tekst"></div>
+      <div id="p7verz-opties" class="mc-grid"></div>
+      <div id="p7verz-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p7Verz.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p7Verz.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — Welke scheidingsmethode? (alle methodes)</h3>
+      <div class="score-balk">Score: <span id="p7met-goed">0</span> / <span id="p7met-totaal">0</span></div>
+      <div id="p7met-vraag" class="vraag-tekst"></div>
+      <div id="p7met-opties" class="mc-grid"></div>
+      <div id="p7met-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p7Met.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p7Met.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="tab-p8" class="tab-content">
@@ -1720,6 +1903,85 @@
   }
   var p6Ren = maakReken('p6ren', p6RenGenereer, 0.015);
 
+  /* §2.3 FLASHCARDS */
+  var p7Fc = maakFC('p7fc', [
+    {voor:'Wat is indampen?', achter:'Een oplossing verwarmen tot de vloeistof verdampt is; de opgeloste vaste stof blijft achter'},
+    {voor:'Waarop berust indampen?', achter:'Verschil in kookpunt'},
+    {voor:'Wat is destilleren?', achter:'Een mengsel verwarmen; de vloeistof met het laagste kookpunt verdampt eerst en condenseert in de koeler'},
+    {voor:'Waarop berust destilleren?', achter:'Verschil in kookpunt'},
+    {voor:'Wat is het destillaat?', achter:'De vloeistof die na het condenseren in de koeler wordt opgevangen'},
+    {voor:'Wat is het residu bij destilleren?', achter:'Wat in de destilleerkolf achterblijft'},
+    {voor:'Welke faseovergangen vinden plaats bij destilleren?', achter:'Verdampen (in de kolf) en condenseren (in de koeler)'},
+    {voor:'Waar gaat het koelwater de koeler in?', achter:'Onderaan (en bovenaan eruit), zodat de koeler helemaal gevuld blijft'},
+    {voor:'Waarvoor dienen kooksteentjes?', achter:'Ze zorgen dat het mengsel rustig kookt en niet plotseling opspat'},
+    {voor:'Wat meet de thermometer bij destilleren?', achter:'De temperatuur van de damp die naar de koeler gaat'},
+    {voor:'Wat is oplosbaarheid?', achter:'Het aantal gram stof dat maximaal in 1 L vloeistof kan oplossen'},
+    {voor:'Wat is een verzadigde oplossing?', achter:'Een oplossing waarin de maximale hoeveelheid stof is opgelost'},
+    {voor:'Wat is een onverzadigde oplossing?', achter:'Een oplossing waarin minder dan de maximale hoeveelheid stof is opgelost'},
+    {voor:'Oplosbaarheid van vaste stoffen als de temperatuur stijgt?', achter:'Neemt meestal toe'},
+    {voor:'Oplosbaarheid van gassen als de temperatuur stijgt?', achter:'Neemt af'},
+    {voor:'Waarin zet je een indampschaaltje boven de brander?', achter:'Op een driehoek op een driepoot'},
+    {voor:'Is het destillaat van een mengsel van vloeistoffen een zuivere stof?', achter:'Meestal niet: het is nog steeds een mengsel'}
+  ]);
+
+  /* §2.3 OEFENEN 1 — onderdelen destillatieopstelling */
+  var DST = ['thermometer','destilleerkolf','residu','brander','koeler','koelwater in','koelwater uit','opvangvat','destillaat'];
+  var NRS = ['1','2','3','4','5','6','7','8','9'];
+  var p7Opst = maakMC('p7opst', [
+    {vraag:'Wat is nummer 1?', opties:DST, antwoord:'thermometer'},
+    {vraag:'Wat is nummer 2?', opties:DST, antwoord:'destilleerkolf'},
+    {vraag:'Wat is nummer 3?', opties:DST, antwoord:'residu'},
+    {vraag:'Wat is nummer 4?', opties:DST, antwoord:'brander'},
+    {vraag:'Wat is nummer 5?', opties:DST, antwoord:'koeler'},
+    {vraag:'Wat is nummer 6?', opties:DST, antwoord:'koelwater in'},
+    {vraag:'Wat is nummer 7?', opties:DST, antwoord:'koelwater uit'},
+    {vraag:'Wat is nummer 8?', opties:DST, antwoord:'opvangvat'},
+    {vraag:'Wat is nummer 9?', opties:DST, antwoord:'destillaat'},
+    {vraag:'Bij welk nummer verdampt de vloeistof?', opties:NRS, antwoord:'2', uitleg:'In de destilleerkolf.'},
+    {vraag:'Bij welk nummer condenseert de damp?', opties:NRS, antwoord:'5', uitleg:'In de koeler.'}
+  ]);
+
+  /* §2.3 OEFENEN 2 — oplosbaarheid en destilleren */
+  var VZ = ['verzadigd','onverzadigd'];
+  var p7Verz = maakMC('p7verz', [
+    {vraag:'Je lost 200 g zout op in 1 L water (oplosbaarheid 359 g/L). Is de oplossing verzadigd of onverzadigd?', opties:VZ, antwoord:'onverzadigd', uitleg:'200 g is minder dan het maximum van 359 g.'},
+    {vraag:'Je roert zout door water tot er zout op de bodem blijft liggen dat niet meer oplost. De oplossing is ...', opties:VZ, antwoord:'verzadigd'},
+    {vraag:'Je dampt een zoutoplossing in. Op het moment dat er vaste stof ontstaat, is de oplossing ...', opties:VZ, antwoord:'verzadigd'},
+    {vraag:'Er kan nog suiker oplossen in je thee. De oplossing is ...', opties:VZ, antwoord:'onverzadigd'},
+    {vraag:'Wat gebeurt er met het gehalte van een onverzadigde oplossing als je hem indampt?', opties:['Het wordt groter','Het wordt kleiner','Het blijft gelijk'], antwoord:'Het wordt groter'},
+    {vraag:'De temperatuur stijgt. Wat doet de oplosbaarheid van een vaste stof (meestal)?', opties:['neemt toe','neemt af','blijft gelijk'], antwoord:'neemt toe'},
+    {vraag:'De temperatuur stijgt. Wat doet de oplosbaarheid van een gas?', opties:['neemt af','neemt toe','blijft gelijk'], antwoord:'neemt af'},
+    {vraag:'Waarom happen vissen op een hete zomerdag naar lucht?', opties:['In warm water is minder zuurstof opgelost','Warm water bevat meer zout','Vissen hebben het te warm'], antwoord:'In warm water is minder zuurstof opgelost'},
+    {vraag:'Welke faseovergang vindt plaats in de destilleerkolf?', opties:['verdampen','condenseren','smelten','stollen'], antwoord:'verdampen'},
+    {vraag:'Welke faseovergang vindt plaats in de koeler?', opties:['condenseren','verdampen','sublimeren','rijpen'], antwoord:'condenseren'},
+    {vraag:'Waar komt het koelwater de koeler binnen?', opties:['onderaan','bovenaan','in het midden'], antwoord:'onderaan', uitleg:'Zo blijft de koeler helemaal gevuld met koud water.'},
+    {vraag:'Waarvoor doe je kooksteentjes in de kolf?', opties:['Zodat het mengsel rustig kookt','Om het mengsel te kleuren','Om het kookpunt te verhogen'], antwoord:'Zodat het mengsel rustig kookt'},
+    {vraag:'Je destilleert rode wijn. Welke stof komt het eerst in het destillaat?', opties:['alcohol (kookpunt 78 °C)','water (kookpunt 100 °C)','kleurstof'], antwoord:'alcohol (kookpunt 78 °C)', uitleg:'De stof met het laagste kookpunt kookt het eerst.'},
+    {vraag:'Je destilleert zout water. Wat is het destillaat?', opties:['water','zout','zout water'], antwoord:'water', uitleg:'Het zout blijft als residu in de kolf.'},
+    {vraag:'Waar in een destillatiekolom voor aardolie komt benzine eruit?', opties:['hoog in de kolom','onderin de kolom','als residu'], antwoord:'hoog in de kolom', uitleg:'Benzine heeft een laag kookpunt; bovenin is het het koelst.'}
+  ]);
+
+  /* §2.3 OEFENEN 3 — welke methode (alle 6) */
+  var ALLE = ['bezinken','centrifugeren','filtreren','extraheren','indampen','destilleren'];
+  var p7Met = maakMC('p7met', [
+    {vraag:'Zout winnen uit zeewater in ondiepe bassins in de zon.', opties:ALLE, antwoord:'indampen'},
+    {vraag:'Suiker terugkrijgen uit suikerwater.', opties:ALLE, antwoord:'indampen'},
+    {vraag:'Alcohol uit wijn halen om cognac te maken.', opties:ALLE, antwoord:'destilleren'},
+    {vraag:'Benzine en stookolie uit aardolie halen.', opties:ALLE, antwoord:'destilleren'},
+    {vraag:'Zuiver water uit zeewater halen én opvangen.', opties:ALLE, antwoord:'destilleren', uitleg:'Bij indampen gaat het water verloren; bij destilleren vang je het op.'},
+    {vraag:'Zand uit modderwater halen met filtreerpapier.', opties:ALLE, antwoord:'filtreren'},
+    {vraag:'Zout uit een mengsel van zout en zand halen met water.', opties:ALLE, antwoord:'extraheren'},
+    {vraag:'Aarde laten zakken in een glas slootwater.', opties:ALLE, antwoord:'bezinken'},
+    {vraag:'Een emulsie snel scheiden door hem snel rond te laten draaien.', opties:ALLE, antwoord:'centrifugeren'},
+    {vraag:'Thee zetten.', opties:ALLE, antwoord:'extraheren'},
+    {vraag:'Welke methode berust op verschil in kookpunt én vangt de verdampte stof op?', opties:ALLE, antwoord:'destilleren'},
+    {vraag:'Welke methode berust op verschil in deeltjesgrootte?', opties:ALLE, antwoord:'filtreren'},
+    {vraag:'Welke methode berust op verschil in oplosbaarheid?', opties:ALLE, antwoord:'extraheren'},
+    {vraag:'Welke twee methodes berusten op verschil in dichtheid? (kies er één)', opties:['bezinken','filtreren','extraheren','indampen'], antwoord:'bezinken', uitleg:'Bezinken en centrifugeren.'},
+    {vraag:'Een vaste stof uit een suspensie halen.', opties:ALLE, antwoord:'filtreren'},
+    {vraag:'Een opgeloste vaste stof uit een oplossing halen (de vloeistof mag verloren gaan).', opties:ALLE, antwoord:'indampen'}
+  ]);
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
@@ -1744,6 +2006,10 @@
   p6Sit.start();
   p6Fil.start();
   p6Ren.start();
+  p7Fc.start();
+  p7Opst.start();
+  p7Verz.start();
+  p7Met.start();
 </script>
 </body>
 </html>
