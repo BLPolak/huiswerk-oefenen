@@ -106,21 +106,39 @@
     .diagram-rij { display:flex; gap:.8rem; flex-wrap:wrap; margin:.8rem 0; }
     .diagram-item { flex:1 1 220px; background:#f0fdf4; border-radius:8px; padding:.6rem; text-align:center; }
     .diagram-label { font-size:.85rem; font-weight:800; color:#047857; margin-top:.3rem; }
+    .hfst-nav { display:flex; gap:.5rem; padding:.8rem 1.5rem 0; background:#fff; }
+    .hfst-btn { flex:1; max-width:200px; padding:.6rem 1rem; border:2px solid #059669; border-radius:10px; background:#fff; color:#059669; font-family:Nunito, sans-serif; font-size:1rem; font-weight:800; cursor:pointer; }
+    .hfst-btn.active { background:#059669; color:#fff; }
+    .tab-groep { display:flex; flex-wrap:wrap; gap:.5rem; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>&#129514; Scheikunde</h1>
-  <p>3 HAVO &middot; H1 Scheikunde is overal</p>
+  <p>3 HAVO &middot; H1 Scheikunde is overal &middot; H2 Scheidingsmethoden</p>
   <a href="../">&larr; Terug naar overzicht</a>
 </header>
 
+<div class="hfst-nav">
+  <button class="hfst-btn active" onclick="showHfst('h1',this)">H1 Scheikunde is overal</button>
+  <button class="hfst-btn" onclick="showHfst('h2',this)">H2 Scheidingsmethoden</button>
+</div>
+
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="showTab('p1',this)">&sect;1.1 Stofeigenschappen</button>
-  <button class="tab-btn" onclick="showTab('p2',this)">&sect;1.2 Veiligheid</button>
-  <button class="tab-btn" onclick="showTab('p3',this)">&sect;1.3 Faseveranderingen</button>
-  <button class="tab-btn" onclick="showTab('p4',this)">&#128218; Begrippen H1</button>
+  <div class="tab-groep" id="groep-h1">
+    <button class="tab-btn active" onclick="showTab('p1',this)">&sect;1.1 Stofeigenschappen</button>
+    <button class="tab-btn" onclick="showTab('p2',this)">&sect;1.2 Veiligheid</button>
+    <button class="tab-btn" onclick="showTab('p3',this)">&sect;1.3 Faseveranderingen</button>
+    <button class="tab-btn" onclick="showTab('p4',this)">&#128218; Begrippen H1</button>
+  </div>
+  <div class="tab-groep" id="groep-h2" style="display:none">
+    <button class="tab-btn" onclick="showTab('p5',this)">&sect;2.1 Soorten mengsels</button>
+    <button class="tab-btn" onclick="showTab('p6',this)">&sect;2.2 Scheiden</button>
+    <button class="tab-btn" onclick="showTab('p7',this)">&sect;2.3 Indampen &amp; destilleren</button>
+    <button class="tab-btn" onclick="showTab('p8',this)">&sect;2.4 Rekenen</button>
+    <button class="tab-btn" onclick="showTab('p9',this)">&#128218; Begrippen H2</button>
+  </div>
 </nav>
 
 <div id="tab-p1" class="tab-content active">
@@ -741,11 +759,68 @@
   </div>
 </div>
 
+<div id="tab-p5" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p5','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p5','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p5-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p5-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p5-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+</div>
+
+<div id="tab-p6" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p6','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p6','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p6','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p6-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p6-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p6-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+</div>
+
+<div id="tab-p7" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p7','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p7','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p7','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p7-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p7-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p7-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+</div>
+
+<div id="tab-p8" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('p8','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p8','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('p8','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-p8-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p8-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p8-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+</div>
+
+<div id="tab-p9" class="tab-content">
+  <div class="uitleg-card"><p>Binnenkort.</p></div>
+</div>
+
 <footer>Gemaakt voor Sam &middot; 3 HAVO</footer>
 
 <script>
   function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
   function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
+  function showHfst(h, btn){
+    document.querySelectorAll('.hfst-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('groep-h1').style.display = h === 'h1' ? '' : 'none';
+    document.getElementById('groep-h2').style.display = h === 'h2' ? '' : 'none';
+    var eerste = document.querySelector('#groep-' + h + ' .tab-btn');
+    var id = eerste.getAttribute('onclick').match(/showTab\('(p\d+)'/)[1];
+    showTab(id, eerste);
+  }
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 
