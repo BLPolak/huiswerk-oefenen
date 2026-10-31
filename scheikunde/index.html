@@ -110,6 +110,8 @@
     .hfst-btn { flex:1; max-width:200px; padding:.6rem 1rem; border:2px solid #059669; border-radius:10px; background:#fff; color:#059669; font-family:Nunito, sans-serif; font-size:1rem; font-weight:800; cursor:pointer; }
     .hfst-btn.active { background:#059669; color:#fff; }
     .tab-groep { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .opstelling { width:100%; max-width:320px; height:auto; display:block; margin:.6rem auto; }
+    .tekentip { background:#fef3c7; border-left:4px solid #f59e0b; border-radius:8px; padding:.6rem 1rem; margin:.6rem 0; font-size:.92rem; }
   </style>
 </head>
 <body>
@@ -879,9 +881,167 @@
     <button class="sub-tab-btn" onclick="showSubTab('p6','flashcards',this)">&#127183; Flashcards</button>
     <button class="sub-tab-btn" onclick="showSubTab('p6','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
-  <div id="sub-p6-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p6-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p6-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p6-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card">
+      <h2>Scheiden door verschil in stofeigenschappen</h2>
+      <p>Het uit elkaar halen van de stoffen in een mengsel heet <strong>scheiden</strong>. Daarbij veranderen de stoffen niet: hun stofeigenschappen blijven gelijk. Je maakt gebruik van een <strong>verschil in stofeigenschappen</strong> tussen de stoffen.</p>
+      <table class="data-tabel">
+        <tr><th>Scheidingsmethode</th><th>Verschil in</th><th>Geschikt voor</th></tr>
+        <tr><td><strong>Bezinken</strong></td><td>dichtheid</td><td>suspensies en emulsies</td></tr>
+        <tr><td><strong>Centrifugeren</strong></td><td>dichtheid</td><td>suspensies en emulsies (sneller dan bezinken)</td></tr>
+        <tr><td><strong>Filtreren</strong></td><td>deeltjesgrootte</td><td>suspensies</td></tr>
+        <tr><td><strong>Extraheren</strong></td><td>oplosbaarheid</td><td>een stof uit een mengsel halen</td></tr>
+      </table>
+      <div class="regel-blok oranje"><p>Een scheiding is <strong>nooit helemaal volledig</strong>.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Bezinken en centrifugeren</h2>
+      <p>Bij <strong>bezinken</strong> zakt de stof met de grootste dichtheid langzaam naar de bodem, bijvoorbeeld aarde in slootwater. Daarna kun je de vloeistof voorzichtig afgieten. Dit heet <strong>afschenken</strong>.</p>
+      <p>Bezinken kan lang duren. Bij <strong>centrifugeren</strong> draait het mengsel met grote snelheid rond in een centrifuge. De stof met de grootste dichtheid wordt naar de buitenkant (onderkant van het buisje) geslingerd. Zo gaat bezinken veel sneller.</p>
+      <div class="regel-blok blauw"><p>Beide methodes berusten op verschil in <strong>dichtheid</strong>.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Filtreren</h2>
+      <p>Bij <strong>filtreren</strong> giet je een suspensie door een filter. De kleine deeltjes (water) gaan door het filter heen; de grote deeltjes (de vaste stof) blijven achter. De methode berust op verschil in <strong>deeltjesgrootte</strong>.</p>
+      <svg class="opstelling" viewBox="0 0 240 260">
+        <polygon points="40,30 180,30 118,120 102,120" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <rect x="104" y="120" width="12" height="55" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <polygon points="52,36 168,36 110,114" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <polygon points="70,58 150,58 110,112" fill="#d6a76c" opacity=".55"/>
+        <polygon points="96,98 124,98 110,113" fill="#7c4a1e"/>
+        <path d="M90,165 L90,228 Q90,248 110,248 Q130,248 130,228 L130,165" fill="#fff" stroke="#475569" stroke-width="2"/>
+        <path d="M92,212 L128,212 L128,228 Q128,246 110,246 Q92,246 92,228 Z" fill="#bfdbfe"/>
+        <line x1="160" y1="44" x2="200" y2="44" stroke="#94a3b8"/><circle cx="210" cy="44" r="10" fill="#059669"/><text x="210" y="48" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">1</text>
+        <line x1="168" y1="70" x2="200" y2="76" stroke="#94a3b8"/><circle cx="210" cy="76" r="10" fill="#059669"/><text x="210" y="80" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">2</text>
+        <line x1="120" y1="106" x2="200" y2="108" stroke="#94a3b8"/><circle cx="210" cy="108" r="10" fill="#059669"/><text x="210" y="112" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">3</text>
+        <line x1="130" y1="185" x2="200" y2="185" stroke="#94a3b8"/><circle cx="210" cy="185" r="10" fill="#059669"/><text x="210" y="189" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">4</text>
+        <line x1="126" y1="230" x2="200" y2="230" stroke="#94a3b8"/><circle cx="210" cy="230" r="10" fill="#059669"/><text x="210" y="234" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">5</text>
+      </svg>
+      <table class="data-tabel">
+        <tr><th>Nr.</th><th>Onderdeel</th></tr>
+        <tr><td>1</td><td><strong>filter</strong> (gevouwen filtreerpapier)</td></tr>
+        <tr><td>2</td><td><strong>trechter</strong></td></tr>
+        <tr><td>3</td><td><strong>residu</strong>: de vaste stof die achterblijft op het filter</td></tr>
+        <tr><td>4</td><td><strong>reageerbuis</strong> (of erlenmeyer/bekerglas)</td></tr>
+        <tr><td>5</td><td><strong>filtraat</strong>: de vloeistof die door het filter loopt</td></tr>
+      </table>
+      <div class="regel-blok rood-blok"><p>Een <strong>oplossing</strong> en een <strong>emulsie</strong> kun je <strong>niet</strong> filtreren: de opgeloste stof en de vloeistofdruppeltjes zijn te klein en gaan door het filter heen.</p></div>
+      <div class="tekentip">✏️ <strong>Tekenen:</strong> teken deze opstelling zelf op papier, zet de 5 namen erbij en vergelijk met de tekening.</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Extraheren</h2>
+      <p>Bij <strong>extraheren</strong> voeg je een oplosmiddel toe aan een mengsel. Daarin lost één stof wel op en de andere niet. Het oplosmiddel heet het <strong>extractiemiddel</strong>. De methode berust op verschil in <strong>oplosbaarheid</strong>.</p>
+      <div class="voorbeeld-blok"><strong>Voorbeeld:</strong> zout uit zand halen. Voeg water toe (extractiemiddel): het zout lost op, het zand niet. Filtreer daarna: het zand is het residu, het zoute water het filtraat.<br><strong>Ook extraheren:</strong> koffie zetten en thee zetten (smaakstoffen lossen op in heet water).</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Rendement</h2>
+      <p>Een scheiding is nooit helemaal volledig. Het <strong>rendement</strong> geeft aan hoeveel procent je echt terugkrijgt van wat er maximaal in zat.</p>
+      <div class="voorbeeld-blok"><strong>rendement = (praktische opbrengst ÷ theoretische opbrengst) × 100%</strong><br>praktische opbrengst = wat je echt hebt teruggekregen<br>theoretische opbrengst = wat er maximaal in zat</div>
+      <div class="regel-blok blauw"><p><strong>Voorbeeld:</strong> in 100 g mengsel zit 5 g zout. Je haalt er 4,5 g zout uit.<br>rendement = 4,5 ÷ 5 × 100% = <strong>90%</strong></p></div>
+    </div>
+  </div>
+  <div id="sub-p6-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§2.2)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p6fc-goed">0</span> / <span id="p6fc-totaal">0</span></div>
+        <div class="fc-teller" id="p6fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p6Fc.flip()">
+        <div class="flip-card" id="p6fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p6fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p6fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p6fc-oordeel" style="display:none">
+        <button onclick="p6Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p6Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p6Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p6Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p6Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p6Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p6-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Methode en stofeigenschap</h3>
+      <div class="score-balk">Score: <span id="p6eig-goed">0</span> / <span id="p6eig-totaal">0</span></div>
+      <div id="p6eig-vraag" class="vraag-tekst"></div>
+      <div id="p6eig-opties" class="mc-grid"></div>
+      <div id="p6eig-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p6Eig.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p6Eig.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Welke methode gebruik je?</h3>
+      <div class="score-balk">Score: <span id="p6sit-goed">0</span> / <span id="p6sit-totaal">0</span></div>
+      <div id="p6sit-vraag" class="vraag-tekst"></div>
+      <div id="p6sit-opties" class="mc-grid"></div>
+      <div id="p6sit-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p6Sit.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p6Sit.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 3 — Onderdelen van de filtreeropstelling</h3>
+      <svg class="opstelling" viewBox="0 0 240 260">
+        <polygon points="40,30 180,30 118,120 102,120" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <rect x="104" y="120" width="12" height="55" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        <polygon points="52,36 168,36 110,114" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <polygon points="70,58 150,58 110,112" fill="#d6a76c" opacity=".55"/>
+        <polygon points="96,98 124,98 110,113" fill="#7c4a1e"/>
+        <path d="M90,165 L90,228 Q90,248 110,248 Q130,248 130,228 L130,165" fill="#fff" stroke="#475569" stroke-width="2"/>
+        <path d="M92,212 L128,212 L128,228 Q128,246 110,246 Q92,246 92,228 Z" fill="#bfdbfe"/>
+        <line x1="160" y1="44" x2="200" y2="44" stroke="#94a3b8"/><circle cx="210" cy="44" r="10" fill="#059669"/><text x="210" y="48" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">1</text>
+        <line x1="168" y1="70" x2="200" y2="76" stroke="#94a3b8"/><circle cx="210" cy="76" r="10" fill="#059669"/><text x="210" y="80" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">2</text>
+        <line x1="120" y1="106" x2="200" y2="108" stroke="#94a3b8"/><circle cx="210" cy="108" r="10" fill="#059669"/><text x="210" y="112" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">3</text>
+        <line x1="130" y1="185" x2="200" y2="185" stroke="#94a3b8"/><circle cx="210" cy="185" r="10" fill="#059669"/><text x="210" y="189" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">4</text>
+        <line x1="126" y1="230" x2="200" y2="230" stroke="#94a3b8"/><circle cx="210" cy="230" r="10" fill="#059669"/><text x="210" y="234" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">5</text>
+      </svg>
+      <div class="score-balk">Score: <span id="p6fil-goed">0</span> / <span id="p6fil-totaal">0</span></div>
+      <div id="p6fil-vraag" class="vraag-tekst"></div>
+      <div id="p6fil-opties" class="mc-grid"></div>
+      <div id="p6fil-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p6Fil.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p6Fil.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 4 — Rendement berekenen</h3>
+      <div class="regel-blok blauw"><p>rendement = (praktische opbrengst ÷ theoretische opbrengst) × 100%</p></div>
+      <div class="score-balk">Score: <span id="p6ren-goed">0</span> / <span id="p6ren-totaal">0</span></div>
+      <div id="p6ren-vraag" class="vraag-tekst"></div>
+      <input type="text" inputmode="decimal" id="p6ren-input" class="open-input" placeholder="Jouw antwoord (bijv. 85)" onkeydown="if(event.key==='Enter') p6Ren.controleer()">
+      <div id="p6ren-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button id="p6ren-controleer-btn" onclick="p6Ren.controleer()">Controleer</button>
+        <button id="p6ren-volgende-btn" onclick="p6Ren.volgende()" style="display:none">Volgende &rarr;</button>
+        <button onclick="p6Ren.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p6Ren.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="tab-p7" class="tab-content">
@@ -1468,6 +1628,98 @@
     {vraag:'Waarom moet je een emulsie als fritessaus niet zonder emulgator maken?', opties:['Dan ontmengt hij snel','Dan wordt hij helder','Dan gaat hij koken'], antwoord:'Dan ontmengt hij snel'}
   ]);
 
+  /* §2.2 FLASHCARDS */
+  var p6Fc = maakFC('p6fc', [
+    {voor:'Wat is scheiden?', achter:'Het uit elkaar halen van de stoffen in een mengsel; de stoffen zelf veranderen niet'},
+    {voor:'Waarop berust bezinken?', achter:'Verschil in dichtheid'},
+    {voor:'Waarop berust centrifugeren?', achter:'Verschil in dichtheid'},
+    {voor:'Waarop berust filtreren?', achter:'Verschil in deeltjesgrootte'},
+    {voor:'Waarop berust extraheren?', achter:'Verschil in oplosbaarheid'},
+    {voor:'Wat is bezinken?', achter:'De stof met de grootste dichtheid zakt naar de bodem'},
+    {voor:'Wat is centrifugeren?', achter:'Bezinken versnellen door het mengsel met grote snelheid te laten ronddraaien'},
+    {voor:'Wat is het residu?', achter:'De vaste stof die bij filtreren achterblijft op het filter'},
+    {voor:'Wat is het filtraat?', achter:'De vloeistof die bij filtreren door het filter loopt'},
+    {voor:'Wat is een extractiemiddel?', achter:'Het oplosmiddel waarin bij extraheren één stof wel en de andere niet oplost'},
+    {voor:'Waarom kun je een oplossing niet filtreren?', achter:'De opgeloste deeltjes zijn zo klein dat ze door het filter gaan'},
+    {voor:'Formule rendement', achter:'(praktische opbrengst ÷ theoretische opbrengst) × 100%'},
+    {voor:'Wat is de praktische opbrengst?', achter:'Wat je bij de scheiding echt terugkrijgt'},
+    {voor:'Wat is de theoretische opbrengst?', achter:'Wat er maximaal in het mengsel zat'},
+    {voor:'Waarom is het rendement nooit 100%?', achter:'Een scheiding is nooit volledig; er blijft altijd wat achter (bijv. zout aan het zand of in het filter)'},
+    {voor:'Welke twee scheidingsmethoden gebruik je bij koffie zetten?', achter:'Extraheren en filtreren'}
+  ]);
+
+  /* §2.2 OEFENEN 1 — methode en stofeigenschap */
+  var EIG = ['dichtheid','deeltjesgrootte','oplosbaarheid'];
+  var MET = ['bezinken','centrifugeren','filtreren','extraheren'];
+  var p6Eig = maakMC('p6eig', [
+    {vraag:'Bezinken berust op verschil in ...', opties:EIG, antwoord:'dichtheid'},
+    {vraag:'Centrifugeren berust op verschil in ...', opties:EIG, antwoord:'dichtheid'},
+    {vraag:'Filtreren berust op verschil in ...', opties:EIG, antwoord:'deeltjesgrootte'},
+    {vraag:'Extraheren berust op verschil in ...', opties:EIG, antwoord:'oplosbaarheid'},
+    {vraag:'Welke methode berust op verschil in deeltjesgrootte?', opties:MET, antwoord:'filtreren'},
+    {vraag:'Welke methode berust op verschil in oplosbaarheid?', opties:MET, antwoord:'extraheren'},
+    {vraag:'Welke methode is een snellere versie van bezinken?', opties:MET, antwoord:'centrifugeren'},
+    {vraag:'Hoe heet de vaste stof die op het filter achterblijft?', opties:['residu','filtraat','extractiemiddel','destillaat'], antwoord:'residu'},
+    {vraag:'Hoe heet de vloeistof die door het filter loopt?', opties:['filtraat','residu','extractiemiddel','destillaat'], antwoord:'filtraat'},
+    {vraag:'Hoe heet het oplosmiddel dat je bij extraheren toevoegt?', opties:['extractiemiddel','emulgator','filtraat','residu'], antwoord:'extractiemiddel'},
+    {vraag:'Welk mengsel kun je wél filtreren?', opties:['suspensie','oplossing','emulsie'], antwoord:'suspensie'},
+    {vraag:'Bij centrifugeren komt de stof met de grootste dichtheid ...', opties:['onderin het buisje','bovenin het buisje','in het midden'], antwoord:'onderin het buisje'},
+    {vraag:'Veranderen de stoffen bij het scheiden van een mengsel?', opties:['Nee','Ja'], antwoord:'Nee', uitleg:'Hun stofeigenschappen blijven gelijk.'}
+  ]);
+
+  /* §2.2 OEFENEN 2 — welke methode in deze situatie */
+  var p6Sit = maakMC('p6sit', [
+    {vraag:'Aarde zakt na een tijdje naar de bodem van een glas slootwater.', opties:MET, antwoord:'bezinken'},
+    {vraag:'In het ziekenhuis laten ze bloed in een buisje staan; de rode bloedcellen zakken naar beneden.', opties:MET, antwoord:'bezinken', uitleg:'Dit is de bloedbezinkingstest.'},
+    {vraag:'Bij Turkse koffie laat je de koffie even staan, zodat het koffiedik naar de bodem zakt.', opties:MET, antwoord:'bezinken'},
+    {vraag:'De wasmachine draait de trommel met grote snelheid rond om de was droog te krijgen.', opties:MET, antwoord:'centrifugeren'},
+    {vraag:'Een emulsie wordt snel gescheiden in een buisje dat heel snel ronddraait.', opties:MET, antwoord:'centrifugeren'},
+    {vraag:'Je houdt het koffiedik tegen met een filterzakje.', opties:MET, antwoord:'filtreren'},
+    {vraag:'Je drinkt slootwater door een speciaal rietje met een filter.', opties:MET, antwoord:'filtreren'},
+    {vraag:'Rivierwater wordt in de duinen door het zand gepompt om het te zuiveren.', opties:MET, antwoord:'filtreren'},
+    {vraag:'Je duwt bij een cafetière (Franse pers) het koffiedik met een zeef naar beneden.', opties:MET, antwoord:'filtreren'},
+    {vraag:'Plastic deeltjes in de oceaan worden met drijvende armen uit het water gevangen.', opties:MET, antwoord:'filtreren', uitleg:'De plastic deeltjes zijn groter dan de waterdeeltjes.'},
+    {vraag:'Smaak- en kleurstoffen lossen op in heet water als je thee zet.', opties:MET, antwoord:'extraheren'},
+    {vraag:'Je voegt water toe aan zout zand: het zout lost op, het zand niet.', opties:MET, antwoord:'extraheren'},
+    {vraag:'Cafeïne wordt met een oplosmiddel uit koffiebonen gehaald.', opties:MET, antwoord:'extraheren'},
+    {vraag:'Heet water haalt de smaakstoffen uit gemalen koffie.', opties:MET, antwoord:'extraheren'}
+  ]);
+
+  /* §2.2 OEFENEN 3 — onderdelen filtreeropstelling */
+  var FIL = ['filter','trechter','residu','reageerbuis','filtraat'];
+  var p6Fil = maakMC('p6fil', [
+    {vraag:'Wat is nummer 1?', opties:FIL, antwoord:'filter'},
+    {vraag:'Wat is nummer 2?', opties:FIL, antwoord:'trechter'},
+    {vraag:'Wat is nummer 3?', opties:FIL, antwoord:'residu'},
+    {vraag:'Wat is nummer 4?', opties:FIL, antwoord:'reageerbuis'},
+    {vraag:'Wat is nummer 5?', opties:FIL, antwoord:'filtraat'},
+    {vraag:'Welk nummer is de stof die door het filter is gegaan?', opties:['1','2','3','4','5'], antwoord:'5'},
+    {vraag:'Welk nummer is de stof die het filter heeft tegengehouden?', opties:['1','2','3','4','5'], antwoord:'3'}
+  ]);
+
+  /* §2.2 OEFENEN 4 — rendement (gerandomiseerd) */
+  function p6RenGenereer(){
+    var stof = pick([['zout','zand'], ['suiker','zand'], ['vaste stof','water'], ['zout','krijt']]);
+    var type = pick(['direct','procent','omgekeerd']);
+    var M = pick([50, 80, 100, 120, 150, 200, 250]);
+    var r = rnd(0.6, 0.98, 2);
+    if (type === 'direct'){
+      var th = rnd(4, M * 0.6, 1);
+      var pr = Math.round(th * r * 10) / 10;
+      return {vraag:'In ' + M + ' g mengsel van ' + stof[0] + ' en ' + stof[1] + ' zit ' + fmt(th) + ' g ' + stof[0] + '. Na de scheiding heb je ' + fmt(pr) + ' g ' + stof[0] + '. Bereken het rendement (in %).', antwoord: pr / th * 100, eenheid:'%', uitleg:fmt(pr) + ' ÷ ' + fmt(th) + ' × 100%'};
+    }
+    if (type === 'procent'){
+      var p = pick([10, 20, 25, 30, 40, 50]);
+      var th2 = M * p / 100;
+      var pr2 = Math.round(th2 * r * 10) / 10;
+      return {vraag:'Je hebt ' + M + ' g mengsel met ' + p + ' massa-% ' + stof[0] + '. Na de scheiding heb je ' + fmt(pr2) + ' g ' + stof[0] + '. Bereken het rendement (in %).', antwoord: pr2 / th2 * 100, eenheid:'%', uitleg:'theoretisch = ' + p + '% van ' + M + ' g = ' + fmt(th2) + ' g; ' + fmt(pr2) + ' ÷ ' + fmt(th2) + ' × 100%'};
+    }
+    var th3 = rnd(5, M * 0.5, 1);
+    var rp = Math.round(r * 100);
+    return {vraag:'In een mengsel zit ' + fmt(th3) + ' g ' + stof[0] + '. Het rendement van de scheiding is ' + rp + '%. Hoeveel gram ' + stof[0] + ' haal je eruit?', antwoord: th3 * rp / 100, eenheid:'g', uitleg:rp + '% van ' + fmt(th3) + ' g = ' + rp + ' ÷ 100 × ' + fmt(th3)};
+  }
+  var p6Ren = maakReken('p6ren', p6RenGenereer, 0.015);
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
@@ -1487,6 +1739,11 @@
   p5Fc.start();
   p5Soort.start();
   p5Kenm.start();
+  p6Fc.start();
+  p6Eig.start();
+  p6Sit.start();
+  p6Fil.start();
+  p6Ren.start();
 </script>
 </body>
 </html>
