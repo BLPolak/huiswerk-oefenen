@@ -765,9 +765,112 @@
     <button class="sub-tab-btn" onclick="showSubTab('p5','flashcards',this)">&#127183; Flashcards</button>
     <button class="sub-tab-btn" onclick="showSubTab('p5','oefenen',this)">&#9999;&#65039; Oefenen</button>
   </nav>
-  <div id="sub-p5-uitleg" class="sub-tab-content active"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p5-flashcards" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
-  <div id="sub-p5-oefenen" class="sub-tab-content"><div class="uitleg-card"><p>Binnenkort.</p></div></div>
+  <div id="sub-p5-uitleg" class="sub-tab-content active">
+    <div class="uitleg-card">
+      <h2>Mengsels</h2>
+      <p>Een <strong>mengsel</strong> bestaat uit twee of meer stoffen. Er zijn verschillende soorten mengsels. Welk soort het is, hangt af van de <strong>fasen</strong> van de stoffen en of het mengsel <strong>helder</strong> of <strong>troebel</strong> is.</p>
+      <div class="regel-blok blauw"><p><strong>Helder</strong> = doorzichtig (je kunt erdoorheen kijken). Helder is niet hetzelfde als kleurloos: thee is helder én gekleurd.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Oplossing</h2>
+      <p>Een <strong>oplossing</strong> is een <strong>helder</strong> mengsel van een vaste stof, gas of vloeistof in een vloeistof. De opgeloste stof is zo fijn verdeeld dat de vloeistof helder en doorzichtig is.</p>
+      <div class="voorbeeld-blok">Voorbeelden: thee, suikerwater, drinkwater, cola, appelsap, brandspiritus.<br>Een oplossing kan <strong>kleurloos</strong> (suikerwater) of <strong>gekleurd</strong> (thee) zijn.</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Suspensie</h2>
+      <p>Een <strong>suspensie</strong> is een <strong>troebel</strong> mengsel van een <strong>vaste stof in een vloeistof</strong>. De deeltjes van de vaste stof zijn zo groot dat ze het licht tegenhouden. Vaak zakken ze na een tijdje naar de bodem: daarom moet je sinaasappelsap schudden voor gebruik.</p>
+      <div class="voorbeeld-blok">Voorbeelden: sinaasappelsap, modderwater, vloeibaar schuurmiddel, bloed.<br>Een suspensie is <strong>nooit kleurloos</strong>, maar altijd gekleurd of wit.</div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Emulsie, emulgator en tweelagensysteem</h2>
+      <p>Een <strong>emulsie</strong> is een <strong>troebel</strong> mengsel van <strong>twee vloeistoffen</strong>. Olie en water mengen alleen als je een hulpstof toevoegt: een <strong>emulgator</strong> (bijvoorbeeld afwasmiddel). De emulgator zorgt dat de emulsie langer gemengd blijft.</p>
+      <div class="voorbeeld-blok">Voorbeelden: melk, fritessaus, mayonaise, reinigingsmelk.</div>
+      <div class="regel-blok oranje"><p>Zonder emulgator <strong>ontmengt</strong> een emulsie snel. Dan vormen de twee vloeistoffen een <strong>tweelagensysteem</strong>: de vloeistof met de <strong>kleinste dichtheid</strong> komt <strong>bovenop</strong> (olie drijft op water).</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Rook, schuim en nevel</h2>
+      <table class="data-tabel">
+        <tr><th>Mengsel</th><th>Wat zit waarin?</th><th>Voorbeeld</th></tr>
+        <tr><td><strong>Rook</strong></td><td>vaste stof in een gas</td><td>rook van een kampvuur of wierook</td></tr>
+        <tr><td><strong>Schuim</strong></td><td>gas in een vloeistof</td><td>schuim op het strand, slagroom</td></tr>
+        <tr><td><strong>Nevel</strong></td><td>vloeistof in een gas</td><td>mist, wolken</td></tr>
+      </table>
+      <div class="regel-blok blauw"><p><strong>Gassen</strong> mengen altijd tot één gasfase: een mengsel van gassen (zoals lucht) is dus altijd <strong>helder</strong>.<br>Een mengsel van <strong>vaste stoffen</strong> (zoals kiezels in beton) is ondoorzichtig; je kunt de stoffen vaak nog herkennen.</p></div>
+    </div>
+
+    <div class="uitleg-card">
+      <h2>Overzicht kenmerken</h2>
+      <table class="data-tabel">
+        <tr><th>Soort mengsel</th><th>Helder of troebel?</th><th>Kleur</th><th>Voorbeeld</th></tr>
+        <tr><td>vaste stoffen</td><td>ondoorzichtig</td><td>gekleurd of wit</td><td>beton</td></tr>
+        <tr><td>gassen</td><td>helder</td><td>meestal kleurloos</td><td>lucht</td></tr>
+        <tr><td>oplossing</td><td>helder</td><td>kleurloos of gekleurd</td><td>suikerwater, thee</td></tr>
+        <tr><td>suspensie</td><td>troebel</td><td>gekleurd of wit</td><td>sinaasappelsap</td></tr>
+        <tr><td>emulsie</td><td>troebel</td><td>gekleurd of wit</td><td>melk, fritessaus</td></tr>
+      </table>
+    </div>
+  </div>
+  <div id="sub-p5-flashcards" class="sub-tab-content">
+    <div class="uitleg-card">
+      <h3 style="color:#059669;margin-bottom:.6rem">Vraag → antwoord (§2.1)</h3>
+      <div class="fc-topbar">
+        <div class="score-balk" style="margin-bottom:0">Score: <span id="p5fc-goed">0</span> / <span id="p5fc-totaal">0</span></div>
+        <div class="fc-teller" id="p5fc-teller">1 / 1</div>
+      </div>
+      <div class="flip-wrapper" onclick="p5Fc.flip()">
+        <div class="flip-card" id="p5fc-card">
+          <div class="flip-face flip-front">
+            <div class="flip-label">Vraag</div>
+            <div class="flip-tekst" id="p5fc-voor"></div>
+            <div class="flip-hint">Klik om om te draaien</div>
+          </div>
+          <div class="flip-face flip-back">
+            <div class="flip-label">Antwoord</div>
+            <div class="flip-tekst" id="p5fc-achter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="knoppen-rij" id="p5fc-oordeel" style="display:none">
+        <button onclick="p5Fc.oordeel(false)">&#10007; Fout</button>
+        <button onclick="p5Fc.oordeel(true)">&#10003; Goed</button>
+      </div>
+      <div class="knoppen-rij">
+        <button onclick="p5Fc.vorige()">&larr; Vorige</button>
+        <button onclick="p5Fc.volgende()">Volgende &rarr;</button>
+        <button onclick="p5Fc.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p5Fc.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
+  <div id="sub-p5-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart">
+      <h3>Onderdeel 1 — Wat voor mengsel is dit?</h3>
+      <div class="score-balk">Score: <span id="p5soort-goed">0</span> / <span id="p5soort-totaal">0</span></div>
+      <div id="p5soort-vraag" class="vraag-tekst"></div>
+      <div id="p5soort-opties" class="mc-grid"></div>
+      <div id="p5soort-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p5Soort.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p5Soort.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+
+    <div class="oefening-kaart">
+      <h3>Onderdeel 2 — Kenmerken van mengsels</h3>
+      <div class="score-balk">Score: <span id="p5kenm-goed">0</span> / <span id="p5kenm-totaal">0</span></div>
+      <div id="p5kenm-vraag" class="vraag-tekst"></div>
+      <div id="p5kenm-opties" class="mc-grid"></div>
+      <div id="p5kenm-feedback" class="feedback"></div>
+      <div class="knoppen-rij">
+        <button onclick="p5Kenm.opnieuw()">&#8635; Opnieuw</button>
+        <button onclick="p5Kenm.schud()">&#128256; Shuffle</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="tab-p6" class="tab-content">
@@ -1303,6 +1406,68 @@
   var p4a = maakFC('p4a', p4Begrippen.map(function(b){ return {voor:b[0], achter:b[1]}; }));
   var p4b = maakFC('p4b', p4Begrippen.map(function(b){ return {voor:b[1], achter:b[0]}; }));
 
+  /* §2.1 FLASHCARDS */
+  var p5Fc = maakFC('p5fc', [
+    {voor:'Wat is een mengsel?', achter:'Een stof die uit twee of meer stoffen bestaat'},
+    {voor:'Wat is een oplossing?', achter:'Een helder mengsel van een vaste stof, gas of vloeistof in een vloeistof'},
+    {voor:'Wat is een suspensie?', achter:'Een troebel mengsel van een vaste stof in een vloeistof'},
+    {voor:'Wat is een emulsie?', achter:'Een troebel mengsel van twee vloeistoffen'},
+    {voor:'Wat is een emulgator?', achter:'Een hulpstof die ervoor zorgt dat een emulsie langer gemengd blijft (bijv. afwasmiddel)'},
+    {voor:'Wat is een tweelagensysteem?', achter:'Twee vloeistoffen die niet mengen en twee lagen vormen; de vloeistof met de kleinste dichtheid ligt boven'},
+    {voor:'Wat is rook?', achter:'Een mengsel van een fijn verdeelde vaste stof in een gas'},
+    {voor:'Wat is schuim?', achter:'Een mengsel van fijn verdeeld gas in een vloeistof'},
+    {voor:'Wat is nevel?', achter:'Een mengsel van fijn verdeelde vloeistof in een gas'},
+    {voor:'Kan een oplossing gekleurd zijn?', achter:'Ja, bijv. thee. Een oplossing is wel altijd helder.'},
+    {voor:'Kan een suspensie kleurloos zijn?', achter:'Nee, een suspensie is altijd gekleurd of wit'},
+    {voor:'Waarom moet je sinaasappelsap schudden?', achter:'Het is een suspensie: de vaste deeltjes zakken naar de bodem'},
+    {voor:'Waarom is een mengsel van gassen altijd helder?', achter:'Gassen mengen altijd tot één gasfase'},
+    {voor:'Wat gebeurt er met een emulsie zonder emulgator?', achter:'Hij ontmengt snel en vormt een tweelagensysteem'}
+  ]);
+
+  /* §2.1 OEFENEN 1 — soort mengsel */
+  var SRT = ['oplossing','suspensie','emulsie','rook','schuim','nevel'];
+  var p5Soort = maakMC('p5soort', [
+    {vraag:'Thee', opties:SRT, antwoord:'oplossing', uitleg:'Helder (maar gekleurd).'},
+    {vraag:'Cola', opties:SRT, antwoord:'oplossing', uitleg:'Helder, alles is opgelost.'},
+    {vraag:'Zwarte koffie', opties:SRT, antwoord:'oplossing', uitleg:'Helder bruin: de stoffen zijn opgelost.'},
+    {vraag:'Suikerwater', opties:SRT, antwoord:'oplossing'},
+    {vraag:'Sinaasappelsap (jus d’orange)', opties:SRT, antwoord:'suspensie', uitleg:'Troebel: vaste deeltjes in een vloeistof.'},
+    {vraag:'Modderwater', opties:SRT, antwoord:'suspensie'},
+    {vraag:'Bloed', opties:SRT, antwoord:'suspensie', uitleg:'Bloedcellen (vast) in bloedplasma (vloeibaar).'},
+    {vraag:'Vloeibaar schuurmiddel', opties:SRT, antwoord:'suspensie', uitleg:'Vaste korreltjes in een vloeistof.'},
+    {vraag:'Krijt geschud met water', opties:SRT, antwoord:'suspensie'},
+    {vraag:'Jus (bloem in vet en water geroerd)', opties:SRT, antwoord:'suspensie', uitleg:'Bloem is een vaste stof die niet oplost.'},
+    {vraag:'Halfvolle melk', opties:SRT, antwoord:'emulsie', uitleg:'Vetdruppeltjes in water.'},
+    {vraag:'Fritessaus', opties:SRT, antwoord:'emulsie', uitleg:'Olie in water, met een emulgator.'},
+    {vraag:'Mayonaise', opties:SRT, antwoord:'emulsie'},
+    {vraag:'Reinigingsmelk', opties:SRT, antwoord:'emulsie'},
+    {vraag:'Olijfolie met water, net goed geschud', opties:SRT, antwoord:'emulsie', uitleg:'Zonder emulgator ontmengt dit snel weer.'},
+    {vraag:'Rook van wierook', opties:SRT, antwoord:'rook', uitleg:'Vaste deeltjes in een gas.'},
+    {vraag:'Schuim op het strand', opties:SRT, antwoord:'schuim', uitleg:'Gas in een vloeistof.'},
+    {vraag:'Slagroom', opties:SRT, antwoord:'schuim', uitleg:'Lucht in room.'},
+    {vraag:'Mist boven een weiland', opties:SRT, antwoord:'nevel', uitleg:'Waterdruppeltjes in lucht.'},
+    {vraag:'Wolk boven een koeltoren', opties:SRT, antwoord:'nevel', uitleg:'Waterdruppeltjes in lucht.'}
+  ]);
+
+  /* §2.1 OEFENEN 2 — kenmerken */
+  var p5Kenm = maakMC('p5kenm', [
+    {vraag:'Is een oplossing helder of troebel?', opties:['helder','troebel'], antwoord:'helder'},
+    {vraag:'Is een suspensie helder of troebel?', opties:['helder','troebel'], antwoord:'troebel'},
+    {vraag:'Is een emulsie helder of troebel?', opties:['helder','troebel'], antwoord:'troebel'},
+    {vraag:'Is een mengsel van gassen helder of troebel?', opties:['helder','troebel'], antwoord:'helder', uitleg:'Gassen mengen altijd tot één gasfase.'},
+    {vraag:'Kan een oplossing gekleurd zijn?', opties:['Ja','Nee'], antwoord:'Ja', uitleg:'Bijv. thee.'},
+    {vraag:'Kan een suspensie kleurloos zijn?', opties:['Ja','Nee'], antwoord:'Nee', uitleg:'Altijd gekleurd of wit.'},
+    {vraag:'Een emulsie is een mengsel van ...', opties:['twee vloeistoffen','een vaste stof in een vloeistof','een gas in een vloeistof','een vloeistof in een gas'], antwoord:'twee vloeistoffen'},
+    {vraag:'Een suspensie is een mengsel van ...', opties:['een vaste stof in een vloeistof','twee vloeistoffen','een gas in een vloeistof','een vaste stof in een gas'], antwoord:'een vaste stof in een vloeistof'},
+    {vraag:'Nevel is een mengsel van ...', opties:['een vloeistof in een gas','een gas in een vloeistof','een vaste stof in een gas','twee vloeistoffen'], antwoord:'een vloeistof in een gas'},
+    {vraag:'Schuim is een mengsel van ...', opties:['een gas in een vloeistof','een vloeistof in een gas','een vaste stof in een gas','twee vloeistoffen'], antwoord:'een gas in een vloeistof'},
+    {vraag:'Rook is een mengsel van ...', opties:['een vaste stof in een gas','een vloeistof in een gas','een gas in een vloeistof','een vaste stof in een vloeistof'], antwoord:'een vaste stof in een gas'},
+    {vraag:'Wat doet een emulgator?', opties:['Zorgt dat een emulsie langer gemengd blijft','Lost een vaste stof op','Scheidt olie en water'], antwoord:'Zorgt dat een emulsie langer gemengd blijft'},
+    {vraag:'Olie en water vormen een tweelagensysteem. Welke laag ligt boven?', opties:['olie','water'], antwoord:'olie', uitleg:'Olie heeft de kleinste dichtheid.'},
+    {vraag:'Je laat sinaasappelsap een tijdje staan. Wat zie je?', opties:['Vaste deeltjes zakken naar de bodem','Er ontstaan twee vloeistoflagen','Er verandert niets'], antwoord:'Vaste deeltjes zakken naar de bodem'},
+    {vraag:'Waarom moet je een emulsie als fritessaus niet zonder emulgator maken?', opties:['Dan ontmengt hij snel','Dan wordt hij helder','Dan gaat hij koken'], antwoord:'Dan ontmengt hij snel'}
+  ]);
+
   /* INIT */
   p1FcInit();
   p1Eig.start();
@@ -1319,6 +1484,9 @@
   p3Zm.start();
   p4a.start();
   p4b.start();
+  p5Fc.start();
+  p5Soort.start();
+  p5Kenm.start();
 </script>
 </body>
 </html>
