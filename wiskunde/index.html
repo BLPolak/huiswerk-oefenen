@@ -130,6 +130,18 @@
     .waarde-tabel { border-collapse: collapse; margin: .6rem 0; font-weight: 700; }
     .waarde-tabel th, .waarde-tabel td { border: 1px solid #cbd5e1; padding: .3rem .9rem; text-align: center; }
     .waarde-tabel th { background: #f0fdfa; color: #0d9488; }
+    .hfst-nav { display:flex; gap:.5rem; padding:.8rem 1.5rem 0; background:#fff; }
+    .hfst-btn { flex:1; max-width:240px; padding:.6rem 1rem; border:2px solid #0d9488; border-radius:10px; background:#fff; color:#0d9488; font-family:Nunito, sans-serif; font-size:1rem; font-weight:800; cursor:pointer; }
+    .hfst-btn.active { background:linear-gradient(135deg, #0d9488, #0ea5e9); border-color:transparent; color:#fff; }
+    .tab-groep { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .vgl { white-space: nowrap; }
+    .vraag-sub { font-size:.85rem; color:var(--grijs); font-weight:600; margin-top:.35rem; }
+    .video-lijst { display:flex; flex-direction:column; gap:.6rem; }
+    .video-kaart { display:flex; gap:.8rem; align-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:.5rem; transition:border-color .15s, background .15s; }
+    .video-kaart:hover { border-color:var(--teal); background:#f0fdfa; }
+    .video-kaart img { width:120px; height:68px; object-fit:cover; border-radius:6px; flex-shrink:0; background:#e2e8f0; }
+    .video-kaart strong { display:block; font-size:.95rem; line-height:1.3; }
+    .video-kaart small { color:var(--grijs); font-weight:600; }
     footer { text-align: center; padding: 1.5rem; color: #94a3b8; font-size: .85rem; }
   </style>
 </head>
@@ -137,11 +149,17 @@
 
 <header>
   <h1>&#128208; Wiskunde</h1>
-  <p>3 HAVO &middot; H1 Lineaire problemen</p>
+  <p>3 HAVO &middot; H1 Lineaire problemen &middot; H3 Kwadratische vergelijkingen</p>
   <a href="../">&larr; Terug naar overzicht</a>
 </header>
 
+<div class="hfst-nav">
+  <button class="hfst-btn active" onclick="showHfst('h1',this)">H1 Lineaire problemen</button>
+  <button class="hfst-btn" onclick="showHfst('h3',this)">H3 Kwadratische vergelijkingen</button>
+</div>
+
 <nav class="tab-nav">
+  <div class="tab-groep" id="groep-h1">
   <button class="tab-btn active" onclick="showTab('p0',this)">Voorkennis</button>
   <button class="tab-btn" onclick="showTab('p1',this)">&sect;1.1 Formules</button>
   <button class="tab-btn" onclick="showTab('p2',this)">&sect;1.2 Verbanden</button>
@@ -149,6 +167,16 @@
   <button class="tab-btn" onclick="showTab('p4',this)">&sect;1.4 Ongelijkheden</button>
   <button class="tab-btn" onclick="showTab('p5',this)">&sect;1.5 Functies</button>
   <button class="tab-btn" onclick="showTab('mix',this)">&#127919; Toetsmix</button>
+  </div>
+  <div class="tab-groep" id="groep-h3" style="display:none">
+  <button class="tab-btn" onclick="showTab('q1',this)">3.1 Parabolen</button>
+  <button class="tab-btn" onclick="showTab('q2',this)">3.2 Balansmethode</button>
+  <button class="tab-btn" onclick="showTab('q3',this)">3.3 Ontbinden</button>
+  <button class="tab-btn" onclick="showTab('q4',this)">3.4 Oplossen door ontbinden</button>
+  <button class="tab-btn" onclick="showTab('q5',this)">3.5 abc-formule</button>
+  <button class="tab-btn" onclick="showTab('q6',this)">3.6 Handigste methode</button>
+  <button class="tab-btn" onclick="showTab('qmix',this)">&#127919; Toetsmix H3</button>
+  </div>
 </nav>
 
 <div id="tab-p0" class="tab-content active">
@@ -717,11 +745,404 @@
   </div>
 </div>
 
+<!-- ===================== H3 KWADRATISCHE VERGELIJKINGEN ===================== -->
+
+<div id="tab-q1" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('q1','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q1','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q1','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-q1-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Kwadratische formules</summary>
+      <p>In een <strong>kwadratische formule</strong> komt x&sup2; voor (en geen hogere machten, wortels of x in de noemer).</p>
+      <div class="voorbeeld-blok">
+        Wel kwadratisch: y = x&sup2; &nbsp;&middot;&nbsp; y = 5x&sup2; &nbsp;&middot;&nbsp; y = 3(x + 4)&sup2; + 6 &nbsp;&middot;&nbsp; y = 3x&sup2; + 6x &nbsp;&middot;&nbsp; y = x&sup2; + 3x + 2<br>
+        Niet kwadratisch: y = 3x + 5 &nbsp;&middot;&nbsp; y = &radic;x &minus; 3 &nbsp;&middot;&nbsp; y = &minus;5x + 4&sup2;
+      </div>
+      <p style="margin-top:.8rem">De algemene vorm is <strong>y = ax&sup2; + bx + c</strong>. Werk eerst haakjes weg en zet de termen op volgorde.</p>
+    </details>
+    <details class="uitleg-card" open>
+      <summary>B. De grafiek: een parabool</summary>
+      <div id="q1-uitleg-grafiek"></div>
+      <div class="regel-blok groen">
+        <p><strong>a &gt; 0</strong> (positief getal voor x&sup2;) &rarr; <strong>dalparabool</strong>: de top is het <em>laagste</em> punt.</p>
+        <p><strong>a &lt; 0</strong> (negatief getal voor x&sup2;) &rarr; <strong>bergparabool</strong>: de top is het <em>hoogste</em> punt.</p>
+      </div>
+      <p>Hoe groter a (zonder minteken), hoe <strong>smaller</strong> de parabool. y = 3x&sup2; is smaller dan y = 0,5x&sup2;.</p>
+      <div class="regel-blok rood-blok">
+        <p><strong>Let op bij negatieve getallen invullen:</strong> zet ze tussen haakjes!</p>
+        <p>(&minus;3)&sup2; = 9, maar &minus;3&sup2; = &minus;9</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Bijzondere punten</summary>
+      <div class="stappen">
+        <div class="stap">Beginpunt: het punt met x = 0. Vul x = 0 in &rarr; y = c.</div>
+        <div class="stap">Nulpunten: de snijpunten met de x-as (daar is y = 0).</div>
+        <div class="stap">Top: het hoogste (berg) of laagste (dal) punt.</div>
+        <div class="stap">Symmetrie-as: verticale lijn door de top, x = x<sub>top</sub>.</div>
+      </div>
+      <div class="regel-blok blauw">
+        <p>De x van de top ligt <strong>precies midden tussen</strong> de x-waarden van de nulpunten.</p>
+        <p>x<sub>top</sub> = (x<sub>1</sub> + x<sub>2</sub>) : 2, daarna x<sub>top</sub> invullen geeft y<sub>top</sub>.</p>
+      </div>
+      <div class="voorbeeld-blok">
+        y = x&sup2; &minus; 2x &minus; 3 heeft nulpunten (&minus;1, 0) en (3, 0).<br>
+        x<sub>top</sub> = (&minus;1 + 3) : 2 = 1<br>
+        y<sub>top</sub> = 1&sup2; &minus; 2 &middot; 1 &minus; 3 = &minus;4 &rarr; top (1, &minus;4)<br>
+        Beginpunt: x = 0 &rarr; y = &minus;3 &rarr; (0, &minus;3)
+      </div>
+    </details>
+    <div class="uitleg-card">
+      <h2>&#127916; Filmpjes</h2>
+      <div class="video-lijst">
+        <a class="video-kaart" href="https://www.youtube.com/watch?v=3M0_X6U1THQ" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/3M0_X6U1THQ/mqdefault.jpg" alt="" loading="lazy"><span><strong>Wiskunde in 5 minuten: bergparabolen en dalparabolen</strong><small>YouTube</small></span></a>
+        <a class="video-kaart" href="https://www.youtube.com/watch?v=joYA0Eq7xs4" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/joYA0Eq7xs4/mqdefault.jpg" alt="" loading="lazy"><span><strong>Eigenschappen van parabolen (berg/dal, top)</strong><small>YouTube</small></span></a>
+      </div>
+    </div>
+  </div>
+  <div id="sub-q1-flashcards" class="sub-tab-content">
+    <div id="q1-fc"></div>
+  </div>
+  <div id="sub-q1-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart"><h3>A. Dal- of bergparabool?</h3><div id="q1-oef-a"></div></div>
+    <div class="oefening-kaart"><h3>B. Punten berekenen (beginpunt, invullen)</h3><div id="q1-oef-b"></div></div>
+    <div class="oefening-kaart"><h3>C. De top via de nulpunten</h3><div id="q1-oef-c"></div></div>
+  </div>
+</div>
+
+<div id="tab-q2" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('q2','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q2','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q2','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-q2-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. x&sup2; = getal (balansmethode)</summary>
+      <p>Komt x alleen als <strong>x&sup2;</strong> voor (geen losse x-term)? Dan los je op met de balansmethode.</p>
+      <div class="stappen">
+        <div class="stap">1. Herleid tot x&sup2; = p (of (x + q)&sup2; = p)</div>
+        <div class="stap">2. Los op met de wortel: let op de twee kanten!</div>
+      </div>
+      <table class="waarde-tabel">
+        <tr><th>p &gt; 0</th><th>p = 0</th><th>p &lt; 0</th></tr>
+        <tr><td>twee oplossingen<br>x = &radic;p &or; x = &minus;&radic;p</td><td>&eacute;&eacute;n oplossing<br>x = 0</td><td>geen oplossing</td></tr>
+      </table>
+      <div class="voorbeeld-blok">
+        2x&sup2; + 3 = 21<br>
+        2x&sup2; = 18 &nbsp;&nbsp;(&minus;3)<br>
+        x&sup2; = 9 &nbsp;&nbsp;(:2)<br>
+        x = 3 &or; x = &minus;3
+      </div>
+      <p style="margin-top:.6rem">Het teken <strong>&or;</strong> betekent &ldquo;of&rdquo;.</p>
+    </details>
+    <details class="uitleg-card">
+      <summary>B. Met haakjes: (x + q)&sup2; = p</summary>
+      <div class="voorbeeld-blok">
+        (x + 4)&sup2; = 25<br>
+        x + 4 = 5 &or; x + 4 = &minus;5<br>
+        x = 1 &or; x = &minus;9
+      </div>
+      <div class="regel-blok rood-blok">
+        <p>Werk de haakjes hier <strong>niet</strong> weg: neem eerst de wortel van beide kanten.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Exact of afgerond</summary>
+      <div class="voorbeeld-blok">
+        x&sup2; = 12<br>
+        <strong>Exact:</strong> x = &radic;12 &or; x = &minus;&radic;12<br>
+        <strong>Afgerond:</strong> x &asymp; 3,46 &or; x &asymp; &minus;3,46
+      </div>
+      <p style="margin-top:.6rem">&ldquo;Los exact op&rdquo; = met &radic; laten staan. &ldquo;In twee decimalen&rdquo; = afronden met je rekenmachine.</p>
+    </details>
+  </div>
+  <div id="sub-q2-flashcards" class="sub-tab-content">
+    <div id="q2-fc"></div>
+  </div>
+  <div id="sub-q2-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart"><h3>A. x&sup2; = getal (mooie uitkomst)</h3><div id="q2-oef-a"></div></div>
+    <div class="oefening-kaart"><h3>B. (x + q)&sup2; = getal</h3><div id="q2-oef-b"></div></div>
+    <div class="oefening-kaart"><h3>C. Hoeveel oplossingen?</h3><div id="q2-oef-c"></div></div>
+    <div class="oefening-kaart"><h3>D. Afronden op twee decimalen</h3><div id="q2-oef-d"></div></div>
+  </div>
+</div>
+
+<div id="tab-q3" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('q3','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q3','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q3','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-q3-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Wat is ontbinden in factoren?</summary>
+      <p>Ontbinden is het <strong>omgekeerde van haakjes wegwerken</strong>: je schrijft een som als een <strong>product</strong> (met haakjes).</p>
+      <div class="voorbeeld-blok">
+        Haakjes wegwerken: x(x + 7) = x&sup2; + 7x<br>
+        Ontbinden: x&sup2; + 7x = x(x + 7)
+      </div>
+    </details>
+    <details class="uitleg-card" open>
+      <summary>B. Tweeterm ax&sup2; + bx</summary>
+      <div class="stappen">
+        <div class="stap">1. Zoek de grootste gemeenschappelijke factor (ggf) van ax&sup2; en bx</div>
+        <div class="stap">2. Zet de ggf v&oacute;&oacute;r de haakjes</div>
+        <div class="stap">3. Bedenk wat er tussen de haakjes moet komen</div>
+      </div>
+      <div class="voorbeeld-blok">
+        3x&sup2; + 9x &nbsp;&rarr;&nbsp; ggf = 3x &nbsp;&rarr;&nbsp; 3x(x + 3)<br>
+        &minus;2x&sup2; &minus; 4x &nbsp;&rarr;&nbsp; ggf = &minus;2x &nbsp;&rarr;&nbsp; &minus;2x(x + 2)<br>
+        5x&sup2; + 7x &nbsp;&rarr;&nbsp; ggf = x &nbsp;&rarr;&nbsp; x(5x + 7)
+      </div>
+      <p style="margin-top:.6rem">Controleer altijd door de haakjes weer weg te werken.</p>
+    </details>
+    <details class="uitleg-card" open>
+      <summary>C. Drieterm x&sup2; + bx + c: product-som-methode</summary>
+      <p>x&sup2; + bx + c = (x + &hellip;)(x + &hellip;). Zoek twee getallen met:</p>
+      <div class="regel-blok groen">
+        <p><strong>product</strong> = c (het losse getal)</p>
+        <p><strong>som</strong> = b (het getal voor x)</p>
+      </div>
+      <div class="voorbeeld-blok">
+        x&sup2; + 5x &minus; 14: product &minus;14, som 5<br>
+        Tabel van product &minus;14: 1&middot;&minus;14, &minus;1&middot;14, 2&middot;&minus;7, <strong>&minus;2&middot;7</strong> &rarr; som 5 &#10003;<br>
+        x&sup2; + 5x &minus; 14 = (x &minus; 2)(x + 7)
+      </div>
+      <div class="regel-blok oranje">
+        <p><strong>Tip:</strong> is c positief, dan hebben beide getallen hetzelfde teken, net als b. Is c negatief, dan is &eacute;&eacute;n getal negatief.</p>
+      </div>
+      <p>Staat er een getal voor x&sup2;? Haal dat eerst buiten haakjes: 2x&sup2; + 10x + 12 = 2(x&sup2; + 5x + 6) = 2(x + 2)(x + 3).</p>
+    </details>
+    <div class="uitleg-card">
+      <h2>&#127916; Filmpjes</h2>
+      <div class="video-lijst">
+        <a class="video-kaart" href="https://www.youtube.com/watch?v=SqLquV0Ha48" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/SqLquV0Ha48/mqdefault.jpg" alt="" loading="lazy"><span><strong>Ontbinden in factoren: buiten haakjes halen en drieterm</strong><small>MathSina &middot; YouTube</small></span></a>
+        <a class="video-kaart" href="https://www.youtube.com/watch?v=MGVXnFzwRe0" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/MGVXnFzwRe0/mqdefault.jpg" alt="" loading="lazy"><span><strong>Product-som-methode stap voor stap</strong><small>Wiskunde met Cindy &middot; YouTube</small></span></a>
+      </div>
+    </div>
+  </div>
+  <div id="sub-q3-flashcards" class="sub-tab-content">
+    <div id="q3-fc"></div>
+  </div>
+  <div id="sub-q3-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart"><h3>A. Tweeterm: ggf buiten haakjes</h3><div id="q3-oef-a"></div></div>
+    <div class="oefening-kaart"><h3>B. Drieterm: product-som-methode</h3><div id="q3-oef-b"></div></div>
+    <div class="oefening-kaart"><h3>C. Eerst een getal buiten haakjes</h3><div id="q3-oef-c"></div></div>
+  </div>
+</div>
+
+<div id="tab-q4" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('q4','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q4','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q4','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-q4-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. De regel A &middot; B = 0</summary>
+      <div class="regel-blok groen">
+        <p><strong>Als A &middot; B = 0, dan A = 0 &or; B = 0.</strong></p>
+        <p>Een product is alleen 0 als minstens &eacute;&eacute;n van de factoren 0 is.</p>
+      </div>
+      <p>Daarom: zorg dat er <strong>0 aan &eacute;&eacute;n kant</strong> staat, ontbind de andere kant, en stel elke factor gelijk aan 0.</p>
+    </details>
+    <details class="uitleg-card" open>
+      <summary>B. Type tweeterm: ax&sup2; + bx = 0</summary>
+      <div class="voorbeeld-blok">
+        5x&sup2; = 10x &nbsp;&nbsp;(eerst herleiden op 0)<br>
+        5x&sup2; &minus; 10x = 0<br>
+        5x(x &minus; 2) = 0<br>
+        5x = 0 &or; x &minus; 2 = 0<br>
+        x = 0 &or; x = 2
+      </div>
+      <div class="regel-blok rood-blok">
+        <p><strong>Nooit delen door x!</strong> Dan raak je de oplossing x = 0 kwijt.</p>
+      </div>
+    </details>
+    <details class="uitleg-card" open>
+      <summary>C. Type drieterm: x&sup2; + bx + c = 0</summary>
+      <div class="voorbeeld-blok">
+        x&sup2; &minus; 11x + 10 = 0<br>
+        (x &minus; 1)(x &minus; 10) = 0 &nbsp;&nbsp;(product 10, som &minus;11)<br>
+        x &minus; 1 = 0 &or; x &minus; 10 = 0<br>
+        x = 1 &or; x = 10
+      </div>
+      <h3>Eerst herleiden</h3>
+      <div class="voorbeeld-blok">
+        x&sup2; + 5x = &minus;6 &nbsp;&rarr;&nbsp; x&sup2; + 5x + 6 = 0<br>
+        3x&sup2; + 15x &minus; 18 = 0 &nbsp;&rarr;&nbsp; alles delen door 3: x&sup2; + 5x &minus; 6 = 0<br>
+        &minus;x&sup2; + 6x &minus; 5 = 0 &nbsp;&rarr;&nbsp; alles keer &minus;1: x&sup2; &minus; 6x + 5 = 0
+      </div>
+      <div class="regel-blok oranje">
+        <p><strong>Let op het teken:</strong> bij (x + 3)(x &minus; 4) = 0 zijn de oplossingen x = &minus;3 &or; x = 4 (tegengesteld teken!).</p>
+      </div>
+    </details>
+    <div class="uitleg-card">
+      <h2>&#127916; Filmpje</h2>
+      <div class="video-lijst">
+        <a class="video-kaart" href="https://www.youtube.com/watch?v=3njQGjIz9DY" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/3njQGjIz9DY/mqdefault.jpg" alt="" loading="lazy"><span><strong>Kwadratische vergelijkingen oplossen door te ontbinden in factoren</strong><small>YouTube</small></span></a>
+      </div>
+    </div>
+  </div>
+  <div id="sub-q4-flashcards" class="sub-tab-content">
+    <div id="q4-fc"></div>
+  </div>
+  <div id="sub-q4-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart"><h3>A. ax&sup2; + bx = 0</h3><div id="q4-oef-a"></div></div>
+    <div class="oefening-kaart"><h3>B. x&sup2; + bx + c = 0</h3><div id="q4-oef-b"></div></div>
+    <div class="oefening-kaart"><h3>C. Eerst herleiden, dan ontbinden</h3><div id="q4-oef-c"></div></div>
+  </div>
+</div>
+
+<div id="tab-q5" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('q5','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q5','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q5','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-q5-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. De abc-formule</summary>
+      <p>Lukt ontbinden niet (bv. x&sup2; &minus; 6x + 2 = 0)? De abc-formule werkt <strong>altijd</strong>.</p>
+      <div class="regel-blok blauw">
+        <p>Bij ax&sup2; + bx + c = 0 (a &ne; 0):</p>
+        <p><strong>D = b&sup2; &minus; 4ac</strong> &nbsp;(de discriminant)</p>
+        <p><strong>x = (&minus;b + &radic;D) / 2a &nbsp;&or;&nbsp; x = (&minus;b &minus; &radic;D) / 2a</strong></p>
+      </div>
+      <div class="stappen">
+        <div class="stap">1. Schrijf de vergelijking in de vorm ax&sup2; + bx + c = 0</div>
+        <div class="stap">2. Noteer a, b en c (met hun teken!)</div>
+        <div class="stap">3. Bereken D = b&sup2; &minus; 4ac</div>
+        <div class="stap">4. Vul in: x = (&minus;b &plusmn; &radic;D) / 2a</div>
+      </div>
+      <div class="voorbeeld-blok">
+        3x&sup2; &minus; x &minus; 2 = 0 &rarr; a = 3, b = &minus;1, c = &minus;2<br>
+        D = (&minus;1)&sup2; &minus; 4 &middot; 3 &middot; &minus;2 = 1 + 24 = 25<br>
+        x = (1 + 5) / 6 = 1 &or; x = (1 &minus; 5) / 6 = &minus;&#8532;
+      </div>
+    </details>
+    <details class="uitleg-card" open>
+      <summary>B. De discriminant: hoeveel oplossingen?</summary>
+      <table class="waarde-tabel">
+        <tr><th>D &gt; 0</th><th>D = 0</th><th>D &lt; 0</th></tr>
+        <tr><td>twee oplossingen</td><td>&eacute;&eacute;n oplossing</td><td>geen oplossing</td></tr>
+      </table>
+      <div class="voorbeeld-blok">2x&sup2; + 3x + 7 = 0: D = 3&sup2; &minus; 4 &middot; 2 &middot; 7 = 9 &minus; 56 = &minus;47 &lt; 0 &rarr; geen oplossing</div>
+      <div class="regel-blok rood-blok">
+        <p><strong>Valkuil:</strong> b&sup2; is altijd positief: (&minus;8)&sup2; = 64. En let op &minus;4ac met een negatieve a of c: &minus;4 &middot; 3 &middot; &minus;2 = +24.</p>
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>C. Exact of in decimalen</summary>
+      <div class="voorbeeld-blok">
+        2 &minus; 8x &minus; 3x&sup2; = 0 &rarr; a = &minus;3, b = &minus;8, c = 2<br>
+        D = (&minus;8)&sup2; &minus; 4 &middot; &minus;3 &middot; 2 = 64 + 24 = 88<br>
+        <strong>Exact:</strong> x = (8 + &radic;88) / &minus;6 &or; x = (8 &minus; &radic;88) / &minus;6<br>
+        <strong>Afgerond:</strong> x &asymp; &minus;2,90 &or; x &asymp; 0,23
+      </div>
+    </details>
+    <details class="uitleg-card">
+      <summary>D. Vergelijkingen met breuken</summary>
+      <p>Staan er breuken in? Vermenigvuldig eerst <strong>alle termen</strong> zodat de breuken verdwijnen. Dat rekent veel makkelijker.</p>
+      <div class="voorbeeld-blok">
+        &frac13;x&sup2; + 2x &minus; 1 = 0 &nbsp;&nbsp;(alles &times; 3)<br>
+        x&sup2; + 6x &minus; 3 = 0 &rarr; a = 1, b = 6, c = &minus;3<br>
+        D = 36 + 12 = 48 &rarr; x &asymp; 0,46 &or; x &asymp; &minus;6,46
+      </div>
+    </details>
+    <div class="uitleg-card">
+      <h2>&#127916; Filmpje</h2>
+      <div class="video-lijst">
+        <a class="video-kaart" href="https://www.youtube.com/watch?v=ObLmA8663aw" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/ObLmA8663aw/mqdefault.jpg" alt="" loading="lazy"><span><strong>Wiskunde: de abc-formule</strong><small>YouTube</small></span></a>
+      </div>
+    </div>
+  </div>
+  <div id="sub-q5-flashcards" class="sub-tab-content">
+    <div id="q5-fc"></div>
+  </div>
+  <div id="sub-q5-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart"><h3>A. Bereken de discriminant</h3><div id="q5-oef-a"></div></div>
+    <div class="oefening-kaart"><h3>B. Hoeveel oplossingen?</h3><div id="q5-oef-b"></div></div>
+    <div class="oefening-kaart"><h3>C. abc-formule (nette uitkomst)</h3><div id="q5-oef-c"></div></div>
+    <div class="oefening-kaart"><h3>D. abc-formule (twee decimalen)</h3><div id="q5-oef-d"></div></div>
+    <div class="oefening-kaart"><h3>E. Met breuken</h3><div id="q5-oef-e"></div></div>
+  </div>
+</div>
+
+<div id="tab-q6" class="tab-content">
+  <nav class="sub-tab-nav">
+    <button class="sub-tab-btn active" onclick="showSubTab('q6','uitleg',this)">&#128214; Uitleg</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q6','flashcards',this)">&#127183; Flashcards</button>
+    <button class="sub-tab-btn" onclick="showSubTab('q6','oefenen',this)">&#9999;&#65039; Oefenen</button>
+  </nav>
+  <div id="sub-q6-uitleg" class="sub-tab-content active">
+    <details class="uitleg-card" open>
+      <summary>A. Vuistregels: welke methode?</summary>
+      <div class="stappen">
+        <div class="stap">1. Staan er breuken? Werk ze weg (alles vermenigvuldigen).</div>
+        <div class="stap">2. Vereenvoudig zoveel mogelijk (haakjes weg, termen samen).</div>
+        <div class="stap">3. Kun je het herleiden tot x&sup2; = getal? &rarr; balansmethode</div>
+        <div class="stap">4. Kun je ontbinden in factoren? &rarr; A &middot; B = 0</div>
+        <div class="stap">5. Lukt dat allemaal niet? &rarr; abc-formule</div>
+      </div>
+    </details>
+    <details class="uitleg-card" open>
+      <summary>B. Overzicht</summary>
+      <table class="waarde-tabel">
+        <tr><th>Vorm</th><th>Methode</th></tr>
+        <tr><td>ax&sup2; = c of (x + q)&sup2; = c<br>(geen losse x)</td><td>balansmethode</td></tr>
+        <tr><td>ax&sup2; + bx = 0<br>(geen los getal)</td><td>ontbinden tweeterm<br>x(ax + b) = 0</td></tr>
+        <tr><td>x&sup2; + bx + c = 0<br>met mooie getallen</td><td>product-som-methode</td></tr>
+        <tr><td>al het andere</td><td>abc-formule</td></tr>
+      </table>
+      <div class="voorbeeld-blok">
+        &frac12;x&sup2; = 32 &rarr; x&sup2; = 64 &rarr; x = 8 &or; x = &minus;8<br>
+        x&sup2; &minus; 18 = 7x &rarr; x&sup2; &minus; 7x &minus; 18 = 0 &rarr; (x + 2)(x &minus; 9) = 0 &rarr; x = &minus;2 &or; x = 9<br>
+        2x(x &minus; 5) = &minus;15 &rarr; 2x&sup2; &minus; 10x + 15 = 0 &rarr; D = 100 &minus; 120 = &minus;20 &rarr; geen oplossing
+      </div>
+    </details>
+    <div class="uitleg-card">
+      <h2>&#127916; Filmpje</h2>
+      <div class="video-lijst">
+        <a class="video-kaart" href="https://www.youtube.com/watch?v=IY4jy8jl5ds" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/IY4jy8jl5ds/mqdefault.jpg" alt="" loading="lazy"><span><strong>Kwadratische vergelijkingen: ontbinden, abc-formule en bordjes (havo 3)</strong><small>YouTube</small></span></a>
+      </div>
+    </div>
+  </div>
+  <div id="sub-q6-flashcards" class="sub-tab-content">
+    <div id="q6-fc"></div>
+  </div>
+  <div id="sub-q6-oefenen" class="sub-tab-content">
+    <div class="oefening-kaart"><h3>A. Welke methode is het handigst?</h3><div id="q6-oef-a"></div></div>
+    <div class="oefening-kaart"><h3>B. Los op met de handigste methode</h3><div id="q6-oef-b"></div></div>
+  </div>
+</div>
+
+<div id="tab-qmix" class="tab-content">
+  <div class="uitleg-card">
+    <p>&#127919; <strong>Toetsmix H3:</strong> 18 gemengde opgaven, 3 per onderdeel (3.1 t/m 3.6), in willekeurige volgorde. Aan het eind zie je per onderdeel hoe het ging.</p>
+    <p style="margin-top:.5rem"><strong>Tip:</strong> werk op papier mee en schrijf je tussenstappen op, net als op de toets.</p>
+  </div>
+  <div class="oefening-kaart">
+    <div id="qmix-oef"></div>
+  </div>
+</div>
+
 <footer>Gemaakt voor Sam &middot; 3 HAVO</footer>
 
 <script>
   function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
   function showSubTab(para,sub,btn){var container=document.getElementById('tab-'+para);container.querySelectorAll('.sub-tab-content').forEach(function(t){t.classList.remove('active');});container.querySelectorAll('.sub-tab-btn').forEach(function(b){b.classList.remove('active');});document.getElementById('sub-'+para+'-'+sub).classList.add('active');btn.classList.add('active');}
+  function showHfst(h, btn){
+    document.querySelectorAll('.hfst-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    ['h1', 'h3'].forEach(function(x){ document.getElementById('groep-' + x).style.display = x === h ? '' : 'none'; });
+    var eerste = document.querySelector('#groep-' + h + ' .tab-btn');
+    showTab(eerste.getAttribute('onclick').match(/showTab\('([^']+)'/)[1], eerste);
+  }
   function fisherYates(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
   function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 
@@ -2570,6 +2991,387 @@
     window.scrollTo(0, 0);
   }
 
+  /* ===================== H3 KWADRATISCHE VERGELIJKINGEN ===================== */
+  // som([[3,'x²'],[-2,'x'],[5,'']]) → "3x² − 2x + 5"
+  function som(lijst){ var s = ''; lijst.forEach(function(t){ s += term(t[0], t[1], s === ''); }); return s || '0'; }
+  function kw(a, b, c){ return som([[a,'x²'],[b,'x'],[c,'']]); }
+  function vgl(l, r){ return '<span class="vgl">' + l + ' = ' + r + '</span>'; }
+  function hk(n){ return n < 0 ? '(' + fmt(n) + ')' : fmt(n); }
+  function ggd(a, b){ a = Math.abs(a); b = Math.abs(b); while (b){ var t = b; b = a % b; a = t; } return a; }
+  function isKwadraat(n){ return n >= 0 && Math.abs(Math.sqrt(n) - Math.round(Math.sqrt(n))) < 1e-9; }
+  function dec2(n){ return (n < 0 ? '−' : '') + Math.abs(n).toFixed(2).replace('.', ','); }
+  var OPL_HINT = '<div class="vraag-sub">Vul bij x₁ de kleinste oplossing in. Een breuk mag ook, bv. -3/2.</div>';
+  var OPL_HINT_DEC = '<div class="vraag-sub">Rond af op twee decimalen. Vul bij x₁ de kleinste oplossing in.</div>';
+  function tweeOpl(x1, x2){
+    var s = [x1, x2].sort(function(p, q){ return p - q; });
+    return [{voor:'x₁ =', antwoord:s[0]}, {voor:'x₂ =', antwoord:s[1]}];
+  }
+  // dezelfde vergelijking ax² + bx + c = 0, maar soms met een term naar rechts gebracht
+  function toonVgl(a, b, c){
+    var v = rnd(0, 3);
+    if (v === 1 && c !== 0) return vgl(som([[a,'x²'],[b,'x']]), fmt(-c));
+    if (v === 2 && b !== 0) return vgl(som([[a,'x²'],[c,'']]), som([[-b,'x']]));
+    if (v === 3 && b !== 0 && c !== 0) return vgl(som([[a,'x²']]), som([[-b,'x'],[-c,'']]));
+    return vgl(kw(a, b, c), '0');
+  }
+  // uitwerking abc-formule; kop = false → zonder de regel "Schrijf als …"
+  function abcUitw(a, b, c, kop){
+    var D = b * b - 4 * a * c, s = '';
+    if (kop !== false) s += 'Schrijf als: ' + kw(a, b, c) + ' = 0<br>';
+    s += 'a = ' + fmt(a) + ', b = ' + fmt(b) + ', c = ' + fmt(c) + '<br>';
+    s += 'D = ' + hk(b) + '² − 4 · ' + hk(a) + ' · ' + hk(c) + ' = ' + fmt(b * b) + ' − ' + hk(4 * a * c) + ' = ' + fmt(D) + '<br>';
+    if (D < 0) return s + 'D &lt; 0 → geen oplossing';
+    if (D === 0) return s + 'D = 0 → één oplossing: x = ' + fmt(-b) + ' / ' + hk(2 * a) + ' = ' + fmt(-b / (2 * a));
+    var x1 = (-b + Math.sqrt(D)) / (2 * a), x2 = (-b - Math.sqrt(D)) / (2 * a);
+    s += 'x = (' + fmt(-b) + ' + √' + fmt(D) + ') / ' + hk(2 * a) + ' ∨ x = (' + fmt(-b) + ' − √' + fmt(D) + ') / ' + hk(2 * a) + '<br>';
+    if (isKwadraat(D)) s += '√' + fmt(D) + ' = ' + Math.round(Math.sqrt(D)) + ' → x = ' + fmt(x1) + ' ∨ x = ' + fmt(x2);
+    else s += 'x ≈ ' + dec2(x1) + ' ∨ x ≈ ' + dec2(x2);
+    return s;
+  }
+
+  /* --- 3.1 Parabolen --- */
+  function q1A(){
+    var a = Math.random() < .25 ? pick([0.5, -0.5, -0.25, 1.5]) : rnd(-5, 5, true), f;
+    var r = Math.random();
+    if (r < .25){
+      var p = rnd(-5, 5, true), q = rnd(-9, 9);
+      f = (a === 1 ? '' : a === -1 ? '−' : fmt(a)) + '(' + lin(1, p) + ')²' + term(q, '', false);
+    } else if (r < .5){
+      var c1 = rnd(-9, 9, true);
+      f = som([[c1,''],[rnd(-8, 8),'x'],[a,'x²']]);
+    } else {
+      f = kw(a, rnd(-8, 8), rnd(-9, 9));
+    }
+    return {vraag:'Is de grafiek van <span class="vgl">y = ' + f + '</span> een dalparabool of een bergparabool?',
+      velden:[{keuze:['dalparabool', 'bergparabool'], antwoord: a > 0 ? 'dalparabool' : 'bergparabool'}],
+      uitwerking:'Kijk naar het getal vóór x² (of vóór de haakjes in het kwadraat): a = ' + fmt(a) + '<br>' + (a > 0 ? 'a &gt; 0 → dalparabool' : 'a &lt; 0 → bergparabool')};
+  }
+  function q1B(){
+    var a = rnd(-4, 4, true), b = rnd(-9, 9), c = rnd(-12, 12);
+    return {vraag:'Bereken het beginpunt (x = 0) van de grafiek van <span class="vgl">y = ' + kw(a, b, c) + '</span>.',
+      velden:[{voor:'(0,', antwoord:c, na:')'}],
+      uitwerking:'Vul x = 0 in: y = ' + fmt(a) + ' · 0² + ' + hk(b) + ' · 0 + ' + hk(c) + ' = ' + fmt(c) + '<br>Het beginpunt is (0, ' + fmt(c) + ').'};
+  }
+  function q1C(){
+    var a = rnd(-3, 3, true), b = rnd(-6, 6), c = rnd(-9, 9), k = Math.random() < .7 ? rnd(-5, -1) : rnd(1, 5);
+    var y = a * k * k + b * k + c;
+    return {vraag:'Gegeven is <span class="vgl">y = ' + kw(a, b, c) + '</span>. Bereken y voor x = ' + fmt(k) + '.',
+      velden:[{voor:'y =', antwoord:y}],
+      uitwerking:'y = ' + fmt(a) + ' · ' + hk(k) + '² + ' + hk(b) + ' · ' + hk(k) + ' + ' + hk(c) + '<br>= ' + fmt(a) + ' · ' + fmt(k * k) + ' + ' + hk(b * k) + ' + ' + hk(c) + ' = ' + fmt(y) +
+        (k < 0 ? '<br>Let op: ' + hk(k) + '² = ' + fmt(k * k) + ' (positief!)' : '')};
+  }
+  function q1D(){
+    var p = rnd(-6, 5), q = rnd(p + 1, 7), s = pick([1, 1, -1]);
+    var a = s, b = -s * (p + q), c = s * p * q, xt = (p + q) / 2, yt = s * (xt - p) * (xt - q);
+    return {vraag:'De parabool <span class="vgl">y = ' + kw(a, b, c) + '</span> heeft nulpunten (' + fmt(p) + ', 0) en (' + fmt(q) + ', 0). Bereken de top.',
+      velden:[{voor:'top: x =', antwoord:xt}, {voor:'y =', antwoord:yt}],
+      uitwerking:'x<sub>top</sub> ligt midden tussen de nulpunten: (' + fmt(p) + ' + ' + hk(q) + ') : 2 = ' + fmt(xt) + '<br>' +
+        'y<sub>top</sub> = ' + fmt(a) + ' · ' + hk(xt) + '² + ' + hk(b) + ' · ' + hk(xt) + ' + ' + hk(c) + ' = ' + fmt(yt) + '<br>' +
+        'Top (' + fmt(xt) + ', ' + fmt(yt) + '), symmetrie-as x = ' + fmt(xt)};
+  }
+
+  /* --- 3.2 Balansmethode --- */
+  // stappen voor ax² + d = e (met x² = c)
+  function balansStappen(a, d, e, basis){
+    basis = basis || 'x²';
+    var u = vgl(a === 1 ? basis : fmt(a) + basis, fmt(e)) + '<br>';
+    if (d) u = vgl((a === 1 ? basis : fmt(a) + basis) + term(d, '', false), fmt(e)) + '<br>' + vgl(a === 1 ? basis : fmt(a) + basis, fmt(e - d)) + ' &nbsp;(' + (d > 0 ? '−' + fmt(d) : '+' + fmt(-d)) + ' aan beide kanten)<br>';
+    if (a !== 1) u += vgl(basis, fmt((e - d) / a)) + ' &nbsp;(:' + fmt(a) + ')<br>';
+    return u;
+  }
+  function q2A(){
+    var n = rnd(1, 12), a = pick([1, 1, 2, 3, 4, 5]), d = Math.random() < .75 ? rnd(-30, 30, true) : 0, e = a * n * n + d;
+    var tekst = vgl(som([[a,'x²'],[d,'']]), fmt(e));
+    return {vraag:'Los op: ' + tekst + OPL_HINT, vgl:tekst, hint:OPL_HINT, velden:tweeOpl(-n, n),
+      uitwerking:balansStappen(a, d, e) + 'x = ' + n + ' ∨ x = −' + n};
+  }
+  function q2B(){
+    var p = rnd(-8, 8, true), n = rnd(1, 9), v = rnd(0, 2), basis = '(' + lin(1, p) + ')²', a = 1, d = 0;
+    if (v === 1) a = pick([2, 3]);
+    if (v === 2) d = rnd(-15, 15, true);
+    var e = a * n * n + d, tekst = vgl((a === 1 ? '' : a) + basis + term(d, '', false), fmt(e));
+    return {vraag:'Los op: ' + tekst + OPL_HINT, vgl:tekst, hint:OPL_HINT, velden:tweeOpl(-p - n, -p + n),
+      uitwerking:balansStappen(a, d, e, basis) + lin(1, p) + ' = ' + n + ' ∨ ' + lin(1, p) + ' = −' + n + '<br>x = ' + fmt(-p + n) + ' ∨ x = ' + fmt(-p - n)};
+  }
+  function q2C(){
+    var t = rnd(0, 2), haakjes = Math.random() < .3, a = haakjes ? 1 : pick([1, 2, 3, 4]), d = rnd(-20, 20, true);
+    var c = t === 0 ? -rnd(1, 20) : t === 1 ? 0 : rnd(1, 30);
+    var basis = haakjes ? '(' + lin(1, rnd(-5, 5, true)) + ')²' : 'x²';
+    var e = a * c + d;
+    var conclusie = c < 0 ? basis + ' = ' + fmt(c) + ' &lt; 0 → een kwadraat is nooit negatief → geen oplossing'
+                  : c === 0 ? basis + ' = 0 → één oplossing' : basis + ' = ' + fmt(c) + ' &gt; 0 → twee oplossingen';
+    return {vraag:'Hoeveel oplossingen heeft ' + vgl((a === 1 ? '' : a) + basis + term(d, '', false), fmt(e)) + '?',
+      velden:[{keuze:['0', '1', '2'], antwoord:String(t)}],
+      uitwerking:balansStappen(a, d, e, basis) + conclusie};
+  }
+  function q2D(){
+    var c; do { c = rnd(2, 80); } while (isKwadraat(c));
+    var a = pick([1, 2, 3, 4]), d = Math.random() < .7 ? rnd(-20, 20, true) : 0, e = a * c + d, w = Math.sqrt(c);
+    var tekst = vgl(som([[a,'x²'],[d,'']]), fmt(e));
+    return {vraag:'Los op: ' + tekst + OPL_HINT_DEC, vgl:tekst, hint:OPL_HINT_DEC, velden:tweeOpl(-w, w),
+      uitwerking:balansStappen(a, d, e) + 'Exact: x = √' + c + ' ∨ x = −√' + c + '<br>Afgerond: x ≈ ' + dec2(w) + ' ∨ x ≈ ' + dec2(-w)};
+  }
+
+  /* --- 3.3 Ontbinden in factoren --- */
+  function q3A(){
+    var g, m, k;
+    do { g = Math.random() < .2 ? 1 : rnd(2, 6); m = rnd(1, 5); k = rnd(-9, 9, true); } while (ggd(m, k) !== 1);
+    if (Math.random() < .25) g = -g;
+    var a = g * m, b = g * k;
+    return {vraag:'Ontbind in factoren: <span class="vgl">' + kw(a, b, 0) + '</span><div class="vraag-sub">Bij een minteken vul je een negatief getal in. Staat er niets vóór x, vul dan 1 in.</div>',
+      velden:[{antwoord:g, na:'x ('}, {antwoord:m, na:'x +'}, {antwoord:k, na:')'}],
+      uitwerking:'De ggf van ' + som([[a,'x²']]) + ' en ' + som([[b,'x']]) + ' is ' + som([[g,'x']]) + '<br>' + kw(a, b, 0) + ' = ' + som([[g,'x']]) + '(' + lin(m, k) + ')<br>Controle: haakjes wegwerken geeft weer ' + kw(a, b, 0)};
+  }
+  function q3B(){
+    var p = rnd(-9, 9, true), q = rnd(-9, 9, true);
+    if (Math.random() < .12) q = -p;
+    var b = p + q, c = p * q, s = [p, q].sort(function(x, y){ return x - y; });
+    return {vraag:'Ontbind in factoren: <span class="vgl">' + kw(1, b, c) + '</span><div class="vraag-sub">Vul het kleinste getal eerst in. Bij (x − 3) vul je −3 in.</div>',
+      velden:[{voor:'(x +', antwoord:s[0], na:')'}, {voor:'(x +', antwoord:s[1], na:')'}],
+      uitwerking:'Zoek twee getallen met product ' + fmt(c) + ' en som ' + fmt(b) + ': ' + fmt(p) + ' en ' + fmt(q) + '<br>(' + fmt(p) + ' · ' + hk(q) + ' = ' + fmt(c) + ' en ' + fmt(p) + ' + ' + hk(q) + ' = ' + fmt(b) + ')<br>' +
+        kw(1, b, c) + ' = (' + lin(1, s[0]) + ')(' + lin(1, s[1]) + ')'};
+  }
+  function q3C(){
+    var k = rnd(2, 5), p = rnd(-7, 7, true), q = rnd(-7, 7, true), s = [p, q].sort(function(x, y){ return x - y; });
+    return {vraag:'Ontbind in factoren: <span class="vgl">' + kw(k, k * (p + q), k * p * q) + '</span><div class="vraag-sub">Haal eerst het getal buiten haakjes. Kleinste getal eerst.</div>',
+      velden:[{antwoord:k}, {voor:'(x +', antwoord:s[0], na:')'}, {voor:'(x +', antwoord:s[1], na:')'}],
+      uitwerking:kw(k, k * (p + q), k * p * q) + ' = ' + k + '(' + kw(1, p + q, p * q) + ')<br>product ' + fmt(p * q) + ', som ' + fmt(p + q) + ' → ' + fmt(p) + ' en ' + fmt(q) + '<br>= ' + k + '(' + lin(1, s[0]) + ')(' + lin(1, s[1]) + ')'};
+  }
+
+  /* --- 3.4 Oplossen door ontbinden --- */
+  function q4A(){
+    var a = rnd(-6, 6, true), b = rnd(-12, 12, true), v = rnd(0, 2), tekst;
+    if (v === 0) tekst = vgl(kw(a, b, 0), '0');
+    else if (v === 1) tekst = vgl(som([[a,'x²']]), som([[-b,'x']]));
+    else tekst = vgl(som([[b,'x']]), som([[-a,'x²']]));
+    return {vraag:'Los op: ' + tekst + OPL_HINT, vgl:tekst, hint:OPL_HINT, velden:tweeOpl(0, -b / a),
+      uitwerking:(v ? 'Herleid op 0: ' + kw(a, b, 0) + ' = 0<br>' : '') + 'x(' + lin(a, b) + ') = 0<br>x = 0 ∨ ' + lin(a, b) + ' = 0<br>x = 0 ∨ x = ' + fmt(-b / a) +
+        '<br><em>Niet delen door x, anders ben je x = 0 kwijt!</em>'};
+  }
+  function wortelsPaar(max){
+    var r1 = rnd(-max, max, true), r2;
+    do { r2 = rnd(-max, max, true); } while (r2 === r1);
+    return [r1, r2];
+  }
+  function q4B(){
+    var r = wortelsPaar(9), b = -(r[0] + r[1]), c = r[0] * r[1], tekst = vgl(kw(1, b, c), '0');
+    return {vraag:'Los op: ' + tekst + OPL_HINT, vgl:tekst, hint:OPL_HINT, velden:tweeOpl(r[0], r[1]),
+      uitwerking:'product ' + fmt(c) + ', som ' + fmt(b) + ' → ' + fmt(-r[0]) + ' en ' + fmt(-r[1]) + '<br>(' + lin(1, -r[0]) + ')(' + lin(1, -r[1]) + ') = 0<br>' +
+        lin(1, -r[0]) + ' = 0 ∨ ' + lin(1, -r[1]) + ' = 0<br>x = ' + fmt(r[0]) + ' ∨ x = ' + fmt(r[1])};
+  }
+  function q4C(){
+    var r = wortelsPaar(8), b = -(r[0] + r[1]), c = r[0] * r[1], v = rnd(0, 3), tekst, stap;
+    if (v === 3 && b === 0) v = 0;
+    if (v === 0){ tekst = vgl(som([[1,'x²'],[b,'x']]), fmt(-c)); stap = 'Herleid op 0: ' + kw(1, b, c) + ' = 0'; }
+    else if (v === 1){ tekst = vgl('x²', som([[-b,'x'],[-c,'']])); stap = 'Herleid op 0: ' + kw(1, b, c) + ' = 0'; }
+    else if (v === 2){ var k = pick([2, 3, 4, 5, -1, -2]); tekst = vgl(kw(k, k * b, k * c), '0'); stap = (k === -1 ? 'Alles keer −1: ' : 'Deel alle termen door ' + hk(k) + ': ') + kw(1, b, c) + ' = 0'; }
+    else { tekst = vgl('x(' + lin(1, b) + ')', fmt(-c)); stap = 'Haakjes weg en herleid op 0: ' + kw(1, b, c) + ' = 0'; }
+    return {vraag:'Los op: ' + tekst + OPL_HINT, vgl:tekst, hint:OPL_HINT, velden:tweeOpl(r[0], r[1]),
+      uitwerking:stap + '<br>(' + lin(1, -r[0]) + ')(' + lin(1, -r[1]) + ') = 0<br>x = ' + fmt(r[0]) + ' ∨ x = ' + fmt(r[1])};
+  }
+
+  /* --- 3.5 abc-formule --- */
+  function q5A(){
+    var a = rnd(-5, 5, true), b = rnd(-9, 9), c = rnd(-9, 9, true);
+    var tekst = Math.random() < .3 ? toonVgl(a, b, c) : vgl(kw(a, b, c), '0');
+    var D = b * b - 4 * a * c;
+    return {vraag:'Bereken de discriminant D van ' + tekst + '.',
+      velden:[{voor:'D =', antwoord:D}],
+      uitwerking:'Schrijf als: ' + kw(a, b, c) + ' = 0 → a = ' + fmt(a) + ', b = ' + fmt(b) + ', c = ' + fmt(c) + '<br>D = ' + hk(b) + '² − 4 · ' + hk(a) + ' · ' + hk(c) + ' = ' + fmt(b * b) + ' − ' + hk(4 * a * c) + ' = ' + fmt(D)};
+  }
+  function q5B(){
+    var t = rnd(0, 2), a, b, c, D;
+    if (t === 1){ a = pick([1, 2, 3, -1, 4]); var r = rnd(-5, 5, true); b = -2 * a * r; c = a * r * r; }
+    else {
+      do { a = rnd(-5, 5, true); b = rnd(-9, 9); c = rnd(-9, 9, true); D = b * b - 4 * a * c; } while (t === 0 ? D >= 0 : D <= 0);
+    }
+    D = b * b - 4 * a * c;
+    return {vraag:'Hoeveel oplossingen heeft ' + vgl(kw(a, b, c), '0') + '?',
+      velden:[{keuze:['0', '1', '2'], antwoord:String(t)}],
+      uitwerking:'D = ' + hk(b) + '² − 4 · ' + hk(a) + ' · ' + hk(c) + ' = ' + fmt(D) + '<br>' +
+        (D > 0 ? 'D &gt; 0 → twee oplossingen' : D === 0 ? 'D = 0 → één oplossing' : 'D &lt; 0 → geen oplossing')};
+  }
+  function q5C(){
+    var m1 = pick([2, 3, 4, 5]), m2 = pick([1, 1, 2, 3]), n1, n2;
+    do { n1 = rnd(-6, 6, true); n2 = rnd(-6, 6, true); } while (ggd(m1, n1) !== 1 || ggd(m2, n2) !== 1 || n1 * m2 === n2 * m1);
+    var a = m1 * m2, b = -(m1 * n2 + m2 * n1), c = n1 * n2;
+    if (Math.random() < .3){ a = -a; b = -b; c = -c; }
+    var tekst = toonVgl(a, b, c);
+    return {vraag:'Los op met de abc-formule: ' + tekst + OPL_HINT, vgl:tekst, hint:OPL_HINT, velden:tweeOpl(n1 / m1, n2 / m2),
+      uitwerking:abcUitw(a, b, c)};
+  }
+  function q5D(){
+    var a, b, c, D;
+    do { a = pick([1, 2, 3, -1, -2, 4]); b = rnd(-9, 9); c = rnd(-9, 9, true); D = b * b - 4 * a * c; } while (D <= 0 || isKwadraat(D));
+    var tekst = toonVgl(a, b, c);
+    return {vraag:'Los op met de abc-formule: ' + tekst + OPL_HINT_DEC, vgl:tekst, hint:OPL_HINT_DEC,
+      velden:tweeOpl((-b + Math.sqrt(D)) / (2 * a), (-b - Math.sqrt(D)) / (2 * a)),
+      uitwerking:abcUitw(a, b, c)};
+  }
+  function q5E(){
+    var BR = {2:'½', 3:'⅓', 4:'¼'}, k, b, c, D;
+    do { k = pick([2, 3, 4]); b = rnd(-6, 6, true); c = rnd(-8, 8, true); D = (k * b) * (k * b) - 4 * k * c; } while (D <= 0);
+    var tekst = vgl(BR[k] + 'x²' + term(b, 'x', false) + term(c, '', false), '0');
+    var hint = isKwadraat(D) ? OPL_HINT : OPL_HINT_DEC;
+    return {vraag:'Los op: ' + tekst + hint, vgl:tekst, hint:hint,
+      velden:tweeOpl((-k * b + Math.sqrt(D)) / 2, (-k * b - Math.sqrt(D)) / 2),
+      uitwerking:'Alles keer ' + k + ' (breuk weg): ' + kw(1, k * b, k * c) + ' = 0<br>' + abcUitw(1, k * b, k * c, false)};
+  }
+
+  /* --- 3.6 Handigste methode --- */
+  function q6A(){
+    var t = rnd(0, 3), tekst, ant, uitleg;
+    if (t === 0){
+      if (Math.random() < .5){ var a = pick([1, 2, 3, 0.5]), d = rnd(-20, 20, true), c = rnd(1, 40); tekst = vgl(som([[a,'x²'],[d,'']]), fmt(a * c + d)); }
+      else tekst = vgl('(' + lin(1, rnd(-6, 6, true)) + ')²', fmt(rnd(1, 50)));
+      ant = 'balans'; uitleg = 'Er staat geen losse x-term: herleid tot x² = getal (of (x + q)² = getal) → balansmethode.';
+    } else if (t === 1){
+      var a2 = rnd(-6, 6, true), b2 = rnd(-12, 12, true);
+      tekst = Math.random() < .5 ? vgl(kw(a2, b2, 0), '0') : vgl(som([[a2,'x²']]), som([[-b2,'x']]));
+      ant = 'tweeterm'; uitleg = 'Geen los getal: x buiten haakjes halen, x(…) = 0 → ontbinden (tweeterm).';
+    } else if (t === 2){
+      var r; do { r = wortelsPaar(9); } while (r[0] + r[1] === 0);
+      var b = -(r[0] + r[1]), c2 = r[0] * r[1];
+      tekst = Math.random() < .5 ? vgl(kw(1, b, c2), '0') : vgl(som([[1,'x²'],[b,'x']]), fmt(-c2));
+      ant = 'product-som'; uitleg = 'x² + bx + c met mooie getallen: product ' + fmt(c2) + ', som ' + fmt(b) + ' → (' + lin(1, -r[0]) + ')(' + lin(1, -r[1]) + ') = 0 → product-som-methode.';
+    } else {
+      var a3, b3, c3, D;
+      do { a3 = pick([2, 3, 5, -2, -3]); b3 = rnd(-9, 9, true); c3 = rnd(-9, 9, true); D = b3 * b3 - 4 * a3 * c3; } while (D <= 0 || isKwadraat(D));
+      tekst = toonVgl(a3, b3, c3);
+      ant = 'abc-formule'; uitleg = 'Drie termen die niet mooi te ontbinden zijn (D = ' + fmt(D) + ' is geen kwadraat) → abc-formule.';
+    }
+    return {vraag:'Wat is de handigste methode voor ' + tekst + '?',
+      velden:[{keuze:['balans', 'tweeterm', 'product-som', 'abc-formule'], antwoord:ant}],
+      uitwerking:uitleg};
+  }
+  var q6BBronnen = [q2A, q2B, q2D, q4A, q4B, q4C, q5C, q5D, q5E];
+  function q6B(){
+    var v = pick(q6BBronnen)(), kopie = {};
+    for (var k in v) kopie[k] = v[k];
+    kopie.vraag = 'Los op met de handigste methode: ' + v.vgl + v.hint;
+    return kopie;
+  }
+
+  /* --- Parabolen tekenen (voor de uitleg) --- */
+  function tekenParabolen(parabolen, opties){
+    opties = opties || {};
+    var xmin = opties.xmin, xmax = opties.xmax, ymin = opties.ymin, ymax = opties.ymax;
+    var svg = tekenGrafiek([], {xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax});
+    var pad = 24, w = 272, h = 272, extra = '';
+    function sx(x){ return (pad + (x - xmin) / (xmax - xmin) * w).toFixed(1); }
+    function sy(y){ return (pad + (ymax - y) / (ymax - ymin) * h).toFixed(1); }
+    parabolen.forEach(function(p){
+      var d = '', aan = false;
+      for (var i = 0; i <= 240; i++){
+        var x = xmin + (xmax - xmin) * i / 240, y = p.a * x * x + p.b * x + p.c;
+        if (y < ymin - 0.01 || y > ymax + 0.01){ aan = false; continue; }
+        d += (aan ? 'L' : 'M') + sx(x) + ' ' + sy(y) + ' ';
+        aan = true;
+      }
+      extra += '<path d="' + d + '" fill="none" stroke="' + p.kleur + '" stroke-width="2.5" stroke-linecap="round"/>';
+      if (p.naam) extra += '<text x="' + sx(p.lx) + '" y="' + sy(p.ly) + '" font-size="12" font-weight="800" fill="' + p.kleur + '">' + p.naam + '</text>';
+    });
+    (opties.punten || []).forEach(function(p){
+      extra += '<circle cx="' + sx(p.x) + '" cy="' + sy(p.y) + '" r="4" fill="#1e293b"/>';
+      if (p.naam) extra += '<text x="' + (+sx(p.x) + 6) + '" y="' + (+sy(p.y) + (p.onder ? 14 : -6)) + '" font-size="11" font-weight="700" fill="#1e293b">' + p.naam + '</text>';
+    });
+    return svg.replace('</svg>', extra + '</svg>');
+  }
+
+  /* --- Flashcards H3 --- */
+  var q1FcData = [
+    {voor:'Wat is een kwadratische formule?', achter:'Een formule waarin x² voorkomt, met algemene vorm y = ax² + bx + c.'},
+    {voor:'Hoe heet de grafiek van een kwadratische formule?', achter:'Een parabool.'},
+    {voor:'a &gt; 0 (positief getal voor x²): welke parabool?', achter:'Dalparabool (top = laagste punt).'},
+    {voor:'a &lt; 0 (negatief getal voor x²): welke parabool?', achter:'Bergparabool (top = hoogste punt).'},
+    {voor:'Wat is het beginpunt?', achter:'Het punt met x = 0. Daar is y = c.'},
+    {voor:'Wat zijn de nulpunten?', achter:'De snijpunten van de grafiek met de x-as (y = 0).'},
+    {voor:'Wat is de symmetrie-as?', achter:'De verticale lijn door de top: x = x<sub>top</sub>.'},
+    {voor:'Hoe vind je x<sub>top</sub> met de nulpunten?', achter:'Precies in het midden: (x₁ + x₂) : 2.'},
+    {voor:'(−3)² = ?  en  −3² = ?', achter:'(−3)² = 9, maar −3² = −9. Negatieve getallen altijd tussen haakjes invullen!'},
+    {voor:'Welke parabool is smaller: y = 3x² of y = 0,5x²?', achter:'y = 3x². Hoe groter a (zonder minteken), hoe smaller.'}
+  ];
+  var q2FcData = [
+    {voor:'Wanneer gebruik je de balansmethode bij een kwadratische vergelijking?', achter:'Als er geen losse x-term is: je kunt herleiden tot x² = getal of (x + q)² = getal.'},
+    {voor:'x² = p met p &gt; 0: hoeveel oplossingen?', achter:'Twee: x = √p ∨ x = −√p.'},
+    {voor:'x² = 0: hoeveel oplossingen?', achter:'Eén: x = 0.'},
+    {voor:'x² = p met p &lt; 0: hoeveel oplossingen?', achter:'Geen: een kwadraat is nooit negatief.'},
+    {voor:'Wat betekent het teken ∨?', achter:'“of”'},
+    {voor:'Los op: (x + 4)² = 25', achter:'x + 4 = 5 ∨ x + 4 = −5 → x = 1 ∨ x = −9'},
+    {voor:'Wat betekent “los exact op”?', achter:'Niet afronden: laat de wortel staan, bv. x = √12 ∨ x = −√12.'},
+    {voor:'Los op: 2x² + 3 = 21', achter:'2x² = 18 → x² = 9 → x = 3 ∨ x = −3'}
+  ];
+  var q3FcData = [
+    {voor:'Wat is ontbinden in factoren?', achter:'Een som schrijven als product (met haakjes). Het omgekeerde van haakjes wegwerken.'},
+    {voor:'Ontbind: 3x² + 9x', achter:'3x(x + 3)'},
+    {voor:'Ontbind: 5x² + 7x', achter:'x(5x + 7)'},
+    {voor:'Ontbind: −2x² − 4x', achter:'−2x(x + 2)'},
+    {voor:'Wat is de product-som-methode voor x² + bx + c?', achter:'Zoek twee getallen met product c en som b. Dan x² + bx + c = (x + getal1)(x + getal2).'},
+    {voor:'Ontbind: x² + 8x + 15', achter:'(x + 3)(x + 5) — product 15, som 8'},
+    {voor:'Ontbind: x² + 5x − 14', achter:'(x − 2)(x + 7) — product −14, som 5'},
+    {voor:'Ontbind: x² − 7x + 12', achter:'(x − 3)(x − 4) — product 12, som −7'},
+    {voor:'c is positief: wat weet je over de twee getallen?', achter:'Ze hebben hetzelfde teken (net als b).'},
+    {voor:'c is negatief: wat weet je over de twee getallen?', achter:'Eén getal is positief en één is negatief.'},
+    {voor:'Ontbind: 2x² + 10x + 12', achter:'2(x² + 5x + 6) = 2(x + 2)(x + 3)'}
+  ];
+  var q4FcData = [
+    {voor:'Wat is de regel A · B = 0?', achter:'Als A · B = 0, dan A = 0 ∨ B = 0.'},
+    {voor:'Wat moet je eerst doen voordat je A · B = 0 gebruikt?', achter:'Alles naar één kant brengen zodat er = 0 staat, en dan ontbinden.'},
+    {voor:'Los op: 3x² + 9x = 0', achter:'3x(x + 3) = 0 → x = 0 ∨ x = −3'},
+    {voor:'Waarom mag je bij 5x² = 10x niet delen door x?', achter:'Dan raak je de oplossing x = 0 kwijt.'},
+    {voor:'Los op: x² − 11x + 10 = 0', achter:'(x − 1)(x − 10) = 0 → x = 1 ∨ x = 10'},
+    {voor:'(x + 3)(x − 4) = 0 geeft…', achter:'x = −3 ∨ x = 4 (tegengesteld teken!)'},
+    {voor:'3x² + 15x − 18 = 0: wat doe je eerst?', achter:'Alle termen delen door 3: x² + 5x − 6 = 0'},
+    {voor:'−x² + 6x − 5 = 0: wat doe je eerst?', achter:'Alles keer −1: x² − 6x + 5 = 0'}
+  ];
+  var q5FcData = [
+    {voor:'De abc-formule', achter:'x = (−b + √D) / 2a ∨ x = (−b − √D) / 2a'},
+    {voor:'De discriminant D', achter:'D = b² − 4ac'},
+    {voor:'D &gt; 0', achter:'Twee oplossingen'},
+    {voor:'D = 0', achter:'Eén oplossing'},
+    {voor:'D &lt; 0', achter:'Geen oplossing'},
+    {voor:'Stap 1 van het werkschema abc-formule?', achter:'Schrijf de vergelijking in de vorm ax² + bx + c = 0.'},
+    {voor:'a, b en c van 3x² − x − 2 = 0?', achter:'a = 3, b = −1, c = −2'},
+    {voor:'(−8)² = ?', achter:'64. b² is altijd positief (of 0).'},
+    {voor:'Wanneer gebruik je de abc-formule?', achter:'Als ontbinden of de balansmethode niet (handig) lukt. De abc-formule werkt altijd.'},
+    {voor:'Er staan breuken in de vergelijking. Wat doe je eerst?', achter:'Alle termen vermenigvuldigen zodat de breuken verdwijnen.'},
+    {voor:'Exact vs. afgerond?', achter:'Exact: wortel laten staan (x = (8 + √88) / −6). Afgerond: met rekenmachine, bv. op 2 decimalen.'}
+  ];
+  var q6FcData = [
+    {voor:'Vuistregel 1', achter:'Staan er breuken? Werk ze weg.'},
+    {voor:'Vuistregel 2', achter:'Vereenvoudig zoveel mogelijk.'},
+    {voor:'Vuistregel 3', achter:'Kun je herleiden tot x² = c? → balansmethode'},
+    {voor:'Vuistregel 4', achter:'Kun je ontbinden in factoren? → A · B = 0'},
+    {voor:'Vuistregel 5', achter:'Lukt niets anders? → abc-formule'},
+    {voor:'½x² = 32: handigste methode?', achter:'Balansmethode: x² = 64 → x = 8 ∨ x = −8'},
+    {voor:'x² − 18 = 7x: handigste methode?', achter:'Product-som: x² − 7x − 18 = 0 → (x + 2)(x − 9) = 0 → x = −2 ∨ x = 9'},
+    {voor:'5x² + 7x = 0: handigste methode?', achter:'Ontbinden (tweeterm): x(5x + 7) = 0 → x = 0 ∨ x = −1,4'},
+    {voor:'2x² + 5x − 1 = 0: handigste methode?', achter:'abc-formule (niet mooi te ontbinden)'}
+  ];
+
+  var q1Gens = {a:[q1A], b:[q1B, q1C], c:[q1D]};
+  var q2Gens = {a:[q2A], b:[q2B], c:[q2C], d:[q2D]};
+  var q3Gens = {a:[q3A], b:[q3B], c:[q3C]};
+  var q4Gens = {a:[q4A], b:[q4B], c:[q4C]};
+  var q5Gens = {a:[q5A], b:[q5B], c:[q5C], d:[q5D], e:[q5E]};
+  var q6Gens = {a:[q6A], b:[q6B]};
+
+  // Toetsmix H3: 6 wrappers × 3 = 18 vragen, precies 3 per onderdeel
+  var qmixGens = [
+    mixGen('3.1 Parabolen', mixAlle(q1Gens)),
+    mixGen('3.2 Balansmethode', mixAlle(q2Gens)),
+    mixGen('3.3 Ontbinden', mixAlle(q3Gens)),
+    mixGen('3.4 Oplossen door ontbinden', mixAlle(q4Gens)),
+    mixGen('3.5 abc-formule', mixAlle(q5Gens)),
+    mixGen('3.6 Handigste methode', mixAlle(q6Gens))
+  ];
+  function qmixNaarOnderdeel(tag){
+    var id = 'q' + tag.charAt(2);
+    showTab(id, document.querySelector('.tab-btn[onclick*="\'' + id + '\'"]'));
+    showSubTab(id, 'oefenen', document.querySelector('#tab-' + id + ' .sub-tab-btn[onclick*="\'oefenen\'"]'));
+    window.scrollTo(0, 0);
+  }
+
   // === INIT ===
   maakFlashcards('p0-fc', p0FcData, 'Voorkennis — begrip → uitleg');
   maakOefening('p0-oef-a', p0Gens.a);
@@ -2610,6 +3412,39 @@
   maakOefening('p5-oef-d', p5Gens.d);
   maakOefening('p5-oef-e', p5Gens.e);
   maakOefening('mix-oef', mixGens, {aantal: 15, tagKlik: mixNaarParagraaf});
+
+  // === INIT H3 ===
+  document.getElementById('q1-uitleg-grafiek').innerHTML = tekenParabolen([
+    {a:1, b:-2, c:-3, kleur:'#0d9488', naam:'y = x² − 2x − 3', lx:3.1, ly:-1.6},
+    {a:-1, b:0, c:4, kleur:'#f59e0b', naam:'y = −x² + 4', lx:-5.8, ly:5.2}
+  ], {xmin:-6, xmax:6, ymin:-6, ymax:6, punten:[{x:1, y:-4, naam:'top (1, −4)', onder:true}, {x:0, y:-3, naam:'(0, −3)'}, {x:-1, y:0, naam:''}, {x:3, y:0, naam:''}]});
+  maakFlashcards('q1-fc', q1FcData, '3.1 Parabolen — begrip → uitleg');
+  maakOefening('q1-oef-a', q1Gens.a);
+  maakOefening('q1-oef-b', q1Gens.b);
+  maakOefening('q1-oef-c', q1Gens.c);
+  maakFlashcards('q2-fc', q2FcData, '3.2 Balansmethode — vraag → antwoord');
+  maakOefening('q2-oef-a', q2Gens.a);
+  maakOefening('q2-oef-b', q2Gens.b);
+  maakOefening('q2-oef-c', q2Gens.c);
+  maakOefening('q2-oef-d', q2Gens.d);
+  maakFlashcards('q3-fc', q3FcData, '3.3 Ontbinden — vraag → antwoord');
+  maakOefening('q3-oef-a', q3Gens.a);
+  maakOefening('q3-oef-b', q3Gens.b);
+  maakOefening('q3-oef-c', q3Gens.c);
+  maakFlashcards('q4-fc', q4FcData, '3.4 Oplossen door ontbinden — vraag → antwoord');
+  maakOefening('q4-oef-a', q4Gens.a);
+  maakOefening('q4-oef-b', q4Gens.b);
+  maakOefening('q4-oef-c', q4Gens.c);
+  maakFlashcards('q5-fc', q5FcData, '3.5 abc-formule — vraag → antwoord');
+  maakOefening('q5-oef-a', q5Gens.a);
+  maakOefening('q5-oef-b', q5Gens.b);
+  maakOefening('q5-oef-c', q5Gens.c);
+  maakOefening('q5-oef-d', q5Gens.d);
+  maakOefening('q5-oef-e', q5Gens.e);
+  maakFlashcards('q6-fc', q6FcData, '3.6 Handigste methode — vraag → antwoord');
+  maakOefening('q6-oef-a', q6Gens.a);
+  maakOefening('q6-oef-b', q6Gens.b);
+  maakOefening('qmix-oef', qmixGens, {aantal: 18, tagKlik: qmixNaarOnderdeel});
 </script>
 </body>
 </html>
