@@ -658,6 +658,64 @@ body {
   color: var(--donker);
 }
 .gram-onregel-pill span { color: var(--rood); font-style: italic; margin-left: 0.3rem; }
+
+/* ── HOOFDSTUK-SWITCH ── */
+.hfst-switch { display:flex; gap:0.4rem; max-width:900px; margin:1.2rem auto 0; padding:0 1rem; flex-wrap:wrap; }
+.hfst-btn { padding:0.5rem 1.1rem; border:2px solid rgba(255,255,255,0.5); border-radius:999px; background:transparent; color:#fff; font-family:'Nunito',sans-serif; font-weight:900; font-size:0.9rem; cursor:pointer; }
+.hfst-btn.actief { background:#fff; color:var(--rood); border-color:#fff; }
+.so-sub { font-size:0.88rem; font-weight:700; color:#fff; opacity:0.95; margin-top:0.35rem; line-height:1.4; }
+.so-sub2 { font-size:0.78rem; font-weight:700; color:#fefcbf; margin-top:0.35rem; }
+
+/* ── KEUZE-CHIPS ── */
+.keuze-kaart { background:rgba(255,255,255,0.15); border-radius:16px; padding:0.8rem 0.9rem; margin-bottom:1rem; }
+.chip-label { font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:rgba(255,255,255,0.85); margin:0.2rem 0 0.35rem; }
+.chip-row { display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.4rem; }
+.chip { padding:0.45rem 0.8rem; border:none; border-radius:999px; background:rgba(255,255,255,0.25); color:#fff; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.82rem; cursor:pointer; }
+.chip.actief { background:#fff; color:var(--rood); box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+.niet-so { background:#fefcbf; color:#744210; border-radius:12px; padding:0.6rem 0.9rem; font-weight:800; font-size:0.85rem; margin-bottom:1rem; text-align:center; }
+
+/* ── EXTRA FLASHCARD / MC / TYPEN ── */
+.flip-tekst.lang { font-size:1.15rem; }
+.flip-sub { font-size:0.85rem; color:var(--grijs); font-weight:700; margin-top:0.6rem; font-style:italic; }
+.herh-tag { font-size:0.78rem; font-weight:800; color:#744210; background:#fefcbf; border-radius:8px; padding:0.25rem 0.6rem; }
+.mc-vraag { width:100%; text-align:center; background:linear-gradient(135deg,#fff5f5,#fff); border:2px solid var(--rood-licht); border-radius:18px; padding:1.3rem 1rem; }
+.mc-prompt { font-size:1.5rem; font-weight:900; color:var(--donker); line-height:1.3; }
+.mc-opties { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; }
+.mc-optie { padding:0.9rem 0.6rem; border:2px solid #e2e8f0; border-radius:12px; background:#fff; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.95rem; color:var(--donker); cursor:pointer; }
+.mc-optie:hover:not(:disabled) { border-color:var(--rood); }
+.mc-optie.goed { background:#f0fff4; border-color:#38a169; color:#276749; }
+.mc-optie.fout { background:#fff5f5; border-color:var(--rood); color:var(--rood); }
+.mc-feedback { min-height:1.4rem; font-weight:800; color:var(--donker); }
+input.typen-input { min-height:0; }
+.accent-tip { display:block; margin-top:0.4rem; color:#744210; background:#fefcbf; border-radius:8px; padding:0.4rem 0.6rem; }
+.zin-diff { display:block; margin-top:0.5rem; font-size:1rem; line-height:1.9; }
+.w { padding:0.1rem 0.3rem; border-radius:6px; }
+.w-ok { background:#c6f6d5; color:#22543d; }
+.w-mis { background:#fed7d7; color:#9b2c2c; text-decoration:underline; }
+.extra { display:block; margin-top:0.4rem; font-size:0.85rem; color:#742a2a; }
+.extra s { opacity:0.8; }
+
+/* ── ZIN BOUWEN ── */
+.bouw-zone { min-height:64px; border:2px dashed #cbd5e0; border-radius:14px; padding:0.6rem; display:flex; flex-wrap:wrap; gap:0.4rem; align-content:flex-start; width:100%; }
+.bouw-pool { display:flex; flex-wrap:wrap; gap:0.4rem; width:100%; justify-content:center; }
+.tegel { padding:0.5rem 0.75rem; border:2px solid var(--rood-licht); border-radius:10px; background:#fff5f5; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; color:var(--donker); cursor:pointer; }
+.tegel.gelegd { background:#fffbeb; border-color:#f6e05e; }
+.tegel.weg { visibility:hidden; }
+.bouw-leeg { color:#a0aec0; font-weight:700; font-size:0.85rem; align-self:center; }
+
+/* ── KLAAR / TOETS / LIJST ── */
+.klaar-fouten { text-align:left; background:#fff5f5; border:2px solid var(--rood-licht); border-radius:12px; padding:0.8rem 1rem; font-size:0.88rem; font-weight:700; color:#742a2a; line-height:1.6; width:100%; }
+.cijfer { font-size:3.2rem; font-weight:900; line-height:1; }
+.cijfer.vold { color:#38a169; } .cijfer.onv { color:var(--rood); }
+.toets-uitleg { font-size:0.95rem; font-weight:700; color:var(--donker); line-height:1.6; text-align:left; width:100%; }
+.toets-uitleg li { margin-left:1.2rem; }
+.lijst-details { background:#fff; border-radius:16px; margin-top:1rem; box-shadow:0 4px 20px rgba(0,0,0,0.14); overflow:hidden; }
+.lijst-details summary { padding:0.9rem 1.2rem; font-weight:900; cursor:pointer; color:var(--donker); }
+.lijst-details table { width:100%; border-collapse:collapse; font-size:0.9rem; }
+.lijst-details td { padding:0.4rem 1rem; border-top:1px solid #edf2f7; }
+.lijst-details td:first-child { font-weight:800; color:var(--rood); width:50%; }
+.lijst-details .kop td { background:#fffbeb; color:#744210; font-weight:900; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.6px; }
+@media (max-width:520px) { .mc-prompt { font-size:1.2rem; } .mc-opties { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -668,32 +726,173 @@ body {
   <div style="width:80px"></div>
 </div>
 
-<div class="tabs">
-  <button class="tab-btn actief" onclick="toonTab('tab-binnenkort', this)">🚧 Binnenkort</button>
+<div class="hfst-switch">
+  <button class="hfst-btn actief" onclick="toonHfst('hfst-c2', this)">Capítulo 2</button>
 </div>
 
-<div class="content">
-
-  <div class="tab-content" id="tab-binnenkort">
-    <div class="fc-wrapper">
-      <p>Hier komt de oefenstof voor Spaans zodra het eerste proefwerk bekend is.</p>
-    </div>
+<div class="hfst" id="hfst-c2">
+  <div class="tabs">
+    <button class="tab-btn actief" onclick="toonTab('tab-voca', this)">📖 Vocabulario<br><small>2.1 – 2.3</small></button>
+    <button class="tab-btn" onclick="toonTab('tab-frases', this)">💬 Frases clave<br><small>blz. 20</small></button>
+    <button class="tab-btn" onclick="toonTab('tab-toets', this)">📝 SO-oefentoets<br><small>20 vragen</small></button>
+    <button class="tab-btn" onclick="toonTab('tab-vw', this)">❓ Vraagwoorden<br><small>eindtoets</small></button>
   </div>
 
+  <div class="content">
+    <div class="so-banner">
+      <div class="so-banner-tekst">📅 SO di 17 / do 19 nov</div>
+      <div class="so-sub">Vocabulario 2.1 + 2.2 + 2.3 (Spaans → Nederlands, wb blz. 79)<br>Frases clave blz. 20 (Nederlands → Spaans)</div>
+      <div class="so-sub2">Eindtoets 8 / 10 dec: het hele hoofdstuk</div>
+    </div>
+
+    <!-- VOCABULARIO -->
+    <div class="tab-content" id="tab-voca">
+      <div class="keuze-kaart">
+        <div class="chip-label">Lijst</div>
+        <div class="chip-row">
+          <button class="chip actief" onclick="kies('voca','lijst','2.1',this)">2.1 fuente A y B</button>
+          <button class="chip" onclick="kies('voca','lijst','2.2',this)">2.2 fuente C</button>
+          <button class="chip" onclick="kies('voca','lijst','2.3',this)">2.3 fuente F, G y H</button>
+          <button class="chip" onclick="kies('voca','lijst','alles',this)">Alles door elkaar</button>
+        </div>
+        <div class="chip-label">Oefenen</div>
+        <div class="chip-row">
+          <button class="chip actief" onclick="kies('voca','modus','flash',this)">🃏 Flashcards</button>
+          <button class="chip" onclick="kies('voca','modus','mc',this)">✅ Meerkeuze</button>
+          <button class="chip" onclick="kies('voca','modus','typen',this)">⌨️ Typen</button>
+        </div>
+      </div>
+      <div id="area-voca"></div>
+      <details class="lijst-details"><summary>📋 Bekijk de hele woordenlijst</summary><div id="lijst-voca"></div></details>
+    </div>
+
+    <!-- FRASES CLAVE -->
+    <div class="tab-content" id="tab-frases" style="display:none">
+      <div class="keuze-kaart">
+        <div class="chip-label">Zinnen</div>
+        <div class="chip-row">
+          <button class="chip actief" onclick="kies('frases','groep','alle',this)">Alle 11</button>
+          <button class="chip" onclick="kies('frases','groep','vragen',this)">Para preguntar</button>
+          <button class="chip" onclick="kies('frases','groep','antwoorden',this)">Para contestar</button>
+        </div>
+        <div class="chip-label">Oefenen (stap 1 → 3)</div>
+        <div class="chip-row">
+          <button class="chip actief" onclick="kies('frases','modus','flash',this)">🃏 1. Flashcards</button>
+          <button class="chip" onclick="kies('frases','modus','bouwen',this)">🧩 2. Zin bouwen</button>
+          <button class="chip" onclick="kies('frases','modus','typen',this)">⌨️ 3. Typen</button>
+        </div>
+      </div>
+      <div id="area-frases"></div>
+      <details class="lijst-details"><summary>📋 Bekijk alle frases clave</summary><div id="lijst-frases"></div></details>
+    </div>
+
+    <!-- SO-OEFENTOETS -->
+    <div class="tab-content" id="tab-toets" style="display:none">
+      <div id="area-toets"></div>
+    </div>
+
+    <!-- VRAAGWOORDEN -->
+    <div class="tab-content" id="tab-vw" style="display:none">
+      <div class="niet-so">⚠️ Niet voor de SO — wel voor de eindtoets (8 / 10 dec)</div>
+      <div class="gram-uitleg">
+        <button class="gram-uitleg-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">📘 Uitleg: vraagzinnen en vraagwoorden (tb blz. 20) <span class="chevron">▼</span></button>
+        <div class="gram-uitleg-body">
+          <div class="gram-sectie-titel">Zonder vraagwoord</div>
+          <div class="gram-regel">Omgekeerd vraagteken vóór de zin, gewoon vraagteken erachter:<br><code>¿Quieres beber algo?</code> = Wil je iets drinken?</div>
+          <div class="gram-sectie-titel">Met vraagwoord</div>
+          <table class="gram-conj-table" id="vw-tabel"></table>
+          <div class="gram-sectie-titel">Let op</div>
+          <div class="gram-regel">Vraagwoorden hebben <b>altijd een accent</b>, ook in uitroepen:<br><code>¡Qué enchilada más rica!</code> = Wat een lekkere enchilada!</div>
+          <div class="gram-regel"><code>cuánto</code> + zelfst. nw. past zich aan: cuánt<b>o</b> / cuánt<b>a</b> / cuánt<b>os</b> / cuánt<b>as</b> (¿Cuántas tortillas…?)<br><code>cuánto</code> + werkwoord blijft <b>cuánto</b> (¿Cuánto cuesta…?)</div>
+          <div class="gram-regel"><code>qué</code> + zelfst. nw. = welk(e) (¿Qué plato prefieres?)<br><code>cuál/cuáles</code> + ser = wat/welke (¿Cuál es tu plato favorito?)</div>
+        </div>
+      </div>
+      <div class="keuze-kaart">
+        <div class="chip-label">Oefenen</div>
+        <div class="chip-row">
+          <button class="chip actief" onclick="kies('vw','modus','flash',this)">🃏 Kaartjes NL → ES</button>
+          <button class="chip" onclick="kies('vw','modus','mc',this)">✅ Kies het vraagwoord</button>
+          <button class="chip" onclick="kies('vw','modus','typen',this)">⌨️ Vul in</button>
+        </div>
+      </div>
+      <div id="area-vw"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-/* ── TAB NAVIGATION ── */
-let actieveTab = 'tab-binnenkort';
-function toonTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
-  document.getElementById(id).style.display = 'block';
-  btn.classList.add('actief');
-  actieveTab = id;
-}
+/* ════════ DATA ════════ */
+const VOCA = {
+  '2.1': [
+    ['la mesa','de tafel'],['la carta','de kaart, het menu'],['el plato','het gerecht'],['el camarero, la camarera','de ober'],['la receta','het recept'],['el sabor','de smaak'],['el agua sin gas','het mineraalwater'],
+    ['la sopa','de soep'],['la ensalada','de salade'],['las verduras','de groente'],['el pollo','de kip'],['el arroz','de rijst'],['la salsa','de saus'],['el queso','de kaas'],
+    ['tener (ie) sed','dorst hebben'],['tener (ie) hambre','honger hebben'],['delicioso/-a','heerlijk'],['sano/-a','gezond'],['rico/-a','lekker, rijk'],['vegetariano/-a','vegetarisch'],['típico/-a','typisch'],
+    ['tomar','nemen, drinken'],['cocinar','koken'],['probar (ue)','proeven, proberen'],['preparar','bereiden, klaarmaken'],['pedir (i)','vragen, bestellen'],['pensar (ie)','denken'],['quemado/-a','verbrand']
+  ],
+  '2.2': [
+    ['el tema','het onderwerp'],['el/la hispanohablante','de Spaanstalige'],['la pregunta','de vraag'],['la respuesta','het antwoord'],['la explicación','de uitleg'],['la palabra','het woord'],['el día festivo','de feestdag'],
+    ['el ingrediente','het ingrediënt'],['el limón','de citroen'],['la pimienta','de peper'],['el pimiento','de paprika'],['la sal','het zout'],['la copa','het glas'],['la bebida','het drankje'],
+    ['necesitar','nodig hebben'],['significar','betekenen'],['olvidar','vergeten'],['entrar','naar binnen gaan'],['echar','toevoegen'],['saber','weten'],['cubrir','bedekken'],
+    ['las palomitas','de popcorn'],['la harina','het meel'],['el ajo','de knoflook'],['el champiñón','de champignon'],['la piña','de ananas'],['la fresa','de aardbei'],['el café','de koffie'],
+    ['salado/-a','zout'],['picante','pittig'],['dulce','zoet'],['redondo/-a','rond'],['plano/-a','plat'],['famoso/-a','beroemd']
+  ],
+  '2.3': [
+    ['¡socorro!','help!'],['el problema','het probleem'],['el consejo','het advies'],['la costumbre','de gewoonte'],['resistir','zich verzetten, weerstand bieden aan'],
+    ['elegir (i)','kiezen'],['significar','betekenen'],
+    ['la carne','het vlees'],['el pescado','de vis'],['la lechuga','de sla'],['el jamón','de ham'],['el helado','het ijs'],['la fruta','het fruit'],['el huevo','het ei'],
+    ['el menú del día','het dagmenu'],['el primero','het voorgerecht'],['el segundo','het hoofdgerecht'],['el postre','het nagerecht'],['la cuenta','de rekening'],['por supuesto','natuurlijk, uiteraard'],['el refresco','de frisdrank']
+  ]
+};
 
-/* ── FISHER-YATES SHUFFLE ── */
+const FRASES = [
+  {groep:'vragen', nl:'Kom je morgen bij mij thuis eten?', es:'¿Mañana vienes a mi casa a cenar?'},
+  {groep:'vragen', nl:'Wat is je lievelingsgerecht?', es:'¿Cuál es tu plato preferido?'},
+  {groep:'vragen', nl:'Van welk eten houd je niet?', es:'¿Qué comida no te gusta?'},
+  {groep:'vragen', nl:'Wie kookt er bij jullie thuis?', es:'¿Quién prepara la comida en casa?'},
+  {groep:'vragen', nl:'Heb je wel eens chili con carne gemaakt?', es:'¿Has preparado chile con carne alguna vez?'},
+  {groep:'antwoorden', nl:'Ja, graag!', es:'Sí, ¡con mucho gusto!'},
+  {groep:'antwoorden', nl:'Mijn lievelingsgerecht is enchiladas. Dat is een erg lekker gerecht.', es:'Mi plato preferido es las enchiladas. Es un plato muy rico.'},
+  {groep:'antwoorden', nl:'Ik vind scherp / pikant eten niet lekker.', es:'No me gusta la comida picante.'},
+  {groep:'antwoorden', nl:'Mijn vader, maar op zondag kook ik.', es:'Mi padre, pero los domingos cocino yo.'},
+  {groep:'antwoorden', nl:'Nee, want ik houd niet van vlees.', es:'No, porque no me gusta la carne.'},
+  {groep:'antwoorden', nl:'Ja, ik ben er dol op!', es:'Sí, ¡me encanta!'}
+];
+
+const VW_KAART = [
+  {nl:'waar', es:'dónde', acc:['dónde'], vb:'¿Dónde has comido la tortilla?'},
+  {nl:'wanneer', es:'cuándo', acc:['cuándo'], vb:'¿Cuándo vamos a cenar?'},
+  {nl:'hoe', es:'cómo', acc:['cómo'], vb:'¿Cómo hacemos la enchilada?'},
+  {nl:'hoeveel (+ zelfst. nw.)', es:'cuánto / cuánta / cuántos / cuántas', acc:['cuánto','cuánta','cuántos','cuántas','cuánto/a/os/as'], vb:'¿Cuántas tortillas ha comido Ana?'},
+  {nl:'hoeveel (+ werkwoord)', es:'cuánto', acc:['cuánto'], vb:'¿Cuánto cuesta la comida en este restaurante?'},
+  {nl:'waarom', es:'por qué', acc:['por qué'], vb:'¿Por qué es un plato sano?'},
+  {nl:'wie', es:'quién / quiénes', acc:['quién','quiénes','quién/quiénes'], vb:'¿Quién es la presentadora?'},
+  {nl:'wat (+ werkwoord)', es:'qué', acc:['qué'], vb:'¿Qué vamos a comer hoy?'},
+  {nl:'welk(e) (+ zelfst. nw.)', es:'qué', acc:['qué'], vb:'¿Qué plato prefieres?'},
+  {nl:'wat / welke (+ ser)', es:'cuál / cuáles', acc:['cuál','cuáles','cuál/cuáles'], vb:'¿Cuál es tu plato favorito?'}
+];
+
+const VW_ZIN = [
+  ['¿___ has comido la tortilla?','Waar heb je de tortilla gegeten?','Dónde'],
+  ['¿___ vamos a cenar?','Wanneer gaan we eten?','Cuándo'],
+  ['¿___ hacemos la enchilada?','Hoe maken we de enchilada?','Cómo'],
+  ['¿___ tortillas ha comido Ana?','Hoeveel tortilla\'s heeft Ana gegeten?','Cuántas'],
+  ['¿___ cuesta la comida en este restaurante?','Hoeveel kost het eten in dit restaurant?','Cuánto'],
+  ['¿___ es un plato sano?','Waarom is het een gezond gerecht?','Por qué'],
+  ['¿___ es la presentadora?','Wie is de presentatrice?','Quién'],
+  ['¿___ vamos a comer hoy?','Wat gaan we vandaag eten?','Qué'],
+  ['¿___ plato prefieres?','Welk gerecht heeft je voorkeur?','Qué'],
+  ['¿___ es tu plato favorito?','Wat is jouw lievelingsgerecht?','Cuál'],
+  ['¡___ enchilada más rica!','Wat een lekkere enchilada!','Qué'],
+  ['¿___ prepara la comida en casa?','Wie kookt er bij jullie thuis?','Quién'],
+  ['¿___ comida no te gusta?','Van welk eten houd je niet?','Qué'],
+  ['¿___ ingredientes necesitas?','Hoeveel ingrediënten heb je nodig?','Cuántos'],
+  ['¿___ vienen a cenar?','Wie komen er eten?','Quiénes'],
+  ['¿___ son tus platos favoritos?','Wat zijn jouw lievelingsgerechten?','Cuáles'],
+  ['¿___ no comes carne?','Waarom eet je geen vlees?','Por qué'],
+  ['¿___ está el restaurante?','Waar is het restaurant?','Dónde']
+];
+
+/* ════════ HULPFUNCTIES ════════ */
 function fisherYates(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -702,6 +901,357 @@ function fisherYates(arr) {
   }
   return a;
 }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function base(s) { return String(s).toLowerCase().replace(/[¿¡?!.,;:"“”()…]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function noAcc(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+function stripNL(s) { return s.replace(/^(de|het|een|zich) /, ''); }
+function lang(t) { return t.length > 32 ? ' lang' : ''; }
+
+/* Antwoord controleren: hoofdletters/leestekens tellen niet; accenten zijn
+   niet verplicht maar worden wel gemeld (exact:false). */
+function check(item, input) {
+  const u = base(input);
+  if (!u) return { ok: false };
+  for (const acc of item.accept) {
+    const e = base(acc);
+    if (item.lang === 'nl') {
+      if (stripNL(noAcc(u)) === stripNL(noAcc(e))) return { ok: true, exact: true };
+    } else {
+      if (u === e) return { ok: true, exact: true };
+      if (noAcc(u) === noAcc(e)) return { ok: true, exact: false };
+    }
+  }
+  return { ok: false };
+}
+
+/* Woord-voor-woord vergelijking (LCS) voor zinnen */
+function woordDiff(expected, input) {
+  const orig = expected.split(/\s+/);
+  const E = orig.map(t => noAcc(base(t)));
+  const userOrig = base(input).split(' ').filter(Boolean);
+  const U = userOrig.map(noAcc);
+  const n = E.length, m = U.length;
+  const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--)
+    dp[i][j] = E[i] === U[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+  const okE = new Array(n).fill(false), okU = new Array(m).fill(false);
+  let i = 0, j = 0;
+  while (i < n && j < m) {
+    if (E[i] === U[j]) { okE[i] = okU[j] = true; i++; j++; }
+    else if (dp[i + 1][j] >= dp[i][j + 1]) i++; else j++;
+  }
+  const html = orig.map((t, k) => `<span class="w ${okE[k] ? 'w-ok' : 'w-mis'}">${esc(t)}</span>`).join(' ');
+  const extra = userOrig.filter((t, k) => !okU[k]);
+  return { html, extra, ratio: dp[0][0] / Math.max(n, m, 1) };
+}
+
+/* ════════ ITEMS ════════ */
+function vocaItems(keys) {
+  const seen = new Set(), out = [];
+  keys.forEach(k => VOCA[k].forEach(([es, nl]) => {
+    if (seen.has(es)) return; seen.add(es);
+    out.push({ prompt: es, answer: nl, accept: [nl, ...nl.split(',').map(x => x.trim())], lang: 'nl', qLabel: 'Spaans', aLabel: 'Nederlands' });
+  }));
+  return out;
+}
+function fraseItems(groep) {
+  return FRASES.filter(f => !groep || groep === 'alle' || f.groep === groep)
+    .map(f => ({ prompt: f.nl, answer: f.es, accept: [f.es], lang: 'es', sentence: true, qLabel: 'Nederlands', aLabel: 'Spaans' }));
+}
+function vwKaartItems() {
+  return VW_KAART.map(v => ({ prompt: v.nl, answer: v.es, accept: v.acc, lang: 'es', note: v.vb, qLabel: 'Nederlands', aLabel: 'Spaans' }));
+}
+function vwZinItems() {
+  return VW_ZIN.map(([es, nl, a]) => ({ prompt: es, sub: nl, answer: a, accept: [a], lang: 'es', qLabel: 'Welk vraagwoord hoort op de puntjes?', aLabel: 'Vraagwoord' }));
+}
+
+/* ════════ SESSIE ════════ */
+class Sessie {
+  constructor(items, schudden = true) { this.all = items; this.schudden = schudden; this.reset(); }
+  reset() { this.queue = this.schudden ? fisherYates(this.all) : [...this.all]; this.goed = 0; this.fout = 0; this.done = 0; this.foutSet = new Set(); }
+  cur() { return this.queue[0]; }
+  answer(ok, herhaal = true) {
+    const it = this.queue.shift();
+    if (ok) { if (!this.foutSet.has(it)) this.goed++; this.done++; }
+    else {
+      if (!this.foutSet.has(it)) { this.fout++; this.foutSet.add(it); }
+      if (herhaal) this.queue.push(it); else this.done++;
+    }
+  }
+  shuffleRest() { this.queue = fisherYates(this.queue); }
+}
+
+const runs = {};
+function start(areaId, items, mode, titel) {
+  runs[areaId] = { areaId, items, mode, titel, s: new Sessie(items), tok: 0 };
+  render(runs[areaId]);
+}
+function render(run) {
+  run.tok++;
+  const el = document.getElementById(run.areaId);
+  if (!run.s.cur()) return run.toets ? renderToetsKlaar(run, el) : renderKlaar(run, el);
+  ({ flash: renderFlash, mc: renderMC, typen: renderTypen, bouwen: renderBouwen })[run.mode](run, el);
+}
+function kop(run) {
+  const s = run.s, tot = s.all.length, it = s.cur();
+  return `<div class="fc-topbar"><div class="fc-titel">${esc(run.titel)}</div><div class="fc-teller">${run.toets ? 'Vraag ' + (s.done + 1) : s.done} / ${tot}</div></div>
+  <div class="fc-score-bar"><span class="fc-score-goed">✓ ${s.goed}</span><span class="fc-score-fout">✗ ${s.fout}</span>${!run.toets && it && s.foutSet.has(it) ? '<span class="herh-tag">🔁 herhaling</span>' : ''}</div>
+  <div class="fc-progress-bar"><div class="fc-progress-fill" style="width:${100 * s.done / tot}%"></div></div>`;
+}
+function acties(run) {
+  if (run.toets) return `<div class="fc-actions"><button class="fc-action-btn" onclick="toetsIntro()">✕ Stoppen</button></div>`;
+  return `<div class="fc-actions"><button class="fc-action-btn" onclick="schud('${run.areaId}')">🔀 Shuffle</button><button class="fc-action-btn" onclick="opnieuw('${run.areaId}')">↺ Opnieuw</button></div>`;
+}
+function schud(id) { const r = runs[id]; if (!r.s.cur()) r.s.reset(); else r.s.shuffleRest(); render(r); }
+function opnieuw(id) { const r = runs[id]; r.s.reset(); render(r); }
+function alleenFout(id) { const r = runs[id]; r.s = new Sessie([...r.s.foutSet]); render(r); }
+
+function renderKlaar(run, el) {
+  const s = run.s, tot = s.all.length;
+  el.innerHTML = `<div class="fc-wrapper"><div class="fc-klaar zichtbaar">
+    <div class="fc-klaar-emoji">${s.fout === 0 ? '🏆' : '🎉'}</div>
+    <div class="fc-klaar-titel">Klaar!</div>
+    <div class="fc-klaar-score"><strong>${s.goed}</strong> van ${tot} in één keer goed</div>
+    ${s.fout ? `<div class="klaar-fouten"><b>Deze gingen eerst fout:</b><br>${[...s.foutSet].map(i => esc(i.prompt) + ' → <b>' + esc(i.answer) + '</b>').join('<br>')}</div>` : ''}
+    <div class="fc-klaar-btns">
+      <button class="fc-klaar-btn shuffle" onclick="schud('${run.areaId}')">🔀 Opnieuw (geschud)</button>
+      ${s.fout ? `<button class="fc-klaar-btn opnieuw" onclick="alleenFout('${run.areaId}')">🎯 Alleen de fouten</button>` : ''}
+    </div></div></div>`;
+}
+
+/* ── FLASHCARDS ── */
+function renderFlash(run, el) {
+  const it = run.s.cur(), id = run.areaId;
+  el.innerHTML = `<div class="fc-wrapper">${kop(run)}
+    <div class="flip-wrapper" onclick="flip('${id}')"><div class="flip-card" id="${id}-card">
+      <div class="flip-face flip-front"><div class="flip-label">${esc(it.qLabel)}</div><div class="flip-tekst${lang(it.prompt)}">${esc(it.prompt)}</div>${it.sub ? `<div class="flip-sub">${esc(it.sub)}</div>` : ''}<div class="flip-hint">Tik om om te draaien</div></div>
+      <div class="flip-face flip-back"><div class="flip-label">${esc(it.aLabel)}</div><div class="flip-tekst${lang(it.answer)}">${esc(it.answer)}</div>${it.note ? `<div class="flip-sub">${esc(it.note)}</div>` : ''}</div>
+    </div></div>
+    <div class="fc-buttons" id="${id}-flipbtns"><button class="fc-btn fc-btn-flip" onclick="flip('${id}')">Omdraaien</button></div>
+    <div class="fc-oordeel" id="${id}-oordeel"><button class="fc-btn-fout" onclick="oordeel('${id}',false)">✗ Nog niet</button><button class="fc-btn-goed" onclick="oordeel('${id}',true)">✓ Wist ik</button></div>
+    ${acties(run)}</div>`;
+}
+function flip(id) {
+  const c = document.getElementById(id + '-card');
+  c.classList.toggle('flipped');
+  if (c.classList.contains('flipped')) {
+    document.getElementById(id + '-oordeel').classList.add('zichtbaar');
+    document.getElementById(id + '-flipbtns').style.display = 'none';
+  }
+}
+function oordeel(id, ok) { const r = runs[id]; r.s.answer(ok); render(r); }
+
+/* ── MEERKEUZE ── */
+function maakOpties(it, pool) {
+  const key = a => stripNL(noAcc(base(a)));
+  const seen = new Set([key(it.answer)]), d = [];
+  for (const p of fisherYates(pool)) {
+    const k = key(p.answer);
+    if (!seen.has(k)) { seen.add(k); d.push(p.answer); }
+    if (d.length === 3) break;
+  }
+  return fisherYates([it.answer, ...d]);
+}
+function renderMC(run, el) {
+  const it = run.s.cur(), id = run.areaId;
+  run.opties = maakOpties(it, run.items); run.locked = false;
+  el.innerHTML = `<div class="fc-wrapper">${kop(run)}
+    <div class="mc-vraag"><div class="flip-label">${esc(it.qLabel)}</div><div class="mc-prompt">${esc(it.prompt)}</div>${it.sub ? `<div class="flip-sub">${esc(it.sub)}</div>` : ''}</div>
+    <div class="mc-opties">${run.opties.map((o, k) => `<button class="mc-optie" onclick="kiesMC('${id}',${k})">${esc(o)}</button>`).join('')}</div>
+    <div class="mc-feedback" id="${id}-mcfb"></div>${acties(run)}</div>`;
+}
+function kiesMC(id, k) {
+  const r = runs[id]; if (r.locked) return; r.locked = true;
+  const it = r.s.cur(), ok = r.opties[k] === it.answer, tok = r.tok;
+  document.querySelectorAll(`#${id} .mc-optie`).forEach((b, i) => {
+    if (r.opties[i] === it.answer) b.classList.add('goed'); else if (i === k) b.classList.add('fout');
+    b.disabled = true;
+  });
+  document.getElementById(id + '-mcfb').innerHTML = ok ? '✓ Goed!' : `✗ Het is <b>${esc(it.answer)}</b> — komt straks terug`;
+  setTimeout(() => { if (r.tok !== tok) return; r.s.answer(ok); render(r); }, ok ? 1300 : 2300);
+}
+
+/* ── TYPEN ── */
+function specials(id) {
+  return `<div class="typen-specials">${['á','é','í','ó','ú','ñ','ü','¿','¡'].map(c => `<button class="typen-special-btn" onmousedown="event.preventDefault()" onclick="voegIn('${id}','${c}')">${c}</button>`).join('')}</div>`;
+}
+function voegIn(id, c) {
+  const inp = document.getElementById(id + '-in'); if (inp.readOnly) return;
+  const a = inp.selectionStart ?? inp.value.length, b = inp.selectionEnd ?? inp.value.length;
+  inp.value = inp.value.slice(0, a) + c + inp.value.slice(b);
+  inp.focus(); inp.setSelectionRange(a + 1, a + 1);
+}
+function renderTypen(run, el) {
+  const it = run.s.cur(), id = run.areaId;
+  run.checked = false;
+  el.innerHTML = `<div class="typen-wrapper">${kop(run)}
+    <div><div class="typen-prompt-label">${esc(it.qLabel)}</div><div class="typen-prompt-tekst">${esc(it.prompt)}${it.sub ? `<div class="flip-sub">${esc(it.sub)}</div>` : ''}</div></div>
+    <div><div class="typen-antwoord-label">${esc(it.aLabel)}</div>
+    <input class="typen-input" id="${id}-in" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Typ je antwoord…" onkeydown="if(event.key==='Enter'){event.preventDefault();typEnter('${id}')}"></div>
+    ${it.lang === 'es' ? specials(id) : ''}
+    <div class="typen-feedback" id="${id}-fb"></div>
+    <div class="typen-btns"><button class="typen-btn controleer" id="${id}-chk" onclick="controleer('${id}')">Controleer</button><button class="typen-btn volgende" id="${id}-next" onclick="volgende('${id}')">Volgende →</button></div>
+    ${acties(run)}</div>`;
+}
+function controleer(id) {
+  const r = runs[id]; if (r.checked) return;
+  const it = r.s.cur(), inp = document.getElementById(id + '-in'), val = inp.value;
+  const res = check(it, val);
+  r.checked = true; r.lastOk = res.ok; r.lastVal = val;
+  const fb = document.getElementById(id + '-fb');
+  let h;
+  if (res.ok) {
+    h = '✓ Goed!';
+    if (!res.exact) h += `<span class="accent-tip">⚠️ Goed gerekend, maar leer de juiste schrijfwijze: <b>${esc(it.answer)}</b></span>`;
+    else if (it.lang === 'nl' && it.answer.includes(',')) h += `<span class="correct-antwoord">Allebei: ${esc(it.answer)}</span>`;
+    else if (it.sentence) h += `<span class="correct-antwoord">${esc(it.answer)}</span>`;
+    fb.className = 'typen-feedback goed'; inp.classList.add('goed');
+  } else {
+    if (it.sentence) {
+      const d = woordDiff(it.answer, val);
+      h = `✗ Niet helemaal. De juiste zin (rood = mist of fout):<span class="zin-diff">${d.html}</span>${d.extra.length ? `<span class="extra">Klopt niet bij jou: <s>${esc(d.extra.join(' '))}</s></span>` : ''}`;
+    } else h = `✗ Helaas.<span class="correct-antwoord">Juist: ${esc(it.answer)}</span>`;
+    fb.className = 'typen-feedback fout'; inp.classList.add('fout');
+  }
+  if (r.toets) r.resultaten.push(toetsPunten(it, val, res));
+  fb.innerHTML = h; inp.readOnly = true;
+  document.getElementById(id + '-chk').style.display = 'none';
+  document.getElementById(id + '-next').classList.add('zichtbaar');
+  document.getElementById(id + '-next').focus();
+}
+function volgende(id) {
+  const r = runs[id]; r.s.answer(r.lastOk, !r.toets); render(r);
+  const inp = document.getElementById(id + '-in'); if (inp) inp.focus();
+}
+function typEnter(id) { runs[id].checked ? volgende(id) : controleer(id); }
+
+/* ── ZIN BOUWEN ── */
+function renderBouwen(run, el) {
+  const it = run.s.cur(), id = run.areaId;
+  if (run.bouwVoor !== it) {
+    run.bouwVoor = it;
+    const t = it.answer.split(/\s+/).map(base);
+    let sh, n = 0;
+    do { sh = fisherYates(t.map((w, i) => ({ w, i }))); n++; } while (n < 20 && t.length > 1 && sh.map(x => x.w).join(' ') === t.join(' '));
+    run.tegels = sh; run.gelegd = []; run.bouwKlaar = false; run.juist = t;
+  }
+  const alles = run.gelegd.length === run.tegels.length;
+  let fb = '';
+  if (alles) {
+    const zin = run.gelegd.map(k => run.tegels[k].w).join(' ');
+    const ok = noAcc(zin) === noAcc(run.juist.join(' '));
+    run.lastOk = ok; run.bouwKlaar = true;
+    fb = ok ? `<div class="typen-feedback goed">✓ Goed!<span class="correct-antwoord">${esc(it.answer)}</span></div>`
+            : `<div class="typen-feedback fout">✗ Nog niet goed. Zo moet het (rood = op de verkeerde plek):<span class="zin-diff">${woordDiff(it.answer, zin).html}</span></div>`;
+  }
+  el.innerHTML = `<div class="fc-wrapper">${kop(run)}
+    <div class="mc-vraag"><div class="flip-label">Zet de Spaanse woorden in de goede volgorde</div><div class="mc-prompt" style="font-size:1.15rem">${esc(it.prompt)}</div></div>
+    <div class="bouw-zone">${run.gelegd.length ? run.gelegd.map((k, p) => `<button class="tegel gelegd" ${alles ? 'disabled' : ''} onclick="haalTerug('${id}',${p})">${esc(run.tegels[k].w)}</button>`).join('') : '<span class="bouw-leeg">Tik op de woorden hieronder…</span>'}</div>
+    <div class="bouw-pool" ${alles ? 'style="display:none"' : ''}>${run.tegels.map((t, k) => `<button class="tegel ${run.gelegd.includes(k) ? 'weg' : ''}" onclick="leg('${id}',${k})">${esc(t.w)}</button>`).join('')}</div>
+    ${fb}
+    ${alles ? `<div class="typen-btns"><button class="typen-btn volgende zichtbaar" onclick="bouwVolgende('${id}')">Volgende →</button></div>` : ''}
+    ${acties(run)}</div>`;
+}
+function leg(id, k) { const r = runs[id]; if (r.bouwKlaar || r.gelegd.includes(k)) return; r.gelegd.push(k); render(r); }
+function haalTerug(id, p) { const r = runs[id]; if (r.bouwKlaar) return; r.gelegd.splice(p, 1); render(r); }
+function bouwVolgende(id) { const r = runs[id]; r.bouwVoor = null; r.s.answer(r.lastOk); render(r); }
+
+/* ════════ SO-OEFENTOETS ════════ */
+function toetsIntro() {
+  if (runs['area-toets']) runs['area-toets'].tok++;
+  delete runs['area-toets'];
+  document.getElementById('area-toets').innerHTML = `<div class="fc-wrapper">
+    <div class="fc-klaar-emoji">📝</div><div class="fc-klaar-titel">SO-oefentoets</div>
+    <div class="toets-uitleg"><ul>
+      <li><b>14 woorden</b> Spaans → Nederlands (1 punt per woord)</li>
+      <li><b>6 frases clave</b> Nederlands → Spaans (2 punten per zin, 1 punt als de zin bijna goed is)</li>
+      <li>Elke keer andere vragen. Aan het eind krijg je een cijfer.</li>
+      <li>Accenten en ¿ ¡ kosten geen punten, maar je krijgt een seintje als ze niet goed zijn.</li>
+    </ul></div>
+    <div class="fc-klaar-btns"><button class="fc-klaar-btn shuffle" onclick="startToets()">▶ Start de toets</button></div></div>`;
+}
+function startToets() {
+  const voca = fisherYates(vocaItems(['2.1', '2.2', '2.3'])).slice(0, 14);
+  const fr = fisherYates(fraseItems('alle')).slice(0, 6);
+  const run = { areaId: 'area-toets', items: [...voca, ...fr], mode: 'typen', titel: 'SO-oefentoets', toets: true, resultaten: [], tok: 0 };
+  run.s = new Sessie(run.items, false);
+  runs['area-toets'] = run; render(run);
+  document.getElementById('area-toets-in').focus();
+}
+function toetsPunten(it, val, res) {
+  const max = it.sentence ? 2 : 1;
+  let p = res.ok ? max : 0;
+  if (!res.ok && it.sentence) { const d = woordDiff(it.answer, val); if (d.ratio >= 0.75) p = 1; }
+  return { it, val, ok: res.ok, exact: res.exact, p, max };
+}
+function renderToetsKlaar(run, el) {
+  const R = run.resultaten, p = R.reduce((a, r) => a + r.p, 0), max = R.reduce((a, r) => a + r.max, 0);
+  const cijfer = Math.max(1, Math.round((1 + 9 * p / max) * 10) / 10);
+  const fout = R.filter(r => !r.ok), accent = R.filter(r => r.ok && !r.exact);
+  el.innerHTML = `<div class="fc-wrapper"><div class="fc-klaar zichtbaar">
+    <div class="fc-klaar-titel">Je cijfer</div>
+    <div class="cijfer ${cijfer >= 5.5 ? 'vold' : 'onv'}">${cijfer.toFixed(1).replace('.', ',')}</div>
+    <div class="fc-klaar-score"><strong>${p}</strong> van ${max} punten</div>
+    ${fout.length ? `<div class="klaar-fouten"><b>Nog leren:</b><br>${fout.map(r => `${esc(r.it.prompt)} → <b>${esc(r.it.answer)}</b>${r.val.trim() ? ` <span style="opacity:.7">(jij: ${esc(r.val)}${r.p ? ', 1 punt' : ''})</span>` : ''}`).join('<br>')}</div>` : '<div class="fc-klaar-score">Alles goed! 🏆</div>'}
+    ${accent.length ? `<div class="klaar-fouten" style="background:#fffbeb;border-color:#f6e05e;color:#744210"><b>Let op de schrijfwijze:</b><br>${accent.map(r => esc(r.it.answer)).join('<br>')}</div>` : ''}
+    <div class="fc-klaar-btns"><button class="fc-klaar-btn shuffle" onclick="startToets()">🔀 Nieuwe toets</button></div>
+  </div></div>`;
+}
+
+/* ════════ BEDIENING ════════ */
+const keuze = { voca: { lijst: '2.1', modus: 'flash' }, frases: { groep: 'alle', modus: 'flash' }, vw: { modus: 'flash' } };
+function kies(tab, key, val, btn) {
+  keuze[tab][key] = val;
+  btn.parentElement.querySelectorAll('.chip').forEach(b => b.classList.remove('actief'));
+  btn.classList.add('actief');
+  startTab(tab);
+}
+function startTab(tab) {
+  if (tab === 'voca') {
+    const k = keuze.voca, keys = k.lijst === 'alles' ? ['2.1', '2.2', '2.3'] : [k.lijst];
+    start('area-voca', vocaItems(keys), k.modus, 'Vocabulario ' + (k.lijst === 'alles' ? '2.1 – 2.3' : k.lijst));
+  } else if (tab === 'frases') {
+    start('area-frases', fraseItems(keuze.frases.groep), keuze.frases.modus, 'Frases clave');
+  } else if (tab === 'vw') {
+    const m = keuze.vw.modus;
+    start('area-vw', m === 'flash' ? vwKaartItems() : vwZinItems(), m, m === 'flash' ? 'Vraagwoorden' : 'Vraagzinnen');
+  }
+}
+
+/* ── TAB NAVIGATION ── */
+function toonTab(id, btn) {
+  const h = btn.closest('.hfst');
+  h.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  h.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById(id).style.display = 'block';
+  btn.classList.add('actief');
+}
+function toonHfst(id, btn) {
+  document.querySelectorAll('.hfst').forEach(h => h.style.display = 'none');
+  document.querySelectorAll('.hfst-btn').forEach(b => b.classList.remove('actief'));
+  document.getElementById(id).style.display = 'block';
+  btn.classList.add('actief');
+}
+
+/* ── LIJSTEN ── */
+function bouwLijsten() {
+  let h = '<table>';
+  for (const k of ['2.1', '2.2', '2.3']) {
+    h += `<tr class="kop"><td colspan="2">${k} ${{ '2.1': 'fuente A y B', '2.2': 'fuente C', '2.3': 'fuente F, G y H' }[k]}</td></tr>`;
+    VOCA[k].forEach(([es, nl]) => h += `<tr><td>${esc(es)}</td><td>${esc(nl)}</td></tr>`);
+  }
+  document.getElementById('lijst-voca').innerHTML = h + '</table>';
+  let f = '<table>';
+  [['vragen', 'Para preguntar / Om te vragen'], ['antwoorden', 'Para contestar / Om te antwoorden']].forEach(([g, t]) => {
+    f += `<tr class="kop"><td colspan="2">${t}</td></tr>`;
+    FRASES.filter(x => x.groep === g).forEach(x => f += `<tr><td>${esc(x.es)}</td><td>${esc(x.nl)}</td></tr>`);
+  });
+  document.getElementById('lijst-frases').innerHTML = f + '</table>';
+  document.getElementById('vw-tabel').innerHTML = VW_KAART.map(v => `<tr><td>${esc(v.nl)}</td><td>${esc(v.es)}</td></tr>`).join('');
+}
+
+bouwLijsten();
+startTab('voca'); startTab('frases'); startTab('vw'); toetsIntro();
 </script>
 
 </body>
